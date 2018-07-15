@@ -4,7 +4,10 @@
   "description": "TreeHacks 2019 website",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts",
+    "start:prod": "ts-node ./index.ts"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,12 @@
   "bugs": {
     "url": "https://github.com/TreeHacks/website-2019/issues"
   },
-  "homepage": "https://github.com/TreeHacks/website-2019#readme"
+  "homepage": "https://github.com/TreeHacks/website-2019#readme",
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.5.2",
+    "nodemon": "^1.18.2",
+    "ts-node": "^7.0.0",
+    "typescript": "^2.9.2"
+  }
 }

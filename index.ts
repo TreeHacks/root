@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var path = require("path");
 var request = require('request');
+import { Router, Request, Response } from 'express';
 
 // Set up the Express app
 const app = express();
@@ -19,10 +20,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-    console.log(err); // To see properties of message in our console
-    res.status(422).send({error: err.message});
-});
+// app.use((err: Error, req: Request, res: Response, next: Next) => {
+//     console.log(err); // To see properties of message in our console
+//     res.status(422).send({error: err.message});
+// });
 
 var port = process.env.PORT || 3000;
 
@@ -32,6 +33,6 @@ app.listen(port, () => {
 });
 
 // Serves the index.html file (our basic frontend)
-app.get('/',(req, res) => {   
+app.get('/',(req: Request, res: Response) => {   
 	res.sendFile('index.html', {root: __dirname});
 }); 
