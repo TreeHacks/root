@@ -21,7 +21,7 @@ describe('user form view', () => {
     return render_json(`/users/${USER_ID}/forms/additional_info`, { "ad": "b" })
   });
   test('get user status', () => {
-    return render_json(`/users/${USER_ID}/status`, "pending")
+    return render_json(`/users/${USER_ID}/status`, {"status": "pending"})
   });
 });
 
