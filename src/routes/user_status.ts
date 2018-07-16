@@ -1,4 +1,4 @@
-import Application from "../models/application";
+import Application from "../models/Application";
 import { Request, Response } from 'express';
 
 // export default (req: Request, res: Response) => {

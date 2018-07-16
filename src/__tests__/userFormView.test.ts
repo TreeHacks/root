@@ -1,6 +1,6 @@
 import request from "supertest";
 // jest.mock('../../app/photo_model');
-import app from "../../index";
+import app from "../..";
 import {USER_ID} from "../constants";
 
 describe('user form view', () => {

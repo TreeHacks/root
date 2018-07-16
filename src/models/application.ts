@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-import {Model} from "mongoose";
+import {Model, Schema} from "mongoose";
+import {IApplication} from "./Application.d"
 
-const applicationSchema = new mongoose.Schema({
+const applicationSchema : Schema = new mongoose.Schema({
   "forms": { // can only be modified by user/editors
       "application_info": {},
       "additional_info": {}
@@ -26,5 +27,5 @@ const applicationSchema = new mongoose.Schema({
     enumValues: ["is", "oos", "stanford"]
   }, // this is created when user is created, cannot be modified later.
 });
-const model = mongoose.model("Application", schema);
+const model: Model<IApplication> = mongoose.model("Application", applicationSchema);
 export default model;

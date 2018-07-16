@@ -4,10 +4,11 @@ const mongoose = require('mongoose');
 const CognitoExpress = require("cognito-express");
 var path = require("path");
 var request = require('request');
+import morgan from "morgan";
 const port = process.env.PORT || 3000;
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import authenticatedRoute from "./src/router/authenticatedRoute";
-
+import {getAdditionalInfo, setAdditionalInfo} from "./src/routes/additional_info"
 
 // Set up the Express app
 const app = express();
@@ -16,7 +17,9 @@ const userId = "test_user_id";
 
 
 // If you want to connect to MongoDB - should be running locally
-mongoose.connect(process.env.MONGO_CONN_STR);
+mongoose.connect(process.env.MONGO_CONN_STR || "mongodb://localhost:65210/test").catch(function (reason: string) {
+    console.log('Unable to connect to the mongodb instance. Error: ', reason);
+});
 // mongoose.Promise = global.Promise;
 
 // Set up static files
@@ -25,6 +28,8 @@ app.use(express.static('public'));
 // Use body-parser to parse HTTP request parameters
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(morgan('combined'))
 
 // Error handling middleware
 // app.use((err: Error, req: Request, res: Response, next: Next) => {
@@ -37,13 +42,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Starts the Express server, which will run locally @ localhost:3000
 app.server = app.listen(port, () => {
     console.log('App listening on port 3000!');
-});
+}); 
 
 // Serves the index.html file (our basic frontend)
 app.get('/',(req: Request, res: Response) => {   
     // res.sendFile('index.html', {root: __dirname});
     res.status(200).send('Welcome to treehacks.');
 }); 
+
+app.get('/users/:userId/forms/additional_info', getAdditionalInfo);
+
 
 
 //Define your routes that need authentication check

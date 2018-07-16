@@ -1,1 +1,1 @@
-exports.USER_ID = "test_user_id";
+export var USER_ID = "test_user_id";

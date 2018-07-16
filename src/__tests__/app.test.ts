@@ -1,6 +1,6 @@
 import request from "supertest";
 // jest.mock('../../app/photo_model');
-import app from "../../index";
+import app from "../..";
 import {Response} from "express";
 
 describe('index route', () => {
