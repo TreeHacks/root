@@ -1,25 +1,49 @@
 import request from "supertest";
 // jest.mock('../../app/photo_model');
 import app from "../..";
-import {USER_ID} from "../constants";
+import { USER_ID } from "../constants";
+
+function render_json(url: string, value: any) {
+  return request(app)
+    .get(url)
+    .expect('Content-Type', /json/)
+    .expect(200)
+    .then(response => {
+      expect(response.body).toEqual(value);
+    });
+}
 
 describe('user form view', () => {
   test('get user application_info', () => {
-    return request(app)
-      .get(`/users/${USER_ID}/forms/application_info`)
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .then(response => {
-        expect(response.body).toEqual('Welcome to treehacks.');
-      });
+    return render_json(`/users/${USER_ID}/forms/application_info`, { "ap": "b" });
   });
   test('get user additional_info', () => {
-    return request(app)
-      .get(`/users/${USER_ID}/forms/additional_info`)
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .then(response => {
-        expect(response.body).toEqual({ "test": "hee" });
-      });
+    return render_json(`/users/${USER_ID}/forms/additional_info`, { "ad": "b" })
+  });
+  test('get user status', () => {
+    return render_json(`/users/${USER_ID}/status`, "pending")
+  });
+});
+
+// todo add authentication here.
+describe('user admin view', () => {
+  test('get user full details', () => {
+    return render_json(`/users/${USER_ID}`, {
+      user: USER_ID,
+      forms: {
+        additional_info: { "ad": "b" },
+        application_info: { "ap": "b" },
+        admin_info: {
+          "transportation": { "t": "b" },
+          "reimbursement amount": { "r": "b" }
+        },
+        reviews: [
+          { "r1": "b" },
+          { "r2": "b" }
+        ],
+        "status": "pending",
+        "type": "oos"
+      }
+    });
   });
 });
