@@ -17,7 +17,7 @@ const applicationSchema: Schema = new mongoose.Schema({
             "method": String,
             "bus_name": String
         },
-        "reimbursement_amount": String
+        "reimbursement_amount": {type: String, default: null}
     },
     "reviews": [reviewSchema] // each review can only be modified by the reviewer who made it.
     ,
@@ -25,7 +25,11 @@ const applicationSchema: Schema = new mongoose.Schema({
         "name": String,
         "email": String
     },
-    "status": String, // only editable by admin (or this user, to a limited extent). incomplete (default), submitted, admitted, waitlisted, rejected, admission_confirmed, admission_declined
+    "status": {
+        type: String,
+        default: "incomplete",
+        enumValues: ["incomplete", "submitted", "admitted", "waitlisted", "rejected", "admission_confirmed", "admission_declined"]
+    },
     "type": {
         type: String,
         enumValues: ["is", "oos", "stanford"]

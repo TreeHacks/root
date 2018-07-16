@@ -1,7 +1,7 @@
 import request from "supertest";
 // jest.mock('../../app/photo_model');
 import app from "../..";
-import { USER_ID } from "../constants";
+import { createApplication } from "../routes/user_create";
 
 function render_json(url: string, value: any) {
   return request(app)
@@ -14,40 +14,33 @@ function render_json(url: string, value: any) {
 }
 
 describe('user form view', () => {
+  let userId: string;
+  beforeAll(() => {
+    userId = Math.random() + "";
+    createApplication(userId);
+  })
   test('get user application_info', () => {
-    return render_json(`/users/${USER_ID}/forms/application_info`, { "ap": "b" });
+    return render_json(`/users/${userId}/forms/application_info`, { "university": "stanford" });
   });
   test('get user additional_info', () => {
-    return render_json(`/users/${USER_ID}/forms/additional_info`, { "ad": "b" })
+    return render_json(`/users/${userId}/forms/additional_info`, { "bus_confirmed_spot": true })
   });
   test('get user status', () => {
-    return render_json(`/users/${USER_ID}/status`, {"status": "pending"})
+    return render_json(`/users/${userId}/status`, { "status": "incomplete" })
   });
-});
-
-// todo add authentication here.
-describe('user admin view', () => {
+  // todo add authentication here:
   test('get user full details', () => {
-    return render_json(`/users/${USER_ID}`, {
-      _id: USER_ID,
-      user: {
-        name: "Test",
-        email: "a@b.com"
+    return render_json(`/users/${userId}`, {
+      "_id": userId,
+      "forms": {
+        "application_info": {"university": "stanford"},
+        "additional_info": {"bus_confirmed_spot": true}
       },
-      forms: {
-        additional_info: { "ad": "b" },
-        application_info: { "ap": "b" }
-      },
-      admin_info: {
-        "transportation": {"t": "b"},
-        "reimbursement amount": {"r": "b"}
-      },
-      reviews: [
-        {"r1": "b"},
-        {"r2": "b"}
-      ],
-      "status": "pending",
-      "type": "oos"
+      "admin_info": {"reimbursement_amount": null},
+      "reviews": [],
+      "user": { "name": "default_user", "email": "default_email@default_email.com" },
+      "type": "oos",
+      "status": "incomplete"
     });
   });
 });

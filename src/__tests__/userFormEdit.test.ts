@@ -1,7 +1,6 @@
 import request from "supertest";
-// jest.mock('../../app/photo_model');
 import app from "../..";
-import { USER_ID_UPDATE } from "../constants";
+import {createApplication} from "../routes/user_create";
 
 function post_expect_json(url: string, formData: {[x:string]: any}, value: any) {
   return request(app)
@@ -14,16 +13,20 @@ function post_expect_json(url: string, formData: {[x:string]: any}, value: any) 
     });
 }
 
-describe('user form edit', () => {
+describe('user form update', () => {
+  let userId:string;
+  beforeAll(() => {
+    userId = Math.random() + "";
+    createApplication(userId);
+  })
   test('set user application_info', () => {
-    return post_expect_json(`/users/${USER_ID_UPDATE}/forms/application_info`, { "university": "stanford" }, { "university": "stanford" });
+    return post_expect_json(`/users/${userId}/forms/application_info`, { "university": "berkeley" }, { "university": "berkeley" });
   });
   test('set user additional_info', () => {
-    return post_expect_json(`/users/${USER_ID_UPDATE}/forms/additional_info`, { "bus_confirmed_spot": true }, { "bus_confirmed_spot": true })
+    return post_expect_json(`/users/${userId}/forms/additional_info`, { "bus_confirmed_spot": false }, { "bus_confirmed_spot": false })
   });
 
-  // Todo: add auth here.
-  test('edit user status', () => {
-    return post_expect_json(`/users/${USER_ID_UPDATE}/status`, {"status": "complete"}, {"status": "complete"})
+  test('set user status', () => {
+    return post_expect_json(`/users/${userId}/status`, {"status": "admitted"}, {"status": "admitted"})
   });
 });
