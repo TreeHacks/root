@@ -6,8 +6,8 @@ const applicationSchema: Schema = new mongoose.Schema({
     // user id is _id.
     "_id": String,
     "forms": { // can only be modified by user/editors
-        "application_info": {},
-        "additional_info": {}
+        "application_info": any,
+        "additional_info": any
         // we can conceivably add additional forms here.
     },
     "admin_info": { // Only editable by admin.

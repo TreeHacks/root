@@ -9,9 +9,9 @@ const port = process.env.PORT || 3000;
 import { Router, Request, Response, NextFunction } from 'express';
 import authenticatedRoute from "./src/router/authenticatedRoute";
 import { getAdditionalInfo, setAdditionalInfo } from "./src/routes/additional_info";
-import {getApplicationInfo} from "./src/routes/application_info";
+import {getApplicationInfo, setApplicationInfo} from "./src/routes/application_info";
 import {getUserDetail} from "./src/routes/user_detail";
-import {getApplicationStatus} from "./src/routes/user_status";
+import {getApplicationStatus, setApplicationStatus} from "./src/routes/user_status";
 
 // Set up the Express app
 const app = express();
@@ -56,9 +56,12 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/users/:userId/forms/additional_info', getAdditionalInfo);
+app.put('/users/:userId/forms/additional_info', setAdditionalInfo);
 app.get('/users/:userId/forms/application_info', getApplicationInfo);
+app.put('/users/:userId/forms/application_info', setApplicationInfo);
 app.get('/users/:userId', getUserDetail);
 app.get('/users/:userId/status', getApplicationStatus);
+app.put('/users/:userId/status', setApplicationStatus);
 
 
 

@@ -20,3 +20,7 @@ MODE - mode ("PROD" or "DEV")
 COGNITO_USER_POOL_ID - user pool id
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
+
+## Todo
+- Authorization
+- Use https://www.npmjs.com/package/mongoose-authorization
