@@ -1,7 +1,6 @@
-import Application from "../models/Application";
 import { Request, Response } from 'express';
+import {getApplicationAttribute} from "./common"
 
-// export default (req: Request, res: Response) => {
-//   let applications = Application.find();
-//   res.status(200).send(JSON.stringify(applications));
-// }; 
+export function getApplicationStatus(req: Request, res: Response) {
+  return getApplicationAttribute(req, res, e => e.status);
+}
