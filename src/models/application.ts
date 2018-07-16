@@ -3,6 +3,7 @@ import { Model, Schema } from "mongoose";
 import { IApplication } from "./Application.d"
 import applicationInfoSchema from "./applicationInfoSchema";
 import additionalInfoSchema from "./additionalInfoSchema";
+import adminInfoSchema from "./adminInfoSchema";
 import reviewSchema from "./reviewSchema";
 
 const applicationSchema: Schema = new mongoose.Schema({
@@ -12,15 +13,8 @@ const applicationSchema: Schema = new mongoose.Schema({
         "application_info": applicationInfoSchema,
         "additional_info": additionalInfoSchema
     },
-    "admin_info": { // Only editable by admin.
-        "transportation": {
-            "method": String,
-            "bus_name": String
-        },
-        "reimbursement_amount": {type: String, default: null}
-    },
-    "reviews": [reviewSchema] // each review can only be modified by the reviewer who made it.
-    ,
+    "admin_info": adminInfoSchema, // Only editable by admin.
+    "reviews": [reviewSchema], // each review can only be modified by the reviewer who made it.
     "user": {
         "name": String,
         "email": String

@@ -3,7 +3,7 @@ import Application from "../models/Application";
 
 // Todo: not really a route, it's a helper function; move somewhere else.
 export function createApplication(userId: string) {
-  // Todo: Look up cognito user id.
+  // Todo: Look up cognito user id, email for out of state.
   const application = new Application({
     "_id": userId,
     "forms": {
