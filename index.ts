@@ -8,7 +8,7 @@ import morgan from "morgan";
 const port = process.env.PORT || 3000;
 import { Router, Request, Response, NextFunction } from 'express';
 import authenticatedRoute from "./src/router/authenticatedRoute";
-import {getAdditionalInfo, setAdditionalInfo} from "./src/routes/additional_info"
+import { getAdditionalInfo, setAdditionalInfo } from "./src/routes/additional_info"
 
 // Set up the Express app
 const app = express();
@@ -29,7 +29,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 
 // Error handling middleware
 // app.use((err: Error, req: Request, res: Response, next: Next) => {
@@ -40,22 +40,24 @@ app.use(morgan('combined'))
 
 
 // Starts the Express server, which will run locally @ localhost:3000
-app.server = app.listen(port, () => {
-    console.log('App listening on port 3000!');
-}); 
+if (!module.parent) {
+    app.listen(port, () => {
+        console.log('App listening on port 3000!');
+    });
+}
 
 // Serves the index.html file (our basic frontend)
-app.get('/',(req: Request, res: Response) => {   
+app.get('/', (req: Request, res: Response) => {
     // res.sendFile('index.html', {root: __dirname});
     res.status(200).send('Welcome to treehacks.');
-}); 
+});
 
 app.get('/users/:userId/forms/additional_info', getAdditionalInfo);
 
 
 
 //Define your routes that need authentication check
-authenticatedRoute.get("/myfirstapi", function(req, res, next) {
+authenticatedRoute.get("/myfirstapi", function (req, res, next) {
     res.send(`Hi ${res.locals.user.username}, your API call is authenticated!`);
 });
 

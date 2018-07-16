@@ -4,25 +4,22 @@ import app from "../..";
 import {USER_ID} from "../constants";
 
 describe('user form view', () => {
-  afterEach(() => {
-    app.server.close();
-  });
   test('get user application_info', () => {
     return request(app)
       .get(`/users/${USER_ID}/forms/application_info`)
-      .expect('Content-Type', /html/)
+      .expect('Content-Type', /json/)
       .expect(200)
       .then(response => {
-        expect(response.text).toEqual('Welcome to treehacks.');
+        expect(response.body).toEqual('Welcome to treehacks.');
       });
   });
   test('get user additional_info', () => {
     return request(app)
       .get(`/users/${USER_ID}/forms/additional_info`)
-      .expect('Content-Type', /html/)
+      .expect('Content-Type', /json/)
       .expect(200)
       .then(response => {
-        expect(response.text).toEqual('Welcome to treehacks.');
+        expect(response.body).toEqual({ "test": "hee" });
       });
   });
 });
