@@ -1,10 +1,11 @@
 {
-  "name": "website-2019",
+  "name": "application-portal",
   "version": "1.0.0",
-  "description": "TreeHacks 2019 website",
-  "main": "server.js",
+  "description": "TreeHacks 2019 application protal",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "tdd": "jest --watch",
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts",
     "build": "tsc",
@@ -13,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TreeHacks/website-2019.git"
+    "url": "git+https://github.com/TreeHacks/application-portal.git"
   },
   "author": "TreeHacks Tech",
   "license": "ISC",
@@ -26,16 +27,38 @@
     "request": "^2.83.0"
   },
   "bugs": {
-    "url": "https://github.com/TreeHacks/website-2019/issues"
+    "url": "https://github.com/TreeHacks/application-portal/issues"
   },
-  "homepage": "https://github.com/TreeHacks/website-2019#readme",
+  "homepage": "https://github.com/TreeHacks/application-portal#readme",
   "devDependencies": {
     "@types/express": "^4.16.0",
+    "@types/jest": "^23.1.6",
     "@types/mongodb": "^3.1.1",
+    "@types/mongodb-memory-server": "^1.8.0",
     "@types/mongoose": "^5.2.0",
     "@types/node": "^10.5.2",
+    "@types/supertest": "^2.0.5",
+    "jest": "^23.4.1",
+    "mongodb-memory-server": "^1.9.0",
     "nodemon": "^1.18.2",
+    "supertest": "^3.1.0",
+    "ts-jest": "^23.0.0",
     "ts-node": "^7.0.0",
     "typescript": "^2.9.2"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./src/setupTests.ts",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

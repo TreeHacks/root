@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // Starts the Express server, which will run locally @ localhost:3000
-app.listen(port, () => {
+app.server = app.listen(port, () => {
     console.log('App listening on port 3000!');
 });
 
@@ -49,4 +49,6 @@ app.get('/',(req: Request, res: Response) => {
 //Define your routes that need authentication check
 authenticatedRoute.get("/myfirstapi", function(req, res, next) {
     res.send(`Hi ${res.locals.user.username}, your API call is authenticated!`);
-  });
+});
+
+export default app;
