@@ -9,7 +9,7 @@ export function getAdditionalInfo(req: Request, res: Response) {
 
 export function setAdditionalInfo(req: Request, res: Response) {
   return Application.findOneAndUpdate(
-    req.params.userId,
+    {"_id": req.params.userId},
     { "$set": { "additional_info": req.body.additional_info } },
     (application: IApplication) => {
       res.status(200).send(application.forms.additional_info);

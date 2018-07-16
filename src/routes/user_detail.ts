@@ -2,8 +2,5 @@ import { Request, Response } from 'express';
 import {getApplicationAttribute} from "./common"
 
 export function getUserDetail(req: Request, res: Response) {
-  return getApplicationAttribute(req, res, e => {
-    delete e["_id"];
-    return e;
-  });
+  return getApplicationAttribute(req, res, e => e);
 }

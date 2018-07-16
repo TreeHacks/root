@@ -15,7 +15,10 @@ export interface IApplication extends Document {
   "reviews": [
       {} // each review can only be modified by the reviewer who made it.
   ],
-  "user": {type: string}, // foreign key
+  "user": {
+    "name": {type: string},
+    "email": {type: string}
+   }, // foreign key
   "id": {type: string},
   "status": {type: string}, // only editable by admin (or this user, to a limited extent). incomplete (default), submitted, admitted, waitlisted, rejected, admission_confirmed, admission_declined
   "type": {type: string}

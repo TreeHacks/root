@@ -6,8 +6,8 @@ import { USER_ID } from "../constants";
 function render_json(url: string, value: any) {
   return request(app)
     .get(url)
-    .expect('Content-Type', /json/)
     .expect(200)
+    .expect('Content-Type', /json/)
     .then(response => {
       expect(response.body).toEqual(value);
     });
@@ -29,21 +29,25 @@ describe('user form view', () => {
 describe('user admin view', () => {
   test('get user full details', () => {
     return render_json(`/users/${USER_ID}`, {
-      user: USER_ID,
+      _id: USER_ID,
+      user: {
+        name: "Test",
+        email: "a@b.com"
+      },
       forms: {
         additional_info: { "ad": "b" },
-        application_info: { "ap": "b" },
-        admin_info: {
-          "transportation": { "t": "b" },
-          "reimbursement amount": { "r": "b" }
-        },
-        reviews: [
-          { "r1": "b" },
-          { "r2": "b" }
-        ],
-        "status": "pending",
-        "type": "oos"
-      }
+        application_info: { "ap": "b" }
+      },
+      admin_info: {
+        "transportation": {"t": "b"},
+        "reimbursement amount": {"r": "b"}
+      },
+      reviews: [
+        {"r1": "b"},
+        {"r2": "b"}
+      ],
+      "status": "pending",
+      "type": "oos"
     });
   });
 });
