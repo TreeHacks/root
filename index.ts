@@ -12,6 +12,7 @@ import authenticatedRoute from "./src/router/authenticatedRoute";
 // Set up the Express app
 const app = express();
 
+const userId = "test_user_id";
 
 
 // If you want to connect to MongoDB - should be running locally
