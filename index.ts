@@ -8,7 +8,9 @@ import morgan from "morgan";
 const port = process.env.PORT || 3000;
 import { Router, Request, Response, NextFunction } from 'express';
 import authenticatedRoute from "./src/router/authenticatedRoute";
-import { getAdditionalInfo, setAdditionalInfo } from "./src/routes/additional_info"
+import { getAdditionalInfo, setAdditionalInfo } from "./src/routes/additional_info";
+import {getApplicationInfo} from "./src/routes/application_info";
+import {getUserDetail} from "./src/routes/user_detail";
 
 // Set up the Express app
 const app = express();
@@ -53,6 +55,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/users/:userId/forms/additional_info', getAdditionalInfo);
+app.get('/users/:userId/forms/application_info', getApplicationInfo);
+app.get('/users/:userId', getUserDetail);
 
 
 

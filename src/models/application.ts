@@ -26,5 +26,6 @@ const applicationSchema : Schema = new mongoose.Schema({
     enumValues: ["is", "oos", "stanford"]
   }, // this is created when user is created, cannot be modified later.
 });
+
 const model: Model<IApplication> = mongoose.model("Application", applicationSchema);
 export default model;
