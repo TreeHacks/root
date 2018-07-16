@@ -45,6 +45,7 @@
     "mongodb-memory-server": "^1.9.0",
     "morgan": "^1.9.0",
     "nodemon": "^1.18.2",
+    "pow-mongodb-fixtures": "^0.14.0",
     "supertest": "^3.1.0",
     "ts-jest": "^23.0.0",
     "ts-node": "^7.0.0",
