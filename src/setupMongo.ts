@@ -9,6 +9,7 @@ const mongoServer = new MongodbMemoryServer({
   console.warn("Setting up mongodb server...");
   mongoServer.getConnectionString().then((uri: string) => {
     process.env.MONGODB_CONN_STR = uri;
+    console.log("Mongodb server running on url", uri);
     // mongoose.connect(mongoUri, mongooseOpts);
 
     // mongoose.connection.on('error', (e) => {
