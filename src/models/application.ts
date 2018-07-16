@@ -9,7 +9,6 @@ const applicationSchema : Schema = new mongoose.Schema({
       // we can conceivably add additional forms here.
   },
   "admin_info": { // Only editable by admin.
-      "status": String,
       "transportation": {
           "method": String,
           "bus_name": String

@@ -6,7 +6,6 @@ export interface IApplication extends Document {
       // we can conceivably add additional forms here.
   },
   "admin_info": { // Only editable by admin.
-      "status": {type: string},
       "transportation": {
           "method": {type: string},
           "bus_name": {type: string}
