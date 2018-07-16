@@ -1,8 +1,19 @@
 import {Document} from "mongoose";
+
+export interface IReview {
+    
+}
+export interface IApplicationInfo {
+    university: Boolean
+}
+export interface IAdditionalInfo {
+    bus_confirmed_spot: Boolean
+}
+
 export interface IApplication extends Document {
   "forms": { // can only be modified by user/editors
-      "application_info": {},
-      "additional_info": {}
+      "application_info": IApplicationInfo,
+      "additional_info": IAdditionalInfo
       // we can conceivably add additional forms here.
   },
   "admin_info": { // Only editable by admin.
@@ -12,8 +23,7 @@ export interface IApplication extends Document {
       },
       "reimbursement_amount": {type: string}
   },
-  "reviews": [
-      {} // each review can only be modified by the reviewer who made it.
+  "reviews": [IReview// each review can only be modified by the reviewer who made it.
   ],
   "user": {
     "name": {type: string},

@@ -16,10 +16,10 @@ function post_expect_json(url: string, formData: {[x:string]: any}, value: any) 
 
 describe('user form edit', () => {
   test('set user application_info', () => {
-    return post_expect_json(`/users/${USER_ID_UPDATE}/forms/application_info`, { "ap": "b2" }, { "ap": "b2" });
+    return post_expect_json(`/users/${USER_ID_UPDATE}/forms/application_info`, { "university": "stanford" }, { "university": "stanford" });
   });
   test('set user additional_info', () => {
-    return post_expect_json(`/users/${USER_ID_UPDATE}/forms/additional_info`, { "ad": "b2" }, { "ad": "b2" })
+    return post_expect_json(`/users/${USER_ID_UPDATE}/forms/additional_info`, { "bus_confirmed_spot": true }, { "bus_confirmed_spot": true })
   });
 
   // Todo: add auth here.

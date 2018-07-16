@@ -7,7 +7,7 @@ export function getApplicationInfo(req: Request, res: Response) {
 
 export function setApplicationInfo(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
-    e => e.forms.application_info = req.body.application_info,
-    e => e.forms.additional_info
+    e => e.forms.application_info = req.body,
+    e => e.forms.application_info
   );
 }

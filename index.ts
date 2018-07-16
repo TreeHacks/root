@@ -62,7 +62,7 @@ app.put('/users/:userId/forms/application_info', setApplicationInfo);
 app.get('/users/:userId', getUserDetail);
 app.get('/users/:userId/status', getApplicationStatus);
 app.put('/users/:userId/status', setApplicationStatus);
-
+// todo: setAdminInfo
 
 
 //Define your routes that need authentication check

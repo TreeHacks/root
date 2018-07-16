@@ -9,7 +9,7 @@ export function getAdditionalInfo(req: Request, res: Response) {
 
 export function setAdditionalInfo(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
-    e => e.forms.additional_info = req.body.additional_info,
+    e => e.forms.additional_info = req.body,
     e => e.forms.additional_info
   );
 }

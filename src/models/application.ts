@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 import { Model, Schema } from "mongoose";
 import { IApplication } from "./Application.d"
+import applicationInfoSchema from "./applicationInfoSchema";
+import additionalInfoSchema from "./additionalInfoSchema";
+import reviewSchema from "./reviewSchema";
 
 const applicationSchema: Schema = new mongoose.Schema({
     // user id is _id.
     "_id": String,
     "forms": { // can only be modified by user/editors
-        "application_info": any,
-        "additional_info": any
-        // we can conceivably add additional forms here.
+        "application_info": applicationInfoSchema,
+        "additional_info": additionalInfoSchema
     },
     "admin_info": { // Only editable by admin.
         "transportation": {
@@ -17,9 +19,8 @@ const applicationSchema: Schema = new mongoose.Schema({
         },
         "reimbursement_amount": String
     },
-    "reviews": [
-        {} // each review can only be modified by the reviewer who made it.
-    ],
+    "reviews": [reviewSchema] // each review can only be modified by the reviewer who made it.
+    ,
     "user": {
         "name": String,
         "email": String
@@ -28,7 +29,7 @@ const applicationSchema: Schema = new mongoose.Schema({
     "type": {
         type: String,
         enumValues: ["is", "oos", "stanford"]
-    }, // this is created when user is created, cannot be modified later.
+    }
 });
 
 const model: Model<IApplication> = mongoose.model("Application", applicationSchema);
