@@ -27,6 +27,9 @@
     "path": "^0.12.7",
     "request": "^2.83.0"
   },
+  "engines": {
+    "node": "8.9.3"
+  },
   "bugs": {
     "url": "https://github.com/TreeHacks/application-portal/issues"
   },
