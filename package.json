@@ -36,7 +36,8 @@
     "request": "^2.83.0"
   },
   "engines": {
-    "node": "8.9.3"
+    "node": "8.9.3",
+    "npm": "5.5.1"
   },
   "bugs": {
     "url": "https://github.com/TreeHacks/application-portal/issues"
