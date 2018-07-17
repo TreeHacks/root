@@ -10,7 +10,7 @@
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts",
     "build": "tsc",
-    "postinstall": "npm run build",
+    "heroku-postbuild": "npm run build",
     "start:prod": "node build/index.js"
   },
   "repository": {
@@ -33,7 +33,8 @@
     "express": "^4.16.2",
     "mongoose": "^5.0.3",
     "path": "^0.12.7",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "typescript": "^2.9.2"
   },
   "engines": {
     "node": "8.9.3",
@@ -46,12 +47,12 @@
   "devDependencies": {
     "cross-env": "^5.2.0",
     "jest": "^23.4.1",
+    "mongodb-memory-server": "^1.9.0",
     "morgan": "^1.9.0",
     "nodemon": "^1.18.2",
     "supertest": "^3.1.0",
     "ts-jest": "^23.0.0",
-    "ts-node": "^7.0.0",
-    "typescript": "^2.9.2"
+    "ts-node": "^7.0.0"
   },
   "jest": {
     "transform": {
