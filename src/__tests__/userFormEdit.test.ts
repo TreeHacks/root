@@ -1,23 +1,9 @@
-import request from "supertest";
-import app from "../..";
-import {createApplication} from "../routes/user_create";
-
-function post_expect_json(url: string, formData: {[x:string]: any}, value: any) {
-  return request(app)
-    .put(url)
-    .send(formData)
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .then(response => {
-      expect(response.body).toEqual(value);
-    });
-}
+import { createRandomApplication, post_expect_json, get_expect_json } from "../testUtils";
 
 describe('user form update', () => {
-  let userId:string;
+  let userId: string;
   beforeAll(() => {
-    userId = Math.random() + "";
-    createApplication(userId);
+    userId = createRandomApplication();
   })
   test('set user application_info', () => {
     return post_expect_json(`/users/${userId}/forms/application_info`, { "university": "berkeley" }, { "university": "berkeley" });
@@ -27,17 +13,26 @@ describe('user form update', () => {
   });
 
   test('set user status', () => {
-    return post_expect_json(`/users/${userId}/status`, {"status": "admitted"}, {"status": "admitted"})
+    return post_expect_json(`/users/${userId}/status`, { "status": "admitted" }, { "status": "admitted" })
   });
 });
 
 describe('admin user edit', () => {
-  let userId:string;
+  let userId: string;
   beforeAll(() => {
-    userId = Math.random() + "";
-    createApplication(userId);
+    userId = createRandomApplication();
   })
   test('set user admin_info', () => {
     return post_expect_json(`/users/${userId}/admin_info`, { "reimbursement_amount": 500 }, { "reimbursement_amount": 500 });
+  });
+});
+
+describe('user review', () => {
+  let userId: string;
+  beforeAll(() => {
+    userId = createRandomApplication();
+  })
+  test('set user review_info item', () => {
+    // return post_expect_json(`/users/${userId}/review`, { "is_beginner": false }, { "is_beginner": false });
   });
 });

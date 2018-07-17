@@ -1,36 +1,22 @@
-import request from "supertest";
-// jest.mock('../../app/photo_model');
-import app from "../..";
-import { createApplication } from "../routes/user_create";
-
-function render_json(url: string, value: any) {
-  return request(app)
-    .get(url)
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .then(response => {
-      expect(response.body).toEqual(value);
-    });
-}
+import { createRandomApplication, post_expect_json, get_expect_json } from "../testUtils";
 
 describe('user form view', () => {
   let userId: string;
   beforeAll(() => {
-    userId = Math.random() + "";
-    createApplication(userId);
+    userId = createRandomApplication();
   })
   test('get user application_info', () => {
-    return render_json(`/users/${userId}/forms/application_info`, { "university": "stanford" });
+    return get_expect_json(`/users/${userId}/forms/application_info`, { "university": "stanford" });
   });
   test('get user additional_info', () => {
-    return render_json(`/users/${userId}/forms/additional_info`, { "bus_confirmed_spot": true })
+    return get_expect_json(`/users/${userId}/forms/additional_info`, { "bus_confirmed_spot": true })
   });
   test('get user status', () => {
-    return render_json(`/users/${userId}/status`, { "status": "incomplete" })
+    return get_expect_json(`/users/${userId}/status`, { "status": "incomplete" })
   });
   // todo add authentication here:
   test('get user full details', () => {
-    return render_json(`/users/${userId}`, {
+    return get_expect_json(`/users/${userId}`, {
       "_id": userId,
       "forms": {
         "application_info": {"university": "stanford"},
