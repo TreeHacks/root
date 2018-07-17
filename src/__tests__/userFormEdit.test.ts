@@ -30,3 +30,14 @@ describe('user form update', () => {
     return post_expect_json(`/users/${userId}/status`, {"status": "admitted"}, {"status": "admitted"})
   });
 });
+
+describe('admin user edit', () => {
+  let userId:string;
+  beforeAll(() => {
+    userId = Math.random() + "";
+    createApplication(userId);
+  })
+  test('set user admin_info', () => {
+    return post_expect_json(`/users/${userId}/admin_info`, { "reimbursement_amount": 500 }, { "reimbursement_amount": 500 });
+  });
+});

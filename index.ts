@@ -9,9 +9,10 @@ const port = process.env.PORT || 3000;
 import { Router, Request, Response, NextFunction } from 'express';
 import authenticatedRoute from "./src/router/authenticatedRoute";
 import { getAdditionalInfo, setAdditionalInfo } from "./src/routes/additional_info";
-import {getApplicationInfo, setApplicationInfo} from "./src/routes/application_info";
-import {getUserDetail} from "./src/routes/user_detail";
-import {getApplicationStatus, setApplicationStatus} from "./src/routes/user_status";
+import { getApplicationInfo, setApplicationInfo } from "./src/routes/application_info";
+import { getUserDetail } from "./src/routes/user_detail";
+import { getApplicationStatus, setApplicationStatus } from "./src/routes/user_status";
+import { setAdminInfo } from "./src/routes/admin_info";
 
 // Set up the Express app
 const app = express();
@@ -55,15 +56,20 @@ app.get('/', (req: Request, res: Response) => {
     res.status(200).send('Welcome to treehacks.');
 });
 
+// Auth - user must be signed in:
 app.get('/users/:userId/forms/additional_info', getAdditionalInfo);
 app.put('/users/:userId/forms/additional_info', setAdditionalInfo);
 app.get('/users/:userId/forms/application_info', getApplicationInfo);
 app.put('/users/:userId/forms/application_info', setApplicationInfo);
-app.get('/users/:userId', getUserDetail);
+// What permission should this one be?
 app.get('/users/:userId/status', getApplicationStatus);
-app.put('/users/:userId/status', setApplicationStatus);
-// todo: setAdminInfo
 
+// Admin protected functions:
+app.put('/users/:userId/status', setApplicationStatus);
+app.get('/users/:userId', getUserDetail);
+
+// Custom auth:
+app.put('/users/:userId/admin_info', setAdminInfo);
 
 //Define your routes that need authentication check
 authenticatedRoute.get("/myfirstapi", function (req, res, next) {

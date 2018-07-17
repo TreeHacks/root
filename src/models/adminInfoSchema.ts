@@ -5,7 +5,7 @@ const adminInfoSchema: Schema = new mongoose.Schema({
     "method": String,
     "bus_name": String
   },
-  "reimbursement_amount": { type: String, default: null }
+  "reimbursement_amount": { type: Number, default: null }
 }, { _id: false });
 
 export default adminInfoSchema;
