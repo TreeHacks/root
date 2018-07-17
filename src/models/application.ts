@@ -30,5 +30,5 @@ const applicationSchema: Schema = new mongoose.Schema({
     }
 });
 
-const model: Model<IApplication> = mongoose.model<IApplication>("Application", applicationSchema);
+const model: Model<IApplication> = mongoose.model("Application", applicationSchema);
 export default model;
