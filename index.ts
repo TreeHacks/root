@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const CognitoExpress = require("cognito-express");
 var path = require("path");
 var request = require('request');
-import morgan from "morgan";
 const port = process.env.PORT || 3000;
 import { Router, Request, Response, NextFunction } from 'express';
 import authenticatedRoute from "./src/router/authenticatedRoute";
@@ -57,19 +56,19 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Auth - user must be signed in:
-app.get('/users/:userId/forms/additional_info', getAdditionalInfo);
-app.put('/users/:userId/forms/additional_info', setAdditionalInfo);
-app.get('/users/:userId/forms/application_info', getApplicationInfo);
-app.put('/users/:userId/forms/application_info', setApplicationInfo);
+authenticatedRoute.get('/users/:userId/forms/additional_info', getAdditionalInfo);
+authenticatedRoute.put('/users/:userId/forms/additional_info', setAdditionalInfo);
+authenticatedRoute.get('/users/:userId/forms/application_info', getApplicationInfo);
+authenticatedRoute.put('/users/:userId/forms/application_info', setApplicationInfo);
 // What permission should this one be?
-app.get('/users/:userId/status', getApplicationStatus);
+authenticatedRoute.get('/users/:userId/status', getApplicationStatus);
 
 // Admin protected functions:
-app.put('/users/:userId/status', setApplicationStatus);
-app.get('/users/:userId', getUserDetail);
+authenticatedRoute.put('/users/:userId/status', setApplicationStatus);
+authenticatedRoute.get('/users/:userId', getUserDetail);
 
-// Custom auth:
-app.put('/users/:userId/admin_info', setAdminInfo);
+// Need custom auth:
+authenticatedRoute.put('/users/:userId/admin_info', setAdminInfo);
 
 //Define your routes that need authentication check
 authenticatedRoute.get("/myfirstapi", function (req, res, next) {

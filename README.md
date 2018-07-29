@@ -2,9 +2,9 @@
 TreeHacks application portal for 2018.
 
 ## Run locally
+Use a .env file.
 ```
 npm i
-npm run mongo
 npm start
 ```
 
