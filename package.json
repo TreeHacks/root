@@ -5,7 +5,7 @@
   "main": "webpack.common.js",
   "scripts": {
     "start": "dotenv gulp serve",
-    "heroku-postbuild": "webpack --watch --config webpack.dev.js"
+    "heroku-postbuild": "webpack --config webpack.dev.js"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,8 @@
   "dependencies": {
     "aws-amplify": "^1.0.4",
     "aws-amplify-react": "^1.0.4",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",

@@ -32,7 +32,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'Treehacks Client',
-      template: 'src/index.html',
+      template: './src/index.html',
       filename: `../index.html`
     })
   ],
