@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.common.js",
   "scripts": {
-    "start": "dotenv -e vars.env gulp serve",
+    "start": "dotenv gulp serve",
     "heroku-postbuild": "webpack --watch --config webpack.dev.js"
   },
   "repository": {
