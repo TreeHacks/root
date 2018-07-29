@@ -6,8 +6,5 @@ const webpack = require('webpack');
 module.exports = merge(common, {
   mode: 'development',
   plugins: [
-    new webpack.DefinePlugin({
-        MODE: `"DEV"`
-    })
   ]
 });

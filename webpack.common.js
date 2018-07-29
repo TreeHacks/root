@@ -7,7 +7,7 @@ const DEST_URL = "./dist";
 
 module.exports = {
   entry: {
-    app: ["whatwg-fetch", "babel-polyfill", './src/index']
+    app: ["whatwg-fetch", "babel-polyfill", SRC_URL + '/index']
   },
   optimization: {
     splitChunks: {
@@ -27,10 +27,12 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
+      COGNITO_USER_POOL_ID: `"${process.env.COGNITO_USER_POOL_ID}"`,
+      COGNITO_CLIENT_ID: `"${process.env.COGNITO_CLIENT_ID}"`
     }),
     new HtmlWebpackPlugin({
       title: 'Treehacks Client',
-      template: './src/index.html',
+      template: 'src/index.html',
       filename: `../index.html`
     })
   ],
