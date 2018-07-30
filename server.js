@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Set up static files
-app.use(express.static('dist'));
+app.use("/dist", express.static('dist'));
 
 // Use body-parser to parse HTTP request parameters
 app.use(bodyParser.json());
