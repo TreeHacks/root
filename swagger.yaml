@@ -4,7 +4,7 @@ info:
   description: API used for [TreeHacks](https://www.treehacks.com/), Stanford's annual hackathon.
   version: 0.0.1
 servers:
-  - url: http://aplication-portal-prod.herokuapp.com
+  - url: http://application-portal-prod.herokuapp.com
     description: Production
   - url: http://application-portal-test.herokuapp.com
     description: Test server

@@ -3,16 +3,17 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./swagger.yaml');
+// const swaggerDocument = YAML.load('./swagger.yaml');
+import swaggerDocument from "./swagger";
 const port = process.env.PORT || 3000;
 
 
-import authenticatedRoute from "./src/router/authenticatedRoute";
-import { getAdditionalInfo, setAdditionalInfo } from "./src/routes/additional_info";
-import { getApplicationInfo, setApplicationInfo } from "./src/routes/application_info";
-import { getUserDetail } from "./src/routes/user_detail";
-import { getApplicationStatus, setApplicationStatus } from "./src/routes/user_status";
-import { setAdminInfo } from "./src/routes/admin_info";
+import authenticatedRoute from "./router/authenticatedRoute";
+import { getAdditionalInfo, setAdditionalInfo } from "./routes/additional_info";
+import { getApplicationInfo, setApplicationInfo } from "./routes/application_info";
+import { getUserDetail } from "./routes/user_detail";
+import { getApplicationStatus, setApplicationStatus } from "./routes/user_status";
+import { setAdminInfo } from "./routes/admin_info";
 
 // Set up the Express app
 const app = express();

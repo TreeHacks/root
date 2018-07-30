@@ -6,7 +6,7 @@ import additionalInfoSchema from "./additionalInfoSchema";
 import adminInfoSchema from "./adminInfoSchema";
 import reviewSchema from "./reviewSchema";
 
-const applicationSchema: Schema = new mongoose.Schema({
+export const applicationSchema: Schema = new mongoose.Schema({
     // user id is _id.
     "_id": String,
     "forms": { // can only be modified by user/editors
