@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const CognitoExpress = require("cognito-express");
-var path = require("path");
-var request = require('request');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 const port = process.env.PORT || 3000;
-import { Router, Request, Response, NextFunction } from 'express';
+
+
 import authenticatedRoute from "./src/router/authenticatedRoute";
 import { getAdditionalInfo, setAdditionalInfo } from "./src/routes/additional_info";
 import { getApplicationInfo, setApplicationInfo } from "./src/routes/application_info";
@@ -50,10 +51,16 @@ if (!module.parent) {
 }
 
 // Serves the index.html file (our basic frontend)
-app.get('/', (req: Request, res: Response) => {
-    // res.sendFile('index.html', {root: __dirname});
-    res.status(200).send('Welcome to treehacks.');
-});
+// app.get('/', (req: Request, res: Response) => {
+//     // res.sendFile('index.html', {root: __dirname});
+//     res.status(200).send('Welcome to treehacks.');
+// });
+
+const options = {
+    customCss: '.swagger-ui .topbar { display: none }'
+};
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+
 
 // Auth - user must be signed in:
 authenticatedRoute.get('/users/:userId/forms/additional_info', getAdditionalInfo);
@@ -69,10 +76,5 @@ authenticatedRoute.get('/users/:userId', getUserDetail);
 
 // Need custom auth:
 authenticatedRoute.put('/users/:userId/admin_info', setAdminInfo);
-
-//Define your routes that need authentication check
-authenticatedRoute.get("/myfirstapi", function (req, res, next) {
-    res.send(`Hi ${res.locals.user.username}, your API call is authenticated!`);
-});
 
 export default app;

@@ -1,6 +1,7 @@
 # application-portal
 TreeHacks application portal for 2018.
 
+
 ## Run locally
 Use a .env file.
 ```

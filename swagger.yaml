@@ -1,0 +1,112 @@
+openapi: 3.0.0
+info:
+  title: TreeHacks API
+  description: API used for [TreeHacks](https://www.treehacks.com/), Stanford's annual hackathon.
+  version: 0.0.1
+servers:
+  - url: http://aplication-portal-prod.herokuapp.com
+    description: Production
+  - url: http://application-portal-test.herokuapp.com
+    description: Test server
+paths:
+  /users/{userId}:
+    get:
+      summary: Get user detail.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+  /users/{userId}/status:
+    get:
+      summary: Get user status.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+    put:
+      summary: Set user status.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+  /users/{userId}/forms/application_info:
+    get:
+      summary: Get user application info.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+    put:
+      summary: Set user application info.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+  /users/{userId}/forms/additional_info:
+    get:
+      summary: Get user additional info.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+    put:
+      summary: Set user additional info.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+  /users/{userId}/admin_info:
+    put:
+      summary: Set user admin info.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
