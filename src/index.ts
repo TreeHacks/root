@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
+import cors from "cors";
 // const swaggerDocument = YAML.load('./swagger.yaml');
 import swaggerDocument from "./swagger";
 const port = process.env.PORT || 3000;
@@ -34,6 +35,9 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(cors());
+
+// HTTP request Logging
 // app.use(morgan('combined'))
 
 // Error handling middleware
