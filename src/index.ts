@@ -64,8 +64,9 @@ if (!module.parent) {
 const options = {
     customCss: '.swagger-ui .topbar { display: none }'
 };
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
+app.get("/", (req, res) => res.redirect("/doc"));
 
 // Auth - user must be signed in:
 authenticatedRoute.get('/users/:userId/forms/additional_info', getAdditionalInfo);
