@@ -7,6 +7,7 @@ import { Switch, Route } from "react-router-dom";
 import { IBaseState } from "./store/base/types";
 import Login from "./Login/Login";
 import Loading from "./Loading/Loading";
+import "bootstrap/dist/css/bootstrap.css";
 
 // function Home() {
 //   return <div>
