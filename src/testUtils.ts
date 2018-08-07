@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "..";
+import app from "./index";
 import {createApplication} from "./routes/user_create";
 
 
