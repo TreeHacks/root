@@ -14,7 +14,6 @@ declare var COGNITO_CLIENT_ID: string;
 Amplify.configure({
   Auth: {
   // REQUIRED - Amazon Cognito Identity Pool ID
-      identityPoolId: '',
   // REQUIRED - Amazon Cognito Region
       region: 'us-east-1',
   // OPTIONAL - Amazon Cognito User Pool ID
@@ -25,13 +24,13 @@ Amplify.configure({
       mandatorySignIn: false
   },
   API: {
-    // endpoints: [
-    //     {
-    //         name: "api",
-    //         endpoint: ENDPOINT_URL,
-    //         custom_header: async () => ({Authorization: (await Auth.currentSession()).idToken.jwtToken})
-    //     }
-    // ]
+    endpoints: [
+        {
+            name: "treehacks",
+            endpoint: ENDPOINT_URL,
+            custom_header: async () => ({Authorization: (await Auth.currentSession()).idToken.jwtToken})
+        }
+    ]
   }
 });
 

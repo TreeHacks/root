@@ -19,7 +19,7 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         ...state,
         loggedIn: true,
         user: action.attributes,
-        userId: `cm:cognitoUserPool:${action.userId}`
+        userId: action.userId
       };
     case 'LOGOUT_SUCCESS':
       return {

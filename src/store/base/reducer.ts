@@ -5,7 +5,7 @@ const initialState: IBaseState = {
   loading: false
 };
 
-const auth: Reducer<any> = (state: any = initialState, action): any => {
+const base: Reducer<any> = (state: any = initialState, action): any => {
   switch (action.type) {
     case 'LOADING_START':
       return {
@@ -22,4 +22,4 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
   }
 };
 
-export default auth;
+export default base;

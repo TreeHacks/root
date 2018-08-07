@@ -28,7 +28,8 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       COGNITO_USER_POOL_ID: `"${process.env.COGNITO_USER_POOL_ID}"`,
-      COGNITO_CLIENT_ID: `"${process.env.COGNITO_CLIENT_ID}"`
+      COGNITO_CLIENT_ID: `"${process.env.COGNITO_CLIENT_ID}"`,
+      ENDPOINT_URL: `"${process.env.ENDPOINT_URL}"`
     }),
     new HtmlWebpackPlugin({
       title: 'Treehacks Client',

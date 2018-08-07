@@ -1,5 +1,4 @@
 import React from "react";
-import { Authenticator } from "aws-amplify-react";
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from "./history";
@@ -8,6 +7,8 @@ import { IBaseState } from "./store/base/types";
 import Login from "./Login/Login";
 import Loading from "./Loading/Loading";
 import "bootstrap/dist/css/bootstrap.css";
+import { IAuthState } from "./store/auth/types";
+import Home from "./Home/Home";
 
 // function Home() {
 //   return <div>
@@ -17,20 +18,28 @@ import "bootstrap/dist/css/bootstrap.css";
 // }
 
 const mapStateToProps = state => ({
-  ...state.base
+  ...state.base,
+  loggedIn: (state.auth as IAuthState).loggedIn
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 
 });
 
-const App = (props: IBaseState) => (
+interface IAuthStateProps extends IBaseState {
+  loggedIn: boolean
+}
+
+const App = (props: IAuthStateProps) => (
   <ConnectedRouter history={history}>
-    <div className="ccmt-cff-Wrapper-Bootstrap">
+    <div className="treehacks-main">
       {props.loading && <Loading />}
+      <Login />
+      {props.loggedIn &&
       <Switch>
-        <Route path="" component={Login} />
+        <Route path="" component={Home} />
       </Switch>
+      }
     </div>
   </ConnectedRouter>);
 
