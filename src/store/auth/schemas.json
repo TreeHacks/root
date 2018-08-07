@@ -1,0 +1,123 @@
+{
+  "signIn": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email Address"
+        },
+        "password": {
+          "type": "string",
+          "title": "Password"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "uiSchema": {
+      "password": {
+        "ui:widget": "password"
+      }
+    }
+  },
+  "signUp": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email Address",
+          "description": "You will use this email address to log in to your account."
+        },
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "description": "Password needs to have at least 8 characters, an uppercase and a lowercase character."
+        },
+        "password2": {
+          "type": "string",
+          "title": "Re-enter password"
+        },
+        "university": {
+          "type": "string",
+          "title": "University"
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "enum": ["In state", "Out of state", "Stanford"]
+        }
+      },
+      "required": [
+        "email",
+        "password",
+        "password2",
+        "university",
+        "status"
+      ]
+    },
+    "uiSchema": {
+      "password": {
+        "ui:widget": "password"
+      },
+      "password2": {
+        "ui:widget": "password"
+      }
+    }
+  },
+  "forgotPassword": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email Address"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "uiSchema": {}
+  },
+  "forgotPasswordSubmit": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email Address"
+        },
+        "code": {
+          "type": "string",
+          "title": "Code"
+        },
+        "password": {
+          "type": "string",
+          "title": "New password"
+        },
+        "password2": {
+          "type": "string",
+          "title": "Confirm new password"
+        }
+      },
+      "required": [
+        "email",
+        "code",
+        "password",
+        "password2"
+      ]
+    },
+    "uiSchema": {
+      "password": {
+        "ui:widget": "password"
+      },
+      "password2": {
+        "ui:widget": "password"
+      }
+    }
+  }
+}

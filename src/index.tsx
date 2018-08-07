@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from "./App";
 import Amplify, {Auth} from "aws-amplify";
 import { I18n } from 'aws-amplify';
-// import store from "./store";
-// import {Provider} from "react-redux";
+import store from "./store";
+import {Provider} from "react-redux";
 
 declare var MODE: string;
 declare var ENDPOINT_URL: string;
@@ -46,5 +46,5 @@ const authScreenLabels = {
 I18n.setLanguage('en');
 I18n.putVocabularies(authScreenLabels);
 
-// ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('main'));
-ReactDOM.render(<App />, document.getElementById('main'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('main'));
+// ReactDOM.render(<App />, document.getElementById('main'));

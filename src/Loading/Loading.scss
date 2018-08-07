@@ -1,0 +1,26 @@
+.treehacks-error-container {
+    position: fixed;
+    top: 10%;
+    left: 20%;
+}
+
+.treehacks-loading-container {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.2);
+    // position: fixed;
+    top: 75px; // For auth bar.
+    left: 0;
+    z-index: 100;
+
+    .treehacks-loading {
+        fill: rgb(100, 0, 221);
+        height: 100px;
+        width: 100px;
+        margin-left: -50px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 99;
+    }
+}
