@@ -68,6 +68,8 @@ app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 app.get("/", (req, res) => res.redirect("/doc"));
 
+app.use("/", authenticatedRoute);
+
 // Auth - user must be signed in:
 authenticatedRoute.get('/users/:userId/forms/additional_info', getAdditionalInfo);
 authenticatedRoute.put('/users/:userId/forms/additional_info', setAdditionalInfo);
