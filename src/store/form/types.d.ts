@@ -5,9 +5,9 @@ export interface IFormState {
     applications: IApplicationItem[]
   },
   schemas: {
-    application1: IAuthStateSchemaItem,
-    application2: IAuthStateSchemaItem
+    application: IAuthStateSchemaItem
   },
+  page: number
 }
 
 export interface IApplicationItem {

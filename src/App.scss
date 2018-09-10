@@ -1,0 +1,10 @@
+.btn-now, .btn-clear {
+    display: none;
+}
+
+.field > ul.list-inline {
+    display: flex;
+    & > li {
+        flex: 1;
+    }
+}

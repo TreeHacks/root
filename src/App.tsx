@@ -9,6 +9,7 @@ import Loading from "./Loading/Loading";
 import "bootstrap/dist/css/bootstrap.css";
 import { IAuthState } from "./store/auth/types";
 import Home from "./Home/Home";
+import "./App.scss";
 
 // function Home() {
 //   return <div>
