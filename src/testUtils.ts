@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "./index";
-import {createApplication} from "./routes/user_create";
+import { createApplication } from "./routes/common";
 
 
 export function get_expect_json(url: string, value: any) {
@@ -13,7 +13,7 @@ export function get_expect_json(url: string, value: any) {
     });
 }
 
-export function post_expect_json(url: string, formData: {[x:string]: any}, value: any) {
+export function post_expect_json(url: string, formData: { [x: string]: any }, value: any) {
   return request(app)
     .put(url)
     .send(formData)
