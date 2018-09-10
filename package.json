@@ -5,8 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "mongo": "ts-node ./src/setupMongo.ts",
-    "test": "jest",
-    "tdd": "jest --watch",
+    "test": "dotenv jest",
+    "tdd": "dotenv jest --watch",
     "start": "concurrently --kill-others \"npm run mongo\" \"npm run build:live\"",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r dotenv/config ./src/index.ts",
     "build": "tsc",

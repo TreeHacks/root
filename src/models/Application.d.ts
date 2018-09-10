@@ -26,7 +26,6 @@ export interface IApplication extends Document {
   "reviews": [IReview// each review can only be modified by the reviewer who made it.
   ],
   "user": {
-    "name": {type: string},
     "email": {type: string}
    }, // foreign key
   "id": {type: string},
