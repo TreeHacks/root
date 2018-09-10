@@ -88,6 +88,7 @@ export function signUp(data) {
       attributes: {
         email: data.email,
         name: "User",
+        // TODO: custom:location here.
         website: (window.location != window.parent.location) ? document.referrer : window.location.href // Link for confirmation email
       }
     })

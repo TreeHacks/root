@@ -41,7 +41,7 @@ class Login extends React.Component<ILoginProps, {}> {
         <h1>TreeHacks Application Portal</h1>
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
-          </div>
+        </div>
         }
         {this.props.error && <div className="alert alert-danger" role="alert">
           {this.props.error}

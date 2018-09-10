@@ -1,11 +1,13 @@
 import React from "react";
+import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
 import { getUserProfile } from "../store/form/actions";
 import { IHomeProps } from "./types.d";
 import "./Home.scss";
 
 const mapStateToProps = state => ({
-  ...state.home
+  ...state.home,
+  schemas: state.form.schemas
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -22,6 +24,9 @@ class Login extends React.Component<IHomeProps, {}> {
       {this.props.profile && <pre>
         {JSON.stringify(this.props.profile, null, 2)}
       </pre>}
+      {this.props.schemas &&
+        <Form schema={this.props.schemas.application1.schema} uiSchema={this.props.schemas.application2.schema} />
+      }
     </div>
   }
 }

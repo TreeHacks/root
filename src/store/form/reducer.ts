@@ -2,7 +2,8 @@ import {IFormState} from "./types";
 import { Reducer } from 'redux';
 
 const initialState: IFormState = {
-  profile: null
+  profile: null,
+  schemas: require("./schemas.json")
 };
 
 const form: Reducer<any> = (state: any = initialState, action): any => {
