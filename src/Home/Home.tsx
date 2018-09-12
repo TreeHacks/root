@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { getUserProfile, setPage } from "../store/form/actions";
 import { IHomeProps } from "./types";
 import "./Home.scss";
-import FormPage from "../FormPage/FormPage";
+import {NavLink} from "react-router-dom";
 
 const mapStateToProps = state => ({
-  ...state.home,
-  schemas: state.form.schemas
+  ...state.home
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -24,9 +23,11 @@ class Login extends React.Component<IHomeProps, {}> {
       {this.props.profile && <pre>
         {JSON.stringify(this.props.profile, null, 2)}
       </pre>}
-      <div>
-        <FormPage />
-      </div>
+      <ul>
+      <NavLink to="/">Dashboard</NavLink>
+      <NavLink to="/application_info">Application</NavLink>
+      <NavLink to="/additional_info">Travel</NavLink>
+      </ul>
     </div>
   }
 }

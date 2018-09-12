@@ -9,7 +9,10 @@ import Loading from "./Loading/Loading";
 import "bootstrap/dist/css/bootstrap.css";
 import { IAuthState } from "./store/auth/types";
 import Home from "./Home/Home";
+import FormPage from "./FormPage/FormPage";
+import Dashboard from "./Dashboard/Dashboard";
 import "./App.scss";
+import { setFormName } from "./store/form/actions";
 
 // function Home() {
 //   return <div>
@@ -24,22 +27,28 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+  setFormName: (e: string) => dispatch(setFormName(e))
 });
 
-interface IAuthStateProps extends IBaseState {
-  loggedIn: boolean
+interface IAppProps extends IBaseState {
+  loggedIn: boolean,
+  setFormName: (e: string) => void
 }
 
-const App = (props: IAuthStateProps) => (
+const App = (props: IAppProps) => (
   <ConnectedRouter history={history}>
     <div className="treehacks-main">
       {props.loading && <Loading />}
       <Login />
       {props.loggedIn &&
-      <Switch>
-        <Route path="" component={Home} />
-      </Switch>
+        <div>
+          <Route path="" component={Home} />
+          <Switch>
+            <Route path="/" exact component={Dashboard} />
+            <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
+            <Route path="/additional_info" render={() => { props.setFormName("additional_info"); return <FormPage />; }} />
+          </Switch>
+        </div>
       }
     </div>
   </ConnectedRouter>);

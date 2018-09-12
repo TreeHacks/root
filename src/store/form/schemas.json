@@ -1,6 +1,7 @@
 {
-    "application": {
+    "application_info": {
         "schema": {
+            "title": "Application",
             "type": "object",
             "properties": {
                 "first_name": {"type": "string"},
@@ -121,7 +122,19 @@
             ]
         ]
     },
-    "travel": {
-        "schema": {}
+    "additional_info": {
+        "schema": {
+            "type": "object",
+            "title": "Travel / Additional Info",
+            "properties": {
+                "q1": {"type": "string", "format": "textarea"}
+            }
+        },
+        "uiSchema": {
+
+        },
+        "pages": [
+            ["q1"]
+        ]
     }
 }
