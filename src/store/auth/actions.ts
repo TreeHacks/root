@@ -1,4 +1,4 @@
-import { IUserAttributes } from "./types.d";
+import { IUserAttributes } from "./types";
 import { API, Auth } from "aws-amplify";
 import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";

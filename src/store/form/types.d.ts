@@ -7,7 +7,9 @@ export interface IFormState {
   schemas: {
     application: IAuthStateSchemaItem
   },
-  page: number
+  page: number,
+  formData: any,
+  formName: string
 }
 
 export interface IApplicationItem {
