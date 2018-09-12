@@ -23,7 +23,7 @@ export const setFormName = (formName: string) => ({
 });
 
 export const getUserProfile = () => (dispatch, getState) => {
-  let userId = (getState().auth as IAuthState).userId;
+  const userId = (getState().auth as IAuthState).userId;
   return API.get("treehacks", `/users/${userId}`, {}).then(e => {
     console.log(e);
     // dispatch(setUserProfile(e));
@@ -34,12 +34,25 @@ export const getUserProfile = () => (dispatch, getState) => {
 };
 
 export const saveData = () => (dispatch, getState) => {
-  const data = (getState() as IFormState).formData;
-  alert("Save data" + data);
+  const formData = (getState().form as IFormState).formData;
+  const userId = (getState().auth as IAuthState).userId;
+  const formName = (getState().form as IFormState).formName;
+  return API.put("treehacks", `/users/${userId}/forms/${formName}`, {"body": formData}).then(e => {
+    console.log("Data saved", e);
+    // dispatch(setData(e));
+  }).catch(e => {
+    console.error(e);
+    alert("Error saving data " + e);
+  });
 }
 
 export const loadData = () => (dispatch, getState) => {
-  const data = (getState() as IFormState).formData;
-  // alert("Save data" + data);
-  dispatch(setData({"first_name": "Ashwin"}));
+  const userId = (getState().auth as IAuthState).userId;
+  const formName = (getState().form as IFormState).formName;
+  return API.get("treehacks", `/users/${userId}/forms/${formName}`, {}).then(e => {
+    dispatch(setData(e));
+  }).catch(e => {
+    console.error(e);
+    alert("Error getting data " + e);
+  });
 }

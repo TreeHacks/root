@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
-import { setPage, setData, saveData, loadData } from "../store/form/actions";
+import { setPage, setData, saveData, loadData, setFormName } from "../store/form/actions";
 import { IFormPageProps } from "./types";
 import { cloneDeep, set } from "lodash-es";
 import Loading from "../Loading/Loading";
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setPage: (e) => dispatch(setPage(e)),
     setData: (e) => dispatch(setData(e)),
     saveData: () => dispatch(saveData()),
-    loadData: () => dispatch(loadData()),
+    loadData: () => { dispatch(setFormName("application_info")); dispatch(loadData()) },
 });
 
 class FormPage extends React.Component<IFormPageProps, {}> {
@@ -30,7 +30,7 @@ class FormPage extends React.Component<IFormPageProps, {}> {
         const uiOrder = [...props.schemas.application.pages[props.page], "*"];
         const schema = props.schemas.application.schema;
         let uiSchema = cloneDeep(props.schemas.application.uiSchema);
-        
+
         // Display proper page:
         uiSchema["ui:order"] = uiOrder;
         for (let item in schema.properties) {
@@ -40,6 +40,7 @@ class FormPage extends React.Component<IFormPageProps, {}> {
         }
 
         return (<Form schema={schema} uiSchema={uiSchema} formData={props.formData}
+            onChange={e => props.setData(e.formData) }
             onSubmit={e => { props.saveData() }}>
             <button className="btn"
                 disabled={props.page - 1 < 0}
