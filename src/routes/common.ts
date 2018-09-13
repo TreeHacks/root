@@ -15,7 +15,7 @@ export function getApplicationAttribute(req: Request, res: Response, getter: (e:
       (application: IApplication | null) => {
         if (!application) {
           if (createIfNotFound) {
-            createApplication(res.locals.user).then(e => getApplicationAttribute(req, res, getter, createIfNotFound));
+            return createApplication(res.locals.user).then(e => getApplicationAttribute(req, res, getter, false));
           }
           else {
             res.status(404).send("Application not found.");
