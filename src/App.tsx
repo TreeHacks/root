@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from "./history";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { IBaseState } from "./store/base/types";
 import Login from "./Login/Login";
 import Loading from "./Loading/Loading";
@@ -40,6 +40,9 @@ const App = (props: IAppProps) => (
     <div className="treehacks-main">
       {props.loading && <Loading />}
       <Login />
+      {!props.loggedIn && 
+        <Redirect to="/"/>
+      }
       {props.loggedIn &&
         <div>
           <Route path="" component={Home} />
