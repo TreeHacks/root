@@ -22,6 +22,12 @@ COGNITO_USER_POOL_ID - user pool id
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 
-## Todo
-- Authorization
-- Use https://www.npmjs.com/package/mongoose-authorization
+## Heroku custom domain names
+https://devcenter.heroku.com/articles/custom-domains#add-a-custom-domain-with-a-subdomain
+```
+--org=treehacks 
+heroku domains:add apply.dev.treehacks.com -a ap-frontend-test
+heroku domains:add apply.treehacks.com -a ap-frontend-prod
+heroku domains:add api.dev.treehacks.com -a application-portal-test
+heroku domains:add api.treehacks.com -a application-portal-prod
+```

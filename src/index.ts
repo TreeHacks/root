@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
+const forceSsl = require('force-ssl-heroku');
 import cors from "cors";
 // const swaggerDocument = YAML.load('./swagger.yaml');
 import swaggerDocument from "./swagger";
@@ -18,6 +19,7 @@ import { setAdminInfo } from "./routes/admin_info";
 
 // Set up the Express app
 const app = express();
+app.use(forceSsl);
 
 const userId = "test_user_id";
 
