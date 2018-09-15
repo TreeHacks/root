@@ -12,12 +12,12 @@ const swagger = {
   },
   "servers": [
     {
-      "url": "http://application-portal-prod.herokuapp.com",
+      "url": "https://api.treehacks.com",
       "description": "Production"
     },
     {
-      "url": "http://application-portal-test.herokuapp.com",
-      "description": "Test"
+      "url": "https://api.dev.treehacks.com",
+      "description": "Dev"
     }
   ],
   "components": {
