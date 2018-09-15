@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+var forceSsl = require('force-ssl-heroku');
 
 // Set up the Express app
 const app = express();
+app.use(forceSsl);
 
 // Set up static files
 app.use("/dist", express.static('dist'));
