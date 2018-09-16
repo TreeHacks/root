@@ -2,7 +2,7 @@ import { Reducer } from 'redux';
 import { IAuthState } from './types';
 
 const initialState: IAuthState = {
-  loggedIn: false,
+  loggedIn: undefined,
   user: null,
   userId: null,
   schemas: require("./schemas.json"),

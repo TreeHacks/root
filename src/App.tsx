@@ -40,10 +40,10 @@ const App = (props: IAppProps) => (
     <div className="treehacks-main">
       {props.loading && <Loading />}
       <Login />
-      {!props.loggedIn && 
+      {props.loggedIn === false && 
         <Redirect to="/"/>
       }
-      {props.loggedIn &&
+      {props.loggedIn === true &&
         <div>
           <Route path="" component={Home} />
           <Switch>
