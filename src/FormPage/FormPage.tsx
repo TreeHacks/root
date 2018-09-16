@@ -19,7 +19,34 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     loadData: () => { dispatch(loadData()) },
     goHome: () => { dispatch(push("/")) }
 });
-class FormPage extends React.Component<IFormPageProps, {afterSubmit: number}> {
+
+
+function base64MimeType(encoded) {
+    var result = null;
+
+    if (typeof encoded !== 'string') {
+        return result;
+    }
+
+    var mime = encoded.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
+
+    if (mime && mime.length) {
+        result = mime[1];
+    }
+
+    return result;
+}
+function validate(formData, errors) {
+    if (formData.resume) {
+        if (!~["application/pdf"].indexOf(base64MimeType(formData.resume))) {
+            console.log(base64MimeType(formData.resume));
+            errors.resume.addError("Resume must be a PDF");
+        }
+    }
+    return errors;
+}
+
+class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> {
     componentDidMount() {
         this.props.loadData();
         // this.props.setData({"first_name":"sad","last_name":"dsf","phone":"123123123","dob":"1901-01-02","gender":"F","race":["American Indian / Alaska Native"],"university":"2nd Military Medical University","graduation_year":"2018","level_of_study":"Graduate","major":"sa","accept_terms":true,"accept_share":true});
@@ -36,7 +63,7 @@ class FormPage extends React.Component<IFormPageProps, {afterSubmit: number}> {
         else {
             props.goHome();
         }
-        this.setState({"afterSubmit": 0});
+        this.setState({ "afterSubmit": 0 });
     }
     render() {
         if (!this.props.formData) {
@@ -66,21 +93,21 @@ class FormPage extends React.Component<IFormPageProps, {afterSubmit: number}> {
         return (<Form schema={schema} uiSchema={uiSchema} formData={props.formData}
             // liveValidate={true}
             showErrorList={true}
-            // validate={validate}
-            onChange={e => props.setData(e.formData)}
+            validate={validate}
+            onChange={e => { props.setData(e.formData) }}
             onSubmit={(e) => this.onSubmit(e)}>
             <input className="btn" type="submit"
                 name="treehacks_previous"
                 value="Previous page"
                 disabled={props.page - 1 < 0}
-                onClick={e => this.setState({"afterSubmit": -1})}
-                />
+                onClick={e => this.setState({ "afterSubmit": -1 })}
+            />
             <input className="btn" type="submit"
                 name="treehacks_next"
                 value="Next page"
                 disabled={props.page + 1 >= schemaObj.pages.length}
-                onClick={e => this.setState({"afterSubmit": 1})}
-                />
+                onClick={e => this.setState({ "afterSubmit": 1 })}
+            />
             {props.page == schemaObj.pages.length - 1 &&
                 <input className="btn btn-primary" type="submit" />}
         </Form>);
