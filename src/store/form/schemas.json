@@ -4,18 +4,21 @@
             "title": "Application",
             "type": "object",
             "properties": {
-                "first_name": {"type": "string"},
-                "last_name": {"type": "string"},
+                "first_name": {"type": "string", "title": "First Name"},
+                "last_name": {"type": "string", "title": "Last Name"},
                 "phone": {
                     "type": "string",
+                    "title": "Phone Number",
                     "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$"
                 },
                 "dob": {
                     "type": "string",
+                    "title": "Date of Birth",
                     "format": "alt-date"
                 },
                 "gender": {
                     "type": "string",
+                    "title": "Gender",
                     "enum": [
                         "M",
                         "F",
@@ -29,14 +32,19 @@
                 },
                 "race": {
                     "title": "Race / Ethnicity",
-                    "enum": [
-                        "American Indian / Alaska Native",
-                        "Asian",
-                        "Black / African American",
-                        "Hispanic / Latino",
-                        "Native Hawaiian / Other Pacific Islander",
-                        "White"
-                    ]
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "American Indian / Alaska Native",
+                            "Asian",
+                            "Black / African American",
+                            "Hispanic / Latino",
+                            "Native Hawaiian / Other Pacific Islander",
+                            "White"
+                        ]
+                    },
+                    "uniqueItems": true
                 },
                 "university": {
                     "title": "University",
@@ -44,6 +52,7 @@
                 },
                 "graduation_year": {
                     "type": "string",
+                    "title": "Graduation Year",
                     "enum": [
                         "2018",
                         "2019",
@@ -59,16 +68,19 @@
                     ]
                 },
                 "level_of_study": {
+                    "title": "Level of Study",
                     "enum": [
                         "Undergraduate",
                         "Graduate"
                     ]
                 },
                 "major": {
+                    "title": "Major",
                     "type": "string"
                 },
                 "resume": {
                     "title": "Upload your resume (optional)",
+                    "description": "Must be a PDF file",
                     "type": "string",
                     "format": "data-url"
                 },
@@ -81,21 +93,41 @@
                     "title": "I authorize you to share ... "
                 },
                 "q1_goodfit": {
-                    "title": "",
+                    "title": "Short Answer 1",
                     "type": "string"
                 },
                 "q2_experience": {
-                    "title": "",
+                    "title": "Short Answer 2",
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "first_name",
+                "last_name",
+                "phone",
+                "dob",
+                "gender",
+                "race",
+                "university",
+                "graduation_year",
+                "level_of_study",
+                "major",
+                "resume",
+                "accept_terms",
+                "accept_share",
+                "q1_goodfit",
+                "q2_experience"
+            ]
         },
         "uiSchema": {
+            "race": {
+                "ui:widget": "checkboxes"
+            },
             "q1_goodfit": {
-                "placeholder": "Please answer the following question in 100-300 words: Why do you think you would be a good fit for treehacks?",
+                "ui:placeholder": "Please answer the following question in 100-300 words: Why do you think you would be a good fit for treehacks?",
                 "ui:widget": "textarea"
             },
-            "q2_goodfit": {
+            "q2_experience": {
                 "ui:widget": "textarea",
                 "ui:placeholder": "Please describe your experience with coding and hackathons in less than 150 words."
             }

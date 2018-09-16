@@ -3,8 +3,9 @@ import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData } from "../store/form/actions";
 import { IFormPageProps } from "./types";
-import { cloneDeep, set } from "lodash-es";
+import { cloneDeep, get, set } from "lodash-es";
 import Loading from "../Loading/Loading";
+import "./FormPage.scss";
 
 const mapStateToProps = state => ({
     ...state.form
@@ -17,6 +18,19 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     loadData: () => { dispatch(loadData()) },
 });
 
+function validate(formData, errors) {
+    console.log(formData.resume, errors);
+}
+
+function ArrayFieldTemplate(props) {
+    return (
+      <div>
+        {props.items.map(element => element.children)}
+        {props.canAdd && <button type="button" onClick={props.onAddClick}></button>}
+      </div>
+    );
+  }
+
 class FormPage extends React.Component<IFormPageProps, {}> {
     componentDidMount() {
         this.props.loadData();
@@ -28,7 +42,7 @@ class FormPage extends React.Component<IFormPageProps, {}> {
 
         const props = this.props;
         const schemaObj = props.schemas[props.formName];
-        console.log(props.formName, props.schemas);
+        // console.log(props.formName, props.schemas);
         const uiOrder = [...schemaObj.pages[props.page], "*"];
         const schema = schemaObj.schema;
         let uiSchema = cloneDeep(schemaObj.uiSchema);
@@ -37,11 +51,16 @@ class FormPage extends React.Component<IFormPageProps, {}> {
         uiSchema["ui:order"] = uiOrder;
         for (let item in schema.properties) {
             if (!~uiOrder.indexOf(item)) {
-                set(uiSchema, `${item}.ui:widget`, "hidden");
+                const existingClass = get(uiSchema, `${item}.classNames`) || "";
+                set(uiSchema, `${item}.classNames`, `${existingClass} treehacks-hidden`);
+                // set(uiSchema, `${item}.ui:widget`, "hidden"); // Can't hide array fields, doesn't work this way.
             }
         }
 
         return (<Form schema={schema} uiSchema={uiSchema} formData={props.formData}
+            ArrayFieldTemplate={ArrayFieldTemplate}
+            liveValidate={true}
+            // validate={validate}
             onChange={e => props.setData(e.formData) }
             onSubmit={e => { props.saveData(); alert("Submission complete"); }}>
             <button className="btn" type="button"

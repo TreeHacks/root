@@ -1,0 +1,14 @@
+.rjsf {
+    padding: 10px;
+    max-width: 80%;
+    margin: auto;
+    .checkbox input {
+        margin-right: 10px;
+    }
+    label.control-label {
+        font-weight: bold;
+    }
+    .treehacks-hidden {
+        display: none;
+    }
+}
