@@ -47,6 +47,10 @@ function validate(formData, errors) {
 }
 
 class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> {
+    constructor(props) {
+        super(props);
+        this.state = {afterSubmit: null};
+    }
     componentDidMount() {
         this.props.loadData();
         // this.props.setData({"first_name":"sad","last_name":"dsf","phone":"123123123","dob":"1901-01-02","gender":"F","race":["American Indian / Alaska Native"],"university":"2nd Military Medical University","graduation_year":"2018","level_of_study":"Graduate","major":"sa","accept_terms":true,"accept_share":true});
