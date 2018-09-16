@@ -3,7 +3,7 @@ import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData } from "../store/form/actions";
 import { IFormPageProps } from "./types";
-import { cloneDeep, get, set } from "lodash-es";
+import { cloneDeep, get, set, pull } from "lodash-es";
 import Loading from "../Loading/Loading";
 import { push } from 'connected-react-router';
 import "./FormPage.scss";
@@ -19,13 +19,24 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     loadData: () => { dispatch(loadData()) },
     goHome: () => { dispatch(push("/")) }
 });
-
-function validate(formData, errors) {
-    console.log(formData.resume, errors);
-}
-class FormPage extends React.Component<IFormPageProps, {}> {
+class FormPage extends React.Component<IFormPageProps, {afterSubmit: number}> {
     componentDidMount() {
         this.props.loadData();
+        // this.props.setData({"first_name":"sad","last_name":"dsf","phone":"123123123","dob":"1901-01-02","gender":"F","race":["American Indian / Alaska Native"],"university":"2nd Military Medical University","graduation_year":"2018","level_of_study":"Graduate","major":"sa","accept_terms":true,"accept_share":true});
+    }
+    onSubmit(e) {
+        const props = this.props;
+        props.saveData();
+        if (this.state.afterSubmit == 1) {
+            props.setPage(props.page + 1);
+        }
+        else if (this.state.afterSubmit == -1) {
+            props.setPage(props.page - 1);
+        }
+        else {
+            props.goHome();
+        }
+        this.setState({"afterSubmit": 0});
     }
     render() {
         if (!this.props.formData) {
@@ -36,7 +47,7 @@ class FormPage extends React.Component<IFormPageProps, {}> {
         const schemaObj = props.schemas[props.formName];
         // console.log(props.formName, props.schemas);
         const uiOrder = [...schemaObj.pages[props.page], "*"];
-        const schema = schemaObj.schema;
+        let schema = cloneDeep(schemaObj.schema);
         let uiSchema = cloneDeep(schemaObj.uiSchema);
 
         // Display proper page:
@@ -45,22 +56,31 @@ class FormPage extends React.Component<IFormPageProps, {}> {
             if (!~uiOrder.indexOf(item)) {
                 const existingClass = get(uiSchema, `${item}.classNames`) || "";
                 set(uiSchema, `${item}.classNames`, `${existingClass} treehacks-hidden`);
+                if (schema.required) {
+                    pull(schema.required, item);
+                }
                 // set(uiSchema, `${item}.ui:widget`, "hidden"); // Can't hide array fields, doesn't work this way.
             }
         }
 
         return (<Form schema={schema} uiSchema={uiSchema} formData={props.formData}
-            liveValidate={true}
-            // showErrorList={true}
+            // liveValidate={true}
+            showErrorList={true}
             // validate={validate}
-            onChange={e => props.setData(e.formData) }
-            onSubmit={e => { props.saveData(); this.props.goHome(); }}>
-            <button className="btn" type="button"
+            onChange={e => props.setData(e.formData)}
+            onSubmit={(e) => this.onSubmit(e)}>
+            <input className="btn" type="submit"
+                name="treehacks_previous"
+                value="Previous page"
                 disabled={props.page - 1 < 0}
-                onClick={() => { props.saveData(); props.setPage(props.page - 1) }} >Previous page</button>
-            <button className="btn" type="button"
+                onClick={e => this.setState({"afterSubmit": -1})}
+                />
+            <input className="btn" type="submit"
+                name="treehacks_next"
+                value="Next page"
                 disabled={props.page + 1 >= schemaObj.pages.length}
-                onClick={() => { props.saveData(); props.setPage(props.page + 1) }} >Next page</button >
+                onClick={e => this.setState({"afterSubmit": 1})}
+                />
             {props.page == schemaObj.pages.length - 1 &&
                 <input className="btn btn-primary" type="submit" />}
         </Form>);
