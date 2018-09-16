@@ -44,10 +44,10 @@ class FormPage extends React.Component<IFormPageProps, {}> {
         return (<Form schema={schema} uiSchema={uiSchema} formData={props.formData}
             onChange={e => props.setData(e.formData) }
             onSubmit={e => { props.saveData(); alert("Submission complete"); }}>
-            <button className="btn"
+            <button className="btn" type="button"
                 disabled={props.page - 1 < 0}
                 onClick={() => { props.saveData(); props.setPage(props.page - 1) }} >Previous page</button>
-            <button className="btn"
+            <button className="btn" type="button"
                 disabled={props.page + 1 >= schemaObj.pages.length}
                 onClick={() => { props.saveData(); props.setPage(props.page + 1) }} >Next page</button >
             {props.page == schemaObj.pages.length - 1 &&
