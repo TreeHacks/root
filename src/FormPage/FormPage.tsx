@@ -5,6 +5,7 @@ import { setPage, setData, saveData, loadData } from "../store/form/actions";
 import { IFormPageProps } from "./types";
 import { cloneDeep, get, set } from "lodash-es";
 import Loading from "../Loading/Loading";
+import { push } from 'connected-react-router';
 import "./FormPage.scss";
 
 const mapStateToProps = state => ({
@@ -16,21 +17,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setData: (e) => dispatch(setData(e)),
     saveData: () => dispatch(saveData()),
     loadData: () => { dispatch(loadData()) },
+    goHome: () => { dispatch(push("/")) }
 });
 
 function validate(formData, errors) {
     console.log(formData.resume, errors);
 }
-
-function ArrayFieldTemplate(props) {
-    return (
-      <div>
-        {props.items.map(element => element.children)}
-        {props.canAdd && <button type="button" onClick={props.onAddClick}></button>}
-      </div>
-    );
-  }
-
 class FormPage extends React.Component<IFormPageProps, {}> {
     componentDidMount() {
         this.props.loadData();
@@ -58,11 +50,11 @@ class FormPage extends React.Component<IFormPageProps, {}> {
         }
 
         return (<Form schema={schema} uiSchema={uiSchema} formData={props.formData}
-            ArrayFieldTemplate={ArrayFieldTemplate}
             liveValidate={true}
+            // showErrorList={true}
             // validate={validate}
             onChange={e => props.setData(e.formData) }
-            onSubmit={e => { props.saveData(); alert("Submission complete"); }}>
+            onSubmit={e => { props.saveData(); this.props.goHome(); }}>
             <button className="btn" type="button"
                 disabled={props.page - 1 < 0}
                 onClick={() => { props.saveData(); props.setPage(props.page - 1) }} >Previous page</button>
