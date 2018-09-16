@@ -54,7 +54,6 @@ export const saveData = () => (dispatch, getState) => {
 export const loadData = () => (dispatch, getState) => {
   const userId = (getState().auth as IAuthState).userId;
   const formName = (getState().form as IFormState).formName;
-  console.log(getState().form);
   dispatch(loadingStart());
   return API.get("treehacks", `/users/${userId}/forms/${formName}`, {}).then(e => {
     dispatch(loadingEnd());
