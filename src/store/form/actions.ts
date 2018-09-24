@@ -23,12 +23,10 @@ export const setFormName = (formName: string) => ({
   formName
 });
 
-// NOT USED.
 export const getUserProfile = () => (dispatch, getState) => {
   const userId = (getState().auth as IAuthState).userId;
   return API.get("treehacks", `/users/${userId}`, {}).then(e => {
-    console.log(e);
-    // dispatch(setUserProfile(e));
+    dispatch(setUserProfile(e));
   }).catch(e => {
     console.error(e);
     alert("Error getting user data " + e);
