@@ -6,6 +6,7 @@ import { withFederated } from 'aws-amplify-react';
 import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
 import { IAuthState } from "../store/auth/types";
+import StanfordLogin from "./StanfordLogin";
 
 const mapStateToProps = state => ({
   ...state.auth
@@ -35,6 +36,10 @@ class Login extends React.Component<ILoginProps, {}> {
     this.props.checkLoginStatus();
   }
 
+  stanfordLogin() {
+
+  }
+
   render() {
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
@@ -47,10 +52,13 @@ class Login extends React.Component<ILoginProps, {}> {
           {this.props.error}
         </div>}
         {this.props.authPage == "signIn" &&
-          <Form
-            schema={this.props.schemas.signIn.schema}
-            uiSchema={this.props.schemas.signIn.uiSchema}
-            onSubmit={e => this.props.signIn(e.formData)} />
+          <div>
+            <Form
+              schema={this.props.schemas.signIn.schema}
+              uiSchema={this.props.schemas.signIn.uiSchema}
+              onSubmit={e => this.props.signIn(e.formData)} />
+              <StanfordLogin />
+          </div>
         }
         {this.props.authPage == "signUp" &&
           <Form
