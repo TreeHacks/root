@@ -31,8 +31,40 @@ export function logout() {
   }
 }
 
-function getCurrentUser() {
-  return Auth.currentAuthenticatedUser();
+function parseJwt(token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace('-', '+').replace('_', '/');
+  return JSON.parse(window.atob(base64));
+};
+
+async function getCurrentUser() {
+  let jwt = localStorage.getItem("jwt");
+  if (jwt) {
+    /*
+    ud: 
+    auth_time: 
+    cognito:username: 
+    email: 
+    email_verified: 
+    event_id: 
+    exp: 1533331712
+    iat: 1533328112
+    iss: 
+    name: 
+    sub: 
+    token_use: 
+    website: 
+    */
+    const parsed = parseJwt(jwt);
+    let attributes: IUserAttributes = { "name": parsed["name"], "email": parsed["email"], "email_verified": parsed["email_verified"] };
+    return await {
+      "username": parsed["sub"],
+      attributes
+    };
+  }
+  else {
+    return Auth.currentAuthenticatedUser();
+  }
 }
 
 export function checkLoginStatus() {

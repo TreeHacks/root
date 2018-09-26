@@ -11,6 +11,19 @@ declare var ENDPOINT_URL: string;
 declare var COGNITO_USER_POOL_ID: string;
 declare var COGNITO_CLIENT_ID: string;
 
+const asyncLocalStorage = {
+    setItem: function (key, value) {
+        return Promise.resolve().then(function () {
+            localStorage.setItem(key, value);
+        });
+    },
+    getItem: function (key) {
+        return Promise.resolve().then(function () {
+            return localStorage.getItem(key) || "anonymous";
+        });
+    }
+};
+
 Amplify.configure({
   Auth: {
   // REQUIRED - Amazon Cognito Identity Pool ID
@@ -28,7 +41,16 @@ Amplify.configure({
         {
             name: "treehacks",
             endpoint: ENDPOINT_URL,
-            custom_header: async () => ({Authorization: (await Auth.currentSession()).idToken.jwtToken})
+            custom_header: async () => { 
+                try {
+                    return { Authorization: (await Auth.currentSession()).idToken.jwtToken }
+                }
+                catch (e) {
+                    console.error(e);
+                    // Get JWT from SAML.
+                    return { Authorization: await asyncLocalStorage.getItem("jwt") } 
+                }
+            }
         }
     ]
   }

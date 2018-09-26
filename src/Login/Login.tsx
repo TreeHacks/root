@@ -7,6 +7,7 @@ import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
 import { IAuthState } from "../store/auth/types";
 import StanfordLogin from "./StanfordLogin";
+import queryString from "query-string";
 
 const mapStateToProps = state => ({
   ...state.auth
@@ -33,6 +34,14 @@ interface ILoginProps extends IAuthState {
 };
 class Login extends React.Component<ILoginProps, {}> {
   componentDidMount() {
+
+    // Parse ID Token from SAML
+    const hash = queryString.parse(window.location.hash);
+    if (hash && hash.id_token) {
+      localStorage.setItem("jwt", hash.id_token);
+      window.location.hash = "";
+    }
+
     this.props.checkLoginStatus();
   }
 
