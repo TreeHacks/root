@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="322px" height="292px" viewBox="0 0 322 292" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 2 Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard-2-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Group-14" transform="translate(19.000000, 24.000000)" stroke="#00E174" stroke-width="5">
+            <g id="Group-5" transform="translate(0.000000, 65.000000)">
+                <polyline id="Stroke-1" points="115.506608 50 0.607929515 50 0.607929515 31.7073171 115.506608 0.614634146"></polyline>
+                <polyline id="Stroke-3" points="160.121704 50 275.020382 50 275.020382 31.7073171 160.121704 0.614634146"></polyline>
+            </g>
+            <polyline id="Stroke-6" points="151 218.951169 188.73913 226 193 209.47754 154.44887 184"></polyline>
+            <polyline id="Stroke-7" points="124 219.951169 86.2608696 227 82 210.47754 120.55113 185"></polyline>
+            <path d="M31,130 L31,169" id="Stroke-8"></path>
+            <path d="M67,133 L67,187" id="Stroke-9"></path>
+            <path d="M244,128 L244,167" id="Stroke-10"></path>
+            <path d="M208,131 L208,185" id="Stroke-11"></path>
+            <path d="M137.5,0 C124.024395,0 113,12.4702015 113,27.7123673 L122.625778,172.784561 C122.625778,211.012447 129.516025,242 138.017827,242 C144.624963,242 150.258148,223.271659 152.440765,196.979226 C152.623457,198.122691 152.682741,197.675248 152.682741,194.84023 L162,27.7123673 C162,12.4702015 150.975605,0 137.5,0 Z" id="Stroke-12"></path>
+        </g>
+    </g>
+</svg>
