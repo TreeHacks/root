@@ -10,19 +10,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getUserProfile: () => dispatch(getUserProfile()),
 });
 
 class Login extends React.Component<IHomeProps, {}> {
   componentDidMount() {
-    this.props.getUserProfile();
   }
 
   render() {
     return <div>
-      {this.props.profile && <pre>
-        {JSON.stringify(this.props.profile, null, 2)}
-      </pre>}
       <ul>
       <NavLink to="/">Dashboard</NavLink>
       <NavLink to="/application_info">Application</NavLink>
