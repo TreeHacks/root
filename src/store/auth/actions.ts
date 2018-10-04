@@ -55,7 +55,13 @@ async function getCurrentUser() {
     token_use: 
     website: 
     */
+    // Verify JWT here.
     const parsed = parseJwt(jwt);
+    if (new Date().getTime() / 1000 >= parseInt(parsed.exp)) {
+      console.log("JWT expired");
+      localStorage.removeItem("jwt");
+      return Auth.currentAuthenticatedUser();
+    }
     let attributes: IUserAttributes = { "name": parsed["name"], "email": parsed["email"], "email_verified": parsed["email_verified"] };
     return await {
       "username": parsed["sub"],
@@ -70,7 +76,7 @@ async function getCurrentUser() {
 export function checkLoginStatus() {
   return (dispatch, getState) => {
     dispatch(loadingStart());
-    getCurrentUser()
+    return getCurrentUser()
       .then((user: { username: string, attributes: IUserAttributes }) => {
         if (!user) throw "No credentials";
         dispatch(loggedIn(user.username, user.attributes));

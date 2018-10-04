@@ -46,7 +46,7 @@ Amplify.configure({
                     return { Authorization: (await Auth.currentSession()).idToken.jwtToken }
                 }
                 catch (e) {
-                    console.error(e);
+                    console.warn(e, "Defaulting to stored JWT in localStorage...");
                     // Get JWT from SAML.
                     return { Authorization: await asyncLocalStorage.getItem("jwt") } 
                 }
