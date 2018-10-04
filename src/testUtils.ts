@@ -1,6 +1,12 @@
 import request from "supertest";
-import app from "./index";
 import { createApplication } from "./routes/common";
+import { CognitoUser } from "./models/cognitoUser";
+import {sinon} from "sinon";
+// import {jest} from "jest";
+
+jest.mock("./router/authenticatedRoute");
+import app from "./index";
+
 
 
 export function get_expect_json(url: string, value: any) {
@@ -29,3 +35,4 @@ export function createRandomApplication() {
   createApplication({sub: userId, email: "a@b.com"});
   return userId;
 }
+

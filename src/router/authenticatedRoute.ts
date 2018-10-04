@@ -11,26 +11,13 @@ const cognitoExpress = new CognitoExpress({
   tokenExpiration: 3600000 //Up to default expiration of 1 hour (3600000 ms)
 });
 
-
-
-//Our middleware that authenticates all APIs under our 'authenticatedRoute' Router
 authenticatedRoute.use(function(req, res, next) {
-  
-  //I'm passing in the jwt token in header under key Authorization
   let accessTokenFromClient = req.headers.authorization;
-
-
-  //Fail if token not present in header. 
   if (!accessTokenFromClient) return res.status(401).send("Access Token missing from header");
 
   cognitoExpress.validate(accessTokenFromClient, function(err, response) {
-      
-      //If API is not authenticated, Return 401 with error message. 
-      if (err) return res.status(401).send(err);
-      
+      if (err) return res.status(401).send(err);  
       // TODO: check permissions here.
-      
-      //Else API has been authenticated. Proceed.
       res.locals.user = response;
       next();
   });
