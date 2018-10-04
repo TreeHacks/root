@@ -3,13 +3,13 @@ import { createRandomApplication, post_expect_json, get_expect_json } from "../t
 describe('user form view', () => {
   let userId: string;
   beforeAll(() => {
-    userId = createRandomApplication();
+    userId = createRandomApplication("a@b.com");
   })
   test('get user application_info', () => {
-    return get_expect_json(`/users/${userId}/forms/application_info`, { "university": "stanford" });
+    return get_expect_json(`/users/${userId}/forms/application_info`, { });
   });
   test('get user additional_info', () => {
-    return get_expect_json(`/users/${userId}/forms/additional_info`, { "bus_confirmed_spot": true })
+    return get_expect_json(`/users/${userId}/forms/additional_info`, { })
   });
   test('get user status', () => {
     return get_expect_json(`/users/${userId}/status`, { "status": "incomplete" })
@@ -19,12 +19,12 @@ describe('user form view', () => {
     return get_expect_json(`/users/${userId}`, {
       "_id": userId,
       "forms": {
-        "application_info": {"university": "stanford"},
-        "additional_info": {"bus_confirmed_spot": true}
+        "application_info": { },
+        "additional_info": {}
       },
       "admin_info": {"reimbursement_amount": null},
       "reviews": [],
-      "user": { "name": "default_user", "email": "default_email@default_email.com" },
+      "user": { "email": "a@b.com" },
       "type": "oos",
       "status": "incomplete"
     });

@@ -30,9 +30,9 @@ export function post_expect_json(url: string, formData: { [x: string]: any }, va
     });
 }
 
-export function createRandomApplication() {
+export function createRandomApplication(email="a@b.com") {
   let userId = Math.random() + "";
-  createApplication({sub: userId, email: "a@b.com"});
+  createApplication({sub: userId, email: email});
   return userId;
 }
 

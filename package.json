@@ -33,7 +33,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "force-ssl-heroku": "^1.0.2",
-    "mongoose": "^5.0.3",
+    "mongoose": "^5.3.1",
     "path": "^0.12.7",
     "request": "^2.83.0",
     "typescript": "^2.9.2",

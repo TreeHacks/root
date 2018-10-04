@@ -96,18 +96,25 @@ website
 /* Create application. Lookup userId in cognito user pool, then set starting parameters accordingly.
  * userId - user ID.
  */
-export function createApplication(user: CognitoUser) {
-  // TODO: Look up cognito user id, email for out of state.
+export async function createApplication(user: CognitoUser) {
+  let applicationInfo = {};
+  let applicationType = "oos";
+  if (user.email.match(/@stanford.edu$/)) {
+    applicationInfo = {
+      "university": "Stanford University"
+    };
+    applicationType = "stanford";
+  }
   const application = new Application({
     "_id": user.sub,
     "forms": {
-      "application_info": { "university": "stanford" },
-      "additional_info": { "bus_confirmed_spot": true }
+      "application_info": applicationInfo,
+      "additional_info": { }
     },
     "admin_info": {},
     "reviews": [],
     "user": { "email": user.email },
-    "type": "oos"
+    "type": applicationType
   });
-  return application.save();
+  return await application.save();
 }

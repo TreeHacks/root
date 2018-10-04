@@ -6,7 +6,7 @@ const applicationInfoSchema: Schema = new mongoose.Schema({
   phone: String,
   dob: String,
   gender: String,
-  race: [String],
+  race: {type: [String], default: undefined},
   university: String,
   graduation_year: String,
   level_of_study: String,
