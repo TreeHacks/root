@@ -4,7 +4,7 @@
   "description": "TreeHacks 2019 application protal",
   "main": "index.ts",
   "scripts": {
-    "mongo": "ts-node ./src/setupMongo.ts",
+    "mongo": "node ./src/setupMongo.js",
     "test": "dotenv jest",
     "tdd": "dotenv jest --watch",
     "start": "concurrently --kill-others \"npm run mongo\" \"npm run build:live\"",
