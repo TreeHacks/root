@@ -98,7 +98,7 @@ website
  */
 export async function createApplication(user: CognitoUser) {
   let applicationInfo = {};
-  let applicationType = "oos";
+  let applicationType = user["custom:location"] === "CA" ? "is": "oos";
   if (user.email.match(/@stanford.edu$/)) {
     applicationInfo = {
       "university": "Stanford University"
@@ -116,5 +116,6 @@ export async function createApplication(user: CognitoUser) {
     "user": { "email": user.email },
     "type": applicationType
   });
-  return await application.save();
+  application.save();
+  return await application; // todo: return something else here?
 }
