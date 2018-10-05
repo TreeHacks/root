@@ -124,7 +124,7 @@ export function signUp(data) {
       username: data.email,
       password: data.password,
       attributes: {
-        email: data.email,
+        email: data.email.toLowerCase(),
         name: "User",
         ["custom:location"]: data.location,
         website: (window.location != window.parent.location) ? document.referrer : window.location.href // Link for confirmation email
@@ -139,7 +139,7 @@ export function signUp(data) {
 export function forgotPassword(data) {
   return dispatch => {
     dispatch(loadingStart());
-    Auth.forgotPassword(data.email)
+    Auth.forgotPassword(data.email.toLowerCase())
       .then(() => dispatch(setAuthPage("forgotPasswordSubmit", "Verification email sent. Please check your email for a code and enter the code below to change your password. If you don't see the email, please check your spam folder.")))
       .catch(e => dispatch(onAuthError(e.message)))
       .then(() => dispatch(loadingEnd()))
@@ -153,7 +153,7 @@ export function forgotPasswordSubmit(data) {
       return;
     }
     dispatch(loadingStart());
-    Auth.forgotPasswordSubmit(data.email, data.code, data.password)
+    Auth.forgotPasswordSubmit(data.email.toLowerCase(), data.code, data.password)
       .then(() => dispatch(setAuthPage("signIn", "Password changed successfully! Please log in with your new password:")))
       .catch(e => dispatch(onAuthError(e.message)))
       .then(() => dispatch(loadingEnd()))

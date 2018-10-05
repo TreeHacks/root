@@ -32,6 +32,19 @@ interface ILoginProps extends IAuthState {
   forgotPassword: (e) => void,
   forgotPasswordSubmit: (e) => void
 };
+
+function transformErrors(errors) {
+  return errors.map(error => {
+    if (error.name === "pattern" && error.property === ".email") {
+      error.message = "If you are a Stanford student, please make sure you click 'Log in with Stanford.'";
+    }
+    return error;
+  });
+}
+
+function AuthForm(props) {
+  return <Form {...props} showErrorList={false} transformErrors={transformErrors} />
+}
 class Login extends React.Component<ILoginProps, {}> {
   componentDidMount() {
 
@@ -62,7 +75,7 @@ class Login extends React.Component<ILoginProps, {}> {
         </div>}
         {this.props.authPage == "signIn" &&
           <div>
-            <Form
+            <AuthForm
               schema={this.props.schemas.signIn.schema}
               uiSchema={this.props.schemas.signIn.uiSchema}
               onSubmit={e => this.props.signIn(e.formData)} />
@@ -70,19 +83,19 @@ class Login extends React.Component<ILoginProps, {}> {
           </div>
         }
         {this.props.authPage == "signUp" &&
-          <Form
+          <AuthForm
             schema={this.props.schemas.signUp.schema}
             uiSchema={this.props.schemas.signUp.uiSchema}
             onSubmit={e => this.props.signUp(e.formData)} />
         }
         {this.props.authPage == "forgotPassword" &&
-          <Form
+          <AuthForm
             schema={this.props.schemas.forgotPassword.schema}
             uiSchema={this.props.schemas.forgotPassword.uiSchema}
             onSubmit={e => this.props.forgotPassword(e.formData)} />
         }
         {this.props.authPage == "forgotPasswordSubmit" &&
-          <Form
+          <AuthForm
             schema={this.props.schemas.forgotPasswordSubmit.schema}
             uiSchema={this.props.schemas.forgotPasswordSubmit.uiSchema}
             onSubmit={e => this.props.forgotPasswordSubmit(e.formData)} />

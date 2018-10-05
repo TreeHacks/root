@@ -5,7 +5,8 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address"
+          "title": "Email Address",
+          "pattern": ".*(?<!@stanford.edu)$"
         },
         "password": {
           "type": "string",
@@ -30,7 +31,8 @@
         "email": {
           "type": "string",
           "title": "Email Address",
-          "description": "You will use this email address to log in to your account."
+          "description": "You will use this email address to log in to your account.",
+          "pattern": ".*(?<!@stanford.edu)$"
         },
         "password": {
           "type": "string",
@@ -69,7 +71,8 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address"
+          "title": "Email Address",
+          "pattern": ".*(?<!@stanford.edu)$"
         }
       },
       "required": [
@@ -84,7 +87,8 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address"
+          "title": "Email Address",
+          "pattern": ".*(?<!@stanford.edu)$"
         },
         "code": {
           "type": "string",
