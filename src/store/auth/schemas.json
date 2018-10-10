@@ -5,8 +5,7 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address",
-          "pattern": ".*(?<!@stanford.edu)$"
+          "title": "Email Address"
         },
         "password": {
           "type": "string",

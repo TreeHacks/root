@@ -34,16 +34,18 @@ interface ILoginProps extends IAuthState {
 };
 
 function transformErrors(errors) {
-  return errors.map(error => {
-    if (error.name === "pattern" && error.property === ".email") {
-      error.message = "If you are a Stanford student, please make sure you click 'Log in with Stanford.'";
-    }
-    return error;
-  });
+  return errors;
+}
+
+function validate(formData, errors) {
+  if (formData.email && ~formData.email.toLowerCase().indexOf("@stanford.edu")) {
+    errors.email.addError("If you are a Stanford student, please make sure you click 'Log in with Stanford.'");
+  }
+  return errors;
 }
 
 function AuthForm(props) {
-  return <Form {...props} showErrorList={false} transformErrors={transformErrors} />
+  return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} />
 }
 class Login extends React.Component<ILoginProps, {}> {
   componentDidMount() {
