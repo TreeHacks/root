@@ -70,7 +70,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'] //['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(svg|png|jpg|woff|eot|ttf)$/,
+        test: /\.(svg|png|jpg|woff|eot|ttf|otf)$/,
         use: [
           {
             loader: 'file-loader',
