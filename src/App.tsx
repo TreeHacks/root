@@ -13,6 +13,7 @@ import FormPage from "./FormPage/FormPage";
 import Dashboard from "./Dashboard/Dashboard";
 import "./App.scss";
 import { setFormName } from "./store/form/actions";
+import Review from "./Review/Review";
 
 // function Home() {
 //   return <div>
@@ -50,6 +51,7 @@ const App = (props: IAppProps) => (
             <Route path="/" exact component={Dashboard} />
             <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
             <Route path="/additional_info" render={() => { props.setFormName("additional_info"); return <FormPage />; }} />
+            <Route path="/review" exact component={Review} />
           </Switch>
         </div>
       }

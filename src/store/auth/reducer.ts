@@ -17,10 +17,9 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
     case 'LOGIN_SUCCESS':
       let admin = false;
       if (action.attributes["cognito:groups"] &&
-        ~(action.attributes as IUserAttributes)["cognito:groups"].indexOf("admin")) {
+        (action.attributes as IUserAttributes)["cognito:groups"].indexOf("admin") > -1) {
         admin = true;
       }
-      admin = true;
 
       return {
         ...state,
