@@ -116,6 +116,5 @@ export async function createApplication(user: CognitoUser) {
     "user": { "email": user.email },
     "type": applicationType
   });
-  application.save();
-  return await application; // todo: return something else here?
+  return await application.save(); // todo: return something else here?
 }
