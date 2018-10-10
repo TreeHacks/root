@@ -14,6 +14,7 @@ import authenticatedRoute from "./router/authenticatedRoute";
 import { getAdditionalInfo, setAdditionalInfo } from "./routes/additional_info";
 import { getApplicationInfo, setApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
+import { getUserList } from "./routes/user_list";
 import { getApplicationStatus, setApplicationStatus } from "./routes/user_status";
 import { setAdminInfo } from "./routes/admin_info";
 
@@ -34,7 +35,7 @@ mongoose.connect(process.env.MONGO_CONN_STR || "mongodb://localhost:65210/test")
 app.use(express.static('public'));
 
 // Use body-parser to parse HTTP request parameters
-app.use(bodyParser.json({limit: '15mb'}));
+app.use(bodyParser.json({ limit: '15mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
@@ -80,9 +81,10 @@ authenticatedRoute.put('/users/:userId/forms/application_info', setApplicationIn
 // What permission should this one be?
 authenticatedRoute.get('/users/:userId/status', getApplicationStatus);
 
-// Admin protected functions:
+// Admin protected functions: // TODO: Authenticate.
 authenticatedRoute.put('/users/:userId/status', setApplicationStatus);
 authenticatedRoute.get('/users/:userId', getUserDetail);
+authenticatedRoute.get('/users', getUserList);
 
 // Need custom auth:
 authenticatedRoute.put('/users/:userId/admin_info', setAdminInfo);
