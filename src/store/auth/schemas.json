@@ -30,8 +30,7 @@
         "email": {
           "type": "string",
           "title": "Email Address",
-          "description": "You will use this email address to log in to your account.",
-          "pattern": ".*(?<!@stanford.edu)$"
+          "description": "You will use this email address to log in to your account."
         },
         "password": {
           "type": "string",
@@ -70,8 +69,7 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address",
-          "pattern": ".*(?<!@stanford.edu)$"
+          "title": "Email Address"
         }
       },
       "required": [
@@ -86,8 +84,7 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address",
-          "pattern": ".*(?<!@stanford.edu)$"
+          "title": "Email Address"
         },
         "code": {
           "type": "string",
