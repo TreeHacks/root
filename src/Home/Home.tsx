@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { getUserProfile, setPage } from "../store/form/actions";
 import { IHomeProps } from "./types";
 import "./Home.scss";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const mapStateToProps = state => ({
-  ...state.home
+  ...state.home,
+  auth: state.auth
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -19,9 +20,12 @@ class Login extends React.Component<IHomeProps, {}> {
   render() {
     return <div>
       <ul>
-      <NavLink to="/">Dashboard</NavLink>
-      <NavLink to="/application_info">Application</NavLink>
-      <NavLink to="/additional_info">Travel</NavLink>
+        <NavLink to="/">Dashboard</NavLink>
+        <NavLink to="/application_info">Application</NavLink>
+        <NavLink to="/additional_info">Travel</NavLink>
+        {this.props.auth.admin &&
+          <NavLink to="/review">Review</NavLink>
+        }
       </ul>
     </div>
   }

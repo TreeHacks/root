@@ -9,7 +9,8 @@ export interface IFederatedCredentials {
 export interface IUserAttributes {
   email: string,
   email_verified: boolean,
-  name: string
+  name: string,
+  "cognito:groups": string[]
 }
 export interface IAuthStateSchemaItem {
   schema: {[x:string]: any},
@@ -28,6 +29,6 @@ export interface IAuthState {
   },
   error: string,
   message: string,
-  authPage: "forgotPassword" | "forgotPasswordSubmit" | "signIn" | "signUp",
-  cognitoUser: any
+  admin: boolean,
+  authPage: "forgotPassword" | "forgotPasswordSubmit" | "signIn" | "signUp"
 }

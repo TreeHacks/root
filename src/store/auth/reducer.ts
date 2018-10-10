@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { IAuthState } from './types';
+import { IAuthState, IUserAttributes } from './types';
 
 const initialState: IAuthState = {
   loggedIn: undefined,
@@ -9,17 +9,25 @@ const initialState: IAuthState = {
   error: null,
   message: null,
   authPage: 'signIn',
-  cognitoUser: null
+  admin: null
 };
 
 const auth: Reducer<any> = (state: any = initialState, action): any => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
+      let admin = false;
+      if (action.attributes["cognito:groups"] &&
+        ~(action.attributes as IUserAttributes)["cognito:groups"].indexOf("admin")) {
+        admin = true;
+      }
+      admin = true;
+
       return {
         ...state,
         loggedIn: true,
         user: action.attributes,
-        userId: action.userId
+        userId: action.userId,
+        admin: admin
       };
     case 'LOGOUT_SUCCESS':
       return {
@@ -42,11 +50,6 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
       return {
         ...state,
         error: action.error
-      }
-    case "SET_COGNITO_USER":
-      return {
-        ...state,
-        cognitoUser: action.cognitoUser
       }
     default:
       return state;

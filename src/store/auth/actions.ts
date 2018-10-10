@@ -62,7 +62,7 @@ async function getCurrentUser() {
       localStorage.removeItem("jwt");
       return Auth.currentAuthenticatedUser();
     }
-    let attributes: IUserAttributes = { "name": parsed["name"], "email": parsed["email"], "email_verified": parsed["email_verified"] };
+    let attributes: IUserAttributes = { "name": parsed["name"], "email": parsed["email"], "email_verified": parsed["email_verified"], "cognito:groups": parsed["cognito:groups"] };
     return await {
       "username": parsed["sub"],
       attributes
