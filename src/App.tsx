@@ -14,6 +14,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import "./App.scss";
 import { setFormName } from "./store/form/actions";
 import Review from "./Review/Review";
+import Verify from "./Verify";
 
 // function Home() {
 //   return <div>
@@ -40,21 +41,26 @@ const App = (props: IAppProps) => (
   <ConnectedRouter history={history}>
     <div className="treehacks-main">
       {props.loading && <Loading />}
-      <Login />
-      {props.loggedIn === false && 
-        <Redirect to="/"/>
-      }
-      {props.loggedIn === true &&
+      <Switch>
+        <Route path="/verify" component={Verify} />
         <div>
-          <Route path="" component={Home} />
-          <Switch>
-            <Route path="/" exact component={Dashboard} />
-            <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
-            <Route path="/additional_info" render={() => { props.setFormName("additional_info"); return <FormPage />; }} />
-            <Route path="/review" exact component={Review} />
-          </Switch>
+          <Login />
+          {props.loggedIn === false &&
+            <Redirect to="/" />
+          }
+          {props.loggedIn === true &&
+            <div>
+              <Route path="" component={Home} />
+              <Switch>
+                <Route path="/" exact component={Dashboard} />
+                <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
+                <Route path="/additional_info" render={() => { props.setFormName("additional_info"); return <FormPage />; }} />
+                <Route path="/review" exact component={Review} />
+              </Switch>
+            </div>
+          }
         </div>
-      }
+      </Switch>
     </div>
   </ConnectedRouter>);
 
