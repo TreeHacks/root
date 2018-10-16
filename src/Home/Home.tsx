@@ -10,20 +10,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getUserProfile: () => dispatch(getUserProfile()),
 });
 
 class Login extends React.Component<IHomeProps, {}> {
   componentDidMount() {
-    this.props.getUserProfile();
   }
 
   render() {
-    return <div>
-      {this.props.profile && <pre>
-        {JSON.stringify(this.props.profile, null, 2)}
-      </pre>}
+    return <div className="nav">
       <ul>
+      <div className="header-logo"><NavLink to="/"><img src="/art/header_logo.png" height="50px" /></NavLink></div>
       <NavLink to="/">Dashboard</NavLink>
       <NavLink to="/application_info">Application</NavLink>
       <NavLink to="/additional_info">Travel</NavLink>

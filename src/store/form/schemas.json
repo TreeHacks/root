@@ -119,8 +119,36 @@
             ]
         },
         "uiSchema": {
+            "first_name": {
+                "ui:placeholder": "first name"
+            },
+            "last_name": {
+                "ui:placeholder": "last name"
+            },
+            "phone": {
+                "ui:placeholder": "phone number"
+            },
+            "dob": {
+                "ui:placeholder": ""
+            },
+            "gender": {
+                "ui:placeholder": "gender"
+            },
             "race": {
+                "ui:placeholder": "race / ethnicity",
                 "ui:widget": "checkboxes"
+            },
+            "university": {
+                "ui:placeholder": "university"
+            },
+            "graduation_year": {
+                "ui:placeholder": "graduation year"
+            },
+            "level_of_study": {
+                "ui:placeholder": "level of study"
+            },
+            "major": {
+                "ui:placeholder": "major"
             },
             "q1_goodfit": {
                 "ui:placeholder": "Please answer the following question in 100-300 words: Why do you think you would be a good fit for treehacks?",

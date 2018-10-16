@@ -100,20 +100,20 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
             validate={validate}
             onChange={e => { props.setData(e.formData) }}
             onSubmit={(e) => this.onSubmit(e)}>
-            <input className="btn" type="submit"
+            <input className="btn btn-custom" type="submit"
                 name="treehacks_previous"
                 value="Previous page"
                 disabled={props.page - 1 < 0}
                 onClick={e => this.setState({ "afterSubmit": -1 })}
             />
-            <input className="btn" type="submit"
+            <input className="btn btn-custom" type="submit"
                 name="treehacks_next"
                 value="Next page"
                 disabled={props.page + 1 >= schemaObj.pages.length}
                 onClick={e => this.setState({ "afterSubmit": 1 })}
             />
             {props.page == schemaObj.pages.length - 1 &&
-                <input className="btn btn-primary" type="submit" />}
+                <input className="btn btn-custom1" type="submit" />}
         </Form>);
     };
 }
