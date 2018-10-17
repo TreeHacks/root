@@ -1,8 +1,6 @@
 import CognitoExpress from "cognito-express";
 import express from "express";
 
-const authenticatedRoute = express.Router();
-
 //Initializing CognitoExpress constructor
 const cognitoExpress = new CognitoExpress({
   region: "us-east-1",
@@ -11,6 +9,7 @@ const cognitoExpress = new CognitoExpress({
   tokenExpiration: 3600000 //Up to default expiration of 1 hour (3600000 ms)
 });
 
+export const authenticatedRoute = express.Router();
 authenticatedRoute.use(function(req, res, next) {
   let accessTokenFromClient = req.headers.authorization;
   if (!accessTokenFromClient) return res.status(401).send("Access Token missing from header");
@@ -19,9 +18,23 @@ authenticatedRoute.use(function(req, res, next) {
       if (err) return res.status(401).send(err);  
       // TODO: check permissions here.
       res.locals.user = response;
+      // console.log(res.locals.user['cognito:groups'].indexOf('admin'));
       next();
   });
 });
 
+export const adminRoute = express.Router();
+adminRoute.use(function(req, res, next) {
+  let accessTokenFromClient = req.headers.authorization;
+  if (!accessTokenFromClient) return res.status(401).send("Access Token missing from header");
 
-export default authenticatedRoute;
+  cognitoExpress.validate(accessTokenFromClient, function(err, response) {
+      if (err) return res.status(401).send(err);  
+      // TODO: check permissions here.
+      res.locals.user = response;
+      if (res.locals.user['cognito:groups'] && ~res.locals.user['cognito:groups'].indexOf('admin')) {
+        next();
+      }
+      return res.status(401).send("Unauthorized; user is not an admin.");  
+  });
+});

@@ -10,7 +10,7 @@ import swaggerDocument from "./swagger";
 const port = process.env.PORT || 3000;
 
 
-import authenticatedRoute from "./router/authenticatedRoute";
+import {authenticatedRoute, adminRoute} from "./router/authenticatedRoute";
 import { getAdditionalInfo, setAdditionalInfo } from "./routes/additional_info";
 import { getApplicationInfo, setApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
@@ -81,12 +81,12 @@ authenticatedRoute.put('/users/:userId/forms/application_info', setApplicationIn
 // What permission should this one be?
 authenticatedRoute.get('/users/:userId/status', getApplicationStatus);
 
-// Admin protected functions: // TODO: Authenticate.
-authenticatedRoute.put('/users/:userId/status', setApplicationStatus);
+// Admin protected functions: TODO: protection.
+adminRoute.put('/users/:userId/status', setApplicationStatus);
 authenticatedRoute.get('/users/:userId', getUserDetail);
-authenticatedRoute.get('/users', getUserList);
+adminRoute.get('/users', getUserList);
 
 // Need custom auth:
-authenticatedRoute.put('/users/:userId/admin_info', setAdminInfo);
+adminRoute.put('/users/:userId/admin_info', setAdminInfo);
 
 export default app;
