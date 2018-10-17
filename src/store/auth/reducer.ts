@@ -15,18 +15,12 @@ const initialState: IAuthState = {
 const auth: Reducer<any> = (state: any = initialState, action): any => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
-      let admin = false;
-      if (action.attributes["cognito:groups"] &&
-        (action.attributes as IUserAttributes)["cognito:groups"].indexOf("admin") > -1) {
-        admin = true;
-      }
-
       return {
         ...state,
         loggedIn: true,
         user: action.attributes,
         userId: action.userId,
-        admin: admin
+        admin: action.admin
       };
     case 'LOGOUT_SUCCESS':
       return {

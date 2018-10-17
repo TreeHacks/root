@@ -2,11 +2,13 @@ import { IUserAttributes } from "./types";
 import { API, Auth } from "aws-amplify";
 import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";
+import { userInfo } from "os";
 
-export const loggedIn = (userId, attributes) => ({
+export const loggedIn = (userId, attributes, admin) => ({
   type: 'LOGIN_SUCCESS',
   userId,
-  attributes
+  attributes,
+  admin
 });
 
 export const loggedOut = () => ({
@@ -60,26 +62,37 @@ async function getCurrentUser() {
     if (new Date().getTime() / 1000 >= parseInt(parsed.exp)) {
       console.log("JWT expired");
       localStorage.removeItem("jwt");
-      return Auth.currentAuthenticatedUser();
     }
-    let attributes: IUserAttributes = { "name": parsed["name"], "email": parsed["email"], "email_verified": parsed["email_verified"], "cognito:groups": parsed["cognito:groups"] };
-    return await {
-      "username": parsed["sub"],
-      attributes
-    };
+    else {
+      let attributes: IUserAttributes = { "name": parsed["name"], "email": parsed["email"], "email_verified": parsed["email_verified"], "cognito:groups": parsed["cognito:groups"] };
+      return await {
+        "username": parsed["sub"],
+        attributes
+      };
+    }
   }
-  else {
-    return Auth.currentAuthenticatedUser();
-  }
+
+  // Need to parse JWT as well, because Auth.currentAuthenticatedUser() does not return user groups.
+  return Promise.all([
+    Auth.currentAuthenticatedUser(),
+    parseJwt((await Auth.currentSession()).idToken.jwtToken)
+  ]).then(([user, token]) => {
+    user.treehacks_admin = false;
+    if (token["cognito:groups"] &&
+      (token["cognito:groups"].indexOf("admin") > -1)) {
+      user.treehacks_admin = true;
+    }
+    return user;
+  });
 }
 
 export function checkLoginStatus() {
   return (dispatch, getState) => {
     dispatch(loadingStart());
     return getCurrentUser()
-      .then((user: { username: string, attributes: IUserAttributes }) => {
+      .then((user: { username: string, attributes: IUserAttributes, treehacks_admin: boolean }) => {
         if (!user) throw "No credentials";
-        dispatch(loggedIn(user.username, user.attributes));
+        dispatch(loggedIn(user.username, user.attributes, user.treehacks_admin));
       }).catch(e => {
         console.error(e);
       }).then(() => dispatch(loadingEnd()));
