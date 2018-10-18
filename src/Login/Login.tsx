@@ -67,7 +67,7 @@ class Login extends React.Component<ILoginProps, {}> {
   render() {
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
-       <img src="/art/logo.png" width="85px" height="65px" style={{ "marginLeft": 207 , "marginTop":49 }} />
+       <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginLeft": 207 , "marginTop":49 }} />
         <h2 className="h3-style">treehacks</h2>
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
