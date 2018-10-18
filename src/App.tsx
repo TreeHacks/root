@@ -15,13 +15,7 @@ import "./App.scss";
 import { setFormName } from "./store/form/actions";
 import Review from "./Review/Review";
 import Verify from "./Verify";
-
-// function Home() {
-//   return <div>
-//     <h1>Treehacks</h1>
-//     <Authenticator />
-//   </div>;
-// }
+import './favicons/favicons';
 
 const mapStateToProps = state => ({
   ...state.base,
