@@ -32,17 +32,17 @@ export interface IApplication extends Document {
   },
   "admin_info": { // Only editable by admin.
       "transportation": {
-          "method": {type: String},
-          "bus_name": {type: String}
+          "method": String,
+          "bus_name": String
       },
-      "reimbursement_amount": {type: String}
+      "reimbursement_amount": String
   },
   "reviews": [IReview// each review can only be modified by the reviewer who made it.
   ],
   "user": {
-    "email": {type: String}
+    "email": String
    }, // foreign key
-  "id": {type: String},
-  "status": {type: String}, // only editable by admin (or this user, to a limited extent). incomplete (default), submitted, admitted, waitlisted, rejected, admission_confirmed, admission_declined
-  "type": {type: String}
+  "id": String,
+  "status": String, // only editable by admin (or this user, to a limited extent). incomplete (default), submitted, admitted, waitlisted, rejected, admission_confirmed, admission_declined
+  "type": String
 }

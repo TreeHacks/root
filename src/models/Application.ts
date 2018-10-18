@@ -5,6 +5,7 @@ import applicationInfoSchema from "./applicationInfoSchema";
 import additionalInfoSchema from "./additionalInfoSchema";
 import adminInfoSchema from "./adminInfoSchema";
 import reviewSchema from "./reviewSchema";
+import { STATUS } from "../constants";
 
 export const applicationSchema: Schema = new mongoose.Schema({
     // user id is _id.
@@ -21,7 +22,7 @@ export const applicationSchema: Schema = new mongoose.Schema({
     "status": {
         type: String,
         default: "incomplete",
-        enumValues: ["incomplete", "submitted", "admitted", "waitlisted", "rejected", "admission_confirmed", "admission_declined"]
+        enumValues: [STATUS.INCOMPLETE, STATUS.SUBMITTED, STATUS.WAITLISTED, STATUS.REJECTED, STATUS.ADMISSION_CONFIRMED, STATUS.ADMISSION_DENIED]
     },
     "type": {
         type: String,
