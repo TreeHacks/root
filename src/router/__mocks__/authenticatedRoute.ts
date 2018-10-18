@@ -1,10 +1,14 @@
 import express from "express";
 import { CognitoUser } from "../../models/cognitoUser";
 
-const authenticatedRoute = express.Router();
+export const authenticatedRoute = express.Router();
 authenticatedRoute.use((req, res, next) => {
     res.locals.user = { sub: "SUB123123", email: "test@treehacks.com" } as CognitoUser;
     next();
 });
 
-export default authenticatedRoute;
+export const adminRoute = express.Router();
+adminRoute.use((req, res, next) => {
+    res.locals.user = { sub: "SUB123124", email: "admin@treehacks.com" } as CognitoUser;
+    next();
+});
