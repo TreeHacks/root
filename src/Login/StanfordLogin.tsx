@@ -8,6 +8,6 @@ export default () => (
         <input type="hidden" name="client_id" value={COGNITO_CLIENT_ID} />
         <input type="hidden" name="scope" value="aws.cognito.signin.user.admin email openid phone profile" />
         <input type="hidden" name="redirect_uri" value={window.location.origin} />
-        <input type="submit" className="btn btn-standford" value="Sign in with Stanford" />
+        <input type="submit" className="btn btn-stanford" value="Sign in with Stanford" />
     </form>
 );
