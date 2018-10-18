@@ -22,6 +22,13 @@ authenticatedRoute.use(function (req, res, next) {
     next();
   });
 });
+authenticatedRoute.param('userId', (req, res, next, userId) => {
+  if (res["cognito:username"] !== userId &&
+    !(res.locals.user['cognito:groups'] && ~res.locals.user['cognito:groups'].indexOf('admin'))) {
+    return res.status(401).send("User does not have access to user ID: " + userId);
+  }
+  next();
+});
 
 export const adminRoute = express.Router();
 adminRoute.use(function (req, res, next) {
