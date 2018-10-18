@@ -39,7 +39,7 @@ function transformErrors(errors) {
 
 function validate(formData, errors) {
   if (formData.email && ~formData.email.toLowerCase().indexOf("@stanford.edu")) {
-    errors.email.addError("If you are a Stanford student, please make sure you click 'Log in with Stanford.'");
+    errors.email.addError("If you are a Stanford student, please make sure you click 'Sign in with Stanford.'");
   }
   return errors;
 }
@@ -68,7 +68,7 @@ class Login extends React.Component<ILoginProps, {}> {
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
        <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginLeft": 207 , "marginTop":49 }} />
-        <h2 className="h3-style">treehacks</h2>
+        <h2 className="h3-style">tree<strong>hacks</strong></h2>
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
         </div>
@@ -114,8 +114,7 @@ class Login extends React.Component<ILoginProps, {}> {
       return (<div className="text-left">
         {/* <img src={require("src/img/logo.png")} style={{ "width": 40, "marginRight": 40 }} /> */}
         <div style={{ "display": "inline-block", "verticalAlign": "middle" }}>
-          <strong>Treehacks</strong><br />
-          Welcome, {this.props.user.email}
+          Welcome Back!
         </div>
         <div className="float-right"><button className="btn" onClick={() => this.props.logout()}>Logout</button></div>
       </div>);
