@@ -4,8 +4,28 @@ import { IReviewWrapperProps, IReviewProps } from "./types";
 import Loading from "../Loading/Loading";
 import { getApplicationList, setApplicationStatus } from "../store/review/actions";
 import ReactTable from "react-table";
-import {get} from "lodash-es";
+import { get, values } from "lodash-es";
 import 'react-table/react-table.css';
+import { STATUS, TYPE } from "../constants";
+
+const defaultFilterMethod = (filter, row) => {
+    if (filter.value == "all") {
+        return true;
+    }
+    return row[filter.id] == filter.value;
+};
+
+const createFilterSelect = (values) => ({ filter, onChange }) =>
+    <select
+        onChange={event => onChange(event.target.value)}
+        className="form-control"
+        value={filter ? filter.value : "all"}
+    >
+        {values.map(e =>
+            <option>{e}</option>
+        )}
+        <option>all</option>
+    </select>;
 
 const columns = [
     {
@@ -13,20 +33,21 @@ const columns = [
         "accessor": "_id"
     },
     {
-        "Header": "status",
-        "accessor": "status"
-    },
-    {
         "Header": "email",
         "accessor": "user.email"
     },
     {
         "Header": "type",
+        "filterMethod": defaultFilterMethod,
+        "Filter": createFilterSelect(values(TYPE)),
         "accessor": "type"
     },
     {
         "Header": "Status",
-        "Cell": (props) => <select><option>1</option><option>2</option><option>3</option></select>
+        "accessor": "status",
+        "filterMethod": defaultFilterMethod,
+        "Filter": createFilterSelect(values(STATUS)),
+        "Cell": (props) => <div>{props.value}</div>
     }
 ]
 
@@ -59,7 +80,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 class ReviewWrapper extends React.Component<IReviewWrapperProps, {}> {
     componentDidMount() {
-        console.log("mounting");
         this.props.getApplicationList();
     }
     render() {
