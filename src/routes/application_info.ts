@@ -31,7 +31,6 @@ export function setApplicationInfo(req: Request, res: Response) {
         let completed = true;
         for (let requiredField of requiredFields) {
           if (typeof e.forms.application_info[requiredField] === "undefined") {
-            res.send("NOPE" + requiredField);
             completed = false;
           }
         }
