@@ -1,8 +1,10 @@
 .rjsf {
+    margin-top: 40px;
     padding: 10px;
-    width: 80%;
+    width: 84%;
     max-width: 800px;
     margin: auto;
+    color: #09da7a;
     .checkbox input {
         margin-right: 10px;
     }
@@ -12,4 +14,67 @@
     .treehacks-hidden {
         display: none;
     }
+    .form-control{
+        padding: 6px;
+        border-radius: 5px;
+    } 
+    .btn-info{
+        background-color: #00b65f;
+        border-color: #00b65f!important;
+        color: white;
+        width: 100%;
+        
+        font-size: 20px;
+    }
+    .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active, .show > .btn-info.dropdown-toggle {
+        background-color: #00b65f;
+        border-color: #00b65f!important;
+        color: white;
+        width: 100%;
+       
+        font-size: 20px;
+
+    }
+legend {
+    color:white;
+    text-align: center;
+    
 }
+}
+.select-li{
+    width:250px;
+}
+.field > ul.list-inline > li {
+    flex: 1 0 33.3%!important;
+}
+.form-control, .checkboxes {
+    border-radius: 5px!important;
+    color: #adadad!important;
+}
+/*.checkbox input:checked {
+    background-color: #535152!important;
+    color: #535152!important;
+}*/
+#root_resume input{
+
+}
+.btn-custom{
+    background-color: #00b65f;
+    border-color: #00b65f!important;
+    color: white;
+    width: 41%;
+    margin-right: 20px;
+    margin-left: 50px;
+    font-size: 20px!important;
+    margin-bottom: 25px;
+}
+.btn-custom1{
+    background-color: #00b65f;
+    border-color: #00b65f!important;
+    color: white;
+    width: 50%;
+    font-size: 20px!important;
+    margin-bottom: 25px;
+    margin-left: 200px;
+}
+

@@ -67,7 +67,8 @@ class Login extends React.Component<ILoginProps, {}> {
   render() {
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
-        <h1>TreeHacks Application Portal</h1>
+       <img src="/art/logo.png" width="85px" height="65px" style={{ "marginLeft": 207 , "marginTop":49 }} />
+        <h2 className="h3-style">treehacks</h2>
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
         </div>
@@ -76,7 +77,7 @@ class Login extends React.Component<ILoginProps, {}> {
           {this.props.error}
         </div>}
         {this.props.authPage == "signIn" &&
-          <div>
+          <div className="top-form">
             <AuthForm
               schema={this.props.schemas.signIn.schema}
               uiSchema={this.props.schemas.signIn.uiSchema}
@@ -102,10 +103,10 @@ class Login extends React.Component<ILoginProps, {}> {
             uiSchema={this.props.schemas.forgotPasswordSubmit.uiSchema}
             onSubmit={e => this.props.forgotPasswordSubmit(e.formData)} />
         }
-        <div className="mt-4">
-          <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In" />
+        <div className="mt-4 left-btn">
+          <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In"  />
           <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />
-          <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
+          <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password"/>
         </div>
       </div>);
     }

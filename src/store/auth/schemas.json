@@ -5,7 +5,8 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address"
+          "title": "Email Address",
+          "pattern": ".*(?<!@stanford.edu)$"
         },
         "password": {
           "type": "string",
@@ -19,7 +20,11 @@
     },
     "uiSchema": {
       "password": {
-        "ui:widget": "password"
+        "ui:widget": "password",
+        "ui:placeholder": "Password"
+      },
+      "email": {
+        "ui:placeholder": "Email Address"
       }
     }
   },
@@ -30,7 +35,8 @@
         "email": {
           "type": "string",
           "title": "Email Address",
-          "description": "You will use this email address to log in to your account."
+          "description": "You will use this email address to log in to your account.",
+          "pattern": ".*(?<!@stanford.edu)$"
         },
         "password": {
           "type": "string",
@@ -56,10 +62,18 @@
     },
     "uiSchema": {
       "password": {
-        "ui:widget": "password"
+        "ui:widget": "password",
+        "ui:placeholder": "Password"
       },
       "password2": {
-        "ui:widget": "password"
+        "ui:widget": "password",
+        "ui:placeholder": "Confirm Password"
+      },
+      "email": {
+        "ui:placeholder": "Email Address"
+      },
+      "location": {
+        "ui:placeholder": "Location"
       }
     }
   },
@@ -69,14 +83,19 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address"
+          "title": "Email Address",
+          "pattern": ".*(?<!@stanford.edu)$"
         }
       },
       "required": [
         "email"
       ]
     },
-    "uiSchema": {}
+    "uiSchema": {
+      "email": {
+        "ui:placeholder": "Email Address"
+      }
+    }
   },
   "forgotPasswordSubmit": {
     "schema": {
@@ -84,7 +103,8 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address"
+          "title": "Email Address",
+          "pattern": ".*(?<!@stanford.edu)$"
         },
         "code": {
           "type": "string",
@@ -108,10 +128,12 @@
     },
     "uiSchema": {
       "password": {
-        "ui:widget": "password"
+        "ui:widget": "password",
+        "ui:placeholder": "Password"
       },
       "password2": {
-        "ui:widget": "password"
+        "ui:widget": "password",
+        "ui:placeholder": "Confirm Password"
       }
     }
   }

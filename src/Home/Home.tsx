@@ -18,14 +18,15 @@ class Login extends React.Component<IHomeProps, {}> {
   }
 
   render() {
-    return <div>
+    return <div className="nav">
       <ul>
-        <NavLink to="/">Dashboard</NavLink>
-        <NavLink to="/application_info">Application</NavLink>
-        <NavLink to="/additional_info">Travel</NavLink>
-        {this.props.auth.admin &&
+      <div className="header-logo"><NavLink to="/"><img src="/art/header_logo.png" height="50px" /></NavLink></div>
+      <NavLink to="/">Dashboard</NavLink>
+      <NavLink to="/application_info">Application</NavLink>
+      <NavLink to="/additional_info">Travel</NavLink>
+      {this.props.auth.admin &&
           <NavLink to="/review">Review</NavLink>
-        }
+      }
       </ul>
     </div>
   }
