@@ -49,7 +49,7 @@ function validate(formData, errors) {
 class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> {
     constructor(props) {
         super(props);
-        this.state = {afterSubmit: null};
+        this.state = { afterSubmit: null };
     }
     componentDidMount() {
         this.props.loadData();
@@ -57,17 +57,18 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
     }
     onSubmit(e) {
         const props = this.props;
-        props.saveData();
-        if (this.state.afterSubmit == 1) {
-            props.setPage(props.page + 1);
-        }
-        else if (this.state.afterSubmit == -1) {
-            props.setPage(props.page - 1);
-        }
-        else {
-            props.goHome();
-        }
-        this.setState({ "afterSubmit": 0 });
+        props.saveData().then(() => {
+            if (this.state.afterSubmit == 1) {
+                props.setPage(props.page + 1);
+            }
+            else if (this.state.afterSubmit == -1) {
+                props.setPage(props.page - 1);
+            }
+            else {
+                props.goHome();
+            }
+            this.setState({ "afterSubmit": 0 });
+        });
     }
     render() {
         if (!this.props.formData) {
