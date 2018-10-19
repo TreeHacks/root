@@ -31,3 +31,7 @@ heroku domains:add apply.treehacks.com -a ap-frontend-prod
 heroku domains:add api.dev.treehacks.com -a application-portal-test
 heroku domains:add api.treehacks.com -a application-portal-prod
 ```
+
+## Cognito config instructions
+Add a SAML IdP to user pool with name "Stanford" and URL "https://idp.stanford.edu/metadata.xml"
+Create a lambda function and link it to the Custom Message Lambda Trigger for the Cognito User Pool
