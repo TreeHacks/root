@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import "./Login.scss";
-import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit } from "../store/auth/actions";
+import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup } from "../store/auth/actions";
 import { withFederated } from 'aws-amplify-react';
 import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
@@ -20,6 +20,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   signUp: data => dispatch(signUp(data)),
   forgotPassword: data => dispatch(forgotPassword(data)),
   forgotPasswordSubmit: data => dispatch(forgotPasswordSubmit(data)),
+  resendSignup: () => dispatch(resendSignup())
 });
 
 
@@ -30,7 +31,8 @@ interface ILoginProps extends IAuthState {
   signIn: (e) => void,
   signUp: (e) => void,
   forgotPassword: (e) => void,
-  forgotPasswordSubmit: (e) => void
+  forgotPasswordSubmit: (e) => void,
+  resendSignup: () => void
 };
 
 function transformErrors(errors) {
@@ -75,6 +77,11 @@ class Login extends React.Component<ILoginProps, {}> {
         }
         {this.props.error && <div className="alert alert-danger" role="alert">
           {this.props.error}
+          {this.props.error == "User is not confirmed." && 
+            <div>
+              <a href="#" onClick={() => this.props.resendSignup()}>Resend email confirmation link</a>
+            </div>
+          }
         </div>}
         {this.props.authPage == "signIn" &&
           <div className="top-form">

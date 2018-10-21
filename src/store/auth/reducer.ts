@@ -9,7 +9,8 @@ const initialState: IAuthState = {
   error: null,
   message: null,
   authPage: 'signIn',
-  admin: null
+  admin: null,
+  attemptedLoginEmail: null
 };
 
 const auth: Reducer<any> = (state: any = initialState, action): any => {
@@ -43,6 +44,11 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
       return {
         ...state,
         error: action.error
+      }
+    case "SET_ATTEMPTED_LOGIN_EMAIL":
+      return {
+        ...state,
+        attemptedLoginEmail: action.attemptedLoginEmail
       }
     default:
       return state;

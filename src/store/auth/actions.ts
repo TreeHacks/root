@@ -1,4 +1,4 @@
-import { IUserAttributes } from "./types";
+import { IUserAttributes, IAuthState } from "./types";
 import { API, Auth } from "aws-amplify";
 import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";
@@ -116,9 +116,15 @@ export const onAuthError = (error) => ({
   error: error
 })
 
+export const setAttemptedLoginEmail = (attemptedLoginEmail) => ({
+  type: 'SET_ATTEMPTED_LOGIN_EMAIL',
+  attemptedLoginEmail
+})
+
 export function signIn(data) {
   return dispatch => {
     dispatch(loadingStart());
+    dispatch(setAttemptedLoginEmail(data.email));
     Auth.signIn(data.email, data.password)
       .then(() => dispatch(checkLoginStatus()))
       .catch(e => dispatch(onAuthError(e.message)))
@@ -170,5 +176,18 @@ export function forgotPasswordSubmit(data) {
       .then(() => dispatch(setAuthPage("signIn", "Password changed successfully! Please log in with your new password:")))
       .catch(e => dispatch(onAuthError(e.message)))
       .then(() => dispatch(loadingEnd()))
+  }
+}
+
+export function resendSignup() {
+  return (dispatch, getState) => {
+    const attemptedLoginEmail = (getState().auth as IAuthState).attemptedLoginEmail;
+    dispatch(loadingStart());
+    Auth.resendSignUp(attemptedLoginEmail)
+      .then(() => {
+        dispatch(setMessage("Verification link sent. Please check your email or spam folder for the verification link."));
+        dispatch(onAuthError(""));
+      }).catch(e => dispatch(onAuthError("Error sending confirmation email link: " + e)))
+      .then(() => dispatch(loadingEnd()));
   }
 }
