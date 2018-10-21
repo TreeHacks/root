@@ -48,7 +48,7 @@ const App = (props: IAppProps) => (
               <Switch>
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
-                <Route path="/additional_info" render={() => { props.setFormName("additional_info"); return <FormPage />; }} />
+                <Route path="/additional_info" render={() => { return <div>Not available yet.</div>/* props.setFormName("additional_info"); return <FormPage />; */ }} />
                 <Route path="/review" exact component={Review} />
               </Switch>
             </div>
