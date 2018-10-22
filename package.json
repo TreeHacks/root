@@ -29,6 +29,7 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.5.2",
     "@types/supertest": "^2.0.5",
+    "aws-sdk": "^2.340.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
