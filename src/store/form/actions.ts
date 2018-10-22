@@ -39,7 +39,6 @@ export const saveData = () => (dispatch, getState) => {
   const formName = (getState().form as IFormState).formName;
   dispatch(loadingStart());
   return API.put("treehacks", `/users/${userId}/forms/${formName}`, {"body": formData}).then(e => {
-    console.log("Data saved", e);
     dispatch(loadingEnd());
     // dispatch(setData(e));
   }).catch(e => {

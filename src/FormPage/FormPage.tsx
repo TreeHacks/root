@@ -7,6 +7,7 @@ import { cloneDeep, get, set, pull } from "lodash-es";
 import Loading from "../Loading/Loading";
 import { push } from 'connected-react-router';
 import "./FormPage.scss";
+import { TypeaheadField } from "react-jsonschema-form-extras/lib/TypeaheadField";
 
 const mapStateToProps = state => ({
     ...state.form
@@ -99,6 +100,7 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
             // liveValidate={true}
             showErrorList={true}
             validate={validate}
+            fields={{ typeahead: TypeaheadField }}
             onChange={e => { props.setData(e.formData) }}
             onSubmit={(e) => this.onSubmit(e)}>
             <input className="btn btn-custom" type="submit"
