@@ -1,5 +1,5 @@
 const faviconsContext = require.context(
-  '!!file-loader?name=assets/favicons/favicon.ico!.',
+  '!!file-loader?name=favicon.png!.',
   true,
   /\.(svg|png|ico|xml|json)$/
 );

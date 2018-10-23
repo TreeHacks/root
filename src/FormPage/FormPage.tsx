@@ -1,7 +1,8 @@
 import React from "react";
 import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
-import { setPage, setData, saveData, loadData } from "../store/form/actions";
+import { setPage, setData, saveData, loadData, getUserProfile } from "../store/form/actions";
+
 import { IFormPageProps } from "./types";
 import { cloneDeep, get, set, pull } from "lodash-es";
 import Loading from "../Loading/Loading";
@@ -17,7 +18,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setData: (e) => dispatch(setData(e)),
     saveData: () => dispatch(saveData()),
     loadData: () => { dispatch(loadData()) },
-    goHome: () => { dispatch(push("/")) }
+    goHome: () => { dispatch(push("/")) },
+    getUserProfile: () => dispatch(getUserProfile())
 });
 
 
@@ -54,6 +56,7 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
     componentDidMount() {
         this.props.loadData();
         // this.props.setData({"first_name":"sad","last_name":"dsf","phone":"123123123","dob":"1901-01-02","gender":"F","race":["American Indian / Alaska Native"],"university":"2nd Military Medical University","graduation_year":"2018","level_of_study":"Graduate","major":"sa","accept_terms":true,"accept_share":true});
+        this.props.getUserProfile();
     }
     onSubmit(e) {
         const props = this.props;
@@ -74,7 +77,6 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
         if (!this.props.formData) {
             return <Loading />;
         }
-
         const props = this.props;
         const schemaObj = props.schemas[props.formName];
         // console.log(props.formName, props.schemas);
@@ -95,27 +97,49 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
             }
         }
 
-        return (<Form schema={schema} uiSchema={uiSchema} formData={props.formData}
-            // liveValidate={true}
-            showErrorList={true}
-            validate={validate}
-            onChange={e => { props.setData(e.formData) }}
-            onSubmit={(e) => this.onSubmit(e)}>
-            <input className="btn btn-custom" type="submit"
-                name="treehacks_previous"
-                value="Previous page"
-                disabled={props.page - 1 < 0}
-                onClick={e => this.setState({ "afterSubmit": -1 })}
-            />
-            <input className="btn btn-custom" type="submit"
-                name="treehacks_next"
-                value="Next page"
-                disabled={props.page + 1 >= schemaObj.pages.length}
-                onClick={e => this.setState({ "afterSubmit": 1 })}
-            />
-            {props.page == schemaObj.pages.length - 1 &&
-                <input className="btn btn-custom1" type="submit" />}
-        </Form>);
+         //   console.log("@@@@@@@@@@@", props.profile.status);
+        const submitted = props ? (
+            props.profile ? (
+                props.profile.status ? (
+                    props.profile.status === "submitted"
+                ) : false
+            ) : false
+        ) : false; 
+
+        return (
+        <div style={{display: 'flex', flexDirection:'column', alignItems: 'center'}}>
+            <div style={{backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center'}}>
+                Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.
+            </div>
+            <Form 
+                schema={schema}
+                uiSchema={{
+                    ...uiSchema,
+                    "ui:readonly": submitted,
+                }} formData={props.formData}
+                // liveValidate={true}
+                showErrorList={true}
+                validate={validate}
+                onChange={e => { props.setData(e.formData) }}
+                onSubmit={(e) => this.onSubmit(e)}>
+                <input className="btn btn-custom" type="submit"
+                    name="treehacks_previous"
+                    value="Previous page"
+                    style={{ visibility: props.page - 1 < 0? 'hidden':'visible' }}
+                    disabled={props.page - 1 < 0}
+                    onClick={e => this.setState({ "afterSubmit": -1 })}
+                />
+                <input className="btn btn-custom" type="submit"
+                    name="treehacks_next"
+                    value="Next page"
+                    style={{ visibility: props.page + 1 >= schemaObj.pages.length? 'hidden':'visible' }}
+                    disabled={props.page + 1 >= schemaObj.pages.length}
+                    onClick={e => this.setState({ "afterSubmit": 1 })}
+                />
+                {props.page == schemaObj.pages.length - 1 &&
+                    <input className="btn btn-custom1" type="submit" />}
+            </Form>
+        </div>);
     };
 }
 

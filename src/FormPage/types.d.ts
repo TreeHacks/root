@@ -5,5 +5,6 @@ export interface IFormPageProps extends IFormState {
     setData: (e: any) => void,
     saveData: () => Promise<any>,
     loadData: () => void,
-    goHome: () => void
+    goHome: () => void,
+    getUserProfile: () => void
 }
