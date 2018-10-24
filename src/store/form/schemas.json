@@ -106,11 +106,14 @@
                     "title": "Short Answer 2",
                     "type": "string"
                 },
-                "q3_newquestion": {
+                "q3": {
                     "title": "Short Answer 3",
                     "type": "string"
                 },
-                "new_question": {"type": "string", "title": "New Question"}
+                "q4": {
+                    "title": "Short Answer 4",
+                    "type": "string"
+                }
             },
             "required": [
                 "first_name",
@@ -127,8 +130,8 @@
                 "accept_share",
                 "q1_goodfit",
                 "q2_experience",
-                "q3_newquestion",
-                "new_question"
+                "q3",
+                "q4"
             ]
         },
         "uiSchema": {
@@ -177,11 +180,11 @@
                 "ui:widget": "textarea",
                 "ui:placeholder": "Please describe your experience with coding and hackathons in less than 150 words."
             },
-            "q3_newquestion": {
+            "q3": {
                 "ui:widget": "textarea",
                 "ui:placeholder": "New question."
             },
-            "new_question": {
+            "q4": {
                 "ui:placeholder":"new question"
             }
         },
@@ -204,8 +207,8 @@
             [
                 "q1_goodfit",
                 "q2_experience",
-                "q3_newquestion",
-                "new_question"
+                "q3",
+                "q4"
             ]
         ]
     },
