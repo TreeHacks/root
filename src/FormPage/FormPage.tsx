@@ -61,7 +61,7 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
     }
     onSubmit(e) {
         const props = this.props;
-        props.saveData().then(() => {
+        (get(props, "profile.status") === "submitted" ? () => Promise.resolve(null) : props.saveData)().then(() => {
             if (this.state.afterSubmit == 1) {
                 props.setPage(props.page + 1);
             }
@@ -132,6 +132,7 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
                     onClick={e => this.setState({ "afterSubmit": 1 })}
                 />
                 {props.page == schemaObj.pages.length - 1 &&
+                    !submitted &&
                     <input className="btn btn-custom1" type="submit" />}
             </Form>
         </div>);
