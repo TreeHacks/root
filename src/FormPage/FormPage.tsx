@@ -98,19 +98,13 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
             }
         }
 
-        const submitted = props ? (
-            props.profile ? (
-                props.profile.status ? (
-                    props.profile.status === "submitted"
-                ) : false
-            ) : false
-        ) : false; 
+        const submitted = get(props, "profile.status") === "submitted";
 
         return (
         <div style={{display: 'flex', flexDirection:'column', alignItems: 'center'}}>
-            <div style={{backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center'}}>
+            {submitted && <div style={{backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center'}}>
                 Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.
-            </div>
+            </div>}
             <Form 
                 schema={schema}
                 uiSchema={{
