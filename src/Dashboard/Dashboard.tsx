@@ -13,8 +13,7 @@ export const Dashboard = (props: IDashboardProps) => {
 
     console.log(diffDays);
     return (
-        <div className="dashboard">
-            <img src={require('../art/combined_circuit.svg')} style={{position: 'relative', width: "100%"}}/>
+        <div className="dashboard" style={{"backgroundImage": `url('${require('../art/combined_circuit.svg')}')`, "backgroundSize": "100% 100%"}}>
             <div style={{position: 'absolute', top: "56%", left: "50%", transform: "translateX(-50%)"}}>
             <div className="dashboard-design">
                 {
