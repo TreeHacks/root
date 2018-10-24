@@ -8,10 +8,6 @@ $navbar-margin: 1.25vw;
 $navbar-padding: 8px;
 
 .nav {
-  position: fixed;
-  top: 0;
-  z-index: 101;
-
   background-color: $dark-gray;
   height: 80px;
   width: 100vw;
