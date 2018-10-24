@@ -34,12 +34,12 @@
         "email": {
           "type": "string",
           "title": "Email Address",
-          "description": "You will use this email address to log in to your account."
+          "description": "You will use this email address to log in to your account. If you do not have an .edu email address, we will contact you to verify your university enrollment later."
         },
         "password": {
           "type": "string",
           "title": "Password",
-          "description": "Password needs to have at least 8 characters, an uppercase and a lowercase character."
+          "description": "Password needs to have at least 8 characters, a number, an uppercase and a lowercase character."
         },
         "password2": {
           "type": "string",
