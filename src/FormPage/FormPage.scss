@@ -46,6 +46,10 @@ legend {
 }
 .field > ul.list-inline > li {
     flex: 1 0 33.3%!important;
+    &:last-child,
+    &:nth-last-child(2) {
+        display: none;
+    }
 }
 .form-control, .checkboxes {
     border-radius: 5px!important;

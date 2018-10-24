@@ -105,7 +105,12 @@
                 "q2_experience": {
                     "title": "Short Answer 2",
                     "type": "string"
-                }
+                },
+                "q3_newquestion": {
+                    "title": "Short Answer 3",
+                    "type": "string"
+                },
+                "new_question": {"type": "string", "title": "New Question"}
             },
             "required": [
                 "first_name",
@@ -121,7 +126,9 @@
                 "accept_terms",
                 "accept_share",
                 "q1_goodfit",
-                "q2_experience"
+                "q2_experience",
+                "q3_newquestion",
+                "new_question"
             ]
         },
         "uiSchema": {
@@ -169,6 +176,13 @@
             "q2_experience": {
                 "ui:widget": "textarea",
                 "ui:placeholder": "Please describe your experience with coding and hackathons in less than 150 words."
+            },
+            "q3_newquestion": {
+                "ui:widget": "textarea",
+                "ui:placeholder": "New question."
+            },
+            "new_question": {
+                "ui:placeholder":"new question"
             }
         },
         "pages": [
@@ -189,7 +203,9 @@
             ],
             [
                 "q1_goodfit",
-                "q2_experience"
+                "q2_experience",
+                "q3_newquestion",
+                "new_question"
             ]
         ]
     },

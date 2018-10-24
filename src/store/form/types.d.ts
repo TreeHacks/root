@@ -3,6 +3,7 @@ import { IAuthStateSchemaItem } from "../auth/types";
 export interface IFormState {
   profile: {
     applications: IApplicationItem[]
+    status: string,
   },
   schemas: {
     application: IAuthStateSchemaItem
@@ -13,5 +14,5 @@ export interface IFormState {
 }
 
 export interface IApplicationItem {
-
+  status: string,
 }

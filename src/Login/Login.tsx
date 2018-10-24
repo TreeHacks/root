@@ -119,11 +119,6 @@ class Login extends React.Component<ILoginProps, {}> {
     }
     else {
       return (<div className="text-left">
-        {/* <img src={require("src/img/logo.png")} style={{ "width": 40, "marginRight": 40 }} /> */}
-        <div style={{ "display": "inline-block", "verticalAlign": "middle" }}>
-          Welcome Back!
-        </div>
-        <div className="float-right"><button className="btn" onClick={() => this.props.logout()}>Logout</button></div>
       </div>);
     }
   }

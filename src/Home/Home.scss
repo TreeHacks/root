@@ -1,27 +1,24 @@
 .nav {
-	padding-top: 20px;
-    padding-bottom: 5px;
+	padding-top: 10px;
+    padding-bottom: 10px;
     background-color: #686e77;
     text-align: center;
     height: 68px;
+		display: flex;
+		flex-direction: row;
+	align-items: center;
+		a {
+			color: white;
+			margin-right: 35px;
+			text-decoration: none;
+		}
 
-    ul {
-    	width: 100%;
-
-	    a {
-	    	color: white;
-	    	margin-right: 35px;
-	    	text-decoration: none;
-	    }
-
-	    a:hover {
-	    	color: #00e765;
-	    }
-    }
-
+		a:hover {
+			color: #00e765;
+		}
+    
     .header-logo {
-    	display: inline;
-    	float: left;
-    	margin-top: -7px;
+			display: inline;
+			margin-right: auto;
     }
 }

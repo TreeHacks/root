@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { getUserProfile, setPage } from "../store/form/actions";
+import { logout } from "../store/auth/actions";
+
 import { IHomeProps } from "./types";
 import "./Home.scss";
 import { NavLink } from "react-router-dom";
@@ -11,6 +13,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  logout: () => dispatch(logout()),
 });
 
 class Login extends React.Component<IHomeProps, {}> {
@@ -19,15 +22,16 @@ class Login extends React.Component<IHomeProps, {}> {
 
   render() {
     return <div className="nav">
-      <ul>
-      <div className="header-logo"><NavLink to="/"><img src={require("../art/header_logo.png")} height="50px" /></NavLink></div>
-      <NavLink to="/">Dashboard</NavLink>
-      <NavLink to="/application_info">Application</NavLink>
-      <NavLink to="/additional_info">Travel</NavLink>
+      <div className="header-logo"><NavLink to="/"><img src={require("../art/header_logo.png")} height="70px" /></NavLink></div>
+      <div style={{}}>
+      <NavLink to="/">dashboard</NavLink>
+      <NavLink to="/application_info">application</NavLink>
+      <NavLink to="/additional_info">travel</NavLink>
       {this.props.auth.admin &&
-          <NavLink to="/review">Review</NavLink>
+          <NavLink to="/review">review</NavLink>
       }
-      </ul>
+      </div>
+      <button style={{marginLeft: 'auto', marginRight: '30px', backgroundColor: 'transparent', color: 'white', border: '0px', cursor: 'pointer'}} onClick={() => this.props.logout()}>log out</button>
     </div>
   }
 }
