@@ -85,8 +85,8 @@
                     "type": "string"
                 },
                 "resume": {
-                    "title": "Upload your resume (optional)",
-                    "description": "Must be a PDF file",
+                    "title": "",
+                    "description": "Upload your resume (optional) - Must be a PDF file",
                     "type": "string",
                     "format": "data-url"
                 },
@@ -96,7 +96,7 @@
                 },
                 "accept_share": {
                     "type": "boolean",
-                    "title": "I authorize you to share ... "
+                    "title": "I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy."
                 },
                 "q1_goodfit": {
                     "title": "Short Answer 1",
