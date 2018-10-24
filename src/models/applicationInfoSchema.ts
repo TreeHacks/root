@@ -15,7 +15,9 @@ const applicationInfoSchema: Schema = new mongoose.Schema({
   accept_terms: Boolean,
   accept_share: Boolean,
   q1_goodfit: String,
-  q2_experience: String
+  q2_experience: String,
+  q3: String,
+  q4: String
 }, { _id : false });
 
 export default applicationInfoSchema;

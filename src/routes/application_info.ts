@@ -26,7 +26,9 @@ export function setApplicationInfo(req: Request, res: Response) {
           "accept_terms",
           "accept_share",
           "q1_goodfit",
-          "q2_experience"
+          "q2_experience",
+          "q3",
+          "q4"
         ];
         let completed = true;
         for (let requiredField of requiredFields) {

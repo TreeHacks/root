@@ -18,7 +18,9 @@ export interface IApplicationInfo {
     accept_terms: boolean,
     accept_share: boolean,
     q1_goodfit: String,
-    q2_experience: String
+    q2_experience: String,
+    q3: String,
+    q4: String
 }
 export interface IAdditionalInfo {
     bus_confirmed_spot: Boolean
