@@ -8,7 +8,7 @@ import "./Dashboard.scss";
 
 export const Dashboard = (props: IDashboardProps) => {
     const date = new Date(`12/${props.profile.type === 'oos' ? 1 : 15}/2018`);
-    const dateNow = new Date(Date.now()); 
+    const dateNow = new Date(Date.now());
     var diffDays = Math.round(Math.abs((date.getTime() - dateNow.getTime())/(24*60*60*1000)));
 
     console.log(diffDays);
@@ -19,7 +19,7 @@ export const Dashboard = (props: IDashboardProps) => {
                 {
                     props.profile.status === "submitted" ? (
                         <span>
-                        You've application has been received and you are all good for now!<br/><br/>Check back on January 15th to view your application decision and then confirm attendance.</span>
+                        Your application has been received, and you are all good for now!<br/><br/>We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)</span>
                     ) : (
                         <div>
                             <span>
@@ -28,7 +28,7 @@ export const Dashboard = (props: IDashboardProps) => {
                                 {diffDays}
                             </span>
                             <span><br/>
-                                days to submit your application before the January 1st deadline at midnight PST.
+                                days to submit your application before the deadline.
                             </span>
                         </div>
                     )
