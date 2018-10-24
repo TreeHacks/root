@@ -2,6 +2,7 @@ import Application from "../models/Application";
 import { IApplication } from "../models/Application.d";
 import { Request, Response } from 'express';
 import { CognitoUser } from "../models/cognitoUser";
+import { STATUS } from "../constants";
 
 /*
  * Get application attribute from current request.
@@ -40,6 +41,11 @@ export function setApplicationAttribute(req: Request, res: Response, setter: (e:
       (application: IApplication | null) => {
         if (!application) {
           res.status(404).send("Application not found.");
+          return;
+        }
+        if (application.status === STATUS.SUBMITTED) {
+          res.status(400).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
+          return;
         }
         else {
           setter(application);
