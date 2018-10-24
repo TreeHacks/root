@@ -22,16 +22,21 @@ class Login extends React.Component<IHomeProps, {}> {
 
   render() {
     return <div className="nav">
-      <div className="header-logo"><NavLink to="/"><img src={require("../art/header_logo.png")} height="70px" /></NavLink></div>
-      <div style={{}}>
-      <NavLink to="/">dashboard</NavLink>
-      <NavLink to="/application_info">application</NavLink>
-      <NavLink to="/additional_info">travel</NavLink>
-      {this.props.auth.admin &&
-          <NavLink to="/review">review</NavLink>
-      }
+      <div className="header-logo">
+        <NavLink to="/"><img src={require("../art/header_logo.png")} height="70px" />
+        </NavLink>
+        <span className="logo-text-tree">tree</span>
+        <span className="logo-text-hacks">hacks</span>
       </div>
-      <button style={{marginLeft: 'auto', marginRight: '30px', backgroundColor: 'transparent', color: 'white', border: '0px', cursor: 'pointer'}} onClick={() => this.props.logout()}>log out</button>
+      <div style={{}}>
+        <NavLink to="/">dashboard</NavLink>
+        <NavLink to="/application_info">application</NavLink>
+        <NavLink to="/additional_info">travel</NavLink>
+        {this.props.auth.admin &&
+          <NavLink to="/review">review</NavLink>
+        }
+      </div>
+      <button style={{ marginLeft: 'auto', marginRight: '30px', backgroundColor: 'transparent', color: 'white', border: '0px', cursor: 'pointer' }} onClick={() => this.props.logout()}>log out</button>
     </div>
   }
 }

@@ -1,25 +1,37 @@
 .nav {
-	padding-top: 10px;
+    padding-top: 10px;
     padding-bottom: 10px;
-	background-color: rgb(83, 81, 82);
-	border-bottom: 3px solid #696E76;
+    background-color: rgb(83, 81, 82);
+    border-bottom: 3px solid #696E76;
     text-align: center;
     height: 68px;
-		display: flex;
-		flex-direction: row;
-	align-items: center;
-		a {
-			color: white;
-			margin-right: 35px;
-			text-decoration: none;
-		}
-
-		a:hover {
-			color: #00e765;
-		}
-    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    a {
+        color: white;
+        margin-right: 35px;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #00e765;
+    }
     .header-logo {
-			display: inline;
-			margin-right: auto;
+        display: inline;
+        margin-right: auto;
+        .logo-text-tree,
+        .logo-text-hacks {
+            font-size: 36px;
+            color: white;
+            display: inline-block;
+            position: relative;
+            top: 5px;
+        }
+        .logo-text-tree {
+            font-family: "Avenir", sans-serif;
+        }
+        .logo-text-hacks {
+            font-family: "Avenir Heavy", sans-serif;
+        }
     }
 }
