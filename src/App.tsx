@@ -15,7 +15,7 @@ import "./App.scss";
 import { setFormName } from "./store/form/actions";
 import Review from "./Review/Review";
 import Verify from "./Verify";
-import './favicons/favicons';
+import Helmet from "react-helmet";
 
 const mapStateToProps = state => ({
   ...state.base,
@@ -34,6 +34,9 @@ interface IAppProps extends IBaseState {
 const App = (props: IAppProps) => { console.log(props); return(
   <ConnectedRouter history={history}>
     <div className="treehacks-main">
+      <Helmet>
+        <link rel="icon" type="image/png" href={require("./art/favicon.png")} />
+      </Helmet>
       {props.loading && <Loading />}
       <Switch>
         <Route path="/verify" component={Verify} />

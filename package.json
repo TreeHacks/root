@@ -61,6 +61,7 @@
     "node-sass": "^4.9.2",
     "query-string": "^5.1.1",
     "react-bootstrap-typeahead": "^3.2.4",
+    "react-helmet": "^5.2.0",
     "react-jsonschema-form": "^1.0.5",
     "react-jsonschema-form-extras": "^0.9.28",
     "react-redux": "^5.0.7",
