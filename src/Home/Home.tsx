@@ -37,7 +37,7 @@ class Login extends React.Component<IHomeProps, {}> {
           <NavLink to="/review">review</NavLink>
         }
       </div>
-      <button style={{ marginLeft: 'auto', marginRight: '30px', backgroundColor: 'transparent', color: 'white', border: '0px', cursor: 'pointer' }} onClick={() => this.props.logout()}>log out</button>
+      <button><span className="logoutText" onClick={() => this.props.logout()}>log out</span></button>
     </div>
   }
 }

@@ -1,37 +1,76 @@
+$dark-gray: #535152;
+$light-gray: #696E76;
+$green: #00E174;
+$white: #FFFFFF;
+
+$navbar-font-size: 16px * 1.18;
+$navbar-margin: 1.25vw;
+$navbar-padding: 8px;
+
 .nav {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: rgb(83, 81, 82);
-    border-bottom: 3px solid #696E76;
-    text-align: center;
-    height: 68px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 101;
+
+  background-color: $dark-gray;
+  height: 80px;
+  width: 100vw;
+  padding: 0 2vw;
+  border-bottom: 3px solid $light-gray;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  a, .logoutText {
+    color: $white;
+    margin: 0 $navbar-margin;
+    padding: $navbar-padding 0;
+    font-size: $navbar-font-size;
+    border-bottom: 2px solid $dark-gray;
+    transition: 0.5s;
+
+    &:hover {
+      border-bottom: 2px solid $green;
+      text-decoration: none;
+    }
+  }
+
+  .header-logo {
+    flex: 1;
+    text-align: left;
+    margin-left: -10px;
+
     a {
-        color: white;
-        margin-right: 35px;
-        text-decoration: none;
+      border-bottom: 0px;
+      margin: 0;
+      font-size: 36px;
     }
-    a:hover {
-        color: #00e765;
+
+    .logo-text-tree {
+      font-family: 'Avenir';
     }
-    .header-logo {
-        display: inline;
-        margin-right: auto;
-        .logo-text-tree,
-        .logo-text-hacks {
-            font-size: 36px;
-            color: white;
-            display: inline-block;
-            position: relative;
-            top: 5px;
-        }
-        .logo-text-tree {
-            font-family: "Avenir", sans-serif;
-        }
-        .logo-text-hacks {
-            font-family: "Avenir Heavy", sans-serif;
-        }
+
+    .logo-text-hacks {
+      font-family: 'Avenir Heavy';
     }
+  }
+
+  button {
+    flex: 1;
+    margin: 0 !important;
+    background-color: transparent;
+    border: 0;
+    text-align: right;
+
+    .logoutText {
+      display: inline-block;
+      padding: $navbar-padding/2 0;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
