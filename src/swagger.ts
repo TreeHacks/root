@@ -144,6 +144,22 @@ const swagger = {
         }
       }
     },
+    "/users/{userId}/application_info/submit": {
+      "post": {
+        "summary": "Submit application",
+        "description": "Submit application. This endpoint checks to make sure that all required fields in the application are complete, then sends a confirmation email. No request body.",
+        "responses": {
+          "200": {
+            "description": "User application info response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApplicationInfo" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/additional_info": {
       "get": {
         "summary": "Get additional info",
