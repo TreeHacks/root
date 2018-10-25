@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute } from "./common"
 import { STATUS } from '../constants';
+import {sendApplicationSubmittedEmail} from "../services/send_email";
 
 export function getApplicationInfo(req: Request, res: Response) {
   return getApplicationAttribute(req, res, e => e.forms.application_info);
@@ -38,7 +39,7 @@ export function setApplicationInfo(req: Request, res: Response) {
         }
         if (completed) {
           e.status = STATUS.SUBMITTED;
-          // todo: send email.
+          sendApplicationSubmittedEmail(res.locals.user.email);
         }
       }
     },

@@ -34,6 +34,8 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "force-ssl-heroku": "^1.0.2",
+    "fs-readfile-promise": "^3.0.1",
+    "html2plaintext": "^2.1.0",
     "mongoose": "^5.3.1",
     "path": "^0.12.7",
     "request": "^2.83.0",
