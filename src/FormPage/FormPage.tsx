@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
-import { setPage, setData, saveData, loadData, getUserProfile, submitForm } from "../store/form/actions";
+import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
 
 import { IFormPageProps } from "./types";
 import { cloneDeep, get, set, pull } from "lodash-es";
@@ -21,7 +21,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     submitForm: () => dispatch(submitForm()),
     loadData: () => { dispatch(loadData()) },
     goHome: () => { dispatch(push("/")) },
-    getUserProfile: () => dispatch(getUserProfile())
+    getUserProfile: () => dispatch(getUserProfile()),
+    setFormName: (e: string) => dispatch(setFormName(e))
 });
 
 
@@ -56,6 +57,7 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
         this.state = { afterSubmit: null };
     }
     componentDidMount() {
+        this.props.setFormName(this.props.incomingFormName);
         this.props.loadData();
         // this.props.setData({"first_name":"sad","last_name":"dsf","phone":"123123123","dob":"1901-01-02","gender":"F","race":["American Indian / Alaska Native"],"university":"2nd Military Medical University","graduation_year":"2018","level_of_study":"Graduate","major":"sa","accept_terms":true,"accept_share":true});
         this.props.getUserProfile();

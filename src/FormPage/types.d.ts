@@ -7,5 +7,7 @@ export interface IFormPageProps extends IFormState {
     submitForm: () => Promise<any>,
     loadData: () => void,
     goHome: () => void,
-    getUserProfile: () => void
+    getUserProfile: () => void,
+    setFormName: (e: string) => void,
+    incomingFormName: string
 }

@@ -12,7 +12,6 @@ import Home from "./Home/Home";
 import FormPage from "./FormPage/FormPage";
 import Dashboard from "./Dashboard/Dashboard";
 import "./App.scss";
-import { setFormName } from "./store/form/actions";
 import Review from "./Review/Review";
 import Verify from "./Verify";
 import Helmet from "react-helmet";
@@ -23,12 +22,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setFormName: (e: string) => dispatch(setFormName(e))
 });
 
 interface IAppProps extends IBaseState {
-  loggedIn: boolean,
-  setFormName: (e: string) => void
+  loggedIn: boolean
 }
 
 const App = (props: IAppProps) => (
@@ -55,7 +52,7 @@ const MainRoutes = (props: IAppProps) => (
         <Route path="" component={Home} />
         <Switch>
           <Route path="/" exact component={Dashboard} />
-          <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
+          <Route path="/application_info" render={() => { return <FormPage incomingFormName="application_info" />; }} />
           <Route path="/additional_info" render={() => {
             return (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
