@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 
 import {authenticatedRoute, adminRoute} from "./router/authenticatedRoute";
 import { getAdditionalInfo, setAdditionalInfo } from "./routes/additional_info";
-import { getApplicationInfo, setApplicationInfo } from "./routes/application_info";
+import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
 import { getUserList } from "./routes/user_list";
 import { getApplicationStatus, setApplicationStatus } from "./routes/user_status";
@@ -79,6 +79,7 @@ authenticatedRoute.get('/users/:userId/forms/additional_info', getAdditionalInfo
 authenticatedRoute.put('/users/:userId/forms/additional_info', setAdditionalInfo);
 authenticatedRoute.get('/users/:userId/forms/application_info', getApplicationInfo);
 authenticatedRoute.put('/users/:userId/forms/application_info', setApplicationInfo);
+authenticatedRoute.post('/users/:userId/forms/application_info/submit', submitApplicationInfo);
 // What permission should this one be?
 authenticatedRoute.get('/users/:userId/status', getApplicationStatus);
 
