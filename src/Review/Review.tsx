@@ -17,12 +17,12 @@ const defaultFilterMethod = (filter, row) => {
 
 const createFilterSelect = (values) => ({ filter, onChange }) =>
     <select
-        onChange={event => onChange(event.target.value)}
         className="form-control"
         value={filter ? filter.value : "all"}
+        onChange={event => onChange(event.target.value)}
     >
         {values.map(e =>
-            <option>{e}</option>
+            <option key={e}>{e}</option>
         )}
         <option>all</option>
     </select>;
@@ -59,7 +59,12 @@ const Review = (props: IReviewProps) => (
                 {(state, makeTable, instance) => {
                     return (
                         <div>
-                            User emails shown: <input type="text" value={state.sortedData.map(e => e && get(e, "user.email")).join(",")} />
+                            User emails shown:
+                            <input type="text"
+                                readOnly
+                                value={state.sortedData.map(e => e && get(e, "user.email")).join(",")}
+                                style={{width: "100%"}}
+                                />
                             {makeTable()}
                         </div>
                     );
