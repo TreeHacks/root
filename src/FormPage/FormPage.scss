@@ -1,9 +1,9 @@
 .rjsf {
+    margin: auto;
     margin-top: 40px;
     padding: 10px;
     width: 84%;
     max-width: 800px;
-    margin: auto;
     color: #09da7a;
     .checkbox input {
         margin-right: 10px;
@@ -17,13 +17,13 @@
     .form-control{
         padding: 6px;
         border-radius: 5px;
-    } 
+    }
     .btn-info{
         background-color: #00b65f;
         border-color: #00b65f!important;
         color: white;
         width: 100%;
-        
+
         font-size: 20px;
     }
     .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active, .show > .btn-info.dropdown-toggle {
@@ -31,14 +31,14 @@
         border-color: #00b65f!important;
         color: white;
         width: 100%;
-       
+
         font-size: 20px;
 
     }
 legend {
     color:white;
     text-align: center;
-    
+
 }
 }
 .select-li{
@@ -81,4 +81,3 @@ legend {
     margin-bottom: 25px;
     margin-left: 200px;
 }
-
