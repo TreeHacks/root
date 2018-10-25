@@ -40,35 +40,37 @@ const App = (props: IAppProps) => (
       {props.loading && <Loading />}
       <Switch>
         <Route path="/verify" component={Verify} />
-        <div>
-          <Login />
-          {props.loggedIn === false &&
-            <Redirect to="/" />
-          }
-          {props.loggedIn === true &&
-            <div>
-              <Route path="" component={Home} />
-              <Switch>
-                <Route path="/" exact component={Dashboard} />
-                <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
-                <Route path="/additional_info" render={() => {
-                  return (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                      <div style={{ fontSize: '30px', marginTop: '30px', color: 'white', textAlign: 'center' }}>
-                        travel
-                    </div>
-                      <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center' }}>
-                        There are no travel options at this time. Check back after you have recived a decision about your application.
-                    </div>
-                    </div>);/* props.setFormName("addsitional_info"); return <FormPage />; */
-                }} />
-                <Route path="/review" exact component={Review} />
-              </Switch>
-            </div>
-          }
-        </div>
+        <Route render={() => <MainRoutes {...props} />} />
       </Switch>
     </div>
   </ConnectedRouter>);
+const MainRoutes = (props: IAppProps) => (
+  <div>
+    <Login />
+    {props.loggedIn === false &&
+      <Redirect to="/" />
+    }
+    {props.loggedIn === true &&
+      <div>
+        <Route path="" component={Home} />
+        <Switch>
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
+          <Route path="/additional_info" render={() => {
+            return (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{ fontSize: '30px', marginTop: '30px', color: 'white', textAlign: 'center' }}>
+                  travel
+                    </div>
+                <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center' }}>
+                  There are no travel options at this time. Check back after you have recived a decision about your application.
+                    </div>
+              </div>);
+          }} />
+          <Route path="/review" exact component={Review} />
+        </Switch>
+      </div>
+    }
+  </div>);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
