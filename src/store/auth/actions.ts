@@ -40,7 +40,7 @@ function parseJwt(token) {
 };
 
 async function getCurrentUser() {
-  let jwt = localStorage.getItem("jwt");
+  const jwt = localStorage.getItem("jwt");
   if (jwt) {
     /*
     ud: 
@@ -57,6 +57,7 @@ async function getCurrentUser() {
     token_use: 
     website: 
     */
+
     // Verify JWT here.
     const parsed = parseJwt(jwt);
     if (new Date().getTime() / 1000 >= parseInt(parsed.exp)) {
@@ -72,16 +73,13 @@ async function getCurrentUser() {
     }
   }
 
-  // Need to parse JWT as well, because Auth.currentAuthenticatedUser() does not return user groups.
+  // If JWT from SAML has expired, or if there is no JWT in the first place, run this code.
+  // Need to parse our local JWT as well to get cognito:groups attribute, because Auth.currentAuthenticatedUser() does not return user groups.
   return Promise.all([
     Auth.currentAuthenticatedUser(),
     parseJwt((await Auth.currentSession()).idToken.jwtToken)
   ]).then(([user, token]) => {
-    user.treehacks_admin = false;
-    if (token["cognito:groups"] &&
-      (token["cognito:groups"].indexOf("admin") > -1)) {
-      user.treehacks_admin = true;
-    }
+    user.attributes["cognito:groups"] = token["cognito:groups"];
     return user;
   });
 }
@@ -90,9 +88,14 @@ export function checkLoginStatus() {
   return (dispatch, getState) => {
     dispatch(loadingStart());
     return getCurrentUser()
-      .then((user: { username: string, attributes: IUserAttributes, treehacks_admin: boolean }) => {
+      .then((user: { username: string, attributes: IUserAttributes, "cognito:groups"?: string[] }) => {
         if (!user) throw "No credentials";
-        dispatch(loggedIn(user.username, user.attributes, user.treehacks_admin));
+        let treehacks_admin = false;
+        if (user.attributes["cognito:groups"] &&
+          (user.attributes["cognito:groups"].indexOf("admin") > -1)) {
+          treehacks_admin = true;
+        }
+        dispatch(loggedIn(user.username, user.attributes, treehacks_admin));
       }).catch(e => {
         console.error(e);
       }).then(() => dispatch(loadingEnd()));
