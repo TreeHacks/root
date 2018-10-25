@@ -31,7 +31,7 @@ interface IAppProps extends IBaseState {
   setFormName: (e: string) => void
 }
 
-const App = (props: IAppProps) => { console.log(props); return(
+const App = (props: IAppProps) => (
   <ConnectedRouter history={history}>
     <div className="treehacks-main">
       <Helmet>
@@ -53,14 +53,14 @@ const App = (props: IAppProps) => { console.log(props); return(
                 <Route path="/application_info" render={() => { props.setFormName("application_info"); return <FormPage />; }} />
                 <Route path="/additional_info" render={() => {
                   return (
-                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                    <div style={{fontSize: '30px', marginTop: '30px', color: 'white', textAlign: 'center'}}>
-                      travel
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                      <div style={{ fontSize: '30px', marginTop: '30px', color: 'white', textAlign: 'center' }}>
+                        travel
                     </div>
-                    <div style={{backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center'}}>
-                      There are no travel options at this time. Check back after you have recived a decision about your application.
+                      <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center' }}>
+                        There are no travel options at this time. Check back after you have recived a decision about your application.
                     </div>
-                  </div>);/* props.setFormName("addsitional_info"); return <FormPage />; */
+                    </div>);/* props.setFormName("addsitional_info"); return <FormPage />; */
                 }} />
                 <Route path="/review" exact component={Review} />
               </Switch>
@@ -69,6 +69,6 @@ const App = (props: IAppProps) => { console.log(props); return(
         </div>
       </Switch>
     </div>
-  </ConnectedRouter>); }
+  </ConnectedRouter>);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
