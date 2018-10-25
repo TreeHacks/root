@@ -54,8 +54,8 @@ const columns = [
 const Review = (props: IReviewProps) => (
     <div>
         <h3>Applications:</h3>
-        <div className="bg-white col-8 offset-2">
-            <ReactTable filterable columns={columns} data={props.applicationList}>
+        <div className="bg-white col-8 offset-2 p-4">
+            <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}>
                 {(state, makeTable, instance) => {
                     return (
                         <div>
