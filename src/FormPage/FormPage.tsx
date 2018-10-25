@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
-import { setPage, setData, saveData, loadData, getUserProfile } from "../store/form/actions";
+import { setPage, setData, saveData, loadData, getUserProfile, submitForm } from "../store/form/actions";
 
 import { IFormPageProps } from "./types";
 import { cloneDeep, get, set, pull } from "lodash-es";
@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setPage: (e) => dispatch(setPage(e)),
     setData: (e) => dispatch(setData(e)),
     saveData: () => dispatch(saveData()),
+    submitForm: () => dispatch(submitForm()),
     loadData: () => { dispatch(loadData()) },
     goHome: () => { dispatch(push("/")) },
     getUserProfile: () => dispatch(getUserProfile())
@@ -69,7 +70,7 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
                 props.setPage(props.page - 1);
             }
             else {
-                props.goHome();
+                return props.submitForm().then(() => props.goHome());
             }
             this.setState({ "afterSubmit": 0 });
         });

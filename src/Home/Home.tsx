@@ -27,9 +27,9 @@ class Login extends React.Component<IHomeProps, {}> {
           <img src={require("../art/header_logo.png")} height="70px" />
           <span className="logo-text-tree">tree</span>
           <span className="logo-text-hacks">hacks</span>
-        </NavLink>
+        </NavLink>  
       </div>
-      <div style={{}}>
+      <div>
         <NavLink to="/">dashboard</NavLink>
         <NavLink to="/application_info">application</NavLink>
         <NavLink to="/additional_info">travel</NavLink>

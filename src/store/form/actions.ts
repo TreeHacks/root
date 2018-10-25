@@ -48,6 +48,19 @@ export const saveData = () => (dispatch, getState) => {
   });
 }
 
+export const submitForm = () => (dispatch, getState) => {
+  const userId = (getState().auth as IAuthState).userId;
+  const formName = (getState().form as IFormState).formName;
+  dispatch(loadingStart());
+  return API.post("treehacks", `/users/${userId}/forms/${formName}/submit`, {}).then(e => {
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error submitting form " + e);
+  });
+}
+
 export const loadData = () => (dispatch, getState) => {
   const userId = (getState().auth as IAuthState).userId;
   const formName = (getState().form as IFormState).formName;
