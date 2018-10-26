@@ -108,7 +108,8 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
             {submitted && <div style={{backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center'}}>
                 Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.
             </div>}
-            <Form 
+            <Form
+                className="treehacks-form" 
                 schema={schema}
                 uiSchema={{
                     ...uiSchema,

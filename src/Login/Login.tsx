@@ -47,7 +47,7 @@ function validate(formData, errors) {
 }
 
 function AuthForm(props) {
-  return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} />
+  return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} className="treehacks-form" />
 }
 class Login extends React.Component<ILoginProps, {}> {
   componentDidMount() {
