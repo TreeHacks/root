@@ -23,7 +23,6 @@ const asyncLocalStorage = {
         });
     }
 };
-console.log(COGNITO_USER_POOL_ID);
 Amplify.configure({
   Auth: {
   // REQUIRED - Amazon Cognito Identity Pool ID
