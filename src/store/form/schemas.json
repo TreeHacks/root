@@ -28,11 +28,15 @@
                     "enum": [
                         "M",
                         "F",
+                        "NonBinary",
+                        "PreferNotToSay",
                         "Other"
                     ],
                     "enumNames": [
                         "Male",
                         "Female",
+                        "Non-binary",
+                        "Prefer not to say",
                         "Other"
                     ]
                 },
@@ -47,7 +51,19 @@
                             "Black / African American",
                             "Hispanic / Latino",
                             "Native Hawaiian / Other Pacific Islander",
-                            "White"
+                            "White",
+                            "Other",
+                            "Prefer not to say"
+                        ],
+                        "enumNames": [
+                            "American Indian / Alaska Native",
+                            "Asian",
+                            "Black / African American",
+                            "Hispanic / Latino",
+                            "Native Hawaiian / Other Pacific Islander",
+                            "White",
+                            "Other",
+                            "Prefer not to say"
                         ]
                     },
                     "uniqueItems": true
