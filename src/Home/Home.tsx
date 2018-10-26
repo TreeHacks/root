@@ -27,7 +27,7 @@ class Login extends React.Component<IHomeProps, {}> {
           <img src={require("../art/header_logo.png")} height="70px" />
           <span className="logo-text-tree">tree</span>
           <span className="logo-text-hacks">hacks</span>
-        </NavLink>  
+        </NavLink>
       </div>
       <div>
         <NavLink to="/">dashboard</NavLink>
@@ -37,7 +37,9 @@ class Login extends React.Component<IHomeProps, {}> {
           <NavLink to="/review">review</NavLink>
         }
       </div>
-      <button><span className="logoutText" onClick={() => this.props.logout()}>log out</span></button>
+      <div className="logoutText">
+        <a onClick={() => this.props.logout()}>log out</a>
+      </div>
     </div>
   }
 }
