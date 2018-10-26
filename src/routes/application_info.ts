@@ -12,7 +12,8 @@ export function setApplicationInfo(req: Request, res: Response) {
     e => {
       e.forms.application_info = req.body
     },
-    e => e.forms.application_info
+    e => e.forms.application_info,
+    true
   );
 }
 
@@ -51,6 +52,7 @@ export function submitApplicationInfo(req: Request, res: Response) {
       }
       // }
     },
-    e => e.forms.application_info
+    e => e.forms.application_info,
+    true
   );
 }

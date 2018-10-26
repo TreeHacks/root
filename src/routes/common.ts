@@ -4,15 +4,27 @@ import { Request, Response } from 'express';
 import { CognitoUser } from "../models/cognitoUser";
 import { STATUS } from "../constants";
 
+function getDeadline(type) {
+  switch (type) {
+    case "is":
+      return new Date("12/16/2018");
+    case "stanford":
+      return new Date("2/16/2019");
+    case "oos":
+    default:
+      return new Date("12/2/2018");
+  }
+}
+
 /*
  * Get application attribute from current request.
  * req - Request (must have userId param)
  * res - Response
  * getter - function describing what part of the application should be returned from the endpoint.
  */
-export function getApplicationAttribute(req: Request, res: Response, getter: (e: IApplication) => any, createIfNotFound=false) {
+export function getApplicationAttribute(req: Request, res: Response, getter: (e: IApplication) => any, createIfNotFound = false) {
   return Application.findOne(
-    { "_id": req.params.userId }, {"__v": 0}).then(
+    { "_id": req.params.userId }, { "__v": 0 }).then(
       (application: IApplication | null) => {
         if (!application) {
           if (createIfNotFound) {
@@ -35,9 +47,9 @@ export function getApplicationAttribute(req: Request, res: Response, getter: (e:
  * setter - a function describing what happens to the application before save.
  * getter - function describing what part of the application should be returned from the endpoint.
  */
-export function setApplicationAttribute(req: Request, res: Response, setter: (e: IApplication) => any, getter: (e: IApplication) => any = e => e) {
+export function setApplicationAttribute(req: Request, res: Response, setter: (e: IApplication) => any, getter: (e: IApplication) => any = e => e, considerDeadline = false) {
   return Application.findOne(
-    { "_id": req.params.userId }, {"__v": 0}).then(
+    { "_id": req.params.userId }, { "__v": 0 }).then(
       (application: IApplication | null) => {
         if (!application) {
           res.status(404).send("Application not found.");
@@ -45,6 +57,11 @@ export function setApplicationAttribute(req: Request, res: Response, setter: (e:
         }
         if (application.status === STATUS.SUBMITTED) {
           res.status(400).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
+          return;
+        }
+        let deadline = getDeadline(application.type);
+        if (considerDeadline && (deadline < new Date())) {
+          res.status(400).send(`Application deadline has already been passed: ${deadline.toLocaleString()}`);
           return;
         }
         else {
@@ -104,7 +121,7 @@ website
  */
 export async function createApplication(user: CognitoUser) {
   let applicationInfo = {};
-  let applicationType = user["custom:location"] === "CA" ? "is": "oos";
+  let applicationType = user["custom:location"] === "CA" ? "is" : "oos";
   if (user.email.match(/@stanford.edu$/)) {
     applicationInfo = {
       "university": "Stanford University"
@@ -115,7 +132,7 @@ export async function createApplication(user: CognitoUser) {
     "_id": user.sub,
     "forms": {
       "application_info": applicationInfo,
-      "additional_info": { }
+      "additional_info": {}
     },
     "admin_info": {},
     "reviews": [],
