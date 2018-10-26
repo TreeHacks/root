@@ -7,8 +7,19 @@ import Loading from "../Loading/Loading";
 import "./Dashboard.scss";
 
 export const Dashboard = (props: IDashboardProps) => {
-    const date = new Date(`12/${props.profile.type === 'oos' ? 1 : 15}/2018`);
-    const dateNow = new Date(Date.now());
+    let date = null;
+    switch (props.profile.type) {
+        case "is":
+            date = new Date("12/15/2018");
+            break;
+        case "stanford":
+            date = new Date("2/15/2019");
+            break;
+        case "oos":
+        default:
+            date = new Date("12/1/2018");
+    }
+    const dateNow = new Date();
     const diffDays = Math.round(Math.abs((date.getTime() - dateNow.getTime())/(24*60*60*1000)));
 
     return (
