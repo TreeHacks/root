@@ -6,19 +6,21 @@ import { IDashboardProps, IDashboardWrapperProps } from "./types";
 import Loading from "../Loading/Loading";
 import "./Dashboard.scss";
 
-export const Dashboard = (props: IDashboardProps) => {
-    let date = null;
-    switch (props.profile.type) {
+function getDeadline(type: string) {
+    switch (type) {
         case "is":
-            date = new Date("12/15/2018");
-            break;
+            return new Date("12/16/2018");
         case "stanford":
-            date = new Date("2/15/2019");
-            break;
+            return new Date("2/16/2019");
         case "oos":
         default:
-            date = new Date("12/1/2018");
+            return new Date("12/2/2018");
     }
+  }
+  
+
+export const Dashboard = (props: IDashboardProps) => {
+    let date = getDeadline(props.profile.type);
     const dateNow = new Date();
     const diffDays = Math.round(Math.abs((date.getTime() - dateNow.getTime())/(24*60*60*1000)));
 
