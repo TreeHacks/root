@@ -123,13 +123,19 @@
       ]
     },
     "uiSchema": {
+      "email": {
+        "ui:placeholder": "email address"
+      },
+      "code": {
+        "ui:placeholder": "code from email"
+      },
       "password": {
         "ui:widget": "password",
-        "ui:placeholder": "password"
+        "ui:placeholder": "new password"
       },
       "password2": {
         "ui:widget": "password",
-        "ui:placeholder": "confirm password"
+        "ui:placeholder": "confirm new password"
       }
     }
   }
