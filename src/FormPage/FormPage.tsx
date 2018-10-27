@@ -46,7 +46,7 @@ function validate(formData, errors) {
 }
 export default (props: IFormPageProps) =>
     (<Form
-        className="treehacks-form"
+        className={`treehacks-form ${props.submitted ? "treehacks-form-disabled": ""}`}
         schema={props.schema}
         uiSchema={{
             ...props.uiSchema,

@@ -6,6 +6,12 @@
     width: 84%;
     max-width: 800px;
     color: #09da7a;
+    &.treehacks-form-disabled {
+        input {
+            cursor: default;
+            pointer-events: none;
+        }
+    }
     .form-control,
     .checkboxes {
         background-color: $box-gray;
