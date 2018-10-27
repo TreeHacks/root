@@ -176,8 +176,7 @@
                 "ui:placeholder": "race / ethnicity",
                 "ui:widget": "checkboxes"
             },
-            "university": {
-                
+            "university": { 
                 "ui:field": "typeahead",
                 "typeahead": {
                     "placeholder": "university",
@@ -218,10 +217,8 @@
             },
             "section2": {
                 "ui:widget": "sectionHeader"
-            }
-        },
-        "pages": [
-            [
+            },
+            "ui:order": [
                 "first_name",
                 "last_name",
                 "phone",
@@ -241,7 +238,7 @@
                 "accept_terms",
                 "accept_share"
             ]
-        ]
+        }
     },
     "additional_info": {
         "schema": {
@@ -255,11 +252,9 @@
             }
         },
         "uiSchema": {
-        },
-        "pages": [
-            [
+            "ui:order": [
                 "q1"
             ]
-        ]
+        }
     }
 }
