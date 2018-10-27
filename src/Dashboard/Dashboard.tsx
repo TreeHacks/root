@@ -25,23 +25,24 @@ export const Dashboard = (props: IDashboardProps) => {
     const diffDays = Math.round(Math.abs((date.getTime() - dateNow.getTime())/(24*60*60*1000)));
 
     return (
-        <div className="dashboard" style={{"backgroundImage": `url('${require('../art/combined_circuit.svg')}')`, "backgroundSize": "cover"}}>
+        <div className="dashboard" style={{"backgroundImage": `url('${require('../art/combined_circuit.svg')}')`, "backgroundSize": "100% 100%"}}>
             <div style={{position: 'absolute', top: "50%", left: "50%", transform: "translateX(-50%) translateY(-50%)"}}>
             <div className="dashboard-design">
                 {
                     props.profile.status === "submitted" ? (
                         <span>
-                        Your application has been received, and you are all good for now!<br/><br/>We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)</span>
+                        Your application has been received &ndash; you are all good for now!<br/><br/>We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)</span>
                     ) : (
                         <div>
-                            <span>
-                            You haven't submitted your application yet. You have <br/> </span>
-                            <span style={{color: "#00E073", fontSize: '70px'}}>
+                            <div>
+                                You haven't submitted your application yet. You have
+                            </div>
+                            <div style={{color: "#00E073", fontSize: '70px', marginBottom: -15}}>
                                 {diffDays}
-                            </span>
-                            <span><br/>
+                            </div>
+                            <div>
                                 days to submit your application before the deadline.
-                            </span>
+                            </div>
                         </div>
                     )
                 }
