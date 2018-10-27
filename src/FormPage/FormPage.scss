@@ -49,8 +49,8 @@
         margin-bottom: 40px;
     }
 
-    input, textarea {
-        box-shadow: none; /* remove firefox highlight */
+    input, textarea, select {
+        box-shadow: none !important; /* remove firefox highlight */
     }
 }
 .select-li{
