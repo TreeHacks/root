@@ -35,14 +35,6 @@
             box-shadow: 0 0 0 0;
         }
     }
-    .btn {
-        transition: 0.2s;
-        &:focus,
-        &:hover {
-            outline: 0;
-            transform: scale(1.02);
-        }
-    }
     .btn .checkboxes {
         padding-bottom: 7.5px;
     }
@@ -133,6 +125,15 @@
     select {
         box-shadow: none !important;
         /* remove firefox highlight */
+    }
+}
+
+.btn {
+    transition: 0.2s;
+    &:focus,
+    &:hover {
+        outline: 0;
+        transform: scale(1.02);
     }
 }
 
