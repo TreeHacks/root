@@ -14,13 +14,12 @@
                 },
                 "phone": {
                     "type": "string",
-                    "title": "Phone Number",
-                    "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$"
+                    "title": "Phone Number"
                 },
                 "dob": {
                     "type": "string",
                     "title": "Date of Birth",
-                    "format": "alt-date"
+                    "format": "date"
                 },
                 "gender": {
                     "type": "string",
@@ -108,7 +107,7 @@
                 },
                 "accept_terms": {
                     "type": "boolean",
-                    "title": "I have read and agree to the MLH Code of Conduct"
+                    "title": "I have read and agree to the MLH Code of Conduct."
                 },
                 "accept_share": {
                     "type": "boolean",
@@ -128,6 +127,10 @@
                 },
                 "q4": {
                     "title": "Short Answer 4",
+                    "type": "string"
+                },
+                "section2": {
+                    "title": "Additional Questions",
                     "type": "string"
                 }
             },
@@ -161,7 +164,10 @@
                 "ui:placeholder": "phone number"
             },
             "dob": {
-                "ui:placeholder": ""
+                "ui:placeholder": "date of birth",
+                "ui:options": {
+                   "yearsRange": [1900, 2018]
+                 }
             },
             "gender": {
                 "ui:placeholder": "gender"
@@ -202,6 +208,9 @@
             },
             "q4": {
                 "ui:placeholder":"new question"
+            },
+            "section2": {
+                "ui:widget": "sectionHeader"
             }
         },
         "pages": [
@@ -217,14 +226,13 @@
                 "level_of_study",
                 "major",
                 "resume",
-                "accept_terms",
-                "accept_share"
-            ],
-            [
+                "section2",
                 "q1_goodfit",
                 "q2_experience",
                 "q3",
-                "q4"
+                "q4",
+                "accept_terms",
+                "accept_share"
             ]
         ]
     },

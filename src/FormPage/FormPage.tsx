@@ -26,6 +26,15 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 
+const SectionHeaderWidget = (props) => {
+  const { schema } = props;
+  return (
+      <legend>
+        {schema.title} 
+      </legend>
+  );
+};
+
 function base64MimeType(encoded) {
     var result = null;
 
@@ -51,10 +60,10 @@ function validate(formData, errors) {
     return errors;
 }
 
-class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> {
+class FormPage extends React.Component<IFormPageProps, { showSavedAlert: boolean }> {
     constructor(props) {
         super(props);
-        this.state = { afterSubmit: null };
+        this.state = { showSavedAlert: false };
     }
     componentDidMount() {
         this.props.setFormName(this.props.incomingFormName);
@@ -62,19 +71,15 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
         // this.props.setData({"first_name":"sad","last_name":"dsf","phone":"123123123","dob":"1901-01-02","gender":"F","race":["American Indian / Alaska Native"],"university":"2nd Military Medical University","graduation_year":"2018","level_of_study":"Graduate","major":"sa","accept_terms":true,"accept_share":true});
         this.props.getUserProfile();
     }
-    onSubmit(e) {
+    onSubmit(submit) {
         const props = this.props;
         (get(props, "profile.status") === "submitted" ? () => Promise.resolve(null) : props.saveData)().then(() => {
-            if (this.state.afterSubmit == 1) {
-                props.setPage(props.page + 1);
-            }
-            else if (this.state.afterSubmit == -1) {
-                props.setPage(props.page - 1);
-            }
-            else {
+            if (submit) {
                 return props.submitForm().then(() => props.goHome());
+            } else {
+                this.setState({ showSavedAlert: true });
+                window.scrollTo(0, 0);
             }
-            this.setState({ "afterSubmit": 0 });
         });
     }
     render() {
@@ -103,10 +108,13 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
 
         const submitted = get(props, "profile.status") === "submitted";
 
+        const alertMessage = submitted ? `Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.` :
+            this.state.showSavedAlert ? `Your application progress has been saved. Make sure you finalize and submit before the deadline.` : null;
+
         return (
         <div style={{display: 'flex', flexDirection:'column', alignItems: 'center'}}>
-            {submitted && <div style={{backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center'}}>
-                Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.
+            {alertMessage && <div style={{backgroundColor: '#686e77', width: '100%', maxWidth: '550px', marginTop: '60px', marginBottom: '-40px', padding: '20px', color: 'white', textAlign: 'center'}}>
+                {alertMessage}
             </div>}
             <Form 
                 schema={schema}
@@ -118,25 +126,28 @@ class FormPage extends React.Component<IFormPageProps, { afterSubmit: number }> 
                 showErrorList={true}
                 validate={validate}
                 fields={{ typeahead: TypeaheadField }}
+                widgets={{sectionHeader: SectionHeaderWidget}}
                 onChange={e => { props.setData(e.formData) }}
+                onError={() => window.scrollTo(0, 0)}
                 onSubmit={(e) => this.onSubmit(e)}>
-                <input className="btn btn-custom" type="submit"
-                    name="treehacks_previous"
-                    value="Previous page"
-                    style={{ visibility: props.page - 1 < 0? 'hidden':'visible' }}
-                    disabled={props.page - 1 < 0}
-                    onClick={e => this.setState({ "afterSubmit": -1 })}
-                />
-                <input className="btn btn-custom" type="submit"
-                    name="treehacks_next"
-                    value="Next page"
-                    style={{ visibility: props.page + 1 >= schemaObj.pages.length? 'hidden':'visible' }}
-                    disabled={props.page + 1 >= schemaObj.pages.length}
-                    onClick={e => this.setState({ "afterSubmit": 1 })}
-                />
                 {props.page == schemaObj.pages.length - 1 &&
-                    !submitted &&
-                    <input className="btn btn-custom1" type="submit" />}
+                    (!submitted ?
+                        <div className="btn-container">
+                            <div>
+                                <input
+                                    className="btn btn-custom inverted"
+                                    type="submit"
+                                    value="Save for later"
+                                    onClick={e => { e.preventDefault(); this.onSubmit(false); }}
+                                />
+                                <input
+                                    className="btn btn-custom"
+                                    type="submit"
+                                    //onClick={e => this.onSubmit(true)}
+                                />
+                            </div>
+                        </div>
+                    : <div></div>)}
             </Form>
         </div>);
     };
