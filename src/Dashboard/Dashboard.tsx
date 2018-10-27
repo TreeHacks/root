@@ -6,15 +6,15 @@ import { IDashboardProps, IDashboardWrapperProps } from "./types";
 import Loading from "../Loading/Loading";
 import "./Dashboard.scss";
 
-function getDeadline(type: string) {
+function getDeadline(type) {
     switch (type) {
-        case "is":
-            return new Date("12/16/2018");
-        case "stanford":
-            return new Date("2/16/2019");
-        case "oos":
-        default:
-            return new Date("12/2/2018");
+      case "is":
+        return new Date("11/27/2018");
+      case "stanford":
+        return new Date("2/14/2019");
+      case "oos":
+      default:
+        return new Date("11/20/2018");
     }
   }
   
