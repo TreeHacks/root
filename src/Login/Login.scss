@@ -33,3 +33,25 @@
 
     font-size: 20px!important;
 }
+
+.label-text {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: -10px;
+    color: #fff;
+
+    &.centered {
+        margin-top: 0;
+    }
+}
+
+.btn-subtle {
+    border: none !important;
+    background: transparent;
+    color: #00b65f;
+    font-size: initial !important;
+}
+
+.rjsf .btn {
+    margin-top: -0.75rem;
+}

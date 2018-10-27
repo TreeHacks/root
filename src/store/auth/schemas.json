@@ -20,10 +20,10 @@
     "uiSchema": {
       "password": {
         "ui:widget": "password",
-        "ui:placeholder": "Password"
+        "ui:placeholder": "password"
       },
       "email": {
-        "ui:placeholder": "Email Address"
+        "ui:placeholder": "email address"
       }
     }
   },
@@ -43,12 +43,12 @@
         },
         "password2": {
           "type": "string",
-          "title": "Re-enter password"
+          "title": "re-enter password"
         },
         "location": {
           "type": "string",
           "title": "Where are you coming from?",
-          "enum": ["Outside US", "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "MD", "MA", "MI", "MN", "MS", "MO", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "US Territories"]
+          "enum": ["Outside USA", "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District Of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "US Territories"]
         }
       },
       "required": [
@@ -61,17 +61,17 @@
     "uiSchema": {
       "password": {
         "ui:widget": "password",
-        "ui:placeholder": "Password"
+        "ui:placeholder": "password"
       },
       "password2": {
         "ui:widget": "password",
-        "ui:placeholder": "Confirm Password"
+        "ui:placeholder": "confirm password"
       },
       "email": {
-        "ui:placeholder": "Email Address"
+        "ui:placeholder": "email address"
       },
       "location": {
-        "ui:placeholder": "Location"
+        "ui:placeholder": "traveling from..."
       }
     }
   },
@@ -81,7 +81,7 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address"
+          "title": "email address"
         }
       },
       "required": [
@@ -90,7 +90,7 @@
     },
     "uiSchema": {
       "email": {
-        "ui:placeholder": "Email Address"
+        "ui:placeholder": "email address"
       }
     }
   },
@@ -100,19 +100,19 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address"
+          "title": "email address"
         },
         "code": {
           "type": "string",
-          "title": "Code"
+          "title": "code"
         },
         "password": {
           "type": "string",
-          "title": "New password"
+          "title": "new password"
         },
         "password2": {
           "type": "string",
-          "title": "Confirm new password"
+          "title": "confirm new password"
         }
       },
       "required": [
@@ -125,11 +125,11 @@
     "uiSchema": {
       "password": {
         "ui:widget": "password",
-        "ui:placeholder": "Password"
+        "ui:placeholder": "password"
       },
       "password2": {
         "ui:widget": "password",
-        "ui:placeholder": "Confirm Password"
+        "ui:placeholder": "confirm password"
       }
     }
   }

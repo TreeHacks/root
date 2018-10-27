@@ -92,6 +92,7 @@ class Login extends React.Component<ILoginProps, {}> {
              >
                <button className="btn btn-info" type="submit">Sign In</button>
              </AuthForm>
+             <div className="label-text centered">or</div>
               <StanfordLogin />
           </div>
         }
@@ -99,13 +100,19 @@ class Login extends React.Component<ILoginProps, {}> {
           <AuthForm
             schema={this.props.schemas.signUp.schema}
             uiSchema={this.props.schemas.signUp.uiSchema}
-            onSubmit={e => this.props.signUp(e.formData)} />
+            onSubmit={e => this.props.signUp(e.formData)}
+            >
+              <button className="btn btn-info" type="submit">Sign Up</button>
+            </AuthForm>
         }
         {this.props.authPage == "forgotPassword" &&
           <AuthForm
             schema={this.props.schemas.forgotPassword.schema}
             uiSchema={this.props.schemas.forgotPassword.uiSchema}
-            onSubmit={e => this.props.forgotPassword(e.formData)} />
+            onSubmit={e => this.props.forgotPassword(e.formData)}
+            >
+              <button className="btn btn-info" type="submit">Send reset instructions</button>
+            </AuthForm>
         }
         {this.props.authPage == "forgotPasswordSubmit" &&
           <AuthForm
@@ -113,6 +120,11 @@ class Login extends React.Component<ILoginProps, {}> {
             uiSchema={this.props.schemas.forgotPasswordSubmit.uiSchema}
             onSubmit={e => this.props.forgotPasswordSubmit(e.formData)} />
         }
+        {this.props.authPage === "signUp" ?
+          <div className="label-text">Already have an account?</div>
+        : this.props.authPage === "signIn" ?
+          <div className="label-text">Don't have an account yet?</div>
+        : null}
         <div className="mt-4 left-btn">
           <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In"  />
           <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />
