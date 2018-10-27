@@ -33,9 +33,11 @@ const schema = {
 			"enum": [0, 1, 2, 3, 4, 5]
 		},
 		"isOrganizer": {
+			"title": "is organizer",
 			"type": "boolean"
 		},
 		"isBeginner": {
+			"title": "is beginner",
 			"type": "boolean"
 		}
 	},
