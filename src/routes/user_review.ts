@@ -1,5 +1,6 @@
 import Application from "../models/Application";
 import { STATUS } from "../constants";
+import { IApplication } from "../models/Application.d";
 
 export const getLeaderboard = (req, res) => {
     Application.collection.find({ num_applications_read: { "$exists": 1 } }).sort({
@@ -13,20 +14,7 @@ export const getReviewStats = (req, res) => {
     Application.collection.find({
         $and: [
             { status: STATUS.SUBMITTED },
-            {
-                $or: [
-                    {
-                        num_reads: {
-                            $lt: 3
-                        }
-                    },
-                    {
-                        num_reads: {
-                            $exists: false
-                        }
-                    }
-                ]
-            }
+            { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
         ]
     }).count().then(num => {
         res.json({
@@ -38,56 +26,29 @@ export const getReviewStats = (req, res) => {
 };
 
 export const rateReview = (req, res) => {
-    Application.collection.updateOne({
-        _id: (req.body.application_id)
-    }, {
-            $inc: {
-                num_reads: 1
-            },
-            $push: {
-                ratings: {
+    Application.findOne(
+        { "_id": req.body.application_id }).then((application: IApplication | null) => {
+            if (!application) {
+                res.status(400).send("Application to rate not found");
+            }
+            else {
+                application.reviews.push({
                     reader_id: res.locals.user.sub,
                     culture_fit: req.body.culture_fit,
                     experience: req.body.experience,
                     passion: req.body.passion,
                     is_organizer: req.body.is_organizer,
                     is_beginner: req.body.is_beginner
-                }
-            }
-        }, function (err, records) {
-            if (records.result.n == 1) {
-                Application.collection.update({
-                    _id: (res.locals.user.sub)
-                }, {
-                        $inc: {
-                            num_applications_read: 1
-                        },
-                        $push: {
-                            applications_read: req.body.application_id
-                        }
-                    }, function (err, records) {
-                        if (records.result.n == 1) {
-                            res.json({
-                                "results": {
-                                    "status": "success"
-                                }
-                            });
-                        } else {
-                            res.json({
-                                "results": {
-                                    "status": "failure"
-                                }
-                            });
-                        }
-                    });
-            } else {
-                res.json({
-                    "results": {
-                        "status": "failure"
-                    }
                 });
+                return application.save();
             }
-        });
+        }).then(() => {
+            res.json({
+                "results": {
+                    "status": "success"
+                }
+            });
+        })
 };
 
 export const reviewNextApplication = (req, res) => {
@@ -100,30 +61,18 @@ export const reviewNextApplication = (req, res) => {
                     $and: [
                         {
                             _id: {
-                                $nin: data.applications_read || []
+                                $nin: (data && data.applications_read) || []
                             }
                         },
                         { status: STATUS.SUBMITTED },
-                        {
-                            $or: [
-                                {
-                                    num_reads: {
-                                        $lt: 3
-                                    }
-                                },
-                                {
-                                    num_reads: {
-                                        $exists: false
-                                    }
-                                }
-                            ]
-                        }
+                        { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
                     ]
                 }
             },
-            { $sample: { size: 1 } } // Pick random
-        ]).toArray().then(data => {
-            res.json(data);
+            { $sample: { size: 1 } }, // Pick random
+            { $project: { "forms.application_info": 1, "user.email": 1, "type": 1 } }
+        ]).toArray().then((data) => {
+            res.json(data[0]);
         })
     })
 };

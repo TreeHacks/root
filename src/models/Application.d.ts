@@ -1,7 +1,12 @@
 import {Document} from "mongoose";
 
 export interface IReview {
-    
+    reader_id: String,
+    culture_fit: Number,
+    experience: Number,
+    passion: Number,
+    is_organizer: Boolean,
+    is_beginner: Boolean
 }
 export interface IApplicationInfo {
     first_name: String,
@@ -39,8 +44,7 @@ export interface IApplication extends Document {
       },
       "reimbursement_amount": String
   },
-  "reviews": [IReview// each review can only be modified by the reviewer who made it.
-  ],
+  "reviews": [IReview],
   "user": {
     "email": String
    }, // foreign key

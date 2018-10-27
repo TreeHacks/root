@@ -1,11 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
 const forceSsl = require('force-ssl-heroku');
 import cors from "cors";
-// const swaggerDocument = YAML.load('./swagger.yaml');
 import swaggerDocument from "./swagger";
 const port = process.env.PORT || 3000;
 

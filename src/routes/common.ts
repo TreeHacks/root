@@ -24,7 +24,7 @@ function getDeadline(type) {
  */
 export function getApplicationAttribute(req: Request, res: Response, getter: (e: IApplication) => any, createIfNotFound = false) {
   return Application.findOne(
-    { "_id": req.params.userId }, { "__v": 0 }).then(
+    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 }).then(
       (application: IApplication | null) => {
         if (!application) {
           if (createIfNotFound) {
@@ -49,7 +49,7 @@ export function getApplicationAttribute(req: Request, res: Response, getter: (e:
  */
 export function setApplicationAttribute(req: Request, res: Response, setter: (e: IApplication) => any, getter: (e: IApplication) => any = e => e, considerDeadline = false) {
   return Application.findOne(
-    { "_id": req.params.userId }, { "__v": 0 }).then(
+    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 }).then(
       (application: IApplication | null) => {
         if (!application) {
           res.status(404).send("Application not found.");
