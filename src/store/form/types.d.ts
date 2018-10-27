@@ -6,7 +6,8 @@ export interface IFormState {
     status: string,
   },
   schemas: {
-    application: IAuthStateSchemaItem
+    application_info: IAuthStateSchemaItem,
+    additional_info: IAuthStateSchemaItem
   },
   page: number,
   formData: any,

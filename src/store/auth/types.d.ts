@@ -14,8 +14,7 @@ export interface IUserAttributes {
 }
 export interface IAuthStateSchemaItem {
   schema: {[x:string]: any},
-  uiSchema: {[x:string]: any},
-  pages?: string[][]
+  uiSchema: {[x:string]: any}
 }
 export interface IAuthState {
   loggedIn: boolean,

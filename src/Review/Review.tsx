@@ -2,15 +2,22 @@ import React, { Component } from 'react';
 import './Review.scss';
 import { API } from "aws-amplify";
 import Form from "react-jsonschema-form";
+import FormPage from '../FormPage/FormPage';
+import { connect } from "react-redux";
+import { IFormState} from 'src/store/form/types';
 
+interface IReviewProps {
+	applicationSchema: { schema: any, uiSchema: any }
+}
 interface IReviewComponentState {
 	leaderboard_data: any[],
-	application_data: any,
+	application_data: {_id: string, type: string, user: {email: string}, forms: {application_info: any}},
 	stats_data: any
 }
 
 const schema = {
 	"type": "object",
+	"title": "Rate",
 	"properties": {
 		"cultureFit": {
 			"type": "number",
@@ -34,12 +41,23 @@ const schema = {
 	"required": ["cultureFit", "experience", "passion"]
 };
 const uiSchema = {
+	"cultureFit": { "ui:placeholder": "culture fit" },
+	"experience": { "ui:placeholder": "organizer" },
+	"passion": { "ui:placeholder": "passion" },
 	"ui:order": ["cultureFit", "experience", "passion", "organizer", "beginner"]
 };
-export default class Review extends React.Component<{}, IReviewComponentState> {
+
+const mapStateToProps = state => ({
+	applicationSchema: (state.form as IFormState).schemas.application_info
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+});
+class Review extends React.Component<IReviewProps, IReviewComponentState> {
 
 	constructor(props) {
 		super(props);
+		console.log(props);
 		this.state = {
 			leaderboard_data: null,
 			application_data: null,
@@ -63,29 +81,42 @@ export default class Review extends React.Component<{}, IReviewComponentState> {
 	}
 
 	render() {
-		return (<div id="dashboard-container">
-			<div id="left-container">
-				<div id="score-container">
-					<Form schema={schema} uiSchema={uiSchema} onSubmit={e => this.handleSubmit(e.formData)} />
+		return (<div className="row">
+			<div className="col-12 col-sm-4" style={{ "position": "fixed" }} >
+				<div >
+					<Form className="treehacks-form" schema={schema} uiSchema={uiSchema} onSubmit={e => this.handleSubmit(e.formData)} />
 				</div>
-				<div id="stats-container">
-					{this.state.stats_data && <div className="leaderboard-person-container">
-						<div className="stats-number"><span className="bold-number">{this.state.stats_data.results.num_remaining}</span> apps remaining</div>
-					</div>}
+				<div className="container">
+					{this.state.stats_data &&
+						<div className="treehacks-body-text">
+							<strong>{this.state.stats_data.results.num_remaining}</strong> apps remaining
+						</div>}
 				</div>
-				<div id="leaderboard-container">
-					{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <div className="leaderboard-person-container">
-						<div className="leaderboard-name">{person.email.replace(/@stanford.edu/, "")}</div>
-						<div className='leaderboard-reads'>{person.num_reads}</div>
-					</div>)}
+				<div className="container">
+					<table className="table treehacks-body-text">
+						{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr>
+							<td>{person.email.replace(/@stanford.edu/, "")}</td>
+							<td>{person.num_reads}</td>
+						</tr>
+						)}
+					</table>
 				</div>
 			</div>
-			<div id="right-container">
-				<div id="application-container">
-					{this.state.application_data && <div className="application-question-container">
-						{JSON.stringify(this.state.application_data)}
+			<div className="col-12 col-sm-8 offset-sm-4 treehacks-body-text">
+				<div >
+					{this.state.application_data && <div className="">
+						Email: {this.state.application_data.user.email}<br />
+						Type: {this.state.application_data.type}<br />
+						<FormPage
+							submitted={true}
+							onChange={e => null}
+							onError={e => null}
+							onSubmit={e => null}
+							schema={this.props.applicationSchema.schema}
+							uiSchema={this.props.applicationSchema.uiSchema}
+							formData={this.state.application_data.forms.application_info} />
 					</div>}
-					{!this.state.application_data && <div className="application-question-container">
+					{!this.state.application_data && <div className="">
 						<div className="application-name">No more apps to read!</div>
 						<div className="application-school">Congrats!</div>
 					</div>}
@@ -110,3 +141,5 @@ export default class Review extends React.Component<{}, IReviewComponentState> {
 		})
 	}
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Review);
