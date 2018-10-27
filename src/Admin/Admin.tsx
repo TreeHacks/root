@@ -49,6 +49,38 @@ const columns = [
         "filterMethod": defaultFilterMethod,
         "Filter": createFilterSelect(values(STATUS)),
         "Cell": (props) => <div>{props.value}</div>
+    },
+    {
+        "Header": "Number of Reviews",
+        "id": "reviews",
+        "accessor": e => e.reviews.length,
+        "filterMethod": defaultFilterMethod,
+        "Filter": createFilterSelect([0,1,2,3])
+    },
+    {
+        "Header": "culture fit",
+        "id": "cultureFit",
+        "accessor": e => e.reviews.map(e => e["cultureFit"]).join(", ")
+    },
+    {
+        "Header": "experience",
+        "id": "experience",
+        "accessor": e => e.reviews.map(e => e["experience"]).join(", ")
+    },
+    {
+        "Header": "passion",
+        "id": "passion",
+        "accessor": e => e.reviews.map(e => e["passion"]).join(", ")
+    },
+    {
+        "Header": "is organizer",
+        "id": "isOrganizer",
+        "accessor": e => e.reviews.map(e => e["isOrganizer"] ? "yes": "no").join(", ")
+    },
+    {
+        "Header": "is beginner",
+        "id": "isBeginner",
+        "accessor": e => e.reviews.map(e => e["isBeginner"] ? "yes": "no").join(", ")
     }
 ]
 
