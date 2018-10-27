@@ -31,17 +31,18 @@ export const Dashboard = (props: IDashboardProps) => {
                 {
                     props.profile.status === "submitted" ? (
                         <span>
-                        Your application has been received, and you are all good for now!<br/><br/>We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)</span>
+                        Your application has been received &ndash; you are all good for now!<br/><br/>We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)</span>
                     ) : (
                         <div>
-                            <span>
-                            You haven't submitted your application yet. You have <br/> </span>
-                            <span style={{color: "#00E073", fontSize: '70px'}}>
+                            <div>
+                                You haven't submitted your application yet. You have
+                            </div>
+                            <div style={{color: "#00E073", fontSize: '70px', marginBottom: -15}}>
                                 {diffDays}
-                            </span>
-                            <span><br/>
+                            </div>
+                            <div>
                                 days to submit your application before the deadline.
-                            </span>
+                            </div>
                         </div>
                     )
                 }

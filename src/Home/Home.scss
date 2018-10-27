@@ -27,7 +27,7 @@ $navbar-padding: 8px;
     border-bottom: 2px solid $dark-gray;
     transition: 0.5s;
 
-    &:hover {
+    &:hover, &.active {
       border-bottom: 2px solid $green;
       text-decoration: none;
     }

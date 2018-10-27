@@ -11,3 +11,26 @@ export interface IFormPageProps extends IFormState {
     setFormName: (e: string) => void,
     incomingFormName: string
 }
+
+export interface CustomDateWidgetProps {
+  id?: string,
+  registry?: object,
+  time?: string,
+  disabled?: boolean,
+  autofocus?: boolean,
+  readonly?: boolean,
+  onBlur?: (e: string) => void,
+  onChange?: (e: string) => void,
+  options?: {
+    yearsRange?: Array<number>
+  }
+}
+
+export interface CustomDateWidgetState {
+  year?: number,
+  month?: number,
+  day?: number,
+  hour?: number,
+  minute?: number,
+  second?: number
+}

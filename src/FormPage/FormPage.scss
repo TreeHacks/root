@@ -7,8 +7,15 @@
     width: 84%;
     max-width: 800px;
     color: #09da7a;
+    .form-group.field.field-string + .form-group.field.field-boolean {
+        margin-top: 40px;
+    }
     .checkbox input {
         margin-right: 10px;
+        margin-left: 2px;
+        &:focus {
+            outline: 0;
+        }
     }
     label.control-label {
         font-weight: bold;
@@ -16,7 +23,11 @@
     .treehacks-hidden {
         display: none;
     }
-    .btn-info {
+    .form-control{
+        padding: 6px 10px 3px;
+        border-radius: 5px;
+    }
+    .btn-info{
         background-color: #00b65f;
         border-color: #00b65f !important;
         color: white;
@@ -33,116 +44,94 @@
         font-size: 20px;
     }
     legend {
-        color: white;
+        color:white;
         text-align: center;
-    }
-    label.control-label {
-        display: none;
-    }
-    select.form-control {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGhlaWdodD0iNTEycHgiIGlkPSJMYXllcl8xIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjUxMnB4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBwb2ludHM9IjM5Ni42LDE2MCA0MTYsMTgwLjcgMjU2LDM1MiA5NiwxODAuNyAxMTUuMywxNjAgMjU2LDMxMC41ICIvPjwvc3ZnPg==');
-        background-repeat: no-repeat;
-        background-position: 100% 50%;
-        background-size: 40px 20px;
-    }
-    .form-control,
-    .checkboxes {
-        background-color: $box-gray;
-        color: white;
-        border: 2px solid $dark-gray;
-        border-radius: 0;
-        font-size: 20px;
-        height: auto;
-        padding: 15px;
-        transition: .5s;
-        &::placeholder {
-            color: $text-gray;
-        }
-        &:focus {
-            background-color: white;
-            color: $text-gray;
-            border: 2px solid $green;
-            box-shadow: 0 0 0 0;
-        }
-    }
-    .form-control {
-        padding: 6px;
-        border-radius: 5px;
-    }
-    .checkboxes {
-        padding-bottom: 7.5px;
-    }
-    .checkbox {
-        font-size: 16px;
-        input {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            margin-bottom: -2px;
-            width: 16px;
-            height: 16px;
-            background-color: white;
-            transition: .5s;
-            &:checked {
-                background-color: $green;
-                color: $green;
-            }
-        }
-    }
-    .field>ul.list-inline {
-        display: flex;
-        justify-content: space-between;
-        &>li {
-            flex: 1 0 30%;
-        }
-    }
-    #root__title {
         padding-top: 38px;
         margin-bottom: 40px;
     }
-    .select-li {
-        width: 250px;
+
+    input, textarea, select {
+        box-shadow: none !important; /* remove firefox highlight */
     }
-    .field>ul.list-inline>li {
-        flex: 1 0 33.3% !important;
-        &:last-child,
-        &:nth-last-child(2) {
-            display: none;
-        }
-    }
-    .form-control,
-    .checkboxes {
-        border-radius: 5px !important;
-        color: #adadad !important;
-    }
-    /*.checkbox input:checked {
+}
+.select-li{
+    width:250px;
+}
+.field > ul.list-inline > li {
+    flex: 1 0 33.3%!important;
+}
+.form-control, .checkboxes {
+    border-radius: 5px!important;
+}
+select.form-control:invalid, select[disabled] {
+    color: #adadad!important;
+}
+select {
+    font-size: 16px;
+}
+input[type="date"] {
+  width: 100%;
+}
+
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #aaa;
+  margin-right: 0.5em;
+}
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: "";
+}
+
+
+/*.checkbox input:checked {
     background-color: #535152!important;
     color: #535152!important;
 }*/
+
+
+#root_race {
+    column-count: 2;
+    padding-bottom: 5px;
+
+    &:before {
+        content: "race/ethnicity";
+        display: block;
+        color: #adadad;
+        padding-bottom: 10px;
+        margin-left: -5px;
+        margin-top: -5px;
+    }
+
+    & .checkbox:nth-child(5):before {
+        content: "";
+        display: block;
+        padding-bottom: 35px;
+    }
 }
 
-#root_resume input {}
+.btn-container {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
 
-.btn-custom {
+.btn-custom{
     background-color: #00b65f;
     border-color: #00b65f !important;
     color: white;
     width: 41%;
-    margin-right: 20px;
-    margin-left: 50px;
-    font-size: 20px !important;
+    font-size: 20px!important;
     margin-bottom: 25px;
 }
 
-.btn-custom1 {
-    background-color: #00b65f;
-    border-color: #00b65f !important;
-    color: white;
-    width: 50%;
-    font-size: 20px !important;
-    margin-bottom: 25px;
-    margin-left: 200px;
+.btn-custom + .btn-custom {
+    margin-left: 20px;
+}
+
+.btn-custom.inverted {
+    background-color: transparent;
+    border-width: 2px;
+    border-color: #00b65f!important;
+    color: #00b65f;
 }
