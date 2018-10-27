@@ -11,7 +11,6 @@ export default class Verify extends React.Component<any, any> {
         }
     }
     componentDidMount() {
-        console.log("VFY");
         this.verify();
     }
     verify() {

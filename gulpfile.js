@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var shell = require('gulp-shell');
 var connect = require('gulp-connect');
-console.log(process.env);
 
 gulp.task('serve', ['dev', 'webserver']);
 

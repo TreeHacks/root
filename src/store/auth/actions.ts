@@ -25,7 +25,6 @@ export function logout() {
     console.log("signing out");
     Cache.removeItem("federatedInfo");
     localStorage.clear();
-    console.log(Cache.getAllKeys());
     Auth.signOut().then(e => {
       loadingEnd();
       dispatch(loggedOut());
