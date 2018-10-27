@@ -10,26 +10,24 @@ import swaggerDocument from "./swagger";
 const port = process.env.PORT || 3000;
 
 
-import {authenticatedRoute, adminRoute} from "./router/authenticatedRoute";
+import {authenticatedRoute, adminRoute, reviewerRoute} from "./router/authenticatedRoute";
 import { getAdditionalInfo, setAdditionalInfo } from "./routes/additional_info";
 import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
 import { getUserList } from "./routes/user_list";
 import { getApplicationStatus, setApplicationStatus } from "./routes/user_status";
 import { setAdminInfo } from "./routes/admin_info";
+import { MongoClient, ObjectId } from "mongodb";
+import Application from "./models/Application";
+import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } from "./routes/user_review";
 
 // Set up the Express app
 const app = express();
 app.use(forceSsl);
 
-const userId = "test_user_id";
-
-
-// If you want to connect to MongoDB - should be running locally
 mongoose.connect(process.env.MONGO_CONN_STR || "mongodb://localhost:65210/test").catch(function (reason: string) {
     console.log('Unable to connect to the mongodb instance. Error: ', reason);
 });
-// mongoose.Promise = global.Promise;
 
 // Set up static files
 app.use(express.static('public'));
@@ -73,6 +71,7 @@ app.get("/", (req, res) => res.redirect("/doc"));
 
 app.use("/", authenticatedRoute);
 app.use("/", adminRoute);
+app.use("/review/", reviewerRoute);
 
 // Auth - user must be signed in:
 authenticatedRoute.get('/users/:userId/forms/additional_info', getAdditionalInfo);
@@ -90,5 +89,12 @@ adminRoute.get('/users', getUserList);
 
 // Need custom auth:
 adminRoute.put('/users/:userId/admin_info', setAdminInfo);
+
+// Review routes:
+reviewerRoute.get('/leaderboard', getLeaderboard);
+reviewerRoute.get('/stats', getReviewStats);
+reviewerRoute.post('/rate', rateReview);
+reviewerRoute.get('/next_application', reviewNextApplication);
+
 
 export default app;
