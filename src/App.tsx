@@ -13,6 +13,7 @@ import FormPage from "./FormPage/FormPage";
 import Dashboard from "./Dashboard/Dashboard";
 import "./App.scss";
 import Review from "./Review/Review";
+import Admin from "./Admin/Admin";
 import Verify from "./Verify";
 import Helmet from "react-helmet";
 
@@ -64,6 +65,7 @@ const MainRoutes = (props: IAppProps) => (
                     </div>
               </div>);
           }} />
+          <Route path="/admin" exact component={Admin} />
           <Route path="/review" exact component={Review} />
         </Switch>
       </div>

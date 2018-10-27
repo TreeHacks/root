@@ -1,98 +1,112 @@
-import React from "react";
-import { connect } from "react-redux";
-import { IReviewWrapperProps, IReviewProps } from "./types";
-import Loading from "../Loading/Loading";
-import { getApplicationList, setApplicationStatus } from "../store/review/actions";
-import ReactTable from "react-table";
-import { get, values } from "lodash-es";
-import 'react-table/react-table.css';
-import { STATUS, TYPE } from "../constants";
+import React, { Component } from 'react';
+import './Review.scss';
+import { API } from "aws-amplify";
+import Form from "react-jsonschema-form";
 
-const defaultFilterMethod = (filter, row) => {
-    if (filter.value == "all") {
-        return true;
-    }
-    return row[filter.id] == filter.value;
-};
-
-const createFilterSelect = (values) => ({ filter, onChange }) =>
-    <select
-        className="form-control"
-        value={filter ? filter.value : "all"}
-        onChange={event => onChange(event.target.value)}
-    >
-        {values.map(e =>
-            <option key={e}>{e}</option>
-        )}
-        <option>all</option>
-    </select>;
-
-const columns = [
-    {
-        "Header": "ID",
-        "accessor": "_id"
-    },
-    {
-        "Header": "email",
-        "accessor": "user.email"
-    },
-    {
-        "Header": "type",
-        "filterMethod": defaultFilterMethod,
-        "Filter": createFilterSelect(values(TYPE)),
-        "accessor": "type"
-    },
-    {
-        "Header": "Status",
-        "accessor": "status",
-        "filterMethod": defaultFilterMethod,
-        "Filter": createFilterSelect(values(STATUS)),
-        "Cell": (props) => <div>{props.value}</div>
-    }
-]
-
-const Review = (props: IReviewProps) => (
-    <div>
-        <h3>Applications:</h3>
-        <div className="bg-white col-8 offset-2 p-4">
-            <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}>
-                {(state, makeTable, instance) => {
-                    return (
-                        <div>
-                            User emails shown:
-                            <input type="text"
-                                readOnly
-                                value={state.sortedData.map(e => e && get(e, "user.email")).join(",")}
-                                style={{width: "100%"}}
-                                />
-                            {makeTable()}
-                        </div>
-                    );
-                }}
-            </ReactTable>
-        </div>
-    </div>
-);
-
-const mapStateToProps = state => ({
-    ...state.review
-});
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    getApplicationList: () => dispatch(getApplicationList()),
-    setApplicationStatus: (a, b) => dispatch(setApplicationStatus(a, b))
-});
-
-class ReviewWrapper extends React.Component<IReviewWrapperProps, {}> {
-    componentDidMount() {
-        this.props.getApplicationList();
-    }
-    render() {
-        if (!this.props.applicationList) {
-            return <Loading />;
-        }
-        return <Review applicationList={this.props.applicationList} />;
-    }
+interface IReviewComponentState {
+	leaderboard_data: any[],
+	application_data: any,
+	stats_data: any
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewWrapper);
+const schema = {
+	"type": "object",
+	"properties": {
+		"cultureFit": {
+			"type": "number",
+			"enum": [0, 1, 2, 3, 4, 5]
+		},
+		"experience": {
+			"type": "number",
+			"enum": [0, 1, 2, 3, 4, 5]
+		},
+		"passion": {
+			"type": "number",
+			"enum": [0, 1, 2, 3, 4, 5]
+		},
+		"organizer": {
+			"type": "boolean"
+		},
+		"beginner": {
+			"type": "boolean"
+		}
+	},
+	"required": ["cultureFit", "experience", "passion"]
+};
+const uiSchema = {
+	"ui:order": ["cultureFit", "experience", "passion", "organizer", "beginner"]
+};
+export default class Review extends React.Component<{}, IReviewComponentState> {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			leaderboard_data: null,
+			application_data: null,
+			stats_data: null
+		}
+	}
+
+	componentDidMount() {
+		this.nextApplication();
+	}
+	nextApplication() {
+		Promise.all([
+			API.get("treehacks", '/review/leaderboard', {}),
+			API.get("treehacks", '/review/next_application', {}),
+			API.get("treehacks", '/review/stats', {})
+		]).then(([leaderboard_data, application_data, stats_data]) => {
+			this.setState({ leaderboard_data, application_data, stats_data });
+		}).catch((err) => {
+			console.log(err);
+		});
+	}
+
+	render() {
+		return (<div id="dashboard-container">
+			<div id="left-container">
+				<div id="score-container">
+					<Form schema={schema} uiSchema={uiSchema} onSubmit={e => this.handleSubmit(e.formData)} />
+				</div>
+				<div id="stats-container">
+					{this.state.stats_data && <div className="leaderboard-person-container">
+						<div className="stats-number"><span className="bold-number">{this.state.stats_data.results.num_remaining}</span> apps remaining</div>
+					</div>}
+				</div>
+				<div id="leaderboard-container">
+					{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <div className="leaderboard-person-container">
+						<div className="leaderboard-name">{person.email.replace(/@stanford.edu/, "")}</div>
+						<div className='leaderboard-reads'>{person.num_reads}</div>
+					</div>)}
+				</div>
+			</div>
+			<div id="right-container">
+				<div id="application-container">
+					{this.state.application_data && <div className="application-question-container">
+						{JSON.stringify(this.state.application_data)}
+					</div>}
+					{!this.state.application_data && <div className="application-question-container">
+						<div className="application-name">No more apps to read!</div>
+						<div className="application-school">Congrats!</div>
+					</div>}
+				</div>
+			</div>
+		</div>
+		);
+	}
+
+	handleSubmit(formData) {
+		API.post("treehacks", '/review/rate', {
+			body: {
+				"application_id": this.state.application_data._id,
+				...formData
+			}
+		}).then((data) => {
+			if (data.results.status === "success") {
+				this.nextApplication();
+			} else {
+				alert("Error...");
+			}
+		})
+	}
+}

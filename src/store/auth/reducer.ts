@@ -10,6 +10,7 @@ const initialState: IAuthState = {
   message: null,
   authPage: 'signIn',
   admin: null,
+  reviewer: null,
   attemptedLoginEmail: null
 };
 
@@ -21,7 +22,8 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         loggedIn: true,
         user: action.attributes,
         userId: action.userId,
-        admin: action.admin
+        admin: action.admin,
+        reviewer: action.reviewer
       };
     case 'LOGOUT_SUCCESS':
       return {

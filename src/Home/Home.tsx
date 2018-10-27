@@ -34,6 +34,9 @@ class Login extends React.Component<IHomeProps, {}> {
         <NavLink to="/application_info">application</NavLink>
         <NavLink to="/additional_info">travel</NavLink>
         {this.props.auth.admin &&
+          <NavLink to="/admin">admin</NavLink>
+        }
+        {this.props.auth.reviewer &&
           <NavLink to="/review">review</NavLink>
         }
       </div>

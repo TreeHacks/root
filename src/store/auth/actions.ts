@@ -4,11 +4,12 @@ import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";
 import { userInfo } from "os";
 
-export const loggedIn = (userId, attributes, admin) => ({
+export const loggedIn = (userId, attributes, admin, reviewer) => ({
   type: 'LOGIN_SUCCESS',
   userId,
   attributes,
-  admin
+  admin,
+  reviewer
 });
 
 export const loggedOut = () => ({
@@ -89,12 +90,17 @@ export function checkLoginStatus() {
     return getCurrentUser()
       .then((user: { username: string, attributes: IUserAttributes, "cognito:groups"?: string[] }) => {
         if (!user) throw "No credentials";
-        let treehacks_admin = false;
+        let admin = false;
+        let reviewer = false;
         if (user.attributes["cognito:groups"] &&
           (user.attributes["cognito:groups"].indexOf("admin") > -1)) {
-          treehacks_admin = true;
+          admin = true;
         }
-        dispatch(loggedIn(user.username, user.attributes, treehacks_admin));
+        if (user.attributes["cognito:groups"] &&
+        (user.attributes["cognito:groups"].indexOf("reviewer") > -1)) {
+        reviewer = true;
+      }
+        dispatch(loggedIn(user.username, user.attributes, admin, reviewer));
       }).catch(e => {
         console.error(e);
       }).then(() => dispatch(loadingEnd()));
