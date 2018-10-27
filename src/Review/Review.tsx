@@ -76,6 +76,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 		]).then(([leaderboard_data, application_data, stats_data]) => {
 			this.setState({ leaderboard_data, application_data, stats_data });
 		}).catch((err) => {
+			alert("Error, " + err);
 			console.log(err);
 		});
 	}
@@ -135,9 +136,10 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 		}).then((data) => {
 			if (data.results.status === "success") {
 				this.nextApplication();
-			} else {
-				alert("Error...");
 			}
+		}).catch(err => {
+			alert("Error, " + err);
+			console.error(err);
 		})
 	}
 }
