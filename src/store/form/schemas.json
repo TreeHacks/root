@@ -195,19 +195,26 @@
                 "ui:placeholder": "major"
             },
             "q1_goodfit": {
-                "ui:placeholder": "Please answer the following question in 100-300 words: Why do you think you would be a good fit for treehacks?",
-                "ui:widget": "textarea"
+                "ui:placeholder": "Why do you want to come to TreeHacks? Max 100 words.",
+                "ui:widget": "textarea",
+                "ui:options": {
+                    "rows": 4
+                }
             },
             "q2_experience": {
                 "ui:widget": "textarea",
-                "ui:placeholder": "Please describe your experience with coding and hackathons in less than 150 words."
+                "ui:placeholder": "Tell us a story about creating the project you're most proud of (technical or nontechnical). Why did you choose to work on it? What did you learn from it? Feel free to include a link. Max 250 words.",
+                "ui:options": {
+                    "rows": 6
+                }
             },
             "q3": {
                 "ui:widget": "textarea",
-                "ui:placeholder": "New question."
+                "ui:placeholder": "Tell us a fun fact about you :)."
             },
             "q4": {
-                "ui:placeholder":"new question"
+                "ui:widget": "textarea",
+                "ui:placeholder":"Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc."
             },
             "section2": {
                 "ui:widget": "sectionHeader"
