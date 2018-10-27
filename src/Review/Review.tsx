@@ -4,15 +4,16 @@ import { API } from "aws-amplify";
 import Form from "react-jsonschema-form";
 import FormPage from '../FormPage/FormPage';
 import { connect } from "react-redux";
-import { IFormState} from 'src/store/form/types';
+import { IFormState } from 'src/store/form/types';
 
 interface IReviewProps {
 	applicationSchema: { schema: any, uiSchema: any }
 }
 interface IReviewComponentState {
 	leaderboard_data: any[],
-	application_data: {_id: string, type: string, user: {email: string}, forms: {application_info: any}},
-	stats_data: any
+	application_data: { _id: string, type: string, user: { email: string }, forms: { application_info: any } },
+	stats_data: any,
+	reviewFormData: any
 }
 
 const schema = {
@@ -31,10 +32,10 @@ const schema = {
 			"type": "number",
 			"enum": [0, 1, 2, 3, 4, 5]
 		},
-		"organizer": {
+		"isOrganizer": {
 			"type": "boolean"
 		},
-		"beginner": {
+		"isBeginner": {
 			"type": "boolean"
 		}
 	},
@@ -44,7 +45,7 @@ const uiSchema = {
 	"cultureFit": { "ui:placeholder": "culture fit" },
 	"experience": { "ui:placeholder": "organizer" },
 	"passion": { "ui:placeholder": "passion" },
-	"ui:order": ["cultureFit", "experience", "passion", "organizer", "beginner"]
+	"ui:order": ["cultureFit", "experience", "passion", "isOrganizer", "isBeginner"]
 };
 
 const mapStateToProps = state => ({
@@ -57,11 +58,11 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 
 	constructor(props) {
 		super(props);
-		console.log(props);
 		this.state = {
 			leaderboard_data: null,
 			application_data: null,
-			stats_data: null
+			stats_data: null,
+			reviewFormData: null
 		}
 	}
 
@@ -74,7 +75,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			API.get("treehacks", '/review/next_application', {}),
 			API.get("treehacks", '/review/stats', {})
 		]).then(([leaderboard_data, application_data, stats_data]) => {
-			this.setState({ leaderboard_data, application_data, stats_data });
+			this.setState({ leaderboard_data, application_data, stats_data, reviewFormData: null });
 		}).catch((err) => {
 			alert("Error, " + err);
 			console.log(err);
@@ -85,7 +86,11 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 		return (<div className="row">
 			<div className="col-12 col-sm-4" style={{ "position": "fixed" }} >
 				<div >
-					<Form className="treehacks-form" schema={schema} uiSchema={uiSchema} onSubmit={e => this.handleSubmit(e.formData)} />
+					<Form className="treehacks-form" schema={schema} uiSchema={uiSchema}
+						onSubmit={e => this.handleSubmit()}
+						formData={this.state.reviewFormData}
+						onChange={e => this.setState({reviewFormData: e.formData})}
+					/>
 				</div>
 				<div className="container">
 					{this.state.stats_data &&
@@ -95,15 +100,17 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 				</div>
 				<div className="container">
 					<table className="table treehacks-body-text">
-						{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr>
-							<td>{person.email.replace(/@stanford.edu/, "")}</td>
-							<td>{person.num_reads}</td>
+					<tbody>
+						{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
+							<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
+							<td>{person.count}</td>
 						</tr>
 						)}
+					</tbody>
 					</table>
 				</div>
 			</div>
-			<div className="col-12 col-sm-8 offset-sm-4 treehacks-body-text">
+			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
 				<div >
 					{this.state.application_data && <div className="">
 						Email: {this.state.application_data.user.email}<br />
@@ -127,11 +134,11 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 		);
 	}
 
-	handleSubmit(formData) {
+	handleSubmit() {
 		API.post("treehacks", '/review/rate', {
 			body: {
 				"application_id": this.state.application_data._id,
-				...formData
+				...this.state.reviewFormData
 			}
 		}).then((data) => {
 			if (data.results.status === "success") {

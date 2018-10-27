@@ -3,8 +3,16 @@
 }
 
 .review-form-container {
+    cursor: default;
+    pointer-events: none;
     #root__title {
         display: none;
+    }
+    .treehacks-form {
+        margin: 0px;
+        label.control-label {
+            display: block;
+        }
     }
 }
 

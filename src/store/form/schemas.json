@@ -114,19 +114,19 @@
                     "title": "I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy."
                 },
                 "q1_goodfit": {
-                    "title": "Short Answer 1",
+                    "title": "Why do you want to come to TreeHacks? Max 100 words.",
                     "type": "string"
                 },
                 "q2_experience": {
-                    "title": "Short Answer 2",
+                    "title": "Tell us a story about creating the project you're most proud of (technical or nontechnical). Why did you choose to work on it? What did you learn from it? Feel free to include a link. Max 250 words.",
                     "type": "string"
                 },
                 "q3": {
-                    "title": "Short Answer 3",
+                    "title": "Tell us a fun fact about you :).",
                     "type": "string"
                 },
                 "q4": {
-                    "title": "Short Answer 4",
+                    "title": "Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
                     "type": "string"
                 },
                 "section2": {
