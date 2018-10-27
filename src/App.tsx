@@ -57,7 +57,7 @@ const MainRoutes = (props: IAppProps) => (
             return (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center' }}>
-                  There are no travel options at this time. Check back after you have recived a decision about your application.
+                  There are no travel options at this time. Check back after you have received a decision about your application.
                     </div>
               </div>);
           }} />
