@@ -55,7 +55,7 @@ const swagger = {
       "Review": {
         "type": "object",
         "properties": {
-          "is_beginner": { "type": "boolean" }
+          "isBeginner": { "type": "boolean" }
         }
       },
       "Application": {

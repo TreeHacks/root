@@ -2,10 +2,20 @@ import Application from "../models/Application";
 import { STATUS } from "../constants";
 import { IApplication } from "../models/Application.d";
 
+/*
+
+Application.collection.insertMany(Array.apply(null, {length: 50}).map(e => (
+    {"forms":{"application_info":{"first_name":Math.random() + "","last_name":Math.random() + "","phone":"1231232133","dob":"1900-01-01","gender":"M","race":["American Indian / Alaska Native"],"university":"Stanford University","graduation_year":"2018","level_of_study":"Undergraduate","major":"CS","accept_terms":true,"accept_share":true,"q1_goodfit":"asd","q2_experience":"sad","q3":"asdf","q4":"asdf"},"additional_info":{}},"user":{"email":"aramaswamis@gmail.com"},"status":"submitted","_id": Math.random() + "abc", "admin_info":{"reimbursement_amount":null},"reviews":[],"type":"oos"}
+)));
+*/
+
 export const getLeaderboard = (req, res) => {
-    Application.collection.find({ num_applications_read: { "$exists": 1 } }).sort({
-        num_applications_read: -1
-    }).map(e => ({ "num_reads": e.ratings.length, "email": e.user.email })).toArray().then(data => {
+    Application.collection.aggregate([
+        { $match: { reviews: { "$exists": 1 } } },
+        { $unwind: "$reviews" },
+        { $group: { _id: "$reviews.reader.email", count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+    ]).toArray().then(data => {
         res.json(data);
     });
 };
@@ -33,12 +43,15 @@ export const rateReview = (req, res) => {
             }
             else {
                 application.reviews.push({
-                    reader_id: res.locals.user.sub,
-                    culture_fit: req.body.culture_fit,
+                    reader: {
+                        id: res.locals.user.sub,
+                        email: res.locals.user.email
+                    },
+                    cultureFit: req.body.cultureFit,
                     experience: req.body.experience,
                     passion: req.body.passion,
-                    is_organizer: req.body.is_organizer,
-                    is_beginner: req.body.is_beginner
+                    isOrganizer: req.body.isOrganizer,
+                    isBeginner: req.body.isBeginner
                 });
                 return application.save();
             }

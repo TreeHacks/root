@@ -1,12 +1,12 @@
 import {Document} from "mongoose";
 
 export interface IReview {
-    reader_id: String,
-    culture_fit: Number,
+    reader: { id: String, email: String },
+    cultureFit: Number,
     experience: Number,
     passion: Number,
-    is_organizer: Boolean,
-    is_beginner: Boolean
+    isOrganizer: Boolean,
+    isBeginner: Boolean
 }
 export interface IApplicationInfo {
     first_name: String,
