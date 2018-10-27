@@ -16,10 +16,6 @@
     .treehacks-hidden {
         display: none;
     }
-    .form-control {
-        padding: 6px;
-        border-radius: 5px;
-    }
     .btn-info {
         background-color: #00b65f;
         border-color: #00b65f !important;
@@ -71,6 +67,10 @@
             border: 2px solid $green;
             box-shadow: 0 0 0 0;
         }
+    }
+    .form-control {
+        padding: 6px;
+        border-radius: 5px;
     }
     .checkboxes {
         padding-bottom: 7.5px;
