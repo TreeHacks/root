@@ -30,7 +30,7 @@ class Login extends React.Component<IHomeProps, {}> {
         </NavLink>  
       </div>
       <div>
-        <NavLink to="/">dashboard</NavLink>
+        <NavLink to="/" isActive={(_, loc) => loc.pathname === "/"}>dashboard</NavLink>
         <NavLink to="/application_info">application</NavLink>
         <NavLink to="/additional_info">travel</NavLink>
         {this.props.auth.admin &&
