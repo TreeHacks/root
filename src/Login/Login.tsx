@@ -88,7 +88,10 @@ class Login extends React.Component<ILoginProps, {}> {
             <AuthForm
               schema={this.props.schemas.signIn.schema}
               uiSchema={this.props.schemas.signIn.uiSchema}
-              onSubmit={e => this.props.signIn(e.formData)} />
+              onSubmit={e => this.props.signIn(e.formData)}
+             >
+               <button className="btn btn-info" type="submit">Sign In</button>
+             </AuthForm>
               <StanfordLogin />
           </div>
         }
