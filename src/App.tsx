@@ -9,13 +9,13 @@ import Loading from "./Loading/Loading";
 import "bootstrap/dist/css/bootstrap.css";
 import { IAuthState } from "./store/auth/types";
 import Home from "./Home/Home";
-import FormPage from "./FormPage/FormPage";
 import Dashboard from "./Dashboard/Dashboard";
 import "./App.scss";
 import Review from "./Review/Review";
 import Admin from "./Admin/Admin";
 import Verify from "./Verify";
 import Helmet from "react-helmet";
+import FormPageWrapper from "./FormPage/FormPageWrapper";
 
 const mapStateToProps = state => ({
   ...state.base,
@@ -53,7 +53,7 @@ const MainRoutes = (props: IAppProps) => (
         <Route path="" component={Home} />
         <Switch>
           <Route path="/" exact component={Dashboard} />
-          <Route path="/application_info" render={() => { return <FormPage incomingFormName="application_info" />; }} />
+          <Route path="/application_info" render={() => { return <FormPageWrapper incomingFormName="application_info" />; }} />
           <Route path="/additional_info" render={() => {
             return (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

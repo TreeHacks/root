@@ -1,6 +1,6 @@
 import { IFormState } from "../store/form/types";
 
-export interface IFormPageProps extends IFormState {
+export interface IFormPageWrapperProps extends IFormState {
     setPage: (e: number) => void,
     setData: (e: any) => void,
     saveData: () => Promise<any>,
@@ -10,6 +10,16 @@ export interface IFormPageProps extends IFormState {
     getUserProfile: () => void,
     setFormName: (e: string) => void,
     incomingFormName: string
+}
+
+export interface IFormPageProps {
+  submitted: boolean,
+  onChange: (any) => void,
+  onError: (any) => void,
+  onSubmit: (any) => void,
+  schema: any,
+  uiSchema: any,
+  formData: any
 }
 
 export interface CustomDateWidgetProps {
