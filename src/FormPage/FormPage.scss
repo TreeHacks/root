@@ -42,22 +42,22 @@
         font-size: 20px;
 
     }
-legend {
-    color:white;
-    text-align: center;
-    padding-top: 38px;
-    margin-bottom: 40px;
-}
+    legend {
+        color:white;
+        text-align: center;
+        padding-top: 38px;
+        margin-bottom: 40px;
+    }
+
+    input, textarea {
+        box-shadow: none; /* remove firefox highlight */
+    }
 }
 .select-li{
     width:250px;
 }
 .field > ul.list-inline > li {
     flex: 1 0 33.3%!important;
-    &:last-child,
-    &:nth-last-child(2) {
-        display: none;
-    }
 }
 .form-control, .checkboxes {
     border-radius: 5px!important;
@@ -65,20 +65,23 @@ legend {
 select.form-control:invalid, select[disabled] {
     color: #adadad!important;
 }
+select {
+    font-size: 16px;
+}
 input[type="date"] {
   width: 100%;
 }
 
-input[type="date"]:invalid::before {
-  width: 100%;
-  content: attr(placeholder);
-  color: #adadad;
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #aaa;
+  margin-right: 0.5em;
 }
-
-input[type="date"]:hover::before, input[type="date"]:focus::before {
-  width: 0%;
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
   content: "";
 }
+
 
 /*.checkbox input:checked {
     background-color: #535152!important;
@@ -96,12 +99,16 @@ input[type="date"]:hover::before, input[type="date"]:focus::before {
     &:before {
         content: "race/ethnicity";
         display: block;
-        column-span: all;
-        -webkit-column-span: all;
         color: #adadad;
         padding-bottom: 10px;
         margin-left: -5px;
         margin-top: -5px;
+    }
+
+    & .checkbox:nth-child(5):before {
+        content: "";
+        display: block;
+        padding-bottom: 35px;
     }
 }
 

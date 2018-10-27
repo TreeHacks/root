@@ -19,7 +19,7 @@
                 "dob": {
                     "type": "string",
                     "title": "Date of Birth",
-                    "format": "date"
+                    "format": "customDate"
                 },
                 "gender": {
                     "type": "string",

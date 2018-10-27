@@ -8,6 +8,7 @@ import { cloneDeep, get, set, pull } from "lodash-es";
 import Loading from "../Loading/Loading";
 import { push } from 'connected-react-router';
 import "./FormPage.scss";
+import CustomDateWidget from './CustomDateWidget';
 import { TypeaheadField } from "react-jsonschema-form-extras/lib/TypeaheadField";
 
 const mapStateToProps = state => ({
@@ -126,7 +127,7 @@ class FormPage extends React.Component<IFormPageProps, { showSavedAlert: boolean
                 showErrorList={true}
                 validate={validate}
                 fields={{ typeahead: TypeaheadField }}
-                widgets={{sectionHeader: SectionHeaderWidget}}
+                widgets={{sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget }}
                 onChange={e => { props.setData(e.formData) }}
                 onError={() => window.scrollTo(0, 0)}
                 onSubmit={(e) => this.onSubmit(e)}>
@@ -143,6 +144,7 @@ class FormPage extends React.Component<IFormPageProps, { showSavedAlert: boolean
                                 <input
                                     className="btn btn-custom"
                                     type="submit"
+                                    value="Submit"
                                     //onClick={e => this.onSubmit(true)}
                                 />
                             </div>
