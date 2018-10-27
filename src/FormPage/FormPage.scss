@@ -101,11 +101,13 @@ input[type="date"]:hover::before, input[type="date"]:focus::before {
         color: #adadad;
         padding-bottom: 10px;
         margin-left: -5px;
+        margin-top: -5px;
     }
 }
 
 .btn-container {
     text-align: center;
+    margin-top: 30px;
     margin-bottom: 100px;
 }
 
