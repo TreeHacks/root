@@ -20,6 +20,12 @@ const SectionHeaderWidget = (props) => {
     );
 };
 
+const FilePreviewWidget = (props) => {
+    return <div>
+        <iframe src={props.value} style={{ width: "100%", minHeight: 600 }}></iframe>
+    </div>;
+};
+
 function base64MimeType(encoded) {
     var result = null;
 
@@ -44,9 +50,16 @@ function validate(formData, errors) {
     }
     return errors;
 }
-export default (props: IFormPageProps) =>
-    (<Form
-        className={`treehacks-form ${props.submitted ? "treehacks-form-disabled": ""}`}
+export default (props: IFormPageProps) => {
+    let widgets;
+    if (props.submitted) {
+        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FilePreviewWidget };
+    }
+    else {
+        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget };
+    }
+    return (<Form
+        className={`treehacks-form ${props.submitted ? "treehacks-form-disabled" : ""}`}
         schema={props.schema}
         uiSchema={{
             ...props.uiSchema,
@@ -56,7 +69,7 @@ export default (props: IFormPageProps) =>
         showErrorList={true}
         validate={validate}
         fields={{ typeahead: TypeaheadField }}
-        widgets={{ sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget }}
+        widgets={widgets}
         onChange={e => props.onChange(e)}
         onError={(e) => props.onError(e)}
         onSubmit={e => props.onSubmit(e)}>
@@ -79,3 +92,4 @@ export default (props: IFormPageProps) =>
             </div>
             : <div></div>}
     </Form>);
+}
