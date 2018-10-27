@@ -43,7 +43,7 @@ const schema = {
 };
 const uiSchema = {
 	"cultureFit": { "ui:placeholder": "culture fit" },
-	"experience": { "ui:placeholder": "organizer" },
+	"experience": { "ui:placeholder": "experience" },
 	"passion": { "ui:placeholder": "passion" },
 	"ui:order": ["cultureFit", "experience", "passion", "isOrganizer", "isBeginner"]
 };
