@@ -21,8 +21,11 @@ const SectionHeaderWidget = (props) => {
 };
 
 const FilePreviewWidget = (props) => {
+    if (!props.value) {
+        return <div>No file uploaded.</div>;
+    }
     return <div>
-        <iframe src={props.value} style={{ width: "100%", minHeight: 600 }}></iframe>
+        <iframe src={props.value} style={{ width: "100%", minHeight: 400 }}></iframe>
     </div>;
 };
 
