@@ -5,8 +5,15 @@
     width: 84%;
     max-width: 800px;
     color: #09da7a;
+    .form-group.field.field-string + .form-group.field.field-boolean {
+        margin-top: 40px;
+    }
     .checkbox input {
         margin-right: 10px;
+        margin-left: 2px;
+        &:focus {
+            outline: 0;
+        }
     }
     label.control-label {
         font-weight: bold;
@@ -15,7 +22,7 @@
         display: none;
     }
     .form-control{
-        padding: 6px;
+        padding: 6px 10px 3px;
         border-radius: 5px;
     }
     .btn-info{
@@ -38,7 +45,8 @@
 legend {
     color:white;
     text-align: center;
-
+    padding-top: 38px;
+    margin-bottom: 40px;
 }
 }
 .select-li{
@@ -53,8 +61,25 @@ legend {
 }
 .form-control, .checkboxes {
     border-radius: 5px!important;
+}
+select.form-control:invalid, select[disabled] {
     color: #adadad!important;
 }
+input[type="date"] {
+  width: 100%;
+}
+
+input[type="date"]:invalid::before {
+  width: 100%;
+  content: attr(placeholder);
+  color: #adadad;
+}
+
+input[type="date"]:hover::before, input[type="date"]:focus::before {
+  width: 0%;
+  content: "";
+}
+
 /*.checkbox input:checked {
     background-color: #535152!important;
     color: #535152!important;
@@ -62,22 +87,44 @@ legend {
 #root_resume input{
 
 }
+
+
+#root_race {
+    column-count: 2;
+    padding-bottom: 5px;
+
+    &:before {
+        content: "race/ethnicity";
+        display: block;
+        column-span: all;
+        -webkit-column-span: all;
+        color: #adadad;
+        padding-bottom: 10px;
+        margin-left: -5px;
+    }
+}
+
+.btn-container {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
 .btn-custom{
     background-color: #00b65f;
     border-color: #00b65f!important;
     color: white;
     width: 41%;
-    margin-right: 20px;
-    margin-left: 50px;
     font-size: 20px!important;
     margin-bottom: 25px;
 }
-.btn-custom1{
-    background-color: #00b65f;
+
+.btn-custom + .btn-custom {
+    margin-left: 20px;
+}
+
+.btn-custom.inverted {
+    background-color: transparent;
+    border-width: 2px;
     border-color: #00b65f!important;
-    color: white;
-    width: 50%;
-    font-size: 20px!important;
-    margin-bottom: 25px;
-    margin-left: 200px;
+    color: #00b65f;
 }
