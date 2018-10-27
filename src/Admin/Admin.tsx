@@ -2,11 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { IAdminWrapperProps, IAdminProps } from "./types";
 import Loading from "../Loading/Loading";
-import { getApplicationList, setApplicationStatus } from "../store/review/actions";
+import { getApplicationList, setApplicationStatus } from "../store/admin/actions";
 import ReactTable from "react-table";
 import { get, values } from "lodash-es";
 import 'react-table/react-table.css';
 import { STATUS, TYPE } from "../constants";
+import { IAdminState } from "../store/admin/types";
 
 const defaultFilterMethod = (filter, row) => {
     if (filter.value == "all") {
@@ -63,8 +64,8 @@ const Admin = (props: IAdminProps) => (
                             <input type="text"
                                 readOnly
                                 value={state.sortedData.map(e => e && get(e, "user.email")).join(",")}
-                                style={{width: "100%"}}
-                                />
+                                style={{ width: "100%" }}
+                            />
                             {makeTable()}
                         </div>
                     );
@@ -75,7 +76,7 @@ const Admin = (props: IAdminProps) => (
 );
 
 const mapStateToProps = state => ({
-    ...state.review
+    ...(state.admin as IAdminState)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

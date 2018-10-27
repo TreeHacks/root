@@ -1,11 +1,11 @@
-import { IReviewState } from "./types";
+import { IAdminState } from "./types";
 import { Reducer } from 'redux';
 
-const initialState: IReviewState = {
+const initialState: IAdminState = {
   applicationList: null
 };
 
-const review: Reducer<any> = (state: any = initialState, action): any => {
+const admin: Reducer<any> = (state: any = initialState, action): any => {
   switch (action.type) {
     case "SET_APPLICATION_LIST":
       return {
@@ -17,4 +17,4 @@ const review: Reducer<any> = (state: any = initialState, action): any => {
   }
 };
 
-export default review;
+export default admin;
