@@ -137,7 +137,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 							uiSchema={applicationUiSchema}
 							formData={this.state.application_data.forms.application_info} />
 					</div>}
-					{!this.state.application_data && <div className="">
+					{!this.state.application_data && <div className="treehacks-form">
 						<div className="application-name">No more apps to read!</div>
 						<div className="application-school">Congrats!</div>
 					</div>}
