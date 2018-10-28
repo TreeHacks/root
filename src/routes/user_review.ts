@@ -10,18 +10,18 @@ Application.collection.insertMany(Array.apply(null, {length: 50}).map(e => (
 */
 
 export const getLeaderboard = (req, res) => {
-    Application.collection.aggregate([
+    Application.aggregate([
         { $match: { reviews: { "$exists": 1 } } },
         { $unwind: "$reviews" },
         { $group: { _id: "$reviews.reader.email", count: { $sum: 1 } } },
         { $sort: { count: -1 } }
-    ]).toArray().then(data => {
+    ]).then(data => {
         res.json(data);
     });
 };
 
 export const getReviewStats = (req, res) => {
-    Application.collection.find({
+    Application.find({
         $and: [
             { status: STATUS.SUBMITTED },
             { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
@@ -65,26 +65,27 @@ export const rateReview = (req, res) => {
 };
 
 export const reviewNextApplication = (req, res) => {
-    Application.collection.findOne({
+    const applicationReviewDisplayFields = ["first_name","last_name","university","graduation_year","level_of_study","major","resume","q1_goodfit","q2_experience","q3","q4"];
+    let projectedFields = {"_id": 1};
+    for (let field of applicationReviewDisplayFields) {
+        projectedFields[`forms.application_info.${field}`] = 1;
+    }
+    Application.findOne({
         _id: (res.locals.user.sub)
     }).then(data => {
-        Application.collection.aggregate([
+        Application.aggregate([
             {
                 $match: {
                     $and: [
-                        {
-                            _id: {
-                                $nin: (data && data.applications_read) || []
-                            }
-                        },
+                        { 'reviews.reader.id': {$ne: res.locals.user.sub }}, // Not already reviewed by current user
                         { status: STATUS.SUBMITTED },
                         { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
                     ]
                 }
             },
             { $sample: { size: 1 } }, // Pick random
-            { $project: { "forms.application_info": 1, "user.email": 1, "type": 1 } }
-        ]).toArray().then((data) => {
+            { $project: projectedFields }
+        ]).then((data) => {
             res.json(data[0]);
         })
     })
