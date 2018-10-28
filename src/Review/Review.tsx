@@ -5,7 +5,7 @@ import Form from "react-jsonschema-form";
 import FormPage from '../FormPage/FormPage';
 import { connect } from "react-redux";
 import { IFormState } from 'src/store/form/types';
-
+import { cloneDeep } from "lodash-es";
 interface IReviewProps {
 	applicationSchema: { schema: any, uiSchema: any }
 }
@@ -17,7 +17,7 @@ interface IReviewComponentState {
 }
 
 // Sync with server.
-const applicationReviewDisplayFields = ["first_name","last_name","university","graduation_year","level_of_study","major","resume","q1_goodfit","q2_experience","q3","q4"];
+const applicationReviewDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "resume", "q1_goodfit", "q2_experience", "q3", "q4"];
 
 const schema = {
 	"type": "object",
@@ -88,7 +88,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 	}
 
 	render() {
-		let applicationUiSchema = this.props.applicationSchema.uiSchema;
+		let applicationUiSchema = cloneDeep(this.props.applicationSchema.uiSchema);
 		// Hide personal information fields (it's already hidden on server side too)
 		for (let field of applicationUiSchema["ui:order"]) {
 			if (applicationReviewDisplayFields.indexOf(field) == -1) {
@@ -104,7 +104,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 					<Form className="treehacks-form" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}
 						formData={this.state.reviewFormData}
-						onChange={e => this.setState({reviewFormData: e.formData})}
+						onChange={e => this.setState({ reviewFormData: e.formData })}
 					/>
 				</div>
 				<div className="container">
@@ -115,13 +115,13 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 				</div>
 				<div className="container">
 					<table className="table treehacks-body-text">
-					<tbody>
-						{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
-							<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
-							<td>{person.count}</td>
-						</tr>
-						)}
-					</tbody>
+						<tbody>
+							{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
+								<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
+								<td>{person.count}</td>
+							</tr>
+							)}
+						</tbody>
 					</table>
 				</div>
 			</div>
