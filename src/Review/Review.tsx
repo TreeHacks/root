@@ -101,19 +101,19 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 		return (<div className="row">
 			<div className="col-12 col-sm-4" style={{ "position": "fixed" }} >
 				<div >
-					<Form className="treehacks-form" schema={schema} uiSchema={uiSchema}
+					<Form className="treehacks-form rate-form" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}
 						formData={this.state.reviewFormData}
 						onChange={e => this.setState({ reviewFormData: e.formData })}
 					/>
 				</div>
-				<div className="container">
+				<div className="container left-sidebar-content">
 					{this.state.stats_data &&
-						<div className="treehacks-body-text">
+						<div className="treehacks-body-text apps-remaining-countdown">
 							<strong>{this.state.stats_data.results.num_remaining}</strong> apps remaining
 						</div>}
 				</div>
-				<div className="container">
+				<div className="container left-sidebar-content">
 					<table className="table treehacks-body-text">
 						<tbody>
 							{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
