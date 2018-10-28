@@ -126,6 +126,10 @@
         box-shadow: none !important;
         /* remove firefox highlight */
     }
+    .form-link {
+        color: inherit;
+        text-decoration: underline;
+    }
 }
 
 .btn {

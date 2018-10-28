@@ -53,8 +53,13 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
             return <Loading />;
         }
         const props = this.props;
-        const schema = props.schemas[props.formName].schema;
+        let schema = props.schemas[props.formName].schema;
         const uiSchema = props.schemas[props.formName].uiSchema;
+
+        // Inject direct link to MLH COC into accept_terms
+        if (get(schema, 'properties.accept_terms')) {
+            schema.properties.accept_terms.title = <span>I have read and agree to the <a className="form-link" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank" onClick={e => e.stopPropagation()}>MLH Code of Conduct</a>.</span>;
+        }
 
         const submitted = get(props, "profile.status") === "submitted";
 
