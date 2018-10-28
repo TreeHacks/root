@@ -11,10 +11,13 @@ interface IReviewProps {
 }
 interface IReviewComponentState {
 	leaderboard_data: any[],
-	application_data: { _id: string, type: string, user: { email: string }, forms: { application_info: any } },
+	application_data: { _id: string, forms: { application_info: any } },
 	stats_data: any,
 	reviewFormData: any
 }
+
+// Sync with server.
+const applicationReviewDisplayFields = ["first_name","last_name","university","graduation_year","level_of_study","major","resume","q1_goodfit","q2_experience","q3","q4"];
 
 const schema = {
 	"type": "object",
@@ -85,6 +88,16 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 	}
 
 	render() {
+		let applicationUiSchema = this.props.applicationSchema.uiSchema;
+		// Hide personal information fields (it's already hidden on server side too)
+		for (let field of applicationUiSchema["ui:order"]) {
+			if (applicationReviewDisplayFields.indexOf(field) == -1) {
+				if (!applicationUiSchema[field]) {
+					applicationUiSchema[field] = {};
+				}
+				applicationUiSchema[field]["classNames"] = "treehacks-hidden";
+			}
+		}
 		return (<div className="row">
 			<div className="col-12 col-sm-4" style={{ "position": "fixed" }} >
 				<div >
@@ -115,15 +128,13 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
 				<div >
 					{this.state.application_data && <div className="">
-						Email: {this.state.application_data.user.email}<br />
-						Type: {this.state.application_data.type}<br />
 						<FormPage
 							submitted={true}
 							onChange={e => null}
 							onError={e => null}
 							onSubmit={e => null}
 							schema={this.props.applicationSchema.schema}
-							uiSchema={this.props.applicationSchema.uiSchema}
+							uiSchema={applicationUiSchema}
 							formData={this.state.application_data.forms.application_info} />
 					</div>}
 					{!this.state.application_data && <div className="">
