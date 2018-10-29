@@ -99,6 +99,18 @@
                     "title": "Major",
                     "type": "string"
                 },
+                "skill_level": {
+                    "title": "Skill level",
+                    "type": "integer",
+                    "enum": [1, 2, 3, 4, 5],
+                    "enumNames": ["1 - new", "2 - learning", "3 - somewhat experienced", "4 - experienced", "5 - very experienced"]
+                },
+                "hackathon_experience": {
+                    "title": "Hackathons attended",
+                    "type": "integer",
+                    "enum": [0, 1, 2, 3, 4, 5],
+                    "enumNames": ["0 hackathons attended", "1 hackathon attended", "2 hackathons attended", "3 hackathons attended", "4 hackathons attended", "5 or more hackathons attended"]
+                },
                 "resume": {
                     "title": "Resume",
                     "description": "Upload your resume (optional) - Must be a PDF file",
@@ -145,6 +157,8 @@
                 "graduation_year",
                 "level_of_study",
                 "major",
+                "skill_level",
+                "hackathon_experience",
                 "accept_terms",
                 "accept_share",
                 "q1_goodfit",
@@ -192,6 +206,12 @@
             "major": {
                 "ui:placeholder": "major"
             },
+            "skill_level": {
+                "ui:placeholder": "skill level"
+            },
+            "hackathon_experience": {
+                "ui:placeholder": "hackathons attended"
+            },
             "q1_goodfit": {
                 "ui:placeholder": "Why do you want to come to TreeHacks? Max 100 words.",
                 "ui:widget": "textarea",
@@ -228,6 +248,8 @@
                 "graduation_year",
                 "level_of_study",
                 "major",
+                "skill_level",
+                "hackathon_experience",
                 "resume",
                 "section2",
                 "q1_goodfit",

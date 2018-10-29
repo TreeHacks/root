@@ -81,6 +81,16 @@
     .form-group.field.field-string+.form-group.field.field-boolean {
         margin-top: 40px;
     }
+
+    /* Skill level / hackathons attended */
+    .form-group.field.field-integer {
+        width: calc(50% - 0.5rem);
+        display: inline-block;
+    }
+    .form-group.field.field-integer+.form-group.field.field-integer {
+        margin-left: 1rem;
+    }
+
     .checkbox input {
         margin-right: 10px;
         margin-left: 2px;
