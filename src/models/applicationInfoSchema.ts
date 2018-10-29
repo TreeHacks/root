@@ -11,6 +11,8 @@ const applicationInfoSchema: Schema = new mongoose.Schema({
   graduation_year: String,
   level_of_study: String,
   major: String,
+  skill_level: Number,
+  hackathon_experience: Number,
   resume: String,
   accept_terms: Boolean,
   accept_share: Boolean,

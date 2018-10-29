@@ -33,6 +33,8 @@ export function submitApplicationInfo(req: Request, res: Response) {
         "graduation_year",
         "level_of_study",
         "major",
+        "skill_level",
+        "hackathon_experience",
         "accept_terms",
         "accept_share",
         "q1_goodfit",
