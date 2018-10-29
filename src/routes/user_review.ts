@@ -65,7 +65,7 @@ export const rateReview = (req, res) => {
 };
 
 export const reviewNextApplication = (req, res) => {
-    const applicationReviewDisplayFields = ["first_name","last_name","university","graduation_year","level_of_study","major","resume","q1_goodfit","q2_experience","q3","q4"];
+    const applicationReviewDisplayFields = ["first_name","last_name","university","graduation_year","level_of_study","major","skill_level", "hackathon_experience", "resume","q1_goodfit","q2_experience","q3","q4"];
     let projectedFields = {"_id": 1};
     for (let field of applicationReviewDisplayFields) {
         projectedFields[`forms.application_info.${field}`] = 1;
