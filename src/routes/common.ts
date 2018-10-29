@@ -7,12 +7,12 @@ import { STATUS } from "../constants";
 function getDeadline(type) {
   switch (type) {
     case "is":
-      return new Date("12/16/2018");
+      return new Date("11/27/2018");
     case "stanford":
-      return new Date("2/16/2019");
+      return new Date("2/14/2019");
     case "oos":
     default:
-      return new Date("12/2/2018");
+      return new Date("11/20/2018");
   }
 }
 
