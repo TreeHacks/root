@@ -39,8 +39,7 @@ export function submitApplicationInfo(req: Request, res: Response) {
         "accept_share",
         "q1_goodfit",
         "q2_experience",
-        "q3",
-        "q4"
+        "q3"
       ];
       let completed = true;
       for (let requiredField of requiredFields) {
