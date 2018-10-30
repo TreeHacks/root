@@ -61,3 +61,20 @@ $navbar-padding: 8px;
     padding: $navbar-padding/2 0;
   }
 }
+
+
+@media only screen and (max-width: 1024px) {
+  .nav {
+    flex-flow: column;
+    .header-logo {
+      margin-top: 30px;
+      // width: 100vw;
+      // // position: absolute;
+    }
+    .treehacks-navbar-links {
+      // width: 100vw;
+      // position: absolute;
+      // margin-top: 50pt;
+    }
+  }
+} 

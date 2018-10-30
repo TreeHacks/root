@@ -29,7 +29,7 @@ class Login extends React.Component<IHomeProps, {}> {
           <span className="logo-text-hacks">hacks</span>
         </NavLink>
       </div>
-      <div>
+      <div className="treehacks-navbar-links">
         <NavLink to="/" isActive={(_, loc) => loc.pathname === "/"}>dashboard</NavLink>
         <NavLink to="/application_info">application</NavLink>
         <NavLink to="/additional_info">travel</NavLink>
