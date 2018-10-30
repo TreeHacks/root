@@ -134,11 +134,11 @@
                     "type": "string"
                 },
                 "q3": {
-                    "title": "Tell us a fun fact about you :).",
+                    "title": "Tell us a fun fact about you :)",
                     "type": "string"
                 },
                 "q4": {
-                    "title": "Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
+                    "title": "(Optional) Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
                     "type": "string"
                 },
                 "section2": {
@@ -210,7 +210,7 @@
                 "ui:placeholder": "skill level"
             },
             "hackathon_experience": {
-                "ui:placeholder": "hackathons attended"
+                "ui:placeholder": "number of hackathons attended"
             },
             "q1_goodfit": {
                 "ui:placeholder": "Why do you want to come to TreeHacks? Max 100 words.",
@@ -228,11 +228,11 @@
             },
             "q3": {
                 "ui:widget": "textarea",
-                "ui:placeholder": "Tell us a fun fact about you :)."
+                "ui:placeholder": "Tell us a fun fact about you :)"
             },
             "q4": {
                 "ui:widget": "textarea",
-                "ui:placeholder":"Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc."
+                "ui:placeholder":"(Optional) Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc."
             },
             "section2": {
                 "ui:widget": "sectionHeader"
