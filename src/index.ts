@@ -24,7 +24,7 @@ import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } fro
 const app = express();
 app.use(forceSsl);
 
-mongoose.connect(process.env.MONGO_CONN_STR || "mongodb://localhost:65210/test").catch(function (reason: string) {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:65210/test").catch(function (reason: string) {
     console.log('Unable to connect to the mongodb instance. Error: ', reason);
 });
 
