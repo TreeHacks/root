@@ -66,15 +66,6 @@ $navbar-padding: 8px;
 @media only screen and (max-width: 1024px) {
   .nav {
     flex-flow: column;
-    .header-logo {
-      margin-top: 30px;
-      // width: 100vw;
-      // // position: absolute;
-    }
-    .treehacks-navbar-links {
-      // width: 100vw;
-      // position: absolute;
-      // margin-top: 50pt;
-    }
+    padding-top: 65px;
   }
 } 
