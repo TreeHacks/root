@@ -69,7 +69,9 @@ class Login extends React.Component<ILoginProps, {}> {
   render() {
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
-       <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginLeft": 207 , "marginTop":49 }} />
+        <div className="text-center">
+          <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginTop": 49 }} />
+        </div>
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
@@ -77,7 +79,7 @@ class Login extends React.Component<ILoginProps, {}> {
         }
         {this.props.error && <div className="alert alert-danger" role="alert">
           {this.props.error}
-          {this.props.error == "User is not confirmed." && 
+          {this.props.error == "User is not confirmed." &&
             <div>
               <a href="#" onClick={() => this.props.resendSignup()}>Resend email confirmation link</a>
             </div>
@@ -89,11 +91,11 @@ class Login extends React.Component<ILoginProps, {}> {
               schema={this.props.schemas.signIn.schema}
               uiSchema={this.props.schemas.signIn.uiSchema}
               onSubmit={e => this.props.signIn(e.formData)}
-             >
-               <button className="btn btn-info" type="submit">Sign In</button>
-             </AuthForm>
-             <div className="label-text centered">or</div>
-              <StanfordLogin />
+            >
+              <button className="btn btn-info" type="submit">Sign In</button>
+            </AuthForm>
+            <div className="label-text centered">or</div>
+            <StanfordLogin />
           </div>
         }
         {this.props.authPage == "signUp" &&
@@ -101,18 +103,18 @@ class Login extends React.Component<ILoginProps, {}> {
             schema={this.props.schemas.signUp.schema}
             uiSchema={this.props.schemas.signUp.uiSchema}
             onSubmit={e => this.props.signUp(e.formData)}
-            >
-              <button className="btn btn-info" type="submit">Sign Up</button>
-            </AuthForm>
+          >
+            <button className="btn btn-info" type="submit">Sign Up</button>
+          </AuthForm>
         }
         {this.props.authPage == "forgotPassword" &&
           <AuthForm
             schema={this.props.schemas.forgotPassword.schema}
             uiSchema={this.props.schemas.forgotPassword.uiSchema}
             onSubmit={e => this.props.forgotPassword(e.formData)}
-            >
-              <button className="btn btn-info" type="submit">Send reset instructions</button>
-            </AuthForm>
+          >
+            <button className="btn btn-info" type="submit">Send reset instructions</button>
+          </AuthForm>
         }
         {this.props.authPage == "forgotPasswordSubmit" &&
           <AuthForm
@@ -122,13 +124,13 @@ class Login extends React.Component<ILoginProps, {}> {
         }
         {this.props.authPage === "signUp" ?
           <div className="label-text">Already have an account?</div>
-        : this.props.authPage === "signIn" ?
-          <div className="label-text">Don't have an account yet?</div>
-        : null}
+          : this.props.authPage === "signIn" ?
+            <div className="label-text">Don't have an account yet?</div>
+            : null}
         <div className="mt-4 left-btn">
-          <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In"  />
+          <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In" />
           <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />
-          <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password"/>
+          <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
         </div>
       </div>);
     }
