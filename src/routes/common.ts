@@ -6,13 +6,13 @@ import { STATUS } from "../constants";
 
 function getDeadline(type) {
   switch (type) {
-    case "is":
-      return new Date("11/27/2018");
-    case "stanford":
-      return new Date("2/14/2019");
-    case "oos":
-    default:
-      return new Date("11/20/2018");
+      case "is":
+          return new Date("11/26/2018 11:59 PM PST");
+      case "stanford":
+          return new Date("2/13/2019 11:59 PM PST");
+      case "oos":
+      default:
+          return new Date("11/19/2018 11:59 PM PST");
   }
 }
 
