@@ -1,7 +1,7 @@
 {
     "application_info": {
         "schema": {
-            "title": "Application",
+            "title": "your application",
             "type": "object",
             "properties": {
                 "first_name": {
@@ -103,13 +103,13 @@
                     "title": "Skill level",
                     "type": "integer",
                     "enum": [1, 2, 3, 4, 5],
-                    "enumNames": ["1 - new", "2 - learning", "3 - somewhat experienced", "4 - experienced", "5 - very experienced"]
+                    "enumNames": ["1 - beginning", "2 - learning", "3 - somewhat experienced", "4 - experienced", "5 - very experienced"]
                 },
                 "hackathon_experience": {
-                    "title": "Hackathons attended",
+                    "title": "Number of hackathons attended",
                     "type": "integer",
                     "enum": [0, 1, 2, 3, 4, 5],
-                    "enumNames": ["0 hackathons attended", "1 hackathon attended", "2 hackathons attended", "3 hackathons attended", "4 hackathons attended", "5 or more hackathons attended"]
+                    "enumNames": ["0", "1", "2", "3", "4", "5 or more"]
                 },
                 "resume": {
                     "title": "Resume",
@@ -142,7 +142,7 @@
                     "type": "string"
                 },
                 "section2": {
-                    "title": "Additional Questions",
+                    "title": "short answer questions",
                     "type": "string"
                 }
             },
@@ -189,7 +189,7 @@
                 "ui:placeholder": "race / ethnicity",
                 "ui:widget": "checkboxes"
             },
-            "university": { 
+            "university": {
                 "ui:field": "typeahead",
                 "typeahead": {
                     "placeholder": "university",
