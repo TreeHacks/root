@@ -32,7 +32,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:65210/test").ca
 app.use(express.static('public'));
 
 // Use body-parser to parse HTTP request parameters
-app.use(bodyParser.json({ limit: '15mb' }));
+app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
