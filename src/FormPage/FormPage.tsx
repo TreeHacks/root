@@ -44,12 +44,15 @@ function base64MimeType(encoded) {
 
     return result;
 }
-function validate(formData, errors) {
+function validate(formData, errors, schema) {
     if (formData.resume) {
         if (!~["application/pdf"].indexOf(base64MimeType(formData.resume))) {
             console.log(base64MimeType(formData.resume));
             errors.resume.addError("Resume must be a PDF");
         }
+    }
+    if (schema.properties.university && !formData.university) {
+        errors.university.addError("University is required");
     }
     return errors;
 }
@@ -70,7 +73,7 @@ export default (props: IFormPageProps) => {
         }} formData={props.formData}
         // liveValidate={true}
         showErrorList={true}
-        validate={validate}
+        validate={(a, b) => validate(a, b, props.schema)}
         fields={{ typeahead: TypeaheadField }}
         widgets={widgets}
         onChange={e => props.onChange(e)}
