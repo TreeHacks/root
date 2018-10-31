@@ -121,7 +121,7 @@ website
  */
 export async function createApplication(user: CognitoUser) {
   let applicationInfo = {};
-  let applicationType = user["custom:location"] === "CA" ? "is" : "oos";
+  let applicationType = user["custom:location"] === "California" ? "is" : "oos";
   if (user.email.match(/@stanford.edu$/)) {
     applicationInfo = {
       "university": "Stanford University"
