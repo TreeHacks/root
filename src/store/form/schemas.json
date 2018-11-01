@@ -127,10 +127,12 @@
                 },
                 "q1_goodfit": {
                     "title": "Why do you want to come to TreeHacks? Max 100 words.",
+                    "word_count": 100,
                     "type": "string"
                 },
                 "q2_experience": {
                     "title": "Tell us a story about creating the project you're most proud of (technical or nontechnical). Why did you choose to work on it? What did you learn from it? Feel free to include a link. Max 250 words.",
+                    "word_count": 250,
                     "type": "string"
                 },
                 "q3": {

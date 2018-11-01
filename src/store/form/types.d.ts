@@ -11,7 +11,8 @@ export interface IFormState {
   },
   page: number,
   formData: any,
-  formName: string
+  formName: string,
+  userEdited: boolean
 }
 
 export interface IApplicationItem {

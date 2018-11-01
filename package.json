@@ -61,6 +61,7 @@
     "lodash-es": "^4.17.11",
     "node-sass": "^4.9.2",
     "query-string": "^5.1.1",
+    "react-beforeunload": "^1.0.4",
     "react-bootstrap-typeahead": "^3.2.4",
     "react-helmet": "^5.2.0",
     "react-jsonschema-form": "^1.0.5",
