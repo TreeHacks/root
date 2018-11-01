@@ -51,6 +51,15 @@ function validate(formData, errors) {
             errors.resume.addError("Resume must be a PDF");
         }
     }
+
+    // Word count limits
+    const counts = [{ key: 'q1_goodfit', word_count: 100 }, { key: 'q2_experience', word_count: 250 }];
+    counts.forEach(({ key, word_count }) => {
+        if (formData[key] && formData[key].split(/\s+/g).length > word_count) {
+            errors[key].addError(`Response cannot exceed ${word_count} words`);
+        }
+    });
+
     return errors;
 }
 export default (props: IFormPageProps) => {
@@ -68,7 +77,7 @@ export default (props: IFormPageProps) => {
             ...props.uiSchema,
             "ui:readonly": props.submitted,
         }} formData={props.formData}
-        // liveValidate={true}
+        liveValidate={true}
         showErrorList={true}
         validate={validate}
         fields={{ typeahead: TypeaheadField }}

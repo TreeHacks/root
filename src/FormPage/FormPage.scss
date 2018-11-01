@@ -140,6 +140,21 @@
         color: inherit;
         text-decoration: underline;
     }
+
+    ul.error-detail {
+        background-color: #F44336;
+        padding: 10px 30px;
+        margin: 0 2px;
+        border-radius: 2px;
+    }
+
+    ul.error-detail .text-danger {
+        color: #fff !important;
+    }
+
+    .panel.errors .panel-heading {
+        display: none;
+    }
 }
 
 .btn {
@@ -197,7 +212,7 @@ input[type="date"]:valid:before {
     column-count: 2;
     padding-bottom: 5px;
     &:before {
-        content: "race/ethnicity";
+        content: "race";
         display: block;
         color: #adadad;
         padding-bottom: 10px;
