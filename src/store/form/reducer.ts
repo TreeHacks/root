@@ -6,7 +6,8 @@ const initialState: IFormState = {
   schemas: require("./schemas.json"),
   page: 0,
   formData: null,
-  formName: null
+  formName: null,
+  userEdited: false
 };
 
 const form: Reducer<any> = (state: any = initialState, action): any => {
@@ -24,7 +25,8 @@ const form: Reducer<any> = (state: any = initialState, action): any => {
     case "SET_DATA":
       return {
         ...state,
-        formData: action.formData
+        formData: action.formData,
+        userEdited: action.userEdited
       };
     case "SET_USER_PROFILE":
       return {

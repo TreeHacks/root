@@ -1,5 +1,7 @@
 import React from "react";
 import Form from "react-jsonschema-form";
+import Beforeunload from "react-beforeunload";
+import { Prompt } from "react-router";
 import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
 
@@ -17,7 +19,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     setPage: (e) => dispatch(setPage(e)),
-    setData: (e) => dispatch(setData(e)),
+    setData: (e, userEdited) => dispatch(setData(e, userEdited)),
     saveData: () => dispatch(saveData()),
     submitForm: () => dispatch(submitForm()),
     loadData: () => { dispatch(loadData()) },
@@ -69,14 +71,18 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
         const alertMessage = submitted ? `Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.` :
             this.state.showSavedAlert ? `Your application progress has been saved. Make sure you finalize and submit before the deadline.` : null;
 
+        const unsavedChangesWarning = 'You have unsaved changes to your application. Are you sure you want to leave? You can save your application to continue later by clicking "Save for later" at the bottom of the page.';
+
         return (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Beforeunload onBeforeunload={e => props.userEdited ? unsavedChangesWarning : true} />
+                <Prompt when={props.userEdited} message={unsavedChangesWarning} />
                 {alertMessage && <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '550px', marginTop: '60px', marginBottom: '-40px', padding: '20px', color: 'white', textAlign: 'center' }}>
                     {alertMessage}
                 </div>}
                 <FormPage
                     submitted={submitted}
-                    onChange={e => { props.setData(e.formData) }}
+                    onChange={e => { props.setData(e.formData, /* userEdited */ JSON.stringify(e.formData) !== JSON.stringify(props.formData)) }}
                     onError={() => window.scrollTo(0, 0)}
                     onSubmit={(e) => this.onSubmit(e)}
                     schema={schema}

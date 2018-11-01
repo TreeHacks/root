@@ -13,9 +13,10 @@ export const setPage = (page: number) => ({
   page
 });
 
-export const setData = (formData: any) => ({
+export const setData = (formData: any, userEdited?: boolean) => ({
   type: "SET_DATA",
-  formData
+  formData,
+  userEdited: userEdited || false
 });
 
 export const setFormName = (formName: string) => ({
@@ -40,7 +41,7 @@ export const saveData = () => (dispatch, getState) => {
   dispatch(loadingStart());
   return API.put("treehacks", `/users/${userId}/forms/${formName}`, {"body": formData}).then(e => {
     dispatch(loadingEnd());
-    // dispatch(setData(e));
+    dispatch(setData(e, false));
   }).catch(e => {
     console.error(e);
     dispatch(loadingEnd());

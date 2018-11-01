@@ -81,7 +81,7 @@ export default (props: IFormPageProps) => {
             ...props.uiSchema,
             "ui:readonly": props.submitted,
         }} formData={props.formData}
-        liveValidate={true}
+        //liveValidate={true}
         showErrorList={true}
         validate={(a, b) => validate(a, b, props.schema)}
         fields={{ typeahead: TypeaheadField }}

@@ -2,14 +2,15 @@ import { IFormState } from "../store/form/types";
 
 export interface IFormPageWrapperProps extends IFormState {
     setPage: (e: number) => void,
-    setData: (e: any) => void,
+    setData: (e: any, userEdited: boolean) => void,
     saveData: () => Promise<any>,
     submitForm: () => Promise<any>,
     loadData: () => void,
     goHome: () => void,
     getUserProfile: () => void,
     setFormName: (e: string) => void,
-    incomingFormName: string
+    incomingFormName: string,
+    userEdited: boolean
 }
 
 export interface IFormPageProps {
