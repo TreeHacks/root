@@ -44,7 +44,7 @@ function base64MimeType(encoded) {
 
     return result;
 }
-function validate(formData, errors) {
+function validate(formData, errors, schema) {
     if (formData.resume) {
         if (!~["application/pdf"].indexOf(base64MimeType(formData.resume))) {
             console.log(base64MimeType(formData.resume));
@@ -53,15 +53,19 @@ function validate(formData, errors) {
     }
 
     // Word count limits
-    const counts = [{ key: 'q1_goodfit', word_count: 100 }, { key: 'q2_experience', word_count: 250 }];
-    counts.forEach(({ key, word_count }) => {
-        if (formData[key] && formData[key].split(/\s+/g).length > word_count) {
-            errors[key].addError(`Response cannot exceed ${word_count} words`);
+    Object.keys(schema.properties).filter(key => !!schema.properties[key].word_count).forEach(key => {
+        const wordCount = schema.properties[key].word_count;
+        if (formData[key] && formData[key].split(/\s+/g).length > wordCount) {
+            errors[key].addError(`Response cannot exceed ${wordCount} words`);
         }
     });
 
+    if (schema.properties.university && !formData.university) {
+        errors.university.addError("University is required");
+    }
     return errors;
 }
+
 export default (props: IFormPageProps) => {
     let widgets;
     if (props.submitted) {
@@ -79,7 +83,7 @@ export default (props: IFormPageProps) => {
         }} formData={props.formData}
         liveValidate={true}
         showErrorList={true}
-        validate={validate}
+        validate={(a, b) => validate(a, b, props.schema)}
         fields={{ typeahead: TypeaheadField }}
         widgets={widgets}
         onChange={e => props.onChange(e)}
