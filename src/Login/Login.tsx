@@ -49,7 +49,14 @@ function validate(formData, errors) {
 function AuthForm(props) {
   return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} className="treehacks-form" />
 }
-class Login extends React.Component<ILoginProps, {}> {
+class Login extends React.Component<ILoginProps, { signupFormData: Object }> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signupFormData: {}
+    };
+  }
+
   componentDidMount() {
 
     // Parse ID Token from SAML
@@ -62,11 +69,9 @@ class Login extends React.Component<ILoginProps, {}> {
     this.props.checkLoginStatus();
   }
 
-  stanfordLogin() {
-
-  }
-
   render() {
+    const isStanfordSignup = (this.state.signupFormData.email || '').indexOf('@stanford.edu') !== -1;
+
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
         <div className="text-center">
@@ -99,13 +104,21 @@ class Login extends React.Component<ILoginProps, {}> {
           </div>
         }
         {this.props.authPage == "signUp" &&
-          <AuthForm
-            schema={this.props.schemas.signUp.schema}
-            uiSchema={this.props.schemas.signUp.uiSchema}
-            onSubmit={e => this.props.signUp(e.formData)}
-          >
-            <button className="btn btn-info" type="submit">Sign Up</button>
-          </AuthForm>
+          <div className="top-form">
+            <AuthForm
+              formData={this.state.signupFormData}
+              schema={Object.assign({}, this.props.schemas.signUp.schema, isStanfordSignup && { properties: { email: this.props.schemas.signUp.schema.properties.email }, required: ['email'] })}
+              uiSchema={Object.assign({}, this.props.schemas.signUp.uiSchema, isStanfordSignup && { 'ui:order': ['email'] })}
+              onSubmit={e => this.props.signUp(e.formData)}
+              onChange={e => this.setState({ signupFormData: e.formData })}
+            >
+              {isStanfordSignup ?
+                <StanfordLogin label="Sign up with Stanford" />
+              :
+                <button className="btn btn-info" type="submit">Sign Up</button>
+              }
+            </AuthForm>
+          </div>
         }
         {this.props.authPage == "forgotPassword" &&
           <AuthForm
