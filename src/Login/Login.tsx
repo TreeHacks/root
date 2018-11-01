@@ -40,9 +40,9 @@ function transformErrors(errors) {
 }
 
 function validate(formData, errors) {
-  if (formData.email && ~formData.email.toLowerCase().indexOf("@stanford.edu")) {
-    errors.email.addError("If you are a Stanford student, please make sure you click 'Sign in with Stanford.'");
-  }
+  // if (formData.email && ~formData.email.toLowerCase().indexOf("@stanford.edu")) {
+  //   errors.email.addError("If you are a Stanford student, please make sure you click 'Sign in with Stanford.'");
+  // }
   return errors;
 }
 
@@ -112,12 +112,13 @@ class Login extends React.Component<ILoginProps, { signupFormData: any }> {
               onSubmit={e => this.props.signUp(e.formData)}
               onChange={e => this.setState({ signupFormData: e.formData })}
             >
-              {isStanfordSignup ?
-                <StanfordLogin label="Sign up with Stanford" />
-              :
+              {!isStanfordSignup ?
                 <button className="btn btn-info" type="submit">Sign Up</button>
-              }
+              : <div></div>}
             </AuthForm>
+            {isStanfordSignup ?
+              <div style={{marginTop: -40}}><StanfordLogin label="Sign up with Stanford" /></div>
+            : null}
           </div>
         }
         {this.props.authPage == "forgotPassword" &&
