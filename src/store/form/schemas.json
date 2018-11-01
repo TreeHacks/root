@@ -113,7 +113,7 @@
                 },
                 "resume": {
                     "title": "Resume",
-                    "description": "Upload your resume (optional) - Must be a PDF file",
+                    "description": "Upload your resume (optional) - Must be a PDF file, 10 MB max",
                     "type": "string",
                     "format": "data-url"
                 },
