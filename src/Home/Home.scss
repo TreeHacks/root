@@ -66,6 +66,7 @@ $navbar-padding: 8px;
 @media only screen and (max-width: 1024px) {
   .nav {
     flex-flow: column;
-    padding-top: 65px;
+    height: auto;
+    padding: 10px 0;
   }
 } 

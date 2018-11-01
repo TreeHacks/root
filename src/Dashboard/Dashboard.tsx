@@ -40,7 +40,7 @@ export const Dashboard = (props: IDashboardProps) => {
     const diffDays = Math.round(Math.abs((date.getTime() - dateNow.getTime()) / (24 * 60 * 60 * 1000)));
     const deadline = formatDate(date);
     return (
-        <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')`, "backgroundSize": "100% 100%" }}>
+        <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
             <div style={{ position: 'absolute', top: "50%", left: "50%", transform: "translateX(-50%) translateY(-50%)" }}>
                 <div className="dashboard-design">
                     {

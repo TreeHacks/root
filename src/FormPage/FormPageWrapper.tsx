@@ -71,12 +71,13 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
         const alertMessage = submitted ? `Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.` :
             this.state.showSavedAlert ? `Your application progress has been saved. Make sure you finalize and submit before the deadline.` : null;
 
-        const unsavedChangesWarning = 'You have unsaved changes to your application. Are you sure you want to leave? You can save your application to continue later by clicking "Save for later" at the bottom of the page.';
+        const unsavedChangesWarning = 'You have unsaved changes to your application. Are you sure you want to leave? You can save your application to continue later by clicking "Save for later" at the bottom of the page.',
+            showUnsavedWarning = props.userEdited && !submitted;
 
         return (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Beforeunload onBeforeunload={e => props.userEdited ? unsavedChangesWarning : true} />
-                <Prompt when={props.userEdited} message={unsavedChangesWarning} />
+                <Beforeunload onBeforeunload={e => showUnsavedWarning ? unsavedChangesWarning : true} />
+                <Prompt when={showUnsavedWarning} message={unsavedChangesWarning} />
                 {alertMessage && <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '550px', marginTop: '60px', marginBottom: '-40px', padding: '20px', color: 'white', textAlign: 'center' }}>
                     {alertMessage}
                 </div>}
