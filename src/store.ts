@@ -5,12 +5,13 @@ import { connectRouter, routerMiddleware, LOCATION_CHANGE } from 'connected-reac
 import GoogleAnalyticsGtag, { trackPageView, trackEvent } from '@redux-beacon/google-analytics-gtag';
 import { createMiddleware } from "redux-beacon";
 import history from "./history";
+import {get} from "lodash-es";
 
 declare const GA_TRACKING_ID: string;
 const ga = GoogleAnalyticsGtag(GA_TRACKING_ID);
 const eventsMap = {
   [LOCATION_CHANGE]: trackPageView(action => ({
-    path: action.payload.routerState.url
+    path: get(action, "payload.routerState.url")
   })),
   '*': trackEvent(action => ({
     category: 'redux',
