@@ -1,6 +1,6 @@
 {
   "name": "application-portal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TreeHacks 2019 application protal",
   "main": "index.ts",
   "scripts": {
