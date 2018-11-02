@@ -1,3 +1,6 @@
+# 1.0.2 (11/1/18)
+- Fix Google analytics bug
+
 # 1.0.1 (11/1/18)
 - Add Google analytics
 - Webpack production build
