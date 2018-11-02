@@ -1,3 +1,7 @@
+# 1.0.1 (11/1/18)
+- Add Google analytics
+- Webpack production build
+
 # 1.0.0 (11/1/18)
 Version 1.0.0
 
