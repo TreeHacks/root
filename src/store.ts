@@ -6,7 +6,7 @@ import GoogleAnalyticsGtag, { trackPageView, trackEvent } from '@redux-beacon/go
 import { createMiddleware } from "redux-beacon";
 import history from "./history";
 
-var GA_TRACKING_ID: string;
+declare const GA_TRACKING_ID: string;
 const ga = GoogleAnalyticsGtag(GA_TRACKING_ID);
 const eventsMap = {
   [LOCATION_CHANGE]: trackPageView(action => ({
