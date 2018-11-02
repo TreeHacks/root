@@ -9,7 +9,7 @@ import swaggerDocument from "./swagger";
 const port = process.env.PORT || 3000;
 
 
-import {authenticatedRoute, adminRoute, reviewerRoute} from "./router/authenticatedRoute";
+import { authenticatedRoute, adminRoute, reviewerRoute } from "./router/authenticatedRoute";
 import { getAdditionalInfo, setAdditionalInfo } from "./routes/additional_info";
 import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
@@ -69,8 +69,6 @@ app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.get("/", (req, res) => res.redirect("/doc"));
 
 app.use("/", authenticatedRoute);
-app.use("/", adminRoute);
-app.use("/review/", reviewerRoute);
 
 // Auth - user must be signed in:
 authenticatedRoute.get('/users/:userId/forms/additional_info', getAdditionalInfo);
@@ -80,20 +78,20 @@ authenticatedRoute.put('/users/:userId/forms/application_info', setApplicationIn
 authenticatedRoute.post('/users/:userId/forms/application_info/submit', submitApplicationInfo);
 // What permission should this one be?
 authenticatedRoute.get('/users/:userId/status', getApplicationStatus);
+authenticatedRoute.get('/users/:userId', getUserDetail);
 
 // Admin protected functions: TODO: protection.
-adminRoute.put('/users/:userId/status', setApplicationStatus);
-authenticatedRoute.get('/users/:userId', getUserDetail);
-adminRoute.get('/users', getUserList);
+authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStatus);
+authenticatedRoute.get('/users', [adminRoute], getUserList);
 
 // Need custom auth:
-adminRoute.put('/users/:userId/admin_info', setAdminInfo);
+authenticatedRoute.put('/users/:userId/admin_info', [adminRoute], setAdminInfo);
 
 // Review routes:
-reviewerRoute.get('/leaderboard', getLeaderboard);
-reviewerRoute.get('/stats', getReviewStats);
-reviewerRoute.post('/rate', rateReview);
-reviewerRoute.get('/next_application', reviewNextApplication);
+authenticatedRoute.get('/review/leaderboard', [reviewerRoute], getLeaderboard);
+authenticatedRoute.get('/review/stats', [reviewerRoute], getReviewStats);
+authenticatedRoute.post('/review/rate', [reviewerRoute], rateReview);
+authenticatedRoute.get('/review/next_application', [reviewerRoute], reviewNextApplication);
 
 
 export default app;
