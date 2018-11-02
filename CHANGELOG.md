@@ -1,3 +1,6 @@
+# 1.0.3 (11/1/18)
+- Fix bug for email verification - doesn't work if you go to the site with a query string in the link.
+
 # 1.0.2 (11/1/18)
 - Fix Google analytics bug
 
