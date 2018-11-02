@@ -1,5 +1,7 @@
 /*
  * This code is deployed on AWS Lambda and run on the Cognito confirmation message trigger.
+ * Environment Variables:
+ * COGNITO_USER_POOL_ID
  */
 exports.handler = (event, context, callback) => {
     //
