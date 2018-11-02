@@ -154,7 +154,7 @@ export function signUp(data) {
         email: data.email.toLowerCase(),
         name: "User",
         ["custom:location"]: data.location,
-        website: (window.location != window.parent.location) ? document.referrer : window.location.href // Link for confirmation email
+        website: [location.protocol, '//', location.host, location.pathname].join('') // Link for confirmation email
       }
     })
       .then(() => dispatch(setAuthPage("signIn", "Account creation complete. Please check your email for a confirmation link to confirm your email address, then sign in below. If you don't see the email, please check your spam folder.")))
