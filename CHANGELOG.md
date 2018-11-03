@@ -1,3 +1,9 @@
+# 1.0.4
+- Fix scrolling on review leaderboard
+- Fix bug -- allow logging in with uppercase characters in email
+- Fix bug -- allow signing up with uppercase characters in email (converted to lowercase email upon signup)
+- Add Minerva schools to university dropdown
+
 # 1.0.3 (11/1/18)
 - Fix bug for email verification - doesn't work if you go to the site with a query string in the link.
 
