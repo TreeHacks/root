@@ -28,6 +28,11 @@ const form: Reducer<any> = (state: any = initialState, action): any => {
         formData: action.formData,
         userEdited: action.userEdited
       };
+    case "SET_USER_EDITED":
+      return {
+        ...state,
+        userEdited: action.userEdited
+      };
     case "SET_USER_PROFILE":
       return {
         ...state,

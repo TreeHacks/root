@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "react-jsonschema-form";
+import FileWidget from "react-jsonschema-form/lib/components/widgets/FileWidget";
 import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
 
@@ -25,9 +26,28 @@ const FilePreviewWidget = (props) => {
         return <div>No file uploaded.</div>;
     }
     return <div>
-        <iframe src={props.value} style={{ width: "100%", minHeight: 400 }}></iframe>
+        <iframe src={props.value} style={Object.assign({ width: "100%", minHeight: 400 }, props.style)}></iframe>
     </div>;
 };
+
+const FileInputAndPreviewWidget = (props) => {
+    const output = [];
+
+    if (props.value) {
+        output.push(<FilePreviewWidget key="preview" {...props} style={{marginBottom: 10}} />);
+    }
+
+    output.push(<FileWidget key="file" {...props} value={undefined} onChange={v => {
+        if (base64MimeType(v) !== 'application/pdf') {
+            window.alert('Resume must be a PDF');
+        } else {
+            props.onChange(v);
+        }
+    }} />);
+ 
+    return output;
+};
+
 
 function base64MimeType(encoded) {
     var result = null;
@@ -45,11 +65,6 @@ function base64MimeType(encoded) {
     return result;
 }
 function validate(formData, errors, schema) {
-    if (formData.resume) {
-        if (!~["application/pdf"].indexOf(base64MimeType(formData.resume))) {
-            console.log(base64MimeType(formData.resume));
-            errors.resume.addError("Resume must be a PDF");
-        }
     if (schema.properties.race && (!formData.race || !formData.race.length)) {
         errors.race.addError("Please specify a race, or select \"Prefer not to say\"");
     }
@@ -74,7 +89,7 @@ export default (props: IFormPageProps) => {
         widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FilePreviewWidget };
     }
     else {
-        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget };
+        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget };
     }
     return (<Form
         className={`treehacks-form ${props.submitted ? "treehacks-form-disabled" : ""}`}

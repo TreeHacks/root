@@ -19,6 +19,11 @@ export const setData = (formData: any, userEdited?: boolean) => ({
   userEdited: userEdited || false
 });
 
+export const setUserEdited = (userEdited: boolean) => ({
+  type: "SET_USER_EDITED",
+  userEdited
+});
+
 export const setFormName = (formName: string) => ({
   type: "SET_NAME",
   formName
@@ -40,8 +45,9 @@ export const saveData = () => (dispatch, getState) => {
   const formName = (getState().form as IFormState).formName;
   dispatch(loadingStart());
   return API.put("treehacks", `/users/${userId}/forms/${formName}`, {"body": formData}).then(e => {
-    dispatch(loadingEnd());
     dispatch(setData(e, false));
+    dispatch(loadingEnd());
+    dispatch(setUserEdited(false));
   }).catch(e => {
     console.error(e);
     dispatch(loadingEnd());
