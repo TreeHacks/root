@@ -3,6 +3,7 @@ import { IApplication } from "../models/Application.d";
 import { Request, Response } from 'express';
 import { CognitoUser } from "../models/cognitoUser";
 import { STATUS } from "../constants";
+import { uploadBase64Content, generateSignedUrlForFile } from "../services/file_actions";
 
 function getDeadline(type) {
   switch (type) {
@@ -16,28 +17,46 @@ function getDeadline(type) {
   }
 }
 
+export async function injectDynamicApplicationContent(application: IApplication) {
+  // Inject fresh resume url from s3
+  const resume = application && application.forms.application_info.resume;
+  if (resume && resume.indexOf('data:') !== 0) {
+    try {
+      const url = await generateSignedUrlForFile(application._id);
+      application.forms.application_info.resume = url;
+    } catch (e) {
+      // fall through - fixme add error logging
+      console.error(e);
+    }
+  }
+
+  return application;
+}
+
 /*
  * Get application attribute from current request.
  * req - Request (must have userId param)
  * res - Response
  * getter - function describing what part of the application should be returned from the endpoint.
  */
-export function getApplicationAttribute(req: Request, res: Response, getter: (e: IApplication) => any, createIfNotFound = false) {
-  return Application.findOne(
-    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 }).then(
-      (application: IApplication | null) => {
-        if (!application) {
-          if (createIfNotFound) {
-            return createApplication(res.locals.user as CognitoUser).then(e => getApplicationAttribute(req, res, getter, false));
-          }
-          else {
-            res.status(404).send("Application not found.");
-          }
-        }
-        else {
-          res.status(200).send(getter(application));
-        }
-      });
+export async function getApplicationAttribute(req: Request, res: Response, getter: (e: IApplication) => any, createIfNotFound = false) {
+  let application: IApplication | null = await Application.findOne(
+    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 });
+
+  if (!application) {
+    if (createIfNotFound) {
+      return createApplication(res.locals.user as CognitoUser).then(e => getApplicationAttribute(req, res, getter, false));
+    }
+    else {
+      res.status(404).send("Application not found.");
+    }
+  }
+  else {
+    // Inject resume from s3
+    application = await injectDynamicApplicationContent(application);
+
+    res.status(200).send(getter(application));
+  }
 }
 
 /*
@@ -47,30 +66,50 @@ export function getApplicationAttribute(req: Request, res: Response, getter: (e:
  * setter - a function describing what happens to the application before save.
  * getter - function describing what part of the application should be returned from the endpoint.
  */
-export function setApplicationAttribute(req: Request, res: Response, setter: (e: IApplication) => any, getter: (e: IApplication) => any = e => e, considerDeadline = false) {
-  return Application.findOne(
-    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 }).then(
-      (application: IApplication | null) => {
-        if (!application) {
-          res.status(404).send("Application not found.");
-          return;
-        }
-        if (application.status === STATUS.SUBMITTED) {
-          res.status(400).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
-          return;
-        }
-        let deadline = getDeadline(application.type);
-        if (considerDeadline && (deadline < new Date())) {
-          res.status(400).send(`Application deadline has already been passed: ${deadline.toLocaleString()}`);
-          return;
-        }
-        else {
-          setter(application);
-          return application.save();
-        }
-      }).then((application: IApplication) => {
-        res.status(200).send(getter(application));
-      });
+export async function setApplicationAttribute(req: Request, res: Response, setter: (e: IApplication) => any, getter: (e: IApplication) => any = e => e, considerDeadline = false) {
+  const application: IApplication | null = await Application.findOne(
+    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 });
+
+  if (!application) {
+    res.status(404).send("Application not found.");
+    return;
+  }
+  if (application.status === STATUS.SUBMITTED) {
+    res.status(400).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
+    return;
+  }
+
+  let deadline = getDeadline(application.type);
+  if (considerDeadline && (deadline < new Date())) {
+    res.status(400).send(`Application deadline has already been passed: ${deadline.toLocaleString()}`);
+    return;
+  }
+
+  const originalResume = application.forms.application_info.resume;
+
+  setter(application);
+
+  // Handle base64 resumes => s3
+  // If upload fails for whatever reason, just persist the base64
+  const resume = application.forms.application_info.resume;
+  if (resume && resume.indexOf('data:') === 0) {
+    try {
+      const result = await uploadBase64Content(application._id, resume);
+      if (result.Key) {
+        application.forms.application_info.resume = result.Key;
+      }
+    } catch (e) {
+      // fall through - fixme add error logging
+      console.error(e);
+    }
+  } else {
+    // If resume was not freshly uploaded, just persist the old one
+    application.forms.application_info.resume = originalResume;
+  }
+
+  await application.save();
+
+  await getApplicationAttribute(req, res, getter);
 }
 
 /* Structure of res.locals.user: 
