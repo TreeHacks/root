@@ -4,3 +4,4 @@ index.html
 *.env
 .DS_Store
 npm-debug.log
+build
