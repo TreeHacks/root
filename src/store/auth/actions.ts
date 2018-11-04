@@ -132,8 +132,8 @@ export const setAttemptedLoginEmail = (attemptedLoginEmail) => ({
 export function signIn(data) {
   return dispatch => {
     dispatch(loadingStart());
-    dispatch(setAttemptedLoginEmail(data.email));
-    Auth.signIn(data.email, data.password)
+    dispatch(setAttemptedLoginEmail(data.email.toLowerCase()));
+    Auth.signIn(data.email.toLowerCase(), data.password)
       .then(() => dispatch(checkLoginStatus()))
       .catch(e => dispatch(onAuthError(e.message)))
       .then(() => dispatch(loadingEnd()))
@@ -148,7 +148,7 @@ export function signUp(data) {
     }
     dispatch(loadingStart());
     Auth.signUp({
-      username: data.email,
+      username: data.email.toLowerCase(),
       password: data.password,
       attributes: {
         email: data.email.toLowerCase(),
