@@ -50,6 +50,8 @@ function validate(formData, errors, schema) {
             console.log(base64MimeType(formData.resume));
             errors.resume.addError("Resume must be a PDF");
         }
+    if (schema.properties.race && (!formData.race || !formData.race.length)) {
+        errors.race.addError("Please specify a race, or select \"Prefer not to say\"");
     }
 
     // Word count limits
