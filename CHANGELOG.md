@@ -1,4 +1,9 @@
-# 1.0.4
+# 1.0.5 (11/4/18)
+- Show error if no race selected
+- Allow file uploads to work with S3.
+- Show file preview after uploading the resume.
+
+# 1.0.4 (11/3/18)
 - Fix scrolling on review leaderboard
 - Fix bug -- allow logging in with uppercase characters in email
 - Fix bug -- allow signing up with uppercase characters in email (converted to lowercase email upon signup)
