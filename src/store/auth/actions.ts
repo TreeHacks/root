@@ -131,9 +131,10 @@ export const setAttemptedLoginEmail = (attemptedLoginEmail) => ({
 
 export function signIn(data) {
   return dispatch => {
+    let email = data.email.toLowerCase().trim();
     dispatch(loadingStart());
-    dispatch(setAttemptedLoginEmail(data.email.toLowerCase()));
-    Auth.signIn(data.email.toLowerCase(), data.password)
+    dispatch(setAttemptedLoginEmail(email));
+    Auth.signIn(email, data.password)
       .then(() => dispatch(checkLoginStatus()))
       .catch(e => dispatch(onAuthError(e.message)))
       .then(() => dispatch(loadingEnd()))
@@ -146,12 +147,15 @@ export function signUp(data) {
       dispatch(onAuthError("Passwords do not match."));
       return;
     }
+
+    let email = data.email.toLowerCase().trim();
+
     dispatch(loadingStart());
     Auth.signUp({
-      username: data.email.toLowerCase(),
+      username: email,
       password: data.password,
       attributes: {
-        email: data.email.toLowerCase(),
+        email: email,
         name: "User",
         ["custom:location"]: data.location,
         website: [location.protocol, '//', location.host, location.pathname].join('') // Link for confirmation email
