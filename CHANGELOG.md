@@ -1,3 +1,7 @@
+# 1.0.6 (11/7/18)
+- Fix scrolling of leaderboard in review page
+- Add Dominican University of California
+
 # 1.0.5 (11/4/18)
 - Show error if no race selected
 - Allow file uploads to work with S3.
