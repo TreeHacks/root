@@ -53,6 +53,10 @@ const Admin = (props: IAdminProps) => {
             "accessor": "type"
         },
         {
+            "Header": "Location",
+            "accessor": "location"
+        },
+        {
             "Header": "Status",
             "accessor": "status",
             "filterMethod": defaultFilterMethod,
