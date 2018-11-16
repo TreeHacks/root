@@ -1,3 +1,7 @@
 export interface IAdminState {
-  applicationList: any[]
+  applicationList: any[],
+  selectedForm: {
+    id: string,
+    name: string
+  }
 }

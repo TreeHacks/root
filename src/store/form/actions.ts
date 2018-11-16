@@ -44,7 +44,7 @@ export const saveData = () => (dispatch, getState) => {
   const userId = (getState().auth as IAuthState).userId;
   const formName = (getState().form as IFormState).formName;
   dispatch(loadingStart());
-  return API.put("treehacks", `/users/${userId}/forms/${formName}`, {"body": formData}).then(e => {
+  return API.put("treehacks", `/users/${userId}/forms/${formName}`, { "body": formData }).then(e => {
     dispatch(setData(e, false));
     dispatch(loadingEnd());
     dispatch(setUserEdited(false));
@@ -68,8 +68,8 @@ export const submitForm = () => (dispatch, getState) => {
   });
 }
 
-export const loadData = () => (dispatch, getState) => {
-  const userId = (getState().auth as IAuthState).userId;
+export const loadData = (userId = null) => (dispatch, getState) => {
+  userId = userId || (getState().auth as IAuthState).userId;
   const formName = (getState().form as IFormState).formName;
   dispatch(loadingStart());
   return API.get("treehacks", `/users/${userId}/forms/${formName}`, {}).then(e => {

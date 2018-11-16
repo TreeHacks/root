@@ -6,11 +6,10 @@ export const setApplicationList = (applicationList) => ({
   applicationList
 });
 
-// export const setApplicationStatus = (status, userId) => ({
-//   type: "SET_APPLICATION_STATUS",
-//   status,
-//   userId
-// });
+export const setSelectedForm = (selectedForm) => ({
+  type: "SET_SELECTED_FORM",
+  selectedForm
+});
 
 export const getApplicationList = () => (dispatch, getState) => {
   dispatch(loadingStart());
