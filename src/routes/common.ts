@@ -160,12 +160,14 @@ website
  */
 export async function createApplication(user: CognitoUser) {
   let applicationInfo = {};
+  let applicationLocation = user["custom:location"];
   let applicationType = user["custom:location"] === "California" ? "is" : "oos";
   if (user.email.match(/@stanford.edu$/)) {
     applicationInfo = {
       "university": "Stanford University"
     };
     applicationType = "stanford";
+    applicationLocation = "California";
   }
   const application = new Application({
     "_id": user.sub,
@@ -176,7 +178,8 @@ export async function createApplication(user: CognitoUser) {
     "admin_info": {},
     "reviews": [],
     "user": { "email": user.email },
-    "type": applicationType
+    "type": applicationType,
+    "location": applicationLocation
   });
   return await application.save(); // todo: return something else here?
 }

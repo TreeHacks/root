@@ -50,5 +50,6 @@ export interface IApplication extends Document {
    }, // foreign key
   "id": String,
   "status": String, // only editable by admin (or this user, to a limited extent). incomplete (default), submitted, admitted, waitlisted, rejected, admission_confirmed, admission_declined
-  "type": String
+  "type": String,
+  "location": String
 }
