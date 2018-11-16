@@ -98,13 +98,13 @@ const Admin = (props: IAdminProps) => {
     ];
     return (
         <div>
-            <h3>Applications:</h3>
             <div className="bg-white col-8 offset-2 p-4">
+            <h3>Applications</h3>
                 <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}>
                     {(state, makeTable, instance) => {
                         return (
                             <div>
-                                User emails shown:
+                                User emails shown (copy and paste):
                             <input type="text"
                                     readOnly
                                     value={state.sortedData.map(e => e && get(e, "user.email")).join(",")}
