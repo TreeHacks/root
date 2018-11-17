@@ -36,6 +36,9 @@ class Login extends React.Component<IHomeProps, {}> {
         {this.props.auth.admin &&
           <NavLink to="/admin">admin</NavLink>
         }
+        {this.props.auth.admin &&
+          <NavLink to="/stats">stats</NavLink>
+        }
         {this.props.auth.reviewer &&
           <NavLink to="/review">review</NavLink>
         }

@@ -11,3 +11,11 @@ export interface IAdminWrapperProps extends IAdminState {
     changeApplicationStatus: (string) => void,
     setSelectedForm: (e: {id: string, name: string}) => void
 }
+
+export interface IStatsWrapperProps extends IAdminState {
+    getApplicationStats: () => void,
+}
+
+export interface IStatsProps {
+    applicationStats: {[x: string]: any};
+}
