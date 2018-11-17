@@ -45,8 +45,8 @@ const swagger = {
           "transportation": {
             "type": "object",
             "properties": {
-              "method": {"type": "string"},
-              "bus_name": {"type": "string"}
+              "method": { "type": "string" },
+              "bus_name": { "type": "string" }
             }
           },
           "reimbursement_amount": { type: "number", default: null }
@@ -81,7 +81,7 @@ const swagger = {
               "email": { "type": "string" }
             }
           },
-          "status": {"$ref": "#/components/schemas/Status"},
+          "status": { "$ref": "#/components/schemas/Status" },
           "type": {
             type: "string",
             enumValues: ["is", "oos", "stanford"]
@@ -95,10 +95,58 @@ const swagger = {
       "get": {
         "summary": "Get list of users/applications",
         "description": "Used for admins to view all users",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page size"
+          },
+          {
+            "in": "query",
+            "name": "filtered",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter query. Must be a JSON-serialized string of an array of objects such as {id: 'a', value: 'b'}"
+          },
+          {
+            "in": "query",
+            "name": "sorted",
+            "schema": {
+              "type": "string",
+            },
+            "description": "Sort query. Must be a JSON-serialized string of an array of objects such as {id: 'a', desc: true}"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "User list response"
-          }
+            "description": "User list response (does not resolve the resume field to a URL)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": { "type": "integer" },
+                    "results": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Application" }
+                    }
+                  }
+                }
+              }
+            }
+          },
         }
       }
     },
