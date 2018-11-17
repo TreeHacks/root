@@ -1,15 +1,27 @@
 import { IFormState } from "../store/form/types";
 import { IAdminState } from "src/store/admin/types";
+import { getApplicationList } from "src/store/admin/actions";
+import { IBaseState } from "src/store/base/types";
 
+export interface IReactTableState {
+    page: number,
+    pageSize: number,
+    sorted: { id: string, desc: string }[],
+    filtered: { id: string, value: boolean }[]
+}
 export interface IAdminProps {
+    loading: boolean,
     applicationList: any[],
-    setSelectedForm?: (e: {id: string, name: string}) => void
+    pages: any[],
+    setSelectedForm?: (e: { id: string, name: string }) => void,
+    getApplicationList?: (state: IReactTableState) => void
 }
 
 export interface IAdminWrapperProps extends IAdminState {
-    getApplicationList: () => void,
+    getApplicationList: (state: IReactTableState) => void
     changeApplicationStatus: (string) => void,
-    setSelectedForm: (e: {id: string, name: string}) => void
+    setSelectedForm: (e: { id: string, name: string }) => void,
+    base: IBaseState
 }
 
 export interface IStatsWrapperProps extends IAdminState {
@@ -17,5 +29,5 @@ export interface IStatsWrapperProps extends IAdminState {
 }
 
 export interface IStatsProps {
-    applicationStats: {[x: string]: any};
+    applicationStats: { [x: string]: any };
 }

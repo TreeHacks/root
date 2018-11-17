@@ -2,7 +2,8 @@ import { IAdminState } from "./types";
 import { Reducer } from 'redux';
 
 const initialState: IAdminState = {
-  applicationList: null,
+  applicationList: [],
+  pages: null,
   applicationStats: null,
   selectedForm: null
 };
@@ -12,7 +13,8 @@ const admin: Reducer<any> = (state: any = initialState, action): any => {
     case "SET_APPLICATION_LIST":
       return {
         ...state,
-        applicationList: action.applicationList
+        applicationList: action.applicationList,
+        pages: action.pages
       };
     case "SET_SELECTED_FORM":
       return {

@@ -9,6 +9,7 @@ import 'react-table/react-table.css';
 import { STATUS, TYPE } from "../constants";
 import { IAdminState } from "../store/admin/types";
 import ApplicationView from "./ApplicationView";
+import { IBaseState } from "src/store/base/types";
 
 const defaultFilterMethod = (filter, row) => {
     if (filter.value == "all") {
@@ -99,8 +100,14 @@ const Admin = (props: IAdminProps) => {
     return (
         <div>
             <div className="bg-white col-8 offset-2 p-4">
-            <h3>Applications</h3>
-                <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}>
+                <h3>Applications</h3>
+                <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}
+                    pages={props.pages}
+                    manual
+                    loading={props.loading}
+                    pageSize={1}
+                    onFetchData={(state, instance) => props.getApplicationList && props.getApplicationList(state)}
+                >
                     {(state, makeTable, instance) => {
                         return (
                             <div>
@@ -110,6 +117,7 @@ const Admin = (props: IAdminProps) => {
                                     value={state.sortedData.map(e => e && get(e, "user.email")).join(",")}
                                     style={{ width: "100%" }}
                                 />
+                                <button className="btn btn-outline-primary" onClick={null}>Export submitted applications as JSON</button>
                                 {makeTable()}
                             </div>
                         );
@@ -121,25 +129,27 @@ const Admin = (props: IAdminProps) => {
 }
 
 const mapStateToProps = state => ({
-    ...(state.admin as IAdminState)
+    ...(state.admin as IAdminState),
+    base: state.base as IBaseState
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getApplicationList: () => dispatch(getApplicationList()),
+    getApplicationList: (e) => dispatch(getApplicationList(e)),
     setApplicationStatus: (a, b) => dispatch(setApplicationStatus(a, b)),
     setSelectedForm: e => dispatch(setSelectedForm(e))
 });
 
 class AdminWrapper extends React.Component<IAdminWrapperProps, {}> {
     componentDidMount() {
-        this.props.getApplicationList();
     }
     render() {
-        if (!this.props.applicationList) {
-            return <Loading />;
-        }
         return <div>
-            <Admin applicationList={this.props.applicationList} setSelectedForm={e => this.props.setSelectedForm(e)} />
+            <Admin applicationList={this.props.applicationList}
+                pages={this.props.pages}
+                loading={this.props.base.loading}
+                setSelectedForm={e => this.props.setSelectedForm(e)}
+                getApplicationList={(a) => this.props.getApplicationList(a)}
+            />
             {this.props.selectedForm && <ApplicationView />}
         </div>;
     }
