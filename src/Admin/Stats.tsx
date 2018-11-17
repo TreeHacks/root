@@ -3,13 +3,21 @@ import { connect } from "react-redux";
 import { IStatsWrapperProps, IStatsProps } from "./types";
 import Loading from "../Loading/Loading";
 import { getApplicationStats } from "../store/admin/actions";
-import ReactTable from "react-table";
-import { get, values } from "lodash-es";
-import { STATUS, TYPE } from "../constants";
+import { Pie, PieChart } from "recharts";
 import { IAdminState } from "../store/admin/types";
 
 const Stats = (props: IStatsProps) => {
-    return <div>Stats{JSON.stringify(props.applicationStats)}</div>
+    return <div>
+        <div className="row">
+            {Object.keys(props.applicationStats).map(key => (
+                <div key={key} className="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2"><h3 className="text-white text-center">{key}</h3>
+                    <PieChart width={250} height={250}>
+                        <Pie data={props.applicationStats[key]} label={true} dataKey="count" nameKey="_id" />
+                    </PieChart>
+                </div>
+            ))}
+        </div>
+    </div>
 }
 
 const mapStateToProps = state => ({
