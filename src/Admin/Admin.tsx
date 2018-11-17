@@ -114,7 +114,6 @@ const Admin = (props: IAdminProps) => {
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export</button> (Export all pages of filtered results as JSON)</p>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getApplicationEmails(state)}>Get emails</button> (Get emails of all pages of filtered results)</p>
                                 {props.applicationEmails && <div>
-                                    All user emails in all pages of the below search results (copy and paste):
                                     <textarea
                                         readOnly
                                         className="form-control"
