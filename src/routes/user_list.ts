@@ -19,7 +19,6 @@ export function getUserStats(req: Request, res: Response) {
         "race": [{ $unwind: "$forms.application_info.race" }, { $sortByCount: "$forms.application_info.race" }],
         "hackathon_experience": [{ $sortByCount: "$forms.application_info.hackathon_experience" }],
         "skill_level": [{ $sortByCount: "$forms.application_info.skill_level" }],
-        "state": [{ $sortByCount: "$forms.application_info.state" }],
         "university": [{ $sortByCount: "$forms.application_info.university" }],
         "location": [{ $sortByCount: "$location" }],
         "type": [{ $sortByCount: "$type" }],
