@@ -44,7 +44,7 @@ class ApplicationView extends React.Component<IApplicationViewProps, {}> {
                 onError={e => null}
                 onSubmit={e => null}
                 schema={this.props.form.schemas[this.props.form.formName].schema}
-                uiSchema={this.props.form.schemas[this.props.form.formName].schema}
+                uiSchema={this.props.form.schemas[this.props.form.formName].uiSchema}
                 formData={this.props.form.formData} /> : <Loading />}
         </Modal>);
     }
