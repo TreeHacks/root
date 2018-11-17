@@ -18,7 +18,7 @@ export function getUserStats(req: Request, res: Response) {
         "race": [{ // "More than one" if multiple races are selected.
           $sortByCount: {
             $cond: {
-              if: { $lte: [{ $size: "$forms.application_info.race" }, 1] },
+              if: { $lte: [{ $size: {$ifNull: ["$forms.application_info.race", []]} }, 1] },
               then: "$forms.application_info.race",
               else: ["More than one"]
             }
