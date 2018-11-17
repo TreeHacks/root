@@ -15,8 +15,17 @@ export function getUserStats(req: Request, res: Response) {
     {
       "$facet": {
         "gender": [{ $sortByCount: "$forms.application_info.gender" }],
-        // Todo: race needs to be weighted -- if someone selects two races, it is double-counted.
-        "race": [{ $unwind: "$forms.application_info.race" }, { $sortByCount: "$forms.application_info.race" }],
+        "race": [{ // "More than one" if multiple races are selected.
+          $sortByCount: {
+            $cond: {
+              if: { $lte: [{ $size: "$forms.application_info.race" }, 1] },
+              then: "$forms.application_info.race",
+              else: ["More than one"]
+            }
+          }
+        },
+        { $unwind: "$_id" }
+        ],
         "hackathon_experience": [{ $sortByCount: "$forms.application_info.hackathon_experience" }],
         "skill_level": [{ $sortByCount: "$forms.application_info.skill_level" }],
         "university": [{ $sortByCount: "$forms.application_info.university" }],
