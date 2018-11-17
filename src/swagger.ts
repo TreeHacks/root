@@ -91,6 +91,28 @@ const swagger = {
     }
   },
   "paths": {
+    "/users": {
+      "get": {
+        "summary": "Get list of users/applications",
+        "description": "Used for admins to view all users",
+        "responses": {
+          "200": {
+            "description": "User list response"
+          }
+        }
+      }
+    },
+    "/users_stats": {
+      "get": {
+        "summary": "Get user stats",
+        "description": "Used for adminss",
+        "responses": {
+          "200": {
+            "description": "User stats response"
+          }
+        }
+      }
+    },
     "/users/{userId}": {
       "get": {
         "summary": "Get full user and application information",

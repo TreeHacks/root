@@ -13,7 +13,7 @@ import { authenticatedRoute, adminRoute, reviewerRoute } from "./router/authenti
 import { getAdditionalInfo, setAdditionalInfo } from "./routes/additional_info";
 import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
-import { getUserList } from "./routes/user_list";
+import { getUserList, getUserStats } from "./routes/user_list";
 import { getApplicationStatus, setApplicationStatus } from "./routes/user_status";
 import { setAdminInfo } from "./routes/admin_info";
 import { MongoClient, ObjectId } from "mongodb";
@@ -83,6 +83,7 @@ authenticatedRoute.get('/users/:userId', getUserDetail);
 // Admin protected functions: TODO: protection.
 authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStatus);
 authenticatedRoute.get('/users', [adminRoute], getUserList);
+authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 
 // Need custom auth:
 authenticatedRoute.put('/users/:userId/admin_info', [adminRoute], setAdminInfo);
