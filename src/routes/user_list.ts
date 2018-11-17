@@ -26,6 +26,6 @@ export function getUserStats(req: Request, res: Response) {
       }
     }
   ]).then(data => {
-    res.json(data);
+    res.json(data[0]);
   });
 }
