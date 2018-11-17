@@ -105,7 +105,7 @@ const Admin = (props: IAdminProps) => {
                     pages={props.pages}
                     manual
                     // loading={props.base.loading}
-                    defaultPageSize={1}
+                    // defaultPageSize={1}
                     onFetchData={(state, instance) => props.getApplicationList && props.getApplicationList(state)}
                 >
                     {(state, makeTable, instance) => {
