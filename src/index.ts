@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const swaggerUi = require('swagger-ui-express');
 const forceSsl = require('force-ssl-heroku');
+const compression = require('compression');
 import cors from "cors";
 import swaggerDocument from "./swagger";
 const port = process.env.PORT || 3000;
@@ -23,6 +24,7 @@ import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } fro
 // Set up the Express app
 const app = express();
 app.use(forceSsl);
+app.use(compression());
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:65210/test").catch(function (reason: string) {
     console.log('Unable to connect to the mongodb instance. Error: ', reason);
