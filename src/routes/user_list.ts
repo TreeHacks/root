@@ -14,12 +14,13 @@ export function getUserStats(req: Request, res: Response) {
   return Application.aggregate([
     {
       "$facet": {
-        "gender": [{ $sortByCount: "$application_info.gender" }],
-        "race": [{ $sortByCount: "$application_info.race" }],
-        "hackathon_experience": [{ $sortByCount: "$application_info.hackathon_experience" }],
-        "skill_level": [{ $sortByCount: "$application_info.skill_level" }],
-        "state": [{ $sortByCount: "$application_info.state" }],
-        "university": [{ $sortByCount: "$application_info.university" }],
+        "gender": [{ $sortByCount: "$forms.application_info.gender" }],
+        // Todo: race needs to be weighted -- if someone selects two races, it is double-counted.
+        "race": [{ $unwind: "$forms.application_info.race" }, { $sortByCount: "$forms.application_info.race" }],
+        "hackathon_experience": [{ $sortByCount: "$forms.application_info.hackathon_experience" }],
+        "skill_level": [{ $sortByCount: "$forms.application_info.skill_level" }],
+        "state": [{ $sortByCount: "$forms.application_info.state" }],
+        "university": [{ $sortByCount: "$forms.application_info.university" }],
         "location": [{ $sortByCount: "$location" }],
         "type": [{ $sortByCount: "$type" }],
         "status": [{ $sortByCount: "$status" }]
