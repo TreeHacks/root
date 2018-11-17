@@ -114,19 +114,27 @@ const swagger = {
           },
           {
             "in": "query",
-            "name": "filtered",
+            "name": "filter",
             "schema": {
               "type": "string"
             },
-            "description": "Filter query. Must be a JSON-serialized string of an array of objects such as {id: 'a', value: 'b'}"
+            "description": "Filter query. Must be a JSON-serialized string of an array of objects such as {'a': 'b'}"
           },
           {
             "in": "query",
-            "name": "sorted",
+            "name": "sort",
             "schema": {
               "type": "string",
             },
-            "description": "Sort query. Must be a JSON-serialized string of an array of objects such as {id: 'a', desc: true}"
+            "description": "Sort query. Must be a JSON-serialized string of an array of objects such as {'a': 1}"
+          },
+          {
+            "in": "query",
+            "name": "project",
+            "schema": {
+              "type": "string",
+            },
+            "description": "Projection query. Must be a JSON-serialized string of an array of objects such as {'a': 1, 'b': 0}"
           }
         ],
         "responses": {

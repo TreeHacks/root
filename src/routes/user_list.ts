@@ -3,19 +3,22 @@ import { Request, Response } from 'express';
 import mapValues from "lodash/mapValues";
 
 export function getUserList(req: Request, res: Response) {
-  
+
   // Text matching search
-  let filtered = JSON.parse(req.query.filtered);
-  for (let key in filtered) {
-    filtered[key] = {$regex: filtered[key]};
+  let filter = JSON.parse(req.query.filter);
+  for (let key in filter) {
+    filter[key] = { $regex: filter[key] };
+  }
+  let query = Application.find(filter, JSON.parse(req.query.project) || {})
+    .sort(JSON.parse(req.query.sort) || {})
+    .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
+  
+  if (parseInt(req.query.pageSize) >= 0) {
+    query = query.limit(parseInt(req.query.pageSize));
   }
 
   Promise.all([
-    Application.find(filtered)
-      .sort(JSON.parse(req.query.sorted))
-      .skip(parseInt(req.query.page) * parseInt(req.query.pageSize))
-      .limit(parseInt(req.query.pageSize))
-      .lean().exec(),
+    query.lean().exec(),
     Application.find({}).count()
   ])
     .then(([results, count]) => {
