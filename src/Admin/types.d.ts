@@ -1,6 +1,6 @@
 import { IFormState } from "../store/form/types";
 import { IAdminState } from "src/store/admin/types";
-import { getApplicationList } from "src/store/admin/actions";
+import { getApplicationList, getExportedApplications } from "src/store/admin/actions";
 import { IBaseState } from "src/store/base/types";
 
 export interface IReactTableState {
@@ -9,17 +9,12 @@ export interface IReactTableState {
     sorted: { id: string, desc: string }[],
     filtered: { id: string, value: boolean }[]
 }
-export interface IAdminProps {
-    loading: boolean,
-    applicationList: any[],
-    pages: any[],
-    setSelectedForm?: (e: { id: string, name: string }) => void,
-    getApplicationList?: (state: IReactTableState) => void
-}
 
-export interface IAdminWrapperProps extends IAdminState {
+export interface IAdminProps extends IAdminState {
     getApplicationList: (state: IReactTableState) => void
     changeApplicationStatus: (string) => void,
+    getApplicationEmails: (state: IReactTableState) => void,
+    getExportedApplications: (state: IReactTableState) => void,
     setSelectedForm: (e: { id: string, name: string }) => void,
     base: IBaseState
 }

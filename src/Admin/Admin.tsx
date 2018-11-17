@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { IAdminWrapperProps, IAdminProps } from "./types";
+import { IAdminProps } from "./types";
 import Loading from "../Loading/Loading";
-import { getApplicationList, setApplicationStatus, setSelectedForm } from "../store/admin/actions";
+import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicationEmails, getExportedApplications } from "../store/admin/actions";
 import ReactTable from "react-table";
 import { get, values } from "lodash-es";
 import 'react-table/react-table.css';
@@ -104,26 +104,31 @@ const Admin = (props: IAdminProps) => {
                 <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}
                     pages={props.pages}
                     manual
-                    loading={props.loading}
-                    pageSize={1}
+                    // loading={props.base.loading}
+                    defaultPageSize={1}
                     onFetchData={(state, instance) => props.getApplicationList && props.getApplicationList(state)}
                 >
                     {(state, makeTable, instance) => {
                         return (
                             <div>
-                                User emails shown (copy and paste):
-                            <input type="text"
-                                    readOnly
-                                    value={state.sortedData.map(e => e && get(e, "user.email")).join(",")}
-                                    style={{ width: "100%" }}
-                                />
-                                <button className="btn btn-outline-primary" onClick={null}>Export submitted applications as JSON</button>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export</button> (Export all pages of filtered results as JSON)</p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getApplicationEmails(state)}>Get emails</button> (Get emails of all pages of filtered results)</p>
+                                {props.applicationEmails && <div>
+                                    All user emails in all pages of the below search results (copy and paste):
+                                    <textarea
+                                        readOnly
+                                        className="form-control"
+                                        style={{ width: "100%" }}
+                                    >
+                                        {props.applicationEmails.join(", ")}
+                                    </textarea></div>}
                                 {makeTable()}
                             </div>
                         );
                     }}
                 </ReactTable>
             </div>
+            {props.selectedForm && <ApplicationView />}
         </div>
     );
 }
@@ -136,23 +141,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getApplicationList: (e) => dispatch(getApplicationList(e)),
     setApplicationStatus: (a, b) => dispatch(setApplicationStatus(a, b)),
-    setSelectedForm: e => dispatch(setSelectedForm(e))
+    setSelectedForm: e => dispatch(setSelectedForm(e)),
+    getApplicationEmails: e => dispatch(getApplicationEmails(e)),
+    getExportedApplications: e => dispatch(getExportedApplications(e))
 });
 
-class AdminWrapper extends React.Component<IAdminWrapperProps, {}> {
-    componentDidMount() {
-    }
-    render() {
-        return <div>
-            <Admin applicationList={this.props.applicationList}
-                pages={this.props.pages}
-                loading={this.props.base.loading}
-                setSelectedForm={e => this.props.setSelectedForm(e)}
-                getApplicationList={(a) => this.props.getApplicationList(a)}
-            />
-            {this.props.selectedForm && <ApplicationView />}
-        </div>;
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);
