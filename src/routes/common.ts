@@ -10,7 +10,7 @@ function getDeadline(type) {
       case "is":
           return new Date("2018-11-27T07:59:00.000Z");
       case "stanford":
-          return new Date("2018-02-14T07:59:00.000Z");
+          return new Date("2019-02-14T07:59:00.000Z");
       case "oos":
       default:
           return new Date("2018-11-20T07:59:00.000Z");
