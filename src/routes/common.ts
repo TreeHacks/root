@@ -8,12 +8,12 @@ import { uploadBase64Content, generateSignedUrlForFile } from "../services/file_
 function getDeadline(type) {
   switch (type) {
       case "is":
-          return new Date("11/26/2018 11:59 PM PST");
+          return new Date("2018-11-27T07:59:00.000Z");
       case "stanford":
-          return new Date("2/13/2019 11:59 PM PST");
+          return new Date("2018-02-14T07:59:00.000Z");
       case "oos":
       default:
-          return new Date("11/19/2018 11:59 PM PST");
+          return new Date("2018-11-20T07:59:00.000Z");
   }
 }
 
