@@ -7,7 +7,7 @@ export function getUserList(req: Request, res: Response) {
   // Text matching search
   let filter = JSON.parse(req.query.filter);
   for (let key in filter) {
-    filter[key] = { $regex: filter[key] };
+    filter[key] = { $regex: filter[key], $options : 'i' };
   }
   let query = Application.find(filter, JSON.parse(req.query.project) || {})
     .sort(JSON.parse(req.query.sort) || {})
