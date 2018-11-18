@@ -335,37 +335,64 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/review_info": {
+    "/review/leaderboard": {
       "get": {
-        "summary": "Get review info",
-        "description": "Get only review info which the current user has reviewed.",
+        "summary": "Get review leaderboard",
+        "description": "List of reviewers, ranked.",
         "responses": {
           "200": {
-            "description": "User review response",
+            "description": "Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ReviewInfo" }
+                "schema": { "type": "object" }
               }
             }
           }
         }
-      },
-      "put": {
-        "summary": "Update review info",
-        "description": "Used by reviewers to update their OWN reviews.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/ReviewInfo" }
-            }
-          }
-        },
+      }
+    },
+    "/review/stats": {
+      "get": {
+        "summary": "Get review stats",
+        "description": "Returns number of applications remaining to be removed.",
         "responses": {
           "200": {
-            "description": "User review info response",
+            "description": "Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ReviewInfo" }
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/review/rate": {
+      "post": {
+        "summary": "Rate review.",
+        "description": ".",
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/review/next_application": {
+      "get": {
+        "summary": "Get review next application",
+        "description": ".",
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
               }
             }
           }
