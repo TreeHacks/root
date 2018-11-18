@@ -7,6 +7,7 @@ import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
 import { IAuthState } from "../store/auth/types";
 import StanfordLogin from "./StanfordLogin";
+import DeadlinesWidget from "../common/DeadlinesWidget";
 import queryString from "query-string";
 
 const mapStateToProps = state => ({
@@ -78,6 +79,7 @@ class Login extends React.Component<ILoginProps, { signupFormData: any }> {
           <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginTop": 49 }} />
         </div>
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
+        <DeadlinesWidget />
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
         </div>

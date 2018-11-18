@@ -5,6 +5,7 @@ import { Prompt } from "react-router";
 import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
 
+import { DEADLINES } from '../constants';
 import { IFormPageWrapperProps } from "./types";
 import { cloneDeep, get, set, pull } from "lodash-es";
 import Loading from "../Loading/Loading";
@@ -66,9 +67,13 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
             schema.properties.accept_share.title = <span>I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a className="form-link" href="https://mlh.io/privacy" target="_blank" onClick={e => e.stopPropagation()}>MLH Privacy Policy</a>. I further I agree to the terms of both the <a className="form-link" href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md" target="_blank" onClick={e => e.stopPropagation()}>MLH Contest Terms and Conditions</a> and the MLH Privacy Policy.</span>;
         }
 
+        const deadline = DEADLINES.find(d => d.key === get(props, "profile.type"));
+        const hasDeadlinePassed = deadline && (new Date()) > new Date(deadline.date);
+
         const submitted = get(props, "profile.status") === "submitted";
 
         const alertMessage = submitted ? `Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.` :
+            hasDeadlinePassed ? 'Sorry, the application window has closed.' :
             this.state.showSavedAlert ? `Your application progress has been saved. Make sure you finalize and submit before the deadline.` : null;
 
         const unsavedChangesWarning = 'You have unsaved changes to your application. Are you sure you want to leave? You can save your application to continue later by clicking "Save for later" at the bottom of the page.',
@@ -81,17 +86,19 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
                 {alertMessage && <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '550px', marginTop: '60px', marginBottom: '-40px', padding: '20px', color: 'white', textAlign: 'center' }}>
                     {alertMessage}
                 </div>}
-                <FormPage
-                    submitted={submitted}
-                    onChange={e => {
-                        const userEdited = JSON.stringify(e.formData) !== JSON.stringify(props.formData);
-                        props.setData(e.formData, userEdited);
-                    }}
-                    onError={() => window.scrollTo(0, 0)}
-                    onSubmit={(e) => this.onSubmit(e)}
-                    schema={schema}
-                    uiSchema={uiSchema}
-                    formData={props.formData} />
+                {!hasDeadlinePassed ?
+                    <FormPage
+                        submitted={submitted}
+                        onChange={e => {
+                            const userEdited = JSON.stringify(e.formData) !== JSON.stringify(props.formData);
+                            props.setData(e.formData, userEdited);
+                        }}
+                        onError={() => window.scrollTo(0, 0)}
+                        onSubmit={(e) => this.onSubmit(e)}
+                        schema={schema}
+                        uiSchema={uiSchema}
+                        formData={props.formData} />
+                : null}
             </div>);
     };
 }

@@ -4,18 +4,11 @@ import { getUserProfile } from "../store/form/actions";
 import { IFormState } from "../store/form/types";
 import { IDashboardProps, IDashboardWrapperProps } from "./types";
 import Loading from "../Loading/Loading";
+import { DEADLINES } from '../constants';
 import "./Dashboard.scss";
 
 function getDeadline(type) {
-    switch (type) {
-        case "is":
-            return new Date("2018-11-27T07:59:00.000Z");
-        case "stanford":
-            return new Date("2019-02-14T07:59:00.000Z");
-        case "oos":
-        default:
-            return new Date("2018-11-20T07:59:00.000Z");
-    }
+    return new Date(DEADLINES.find(d => d.key === (type || 'oos')).date);
   }
 
 function formatDate(date) {
@@ -47,6 +40,8 @@ export const Dashboard = (props: IDashboardProps) => {
                         props.profile.status === "submitted" ? (
                             <span>
                                 Your application has been received &ndash; you are all good for now!<br /><br />We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)</span>
+                        ) : dateNow > date ? (
+                            <span>Sorry, the application window has closed.</span>
                         ) : (
                                 <div>
                                     <div>
