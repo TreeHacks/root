@@ -12,6 +12,10 @@ export const loggedIn = (userId, attributes, admin, reviewer) => ({
   reviewer
 });
 
+export const notLoggedIn = () => ({
+  type: 'LOGIN_FAILURE'
+})
+
 export const loggedOut = () => ({
   type: 'LOGOUT_SUCCESS'
 });
@@ -102,6 +106,7 @@ export function checkLoginStatus() {
       }
         dispatch(loggedIn(user.username, user.attributes, admin, reviewer));
       }).catch(e => {
+        dispatch(notLoggedIn());
         console.error(e);
       }).then(() => dispatch(loadingEnd()));
   }

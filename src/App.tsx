@@ -47,7 +47,10 @@ const MainRoutes = (props: IAppProps) => (
   <div>
     <Login />
     {props.loggedIn === false &&
-      <Redirect to="/" />
+      <Switch>
+        <Route exact={true} path='/' component={null} />
+        <Redirect to="/" />
+      </Switch>
     }
     {props.loggedIn === true &&
       <div>

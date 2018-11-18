@@ -25,6 +25,15 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         admin: action.admin,
         reviewer: action.reviewer
       };
+    case 'LOGIN_FAILURE':
+      return {
+        ...state,
+        loggedIn: false,
+        user: null,
+        userId: null,
+        admin: null,
+        reviewer: null
+      }
     case 'LOGOUT_SUCCESS':
       return {
         ...state,

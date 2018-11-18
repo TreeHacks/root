@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var forceSsl = require('force-ssl-heroku');
+const forceSsl = require('force-ssl-heroku');
+const compression = require('compression');
 
 // Set up the Express app
 const app = express();
 app.use(forceSsl);
+app.use(compression());
 
 // Set up static files
 app.use("/dist", express.static('dist'));
