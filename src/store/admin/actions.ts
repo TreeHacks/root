@@ -59,7 +59,7 @@ export const getApplicationEmails = (tableState: IReactTableState) => (dispatch,
 
 export const getExportedApplications = (tableState: IReactTableState) => (dispatch, getState) => {
   dispatch(loadingStart());
-  return dispatch(fetchApplications(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
+  return dispatch(fetchApplications(tableState, {"forms.application_info.resume": 0}, true)).then((e: { count: number, results: any[] }) => {
     saveAs(new Blob([JSON.stringify(e.results)]), "data.json");
     dispatch(setExportedApplications(e.results));
     dispatch(loadingEnd());
