@@ -23,12 +23,12 @@ export var DEADLINES = [
     "key": "is",
     "label": "in-state",
     "date": "2018-11-27T07:59:00.000Z",
-    "display_date": "November 27, 2018"
+    "display_date": "November 26, 2018"
   },
   {
     "key": "stanford",
     "label": "Stanford student",
     "date": "2019-02-14T07:59:00.000Z",
-    "display_date": "November 13, 2018"
+    "display_date": "February 13, 2019"
   }
 ];
