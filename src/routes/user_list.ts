@@ -19,7 +19,7 @@ export function getUserList(req: Request, res: Response) {
 
   Promise.all([
     query.lean().exec(),
-    Application.find({}).count()
+    Application.find(filter).count()
   ])
     .then(([results, count]) => {
       return res.status(200).json({
