@@ -70,7 +70,7 @@ export const getExportedApplications = (tableState: IReactTableState) => (dispat
   });
 };
 
-const fetchApplications = (tableState: IReactTableState, project = {}, retrieveAllPages = false) => (dispatch, getState) => {
+const fetchApplications = (tableState: IReactTableState, project = {"forms.application_info.resume": 0}, retrieveAllPages = false) => (dispatch, getState) => {
   let sort = {};
   for (let item of tableState.sorted) {
     sort[item.id] = item.desc ? 1 : 0;
