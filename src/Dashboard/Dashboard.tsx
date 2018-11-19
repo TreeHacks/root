@@ -7,10 +7,6 @@ import Loading from "../Loading/Loading";
 import { DEADLINES } from '../constants';
 import "./Dashboard.scss";
 
-function getDeadline(type) {
-    return new Date(DEADLINES.find(d => d.key === (type || 'oos')).date);
-  }
-
 function formatDate(date) {
     var monthNames = [
         "January", "February", "March",
@@ -28,10 +24,11 @@ function formatDate(date) {
 
 
 export const Dashboard = (props: IDashboardProps) => {
-    let date = getDeadline(props.profile.type);
+    const deadline = DEADLINES.find(d => d.key === (props.profile.type || 'oos'));
+    const deadlineDate = new Date(deadline.date);
     const dateNow = new Date();
-    const diffDays = Math.round(Math.abs((date.getTime() - dateNow.getTime()) / (24 * 60 * 60 * 1000)));
-    const deadline = formatDate(date);
+    const diffDays = Math.round(Math.abs((deadlineDate.getTime() - dateNow.getTime()) / (24 * 60 * 60 * 1000)));
+    const displayDeadline = deadline.display_date || deadlineDate.toLocaleString('en-US', { month: 'long', year: 'numeric', day: 'numeric' });
     return (
         <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
             <div style={{ position: 'absolute', top: "50%", left: "50%", transform: "translateX(-50%) translateY(-50%)" }}>
@@ -40,7 +37,7 @@ export const Dashboard = (props: IDashboardProps) => {
                         props.profile.status === "submitted" ? (
                             <span>
                                 Your application has been received &ndash; you are all good for now!<br /><br />We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)</span>
-                        ) : dateNow > date ? (
+                        ) : dateNow > deadlineDate ? (
                             <span>Sorry, the application window has closed.</span>
                         ) : (
                                 <div>
@@ -51,7 +48,7 @@ export const Dashboard = (props: IDashboardProps) => {
                                         {diffDays}
                                     </div>
                                     <div>
-                                        days to submit your application before the deadline:<br /><strong>{deadline}</strong>.
+                                        days to submit your application before the deadline:<br /><strong>{displayDeadline}</strong>.
                             </div>
                                 </div>
                             )
