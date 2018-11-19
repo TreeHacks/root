@@ -7,21 +7,6 @@ import Loading from "../Loading/Loading";
 import { DEADLINES } from '../constants';
 import "./Dashboard.scss";
 
-function formatDate(date) {
-    var monthNames = [
-        "January", "February", "March",
-        "April", "May", "June", "July",
-        "August", "September", "October",
-        "November", "December"
-    ];
-
-    var day = date.getDate();
-    var monthIndex = date.getMonth();
-    var year = date.getFullYear();
-
-    return monthNames[monthIndex] + ' ' + day + ', ' + year;
-}
-
 
 export const Dashboard = (props: IDashboardProps) => {
     const deadline = DEADLINES.find(d => d.key === (props.profile.type || 'oos'));
@@ -40,18 +25,18 @@ export const Dashboard = (props: IDashboardProps) => {
                         ) : dateNow > deadlineDate ? (
                             <span>Sorry, the application window has closed.</span>
                         ) : (
-                                <div>
                                     <div>
-                                        You haven't submitted your application yet. You have
-                            </div>
-                                    <div style={{ color: "#00E073", fontSize: '70px', marginBottom: -15 }}>
-                                        {diffDays}
+                                        <div>
+                                            You haven't submitted your application yet. You have
+                                        </div>
+                                        <div style={{ color: "#00E073", fontSize: '70px', marginBottom: -15 }}>
+                                            {diffDays}
+                                        </div>
+                                        <div>
+                                            days to submit your application before the deadline:<br /><strong>{displayDeadline}</strong>.
+                                        </div>
                                     </div>
-                                    <div>
-                                        days to submit your application before the deadline:<br /><strong>{displayDeadline}</strong>.
-                            </div>
-                                </div>
-                            )
+                                )
                     }
                 </div>
             </div>
