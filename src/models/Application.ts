@@ -5,7 +5,8 @@ import applicationInfoSchema from "./applicationInfoSchema";
 import additionalInfoSchema from "./additionalInfoSchema";
 import adminInfoSchema from "./adminInfoSchema";
 import reviewSchema from "./reviewSchema";
-import { STATUS } from "../constants";
+import { STATUS, TRANSPORTATION_STATUS } from "../constants";
+import {values} from "lodash";
 
 export const applicationSchema: Schema = new mongoose.Schema({
     // user id is _id.
@@ -21,8 +22,13 @@ export const applicationSchema: Schema = new mongoose.Schema({
     },
     "status": {
         type: String,
-        default: "incomplete",
-        enumValues: [STATUS.INCOMPLETE, STATUS.SUBMITTED, STATUS.WAITLISTED, STATUS.REJECTED, STATUS.ADMITTED, STATUS.ADMISSION_CONFIRMED, STATUS.ADMISSION_DECLINED]
+        default: STATUS.INCOMPLETE,
+        enumValues: values(STATUS)
+    },
+    "transportation_status": {
+        type: String,
+        default: null,
+        enumValues: values(TRANSPORTATION_STATUS)
     },
     "type": {
         type: String,

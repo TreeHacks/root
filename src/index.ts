@@ -21,6 +21,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import Application from "./models/Application";
 import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } from "./routes/user_review";
 import { bulkChangeUsers } from "./routes/user_bulk_change";
+import { setTransportationInfo, submitTransportationInfo } from "./routes/transportation_info";
 
 // Set up the Express app
 const app = express();
@@ -75,7 +76,9 @@ app.use("/", authenticatedRoute);
 
 // Auth - user must be signed in:
 authenticatedRoute.get('/users/:userId/forms/additional_info', getAdditionalInfo);
-authenticatedRoute.put('/users/:userId/forms/additional_info', setAdditionalInfo);
+// authenticatedRoute.put('/users/:userId/forms/additional_info', setAdditionalInfo);
+authenticatedRoute.put('/users/:userId/forms/additional_info/transportation', setTransportationInfo);
+authenticatedRoute.put('/users/:userId/forms/additional_info/transportation/submit', submitTransportationInfo);
 authenticatedRoute.get('/users/:userId/forms/application_info', getApplicationInfo);
 authenticatedRoute.put('/users/:userId/forms/application_info', setApplicationInfo);
 authenticatedRoute.post('/users/:userId/forms/application_info/submit', submitApplicationInfo);

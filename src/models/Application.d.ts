@@ -28,7 +28,7 @@ export interface IApplicationInfo {
     q4: String
 }
 export interface IAdditionalInfo {
-    bus_confirmed_spot: Boolean
+    transportation: any
 }
 
 export interface IApplication extends Document {
@@ -49,7 +49,8 @@ export interface IApplication extends Document {
     "email": String
    }, // foreign key
   "id": String,
-  "status": String, // only editable by admin (or this user, to a limited extent). incomplete (default), submitted, admitted, waitlisted, rejected, admission_confirmed, admission_declined
+  "status": String, // only editable by admin (or this user, to a limited extent).
   "type": String,
-  "location": String
+  "location": String,
+  "transportation_status": String
 }

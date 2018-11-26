@@ -36,7 +36,7 @@ const swagger = {
       "AdditionalInfo": {
         "type": "object",
         "properties": {
-          "bus_confirmed_spot": { "type": "boolean" }
+          "transportation": {"type": "object"}
         }
       },
       "AdminInfo": {
@@ -45,11 +45,10 @@ const swagger = {
           "transportation": {
             "type": "object",
             "properties": {
-              "method": { "type": "string" },
-              "bus_name": { "type": "string" }
+              "type": {"type": "string"},
+              "amount": {"type": "number"}
             }
-          },
-          "reimbursement_amount": { type: "number", default: null }
+          }
         }
       },
       "Review": {
@@ -86,6 +85,15 @@ const swagger = {
             type: "string",
             enumValues: ["is", "oos", "stanford"]
           }
+        }
+      },
+      "Transportation": {
+        "type": "object",
+        "properties": {
+          "address": {"type": "object"},
+          "vendor": {"type": "string"},
+          "receipt": {"type": "string"},
+          "accept": {"type": "boolean"}
         }
       }
     }
@@ -269,6 +277,62 @@ const swagger = {
             "content": {
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/AdditionalInfo" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/additional_info/transportation": {
+      "put": {
+        "summary": "Update transportation info",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/Transportation"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nModified": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/additional_info/transportation/submit": {
+      "post": {
+        "summary": "Submit transportation info",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/Transportation"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nModified": {"type": "integer"}
+                  }
+                }
               }
             }
           }
