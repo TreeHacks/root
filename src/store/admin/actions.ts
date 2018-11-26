@@ -129,8 +129,8 @@ export const performBulkChange = () => (dispatch, getState) => {
       status: status
     }
   }).then(e => {
-    dispatch(setBulkChangeIds(null));
-    dispatch(setBulkChangeStatus(null));
+    dispatch(setBulkChangeIds(""));
+    dispatch(setBulkChangeStatus(""));
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
