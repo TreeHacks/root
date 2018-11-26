@@ -22,18 +22,28 @@ export const getLeaderboard = (req, res) => {
 };
 
 export const getReviewStats = (req, res) => {
-    Application.find({
+    Promise.all([Application.find({
         $and: [
             { status: STATUS.SUBMITTED },
+            { type: 'is' },
             { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
         ]
-    }).count().then(num => {
-        res.json({
-            "results": {
-                "num_remaining": num
-            }
-        });
-    })
+    }).count().exec(), Application.find({
+        $and: [
+            { status: STATUS.SUBMITTED },
+            { type: 'oos' },
+            { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
+        ]
+    }).count().exec()])
+        .then(([num_is, num_oos]) => {
+            res.json({
+                "results": {
+                    "num_remaining": num_is + num_oos,
+                    "num_remaining_is": num_is,
+                    "num_remaining_oos": num_oos
+                }
+            });
+        })
 };
 
 export const rateReview = (req, res) => {
