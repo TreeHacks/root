@@ -12,12 +12,11 @@ const BulkChange = (props: IBulkChangeProps) => {
                 <form onSubmit={e => {e.preventDefault(); props.performBulkChange()}} >
                     <textarea className="form-control" placeholder="Enter application IDs, separated by newlines."
                         value={props.bulkChange.ids}
-                        onChange={e => {console.log(e);props.setBulkChangeIds(e.target.value)}}>
+                        onChange={e => props.setBulkChangeIds(e.target.value)}>
                     </textarea>
-
-                    Change status to:
+                    <small>Note: this won't send an email automatically. If you are accepting a batch of users, make sure you send the emails yourself using MailChimp.</small>
                     <select className="form-control" value={props.bulkChange.status} onChange={e => props.setBulkChangeStatus(e.target.value)}>
-                        <option disabled value="">Select a status...</option>
+                        <option disabled value="">Change status to...</option>
                         {Object.keys(STATUS).map(statusName => <option key={statusName} value={STATUS[statusName]}>{statusName}</option>)};
                     </select>
                     <input className="form-control" type="submit" />
