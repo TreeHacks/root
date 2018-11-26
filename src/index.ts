@@ -20,6 +20,7 @@ import { setAdminInfo } from "./routes/admin_info";
 import { MongoClient, ObjectId } from "mongodb";
 import Application from "./models/Application";
 import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } from "./routes/user_review";
+import { bulkChangeUsers } from "./routes/user_bulk_change";
 
 // Set up the Express app
 const app = express();
@@ -82,10 +83,11 @@ authenticatedRoute.post('/users/:userId/forms/application_info/submit', submitAp
 authenticatedRoute.get('/users/:userId/status', getApplicationStatus);
 authenticatedRoute.get('/users/:userId', getUserDetail);
 
-// Admin protected functions: TODO: protection.
+// Admin protected functions.
 authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStatus);
 authenticatedRoute.get('/users', [adminRoute], getUserList);
 authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
+authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);
 
 // Need custom auth:
 authenticatedRoute.put('/users/:userId/admin_info', [adminRoute], setAdminInfo);

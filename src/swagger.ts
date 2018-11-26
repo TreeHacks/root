@@ -335,6 +335,45 @@ const swagger = {
         }
       }
     },
+    "/users_bulkchange": {
+      "post": {
+        "summary": "Bulk change application status",
+        "description": "Bulk change application statuses by sending in a list of IDs.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nModified": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/review/leaderboard": {
       "get": {
         "summary": "Get review leaderboard",

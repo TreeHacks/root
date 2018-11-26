@@ -22,7 +22,7 @@ export const applicationSchema: Schema = new mongoose.Schema({
     "status": {
         type: String,
         default: "incomplete",
-        enumValues: [STATUS.INCOMPLETE, STATUS.SUBMITTED, STATUS.WAITLISTED, STATUS.REJECTED, STATUS.ADMISSION_CONFIRMED, STATUS.ADMISSION_DENIED]
+        enumValues: [STATUS.INCOMPLETE, STATUS.SUBMITTED, STATUS.WAITLISTED, STATUS.REJECTED, STATUS.ADMITTED, STATUS.ADMISSION_CONFIRMED, STATUS.ADMISSION_DECLINED]
     },
     "type": {
         type: String,

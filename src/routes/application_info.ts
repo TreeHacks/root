@@ -20,7 +20,6 @@ export function setApplicationInfo(req: Request, res: Response) {
 export function submitApplicationInfo(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
     e => {
-      // if (e.status == STATUS.INCOMPLETE) {
       // todo: share this with the frontend in some common configuration.
       const requiredFields = [
         "first_name",
@@ -51,7 +50,6 @@ export function submitApplicationInfo(req: Request, res: Response) {
         e.status = STATUS.SUBMITTED;
         sendApplicationSubmittedEmail(res.locals.user.email);
       }
-      // }
     },
     e => e.forms.application_info,
     true
