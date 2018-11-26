@@ -34,3 +34,13 @@ export var DEADLINES = [
     "display_date": "February 13, 2019"
   }
 ];
+
+export var TRANSPORTATION_STATUS = {
+  PENDING: "pending",
+  UNAVAILABLE: "unavailable",
+  AVAILABLE: "available",
+  SUBMITTED: "submitted",
+  REJECTED: "rejected",
+  APPROVED: "approved",
+  PAID: "paid"
+}
