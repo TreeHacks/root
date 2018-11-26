@@ -80,6 +80,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			API.get("treehacks", '/review/next_application', {}),
 			API.get("treehacks", '/review/stats', {})
 		]).then(([leaderboard_data, application_data, stats_data]) => {
+			window.scrollTo(0, 0);
 			this.setState({ leaderboard_data, application_data, stats_data, reviewFormData: null });
 		}).catch((err) => {
 			alert("Error, " + err);
