@@ -10,7 +10,7 @@ export interface IReactTableState {
     filtered: { id: string, value: boolean }[]
 }
 
-export interface IAdminProps extends IAdminState {
+export interface IAdminTableProps extends IAdminState {
     getApplicationList: (state: IReactTableState) => void
     changeApplicationStatus: (string) => void,
     getApplicationEmails: (state: IReactTableState) => void,

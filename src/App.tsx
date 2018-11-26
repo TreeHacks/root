@@ -66,8 +66,7 @@ const MainRoutes = (props: IAppProps) => (
                     </div>
               </div>);
           }} />
-          <Route path="/admin" exact component={Admin} />
-          <Route path="/stats" exact component={Stats} />
+          <Route path="/admin" component={Admin} />
           <Route path="/review" exact component={Review} />
         </Switch>
       </div>

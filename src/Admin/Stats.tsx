@@ -11,9 +11,11 @@ const Stats = (props: IStatsProps) => {
     return <div>
         <div className="row">
             {Object.keys(props.applicationStats).map(key => (
-                <div key={key} className="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3"><h3 className="text-white text-center">{key}</h3>
+                <div key={key} className="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3"><h3 className="text-center">{key}</h3>
                     <PieChart width={250} height={250}>
-                        <Pie data={filter(props.applicationStats[key], e => e._id !== null)} label={true} dataKey="count" nameKey="_id" />
+                        <Pie data={filter(props.applicationStats[key], e => e._id !== null)} label={true} dataKey="count" nameKey="_id"
+                            
+                        />
                         <Tooltip />
                     </PieChart>
                 </div>
