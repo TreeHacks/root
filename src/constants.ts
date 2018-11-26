@@ -3,9 +3,11 @@ export var STATUS = {
     SUBMITTED: "submitted",
     WAITLISTED: "waitlisted",
     REJECTED: "rejected",
+    ADMITTED: "admitted",
     ADMISSION_CONFIRMED: "admission_confirmed",
-    ADMISSION_DENIED: "admission_denied"
+    ADMISSION_DECLINED: "admission_declined"
 }
+
 export var TYPE = {
     IN_STATE: "is",
     OUT_OF_STATE: "oos",

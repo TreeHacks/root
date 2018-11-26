@@ -3,6 +3,7 @@ import { loadingStart, loadingEnd } from "../base/actions";
 import { IReactTableState } from "src/Admin/types";
 import { get } from "lodash-es";
 import saveAs from 'file-saver';
+import { IAdminState } from "./types";
 
 export const setApplicationList = (applicationList, pages) => ({
   type: "SET_APPLICATION_LIST",
@@ -105,6 +106,39 @@ export const getApplicationStats = () => (dispatch, getState) => {
     alert("Error getting application stats " + e);
   });
 };
+
+
+export const setBulkChangeStatus = (status) => ({
+  type: "SET_BULK_CHANGE_STATUS",
+  status
+});
+
+export const setBulkChangeIds = (ids) => ({
+  type: "SET_BULK_CHANGE_IDS",
+  ids
+});
+
+
+
+export const performBulkChange = () => (dispatch, getState) => {
+  const {ids, status} = (getState().admin as IAdminState).bulkChange;
+  dispatch(loadingStart());
+  return API.post("treehacks", `/users_bulkchange`, {
+    body: {
+      ids: ids.split("\n"),
+      status: status
+    }
+  }).then(e => {
+    dispatch(setBulkChangeIds(null));
+    dispatch(setBulkChangeStatus(null));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error performing bulk change: " + e);
+  });
+}
+
 
 export const setApplicationStatus = (status, userId) => (dispatch, getState) => {
   // todo

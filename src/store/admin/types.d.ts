@@ -7,5 +7,9 @@ export interface IAdminState {
   selectedForm: {
     id: string,
     name: string
+  },
+  bulkChange: {
+    status: string,
+    ids: string
   }
 }

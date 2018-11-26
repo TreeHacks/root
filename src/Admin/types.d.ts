@@ -26,3 +26,9 @@ export interface IStatsWrapperProps extends IAdminState {
 export interface IStatsProps {
     applicationStats: { [x: string]: any };
 }
+
+export interface IBulkChangeProps extends IAdminState {
+    performBulkChange: () => void,
+    setBulkChangeStatus: (x: string) => void,
+    setBulkChangeIds: (x: string) => void
+}

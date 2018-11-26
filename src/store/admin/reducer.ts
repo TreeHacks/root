@@ -7,7 +7,11 @@ const initialState: IAdminState = {
   applicationStats: null,
   selectedForm: null,
   applicationEmails: null,
-  exportedApplications: null
+  exportedApplications: null,
+  bulkChange: {
+    status: "",
+    ids: ""
+  }
 };
 
 const admin: Reducer<any> = (state: any = initialState, action): any => {
@@ -37,6 +41,22 @@ const admin: Reducer<any> = (state: any = initialState, action): any => {
       return {
         ...state,
         applicationStats: action.applicationStats
+      };
+    case "SET_BULK_CHANGE_STATUS":
+      return {
+        ...state,
+        bulkChange: {
+          ...state.bulkChange,
+          status: action.status
+        }
+      };
+    case "SET_BULK_CHANGE_IDS":
+      return {
+        ...state,
+        bulkChange: {
+          ...state.bulkChange,
+          ids: action.ids
+        }
       };
     default:
       return state;
