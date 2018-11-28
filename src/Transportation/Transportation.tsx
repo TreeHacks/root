@@ -46,10 +46,19 @@ class Transportation extends React.Component<ITransportationProps> {
     }
 
     // FIXME REMOVE THIS BEFORE PROD
-    // this.props.profile.status = STATUS.ADMISSION_CONFIRMED;
-    // this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.BUS, bus: TRANSPORTATION_BUS_ROUTES.USC };
-    // this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.FLIGHT, amount: 500 };
-    // this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.OTHER, amount: 100 };
+    if (window.location.search.indexOf('simulate=') !== -1) {
+      this.props.profile.status = STATUS.ADMISSION_CONFIRMED;
+
+      if (window.location.search.indexOf('simulate=bus') !== -1) {
+        this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.BUS, bus: TRANSPORTATION_BUS_ROUTES.USC };
+      } else if (window.location.search.indexOf('simulate=flight') !== -1) {
+        this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.FLIGHT, amount: 500 };
+
+      } else if (window.location.search.indexOf('simulate=other') !== -1) {
+        this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.OTHER, amount: 100 };
+
+      }
+    }
     // FIXME REMOVE THIS DEV ONLY
 
     const {
@@ -59,11 +68,12 @@ class Transportation extends React.Component<ITransportationProps> {
       transportation_status
     } = this.props.profile;
 
+    const formattedDeadline = new Date((transportation && transportation.deadline) || Date.now()).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' });
     const transportationType = (transportation && transportation.type) || TRANSPORTATION_TYPES.NONE;
     const transportationAmount = (transportation && transportation.amount) || 0;
     let transportationForm = this.props.formData || {};
 
-    if (status === STATUS.ADMISSION_CONFIRMED) {
+    if (status === STATUS.ADMISSION_CONFIRMED || status === STATUS.ADMITTED) {
 
       if (transportationType === TRANSPORTATION_TYPES.NONE) {
         return (
@@ -82,7 +92,7 @@ class Transportation extends React.Component<ITransportationProps> {
           <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '700px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
               <h5>You have been placed on a bus!</h5>
-              <p style={{maxWidth: 500, margin: '20px auto 0'}}>We are running free buses from locations in California, and we would like you to offer a spot on one :) Buses leave on Friday morning and return Sunday night. If you would like a spot on the bus listed below, you must RSVP on this page by <strong>{TRANSPORTATION_DEADLINES[transportationType]}</strong>. The bus will be first come, first served, but this shows us approximately how many seats we need. If you do not fill out this form, you will *not *be allowed to board the bus. Because you are near a bus, we do not anticipate offering you other travel reimbursement options.</p>
+              <p style={{maxWidth: 500, margin: '20px auto 0'}}>We are running free buses from locations in California, and we would like you to offer a spot on one :) Buses leave on Friday morning and return Sunday night. If you would like a spot on the bus listed below, you must RSVP on this page by <strong>{formattedDeadline}</strong>. The bus will be first come, first served, but this shows us approximately how many seats we need. If you do not fill out this form, you will *not *be allowed to board the bus. Because you are near a bus, we do not anticipate offering you other travel reimbursement options.</p>
               <p style={{maxWidth: 500, margin: '20px auto 0'}}>You <strong>must</strong> have a <u><strong>government-issued ID</strong></u> to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.</p>
 
               <div style={{margin: 40, padding: 20, backgroundColor: '#535152'}}>
@@ -105,25 +115,30 @@ class Transportation extends React.Component<ITransportationProps> {
                 </div>
               </div>
 
-              <h5>{transportationForm.accept ? "Thanks, we've received your RSVP" :  <span>You must RSVP by <strong>{TRANSPORTATION_DEADLINES[transportationType]}</strong></span>}</h5>
-              <div className="btn-container" style={{marginBottom: 0}}>
-                  <div>
-                      <input
-                          className="btn btn-custom inverted"
-                          type="submit"
-                          value="cancel RSVP"
-                          style={!transportationForm.accept ? { opacity: 0.5, pointerEvents: 'none' } : {}}
-                          disabled={!transportationForm.accept}
-                          onClick={e => { e.preventDefault(); this.submitAcceptance(false); }}
-                      />
-                      <input
-                          className="btn btn-custom"
-                          type="submit"
-                          value="RSVP"
-                          onClick={e => { e.preventDefault(); this.submitAcceptance(true); }}
-                      />
-                  </div>
-              </div>
+              <h5>{transportationForm.accept ? "Thanks, we've received your RSVP" :  <span>You must RSVP by <strong>{formattedDeadline}</strong></span>}</h5>
+
+              {status === STATUS.ADMITTED ?
+                <p style={{maxWidth: 575, margin: '20px auto 0'}}>After you confirm your spot using the dashboard, you can use this page to submit your RSVP and reserve your spot on the bus.</p>
+              :
+                <div className="btn-container" style={{marginBottom: 0}}>
+                    <div>
+                        <input
+                            className="btn btn-custom inverted"
+                            type="submit"
+                            value="cancel RSVP"
+                            style={!transportationForm.accept ? { opacity: 0.5, pointerEvents: 'none' } : {}}
+                            disabled={!transportationForm.accept}
+                            onClick={e => { e.preventDefault(); this.submitAcceptance(false); }}
+                        />
+                        <input
+                            className="btn btn-custom"
+                            type="submit"
+                            value="RSVP"
+                            onClick={e => { e.preventDefault(); this.submitAcceptance(true); }}
+                        />
+                    </div>
+                </div>
+              }
 
               {transportationForm.accept ?
                 <p><small>We've received your RSVP! You can change your status anytime up to the event if your plans change.</small></p>
@@ -167,10 +182,12 @@ class Transportation extends React.Component<ITransportationProps> {
                 </div>
               }
 
-              <h5 style={{marginTop: 40}}>{transportationForm.accept ? "Thanks, we've received your receipt" :  <span>Receipts must be uploaded by <strong>{TRANSPORTATION_DEADLINES[transportationType]}</strong></span>}</h5>
+              <h5 style={{marginTop: 40}}>{transportationForm.accept ? "Thanks, we've received your receipt" :  <span>Receipts must be uploaded by <strong>{formattedDeadline}</strong></span>}</h5>
               <h5>TreeHacks is reimbursing you up to <span style={{color: '#00b65f', fontWeight: 'bold'}}>${transportationAmount}</span></h5>
               
-              {transportationForm.accept ?
+              {status === STATUS.ADMITTED ?
+                <p style={{maxWidth: 575, margin: '20px auto 0'}}>After you confirm your spot using the dashboard, you can use this page to upload your receipts and request reimbursement.</p>
+              : transportationForm.accept ?
                 <p style={{maxWidth: 575, margin: '20px auto 0'}}>Thanks, we've received your reimbursement request.</p>
               :
                 <div>
