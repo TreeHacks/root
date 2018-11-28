@@ -2,10 +2,14 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 const additionalInfoSchema: Schema = new mongoose.Schema({
   "transportation": {
-    "address": {any: {}},
     "vendor": String,
     "receipt": String,
-    "accept": Boolean
+    "accept": Boolean,
+    "address1": String,
+    "address2": String,
+    "city": String,
+    "state": String,
+    "zip": String
   }
 }, { _id : false });
 
