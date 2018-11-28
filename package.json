@@ -6,7 +6,8 @@
   "scripts": {
     "webpack": "webpack",
     "start": "dotenv gulp serve",
-    "heroku-postbuild": "webpack --config webpack.prod.js"
+    "heroku-postbuild": "npm i -g webpack-cli && npm test && webpack --config webpack.prod.js",
+    "test": "dotenv jest"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/TreeHacks/application-portal-frontend#readme",
   "devDependencies": {
+    "@types/jest": "^23.3.10",
     "@types/react": "^16.4.7",
     "@types/react-dom": "^16.0.6",
     "babel-core": "^6.26.3",
@@ -32,6 +34,8 @@
     "css-loader": "^1.0.0",
     "dotenv-cli": "^1.4.0",
     "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
     "file-loader": "^1.1.11",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.5.0",
@@ -43,6 +47,7 @@
     "react-dom": "^16.5.2",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
+    "ts-jest": "^23.10.5",
     "ts-loader": "^4.4.2",
     "typescript": "^2.9.2",
     "webpack": "^4.20.2",
