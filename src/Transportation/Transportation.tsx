@@ -156,14 +156,13 @@ class Transportation extends React.Component<ITransportationProps> {
                 <div>
                   <h5>You have received a flight reimbursement!</h5>
                   <p style={{maxWidth: 575, margin: '20px auto'}}>We have calculated your flight cap based on the location in your application. We will reimburse the cost of your flight, up to this amount. <strong>If you do not upload your receipts by the deadline, we will assume you are declining the reimbursement, and you will not be reimbursed.</strong></p>
-                  <p style={{maxWidth: 575, margin: '20px auto'}}>Here are the guidelines you need to follow in order to receive a reimbursement:
-                  <ul style={{textAlign: 'left', marginTop: 20}}>
+                  <p style={{maxWidth: 575, margin: '20px auto'}}>Here are the guidelines you need to follow in order to receive a reimbursement:</p>
+                  <ul style={{textAlign: 'left', margin: '20px auto', maxWidth: 575}}>
                     <li>Attend TreeHacks 2019 :)</li>
                     <li>Submit a project by the project deadline the weekend-of.</li>
                     <li>Submit your flight receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.</li>
                     <li>Follow any and all TreeHacks rules &amp; the MLH Code of Conduct.</li>
                   </ul>
-                  </p>
                   <p style={{maxWidth: 575, margin: '20px auto'}}>We recommend flying into SJC, SFO, or OAK; these are the closest  airports to Stanford (in that order). Please arrange for transportation  to bring you to the venue from the airport on Friday afternoon. Plan for your flight to arrive Friday afternoon by 3pm. This will allow  for you to get to Stanford on time for dinner and other goodies we have  planned. On Sunday, expect to leave the venue around 4pm, after closing ceremony.</p>
                   <p style={{maxWidth: 575, margin: '20px auto'}}>In the case that your current flight cap prevents you from attending TreeHacks or is significantly off the mark of flight prices that you're able to find, please reach out to us at hello@treehacks.com,  and we will work something out. Our hope is to remove any and all  barriers that could prevent you from coming out to TreeHacks!</p>
                 </div>
@@ -171,14 +170,13 @@ class Transportation extends React.Component<ITransportationProps> {
                 <div>
                   <h5>You have received a travel reimbursement!</h5>
                   <p style={{maxWidth: 575, margin: '20px auto'}}>We have calculated your reimbursement amount based on the location in your application. We will reimburse the cost of your travel, up to this amount. It is up to you to decide how you get to Stanford, whether that's driving, public transportation, or another method. You must upload your receipts by the deadline listed on this page, or we will not be able to process your reimbursement.</p>
-                  <p style={{maxWidth: 575, margin: '20px auto'}}>Here are the guidelines you need to follow in order to receive a reimbursement:
-                  <ul style={{textAlign: 'left', marginTop: 20}}>
+                  <p style={{maxWidth: 575, margin: '20px auto'}}>Here are the guidelines you need to follow in order to receive a reimbursement:</p>
+                  <ul style={{textAlign: 'left', margin: '20px auto', maxWidth: 575}}>
                     <li>Attend TreeHacks 2019 :)</li>
                     <li>Submit a project by the project deadline the weekend-of.</li>
                     <li>Submit your flight receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.</li>
                     <li>Follow any and all TreeHacks rules &amp; the MLH Code of Conduct.</li>
                   </ul>
-                  </p>
                 </div>
               }
 
