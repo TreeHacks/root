@@ -85,7 +85,7 @@ export const loadData = (userId = null) => (dispatch, getState) => {
   return API.get("treehacks", `/users/${userId}/forms/${formName}`, {}).then(e => {
     dispatch(loadingEnd());
     if (subformName) {
-      e = e[subformName];
+      e = e[subformName] || {};
     }
     dispatch(setData(e));
   }).catch(e => {
