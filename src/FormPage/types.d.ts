@@ -20,7 +20,8 @@ export interface IFormPageProps {
   onSubmit: (any) => void,
   schema: any,
   uiSchema: any,
-  formData: any
+  formData: any,
+  actionButtons?: any
 }
 
 export interface CustomDateWidgetProps {

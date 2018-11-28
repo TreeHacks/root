@@ -1,0 +1,81 @@
+.transportation .treehacks-form .form-control {
+  background-color: #535152;
+}
+
+.transportation .treehacks-form .field-string:nth-child(4),
+.transportation .treehacks-form .field-string:nth-child(5),
+.transportation .treehacks-form .field-string:nth-child(6) {
+  width: calc(33% - 0.56rem);
+  margin-right: 1rem;
+  display: inline-block;
+
+  &:nth-child(6) {
+    margin-right: 0;
+  }
+}
+
+.transportation p#root_receipt__description {
+  font-size: 20px;
+  color: #fff;
+  margin-top: 1rem;
+}
+
+.transportation input#root_receipt {
+  border: 1px dashed white;
+  padding: 10px;
+  color: #fff;
+}
+
+.transportation .route {
+  margin-bottom: 2rem;
+
+  .entry {
+    position: relative;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+
+    .time, .stop {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .left, .right {
+      display: inline-block;
+    }
+
+    .left {
+      width: calc(40% - 20px);
+      text-align: right;
+    }
+
+    .right {
+      position: relative;
+      margin-left: 40px;
+      width: calc(60% - 20px);
+      text-align: left;
+
+      &:before {
+        content: '';
+        border: 3px solid #00E174;
+        border-radius: 100%;
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        left: -27px;
+        top: 3px;
+        background-color: #535152;
+      }
+    }
+
+    &:not(:last-child) {
+      &:before {
+        content: "";
+        border-left: 3px solid #00E174;
+        position: absolute;
+        left: calc(40% - 1px);
+        top: 15px;
+        height: calc(100% + 3rem);
+      }
+    }
+  }
+}

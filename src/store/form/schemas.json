@@ -265,7 +265,7 @@
     "additional_info": {
         "schema": {
             "type": "object",
-            "title": "Travel / Additional Info",
+            "title": "your travel",
             "properties": {
                 "q1": {
                     "type": "string",
@@ -276,6 +276,81 @@
         "uiSchema": {
             "ui:order": [
                 "q1"
+            ]
+        }
+    },
+    "reimbursement_info": {
+        "schema": {
+            "type": "object",
+            "title": "",
+            "properties": {
+                "vendor": {
+                    "type": "string",
+                    "title": "Vendor"
+                },
+                "address1": {
+                    "type": "string",
+                    "title": "Your address"
+                },
+                "address2": {
+                    "type": "string",
+                    "title": "Address line 2"
+                },
+                "city": {
+                    "type": "string",
+                    "title": "City"
+                },
+                "state": {
+                    "type": "string",
+                    "title": "State"
+                },
+                "zip": {
+                    "type": "string",
+                    "title": "Zip code"
+                },
+                "receipt": {
+                    "title": "Receipt",
+                    "description": "receipt upload (PDF)",
+                    "type": "string",
+                    "format": "data-url"
+                }
+            },
+            "required": [
+                "vendor",
+                "address1",
+                "city",
+                "state",
+                "zip",
+                "receipt"
+            ]
+        },
+        "uiSchema": {
+            "vendor": {
+                "ui:placeholder": "vendor (company purchased from)"
+            },
+            "address1": {
+                "ui:placeholder": "your mailing address"
+            },
+            "address2": {
+                "ui:placeholder": "address line 2"
+            },
+            "city": {
+                "ui:placeholder": "city"
+            },
+            "state": {
+                "ui:placeholder": "state"
+            },
+            "zip": {
+                "ui:placeholder": "zip code"
+            },
+            "ui:order": [
+                "vendor",
+                "address1",
+                "address2",
+                "city",
+                "state",
+                "zip",
+                "receipt"
             ]
         }
     }

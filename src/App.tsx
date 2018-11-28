@@ -10,6 +10,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { IAuthState } from "./store/auth/types";
 import Home from "./Home/Home";
 import Dashboard from "./Dashboard/Dashboard";
+import Transportation from "./Transportation/Transportation";
 import "./App.scss";
 import Review from "./Review/Review";
 import Admin from "./Admin/Admin";
@@ -58,14 +59,7 @@ const MainRoutes = (props: IAppProps) => (
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/application_info" render={() => { return <FormPageWrapper incomingFormName="application_info" />; }} />
-          <Route path="/additional_info" render={() => {
-            return (
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center' }}>
-                  There are no travel options at this time. Check back after you have received a decision about your application.
-                    </div>
-              </div>);
-          }} />
+          <Route path="/additional_info" component={Transportation} />
           <Route path="/admin" component={Admin} />
           <Route path="/review" exact component={Review} />
         </Switch>

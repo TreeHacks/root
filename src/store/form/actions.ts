@@ -29,6 +29,11 @@ export const setFormName = (formName: string) => ({
   formName
 });
 
+export const setSubformName = (subformName: string) => ({
+  type: "SET_SUBNAME",
+  subformName
+});
+
 export const getUserProfile = () => (dispatch, getState) => {
   const userId = (getState().auth as IAuthState).userId;
   return API.get("treehacks", `/users/${userId}`, {}).then(e => {
@@ -43,9 +48,12 @@ export const saveData = () => (dispatch, getState) => {
   const formData = (getState().form as IFormState).formData;
   const userId = (getState().auth as IAuthState).userId;
   const formName = (getState().form as IFormState).formName;
+  const subformName = (getState().form as IFormState).subformName;
   dispatch(loadingStart());
-  return API.put("treehacks", `/users/${userId}/forms/${formName}`, { "body": formData }).then(e => {
-    dispatch(setData(e, false));
+  return API.put("treehacks", `/users/${userId}/forms/${formName}${subformName ? `/${subformName}`: ''}`, { "body": formData }).then(e => {
+    if (!subformName) {
+      dispatch(setData(e, false));
+    }
     dispatch(loadingEnd());
     dispatch(setUserEdited(false));
   }).catch(e => {
@@ -58,8 +66,9 @@ export const saveData = () => (dispatch, getState) => {
 export const submitForm = () => (dispatch, getState) => {
   const userId = (getState().auth as IAuthState).userId;
   const formName = (getState().form as IFormState).formName;
+  const subformName = (getState().form as IFormState).subformName;
   dispatch(loadingStart());
-  return API.post("treehacks", `/users/${userId}/forms/${formName}/submit`, {}).then(e => {
+  return API.post("treehacks", `/users/${userId}/forms/${formName}${subformName ? `/${subformName}`: ''}/submit`, {}).then(e => {
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
@@ -71,9 +80,13 @@ export const submitForm = () => (dispatch, getState) => {
 export const loadData = (userId = null) => (dispatch, getState) => {
   userId = userId || (getState().auth as IAuthState).userId;
   const formName = (getState().form as IFormState).formName;
+  const subformName = (getState().form as IFormState).subformName;
   dispatch(loadingStart());
   return API.get("treehacks", `/users/${userId}/forms/${formName}`, {}).then(e => {
     dispatch(loadingEnd());
+    if (subformName) {
+      e = e[subformName];
+    }
     dispatch(setData(e));
   }).catch(e => {
     console.error(e);

@@ -43,4 +43,54 @@ export var TRANSPORTATION_STATUS = {
   REJECTED: "rejected",
   APPROVED: "approved",
   PAID: "paid"
-}
+};
+
+export var TRANSPORTATION_TYPES = {
+  BUS: "bus",
+  FLIGHT: "flight",
+  OTHER: "other",
+  NONE: "none"
+};
+
+export var TRANSPORTATION_BUS_ROUTES = {
+  USC: "usc"
+};
+
+export var TRANSPORTATION_DEADLINES = {
+  [TRANSPORTATION_TYPES.FLIGHT]: 'December 9th at 11:59pm PST',
+  [TRANSPORTATION_TYPES.BUS]: 'January 10th at 11:59pm PST',
+  [TRANSPORTATION_TYPES.OTHER]: 'February 19th at 11:59pm PST'
+};
+
+export var TRANSPORTATION_BUS_ROUTE_DETAILS = {
+  [TRANSPORTATION_BUS_ROUTES.USC]: [
+    {
+      day: 'Friday, February 15th',
+      time: '8:00am',
+      stop: 'Check in at 37th & McClintock',
+      location: 'Los Angeles'
+    },
+    {
+      day: 'Friday, February 15th',
+      time: '4:30pm',
+      stop: 'Panama St. & Via Ortega',
+      location: 'Stanford'
+    },
+    {
+      hack: true
+    },
+    {
+      day: 'Sunday, February 17th',
+      time: '8:00am',
+      stop: 'Check in at Panama St. & Via Ortega',
+      location: 'Stanford'
+    },
+    {
+      day: 'Sunday, February 17th',
+      time: '11:00pm',
+      stop: '37th & McClintock',
+      location: 'Los Angeles'
+    }
+  ],
+  // FIXME: NEED TO ADD OTHER ROUTES
+};

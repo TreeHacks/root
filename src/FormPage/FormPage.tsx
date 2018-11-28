@@ -39,7 +39,7 @@ const FileInputAndPreviewWidget = (props) => {
 
     output.push(<FileWidget key="file" {...props} value={undefined} onChange={v => {
         if (base64MimeType(v) !== 'application/pdf') {
-            window.alert('Resume must be a PDF');
+            window.alert('Uploaded file must be a PDF');
         } else {
             props.onChange(v);
         }
@@ -107,7 +107,7 @@ export default (props: IFormPageProps) => {
         onError={(e) => props.onError(e)}
         onSubmit={e => props.onSubmit(e)}>
         {!props.submitted ?
-            <div className="btn-container">
+            (props.actionButtons || <div className="btn-container">
                 <div>
                     <input
                         className="btn btn-custom inverted"
@@ -122,7 +122,7 @@ export default (props: IFormPageProps) => {
                     //onClick={e => this.onSubmit(true)}
                     />
                 </div>
-            </div>
+            </div>)
             : <div></div>}
     </Form>);
 }
