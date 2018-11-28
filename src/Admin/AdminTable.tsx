@@ -65,6 +65,22 @@ const AdminTable = (props: IAdminTableProps) => {
             "Cell": (props) => <div>{props.value}</div>
         },
         {
+            "Header": "Transportation Status",
+            "accessor": "transportation_status"
+        },
+        {
+            "Header": "Acceptance Deadline",
+            "accessor": "admin_info.acceptance.deadline"
+        },
+        {
+            "Header": "Transportation Deadline",
+            "accessor": "admin_info.transportation.deadline"
+        },
+        {
+            "Header": "Transportation Type",
+            "accessor": "admin_info.transportation.type"
+        },
+        {
             "Header": "Number of Reviews",
             "id": "reviews",
             "accessor": e => e.reviews.length,
