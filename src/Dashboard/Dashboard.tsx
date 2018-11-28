@@ -4,8 +4,9 @@ import { getUserProfile } from "../store/form/actions";
 import { IFormState } from "../store/form/types";
 import { IDashboardProps, IDashboardWrapperProps } from "./types";
 import Loading from "../Loading/Loading";
-import { DEADLINES } from '../constants';
+import { DEADLINES, STATUS } from '../constants';
 import "./Dashboard.scss";
+import AcceptanceConfirm from "./AcceptanceConfirm";
 
 
 export const Dashboard = (props: IDashboardProps) => {
@@ -18,10 +19,11 @@ export const Dashboard = (props: IDashboardProps) => {
         <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
             <div style={{ position: 'absolute', top: "50%", left: "50%", transform: "translateX(-50%) translateY(-50%)" }}>
                 <div className="dashboard-design">
-                    {
-                        props.profile.status === "submitted" ? (
+                    {props.profile.status === STATUS.ADMITTED ? <AcceptanceConfirm /> :
+                        props.profile.status === STATUS.SUBMITTED ? (
                             <span>
-                                Your application has been received &ndash; you are all good for now!<br /><br />We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)</span>
+                                Your application has been received &ndash; you are all good for now!<br /><br />We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)
+                        </span>
                         ) : dateNow > deadlineDate ? (
                             <span>Sorry, the application window has closed.</span>
                         ) : (
