@@ -4,7 +4,6 @@
   "description": "https://ap-frontend-test.herokuapp.com/",
   "main": "webpack.common.js",
   "scripts": {
-    "webpack": "webpack",
     "start": "dotenv gulp serve",
     "heroku-postbuild": "webpack --config webpack.prod.js"
   },
