@@ -30,7 +30,7 @@ export function bulkChangeUsers(req: Request, res: Response) {
                     bulk.find({ "_id": element.id }).updateOne({
                         "$set": {
                             "status": body.status,
-                            "admin_info.acceptance.deadline": new Date(element.acceptanceDeadline),
+                            "forms.admin_info.acceptance.deadline": new Date(element.acceptanceDeadline),
                             "transportation_status": TRANSPORTATION_STATUS.UNAVAILABLE
                         }
                     });
@@ -42,9 +42,9 @@ export function bulkChangeUsers(req: Request, res: Response) {
             bulk.find({ "_id": element.id }).updateOne({
                 $set: {
                     "status": body.status,
-                    "admin_info.acceptance.deadline": new Date(element.acceptanceDeadline),
-                    "admin_info.transportation": {
-                        method: element.transportationType,
+                    "forms.admin_info.acceptance.deadline": new Date(element.acceptanceDeadline),
+                    "forms.admin_info.transportation": {
+                        type: element.transportationType,
                         amount: parseFloat(element.transportationAmount),
                         id: element.transportationId,
                         deadline: new Date(element.transportationDeadline)

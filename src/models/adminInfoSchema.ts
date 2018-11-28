@@ -8,7 +8,7 @@ const adminInfoSchema: Schema = new mongoose.Schema({
     "deadline": Date
   },
   "transportation": {
-    "method": { type: String, enum: values(TRANSPORTATION_TYPE) },
+    "type": { type: String, enum: values(TRANSPORTATION_TYPE) },
     "amount": Number,
     "id": String,
     "deadline": Date
