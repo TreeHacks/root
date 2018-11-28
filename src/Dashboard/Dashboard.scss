@@ -13,6 +13,18 @@
         min-width: 300px;
         padding: 20px;
 	}
+
+    .admitted-content {
+        padding-top: 1rem;
+
+        .btn {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: #02e074;
+        }
+    }
 }
 
 @media only screen and (max-width: 1024px) {
