@@ -94,3 +94,27 @@ export const loadData = (userId = null) => (dispatch, getState) => {
     alert("Error getting data " + e);
   });
 }
+
+export const confirmAdmission = () => (dispatch, getState) => {
+  const userId = (getState().auth as IAuthState).userId;
+  dispatch(loadingStart());
+  return API.post("treehacks", `/users/${userId}/status/confirm`, {}).then(e => {
+    dispatch(getUserProfile());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error " + e);
+  });
+}
+
+export const declineAdmission = () => (dispatch, getState) => {
+  const userId = (getState().auth as IAuthState).userId;
+  dispatch(loadingStart());
+  return API.post("treehacks", `/users/${userId}/status/decline`, {}).then(e => {
+    dispatch(getUserProfile());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error " + e);
+  });
+}
