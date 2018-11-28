@@ -4,6 +4,9 @@ import { IReactTableState } from "src/Admin/types";
 import { get } from "lodash-es";
 import saveAs from 'file-saver';
 import { IAdminState } from "./types";
+import Papa from "papaparse";
+import { STATUS } from "../../constants";
+import {some} from "lodash-es";
 
 export const setApplicationList = (applicationList, pages) => ({
   type: "SET_APPLICATION_LIST",
@@ -119,13 +122,21 @@ export const setBulkChangeIds = (ids) => ({
 });
 
 
-
+const headersAdmitted = ["id", "acceptanceDeadline", "transportationType", "transportationDeadline", "transportationAmount", "transportationId"];
+const headers = ["id"];
 export const performBulkChange = () => (dispatch, getState) => {
   const {ids, status} = (getState().admin as IAdminState).bulkChange;
+  let csvData = null;
+  if (status === STATUS.ADMITTED) {
+    csvData = Papa.parse(headersAdmitted.join(",") + "\n" + ids, {header: true}).data;
+  }
+  else {
+    csvData = Papa.parse(headers.join(",") + "\n" + ids, {header: true}).data;
+  }
   dispatch(loadingStart());
   return API.post("treehacks", `/users_bulkchange`, {
     body: {
-      ids: ids.split("\n"),
+      ids: csvData,
       status: status
     }
   }).then(e => {

@@ -63,6 +63,7 @@
     "force-ssl-heroku": "^1.0.2",
     "lodash-es": "^4.17.11",
     "node-sass": "^4.9.2",
+    "papaparse": "^4.6.2",
     "query-string": "^5.1.1",
     "react-beforeunload": "^1.0.4",
     "react-bootstrap-typeahead": "^3.2.4",

@@ -9,19 +9,43 @@ const BulkChange = (props: IBulkChangeProps) => {
     return <div>
         <div className="row">
             <div className="form-group col-12 col-sm-6">
-                <form onSubmit={e => {e.preventDefault(); props.performBulkChange()}} >
-                    <textarea className="form-control" placeholder="Enter application IDs, separated by newlines."
+                <form onSubmit={e => { e.preventDefault(); props.performBulkChange() }} >
+                    <textarea required className="form-control" placeholder="Enter CSV value"
                         value={props.bulkChange.ids}
                         onChange={e => props.setBulkChangeIds(e.target.value)}>
                     </textarea>
-                    <small>Note: this won't send an email automatically. If you are accepting a batch of users, make sure you send the emails yourself using MailChimp.</small>
-                    <select className="form-control" value={props.bulkChange.status} onChange={e => props.setBulkChangeStatus(e.target.value)}>
+                    <select required className="form-control" value={props.bulkChange.status} onChange={e => props.setBulkChangeStatus(e.target.value)}>
                         <option disabled value="">Change status to...</option>
                         {Object.keys(STATUS).map(statusName => <option key={statusName} value={STATUS[statusName]}>{statusName}</option>)};
                     </select>
                     <input className="form-control" type="submit" />
                 </form>
             </div>
+            <div className="col-12 col-sm-6"><small>
+                <div>Note: this won't send an email automatically. If you are accepting a batch of users, make sure you send the emails yourself using MailChimp.</div>
+                <hr />
+                <div>
+                    Note: For admitted status, enter in the following format:
+                        <pre>
+                        "id", "acceptanceDeadline", "transportationType", "transportationDeadline", "transportationAmount", "transportationId"{"\n"}
+                        id, 2048-11-28T04:39:47.512Z, flight, 2048-11-28T04:39:47.512Z, 500,{"\n"}
+                        id2, 2048-11-28T04:39:47.512Z, bus, 2048-11-28T04:39:47.512Z, 0, A5{"\n"}
+                        id3, 2048-11-28T04:39:47.512Z, other, 2048-11-28T04:39:47.512Z, 300,{"\n"}
+                        id4, 2048-11-28T04:39:47.512Z, , , ,{"\n"}
+                        ...{"\n"}
+                    </pre>
+                </div>
+                <hr />
+                <div>
+                    Note: For all other statuses, please enter application IDs, separated by newlines. 
+                        <pre>
+                        ["id"]{"\n"}
+                        id1{"\n"}
+                        id2{"\n"}
+                        ...{"\n"}
+                    </pre>
+                </div>
+            </small></div>
         </div>
     </div>
 }
