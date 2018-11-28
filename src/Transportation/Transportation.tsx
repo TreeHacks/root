@@ -174,7 +174,7 @@ class Transportation extends React.Component<ITransportationProps> {
                   <ul style={{textAlign: 'left', margin: '20px auto', maxWidth: 575}}>
                     <li>Attend TreeHacks 2019 :)</li>
                     <li>Submit a project by the project deadline the weekend-of.</li>
-                    <li>Submit your flight receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.</li>
+                    <li>Submit your receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.</li>
                     <li>Follow any and all TreeHacks rules &amp; the MLH Code of Conduct.</li>
                   </ul>
                 </div>
