@@ -70,15 +70,15 @@ const AdminTable = (props: IAdminTableProps) => {
         },
         {
             "Header": "Acceptance Deadline",
-            "accessor": "admin_info.acceptance.deadline"
+            "accessor": "forms.admin_info.acceptance.deadline"
         },
         {
             "Header": "Transportation Deadline",
-            "accessor": "admin_info.transportation.deadline"
+            "accessor": "forms.admin_info.transportation.deadline"
         },
         {
             "Header": "Transportation Type",
-            "accessor": "admin_info.transportation.type"
+            "accessor": "forms.admin_info.transportation.type"
         },
         {
             "Header": "Number of Reviews",
