@@ -81,7 +81,7 @@ class Transportation extends React.Component<ITransportationProps> {
         return (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '700px', marginTop: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
-              <h5>You have not been given a travel reimbursement.</h5>
+              <h4>You have not been given a travel reimbursement.</h4>
               <p style={{maxWidth: 500, margin: '20px auto 0'}}>It looks like you're coming from close by, so we aren't planning to coordinate travel for you. Let us know if we made a mistake!</p>
             </div>
           </div>
@@ -93,9 +93,9 @@ class Transportation extends React.Component<ITransportationProps> {
         return (
           <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
-              <h5>You have been placed on a bus!</h5>
-              <p style={{maxWidth: 575, margin: '20px auto 0'}}>We are running free buses from locations in California, and we would like you to offer a spot on one :) Buses leave on Friday morning and return Sunday night. If you would like a spot on the bus listed below, you must RSVP on this page by <strong>{formattedDeadline}</strong>. The bus will be first come, first served, but this shows us approximately how many seats we need. If you do not fill out this form, you will *not *be allowed to board the bus. Because you are near a bus, we do not anticipate offering you other travel reimbursement options.</p>
-              <p style={{maxWidth: 575, margin: '20px auto 0'}}>You <strong>must</strong> have a <u><strong>government-issued ID</strong></u> to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.</p>
+              <h4>You have been placed on a bus!</h4>
+              <p style={{maxWidth: 575, margin: '20px auto 0'}}>We are running free buses from locations in California, and we would like you to offer a spot on one :) Buses leave on Friday morning and return Sunday night. If you would like a spot on the bus listed below, you must RSVP on this page by <strong>{formattedDeadline}</strong>. The bus will be first come, first served, but this shows us approximately how many seats we need. If you do not fill out this form, you will <u><strong>not</strong></u> be allowed to board the bus. Because you are near a bus, we do not anticipate offering you other travel reimbursement options.</p>
+              <p style={{maxWidth: 575, margin: '20px auto 0'}}>You <u><strong>must</strong></u> have a <u><strong>government-issued ID</strong></u> to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.</p>
 
               <div style={{margin: 40, padding: 20, backgroundColor: '#535152'}}>
                 <p><small>We will add information for your bus coordinator in the weeks leading up to the event. If you have questions in the meantime, please reach out to hello@treehacks.com.</small></p>
@@ -156,7 +156,7 @@ class Transportation extends React.Component<ITransportationProps> {
               
               {transportationType === TRANSPORTATION_TYPES.FLIGHT ?
                 <div>
-                  <h5>You have received a flight reimbursement!</h5>
+                  <h4>You have received a flight reimbursement!</h4>
                   <p style={{maxWidth: 575, margin: '20px auto'}}>We have calculated your flight cap based on the location in your application. We will reimburse the cost of your flight, up to this amount. <strong>If you do not upload your receipts by the deadline, we will assume you are declining the reimbursement, and you will not be reimbursed.</strong></p>
                   <p style={{maxWidth: 575, margin: '20px auto'}}>Here are the guidelines you need to follow in order to receive a reimbursement:</p>
                   <ul style={{textAlign: 'left', margin: '20px auto', maxWidth: 575}}>
@@ -170,7 +170,7 @@ class Transportation extends React.Component<ITransportationProps> {
                 </div>
               :
                 <div>
-                  <h5>You have received a travel reimbursement!</h5>
+                  <h4>You have received a travel reimbursement!</h4>
                   <p style={{maxWidth: 575, margin: '20px auto'}}>We have calculated your reimbursement amount based on the location in your application. We will reimburse the cost of your travel, up to this amount. It is up to you to decide how you get to Stanford, whether that's driving, public transportation, or another method. You must upload your receipts by the deadline listed on this page, or we will not be able to process your reimbursement.</p>
                   <p style={{maxWidth: 575, margin: '20px auto'}}>Here are the guidelines you need to follow in order to receive a reimbursement:</p>
                   <ul style={{textAlign: 'left', margin: '20px auto', maxWidth: 575}}>
