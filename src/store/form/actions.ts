@@ -36,10 +36,13 @@ export const setSubformName = (subformName: string) => ({
 
 export const getUserProfile = () => (dispatch, getState) => {
   const userId = (getState().auth as IAuthState).userId;
+  dispatch(loadingStart());
   return API.get("treehacks", `/users/${userId}`, {}).then(e => {
     dispatch(setUserProfile(e));
+    dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
+    dispatch(loadingEnd());
     alert("Error getting user data " + e);
   });
 };
