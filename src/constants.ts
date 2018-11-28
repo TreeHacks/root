@@ -81,7 +81,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS = {
     },
     {
       day: 'Sunday, February 17th',
-      time: '8:00am',
+      time: '4:00pm',
       stop: 'Check in at Panama St. & Via Ortega',
       location: 'Stanford'
     },
