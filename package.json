@@ -4,9 +4,8 @@
   "description": "https://ap-frontend-test.herokuapp.com/",
   "main": "webpack.common.js",
   "scripts": {
-    "webpack": "webpack",
     "start": "dotenv gulp serve",
-    "heroku-postbuild": "npm i -g webpack-cli && npm test && webpack --config webpack.prod.js",
+    "heroku-postbuild": "npm test && webpack --config webpack.prod.js",
     "test": "dotenv jest"
   },
   "repository": {
@@ -86,8 +85,6 @@
     "recharts": "^1.4.1",
     "redux": "^4.0.0",
     "redux-beacon": "^2.0.3",
-    "redux-thunk": "^2.3.0",
-    "webpack": "^4.16.3",
-    "webpack-cli": "^3.1.0"
+    "redux-thunk": "^2.3.0"
   }
 }
