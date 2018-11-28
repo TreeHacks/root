@@ -379,11 +379,55 @@ const swagger = {
       },
       "put": {
         "summary": "Update status",
-        "description": "Used by applicants (to a limited extent, accept/reject their selection) and otherwise by admins",
+        "description": "Used only by admins",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": { "$ref": "#/components/schemas/Status" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User status response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Status" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/status/confirm": {
+      "post": {
+        "summary": "Confirm admission",
+        "description": "Used by applicants. Status must already be STATUS.ADMITTED.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User status response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Status" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/status/decline": {
+      "post": {
+        "summary": "Decline admission",
+        "description": "Used by applicants. Status must already be STATUS.ADMITTED.",
+        "requestBody": {
+          "content": {
+            "application/json": {
             }
           }
         },
