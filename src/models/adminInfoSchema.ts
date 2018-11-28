@@ -4,10 +4,14 @@ import { values } from "lodash";
 import { TRANSPORTATION_TYPE } from "../constants";
 
 const adminInfoSchema: Schema = new mongoose.Schema({
+  "acceptance": {
+    "deadline": Date
+  },
   "transportation": {
     "method": { type: String, enum: values(TRANSPORTATION_TYPE) },
     "amount": Number,
-    "number": String
+    "id": String,
+    "deadline": Date
   }
 }, { _id: false });
 
