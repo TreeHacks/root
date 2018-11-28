@@ -46,25 +46,25 @@ class Transportation extends React.Component<ITransportationProps> {
     }
 
     // FIXME REMOVE THIS BEFORE PROD
-    if (window.location.search.indexOf('simulate=') !== -1) {
-      this.props.profile.status = STATUS.ADMISSION_CONFIRMED;
+    // if (window.location.search.indexOf('simulate=') !== -1) {
+    //   this.props.profile.status = STATUS.ADMISSION_CONFIRMED;
 
-      if (window.location.search.indexOf('simulate=bus') !== -1) {
-        this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.BUS, bus: TRANSPORTATION_BUS_ROUTES.USC };
-      } else if (window.location.search.indexOf('simulate=flight') !== -1) {
-        this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.FLIGHT, amount: 500 };
+    //   if (window.location.search.indexOf('simulate=bus') !== -1) {
+    //     this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.BUS, bus: TRANSPORTATION_BUS_ROUTES.USC };
+    //   } else if (window.location.search.indexOf('simulate=flight') !== -1) {
+    //     this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.FLIGHT, amount: 500 };
 
-      } else if (window.location.search.indexOf('simulate=other') !== -1) {
-        this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.OTHER, amount: 100 };
+    //   } else if (window.location.search.indexOf('simulate=other') !== -1) {
+    //     this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.OTHER, amount: 100 };
 
-      }
-    }
+    //   }
+    // }
     // FIXME REMOVE THIS DEV ONLY
 
     const {
       status,
       type,
-      admin_info: { transportation },
+      forms: {admin_info: { transportation }},
       transportation_status
     } = this.props.profile;
 
