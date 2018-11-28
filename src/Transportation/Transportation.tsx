@@ -66,7 +66,7 @@ class Transportation extends React.Component<ITransportationProps> {
     const {
       status,
       type,
-      forms: {admin_info: { transportation }},
+      admin_info: { transportation },
       transportation_status
     } = this.props.profile;
 
