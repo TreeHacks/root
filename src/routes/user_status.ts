@@ -13,20 +13,23 @@ export function setApplicationStatus(req: Request, res: Response) {
 }
 
 export function confirmAdmission(req: Request, res: Response) {
-  return confirmDenyAdmission(req, res, STATUS.ADMISSION_CONFIRMED);
-}
-
-export function declineAdmission(req: Request, res: Response) {
-  return confirmDenyAdmission(req, res, STATUS.ADMISSION_DECLINED);
-}
-
-function confirmDenyAdmission(req, res, newStatus) {
   return setApplicationAttribute(req, res,
     e => {
       if (e.status !== STATUS.ADMITTED) {
         res.send(400).send("Status is not admitted.");
       }
-      e.status = newStatus
+      e.status = STATUS.ADMISSION_CONFIRMED
+    },
+    e => ({status: e.status}));
+}
+
+export function declineAdmission(req: Request, res: Response) {
+  return setApplicationAttribute(req, res,
+    e => {
+      if (e.status !== STATUS.ADMITTED || e.status !== STATUS.ADMISSION_CONFIRMED) {
+        res.send(400).send("Status is not admitted or admission_confirmed.");
+      }
+      e.status = STATUS.ADMISSION_DECLINED
     },
     e => ({status: e.status}));
 }
