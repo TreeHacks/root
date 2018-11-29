@@ -6,10 +6,8 @@ import { IDashboardProps, IDashboardWrapperProps } from "./types";
 import Loading from "../Loading/Loading";
 import { DEADLINES, STATUS } from '../constants';
 import "./Dashboard.scss";
-import AcceptanceConfirm from "./AdmittedScreen";
 import AdmittedScreen from "./AdmittedScreen";
 import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
-import AdmissionConfirmedScreen from "./AdmissionConfirmedScreen";
 import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
 import { get } from "lodash-es";
 
@@ -24,10 +22,10 @@ export const Dashboard = (props: IDashboardProps) => {
         <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
             <div style={{ position: 'absolute', top: "50%", left: "50%", transform: "translateX(-50%) translateY(-50%)" }}>
                 <div className="dashboard-design">
-                    {props.profile.status === STATUS.ADMISSION_CONFIRMED ? <AdmissionConfirmedScreen /> :
+                    {props.profile.status === STATUS.ADMISSION_CONFIRMED ? <AdmittedScreen confirmedYet={true} /> :
                         props.profile.status === STATUS.ADMISSION_DECLINED ? <AdmissionDeclinedScreen /> :
                         props.profile.status === STATUS.ADMITTED && dateNow > acceptanceConfirmDeadline ? <AdmissionExpiredScreen /> :
-                        props.profile.status === STATUS.ADMITTED ? <AdmittedScreen /> :
+                        props.profile.status === STATUS.ADMITTED ? <AdmittedScreen confirmedYet={false} /> :
                         props.profile.status === STATUS.SUBMITTED ? (
                                 <span>
                                     Your application has been received &ndash; you are all good for now!<br /><br />We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)
