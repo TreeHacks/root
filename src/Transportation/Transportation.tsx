@@ -23,18 +23,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   saveData: () => dispatch(saveData()),
 });
 
-class Transportation extends React.Component<ITransportationProps> {
+export class Transportation extends React.Component<ITransportationProps> {
   constructor(props) {
     super(props);
 
     this.submitAcceptance = this.submitAcceptance.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.setFormName('additional_info');
-    this.props.setSubformName('transportation');
-    this.props.loadData();
-    this.props.getUserProfile();
   }
 
   submitAcceptance(accept) {
@@ -43,9 +36,6 @@ class Transportation extends React.Component<ITransportationProps> {
   }
 
   render() {
-    if (!this.props.formData || !this.props.profile) {
-        return <Loading />;
-    }
 
     if (MODE === 'DEV') {
       if (window.location.search.indexOf('simulate=') !== -1) {
@@ -239,4 +229,20 @@ class Transportation extends React.Component<ITransportationProps> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Transportation);
+class TransportationWrapper extends React.Component<ITransportationProps, {}> {
+  componentDidMount() {
+    this.props.setFormName('additional_info');
+    this.props.setSubformName('transportation');
+    this.props.loadData();
+    this.props.getUserProfile();
+  }
+  render() {
+      if (!this.props.formData || !this.props.profile) {
+        return <Loading />;
+      }
+      return <Transportation {...this.props}  />;
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransportationWrapper);
