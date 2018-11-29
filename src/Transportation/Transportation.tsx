@@ -173,7 +173,7 @@ export class Transportation extends React.Component<ITransportationProps> {
               }
 
               <h5 style={{marginTop: 40}}>{transportationForm.accept ? "Thanks, we've received your receipt" :  <span>Receipts must be uploaded by <strong>{formattedDeadline}</strong></span>}</h5>
-              <h5>TreeHacks is reimbursing you up to <span style={{color: '#00b65f', fontWeight: 'bold'}}>${transportationAmount}</span></h5>
+              <h5>TreeHacks is reimbursing you up to <span style={{color: '#00b65f', fontWeight: 'bold'}}>{transportationAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span></h5>
               
               {status === STATUS.ADMITTED ?
                 <p style={{maxWidth: 575, margin: '20px auto 0'}}>After you confirm your spot using the dashboard, you can use this page to upload your receipts and request reimbursement.</p>
