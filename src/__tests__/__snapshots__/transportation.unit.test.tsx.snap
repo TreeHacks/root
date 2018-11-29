@@ -16,7 +16,7 @@ exports[`bus reimbursement 1`] = `
     >
       We are running free buses from locations in California, and we would like you to offer a spot on one :) Buses leave on Friday morning and return Sunday night. If you would like a spot on the bus listed below, you must RSVP on this page by 
       <strong>
-        November 27, 2048, 8:39 PM
+        11/28/2048, 4:39:47 AM
       </strong>
       . The bus will be first come, first served, but this shows us approximately how many seats we need. If you do not fill out this form, you will 
       <u>
@@ -214,7 +214,7 @@ exports[`bus reimbursement 1`] = `
       <span>
         You must RSVP by 
         <strong>
-          November 27, 2048, 8:39 PM
+          11/28/2048, 4:39:47 AM
         </strong>
       </span>
     </h5>
@@ -299,7 +299,7 @@ exports[`flight reimbursement 1`] = `
       <span>
         Receipts must be uploaded by 
         <strong>
-          November 27, 2048, 8:39 PM
+          11/28/2048, 4:39:47 AM
         </strong>
       </span>
     </h5>
@@ -403,7 +403,7 @@ exports[`other reimbursement 1`] = `
       <span>
         Receipts must be uploaded by 
         <strong>
-          November 27, 2048, 8:39 PM
+          11/28/2048, 4:39:47 AM
         </strong>
       </span>
     </h5>
@@ -501,7 +501,7 @@ exports[`reimbursement screen when admission not yet confirmed 1`] = `
       <span>
         Receipts must be uploaded by 
         <strong>
-          November 27, 2048, 8:39 PM
+          11/28/2048, 4:39:47 AM
         </strong>
       </span>
     </h5>
