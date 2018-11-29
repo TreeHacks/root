@@ -241,6 +241,25 @@ exports[`bus reimbursement 1`] = `
 </div>
 `;
 
+exports[`don't show reimbursement if status is unavailable, even if reimbursement is defined 1`] = `
+<div
+  style="display:flex;flex-direction:column;align-items:center"
+>
+  <div
+    style="background-color:#686e77;width:100%;max-width:700px;margin-top:60px;padding:40px 20px;color:white;text-align:center"
+  >
+    <h4>
+      You have not been given a travel reimbursement.
+    </h4>
+    <p
+      style="max-width:500px;margin:20px auto 0"
+    >
+      It looks like you're coming from close by, so we aren't planning to coordinate travel for you. Let us know if we made a mistake!
+    </p>
+  </div>
+</div>
+`;
+
 exports[`flight reimbursement 1`] = `
 <div
   class="transportation"
@@ -358,6 +377,18 @@ exports[`no reimbursement 1`] = `
 </div>
 `;
 
+exports[`no reimbursement before submitting form 1`] = `
+<div
+  style="display:flex;flex-direction:column;align-items:center"
+>
+  <div
+    style="background-color:#686e77;width:100%;max-width:500px;margin-top:60px;padding:20px;color:white;text-align:center"
+  >
+    There are no travel options at this time. Check back after you have received a decision about your application.
+  </div>
+</div>
+`;
+
 exports[`other reimbursement 1`] = `
 <div
   class="transportation"
@@ -439,6 +470,18 @@ exports[`other reimbursement 1`] = `
         </div>
       </form>
     </div>
+  </div>
+</div>
+`;
+
+exports[`reimbursement screen when admission declined -- don't show reimbursement 1`] = `
+<div
+  style="display:flex;flex-direction:column;align-items:center"
+>
+  <div
+    style="background-color:#686e77;width:100%;max-width:500px;margin-top:60px;padding:20px;color:white;text-align:center"
+  >
+    There are no travel options at this time. Check back after you have received a decision about your application.
   </div>
 </div>
 `;

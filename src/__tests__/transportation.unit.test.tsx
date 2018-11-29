@@ -15,6 +15,26 @@ const deadline = "2048-11-28T04:39:47.512Z";
 
 const schemas = { application_info: { schema: {}, uiSchema: {} }, additional_info: { schema: {}, uiSchema: {} }, reimbursement_info: { schema: {}, uiSchema: {} } };
 
+it('no reimbursement before submitting form', () => {
+    // const store = mockStore({ form: {} })
+    const profile = {
+        status: STATUS.INCOMPLETE,
+        type: "oos",
+        admin_info: {
+        },
+        applications: [],
+        transportation_status: null,
+        forms: {}
+    };
+    const wrapper = render(
+        <Transportation
+            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            schemas={schemas} />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("There are no travel options at this time.");
+});
+
 
 it('no reimbursement', () => {
     // const store = mockStore({ form: {} })
@@ -78,7 +98,7 @@ it('flight reimbursement', () => {
             }
         },
         applications: [],
-        transportation_status: TRANSPORTATION_STATUS.UNAVAILABLE,
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
         forms: {}
     };
     const wrapper = render(
@@ -104,7 +124,7 @@ it('bus reimbursement', () => {
             }
         },
         applications: [],
-        transportation_status: TRANSPORTATION_STATUS.UNAVAILABLE,
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
         forms: {}
     };
     const wrapper = render(
@@ -129,7 +149,7 @@ it('other reimbursement', () => {
             }
         },
         applications: [],
-        transportation_status: TRANSPORTATION_STATUS.UNAVAILABLE,
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
         forms: {}
     };
     const wrapper = render(
@@ -142,4 +162,57 @@ it('other reimbursement', () => {
     expect(wrapper.text()).toContain("$500.30");
 });
 
-// todo: ADMISSION_DECLINED
+it('don\'t show reimbursement if status is unavailable, even if reimbursement is defined', () => {
+    // const store = mockStore({ form: {} })
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "other",
+                amount: 500.30,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.UNAVAILABLE,
+        forms: {}
+    };
+    const wrapper = render(
+        <Transportation
+            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            schemas={schemas} />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("You have not been given a travel reimbursement");
+    expect(wrapper.text()).not.toContain("You have received a travel reimbursement!");
+    expect(wrapper.text()).not.toContain("$500.30");
+});
+
+
+// TODO: FIX THIS TEST.
+it('reimbursement screen when admission declined -- don\'t show reimbursement', () => {
+    // const store = mockStore({ form: {} })
+    const profile = {
+        status: STATUS.ADMISSION_DECLINED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "other",
+                amount: 500.30,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+        forms: {}
+    };
+    const wrapper = render(
+        <Transportation
+            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            schemas={schemas} />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).not.toContain("You have received a travel reimbursement!");
+    expect(wrapper.text()).not.toContain("$500.30");
+});

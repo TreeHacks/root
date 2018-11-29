@@ -61,13 +61,13 @@ export class Transportation extends React.Component<ITransportationProps> {
     } = this.props.profile;
 
     const formattedDeadline = new Date((transportation && transportation.deadline) || Date.now()).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' });
-    const transportationType = (transportation && transportation.type) || TRANSPORTATION_TYPES.NONE;
+    const transportationType = (transportation && transportation.type) || "";
     const transportationAmount = (transportation && transportation.amount) || 0;
     let transportationForm = this.props.formData || {};
 
     if (status === STATUS.ADMISSION_CONFIRMED || status === STATUS.ADMITTED) {
 
-      if (transportationType === TRANSPORTATION_TYPES.NONE) {
+      if (transportation_status === TRANSPORTATION_STATUS.UNAVAILABLE) {
         return (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '700px', marginTop: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
@@ -131,7 +131,6 @@ export class Transportation extends React.Component<ITransportationProps> {
                     </div>
                 </div>
               }
-
               {transportationForm.accept ?
                 <p><small>We've received your RSVP! You can change your status anytime up to the event if your plans change.</small></p>
               : null}

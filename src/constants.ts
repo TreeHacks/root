@@ -48,8 +48,7 @@ export var TRANSPORTATION_STATUS = {
 export var TRANSPORTATION_TYPES = {
   BUS: "bus",
   FLIGHT: "flight",
-  OTHER: "other",
-  NONE: "none"
+  OTHER: "other"
 };
 
 export var TRANSPORTATION_BUS_ROUTES = {
