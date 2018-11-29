@@ -42,7 +42,7 @@ export class Transportation extends React.Component<ITransportationProps> {
         this.props.profile.status = STATUS.ADMISSION_CONFIRMED;
 
         if (window.location.search.indexOf('simulate=bus') !== -1) {
-          this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.BUS, bus: TRANSPORTATION_BUS_ROUTES.USC };
+          this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.BUS, id: TRANSPORTATION_BUS_ROUTES.USC };
         } else if (window.location.search.indexOf('simulate=flight') !== -1) {
           this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.FLIGHT, amount: 500 };
 
@@ -78,7 +78,7 @@ export class Transportation extends React.Component<ITransportationProps> {
         );
 
       } else if (transportationType === TRANSPORTATION_TYPES.BUS) {
-        const route = TRANSPORTATION_BUS_ROUTE_DETAILS[transportation.bus] || [];
+        const route = TRANSPORTATION_BUS_ROUTE_DETAILS[transportation.id] || [];
 
         return (
           <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
