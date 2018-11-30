@@ -133,6 +133,7 @@ export const performBulkChange = () => (dispatch, getState) => {
   else {
     csvData = Papa.parse(headers.join(",") + "\n" + ids, {header: true}).data;
   }
+  csvData = csvData.filter(e => e["id"] !== ""); // Skip newlines
   dispatch(loadingStart());
   return API.post("treehacks", `/users_bulkchange`, {
     body: {
