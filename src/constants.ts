@@ -150,7 +150,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
     },
 
     {
-      day: 'Friday, February 15th',
+      day: 'Sunday, February 17th',
       time: '10:30pm',
       stop: '10 Charles E. Young',
       location: 'Los Angeles'
