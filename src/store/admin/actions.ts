@@ -127,13 +127,19 @@ const headers = ["id"];
 export const performBulkChange = () => (dispatch, getState) => {
   const {ids, status} = (getState().admin as IAdminState).bulkChange;
   let csvData = null;
+  const opts = {header: true, skipEmptyLines: true};
   if (status === STATUS.ADMITTED) {
-    csvData = Papa.parse(headersAdmitted.join(",") + "\n" + ids, {header: true}).data;
+    csvData = Papa.parse(headersAdmitted.join(",") + "\n" + ids, opts).data;
   }
   else {
-    csvData = Papa.parse(headers.join(",") + "\n" + ids, {header: true}).data;
+    csvData = Papa.parse(headers.join(",") + "\n" + ids, opts).data;
   }
-  csvData = csvData.filter(e => e["id"] !== ""); // Skip newlines
+  for (let item of csvData) {
+    if (item.__parsed_extra) {
+      alert("Error: Too many fields are in a line. Please reformat the data.");
+      return;
+    }
+  }
   dispatch(loadingStart());
   return API.post("treehacks", `/users_bulkchange`, {
     body: {
