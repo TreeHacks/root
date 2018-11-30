@@ -172,8 +172,7 @@ export async function createApplication(user: CognitoUser) {
   const application = new Application({
     "_id": user.sub,
     "forms": {
-      "application_info": applicationInfo,
-      "additional_info": {}
+      "application_info": applicationInfo
     },
     "admin_info": {},
     "reviews": [],

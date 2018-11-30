@@ -27,14 +27,14 @@ export interface IApplicationInfo {
     q3: String,
     q4: String
 }
-export interface IAdditionalInfo {
-    transportation: any
+export interface ITransportationInfo {
+    [e: string]: any
 }
 
 export interface IApplication extends Document {
   "forms": { // can only be modified by user/editors
       "application_info": IApplicationInfo,
-      "additional_info": IAdditionalInfo
+      "transportation": ITransportationInfo
       // we can conceivably add additional forms here.
   },
   "admin_info": { // Only editable by admin.

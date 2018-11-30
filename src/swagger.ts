@@ -33,12 +33,6 @@ const swagger = {
           "university": { "type": "string" }
         }
       },
-      "AdditionalInfo": {
-        "type": "object",
-        "properties": {
-          "transportation": {"type": "object"}
-        }
-      },
       "AdminInfo": {
         "type": "object",
         "properties": {
@@ -65,7 +59,7 @@ const swagger = {
             "type": "object",
             "properties": {
               "application_info": { "$ref": "#/components/schemas/ApplicationInfo" },
-              "additional_info": { "$ref": "#/components/schemas/AdditionalInfo" }
+              "transportation": { "$ref": "#/components/schemas/Transportation" }
             }
           },
           "admin_info": { "$ref": "#/components/schemas/AdminInfo" }, // Only editable by admin.
@@ -246,44 +240,21 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/additional_info": {
+    "/users/{userId}/transportation": {
       "get": {
-        "summary": "Get additional info",
+        "summary": "Get transportation info",
         "description": "Used by applicants",
         "responses": {
           "200": {
-            "description": "User additional info response",
+            "description": "User transportation info response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/AdditionalInfo" }
+                "schema": { "$ref": "#/components/schemas/Transportation" }
               }
             }
           }
         }
       },
-      "put": {
-        "summary": "Update additional info",
-        "description": "Used by applicants",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/AdditionalInfo" }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "User additional info response",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/AdditionalInfo" }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users/{userId}/additional_info/transportation": {
       "put": {
         "summary": "Update transportation info",
         "description": "",
@@ -311,7 +282,7 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/additional_info/transportation/submit": {
+    "/users/{userId}/transportation/submit": {
       "post": {
         "summary": "Submit transportation info",
         "description": "",
