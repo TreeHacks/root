@@ -15,8 +15,17 @@ const deadline = "2048-11-28T04:39:47.512Z";
 
 const schemas = { application_info: { schema: {}, uiSchema: {} }, reimbursement_info: { schema: {}, uiSchema: {} } };
 
+const commonProps = {
+    page: 0,
+    formData: {},
+    formName: "",
+    incomingFormName: "",
+    userEdited: false,
+    schemas: schemas
+}
+
 it('no reimbursement before submitting form', () => {
-    // const store = mockStore({ form: {} })
+
     const profile = {
         status: STATUS.INCOMPLETE,
         type: "oos",
@@ -28,8 +37,8 @@ it('no reimbursement before submitting form', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
-            schemas={schemas} />
+            profile={profile} {...commonProps}
+        />
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("There are no travel options at this time.");
@@ -37,7 +46,7 @@ it('no reimbursement before submitting form', () => {
 
 
 it('no reimbursement', () => {
-    // const store = mockStore({ form: {} })
+
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
         type: "oos",
@@ -52,15 +61,15 @@ it('no reimbursement', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
-            schemas={schemas} />
+            profile={profile} {...commonProps}
+        />
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You have not been given a travel reimbursement");
 });
 
 it('reimbursement screen when admission not yet confirmed', () => {
-    // const store = mockStore({ form: {} })
+
     const profile = {
         status: STATUS.ADMITTED,
         type: "oos",
@@ -77,8 +86,8 @@ it('reimbursement screen when admission not yet confirmed', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
-            schemas={schemas} />
+            profile={profile} {...commonProps}
+        />
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You have received a flight reimbursement");
@@ -86,7 +95,7 @@ it('reimbursement screen when admission not yet confirmed', () => {
 });
 
 it('flight reimbursement', () => {
-    // const store = mockStore({ form: {} })
+
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
         type: "oos",
@@ -103,8 +112,8 @@ it('flight reimbursement', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
-            schemas={schemas} />
+            profile={profile} {...commonProps}
+        />
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You have received a flight reimbursement!");
@@ -112,7 +121,7 @@ it('flight reimbursement', () => {
 });
 
 it('bus reimbursement', () => {
-    // const store = mockStore({ form: {} })
+
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
         type: "oos",
@@ -129,15 +138,15 @@ it('bus reimbursement', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
-            schemas={schemas} />
+            profile={profile} {...commonProps}
+        />
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You have been placed on a bus!");
 });
 
 it('other reimbursement', () => {
-    // const store = mockStore({ form: {} })
+
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
         type: "oos",
@@ -154,8 +163,8 @@ it('other reimbursement', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
-            schemas={schemas} />
+            profile={profile} {...commonProps}
+        />
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You have received a travel reimbursement!");
@@ -163,7 +172,7 @@ it('other reimbursement', () => {
 });
 
 it('don\'t show reimbursement if status is unavailable, even if reimbursement is defined', () => {
-    // const store = mockStore({ form: {} })
+
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
         type: "oos",
@@ -180,8 +189,8 @@ it('don\'t show reimbursement if status is unavailable, even if reimbursement is
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
-            schemas={schemas} />
+            profile={profile} {...commonProps}
+        />
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You have not been given a travel reimbursement");
@@ -190,9 +199,8 @@ it('don\'t show reimbursement if status is unavailable, even if reimbursement is
 });
 
 
-// TODO: FIX THIS TEST.
 it('reimbursement screen when admission declined -- don\'t show reimbursement', () => {
-    // const store = mockStore({ form: {} })
+
     const profile = {
         status: STATUS.ADMISSION_DECLINED,
         type: "oos",
@@ -209,8 +217,8 @@ it('reimbursement screen when admission declined -- don\'t show reimbursement', 
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
-            schemas={schemas} />
+            profile={profile} {...commonProps}
+        />
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).not.toContain("You have received a travel reimbursement!");
