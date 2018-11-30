@@ -128,7 +128,7 @@ it('bus reimbursement', () => {
         admin_info: {
             transportation: {
                 type: "bus",
-                id: TRANSPORTATION_BUS_ROUTES.USC,
+                id: TRANSPORTATION_BUS_ROUTES.TEST,
                 deadline
             }
         },
@@ -143,6 +143,8 @@ it('bus reimbursement', () => {
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You have been placed on a bus!");
+    expect(wrapper.text()).toContain("Hack, hack, hack!");
+    expect(wrapper.text()).toContain("Charles E. Young");
 });
 
 it('other reimbursement', () => {
