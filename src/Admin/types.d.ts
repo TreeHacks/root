@@ -30,5 +30,6 @@ export interface IStatsProps {
 export interface IBulkChangeProps extends IAdminState {
     performBulkChange: () => void,
     setBulkChangeStatus: (x: string) => void,
-    setBulkChangeIds: (x: string) => void
+    setBulkChangeIds: (x: string) => void,
+    userId: string
 }

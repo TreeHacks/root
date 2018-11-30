@@ -4,6 +4,7 @@ import { IStatsWrapperProps, IStatsProps, IBulkChangeProps } from "./types";
 import { performBulkChange, setBulkChangeIds, setBulkChangeStatus } from "../store/admin/actions";
 import { IAdminState } from "../store/admin/types";
 import { STATUS } from "../constants";
+import { IAuthState } from "src/store/auth/types";
 
 const BulkChange = (props: IBulkChangeProps) => {
     return <div>
@@ -28,10 +29,10 @@ const BulkChange = (props: IBulkChangeProps) => {
                     Note: For admitted status, enter in the following format:
                         <pre>
                         "id", "acceptanceDeadline", "transportationType", "transportationDeadline", "transportationAmount", "transportationId"{"\n"}
-                        id, 2048-11-28T04:39:47.512Z, flight, 2048-11-28T04:39:47.512Z, 500,{"\n"}
-                        id2, 2048-11-28T04:39:47.512Z, bus, 2048-11-28T04:39:47.512Z, 0, A5{"\n"}
-                        id3, 2048-11-28T04:39:47.512Z, other, 2048-11-28T04:39:47.512Z, 300,{"\n"}
-                        id4, 2048-11-28T04:39:47.512Z, , , ,{"\n"}
+                        {props.userId}, 2048-11-28T04:39:47.512Z, flight, 2048-11-28T04:39:47.512Z, 500,{"\n"}
+                        {props.userId}, 2048-11-28T04:39:47.512Z, bus, 2048-11-28T04:39:47.512Z, 0, A5{"\n"}
+                        {props.userId}, 2048-11-28T04:39:47.512Z, other, 2048-11-28T04:39:47.512Z, 300,{"\n"}
+                        {props.userId}, 2048-11-28T04:39:47.512Z, , , ,{"\n"}
                         ...{"\n"}
                     </pre>
                 </div>
@@ -40,8 +41,8 @@ const BulkChange = (props: IBulkChangeProps) => {
                     Note: For all other statuses, please enter application IDs, separated by newlines. 
                         <pre>
                         ["id"]{"\n"}
-                        id1{"\n"}
-                        id2{"\n"}
+                        {props.userId}{"\n"}
+                        {props.userId}{"\n"}
                         ...{"\n"}
                     </pre>
                 </div>
@@ -51,7 +52,8 @@ const BulkChange = (props: IBulkChangeProps) => {
 }
 
 const mapStateToProps = state => ({
-    ...(state.admin as IAdminState)
+    ...(state.admin as IAdminState),
+    userId: (state.auth as IAuthState).userId
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
