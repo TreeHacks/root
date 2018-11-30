@@ -7,6 +7,11 @@ Setup
 2. Run `npm install`
 3. Run `npm start`
 
+Running tests
+Applicatin will deploy to Heroku only if tests pass.
+Run `npm test` to run tests.
+Run `npm test -- -- -u` to update snapshots.
+
 ## Environment variables in the .env file
 COGNITO_USER_POOL_ID=...
 COGNITO_CLIENT_ID=...

@@ -384,7 +384,12 @@ exports[`no reimbursement before submitting form 1`] = `
   <div
     style="background-color:#686e77;width:100%;max-width:500px;margin-top:60px;padding:20px;color:white;text-align:center"
   >
-    There are no travel options at this time. Check back after you have received a decision about your application.
+    <span>
+      There are no travel options at this time. 
+    </span>
+    <span>
+      Check back after you have received a decision about your application.
+    </span>
   </div>
 </div>
 `;
@@ -481,7 +486,12 @@ exports[`reimbursement screen when admission declined -- don't show reimbursemen
   <div
     style="background-color:#686e77;width:100%;max-width:500px;margin-top:60px;padding:20px;color:white;text-align:center"
   >
-    There are no travel options at this time. Check back after you have received a decision about your application.
+    <span>
+      There are no travel options at this time. 
+    </span>
+    <span>
+      You have declined your admission, so no transportation options are available.
+    </span>
   </div>
 </div>
 `;
