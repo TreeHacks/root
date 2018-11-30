@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { IStatsWrapperProps, IStatsProps, IBulkChangeProps } from "./types";
 import { performBulkChange, setBulkChangeIds, setBulkChangeStatus } from "../store/admin/actions";
 import { IAdminState } from "../store/admin/types";
-import { STATUS } from "../constants";
+import { STATUS, TRANSPORTATION_BUS_ROUTES } from "../constants";
 import { IAuthState } from "src/store/auth/types";
 
 const BulkChange = (props: IBulkChangeProps) => {
@@ -30,7 +30,7 @@ const BulkChange = (props: IBulkChangeProps) => {
                         <pre>
                         "id", "acceptanceDeadline", "transportationType", "transportationDeadline", "transportationAmount", "transportationId"{"\n"}
                         {props.userId}, 2048-11-28T04:39:47.512Z, flight, 2048-11-28T04:39:47.512Z, 500,{"\n"}
-                        {props.userId}, 2048-11-28T04:39:47.512Z, bus, 2048-11-28T04:39:47.512Z, 0, A5{"\n"}
+                        {props.userId}, 2048-11-28T04:39:47.512Z, bus, 2048-11-28T04:39:47.512Z, 0, {TRANSPORTATION_BUS_ROUTES.TEST}{"\n"}
                         {props.userId}, 2048-11-28T04:39:47.512Z, other, 2048-11-28T04:39:47.512Z, 300,{"\n"}
                         {props.userId}, 2048-11-28T04:39:47.512Z, , , ,{"\n"}
                         ...{"\n"}

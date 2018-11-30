@@ -7,6 +7,7 @@ import FormPage from '../FormPage/FormPage';
 import { STATUS, TYPE, TRANSPORTATION_STATUS, TRANSPORTATION_TYPES, TRANSPORTATION_BUS_ROUTES,
   TRANSPORTATION_DEADLINES, TRANSPORTATION_BUS_ROUTE_DETAILS } from '../constants';
 import { ITransportationProps } from './types';
+import RouteMap from './RouteMap';
 
 declare var MODE: string;
 
@@ -87,22 +88,7 @@ export class Transportation extends React.Component<ITransportationProps> {
 
               <div style={{margin: 40, padding: 20, backgroundColor: '#535152'}}>
                 <p><small>We will add information for your bus coordinator in the weeks leading up to the event. If you have questions in the meantime, please reach out to hello@treehacks.com.</small></p>
-                <div className="route">
-                  {route.map(({ day, time, stop, location, hack }) => {
-                    return (
-                      <div key={`${day}${time}`} className="entry">
-                        <div className="left">
-                          <div className="time">{time}</div>
-                          <div className="day">{day}</div>
-                        </div>
-                        <div className="right">
-                          <div className="stop">{hack ? 'Hack, hack, hack!' : stop}</div>
-                          <div className="location">{location}</div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                <RouteMap route={route} />
               </div>
 
               <h5>{transportationForm.accept ? "Thanks, we've received your RSVP" :  <span>You must RSVP by <strong>{formattedDeadline}</strong></span>}</h5>
