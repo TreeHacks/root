@@ -13,7 +13,7 @@ const mockStore = configureMockStore(middlewares)
 
 const deadline = "2048-11-28T04:39:47.512Z";
 
-const schemas = { application_info: { schema: {}, uiSchema: {} }, additional_info: { schema: {}, uiSchema: {} }, reimbursement_info: { schema: {}, uiSchema: {} } };
+const schemas = { application_info: { schema: {}, uiSchema: {} }, reimbursement_info: { schema: {}, uiSchema: {} } };
 
 it('no reimbursement before submitting form', () => {
     // const store = mockStore({ form: {} })
@@ -28,7 +28,7 @@ it('no reimbursement before submitting form', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
             schemas={schemas} />
     );
     expect(wrapper).toMatchSnapshot();
@@ -52,7 +52,7 @@ it('no reimbursement', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
             schemas={schemas} />
     );
     expect(wrapper).toMatchSnapshot();
@@ -77,7 +77,7 @@ it('reimbursement screen when admission not yet confirmed', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
             schemas={schemas} />
     );
     expect(wrapper).toMatchSnapshot();
@@ -103,7 +103,7 @@ it('flight reimbursement', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
             schemas={schemas} />
     );
     expect(wrapper).toMatchSnapshot();
@@ -129,7 +129,7 @@ it('bus reimbursement', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
             schemas={schemas} />
     );
     expect(wrapper).toMatchSnapshot();
@@ -154,7 +154,7 @@ it('other reimbursement', () => {
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
             schemas={schemas} />
     );
     expect(wrapper).toMatchSnapshot();
@@ -180,7 +180,7 @@ it('don\'t show reimbursement if status is unavailable, even if reimbursement is
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
             schemas={schemas} />
     );
     expect(wrapper).toMatchSnapshot();
@@ -209,7 +209,7 @@ it('reimbursement screen when admission declined -- don\'t show reimbursement', 
     };
     const wrapper = render(
         <Transportation
-            profile={profile} page={0} formData={{}} formName="" subformName="" incomingFormName="" userEdited={false}
+            profile={profile} page={0} formData={{}} formName=""  incomingFormName="" userEdited={false}
             schemas={schemas} />
     );
     expect(wrapper).toMatchSnapshot();

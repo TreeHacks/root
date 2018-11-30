@@ -262,23 +262,6 @@
             ]
         }
     },
-    "additional_info": {
-        "schema": {
-            "type": "object",
-            "title": "your travel",
-            "properties": {
-                "q1": {
-                    "type": "string",
-                    "format": "textarea"
-                }
-            }
-        },
-        "uiSchema": {
-            "ui:order": [
-                "q1"
-            ]
-        }
-    },
     "reimbursement_info": {
         "schema": {
             "type": "object",

@@ -11,13 +11,11 @@ export interface IFormState {
   },
   schemas: {
     application_info: IAuthStateSchemaItem,
-    additional_info: IAuthStateSchemaItem,
     reimbursement_info: IAuthStateSchemaItem
   },
   page: number,
   formData: any,
   formName: string,
-  subformName: string,
   userEdited: boolean
 }
 

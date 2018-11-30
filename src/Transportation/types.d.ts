@@ -9,7 +9,6 @@ export interface ITransportationProps extends IFormState {
     goHome?: () => void,
     getUserProfile?: () => void,
     setFormName?: (e: string) => void,
-    setSubformName?: (e: string) => void,
     incomingFormName: string,
     userEdited: boolean
 }

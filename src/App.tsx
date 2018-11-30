@@ -59,7 +59,7 @@ const MainRoutes = (props: IAppProps) => (
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/application_info" render={() => { return <FormPageWrapper incomingFormName="application_info" />; }} />
-          <Route path="/additional_info" component={Transportation} />
+          <Route path="/transportation" component={Transportation} />
           <Route path="/admin" component={Admin} />
           <Route path="/review" exact component={Review} />
         </Switch>

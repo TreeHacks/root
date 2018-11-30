@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './Transportation.scss';
-import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName, setSubformName } from "../store/form/actions";
+import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
 import Loading from "../Loading/Loading";
 import FormPage from '../FormPage/FormPage';
 import { STATUS, TYPE, TRANSPORTATION_STATUS, TRANSPORTATION_TYPES, TRANSPORTATION_BUS_ROUTES,
@@ -18,7 +18,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   loadData: () => { dispatch(loadData()) },
   getUserProfile: () => dispatch(getUserProfile()),
   setFormName: (e: string) => dispatch(setFormName(e)),
-  setSubformName: (e: string) => dispatch(setSubformName(e)),
   setData: (e, userEdited) => dispatch(setData(e, userEdited)),
   saveData: () => dispatch(saveData()),
 });
@@ -36,7 +35,6 @@ export class Transportation extends React.Component<ITransportationProps> {
   }
 
   render() {
-
     if (MODE === 'DEV') {
       if (window.location.search.indexOf('simulate=') !== -1) {
         this.props.profile.status = STATUS.ADMISSION_CONFIRMED;
@@ -230,8 +228,7 @@ export class Transportation extends React.Component<ITransportationProps> {
 
 class TransportationWrapper extends React.Component<ITransportationProps, {}> {
   componentDidMount() {
-    this.props.setFormName('additional_info');
-    this.props.setSubformName('transportation');
+    this.props.setFormName('transportation');
     this.props.loadData();
     this.props.getUserProfile();
   }

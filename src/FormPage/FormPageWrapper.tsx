@@ -52,7 +52,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
         });
     }
     render() {
-        if (!this.props.formData) {
+        if (!this.props.formData || this.props.formName !== this.props.incomingFormName) {
             return <Loading />;
         }
         const props = this.props;

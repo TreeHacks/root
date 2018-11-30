@@ -7,7 +7,6 @@ const initialState: IFormState = {
   page: 0,
   formData: null,
   formName: null,
-  subformName: null,
   userEdited: false
 };
 
@@ -21,13 +20,7 @@ const form: Reducer<any> = (state: any = initialState, action): any => {
     case "SET_NAME":
       return {
         ...state,
-        formName: action.formName,
-        subformName: null
-      };
-    case "SET_SUBNAME":
-      return {
-        ...state,
-        subformName: action.subformName
+        formName: action.formName
       };
     case "SET_DATA":
       return {
