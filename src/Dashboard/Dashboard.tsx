@@ -17,7 +17,7 @@ export const Dashboard = (props: IDashboardProps) => {
     const dateNow = new Date();
     const diffDays = Math.round(Math.abs((deadlineDate.getTime() - dateNow.getTime()) / (24 * 60 * 60 * 1000)));
     const displayDeadline = deadline.display_date || deadlineDate.toLocaleString('en-US', { month: 'long', year: 'numeric', day: 'numeric' });
-    const acceptanceConfirmDeadline = get(props.profile, "admin_info.acceptance.deadline");
+    const acceptanceConfirmDeadline = new Date(get(props.profile, "admin_info.acceptance.deadline"));
     return (
         <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
             <div style={{ position: 'absolute', top: "50%", left: "50%", transform: "translateX(-50%) translateY(-50%)" }}>
