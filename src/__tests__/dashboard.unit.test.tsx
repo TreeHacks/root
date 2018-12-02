@@ -3,32 +3,117 @@ import { shallow, mount, render } from 'enzyme';
 import { Provider } from "react-redux";
 import store from "../store";
 import sinon from "sinon";
+import lolex from "lolex";
 import {Dashboard} from "../Dashboard/Dashboard";
+import { STATUS, TYPE, DEADLINES } from "../constants";
+import AdmittedScreen from "../Dashboard/AdmittedScreen";
+import AdmissionDeclinedScreen from "../Dashboard/AdmissionDeclinedScreen";
+import AdmissionExpiredScreen from "../Dashboard/AdmissionExpiredScreen";
 
-const literallyJustDateNow = () => Date.now();
-
-// test('It should call and return Date.now()', () => {
-//   const realDateNow = Date.now.bind(global.Date);
-//   const dateNowStub = jest.fn(() => 1530518207007);
-//   global.Date.now = dateNowStub;
-
-//   expect(literallyJustDateNow()).toBe(1530518207007);
-//   expect(dateNowStub).toHaveBeenCalled();
-
-//   global.Date.now = realDateNow;
-// });
-
-it('renders dashboard', () => {
-    //   store.dispatch(action())
-    //   const wrapper = render(
-    //     <Provider store={store}><PaymentHistory /></Provider>
-    //   );
+it('dashboard incomplete after deadline', () => {
     const profile = {
-
+        status: STATUS.INCOMPLETE,
+        type: TYPE.OUT_OF_STATE
     };
+    const clock = lolex.install({now: new Date("01/01/2048")});
+  
     const wrapper = render(
         <Dashboard profile={ profile } />
     );
-    // expect(wrapper).toMatchSnapshot();
-    //   expect(wrapper.text()).toContain("No rows found");
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("Sorry, the application window has closed.");
+});
+
+it('dashboard incomplete before deadline', () => {
+    const profile = {
+        status: STATUS.INCOMPLETE,
+        type: TYPE.OUT_OF_STATE
+    };
+    const clock = lolex.install({now: new Date("01/01/1999")});
+  
+    const wrapper = render(
+        <Dashboard profile={ profile } />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("You haven't submitted your application yet.");
+    expect(wrapper.text()).toContain("before the deadline:November 19, 2018");
+});
+
+it('dashboard submitted', () => {
+    const profile = {
+        status: STATUS.SUBMITTED,
+        type: TYPE.OUT_OF_STATE
+    };
+  
+    const wrapper = render(
+        <Dashboard profile={ profile } />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("Your application has been received");
+});
+
+it('dashboard admitted', () => {
+    const profile = {
+        status: STATUS.ADMITTED,
+        type: TYPE.OUT_OF_STATE
+    };
+  
+    const wrapper = shallow(
+        <Dashboard profile={ profile } />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<AdmittedScreen confirmedYet={false} />)).toBe(true);
+});
+
+it('dashboard admission confirmed', () => {
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: TYPE.OUT_OF_STATE,
+        admin_info: {
+            acceptance: {
+                deadline: "2048-01-30T04:39:47.512Z"
+            }
+        }
+    };
+  
+    const wrapper = shallow(
+        <Dashboard profile={ profile } />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<AdmittedScreen confirmedYet={true} />)).toBe(true);
+});
+
+it('dashboard admission declined', () => {
+    const profile = {
+        status: STATUS.ADMISSION_DECLINED,
+        type: TYPE.OUT_OF_STATE
+    };
+  
+    const wrapper = shallow(
+        <Dashboard profile={ profile } />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<AdmissionDeclinedScreen />)).toBe(true);
+});
+
+it('dashboard admission confirm expired', () => {
+    const profile = {
+        status: STATUS.ADMITTED,
+        type: TYPE.OUT_OF_STATE,
+        admin_info: {
+            acceptance: {
+                deadline: "2018-01-30T04:39:47.512Z"
+            }
+        }
+    };
+    const clock = lolex.install({now: new Date("2018-01-30T04:39:48.512Z") });
+  
+    const wrapper = shallow(
+        <Dashboard profile={ profile } />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<AdmissionExpiredScreen />)).toBe(true);
 });
