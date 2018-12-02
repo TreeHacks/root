@@ -38,11 +38,15 @@ export interface IApplication extends Document {
       // we can conceivably add additional forms here.
   },
   "admin_info": { // Only editable by admin.
-      "transportation": {
-          "method": String,
-          "bus_name": String
+    "acceptance": {
+        "deadline": Date
       },
-      "reimbursement_amount": String
+      "transportation": {
+        "type": { type: String },
+        "amount": Number,
+        "id": String,
+        "deadline": Date
+      }
   },
   "reviews": [IReview],
   "user": {
