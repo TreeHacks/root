@@ -75,13 +75,13 @@ export async function setApplicationAttribute(req: Request, res: Response, sette
     return;
   }
   if (application.status === STATUS.SUBMITTED) {
-    res.status(400).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
+    res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
     return;
   }
 
   let deadline = getDeadline(application.type);
   if (considerDeadline && (deadline < new Date())) {
-    res.status(400).send(`Application deadline has already been passed: ${deadline.toLocaleString()}`);
+    res.status(403).send(`Application deadline has already passed: ${deadline.toLocaleString()}`);
     return;
   }
 

@@ -14,7 +14,7 @@ import { authenticatedRoute, adminRoute, reviewerRoute } from "./router/authenti
 import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
 import { getUserList, getUserStats } from "./routes/user_list";
-import { getApplicationStatus, setApplicationStatus, confirmAdmission } from "./routes/user_status";
+import { getApplicationStatus, setApplicationStatus, confirmAdmission, declineAdmission } from "./routes/user_status";
 import { setAdminInfo } from "./routes/admin_info";
 import { MongoClient, ObjectId } from "mongodb";
 import Application from "./models/Application";
@@ -87,7 +87,7 @@ authenticatedRoute.get('/users/:userId', getUserDetail);
 // Admin protected functions.
 authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStatus);
 authenticatedRoute.post('/users/:userId/status/confirm', confirmAdmission);
-authenticatedRoute.post('/users/:userId/status/decline', confirmAdmission);
+authenticatedRoute.post('/users/:userId/status/decline', declineAdmission);
 authenticatedRoute.get('/users', [adminRoute], getUserList);
 authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);
