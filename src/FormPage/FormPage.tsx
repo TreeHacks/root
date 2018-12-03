@@ -48,6 +48,10 @@ const FileInputAndPreviewWidget = (props) => {
     return output;
 };
 
+const TextareaReadOnlyWidget = (props) => {
+    return <div className="form-control">{props.value}</div>;
+}
+
 
 function base64MimeType(encoded) {
     var result = null;
@@ -86,7 +90,7 @@ function validate(formData, errors, schema) {
 export default (props: IFormPageProps) => {
     let widgets;
     if (props.submitted) {
-        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FilePreviewWidget };
+        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FilePreviewWidget, textarea: TextareaReadOnlyWidget };
     }
     else {
         widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget };
