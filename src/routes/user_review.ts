@@ -1,14 +1,12 @@
 import Application from "../models/Application";
 import { STATUS } from "../constants";
 import { IApplication } from "../models/Application.d";
+import {find} from "lodash";
 import { injectDynamicApplicationContent } from "./common";
 
-/*
-
-Application.collection.insertMany(Array.apply(null, {length: 50}).map(e => (
-    {"forms":{"application_info":{"first_name":Math.random() + "","last_name":Math.random() + "","phone":"1231232133","dob":"1900-01-01","gender":"M","race":["American Indian / Alaska Native"],"university":"Stanford University","graduation_year":"2018","level_of_study":"Undergraduate","major":"CS","accept_terms":true,"accept_share":true,"q1_goodfit":"asd","q2_experience":"sad","q3":"asdf","q4":"asdf"}},"user":{"email":"aramaswamis@gmail.com"},"status":"submitted","_id": Math.random() + "abc", "admin_info":{"reimbursement_amount":null},"reviews":[],"type":"oos"}
-)));
-*/
+// Application.collection.insertMany(Array.apply(null, {length: 50}).map(e => (
+//     {"forms":{"application_info":{"first_name":Math.random() + "","last_name":Math.random() + "","phone":"1231232133","dob":"1900-01-01","gender":"M","race":["American Indian / Alaska Native"],"university":"Stanford University","graduation_year":"2018","level_of_study":"Undergraduate","major":"CS","accept_terms":true,"accept_share":true,"q1_goodfit":"asd","q2_experience":"sad","q3":"asdf","q4":"asdf"}},"user":{"email":"aramaswamis@gmail.com"},"status":"submitted","_id": Math.random() + "abc", "admin_info":{"reimbursement_amount":null},"reviews":[],"type":"oos"}
+// )));
 
 export const getLeaderboard = (req, res) => {
     Application.aggregate([
@@ -50,7 +48,13 @@ export const rateReview = (req, res) => {
     Application.findOne(
         { "_id": req.body.application_id }).then((application: IApplication | null) => {
             if (!application) {
-                res.status(400).send("Application to rate not found");
+                res.status(404).send("Application to rate not found");
+            }
+            else if (application.reviews && application.reviews.length >= 3) {
+                res.status(403).send("Application already has 3 reviews.");
+            }
+            else if (application.reviews && find(application.reviews, {"reader": {"id": res.locals.user.sub}})) {
+                res.status(403).send("Application already has a review submitted by user " + res.locals.user.sub);
             }
             else {
                 application.reviews.push({
