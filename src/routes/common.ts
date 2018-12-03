@@ -74,7 +74,7 @@ export async function setApplicationAttribute(req: Request, res: Response, sette
     res.status(404).send("Application not found.");
     return;
   }
-  if (application.status === STATUS.SUBMITTED) {
+  if (application.status !== STATUS.INCOMPLETE) {
     res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
     return;
   }
