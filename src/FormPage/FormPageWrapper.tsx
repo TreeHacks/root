@@ -42,7 +42,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
     }
     onSubmit(submit) {
         const props = this.props;
-        (get(props, "profile.status") === "submitted" ? () => Promise.resolve(null) : props.saveData)().then(() => {
+        (get(props, "profile.status") !== "incomplete" ? () => Promise.resolve(null) : props.saveData)().then(() => {
             if (submit) {
                 return props.submitForm().then(() => props.goHome());
             } else {
@@ -70,7 +70,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
         const deadline = DEADLINES.find(d => d.key === get(props, "profile.type"));
         const hasDeadlinePassed = deadline && (new Date()) > new Date(deadline.date);
 
-        const submitted = get(props, "profile.status") === "submitted";
+        const submitted = get(props, "profile.status") !== "incomplete";
 
         const alertMessage = submitted ? `Thanks for applying! Check your dashboard for updates on your application, and email us if any of the information submitted changes.` :
             hasDeadlinePassed ? 'Sorry, the application window has closed.' :
