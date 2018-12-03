@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admission confirmed screen 1`] = `
+<div
+  className="admitted-content"
+>
+  <div>
+    <h4>
+      You're coming to Treehacks 
+      2019
+      !
+    </h4>
+    <p>
+      Admission confirmed – see you there! Make sure to review and confirm your 
+      <Link
+        replace={false}
+        to="/transportation"
+      >
+        travel information
+      </Link>
+      .
+    </p>
+  </div>
+  <button
+    className="btn btn-custom inverted"
+    onClick={[Function]}
+  >
+    decline spot
+  </button>
+  <button
+    className="btn btn-custom"
+    disabled={true}
+    onClick={[Function]}
+  >
+    already confirmed
+  </button>
+</div>
+`;
+
+exports[`Format admission deadline with PST time zone 1`] = `
+<div
+  className="admitted-content"
+>
+  <div>
+    <h4>
+      Congratulations! You have been selected to attend Treehacks 
+      2019
+      !
+    </h4>
+    <p>
+      You have until 
+      November 27, 2048 8:39 PM PST
+       to confirm your attendance at Treehacks 
+      2019
+      . If you don't confirm by then, we'll assume you can't make it and give your spot to someone else.
+    </p>
+  </div>
+  <button
+    className="btn btn-custom inverted"
+    onClick={[Function]}
+  >
+    decline spot
+  </button>
+  <button
+    className="btn btn-custom"
+    disabled={false}
+    onClick={[Function]}
+  >
+    confirm spot
+  </button>
+  <p>
+    We are committed to helping every admitted hacker get here! Check out the 
+    <Link
+      replace={false}
+      to="/transportation"
+    >
+      travel section
+    </Link>
+     for details.
+  </p>
+</div>
+`;

@@ -17,7 +17,7 @@ it('dashboard incomplete after deadline', () => {
     };
     const clock = lolex.install({now: new Date("01/01/2048")});
   
-    const wrapper = render(
+    const wrapper = shallow(
         <Dashboard profile={ profile } />
     );
     clock.uninstall();
@@ -32,7 +32,7 @@ it('dashboard incomplete before deadline', () => {
     };
     const clock = lolex.install({now: new Date("01/01/1999")});
   
-    const wrapper = render(
+    const wrapper = shallow(
         <Dashboard profile={ profile } />
     );
     clock.uninstall();
@@ -54,28 +54,10 @@ it('dashboard submitted', () => {
     expect(wrapper.text()).toContain("Your application has been received");
 });
 
-it('dashboard admitted', () => {
-    const profile = {
-        status: STATUS.ADMITTED,
-        type: TYPE.OUT_OF_STATE
-    };
-  
-    const wrapper = shallow(
-        <Dashboard profile={ profile } />
-    );
-    expect(wrapper).toMatchSnapshot();
-    expect(wrapper.contains(<AdmittedScreen confirmedYet={false} />)).toBe(true);
-});
-
 it('dashboard admission confirmed', () => {
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
-        type: TYPE.OUT_OF_STATE,
-        admin_info: {
-            acceptance: {
-                deadline: "2048-01-30T04:39:47.512Z"
-            }
-        }
+        type: TYPE.OUT_OF_STATE
     };
   
     const wrapper = shallow(
@@ -96,6 +78,25 @@ it('dashboard admission declined', () => {
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.contains(<AdmissionDeclinedScreen />)).toBe(true);
+});
+
+it('dashboard admitted', () => {
+    const DEADLINE = "2048-01-30T04:39:47.512Z";
+    const profile = {
+        status: STATUS.ADMITTED,
+        type: TYPE.OUT_OF_STATE,
+        admin_info: {
+            acceptance: {
+                deadline: DEADLINE
+            }
+        }
+    };
+  
+    const wrapper = shallow(
+        <Dashboard profile={ profile } />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<AdmittedScreen confirmedYet={false} deadline={DEADLINE} />)).toBe(true);
 });
 
 it('dashboard admission confirm expired', () => {

@@ -60,7 +60,7 @@ exports[`dashboard admission confirmed 1`] = `
     <div
       className="dashboard-design"
     >
-      <Connect(AdmittedScreen)
+      <Connect(Component)
         confirmedYet={true}
       />
     </div>
@@ -128,8 +128,9 @@ exports[`dashboard admitted 1`] = `
     <div
       className="dashboard-design"
     >
-      <Connect(AdmittedScreen)
+      <Connect(Component)
         confirmedYet={false}
+        deadline="2048-01-30T04:39:47.512Z"
       />
     </div>
   </div>
@@ -138,19 +139,30 @@ exports[`dashboard admitted 1`] = `
 
 exports[`dashboard incomplete after deadline 1`] = `
 <div
-  class="dashboard"
-  style="background-image:url('function SvgCombined_circuit(props) {
+  className="dashboard"
+  style={
+    Object {
+      "backgroundImage": "url('function SvgCombined_circuit(props) {
   return React.createElement(
     'svg', 
     Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
   );
-}')"
+}')",
+    }
+  }
 >
   <div
-    style="position:absolute;top:50%;left:50%;transform:translateX(-50%) translateY(-50%)"
+    style={
+      Object {
+        "left": "50%",
+        "position": "absolute",
+        "top": "50%",
+        "transform": "translateX(-50%) translateY(-50%)",
+      }
+    }
   >
     <div
-      class="dashboard-design"
+      className="dashboard-design"
     >
       <span>
         Sorry, the application window has closed.
@@ -162,28 +174,45 @@ exports[`dashboard incomplete after deadline 1`] = `
 
 exports[`dashboard incomplete before deadline 1`] = `
 <div
-  class="dashboard"
-  style="background-image:url('function SvgCombined_circuit(props) {
+  className="dashboard"
+  style={
+    Object {
+      "backgroundImage": "url('function SvgCombined_circuit(props) {
   return React.createElement(
     'svg', 
     Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
   );
-}')"
+}')",
+    }
+  }
 >
   <div
-    style="position:absolute;top:50%;left:50%;transform:translateX(-50%) translateY(-50%)"
+    style={
+      Object {
+        "left": "50%",
+        "position": "absolute",
+        "top": "50%",
+        "transform": "translateX(-50%) translateY(-50%)",
+      }
+    }
   >
     <div
-      class="dashboard-design"
+      className="dashboard-design"
     >
       <div>
         <div>
           You haven't submitted your application yet. You have
         </div>
         <div
-          style="color:#00E073;font-size:70px;margin-bottom:-15px"
+          style={
+            Object {
+              "color": "#00E073",
+              "fontSize": "70px",
+              "marginBottom": -15,
+            }
+          }
         >
-          7263
+          7262
         </div>
         <div>
           days to submit your application before the deadline:
