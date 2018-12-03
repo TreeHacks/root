@@ -16,7 +16,8 @@ export const Dashboard = (props: IDashboardProps) => {
     const deadline = DEADLINES.find(d => d.key === (props.profile.type || 'oos'));
     const deadlineDate = moment(deadline.date);
     const dateNow = moment();
-    const diffDays = deadlineDate.diff(dateNow, "days");
+    // const diffDays = deadlineDate.diff(dateNow, "days");
+    const diffDays = Math.round(Math.abs((deadlineDate.valueOf() - dateNow.valueOf()) / (24 * 60 * 60 * 1000)));
     const displayDeadline = deadline.display_date || deadlineDate.toLocaleString('en-US', { month: 'long', year: 'numeric', day: 'numeric' });
     const acceptanceConfirmDeadline = get(props.profile, "admin_info.acceptance.deadline");
     const acceptanceConfirmDeadlineObject = moment(acceptanceConfirmDeadline);
