@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute } from "./common";
-import { ALLOWED_TRANSITIONS_USER, TRANSPORTATION_STATUS } from "../constants";
+import { ALLOWED_TRANSITIONS_USER, TRANSPORTATION_STATUS, TRANSPORTATION_TYPE } from "../constants";
 import { IApplication } from '../models/Application.d';
 
 export function getTransportationInfo(req: Request, res: Response) {
@@ -30,6 +30,9 @@ export function submitTransportationInfo(req: Request, res: Response) {
             }
             if (new Date(e.admin_info.transportation.deadline) > new Date()) {
                 return res.status(403).send("Transportation deadline has passed.");
+            }
+            if (e.admin_info.transportation.type !== TRANSPORTATION_TYPE.FLIGHT || e.admin_info.transportation.type !== TRANSPORTATION_TYPE.OTHER) {
+                return res.status(403).send("Transportation type is not FLIGHT or OTHER.");
             }
             // todo: make list of required fields.
             // todo: share this with the frontend in some common configuration.

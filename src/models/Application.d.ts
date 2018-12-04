@@ -42,7 +42,7 @@ export interface IApplication extends Document {
         "deadline": Date
       },
       "transportation": {
-        "type": { type: String },
+        "type": String,
         "amount": Number,
         "id": String,
         "deadline": Date
