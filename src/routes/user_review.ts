@@ -118,4 +118,4 @@ export const reviewNextApplication = (req, res) => {
     })
 };
 
-db.applications.find({'type': 'oos', 'status': 'submitted', 'reviews.0': { $exists: false }}).count()
+// db.applications.find({'type': 'oos', 'status': 'submitted', 'reviews.0': { $exists: false }}).count()
