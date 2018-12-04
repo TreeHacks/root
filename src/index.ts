@@ -7,6 +7,7 @@ const forceSsl = require('force-ssl-heroku');
 const compression = require('compression');
 import cors from "cors";
 import swaggerDocument from "./swagger";
+import filePlugin from './utils/file_plugin';
 const port = process.env.PORT || 3000;
 
 
@@ -30,6 +31,7 @@ app.use(compression());
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:65210/test").catch(function (reason: string) {
     console.log('Unable to connect to the mongodb instance. Error: ', reason);
 });
+mongoose.plugin(filePlugin);
 
 // Set up static files
 app.use(express.static('public'));
