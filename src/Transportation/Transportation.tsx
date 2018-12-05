@@ -167,7 +167,7 @@ export class Transportation extends React.Component<ITransportationProps> {
                   onError={() => window.scrollTo(0, 0)}
                   onSubmit={(e) => {
                     this.props.saveData().then(() => {
-                      this.props.submitForm();
+                      this.props.submitForm().then(() => this.props.getUserProfile());;
                     });
                   }}
                   schema={this.props.schemas.reimbursement_info.schema}
