@@ -239,6 +239,7 @@ input[type="date"]:valid:before {
     width: 41%;
     font-size: 20px !important;
     margin-bottom: 25px;
+    white-space: pre-wrap;
 }
 
 .btn-custom+.btn-custom {
