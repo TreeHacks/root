@@ -35,7 +35,7 @@ module.exports = {
       MODE: `"${process.env.MODE}"`
     }),
     new HtmlWebpackPlugin({
-      title: 'Treehacks Client',
+      title: 'TreeHacks Client',
       template: './src/index.html',
       filename: `../index.html`
     })

@@ -1,4 +1,4 @@
-# Treehacks application portal frontend
+# TreeHacks application portal frontend
 
 https://ap-frontend-test.herokuapp.com/
 
