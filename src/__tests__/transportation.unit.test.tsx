@@ -51,9 +51,6 @@ it('no reimbursement', () => {
         status: STATUS.ADMISSION_CONFIRMED,
         type: "oos",
         admin_info: {
-            transportation: {
-                type: ""
-            }
         },
         applications: [],
         transportation_status: TRANSPORTATION_STATUS.UNAVAILABLE,

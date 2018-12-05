@@ -6,7 +6,17 @@ export interface IFormState {
     status: string,
     transportation_status: string,
     type: string,
-    admin_info: any,
+    admin_info: {
+      "acceptance"?: {
+        "deadline": Date
+      },
+      "transportation"?: {
+        "type": string,
+        "amount"?: Number,
+        "id"?: string,
+        "deadline": String
+      }
+  },
     forms: any
   },
   schemas: {

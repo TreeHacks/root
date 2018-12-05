@@ -8,6 +8,8 @@ import { STATUS, TYPE, TRANSPORTATION_STATUS, TRANSPORTATION_TYPES, TRANSPORTATI
   TRANSPORTATION_DEADLINES, TRANSPORTATION_BUS_ROUTE_DETAILS } from '../constants';
 import { ITransportationProps } from './types';
 import RouteMap from './RouteMap';
+import FlightReimbursementHeader from './FlightReimbursementHeader';
+import moment from "moment-timezone";
 
 declare var MODE: string;
 
@@ -32,7 +34,14 @@ export class Transportation extends React.Component<ITransportationProps> {
 
   submitAcceptance(accept) {
     this.props.setData({ accept }, true);
-    this.props.saveData();
+    this.props.saveData().then(() => {
+      if (accept === true) {
+        if (this.props.profile.admin_info.transportation.type === TRANSPORTATION_TYPES.FLIGHT || this.props.profile.admin_info.transportation.type === TRANSPORTATION_TYPES.OTHER) {
+          this.props.submitForm();
+        }
+      }
+    });
+    
   }
 
   render() {
@@ -41,12 +50,12 @@ export class Transportation extends React.Component<ITransportationProps> {
         this.props.profile.status = STATUS.ADMISSION_CONFIRMED;
 
         if (window.location.search.indexOf('simulate=bus') !== -1) {
-          this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.BUS, id: TRANSPORTATION_BUS_ROUTES.USC };
+          this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.BUS, id: TRANSPORTATION_BUS_ROUTES.USC, deadline: "2048-11-28T04:39:47.512Z" };
         } else if (window.location.search.indexOf('simulate=flight') !== -1) {
-          this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.FLIGHT, amount: 500 };
+          this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.FLIGHT, amount: 500, deadline: "2048-11-28T04:39:47.512Z" };
 
         } else if (window.location.search.indexOf('simulate=other') !== -1) {
-          this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.OTHER, amount: 100 };
+          this.props.profile.admin_info.transportation = { type: TRANSPORTATION_TYPES.OTHER, amount: 100, deadline: "2048-11-28T04:39:47.512Z" };
 
         }
       }
@@ -59,7 +68,7 @@ export class Transportation extends React.Component<ITransportationProps> {
       transportation_status
     } = this.props.profile;
 
-    const formattedDeadline = new Date((transportation && transportation.deadline) || Date.now()).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' });
+    const formattedDeadline = moment(transportation && transportation.deadline).tz("America/Los_Angeles").format("LLL z");
     const transportationType = (transportation && transportation.type) || "";
     const transportationAmount = (transportation && transportation.amount) || 0;
     let transportationForm = this.props.formData || {};
@@ -128,19 +137,7 @@ export class Transportation extends React.Component<ITransportationProps> {
             <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
               
               {transportationType === TRANSPORTATION_TYPES.FLIGHT ?
-                <div>
-                  <h4>You have received a flight reimbursement!</h4>
-                  <p style={{maxWidth: 575, margin: '20px auto'}}>We have calculated your flight cap based on the location in your application. We will reimburse the cost of your flight, up to this amount. <strong>If you do not upload your receipts by the deadline, we will assume you are declining the reimbursement, and you will not be reimbursed.</strong></p>
-                  <p style={{maxWidth: 575, margin: '20px auto'}}>Here are the guidelines you need to follow in order to receive a reimbursement:</p>
-                  <ul style={{textAlign: 'left', margin: '20px auto', maxWidth: 575}}>
-                    <li>Attend TreeHacks 2019 :)</li>
-                    <li>Submit a project by the project deadline the weekend-of.</li>
-                    <li>Submit your flight receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.</li>
-                    <li>Follow any and all TreeHacks rules &amp; the MLH Code of Conduct.</li>
-                  </ul>
-                  <p style={{maxWidth: 575, margin: '20px auto'}}>We recommend flying into SJC, SFO, or OAK; these are the closest  airports to Stanford (in that order). Please arrange for transportation  to bring you to the venue from the airport on Friday afternoon. Plan for your flight to arrive Friday afternoon by 3pm. This will allow  for you to get to Stanford on time for dinner and other goodies we have  planned. On Sunday, expect to leave the venue around 4pm, after closing ceremony.</p>
-                  <p style={{maxWidth: 575, margin: '20px auto'}}>In the case that your current flight cap prevents you from attending TreeHacks or is significantly off the mark of flight prices that you're able to find, please reach out to us at hello@treehacks.com,  and we will work something out. Our hope is to remove any and all  barriers that could prevent you from coming out to TreeHacks!</p>
-                </div>
+                <FlightReimbursementHeader />
               :
                 <div>
                   <h4>You have received a travel reimbursement!</h4>
