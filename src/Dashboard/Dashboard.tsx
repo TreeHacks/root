@@ -25,7 +25,7 @@ export const Dashboard = (props: IDashboardProps) => {
     const acceptanceConfirmDeadlineObject = moment(acceptanceConfirmDeadline);
     return (
         <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
-            <div style={{ position: 'absolute', top: "50%", left: "50%", transform: "translateX(-50%) translateY(-50%)" }}>
+            <div className="treehacks-dashboard-message-container">
                 <div className="dashboard-design">
                     {
                         props.profile.status === STATUS.REJECTED ? <RejectedScreen /> :
