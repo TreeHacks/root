@@ -78,7 +78,7 @@ app.use("/", authenticatedRoute);
 // Auth - user must be signed in:
 authenticatedRoute.get('/users/:userId/forms/transportation', getTransportationInfo);
 authenticatedRoute.put('/users/:userId/forms/transportation', setTransportationInfo);
-authenticatedRoute.put('/users/:userId/forms/transportation/submit', submitTransportationInfo);
+authenticatedRoute.post('/users/:userId/forms/transportation/submit', submitTransportationInfo);
 authenticatedRoute.get('/users/:userId/forms/application_info', getApplicationInfo);
 authenticatedRoute.put('/users/:userId/forms/application_info', setApplicationInfo);
 authenticatedRoute.post('/users/:userId/forms/application_info/submit', submitApplicationInfo);
