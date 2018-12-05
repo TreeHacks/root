@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
+
 const applicationInfoSchema: Schema = new mongoose.Schema({
   first_name: String,
   last_name: String,

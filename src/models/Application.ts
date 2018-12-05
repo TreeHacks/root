@@ -7,6 +7,7 @@ import reviewSchema from "./reviewSchema";
 import { STATUS, TRANSPORTATION_STATUS } from "../constants";
 import {values} from "lodash";
 import transportationInfoSchema from "./transportationInfoSchema";
+import s3FilePlugin from "../utils/file_plugin";
 
 export const applicationSchema: Schema = new mongoose.Schema({
     // user id is _id.
@@ -40,5 +41,7 @@ export const applicationSchema: Schema = new mongoose.Schema({
     }
 });
 
+applicationSchema.plugin(s3FilePlugin);
+
 const model: Model<IApplication> = mongoose.model("Application", applicationSchema);
-export default model;
+export default model; 

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
+
 const transportationInfoSchema: Schema = new mongoose.Schema({
   "vendor": String,
   "receipt": String,

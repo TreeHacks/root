@@ -17,22 +17,6 @@ function getDeadline(type) {
   }
 }
 
-export async function injectDynamicApplicationContent(application: IApplication) {
-  // Inject fresh resume url from s3
-  const resume = application && application.forms.application_info.resume;
-  if (resume && resume.indexOf('data:') !== 0) {
-    try {
-      const url = await generateSignedUrlForFile(application._id);
-      application.forms.application_info.resume = url;
-    } catch (e) {
-      // fall through - fixme add error logging
-      console.error(e);
-    }
-  }
-
-  return application;
-}
-
 /*
  * Get application attribute from current request.
  * req - Request (must have userId param)
@@ -52,9 +36,6 @@ export async function getApplicationAttribute(req: Request, res: Response, gette
     }
   }
   else {
-    // Inject resume from s3
-    application = await injectDynamicApplicationContent(application);
-
     res.status(200).send(getter(application));
   }
 }
@@ -81,27 +62,7 @@ export async function setApplicationAttribute(req: Request, res: Response, sette
     return;
   }
 
-  const originalResume = application.forms.application_info.resume;
-
   setter(application);
-
-  // Handle base64 resumes => s3
-  // If upload fails for whatever reason, just persist the base64
-  const resume = application.forms.application_info.resume;
-  if (resume && resume.indexOf('data:') === 0) {
-    try {
-      const result = await uploadBase64Content(application._id, resume);
-      if (result.Key) {
-        application.forms.application_info.resume = result.Key;
-      }
-    } catch (e) {
-      // fall through - fixme add error logging
-      console.error(e);
-    }
-  } else {
-    // If resume was not freshly uploaded, just persist the old one
-    application.forms.application_info.resume = originalResume;
-  }
 
   await application.save();
 
