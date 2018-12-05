@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
-import { S3File } from '../utils/file_plugin';
 
 const applicationInfoSchema: Schema = new mongoose.Schema({
   first_name: String,
@@ -15,7 +14,7 @@ const applicationInfoSchema: Schema = new mongoose.Schema({
   major: String,
   skill_level: Number,
   hackathon_experience: Number,
-  resume: S3File,
+  resume: String,
   accept_terms: Boolean,
   accept_share: Boolean,
   q1_goodfit: String,

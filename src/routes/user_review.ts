@@ -1,7 +1,7 @@
 import Application from "../models/Application";
 import { STATUS } from "../constants";
 import { IApplication } from "../models/Application.d";
-import { injectDynamicApplicationContent } from "./common";
+import { injectDynamicApplicationContent } from "../utils/file_plugin";
 
 /*
 
@@ -106,8 +106,7 @@ export const reviewNextApplication = (req, res) => {
                 return await data;
             }
         }).then(async data => {
-            let application = data[0];
-            application = await injectDynamicApplicationContent(application);
+            const application = await injectDynamicApplicationContent(data[0]);
             res.json(application);
         });
     })
