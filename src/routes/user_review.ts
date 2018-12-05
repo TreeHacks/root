@@ -5,9 +5,11 @@ import {find} from "lodash";
 import { injectDynamicApplicationContent } from "./common";
 
 // Uncomment to insert dummy data for testing.
+// let TYPE = "oos";
 // Application.collection.insertMany(Array.apply(null, {length: 50}).map(e => (
-    // {"forms":{"application_info":{"first_name":Math.random() + "","last_name":Math.random() + "","phone":"1231232133","dob":"1900-01-01","gender":"M","race":["American Indian / Alaska Native"],"university":"Stanford University","graduation_year":"2018","level_of_study":"Undergraduate","major":"CS","accept_terms":true,"accept_share":true,"q1_goodfit":"asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd def def def dfef dfe fd sf ds fsd f sd fsd f dsfjskdlfjs dklf sld flsdj fkljsd fkl sjdlkfj sdklf jskdl fjlskd  asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd  ajskdlasj dklas jkdl ajskld ajskljdklasjdkla","q2_experience":"sad","q3":"asdf","q4":"asdf"}},"user":{"email":"aramaswamis@gmail.com"},"status":"submitted","_id": Math.random() + "abc", "admin_info":{"reimbursement_amount":null},"reviews":[],"type":"oos"}
+//     {"forms":{"application_info":{"first_name":Math.random() + "","last_name":Math.random() + "","phone":"1231232133","dob":"1900-01-01","gender":"M","race":["American Indian / Alaska Native"],"university":"Stanford University","graduation_year":"2018","level_of_study":"Undergraduate","major":"CS","accept_terms":true,"accept_share":true,"q1_goodfit":"asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd def def def dfef dfe fd sf ds fsd f sd fsd f dsfjskdlfjs dklf sld flsdj fkljsd fkl sjdlkfj sdklf jskdl fjlskd  asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd  ajskdlasj dklas jkdl ajskld ajskljdklasjdkla","q2_experience":"sad","q3":"asdf","q4":"asdf"}},"user":{"email":"aramaswamis@gmail.com"},"status":"submitted","_id": Math.random() + "abc", "admin_info":{"reimbursement_amount":null},"reviews":[],"type":TYPE}
 // )));
+
 
 export const getLeaderboard = (req, res) => {
     Application.aggregate([
@@ -86,13 +88,13 @@ export const reviewNextApplication = (req, res) => {
     for (let field of applicationReviewDisplayFields) {
         projectedFields[`forms.application_info.${field}`] = 1;
     }
-    let createAggregationPipeline = (getOos) => ([
+    let createAggregationPipeline = (type: string) => ([
         {
             $match: {
                 $and: [
                     { 'reviews.reader.id': { $ne: res.locals.user.sub } }, // Not already reviewed by current user
                     { status: STATUS.SUBMITTED },
-                    { type: getOos ? "oos" : { $ne: "oos" } },
+                    { type: type },
                     { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }
@@ -103,9 +105,9 @@ export const reviewNextApplication = (req, res) => {
     Application.findOne({
         _id: (res.locals.user.sub)
     }).then(data => {
-        Application.aggregate(createAggregationPipeline(true)).then(async data => {
+        Application.aggregate(createAggregationPipeline("oos")).then(async data => {
             if (!data || data.length === 0) {
-                return await Application.aggregate(createAggregationPipeline(false));
+                return await Application.aggregate(createAggregationPipeline("is"));
             }
             else {
                 return await data;
