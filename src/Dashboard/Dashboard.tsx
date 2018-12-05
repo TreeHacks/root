@@ -10,7 +10,9 @@ import AdmittedScreen from "./AdmittedScreen";
 import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
 import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
 import { get } from "lodash-es";
-const moment = require("moment-timezone");
+import WaitlistedScreen from "./WaitlistedScreen";
+import RejectedScreen from "./RejectedScreen";
+import moment from "moment-timezone";
 
 export const Dashboard = (props: IDashboardProps) => {
     const deadline = DEADLINES.find(d => d.key === (props.profile.type || 'oos'));
@@ -25,7 +27,10 @@ export const Dashboard = (props: IDashboardProps) => {
         <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
             <div style={{ position: 'absolute', top: "50%", left: "50%", transform: "translateX(-50%) translateY(-50%)" }}>
                 <div className="dashboard-design">
-                    {props.profile.status === STATUS.ADMISSION_CONFIRMED ? <AdmittedScreen confirmedYet={true} /> :
+                    {
+                        props.profile.status === STATUS.REJECTED ? <RejectedScreen /> :
+                        props.profile.status === STATUS.WAITLISTED ? <WaitlistedScreen /> :
+                        props.profile.status === STATUS.ADMISSION_CONFIRMED ? <AdmittedScreen confirmedYet={true} /> :
                         props.profile.status === STATUS.ADMISSION_DECLINED ? <AdmissionDeclinedScreen /> :
                         props.profile.status === STATUS.ADMITTED && dateNow > acceptanceConfirmDeadlineObject ? <AdmissionExpiredScreen /> :
                         props.profile.status === STATUS.ADMITTED ? <AdmittedScreen confirmedYet={false} deadline={acceptanceConfirmDeadline} /> :

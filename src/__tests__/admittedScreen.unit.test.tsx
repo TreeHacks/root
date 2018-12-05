@@ -21,7 +21,7 @@ it('Format admission deadline with PST time zone', () => {
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You have until November 27, 2048 8:39 PM PST to confirm your attendance");
-    expect(wrapper.text()).toContain("Congratulations! You have been selected to attend Treehacks 2019!");
+    expect(wrapper.text()).toContain("Congratulations! You've been accepted to Treehacks 2019!");
 });
 
 it('Admission confirmed screen', () => {

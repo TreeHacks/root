@@ -291,3 +291,4 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
 };
 
 export const HACKATHON_YEAR = 2019;
+export const HACKATHON_DATE_RANGE = "February 15-17";

@@ -228,6 +228,39 @@ exports[`dashboard incomplete before deadline 1`] = `
 </div>
 `;
 
+exports[`dashboard rejected 1`] = `
+<div
+  className="dashboard"
+  style={
+    Object {
+      "backgroundImage": "url('function SvgCombined_circuit(props) {
+  return React.createElement(
+    'svg', 
+    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
+  );
+}')",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "left": "50%",
+        "position": "absolute",
+        "top": "50%",
+        "transform": "translateX(-50%) translateY(-50%)",
+      }
+    }
+  >
+    <div
+      className="dashboard-design"
+    >
+      <Component />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`dashboard submitted 1`] = `
 <div
   class="dashboard"
@@ -250,6 +283,39 @@ exports[`dashboard submitted 1`] = `
         <br />
         We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)
       </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`dashboard waitlisted 1`] = `
+<div
+  className="dashboard"
+  style={
+    Object {
+      "backgroundImage": "url('function SvgCombined_circuit(props) {
+  return React.createElement(
+    'svg', 
+    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
+  );
+}')",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "left": "50%",
+        "position": "absolute",
+        "top": "50%",
+        "transform": "translateX(-50%) translateY(-50%)",
+      }
+    }
+  >
+    <div
+      className="dashboard-design"
+    >
+      <Component />
     </div>
   </div>
 </div>

@@ -9,6 +9,8 @@ import { STATUS, TYPE, DEADLINES } from "../constants";
 import AdmittedScreen from "../Dashboard/AdmittedScreen";
 import AdmissionDeclinedScreen from "../Dashboard/AdmissionDeclinedScreen";
 import AdmissionExpiredScreen from "../Dashboard/AdmissionExpiredScreen";
+import RejectedScreen from "../Dashboard/RejectedScreen";
+import WaitlistedScreen from "../Dashboard/WaitlistedScreen";
 
 it('dashboard incomplete after deadline', () => {
     const profile = {
@@ -117,4 +119,32 @@ it('dashboard admission confirm expired', () => {
     clock.uninstall();
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.contains(<AdmissionExpiredScreen />)).toBe(true);
+});
+
+it('dashboard rejected', () => {
+    const profile = {
+        status: STATUS.REJECTED,
+        type: TYPE.OUT_OF_STATE,
+        admin_info: {}
+    };
+  
+    const wrapper = shallow(
+        <Dashboard profile={ profile } />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<RejectedScreen />)).toBe(true);
+});
+
+it('dashboard waitlisted', () => {
+    const profile = {
+        status: STATUS.WAITLISTED,
+        type: TYPE.OUT_OF_STATE,
+        admin_info: {}
+    };
+  
+    const wrapper = shallow(
+        <Dashboard profile={ profile } />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<WaitlistedScreen />)).toBe(true);
 });
