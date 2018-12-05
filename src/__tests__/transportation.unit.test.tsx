@@ -170,34 +170,6 @@ it('other reimbursement', () => {
     expect(wrapper.text()).toContain("$500.30");
 });
 
-it('flight reimbursement with accept=true', () => {
-
-    const profile = {
-        status: STATUS.ADMISSION_CONFIRMED,
-        type: "oos",
-        admin_info: {
-            transportation: {
-                type: "flight",
-                amount: 500.30,
-                deadline
-            }
-        },
-        applications: [],
-        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
-        forms: {
-        }
-    };
-    const wrapper = render(
-        <Transportation
-            profile={profile} {...commonProps} formData={{accept: true}}
-        />
-    );
-    expect(wrapper).toMatchSnapshot();
-    expect(wrapper.text()).toContain("You have received a flight reimbursement!");
-    expect(wrapper.text()).toContain("$500.30");
-    expect(wrapper.text()).toContain("Thanks, we've received your receipt");
-});
-
 it('bus reimbursement with accept=true', () => {
 
     const profile = {
@@ -227,7 +199,35 @@ it('bus reimbursement with accept=true', () => {
     expect(wrapper.text()).toContain("We've received your RSVP! You can change your status");
 });
 
-it('other reimbursement with accept=true', () => {
+it('flight reimbursement with transportation_status=SUBMITTED', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "flight",
+                amount: 500.30,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.SUBMITTED,
+        forms: {
+        }
+    };
+    const wrapper = render(
+        <Transportation
+            profile={profile} {...commonProps} formData={{accept: true}}
+        />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("You have received a flight reimbursement!");
+    expect(wrapper.text()).toContain("$500.30");
+    expect(wrapper.text()).toContain("Thanks, we've received your receipt");
+});
+
+it('other reimbursement with transportation_status=SUBMITTED', () => {
 
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
@@ -240,7 +240,7 @@ it('other reimbursement with accept=true', () => {
             }
         },
         applications: [],
-        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+        transportation_status: TRANSPORTATION_STATUS.SUBMITTED,
         forms: {
         }
     };
@@ -254,6 +254,7 @@ it('other reimbursement with accept=true', () => {
     expect(wrapper.text()).toContain("$500.30");
     expect(wrapper.text()).toContain("Thanks, we've received your reimbursement request");
 });
+
 
 it('don\'t show reimbursement if status is unavailable, even if reimbursement is defined', () => {
 

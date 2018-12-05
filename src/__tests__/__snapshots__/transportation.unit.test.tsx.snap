@@ -597,7 +597,7 @@ exports[`flight reimbursement 1`] = `
 </div>
 `;
 
-exports[`flight reimbursement with accept=true 1`] = `
+exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
 <div
   class="transportation"
   style="display:flex;flex-direction:column;align-items:center"
@@ -792,7 +792,7 @@ exports[`other reimbursement 1`] = `
 </div>
 `;
 
-exports[`other reimbursement with accept=true 1`] = `
+exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
 <div
   class="transportation"
   style="display:flex;flex-direction:column;align-items:center"
