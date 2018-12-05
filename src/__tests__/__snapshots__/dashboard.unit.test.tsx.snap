@@ -15,14 +15,7 @@ exports[`dashboard admission confirm expired 1`] = `
   }
 >
   <div
-    style={
-      Object {
-        "left": "50%",
-        "position": "absolute",
-        "top": "50%",
-        "transform": "translateX(-50%) translateY(-50%)",
-      }
-    }
+    className="treehacks-dashboard-message-container"
   >
     <div
       className="dashboard-design"
@@ -48,14 +41,7 @@ exports[`dashboard admission confirmed 1`] = `
   }
 >
   <div
-    style={
-      Object {
-        "left": "50%",
-        "position": "absolute",
-        "top": "50%",
-        "transform": "translateX(-50%) translateY(-50%)",
-      }
-    }
+    className="treehacks-dashboard-message-container"
   >
     <div
       className="dashboard-design"
@@ -83,14 +69,7 @@ exports[`dashboard admission declined 1`] = `
   }
 >
   <div
-    style={
-      Object {
-        "left": "50%",
-        "position": "absolute",
-        "top": "50%",
-        "transform": "translateX(-50%) translateY(-50%)",
-      }
-    }
+    className="treehacks-dashboard-message-container"
   >
     <div
       className="dashboard-design"
@@ -116,14 +95,7 @@ exports[`dashboard admitted 1`] = `
   }
 >
   <div
-    style={
-      Object {
-        "left": "50%",
-        "position": "absolute",
-        "top": "50%",
-        "transform": "translateX(-50%) translateY(-50%)",
-      }
-    }
+    className="treehacks-dashboard-message-container"
   >
     <div
       className="dashboard-design"
@@ -152,14 +124,7 @@ exports[`dashboard incomplete after deadline 1`] = `
   }
 >
   <div
-    style={
-      Object {
-        "left": "50%",
-        "position": "absolute",
-        "top": "50%",
-        "transform": "translateX(-50%) translateY(-50%)",
-      }
-    }
+    className="treehacks-dashboard-message-container"
   >
     <div
       className="dashboard-design"
@@ -187,14 +152,7 @@ exports[`dashboard incomplete before deadline 1`] = `
   }
 >
   <div
-    style={
-      Object {
-        "left": "50%",
-        "position": "absolute",
-        "top": "50%",
-        "transform": "translateX(-50%) translateY(-50%)",
-      }
-    }
+    className="treehacks-dashboard-message-container"
   >
     <div
       className="dashboard-design"
@@ -243,14 +201,7 @@ exports[`dashboard rejected 1`] = `
   }
 >
   <div
-    style={
-      Object {
-        "left": "50%",
-        "position": "absolute",
-        "top": "50%",
-        "transform": "translateX(-50%) translateY(-50%)",
-      }
-    }
+    className="treehacks-dashboard-message-container"
   >
     <div
       className="dashboard-design"
@@ -272,7 +223,7 @@ exports[`dashboard submitted 1`] = `
 }')"
 >
   <div
-    style="position:absolute;top:50%;left:50%;transform:translateX(-50%) translateY(-50%)"
+    class="treehacks-dashboard-message-container"
   >
     <div
       class="dashboard-design"
@@ -303,14 +254,7 @@ exports[`dashboard waitlisted 1`] = `
   }
 >
   <div
-    style={
-      Object {
-        "left": "50%",
-        "position": "absolute",
-        "top": "50%",
-        "transform": "translateX(-50%) translateY(-50%)",
-      }
-    }
+    className="treehacks-dashboard-message-container"
   >
     <div
       className="dashboard-design"
