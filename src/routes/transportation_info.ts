@@ -13,7 +13,7 @@ export function setTransportationInfo(req: Request, res: Response) {
             if (e.transportation_status !== TRANSPORTATION_STATUS.AVAILABLE) {
                 return res.status(403).send("Transportation form status is not 'AVAILABLE'.");
             }
-            if (new Date(e.admin_info.transportation.deadline) > new Date()) {
+            if (new Date(e.admin_info.transportation.deadline) < new Date()) {
                 res.status(403).send("Transportation deadline has passed.");
             }
             e.forms.transportation = req.body;
@@ -28,7 +28,7 @@ export function submitTransportationInfo(req: Request, res: Response) {
             if (e.transportation_status !== TRANSPORTATION_STATUS.AVAILABLE) {
                 return res.status(403).send("Transportation form status is not 'AVAILABLE'.");
             }
-            if (new Date(e.admin_info.transportation.deadline) > new Date()) {
+            if (new Date(e.admin_info.transportation.deadline) < new Date()) {
                 return res.status(403).send("Transportation deadline has passed.");
             }
             if (e.admin_info.transportation.type !== TRANSPORTATION_TYPE.FLIGHT || e.admin_info.transportation.type !== TRANSPORTATION_TYPE.OTHER) {
