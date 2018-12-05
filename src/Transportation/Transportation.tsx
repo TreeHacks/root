@@ -24,6 +24,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   setFormName: (e: string) => dispatch(setFormName(e)),
   setData: (e, userEdited) => dispatch(setData(e, userEdited)),
   saveData: () => dispatch(saveData()),
+  submitForm: () => dispatch(submitForm())
 });
 
 export class Transportation extends React.Component<ITransportationProps> {
