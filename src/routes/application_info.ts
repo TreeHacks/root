@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute } from "./common"
 import { STATUS } from '../constants';
 import { sendApplicationSubmittedEmail } from "../services/send_email";
+import { IApplication } from '../models/Application.d';
 
 export function getApplicationInfo(req: Request, res: Response) {
   return getApplicationAttribute(req, res, e => e.forms.application_info);
@@ -9,7 +10,11 @@ export function getApplicationInfo(req: Request, res: Response) {
 
 export function setApplicationInfo(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
-    e => {
+    (e: IApplication) => {
+      if (e.status !== STATUS.INCOMPLETE) {
+        res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
+        return;
+      }
       e.forms.application_info = req.body
     },
     e => e.forms.application_info,
@@ -20,6 +25,10 @@ export function setApplicationInfo(req: Request, res: Response) {
 export function submitApplicationInfo(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
     e => {
+      if (e.status !== STATUS.INCOMPLETE) {
+        res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
+        return;
+      }
       // todo: share this with the frontend in some common configuration.
       const requiredFields = [
         "first_name",
