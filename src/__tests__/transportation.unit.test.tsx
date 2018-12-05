@@ -306,6 +306,6 @@ it('reimbursement screen when admission declined -- don\'t show reimbursement', 
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).not.toContain("You have received a travel reimbursement!");
-    expect(wrapper.text()).toContain("You have declined your admission");
+    expect(wrapper.text()).toContain("You have declined your admission, so no transportation options are available.");
     expect(wrapper.text()).not.toContain("$500.30");
 });

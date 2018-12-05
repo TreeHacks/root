@@ -10,6 +10,7 @@ import { ITransportationProps } from './types';
 import RouteMap from './RouteMap';
 import FlightReimbursementHeader from './FlightReimbursementHeader';
 import moment from "moment-timezone";
+import TravelReimbursementHeader from './TravelReimbursementHeader';
 
 declare var MODE: string;
 
@@ -29,18 +30,12 @@ export class Transportation extends React.Component<ITransportationProps> {
   constructor(props) {
     super(props);
 
-    this.submitAcceptance = this.submitAcceptance.bind(this);
+    this.submitBusAcceptance = this.submitBusAcceptance.bind(this);
   }
 
-  submitAcceptance(accept) {
+  submitBusAcceptance(accept) {
     this.props.setData({ accept }, true);
-    this.props.saveData().then(() => {
-      if (accept === true) {
-        if (this.props.profile.admin_info.transportation.type === TRANSPORTATION_TYPES.FLIGHT || this.props.profile.admin_info.transportation.type === TRANSPORTATION_TYPES.OTHER) {
-          this.props.submitForm();
-        }
-      }
-    });
+    this.props.saveData();
     
   }
 
@@ -113,13 +108,13 @@ export class Transportation extends React.Component<ITransportationProps> {
                             value="cancel RSVP"
                             style={!transportationForm.accept ? { opacity: 0.5, pointerEvents: 'none' } : {}}
                             disabled={!transportationForm.accept}
-                            onClick={e => { e.preventDefault(); this.submitAcceptance(false); }}
+                            onClick={e => { e.preventDefault(); this.submitBusAcceptance(false); }}
                         />
                         <input
                             className="btn btn-custom"
                             type="submit"
                             value="RSVP"
-                            onClick={e => { e.preventDefault(); this.submitAcceptance(true); }}
+                            onClick={e => { e.preventDefault(); this.submitBusAcceptance(true); }}
                         />
                     </div>
                 </div>
@@ -136,21 +131,8 @@ export class Transportation extends React.Component<ITransportationProps> {
           <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
               
-              {transportationType === TRANSPORTATION_TYPES.FLIGHT ?
-                <FlightReimbursementHeader />
-              :
-                <div>
-                  <h4>You have received a travel reimbursement!</h4>
-                  <p style={{maxWidth: 575, margin: '20px auto'}}>We have calculated your reimbursement amount based on the location in your application. We will reimburse the cost of your travel, up to this amount. It is up to you to decide how you get to Stanford, whether that's driving, public transportation, or another method. You must upload your receipts by the deadline listed on this page, or we will not be able to process your reimbursement.</p>
-                  <p style={{maxWidth: 575, margin: '20px auto'}}>Here are the guidelines you need to follow in order to receive a reimbursement:</p>
-                  <ul style={{textAlign: 'left', margin: '20px auto', maxWidth: 575}}>
-                    <li>Attend TreeHacks 2019 :)</li>
-                    <li>Submit a project by the project deadline the weekend-of.</li>
-                    <li>Submit your receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.</li>
-                    <li>Follow any and all TreeHacks rules &amp; the MLH Code of Conduct.</li>
-                  </ul>
-                </div>
-              }
+              {transportationType === TRANSPORTATION_TYPES.FLIGHT && <FlightReimbursementHeader />}
+              {transportationType === TRANSPORTATION_TYPES.OTHER && <TravelReimbursementHeader /> }
 
               <h5 style={{marginTop: 40}}>{transportationForm.accept ? "Thanks, we've received your receipt" :  <span>Receipts must be uploaded by <strong>{formattedDeadline}</strong></span>}</h5>
               <h5>TreeHacks is reimbursing you up to <span style={{color: '#00b65f', fontWeight: 'bold'}}>{transportationAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span></h5>
@@ -172,7 +154,9 @@ export class Transportation extends React.Component<ITransportationProps> {
                     onSubmit={(e) => {
                       e.formData.accept = true;
                       this.props.setData(e.formData, true);
-                      this.props.saveData();
+                      this.props.saveData().then(() => {
+                        this.props.submitForm();
+                      });
                     }}
                     schema={this.props.schemas.reimbursement_info.schema}
                     uiSchema={this.props.schemas.reimbursement_info.uiSchema}
