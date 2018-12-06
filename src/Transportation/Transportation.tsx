@@ -101,7 +101,10 @@ export class Transportation extends React.Component<ITransportationProps> {
       const route = TRANSPORTATION_BUS_ROUTE_DETAILS[transportation.id] || [];
 
       if (deadlinePassed && transportationForm.accept !== true) {
-        return <TransportationExpired />;
+        return <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
+            <TransportationExpired />
+          </div></div>;
       }
 
       return (
@@ -135,6 +138,7 @@ export class Transportation extends React.Component<ITransportationProps> {
                           className="btn btn-custom"
                           type="submit"
                           value="RSVP"
+                          disabled={transportationForm.accept}
                           onClick={e => { e.preventDefault(); this.submitBusAcceptance(true, deadlinePassed); }}
                       />
                   </div>

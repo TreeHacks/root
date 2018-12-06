@@ -338,6 +338,7 @@ exports[`bus reimbursement with accept=true 1`] = `
         />
         <input
           class="btn btn-custom"
+          disabled=""
           type="submit"
           value="RSVP"
         />
@@ -352,7 +353,34 @@ exports[`bus reimbursement with accept=true 1`] = `
 </div>
 `;
 
-exports[`bus reimbursement with deadline passed and RSVP'd no, should show TransportationExpired 1`] = `<Component />`;
+exports[`bus reimbursement with deadline passed and RSVP'd no, should show TransportationExpired 1`] = `
+<div
+  className="transportation"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#686e77",
+        "color": "white",
+        "margin": "60px",
+        "maxWidth": "750px",
+        "padding": "40px 20px",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Component />
+  </div>
+</div>
+`;
 
 exports[`bus reimbursement with deadline passed and RSVP'd yes, should show bus route 1`] = `
 <div
@@ -515,6 +543,7 @@ exports[`bus reimbursement with deadline passed and RSVP'd yes, should show bus 
         />
         <input
           class="btn btn-custom"
+          disabled=""
           type="submit"
           value="RSVP"
         />
@@ -529,7 +558,34 @@ exports[`bus reimbursement with deadline passed and RSVP'd yes, should show bus 
 </div>
 `;
 
-exports[`bus reimbursement with deadline passed and no RSVP, should show TransportationExpired 1`] = `<Component />`;
+exports[`bus reimbursement with deadline passed and no RSVP, should show TransportationExpired 1`] = `
+<div
+  className="transportation"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#686e77",
+        "color": "white",
+        "margin": "60px",
+        "maxWidth": "750px",
+        "padding": "40px 20px",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Component />
+  </div>
+</div>
+`;
 
 exports[`don't show reimbursement if status is unavailable, even if reimbursement is defined 1`] = `
 <div
