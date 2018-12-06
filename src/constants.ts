@@ -185,7 +185,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
       day: 'Sunday, February 17th',
       time: '11:45pm',
       stop: 'UCSD',
-      location: 'Los Angeles'
+      location: 'San Diego'
     }
   ],
   [TRANSPORTATION_BUS_ROUTES.UCI]: [
