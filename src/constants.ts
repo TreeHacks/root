@@ -122,7 +122,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
       location: 'Los Angeles'
     }
   ],
-  [TRANSPORTATION_BUS_ROUTES.TEST]: [
+  [TRANSPORTATION_BUS_ROUTES.UCLA]: [
     {
       day: 'Friday, February 15th',
       time: '9:00am',
