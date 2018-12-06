@@ -36,7 +36,6 @@ export var DEADLINES = [
 ];
 
 export var TRANSPORTATION_STATUS = {
-  PENDING: "pending",
   UNAVAILABLE: "unavailable",
   AVAILABLE: "available",
   SUBMITTED: "submitted",
