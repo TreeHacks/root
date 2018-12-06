@@ -139,7 +139,7 @@ export class Transportation extends React.Component<ITransportationProps> {
               </div>
             }
             {transportationForm.accept ?
-              <p><small>We've received your RSVP! You can change your status anytime up to the event if your plans change.</small></p>
+              <p><small>We've received your RSVP! You can cancel your RSVP anytime up to the event if your plans change.</small></p>
             : null}
           </div>
         </div>
