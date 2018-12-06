@@ -35,10 +35,11 @@ export class Transportation extends React.Component<ITransportationProps> {
     this.submitBusAcceptance = this.submitBusAcceptance.bind(this);
   }
 
-  submitBusAcceptance(accept) {
-    this.props.setData({ accept }, true);
-    this.props.saveData();
-    
+  submitBusAcceptance(accept, deadlinePassed) {
+    if (!deadlinePassed || window.confirm("Are you sure you want to decline your RSVP? Since the transportation deadline has passed, this will be final.")) {
+      this.props.setData({ accept }, true);
+      this.props.saveData();
+    }
   }
 
   render() {
@@ -70,6 +71,7 @@ export class Transportation extends React.Component<ITransportationProps> {
     const transportationType = (transportation && transportation.type) || "";
     const transportationAmount = (transportation && transportation.amount) || 0;
     const dateNow = moment();
+    const deadlinePassed = dateNow > transportationDeadline;
     let transportationForm = this.props.formData || {};
     if (status !== STATUS.ADMITTED && status !== STATUS.ADMISSION_CONFIRMED) {
       // No travel info to show
@@ -98,7 +100,7 @@ export class Transportation extends React.Component<ITransportationProps> {
     if (transportationType === TRANSPORTATION_TYPES.BUS) {
       const route = TRANSPORTATION_BUS_ROUTE_DETAILS[transportation.id] || [];
 
-      if (dateNow > transportationDeadline && transportationForm.accept !== true) {
+      if (deadlinePassed && transportationForm.accept !== true) {
         return <TransportationExpired />;
       }
 
@@ -127,13 +129,13 @@ export class Transportation extends React.Component<ITransportationProps> {
                           value="cancel RSVP"
                           style={!transportationForm.accept ? { opacity: 0.5, pointerEvents: 'none' } : {}}
                           disabled={!transportationForm.accept}
-                          onClick={e => { e.preventDefault(); this.submitBusAcceptance(false); }}
+                          onClick={e => { e.preventDefault(); this.submitBusAcceptance(false, deadlinePassed); }}
                       />
                       <input
                           className="btn btn-custom"
                           type="submit"
                           value="RSVP"
-                          onClick={e => { e.preventDefault(); this.submitBusAcceptance(true); }}
+                          onClick={e => { e.preventDefault(); this.submitBusAcceptance(true, deadlinePassed); }}
                       />
                   </div>
               </div>
