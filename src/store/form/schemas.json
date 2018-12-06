@@ -262,7 +262,7 @@
             ]
         }
     },
-    "reimbursement_info": {
+    "transportation": {
         "schema": {
             "type": "object",
             "title": "",

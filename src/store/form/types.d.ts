@@ -21,7 +21,7 @@ export interface IFormState {
   },
   schemas: {
     application_info: IAuthStateSchemaItem,
-    reimbursement_info: IAuthStateSchemaItem
+    transportation: IAuthStateSchemaItem
   },
   page: number,
   formData: any,

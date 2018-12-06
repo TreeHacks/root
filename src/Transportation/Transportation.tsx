@@ -170,8 +170,8 @@ export class Transportation extends React.Component<ITransportationProps> {
                       this.props.submitForm().then(() => this.props.getUserProfile());;
                     });
                   }}
-                  schema={this.props.schemas.reimbursement_info.schema}
-                  uiSchema={this.props.schemas.reimbursement_info.uiSchema}
+                  schema={this.props.schemas.transportation.schema}
+                  uiSchema={this.props.schemas.transportation.uiSchema}
                   formData={transportationForm}
                 >
                   <div className="btn-container" style={{marginBottom: 0}}>

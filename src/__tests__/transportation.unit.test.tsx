@@ -13,7 +13,7 @@ const mockStore = configureMockStore(middlewares)
 
 const deadline = "2048-11-28T04:39:47.512Z";
 
-const schemas = { application_info: { schema: {}, uiSchema: {} }, reimbursement_info: { schema: {}, uiSchema: {} } };
+const schemas = { application_info: { schema: {}, uiSchema: {} }, transportation: { schema: {}, uiSchema: {} } };
 
 const commonProps = {
     page: 0,
