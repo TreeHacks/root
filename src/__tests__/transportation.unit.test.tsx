@@ -317,6 +317,94 @@ it('other reimbursement with deadline passed', () => {
     expect(wrapper.contains(<TransportationExpired />)).toBe(true);
 });
 
+it('bus reimbursement with deadline passed and no RSVP, should show TransportationExpired', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "bus",
+                id: TRANSPORTATION_BUS_ROUTES.TEST,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+        forms: {
+        }
+    };
+    const clock = lolex.install({now: new Date(deadlineTooLate)});
+    const wrapper = shallow(
+        <Transportation
+            profile={profile} {...commonProps} formData={{}}
+        />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<TransportationExpired />)).toBe(true);
+});
+
+it('bus reimbursement with deadline passed and RSVP\'d yes, should show bus route', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "bus",
+                id: TRANSPORTATION_BUS_ROUTES.TEST,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+        forms: {
+            transportation: {
+            }
+        }
+    };
+    const clock = lolex.install({now: new Date(deadlineTooLate)});
+    const wrapper = render(
+        <Transportation
+            profile={profile} {...commonProps} formData={{accept: true}}
+        />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("You have been placed on a bus!");
+});
+
+it('bus reimbursement with deadline passed and RSVP\'d no, should show TransportationExpired', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "bus",
+                id: TRANSPORTATION_BUS_ROUTES.TEST,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+        forms: {
+            transportation: {
+            }
+        }
+    };
+    const clock = lolex.install({now: new Date(deadlineTooLate)});
+    const wrapper = shallow(
+        <Transportation
+            profile={profile} {...commonProps} formData={{accept: false}}
+        />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<TransportationExpired />)).toBe(true);
+});
+
 
 it('don\'t show reimbursement if status is unavailable, even if reimbursement is defined', () => {
 

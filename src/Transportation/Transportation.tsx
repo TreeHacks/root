@@ -95,12 +95,12 @@ export class Transportation extends React.Component<ITransportationProps> {
 
     }
     
-    if (dateNow > transportationDeadline) {
-      return <TransportationExpired />;
-    }
-    
     if (transportationType === TRANSPORTATION_TYPES.BUS) {
       const route = TRANSPORTATION_BUS_ROUTE_DETAILS[transportation.id] || [];
+
+      if (dateNow > transportationDeadline && transportationForm.accept !== true) {
+        return <TransportationExpired />;
+      }
 
       return (
         <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -148,6 +148,10 @@ export class Transportation extends React.Component<ITransportationProps> {
     }
     
     if (transportationType === TRANSPORTATION_TYPES.FLIGHT || transportationType === TRANSPORTATION_TYPES.OTHER) {
+      if (dateNow > transportationDeadline) {
+        return <TransportationExpired />;
+      }
+
       return (
         <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
