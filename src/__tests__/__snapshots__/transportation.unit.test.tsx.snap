@@ -63,7 +63,7 @@ exports[`bus reimbursement 1`] = `
             <div
               class="time"
             >
-              9:00am
+              8:00am
             </div>
             <div
               class="day"
@@ -77,44 +77,12 @@ exports[`bus reimbursement 1`] = `
             <div
               class="stop"
             >
-              Check in at 10 Charles E. Young
+              Check in at 37th & McClintock
             </div>
             <div
               class="location"
             >
-              Los Angeles
-            </div>
-          </div>
-        </div>
-        <div
-          class="entry"
-        >
-          <div
-            class="left"
-          >
-            <div
-              class="time"
-            >
-              4:30pm
-            </div>
-            <div
-              class="day"
-            >
-              Friday, February 15th
-            </div>
-          </div>
-          <div
-            class="right"
-          >
-            <div
-              class="stop"
-            >
-              Panama St. & Via Ortega
-            </div>
-            <div
-              class="location"
-            >
-              Stanford
+              Atlanta
             </div>
           </div>
         </div>
@@ -153,7 +121,7 @@ exports[`bus reimbursement 1`] = `
             <div
               class="time"
             >
-              4:00pm
+              11:00pm
             </div>
             <div
               class="day"
@@ -167,39 +135,7 @@ exports[`bus reimbursement 1`] = `
             <div
               class="stop"
             >
-              Check in at Panama St. & Via Ortega
-            </div>
-            <div
-              class="location"
-            >
-              Stanford
-            </div>
-          </div>
-        </div>
-        <div
-          class="entry"
-        >
-          <div
-            class="left"
-          >
-            <div
-              class="time"
-            >
-              10:30pm
-            </div>
-            <div
-              class="day"
-            >
-              Sunday, February 17th
-            </div>
-          </div>
-          <div
-            class="right"
-          >
-            <div
-              class="stop"
-            >
-              10 Charles E. Young
+              37th & McClintock
             </div>
             <div
               class="location"
@@ -304,7 +240,7 @@ exports[`bus reimbursement with accept=true 1`] = `
             <div
               class="time"
             >
-              9:00am
+              8:00am
             </div>
             <div
               class="day"
@@ -318,44 +254,12 @@ exports[`bus reimbursement with accept=true 1`] = `
             <div
               class="stop"
             >
-              Check in at 10 Charles E. Young
+              Check in at 37th & McClintock
             </div>
             <div
               class="location"
             >
-              Los Angeles
-            </div>
-          </div>
-        </div>
-        <div
-          class="entry"
-        >
-          <div
-            class="left"
-          >
-            <div
-              class="time"
-            >
-              4:30pm
-            </div>
-            <div
-              class="day"
-            >
-              Friday, February 15th
-            </div>
-          </div>
-          <div
-            class="right"
-          >
-            <div
-              class="stop"
-            >
-              Panama St. & Via Ortega
-            </div>
-            <div
-              class="location"
-            >
-              Stanford
+              Atlanta
             </div>
           </div>
         </div>
@@ -394,7 +298,7 @@ exports[`bus reimbursement with accept=true 1`] = `
             <div
               class="time"
             >
-              4:00pm
+              11:00pm
             </div>
             <div
               class="day"
@@ -408,39 +312,7 @@ exports[`bus reimbursement with accept=true 1`] = `
             <div
               class="stop"
             >
-              Check in at Panama St. & Via Ortega
-            </div>
-            <div
-              class="location"
-            >
-              Stanford
-            </div>
-          </div>
-        </div>
-        <div
-          class="entry"
-        >
-          <div
-            class="left"
-          >
-            <div
-              class="time"
-            >
-              10:30pm
-            </div>
-            <div
-              class="day"
-            >
-              Sunday, February 17th
-            </div>
-          </div>
-          <div
-            class="right"
-          >
-            <div
-              class="stop"
-            >
-              10 Charles E. Young
+              37th & McClintock
             </div>
             <div
               class="location"
