@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { CognitoUser } from "../models/cognitoUser";
 import { STATUS } from "../constants";
 import { uploadBase64Content, generateSignedUrlForFile } from "../services/file_actions";
+import { injectDynamicApplicationContent } from "../utils/file_plugin";
 
 function getDeadline(type) {
   switch (type) {
@@ -36,6 +37,7 @@ export async function getApplicationAttribute(req: Request, res: Response, gette
     }
   }
   else {
+    application = await injectDynamicApplicationContent(application) as IApplication;
     res.status(200).send(getter(application));
   }
 }

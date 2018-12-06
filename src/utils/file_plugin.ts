@@ -1,13 +1,14 @@
 import { uploadBase64Content, generateSignedUrlForFile } from '../services/file_actions';
 import mongoose from 'mongoose';
 import { get, set } from "lodash";
+import { IApplication } from '../models/Application.d';
 
 // Paths on the application that store file data that should be uploaded to S3.
 const PATHS = ["forms.application_info.resume", "forms.transportation.receipt"];
 
 export default function s3FilePlugin(schema: mongoose.Schema, options) {
   schema.pre('save', uploadDynamicApplicationContent);
-  schema.post('findOne', injectDynamicApplicationContent);
+  // schema.post('findOne', injectDynamicApplicationContent);
 }
 
 async function uploadDynamicApplicationContent(this: mongoose.Document) {
@@ -32,7 +33,7 @@ async function uploadDynamicApplicationContent(this: mongoose.Document) {
   }
 }
 
-export async function injectDynamicApplicationContent(doc: any) {
+export async function injectDynamicApplicationContent(doc: IApplication) {
     for (let path of PATHS) {
       const resume = get(doc, path);
       if (resume && resume.indexOf('data:') !== 0) {
@@ -44,7 +45,6 @@ export async function injectDynamicApplicationContent(doc: any) {
           console.error(e);
         }
       }
-
-      return await doc;
     }
+    return doc;
 }
