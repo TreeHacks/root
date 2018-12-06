@@ -173,8 +173,8 @@ export class Transportation extends React.Component<ITransportationProps> {
                   schema={this.props.schemas.reimbursement_info.schema}
                   uiSchema={this.props.schemas.reimbursement_info.uiSchema}
                   formData={transportationForm}
-                  actionButtons={
-                    <div className="btn-container" style={{marginBottom: 0}}>
+                >
+                  <div className="btn-container" style={{marginBottom: 0}}>
                       <div>
                         <input
                           className="btn btn-custom"
@@ -183,8 +183,7 @@ export class Transportation extends React.Component<ITransportationProps> {
                         />
                       </div>
                     </div>
-                  }
-                />
+                </FormPage>
               </div>
             }
           </div>

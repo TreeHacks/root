@@ -111,7 +111,7 @@ export default (props: IFormPageProps) => {
         onError={(e) => props.onError(e)}
         onSubmit={e => props.onSubmit(e)}>
         {!props.submitted ?
-            (props.actionButtons || <div className="btn-container">
+            (props.children || <div className="btn-container">
                 <div>
                     <input
                         className="btn btn-custom inverted"

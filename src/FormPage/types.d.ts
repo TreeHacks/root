@@ -21,7 +21,7 @@ export interface IFormPageProps {
   schema: any,
   uiSchema: any,
   formData: any,
-  actionButtons?: any
+  children?: any
 }
 
 export interface CustomDateWidgetProps {
