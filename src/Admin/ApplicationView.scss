@@ -4,5 +4,8 @@
     .treehacks-form {
         margin-top: 0;
         padding-top: 0;
+        label.control-label {
+            display: block;
+        }
     }
 }
