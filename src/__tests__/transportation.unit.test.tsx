@@ -199,7 +199,7 @@ it('bus reimbursement with accept=true', () => {
     expect(wrapper.text()).toContain("You have been placed on a bus!");
     expect(wrapper.text()).toContain("Hack, hack, hack!");
     expect(wrapper.text()).toContain("37th & McClintock");
-    expect(wrapper.text()).toContain("We've received your RSVP! You can change your status");
+    expect(wrapper.text()).toContain("We've received your RSVP! You can cancel your RSVP");
 });
 
 it('flight reimbursement with transportation_status=SUBMITTED', () => {
