@@ -7,11 +7,14 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { Transportation } from "../Transportation/Transportation";
 import { TRANSPORTATION_STATUS, STATUS, TRANSPORTATION_BUS_ROUTES } from "../constants";
+import lolex from "lolex";
+import TransportationExpired from "../Transportation/TransportationExpired";
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 const deadline = "2048-11-28T04:39:47.512Z";
+const deadlineTooLate = "2048-11-28T05:39:47.512Z";
 
 const schemas = { application_info: { schema: {}, uiSchema: {} }, transportation: { schema: {}, uiSchema: {} } };
 
@@ -253,6 +256,65 @@ it('other reimbursement with transportation_status=SUBMITTED', () => {
     expect(wrapper.text()).toContain("You have received a travel reimbursement!");
     expect(wrapper.text()).toContain("$500.30");
     expect(wrapper.text()).toContain("Thanks, we've received your reimbursement request");
+});
+
+it('flight reimbursement with deadline passed', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "flight",
+                amount: 500.30,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.SUBMITTED,
+        forms: {
+        }
+    };
+    const clock = lolex.install({now: new Date(deadlineTooLate)});
+    const wrapper = shallow(
+        <Transportation
+            profile={profile} {...commonProps}
+        />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).not.toContain("You have received a flight reimbursement!");
+    expect(wrapper.text()).not.toContain("$500.30");
+    expect(wrapper.text()).not.toContain("Thanks, we've received your receipt");
+    expect(wrapper.contains(<TransportationExpired />)).toBe(true);
+});
+
+it('other reimbursement with deadline passed', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "other",
+                amount: 500.30,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.SUBMITTED,
+        forms: {
+        }
+    };
+    const clock = lolex.install({now: new Date(deadlineTooLate)});
+    const wrapper = shallow(
+        <Transportation
+            profile={profile} {...commonProps}
+        />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<TransportationExpired />)).toBe(true);
 });
 
 

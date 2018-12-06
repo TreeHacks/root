@@ -469,6 +469,8 @@ exports[`flight reimbursement 1`] = `
 </div>
 `;
 
+exports[`flight reimbursement with deadline passed 1`] = `<Component />`;
+
 exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
 <div
   class="transportation"
@@ -663,6 +665,8 @@ exports[`other reimbursement 1`] = `
   </div>
 </div>
 `;
+
+exports[`other reimbursement with deadline passed 1`] = `<Component />`;
 
 exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
 <div

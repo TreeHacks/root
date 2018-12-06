@@ -11,6 +11,7 @@ import RouteMap from './RouteMap';
 import FlightReimbursementHeader from './FlightReimbursementHeader';
 import moment from "moment-timezone";
 import TravelReimbursementHeader from './TravelReimbursementHeader';
+import TransportationExpired from './TransportationExpired';
 
 declare var MODE: string;
 
@@ -64,9 +65,11 @@ export class Transportation extends React.Component<ITransportationProps> {
       transportation_status
     } = this.props.profile;
 
-    const formattedDeadline = moment(transportation && transportation.deadline).tz("America/Los_Angeles").format("LLL z");
+    const transportationDeadline = moment(transportation && transportation.deadline);
+    const formattedDeadline = transportationDeadline.tz("America/Los_Angeles").format("LLL z");
     const transportationType = (transportation && transportation.type) || "";
     const transportationAmount = (transportation && transportation.amount) || 0;
+    const dateNow = moment();
     let transportationForm = this.props.formData || {};
     if (status !== STATUS.ADMITTED && status !== STATUS.ADMISSION_CONFIRMED) {
       // No travel info to show
@@ -90,6 +93,10 @@ export class Transportation extends React.Component<ITransportationProps> {
         </div>
       );
 
+    }
+    
+    if (dateNow > transportationDeadline) {
+      return <TransportationExpired />;
     }
     
     if (transportationType === TRANSPORTATION_TYPES.BUS) {
