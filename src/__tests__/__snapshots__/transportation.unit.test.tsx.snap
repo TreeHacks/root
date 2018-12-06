@@ -345,7 +345,7 @@ exports[`bus reimbursement with accept=true 1`] = `
     </div>
     <p>
       <small>
-        We've received your RSVP! You can change your status anytime up to the event if your plans change.
+        We've received your RSVP! You can cancel your RSVP anytime up to the event if your plans change.
       </small>
     </p>
   </div>
@@ -522,7 +522,7 @@ exports[`bus reimbursement with deadline passed and RSVP'd yes, should show bus 
     </div>
     <p>
       <small>
-        We've received your RSVP! You can change your status anytime up to the event if your plans change.
+        We've received your RSVP! You can cancel your RSVP anytime up to the event if your plans change.
       </small>
     </p>
   </div>
