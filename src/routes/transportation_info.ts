@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute } from "./common";
-import { ALLOWED_TRANSITIONS_USER, TRANSPORTATION_STATUS, TRANSPORTATION_TYPE } from "../constants";
+import { TRANSPORTATION_STATUS, TRANSPORTATION_TYPE } from "../constants";
 import { IApplication } from '../models/Application.d';
 
 export function getTransportationInfo(req: Request, res: Response) {
