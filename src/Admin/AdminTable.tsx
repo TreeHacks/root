@@ -40,6 +40,13 @@ const AdminTable = (props: IAdminTableProps) => {
             }}><a href="#">View</a></div>
         },
         {
+            "Header": "Transportation Preview",
+            "accessor": "_id",
+            "Cell": (p) => <div onClick={(e) => {
+                e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "transportation" })
+            }}><a href="#">View Travel</a></div>
+        },
+        {
             "Header": "ID",
             "accessor": "_id"
         },
