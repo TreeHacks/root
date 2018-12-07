@@ -17,7 +17,9 @@ export function setTransportationInfo(req: Request, res: Response) {
                 if (e.admin_info.transportation.type === TRANSPORTATION_TYPE.BUS && req.body.accept === false) {
                     // Allowed to cancel bus RSVPs after the deadline.
                 }
-                return res.status(403).send("Transportation deadline has passed.");
+                else {
+                    return res.status(403).send("Transportation deadline has passed.");
+                }
             }
             e.forms.transportation = req.body;
         },
