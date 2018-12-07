@@ -60,7 +60,7 @@ exports[`Format admission deadline with PST time zone 1`] = `
       . If you don't confirm by then, we'll assume you can't make it and give your spot to someone else.
     </p>
     <p>
-      By confirming your spot, you agree to let us share your information with our sponsors. If you'd like to opt out, send us a message at hello@treehacks.com.
+      By confirming your spot, you agree to let us share the information you gave us in your application with our sponsors. If you'd like to opt out, send us a message at hello@treehacks.com.
     </p>
   </div>
   <button

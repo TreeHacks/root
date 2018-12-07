@@ -20,7 +20,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => <div className="a
         <h4>Congratulations! You've been accepted to TreeHacks {HACKATHON_YEAR}!</h4>
         <p>We're so stoked to see you the weekend of {HACKATHON_DATE_RANGE} at Stanford. We were blown away by your application and know that you’ll be an inspiring hacker. It'll be a super fun weekend filled with amazing hacks, delicious food, and fantastic people. We hope you can join us!</p>
         <p>You have until {moment(props.deadline).tz("America/Los_Angeles").format("LLL z")} to confirm your attendance at TreeHacks {HACKATHON_YEAR}. If you don't confirm by then, we'll assume you can't make it and give your spot to someone else.</p>
-        <p>By confirming your spot, you agree to let us share your information with our sponsors. If you'd like to opt out, send us a message at hello@treehacks.com.</p>
+        <p>By confirming your spot, you agree to let us share the information you gave us in your application with our sponsors. If you'd like to opt out, send us a message at hello@treehacks.com.</p>
     </div>}
     <button className="btn btn-custom inverted" onClick={() => window.confirm(`Are you sure you would like to decline your spot at TreeHacks ${HACKATHON_YEAR}? Your decision is final.`) && props.declineAdmission()}>decline spot</button>
     <button className="btn btn-custom" disabled={props.confirmedYet} onClick={() => props.confirmAdmission()}>{props.confirmedYet ? "already confirmed": "confirm spot"}</button>
