@@ -258,7 +258,63 @@ it('other reimbursement with transportation_status=SUBMITTED', () => {
     expect(wrapper.text()).toContain("Thanks, we've received your reimbursement request");
 });
 
-it('flight reimbursement with deadline passed', () => {
+it('flight reimbursement with deadline passed, should show expired screen', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "flight",
+                amount: 500.30,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+        forms: {
+        }
+    };
+    const clock = lolex.install({now: new Date(deadlineTooLate)});
+    const wrapper = shallow(
+        <Transportation
+            profile={profile} {...commonProps}
+        />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<TransportationExpired />)).toBe(true);
+});
+
+it('other reimbursement with deadline passed, should show deadline passed', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "other",
+                amount: 500.30,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+        forms: {
+        }
+    };
+    const clock = lolex.install({now: new Date(deadlineTooLate)});
+    const wrapper = shallow(
+        <Transportation
+            profile={profile} {...commonProps}
+        />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.contains(<TransportationExpired />)).toBe(true);
+});
+
+it('flight reimbursement with deadline passed, should not show expired message', () => {
 
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
@@ -283,13 +339,10 @@ it('flight reimbursement with deadline passed', () => {
     );
     clock.uninstall();
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.text()).not.toContain("You have received a flight reimbursement!");
-    expect(wrapper.text()).not.toContain("$500.30");
-    expect(wrapper.text()).not.toContain("Thanks, we've received your receipt");
-    expect(wrapper.contains(<TransportationExpired />)).toBe(true);
+    expect(wrapper.contains(<TransportationExpired />)).toBe(false);
 });
 
-it('other reimbursement with deadline passed', () => {
+it('other reimbursement with deadline passed, should not show expired message', () => {
 
     const profile = {
         status: STATUS.ADMISSION_CONFIRMED,
@@ -314,8 +367,9 @@ it('other reimbursement with deadline passed', () => {
     );
     clock.uninstall();
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.contains(<TransportationExpired />)).toBe(true);
+    expect(wrapper.contains(<TransportationExpired />)).toBe(false);
 });
+
 
 it('bus reimbursement with deadline passed and no RSVP, should show TransportationExpired', () => {
 

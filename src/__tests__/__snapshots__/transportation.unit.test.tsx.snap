@@ -704,7 +704,68 @@ exports[`flight reimbursement 1`] = `
 </div>
 `;
 
-exports[`flight reimbursement with deadline passed 1`] = `<Component />`;
+exports[`flight reimbursement with deadline passed, should not show expired message 1`] = `
+<div
+  className="transportation"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#686e77",
+        "color": "white",
+        "margin": "60px",
+        "maxWidth": "750px",
+        "padding": "40px 20px",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Component />
+    <h5
+      style={
+        Object {
+          "marginTop": 40,
+        }
+      }
+    >
+      Thanks, we've received your receipt
+    </h5>
+    <h5>
+      TreeHacks is reimbursing you up to 
+      <span
+        style={
+          Object {
+            "color": "#00b65f",
+            "fontWeight": "bold",
+          }
+        }
+      >
+        $500.30
+      </span>
+    </h5>
+    <p
+      style={
+        Object {
+          "margin": "20px auto 0",
+          "maxWidth": 575,
+        }
+      }
+    >
+      Thanks, we've received your reimbursement request.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`flight reimbursement with deadline passed, should show expired screen 1`] = `<Component />`;
 
 exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
 <div
@@ -901,7 +962,68 @@ exports[`other reimbursement 1`] = `
 </div>
 `;
 
-exports[`other reimbursement with deadline passed 1`] = `<Component />`;
+exports[`other reimbursement with deadline passed, should not show expired message 1`] = `
+<div
+  className="transportation"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#686e77",
+        "color": "white",
+        "margin": "60px",
+        "maxWidth": "750px",
+        "padding": "40px 20px",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Component />
+    <h5
+      style={
+        Object {
+          "marginTop": 40,
+        }
+      }
+    >
+      Thanks, we've received your receipt
+    </h5>
+    <h5>
+      TreeHacks is reimbursing you up to 
+      <span
+        style={
+          Object {
+            "color": "#00b65f",
+            "fontWeight": "bold",
+          }
+        }
+      >
+        $500.30
+      </span>
+    </h5>
+    <p
+      style={
+        Object {
+          "margin": "20px auto 0",
+          "maxWidth": 575,
+        }
+      }
+    >
+      Thanks, we've received your reimbursement request.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`other reimbursement with deadline passed, should show deadline passed 1`] = `<Component />`;
 
 exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
 <div

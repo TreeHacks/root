@@ -154,7 +154,7 @@ export class Transportation extends React.Component<ITransportationProps> {
     }
     
     if (transportationType === TRANSPORTATION_TYPES.FLIGHT || transportationType === TRANSPORTATION_TYPES.OTHER) {
-      if (dateNow > transportationDeadline) {
+      if (dateNow > transportationDeadline && transportation_status === TRANSPORTATION_STATUS.AVAILABLE) {
         return <TransportationExpired />;
       }
 
