@@ -1,14 +1,14 @@
 # TreeHacks application portal frontend
 
-https://ap-frontend-test.herokuapp.com/
+https://apply.dev.treehacks.com
 
-Setup
+## Setup
 1. Download the appropriate `.env` file with the proper environment variables set, and put it in your working directory.
 2. Run `npm install`
 3. Run `npm start`
 
-Running tests
-Applicatin will deploy to Heroku only if tests pass.
+## Running tests
+Application will deploy to Heroku only if tests pass.
 Run `npm test` to run tests.
 Run `npm test -- -- -u` to update snapshots.
 
