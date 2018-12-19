@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute } from "./common"
-import { STATUS } from '../constants';
+import { STATUS, TYPE } from '../constants';
 import { sendApplicationSubmittedEmail } from "../services/send_email";
 import { IApplication } from '../models/Application.d';
 
@@ -30,7 +30,7 @@ export function submitApplicationInfo(req: Request, res: Response) {
         return;
       }
       // todo: share this with the frontend in some common configuration.
-      const requiredFields = [
+      let requiredFields = [
         "first_name",
         "last_name",
         "phone",
@@ -44,11 +44,15 @@ export function submitApplicationInfo(req: Request, res: Response) {
         "skill_level",
         "hackathon_experience",
         "accept_terms",
-        "accept_share",
-        "q1_goodfit",
-        "q2_experience",
-        "q3"
+        "accept_share"
       ];
+      if (e.type !== TYPE.STANFORD) {
+        requiredFields.push(...[
+          "q1_goodfit",
+          "q2_experience",
+          "q3"
+        ]);
+      }
       let completed = true;
       for (let requiredField of requiredFields) {
         if (typeof e.forms.application_info[requiredField] === "undefined") {

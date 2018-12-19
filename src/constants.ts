@@ -18,6 +18,12 @@ export var TRANSPORTATION_STATUS = {
   PAID: "paid"
 }
 
+export var TYPE = {
+  IN_STATE: "is",
+  OUT_OF_STATE: "oos",
+  STANFORD: "stanford"
+}
+
 export var TRANSPORTATION_TYPE = {
   BUS: "bus",
   FLIGHT: "flight",
