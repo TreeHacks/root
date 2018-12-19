@@ -5,7 +5,7 @@ import { Prompt } from "react-router";
 import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
 
-import { DEADLINES } from '../constants';
+import { DEADLINES, TYPE } from '../constants';
 import { IFormPageWrapperProps } from "./types";
 import { cloneDeep, get, set, pull } from "lodash-es";
 import Loading from "../Loading/Loading";
@@ -13,6 +13,8 @@ import { push } from 'connected-react-router';
 import CustomDateWidget from './CustomDateWidget';
 import { TypeaheadField } from "react-jsonschema-form-extras/lib/TypeaheadField";
 import FormPage from "./FormPage";
+import remove from "lodash-es";
+import { isArray } from "util";
 
 const mapStateToProps = state => ({
     ...state.form
@@ -65,6 +67,15 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
         }
         if (get(schema, 'properties.accept_share')) {
             schema.properties.accept_share.title = <span>I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a className="form-link" href="https://mlh.io/privacy" target="_blank" onClick={e => e.stopPropagation()}>MLH Privacy Policy</a>. I further I agree to the terms of both the <a className="form-link" href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md" target="_blank" onClick={e => e.stopPropagation()}>MLH Contest Terms and Conditions</a> and the MLH Privacy Policy.</span>;
+        }
+        console.log(get(props, "profile.type"));
+        if (get(props, "profile.type") === TYPE.STANFORD && schema.required) {
+            // Hide these fields and make them not required.
+            const fields = ["q1_goodfit", "q2_experience", "q3"];
+            for (let field of fields) {
+                set(uiSchema, `${field}.classNames`, "treehacks-hidden");
+            }
+            schema.required = schema.required.filter(e => fields.indexOf(e) === -1);
         }
 
         const deadline = DEADLINES.find(d => d.key === get(props, "profile.type"));
