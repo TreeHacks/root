@@ -2,14 +2,15 @@ import { IUserAttributes, IAuthState } from "./types";
 import { API, Auth } from "aws-amplify";
 import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";
-import { userInfo } from "os";
+import {get} from "lodash-es";
 
-export const loggedIn = (userId, attributes, admin, reviewer) => ({
+export const loggedIn = (userId, attributes, admin, reviewer, sponsor) => ({
   type: 'LOGIN_SUCCESS',
   userId,
   attributes,
   admin,
-  reviewer
+  reviewer,
+  sponsor
 });
 
 export const notLoggedIn = () => ({
@@ -95,17 +96,14 @@ export function checkLoginStatus() {
     return getCurrentUser()
       .then((user: { username: string, attributes: IUserAttributes, "cognito:groups"?: string[] }) => {
         if (!user) throw "No credentials";
-        let admin = false;
-        let reviewer = false;
-        if (user.attributes["cognito:groups"] &&
-          (user.attributes["cognito:groups"].indexOf("admin") > -1)) {
-          admin = true;
-        }
-        if (user.attributes["cognito:groups"] &&
-        (user.attributes["cognito:groups"].indexOf("reviewer") > -1)) {
-        reviewer = true;
-      }
-        dispatch(loggedIn(user.username, user.attributes, admin, reviewer));
+        const groups = get(user.attributes, "cognito:groups", []);
+        const checkInGroup = group => groups.indexOf(group) > -1;
+        const [admin, reviewer, sponsor] = [
+          checkInGroup("admin"),
+          checkInGroup("reviewer"),
+          checkInGroup("sponsor")
+        ];
+        dispatch(loggedIn(user.username, user.attributes, admin, reviewer, sponsor));
       }).catch(e => {
         dispatch(notLoggedIn());
         console.error(e);

@@ -39,6 +39,9 @@ class Login extends React.Component<IHomeProps, {}> {
         {this.props.auth.reviewer &&
           <NavLink to="/review">review</NavLink>
         }
+        {(this.props.auth.admin || this.props.auth.sponsor) &&
+          <NavLink to="/sponsors">sponsors</NavLink>
+        }
       </div>
       <div className="logoutText">
         <a onClick={() => this.props.logout()}>log out</a>

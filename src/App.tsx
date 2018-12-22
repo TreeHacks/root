@@ -17,7 +17,7 @@ import Admin from "./Admin/Admin";
 import Verify from "./Verify";
 import Helmet from "react-helmet";
 import FormPageWrapper from "./FormPage/FormPageWrapper";
-import Stats from "./Admin/Stats";
+import Sponsors from "./Sponsors/Sponsors";
 
 const mapStateToProps = state => ({
   ...state.base,
@@ -62,6 +62,7 @@ const MainRoutes = (props: IAppProps) => (
           <Route path="/transportation" component={Transportation} />
           <Route path="/admin" component={Admin} />
           <Route path="/review" exact component={Review} />
+          <Route path="/sponsors" component={Sponsors} />
         </Switch>
       </div>
     }

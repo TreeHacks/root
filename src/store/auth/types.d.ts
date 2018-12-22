@@ -30,6 +30,7 @@ export interface IAuthState {
   message: string,
   admin: boolean,
   reviewer: boolean,
+  sponsor: boolean,
   authPage: "forgotPassword" | "forgotPasswordSubmit" | "signIn" | "signUp",
   attemptedLoginEmail: string
 }
