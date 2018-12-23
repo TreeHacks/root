@@ -58,8 +58,8 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
             return <Loading />;
         }
         const props = this.props;
-        let schema = props.schemas[props.formName].schema;
-        const uiSchema = props.schemas[props.formName].uiSchema;
+        let schema = cloneDeep(props.schemas[props.formName].schema);
+        const uiSchema = cloneDeep(props.schemas[props.formName].uiSchema);
 
         // Inject direct link to MLH COC into accept_terms
         if (get(schema, 'properties.accept_terms')) {
