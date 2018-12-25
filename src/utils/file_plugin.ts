@@ -26,9 +26,14 @@ async function uploadDynamicApplicationContent(this: mongoose.Document) {
         // fall through - fixme add error logging
         console.error(e);
       }
-    } else {
+    }
+    else if (resume) {
       // If resume was not freshly uploaded, just persist the old one
-      // this.forms.application_info.resume = originalResume;
+      // Get resume id from the URL
+      const match = resume.match(/amazonaws.com\/(.*?)\?AWS/);
+      if (match[1]) {
+        set(this, path, match[1]);
+      }
     }
   }
 }
