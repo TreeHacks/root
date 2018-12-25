@@ -31,7 +31,7 @@ async function uploadDynamicApplicationContent(this: mongoose.Document) {
       // If resume was not freshly uploaded, just persist the old one
       // Get resume id from the URL
       const match = resume.match(/amazonaws.com\/(.*?)\?AWS/);
-      if (match[1]) {
+      if (match && match[1]) {
         set(this, path, match[1]);
       }
     }
