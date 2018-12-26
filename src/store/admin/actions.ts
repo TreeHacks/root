@@ -61,6 +61,19 @@ export const getApplicationEmails = (tableState: IReactTableState) => (dispatch,
   });
 };
 
+export const getApplicationResumes = (tableState: IReactTableState) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return dispatch(fetchApplications(tableState, { "forms.application_info.resume": 1 }, true)).then((e: { count: number, results: any[] }) => {
+    let emails = e.results.map(e => get(e, "forms.application_info.resume"));
+    // dispatch(setApplicationEmails(emails));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error getting application emails " + e);
+  });
+};
+
 export const getExportedApplications = (tableState: IReactTableState) => (dispatch, getState) => {
   dispatch(loadingStart());
   return dispatch(fetchApplications(tableState, {"forms.application_info.resume": 0}, true)).then((e: { count: number, results: any[] }) => {
@@ -73,6 +86,15 @@ export const getExportedApplications = (tableState: IReactTableState) => (dispat
     alert("Error getting exported applications " + e);
   });
 };
+
+/*
+ * To-do
+ */
+export const getExportedApplicationsCSV = (tableState: IReactTableState) => (dispatch, getState) => {
+  dispatch(getExportedApplications(tableState));
+};
+
+
 
 const fetchApplications = (tableState: IReactTableState, project=null, retrieveAllPages = false) => (dispatch, getState) => {
   if (project === null) {
