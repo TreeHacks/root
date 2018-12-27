@@ -33,3 +33,9 @@ export interface IBulkChangeProps extends IAdminState {
     setBulkChangeIds: (x: string) => void,
     userId: string
 }
+
+export interface IReactTableHeader {
+    Header?: string,
+    id?: string,
+    accessor: any
+}

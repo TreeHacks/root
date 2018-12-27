@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { ISponsorsTableProps } from "./types";
 import Loading from "../Loading/Loading";
-import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicationEmails, getExportedApplications, getApplicationResumes } from "../store/admin/actions";
+import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicationEmails, getExportedApplications, getApplicationResumes, getExportedApplicationsCSV } from "../store/admin/actions";
 import ReactTable from "react-table";
-import { get, values } from "lodash-es";
+import { pickBy, values } from "lodash-es";
 import 'react-table/react-table.css';
 import { STATUS, TYPE } from "../constants";
 import { IAdminState } from "../store/admin/types";
@@ -41,10 +41,6 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
             }}><a href="#">View</a></div>
         },
         {
-            "Header": "ID",
-            "accessor": "_id"
-        },
-        {
             "Header": "email",
             "accessor": "user.email"
         },
@@ -63,6 +59,7 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
             "accessor": "forms.application_info.university"
         }
     ];
+    const columnsToExport = columns.filter(e => e.accessor !== "_id");
     return (
         <div>
             <div className="col-12">
@@ -77,7 +74,7 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
                     {(state, makeTable, instance) => {
                         return (
                             <div>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state)}>Export</button> (Export all pages of filtered results as CSV)</p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export</button> (Export all pages of filtered results as CSV)</p>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getApplicationResumes(state)}>Get resumes</button> (Get resumes of all pages of filtered results)</p>
                                 {props.applicationEmails && <div>
                                     <textarea
@@ -108,7 +105,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setApplicationStatus: (a, b) => dispatch(setApplicationStatus(a, b)),
     setSelectedForm: e => dispatch(setSelectedForm(e)),
     getApplicationResumes: e => dispatch(getApplicationResumes(e)),
-    getExportedApplications: e => dispatch(getExportedApplications(e))
+    getExportedApplicationsCSV: (e, c) => dispatch(getExportedApplicationsCSV(e, c))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SponsorsTable);

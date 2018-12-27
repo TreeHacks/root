@@ -1,12 +1,12 @@
 import { API } from "aws-amplify";
 import { loadingStart, loadingEnd } from "../base/actions";
-import { IReactTableState } from "src/Admin/types";
+import { IReactTableState, IReactTableHeader } from "src/Admin/types";
 import { get } from "lodash-es";
 import saveAs from 'file-saver';
 import { IAdminState } from "./types";
 import Papa from "papaparse";
 import { STATUS } from "../../constants";
-import {some} from "lodash-es";
+import {pick} from "lodash-es";
 
 export const setApplicationList = (applicationList, pages) => ({
   type: "SET_APPLICATION_LIST",
@@ -88,13 +88,35 @@ export const getExportedApplications = (tableState: IReactTableState) => (dispat
 };
 
 /*
- * To-do
+ * Get exported applications as CSV.
  */
-export const getExportedApplicationsCSV = (tableState: IReactTableState) => (dispatch, getState) => {
-  dispatch(getExportedApplications(tableState));
+export const getExportedApplicationsCSV = (tableState: IReactTableState, columns: IReactTableHeader[]) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return dispatch(fetchApplications(tableState, {"forms.application_info.resume": 0}, true)).then((e: { count: number, results: any[] }) => {
+    let results = e.results.map(item => {
+      let newItem = {};
+      for (let column of columns) {
+        let value = "";
+        if (typeof column.accessor === "function") {
+          value = column.accessor(item);
+        }
+        else {
+          value = get(item, column.accessor);
+        }
+        newItem[column.Header] = value;
+      }
+      return newItem;
+    }
+    );
+    saveAs(new Blob([Papa.unparse(results)]), "data.csv");
+    dispatch(setExportedApplications(results));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error getting exported applications " + e);
+  });
 };
-
-
 
 const fetchApplications = (tableState: IReactTableState, project=null, retrieveAllPages = false) => (dispatch, getState) => {
   if (project === null) {
