@@ -11,44 +11,19 @@ import { IAdminState } from "../store/admin/types";
 import ApplicationView from "../Admin/ApplicationView";
 import { IBaseState } from "src/store/base/types";
 
-const defaultFilterMethod = (filter, row) => {
-    if (filter.value == "all") {
-        return true;
-    }
-    return row[filter.id] == filter.value;
-};
-
-const createFilterSelect = (values) => ({ filter, onChange }) =>
-    <select
-        className="form-control"
-        value={filter ? filter.value : "all"}
-        onChange={event => onChange(event.target.value)}
-    >
-        {values.map(e =>
-            <option key={e}>{e}</option>
-        )}
-        <option>all</option>
-    </select>;
-
 const SponsorsTable = (props: ISponsorsTableProps) => {
     const columns = [
-        {
-            "Header": "Preview",
-            "accessor": "_id",
-            "id": "view",
-            "Cell": (p) => <div onClick={(e) => {
-                e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "application_info" })
-            }}><a href="#">View</a></div>
-        },
+        // {
+        //     "Header": "Preview",
+        //     "accessor": "_id",
+        //     "id": "view",
+        //     "Cell": (p) => <div onClick={(e) => {
+        //         e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "application_info" })
+        //     }}><a href="#">View</a></div>
+        // },
         {
             "Header": "email",
             "accessor": "user.email"
-        },
-        {
-            "Header": "type",
-            "filterMethod": defaultFilterMethod,
-            "Filter": createFilterSelect(values(TYPE)),
-            "accessor": "type"
         },
         {
             "Header": "Location",
@@ -57,7 +32,41 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
         {
             "Header": "University",
             "accessor": "forms.application_info.university"
-        }
+        },
+        {
+            "Header": "Graduation Year",
+            "accessor": "forms.application_info.graduation_year"
+        },
+        {
+            "Header": "Level of Study",
+            "accessor": "forms.application_info.level_of_study"
+        },
+        {
+            "Header": "Major",
+            "accessor": "forms.application_info.major"
+        },
+        {
+            "Header": "Resume",
+            "accessor": "forms.application_info.resume",
+            "Cell": p => <a href={p}>View Resume</a>
+        },
+        {
+            "Header": "Q1 - Why do you want to come to TreeHacks?",
+            "accessor": "forms.application_info.q1_goodfit"
+        },
+        {
+            "Header": "Q2 - Tell us a story about creating the project you're most proud of (technical or nontechnical). Why did you choose to work on it? What did you learn from it?",
+            "accessor": "forms.application_info.q2_experience"
+        },
+        {
+            "Header": "Q3 - Tell us a fun fact about you",
+            "accessor": "forms.application_info.q3"
+        },
+        {
+            "Header": "Q4 (Optional) - Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
+            "accessor": "forms.application_info.q4"
+        },
+
     ];
     const columnsToExport = columns.filter(e => e.accessor !== "_id");
     return (
