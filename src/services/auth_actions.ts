@@ -20,6 +20,10 @@ export async function bulkAutoCreateUser({ email, group }) {
       {
         Name: 'email',
         Value: email
+      },
+      {
+        Name: 'name',
+        Value: 'TreeHacks User' // Required in IDP config (cannot be made optional after IDP creation)
       }
     ]
   };
