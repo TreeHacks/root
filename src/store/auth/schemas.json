@@ -145,7 +145,8 @@
       "properties": {
         "password": {
           "type": "string",
-          "title": "new password"
+          "title": "new password",
+          "description": "Password needs to have at least 8 characters, a number, and an uppercase and a lowercase letter."
         },
         "password2": {
           "type": "string",
