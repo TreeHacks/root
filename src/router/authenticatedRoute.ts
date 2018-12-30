@@ -31,7 +31,10 @@ authenticatedRoute.param('userId', (req, res, next, userId) => {
 });
 
 
-const validateGroup = (groupName) => (req, res, next) => {
+const validateGroup = (group) => (req, res, next) => {
+  // Allow either a single group or multiple valid groups passed as an array
+  if (!Array.isArray(group)) { group = [group]; }
+
   let accessTokenFromClient = req.headers.authorization;
   if (!accessTokenFromClient) return res.status(401).send("Access Token missing from header");
 
@@ -39,11 +42,11 @@ const validateGroup = (groupName) => (req, res, next) => {
     if (err) return res.status(401).send(err);
     // TODO: check permissions here.
     res.locals.user = response;
-    if (res.locals.user['cognito:groups'] && ~res.locals.user['cognito:groups'].indexOf(groupName)) {
+    if (res.locals.user['cognito:groups'] && group.some(g => res.locals.user['cognito:groups'].indexOf(g) !== -1)) {
       next();
     }
     else {
-      return res.status(401).send("Unauthorized; user is not a " + groupName + ". User is in groups: " + res.locals.user['cognito:groups']);
+      return res.status(401).send("Unauthorized; user is not a " + group + ". User is in groups: " + res.locals.user['cognito:groups']);
     }
   });
 }
@@ -53,3 +56,6 @@ adminRoute.use(validateGroup("admin"));
 
 export const reviewerRoute = express.Router();
 reviewerRoute.use(validateGroup("reviewer"));
+
+export const sponsorRoute = express.Router();
+sponsorRoute.use(validateGroup(["admin", "sponsor"]));
