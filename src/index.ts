@@ -21,6 +21,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import Application from "./models/Application";
 import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } from "./routes/user_review";
 import { bulkChangeUsers } from "./routes/user_bulk_change";
+import { bulkCreateUsers } from "./routes/user_bulk_create";
 import { setTransportationInfo, submitTransportationInfo, getTransportationInfo } from "./routes/transportation_info";
 
 // Set up the Express app
@@ -93,6 +94,7 @@ authenticatedRoute.post('/users/:userId/status/decline', declineAdmission);
 authenticatedRoute.get('/users', [adminRoute], getUserList);
 authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);
+authenticatedRoute.post('/users_bulkcreate', [adminRoute], bulkCreateUsers);
 
 // Need custom auth:
 authenticatedRoute.put('/users/:userId/admin_info', [adminRoute], setAdminInfo);
