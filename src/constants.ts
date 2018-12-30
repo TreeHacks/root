@@ -1,3 +1,9 @@
+export var GROUPS = {
+  'admin': 'Administrator',
+  'reviewer': 'Reviewer',
+  'sponsor': 'Sponsor'
+};
+
 export var STATUS = {
   INCOMPLETE: "incomplete",
   SUBMITTED: "submitted",

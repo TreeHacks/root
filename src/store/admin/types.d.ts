@@ -11,5 +11,9 @@ export interface IAdminState {
   bulkChange: {
     status: string,
     ids: string
+  },
+  bulkCreate: {
+    group: string,
+    emails: string
   }
 }

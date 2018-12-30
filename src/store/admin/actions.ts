@@ -201,6 +201,35 @@ export const performBulkChange = () => (dispatch, getState) => {
   });
 }
 
+export const setBulkCreateGroup = (group) => ({
+  type: "SET_BULK_CREATE_GROUP",
+  group
+});
+
+export const setBulkCreateEmails = (emails) => ({
+  type: "SET_BULK_CREATE_EMAILS",
+  emails
+});
+
+export const performBulkCreate = () => (dispatch, getState) => {
+  const {group, emails} = (getState().admin as IAdminState).bulkCreate;
+  dispatch(loadingStart());
+  return API.post("treehacks", `/users_bulkcreate`, {
+    body: {
+      emails: emails.split('\n').map(e => e.trim()),
+      group
+    }
+  }).then(e => {
+    saveAs(new Blob([Papa.unparse(e.users)]), `bulk-creation-${Date.now()}.csv`);
+    dispatch(setBulkCreateGroup(""));
+    dispatch(setBulkCreateEmails(""));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error performing bulk creation: " + e);
+  });
+}
 
 export const setApplicationStatus = (status, userId) => (dispatch, getState) => {
   // todo
