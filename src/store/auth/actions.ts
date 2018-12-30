@@ -159,7 +159,7 @@ export function signIn(data) {
 
 export function signUp(data) {
   return dispatch => {
-    if (data.password != data.password2) {
+    if (data.password !== data.password2) {
       dispatch(onAuthError("Passwords do not match."));
       return;
     }
@@ -195,7 +195,7 @@ export function forgotPassword(data) {
 
 export function forgotPasswordSubmit(data) {
   return dispatch => {
-    if (data.password != data.password2) {
+    if (data.password !== data.password2) {
       dispatch(onAuthError("Passwords do not match."));
       return;
     }
@@ -227,7 +227,7 @@ export function changePassword(data) {
       dispatch(onAuthError("No user for whom to change password."));
       return;
     }
-    if (data.password != data.password2) {
+    if (data.password !== data.password2) {
       dispatch(onAuthError("Passwords do not match."));
       return;
     }

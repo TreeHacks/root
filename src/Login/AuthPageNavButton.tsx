@@ -18,7 +18,7 @@ interface IAuthPageNavButtonProps {
 }
 
 function AuthPageNavButton(props: IAuthPageNavButtonProps) {
-  if (props.currentPage != props.page) {
+  if (props.currentPage !== props.page) {
     return <button className={`btn btn-stanford${props.page === 'forgotPassword' ? ' btn-subtle' : ''}`} onClick={() => props.setAuthPage(props.page)}>{props.label}</button>;
   }
   else {
