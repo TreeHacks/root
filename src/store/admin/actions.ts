@@ -63,14 +63,18 @@ export const getApplicationEmails = (tableState: IReactTableState) => (dispatch,
 
 export const getApplicationResumes = (tableState: IReactTableState) => (dispatch, getState) => {
   dispatch(loadingStart());
-  return dispatch(fetchApplications(tableState, { "forms.application_info.resume": 1 }, true)).then((e: { count: number, results: any[] }) => {
-    let emails = e.results.map(e => get(e, "forms.application_info.resume"));
-    // dispatch(setApplicationEmails(emails));
+  const applicationIds = (getState().admin as IAdminState).applicationList.map(e => e._id);
+  return API.post("treehacks", `/users_resumes`, {
+    body: {
+      ids: applicationIds
+    }
+  }).then(e => {
+    saveAs(new Blob([e]), "resumes.zip");
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
     dispatch(loadingEnd());
-    alert("Error getting application emails " + e);
+    alert("Error getting application resumes " + e);
   });
 };
 
