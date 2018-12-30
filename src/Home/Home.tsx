@@ -30,9 +30,9 @@ class Login extends React.Component<IHomeProps, {}> {
         </NavLink>
       </div>
       <div className="treehacks-navbar-links">
-        <NavLink to="/" isActive={(_, loc) => loc.pathname === "/"}>dashboard</NavLink>
-        <NavLink to="/application_info">application</NavLink>
-        <NavLink to="/transportation">travel</NavLink>
+        {!this.props.auth.sponsor && <NavLink to="/" isActive={(_, loc) => loc.pathname === "/"}>dashboard</NavLink>}
+        {!this.props.auth.sponsor && <NavLink to="/application_info">application</NavLink>}
+        {!this.props.auth.sponsor && <NavLink to="/transportation">travel</NavLink>}
         {this.props.auth.admin &&
           <NavLink to="/admin">admin</NavLink>
         }

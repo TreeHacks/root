@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import "./Login.scss";
-import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup } from "../store/auth/actions";
+import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup, changePassword } from "../store/auth/actions";
 import { withFederated } from 'aws-amplify-react';
 import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
@@ -21,7 +21,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   signUp: data => dispatch(signUp(data)),
   forgotPassword: data => dispatch(forgotPassword(data)),
   forgotPasswordSubmit: data => dispatch(forgotPasswordSubmit(data)),
-  resendSignup: () => dispatch(resendSignup())
+  resendSignup: () => dispatch(resendSignup()),
+  changePassword: data => dispatch(changePassword(data))
 });
 
 
@@ -33,7 +34,8 @@ interface ILoginProps extends IAuthState {
   signUp: (e) => void,
   forgotPassword: (e) => void,
   forgotPasswordSubmit: (e) => void,
-  resendSignup: () => void
+  resendSignup: () => void,
+  changePassword: (e) => void
 };
 
 function transformErrors(errors) {
@@ -79,7 +81,7 @@ class Login extends React.Component<ILoginProps, { signupFormData: any }> {
           <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginTop": 49 }} />
         </div>
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
-        <DeadlinesWidget />
+        {["signIn", "signUp"].indexOf(this.props.authPage) !== -1 && <DeadlinesWidget />}
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
         </div>
@@ -138,16 +140,27 @@ class Login extends React.Component<ILoginProps, { signupFormData: any }> {
             uiSchema={this.props.schemas.forgotPasswordSubmit.uiSchema}
             onSubmit={e => this.props.forgotPasswordSubmit(e.formData)} />
         }
+        {this.props.authPage === "changePassword" &&
+          <AuthForm
+            schema={this.props.schemas.changePassword.schema}
+            uiSchema={this.props.schemas.changePassword.uiSchema}
+            onSubmit={e => this.props.changePassword(e.formData)}
+          >
+            <button className="btn btn-info" type="submit">Update password</button>
+          </AuthForm>
+        }
         {this.props.authPage === "signUp" ?
           <div className="label-text">Already have an account?</div>
-          : this.props.authPage === "signIn" ?
-            <div className="label-text">Don't have an account yet?</div>
-            : null}
-        <div className="mt-4 left-btn">
-          <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In" />
-          <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />
-          <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
-        </div>
+        : this.props.authPage === "signIn" ?
+          <div className="label-text">Don't have an account yet?</div>
+        : null}
+        {this.props.authPage !== "changePassword" &&
+          <div className="mt-4 left-btn">
+            <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In" />
+            <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />
+            <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
+          </div>
+        }
       </div>);
     }
     else {

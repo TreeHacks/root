@@ -123,6 +123,11 @@ export const setMessage = (message) => ({
   message: message
 })
 
+export const setUser = (user) => ({
+  type: 'SET_USER',
+  user
+})
+
 export const onAuthError = (error) => ({
   type: 'SET_ERROR',
   error: error
@@ -139,7 +144,14 @@ export function signIn(data) {
     dispatch(loadingStart());
     dispatch(setAttemptedLoginEmail(email));
     Auth.signIn(email, data.password)
-      .then(() => dispatch(checkLoginStatus()))
+      .then(user => {
+        if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+          dispatch(setUser(user));
+          dispatch(setAuthPage("changePassword", "Welcome to TreeHacks. To finish logging in, please set a new password for your account."));
+        } else {
+          dispatch(checkLoginStatus());
+        }
+      })
       .catch(e => dispatch(onAuthError(e.message)))
       .then(() => dispatch(loadingEnd()))
   }
@@ -205,5 +217,26 @@ export function resendSignup() {
         dispatch(onAuthError(""));
       }).catch(e => dispatch(onAuthError("Error sending confirmation email link: " + e)))
       .then(() => dispatch(loadingEnd()));
+  }
+}
+
+export function changePassword(data) {
+  return (dispatch, getState) => {
+    const user = (getState().auth as IAuthState).user;
+    if (!user) {
+      dispatch(onAuthError("No user for whom to change password."));
+      return;
+    }
+    if (data.password != data.password2) {
+      dispatch(onAuthError("Passwords do not match."));
+      return;
+    }
+
+    dispatch(loadingStart());
+
+    Auth.completeNewPassword(user, data.password, {})
+      .then(() => dispatch(checkLoginStatus()))
+      .catch(e => dispatch(onAuthError(e.message)))
+      .then(() => dispatch(loadingEnd()))
   }
 }

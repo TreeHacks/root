@@ -21,14 +21,16 @@ import Sponsors from "./Sponsors/Sponsors";
 
 const mapStateToProps = state => ({
   ...state.base,
-  loggedIn: (state.auth as IAuthState).loggedIn
+  loggedIn: (state.auth as IAuthState).loggedIn,
+  sponsor: (state.auth as IAuthState).sponsor
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 interface IAppProps extends IBaseState {
-  loggedIn: boolean
+  loggedIn: boolean,
+  sponsor: boolean
 }
 
 const App = (props: IAppProps) => (
@@ -57,7 +59,11 @@ const MainRoutes = (props: IAppProps) => (
       <div>
         <Route path="" component={Home} />
         <Switch>
-          <Route path="/" exact component={Dashboard} />
+          {props.sponsor ?
+            <Redirect exact path="/" to="/sponsors" />
+          :
+            <Route path="/" exact component={Dashboard} />
+          }
           <Route path="/application_info" render={() => { return <FormPageWrapper incomingFormName="application_info" />; }} />
           <Route path="/transportation" component={Transportation} />
           <Route path="/admin" component={Admin} />

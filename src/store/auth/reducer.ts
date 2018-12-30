@@ -58,6 +58,11 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         ...state,
         error: action.error
       }
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user
+      }
     case "SET_ATTEMPTED_LOGIN_EMAIL":
       return {
         ...state,
