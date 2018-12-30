@@ -23,6 +23,7 @@ import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } fro
 import { bulkChangeUsers } from "./routes/user_bulk_change";
 import { bulkCreateUsers } from "./routes/user_bulk_create";
 import { setTransportationInfo, submitTransportationInfo, getTransportationInfo } from "./routes/transportation_info";
+import { getUserResumes } from "./routes/user_resumes";
 
 // Set up the Express app
 const app = express();
@@ -92,6 +93,7 @@ authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStat
 authenticatedRoute.post('/users/:userId/status/confirm', confirmAdmission);
 authenticatedRoute.post('/users/:userId/status/decline', declineAdmission);
 authenticatedRoute.get('/users', [sponsorRoute], getUserList);
+authenticatedRoute.post('/users_resumes', [sponsorRoute], getUserResumes);
 authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);
 authenticatedRoute.post('/users_bulkcreate', [adminRoute], bulkCreateUsers);

@@ -38,6 +38,7 @@
     "fs-readfile-promise": "^3.0.1",
     "generate-password": "^1.4.1",
     "html2plaintext": "^2.1.0",
+    "jszip": "^3.1.5",
     "lodash": "^4.17.11",
     "mongoose": "^5.3.1",
     "path": "^0.12.7",

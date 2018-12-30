@@ -453,6 +453,42 @@ const swagger = {
         }
       }
     },
+    "/users_resumes": {
+      "post": {
+        "summary": "Bulk download resumes",
+        "description": "Bulk download resumes as a zip by sending in a list of IDs.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "description": "Zip file of all resumes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/review/leaderboard": {
       "get": {
         "summary": "Get review leaderboard",
