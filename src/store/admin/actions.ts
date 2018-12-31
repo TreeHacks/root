@@ -7,6 +7,9 @@ import { IAdminState } from "./types";
 import Papa from "papaparse";
 import { STATUS } from "../../constants";
 import {pick} from "lodash-es";
+import { custom_header } from "../../index";
+
+declare const ENDPOINT_URL: string;
 
 export const setApplicationList = (applicationList, pages) => ({
   type: "SET_APPLICATION_LIST",
@@ -64,12 +67,26 @@ export const getApplicationEmails = (tableState: IReactTableState) => (dispatch,
 export const getApplicationResumes = (tableState: IReactTableState) => (dispatch, getState) => {
   dispatch(loadingStart());
   const applicationIds = (getState().admin as IAdminState).applicationList.map(e => e._id);
-  return API.post("treehacks", `/users_resumes`, {
-    body: {
-      ids: applicationIds
-    }
-  }).then(e => {
-    saveAs(new Blob([e]), "resumes.zip");
+  // Using fetch workaround; once Amplify library supports responseType, we can use the below code instead.
+  // return API.post("treehacks", `/users_resumes`, {
+  //   body: {
+  //     ids: applicationIds
+  //   },
+  //   responseType: "blob"
+  // })
+  custom_header().then(headers => {
+    const options = {
+      method: "POST",
+      headers: {
+          ...headers,
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ids: applicationIds})
+    };
+    return fetch(ENDPOINT_URL + '/users_resumes', options)
+  }).then(res => res.blob())
+  .then(e => {
+    saveAs(e, "resumes.zip");
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
