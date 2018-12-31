@@ -107,6 +107,8 @@
     .form-control {
         padding: 6px 10px 3px;
         border-radius: 5px;
+        word-break: break-all;
+        min-height: 43px;
     }
     .btn-info {
         background-color: #00b65f;
