@@ -298,3 +298,25 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
 export const HACKATHON_YEAR = 2019;
 export const HACKATHON_DATE_RANGE = "February 15-17";
 export const sponsorApplicationDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "resume", "q2_experience", "q4"];
+export const stanfordApplicationDisplayFields = [
+  "first_name",
+  "last_name",
+  "phone",
+  "dob",
+  "gender",
+  "race",
+  "university",
+  "graduation_year",
+  "level_of_study",
+  "major",
+  "skill_level",
+  "hackathon_experience",
+  "resume",
+  "section2",
+  // "q1_goodfit",
+  // "q2_experience",
+  // "q3",
+  "q4",
+  "accept_terms",
+  "accept_share"
+];
