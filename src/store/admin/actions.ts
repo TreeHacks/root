@@ -97,7 +97,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => (dispatch
 
 export const getExportedApplications = (tableState: IReactTableState) => (dispatch, getState) => {
   dispatch(loadingStart());
-  return dispatch(fetchApplications(tableState, {"forms.application_info.resume": 0}, true)).then((e: { count: number, results: any[] }) => {
+  return dispatch(fetchApplications(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
     saveAs(new Blob([JSON.stringify(e.results)]), `treehacks-applications-${Date.now()}.json`);
     dispatch(setExportedApplications(e.results));
     dispatch(loadingEnd());
@@ -113,7 +113,7 @@ export const getExportedApplications = (tableState: IReactTableState) => (dispat
  */
 export const getExportedApplicationsCSV = (tableState: IReactTableState, columns: IReactTableHeader[]) => (dispatch, getState) => {
   dispatch(loadingStart());
-  return dispatch(fetchApplications(tableState, {"forms.application_info.resume": 0}, true)).then((e: { count: number, results: any[] }) => {
+  return dispatch(fetchApplications(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
     let results = e.results.map(item => {
       let newItem = {};
       for (let column of columns) {
@@ -141,7 +141,7 @@ export const getExportedApplicationsCSV = (tableState: IReactTableState, columns
 
 const fetchApplications = (tableState: IReactTableState, project=null, retrieveAllPages = false) => (dispatch, getState) => {
   if (project === null) {
-    project = {"forms.application_info.resume": 0};
+    project = {};
   }
   let sort = {};
   for (let item of tableState.sorted) {
