@@ -83,7 +83,7 @@ async function getCurrentUser() {
   // Need to parse our local JWT as well to get cognito:groups attribute, because Auth.currentAuthenticatedUser() does not return user groups.
   return Promise.all([
     Auth.currentAuthenticatedUser(),
-    parseJwt((await Auth.currentSession()).idToken.jwtToken)
+    parseJwt((await Auth.currentSession()).getIdToken().getJwtToken())
   ]).then(([user, token]) => {
     user.attributes["cognito:groups"] = token["cognito:groups"];
     return user;

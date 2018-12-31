@@ -42,7 +42,7 @@ Amplify.configure({
             endpoint: ENDPOINT_URL,
             custom_header: async () => { 
                 try {
-                    return { Authorization: (await Auth.currentSession()).idToken.jwtToken }
+                    return { Authorization: (await Auth.currentSession()).getIdToken().getJwtToken() }
                 }
                 catch (e) {
                     console.warn(e, "Defaulting to stored JWT in localStorage...");
