@@ -56,5 +56,6 @@ export interface IApplication extends Document {
   "status": String, // only editable by admin (or this user, to a limited extent).
   "type": String,
   "location": String,
-  "transportation_status": String
+  "transportation_status": String,
+  "sponsor_optout": Boolean
 }

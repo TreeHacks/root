@@ -78,6 +78,9 @@ const swagger = {
           "type": {
             type: "string",
             enumValues: ["is", "oos", "stanford"]
+          },
+          "sponsor_optout": {
+            type: "boolean"
           }
         }
       },
