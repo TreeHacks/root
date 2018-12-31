@@ -9,7 +9,9 @@ export function getUserList(req: Request, res: Response) {
   for (let key in filter) {
     filter[key] = { $regex: filter[key], $options : 'i' };
   }
-  let query = Application.find(filter, JSON.parse(req.query.project) || {})
+  let query = Application.find(filter, JSON.parse(req.query.project) || {}, {
+    "treehacks:groups": res.locals.user['cognito:groups']
+  })
     .sort(JSON.parse(req.query.sort) || {})
     .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
   

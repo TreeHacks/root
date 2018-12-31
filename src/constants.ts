@@ -29,3 +29,5 @@ export var TRANSPORTATION_TYPE = {
   FLIGHT: "flight",
   OTHER: "other"
 }
+
+export const sponsorApplicationDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "resume", "q2_experience", "q4"];

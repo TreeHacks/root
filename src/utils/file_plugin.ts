@@ -2,12 +2,14 @@ import { uploadBase64Content, generateSignedUrlForFile } from '../services/file_
 import mongoose from 'mongoose';
 import { get, set } from "lodash";
 import { IApplication } from '../models/Application.d';
+import { STATUS, sponsorApplicationDisplayFields } from '../constants';
 
 // Paths on the application that store file data that should be uploaded to S3.
 const PATHS = ["forms.application_info.resume", "forms.transportation.receipt"];
 
 export default function s3FilePlugin(schema: mongoose.Schema, options) {
   schema.pre('save', uploadDynamicApplicationContent);
+  schema.pre('find', projectAllowedApplicationFields);
   // schema.post('findOne', injectDynamicApplicationContent);
 }
 
@@ -52,4 +54,28 @@ export async function injectDynamicApplicationContent(doc: IApplication) {
       }
     }
     return doc;
+}
+
+/*
+ * Only filter by allowed applications and fields.
+ * For example, only reviewers and admins can view all fields.
+ * Sponsors can only view certain fields, and can only view admitted people who have not opted out.
+ */
+export function projectAllowedApplicationFields(this: mongoose.Query<IApplication>) {
+  let query = this.getQuery();
+  const options = (this as any).getOptions(); // Todo: fix mongoose types when https://github.com/DefinitelyTyped/DefinitelyTyped/pull/31798 is merged
+  let groups = get(options, "treehacks:groups", []);
+  if (groups.indexOf("admin") > -1 || groups.indexOf("reviewer") > -1) {
+  }
+  else { // Sponsors
+    query = {"$and": [
+      query,
+      {"sponsor_optout": {"$ne": false}},
+      {"status": STATUS.ADMISSION_CONFIRMED}
+    ]};
+    this.setQuery(query);
+    if (!this.selected()) {
+      this.select(["email", ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)].join(" "));
+    }
+  }
 }

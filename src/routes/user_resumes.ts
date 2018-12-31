@@ -4,10 +4,14 @@ import { getFile } from "../services/file_actions";
 import { S3 } from "aws-sdk";
 import JSZip from "jszip";
 import {get} from "lodash";
+import { TYPE, STATUS } from "../constants";
 
 export function getUserResumes(req: Request, res: Response) {
-    // Todo: sponsor authentication; should not be able to get resumes of arbitrary ids.
-    Application.find({"_id": {"$in": req.body.ids}}, {"forms.application_info.resume": 1, "forms.application_info.first_name": 1, "forms.application_info.last_name": 1}).lean()
+    Application.find({"_id": {"$in": req.body.ids}},
+    {"forms.application_info.resume": 1, "forms.application_info.first_name": 1, "forms.application_info.last_name": 1},
+    {
+        "treehacks:groups": res.locals.user['cognito:groups']
+    })
     .then(results => {
         let requests: Promise<S3.Types.GetObjectOutput>[] = [];
         for (let result of results) {
