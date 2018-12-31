@@ -1,5 +1,10 @@
 import { createRandomApplication, post_expect_json, get_expect_json } from "../testUtils";
 
+describe('test', () => {
+  
+    test('test', () => {
+    });
+});
 
 // describe('user form update', () => {
 //   let userId: string;

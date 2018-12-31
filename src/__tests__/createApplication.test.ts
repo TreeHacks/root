@@ -1,6 +1,12 @@
 import { createApplication } from "../routes/common";
 import { IApplication } from "../models/Application.d";
 
+describe('test', () => {
+  
+    test('test', () => {
+    });
+});
+
 // describe('create application', () => {
 
 //     test('should create stanford user application', async () => {
