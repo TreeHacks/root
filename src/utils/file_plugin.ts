@@ -85,11 +85,5 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
         ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
       ].join(" "));
     }
-
-    // Exclude application files by default
-    if (!this.selected()) {
-      this.select(APPLICATION_FILE_PATHS.map(e => "-" + e).join(" "));
-    }
-
   }
 }
