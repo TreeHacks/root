@@ -85,7 +85,7 @@ class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor:
           <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginTop": 49 }} />
         </div>
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
-        <h3 className="h3-style">sponsors</h3>
+        {this.props.sponsor && <h3 className="h3-style">sponsors</h3>}
         {["signIn", "signUp"].indexOf(this.props.authPage) !== -1 && !this.state.sponsor && <DeadlinesWidget />}
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
