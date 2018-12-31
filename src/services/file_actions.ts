@@ -32,3 +32,16 @@ export async function generateSignedUrlForFile(filePath) {
         Expires: SIGNED_EXPIRY_SECONDS
     });
 }
+
+export async function getFile(filePath) {
+    let params = {
+        Bucket: process.env.AWS_S3_BUCKET!,
+        Key: filePath
+    };
+    return new Promise((resolve, reject) => {
+        new AWS.S3().getObject(params, (err, data) => {
+            if (err) { return reject(err); }
+            resolve(data);
+        });
+    });
+}

@@ -78,6 +78,9 @@ const swagger = {
           "type": {
             type: "string",
             enumValues: ["is", "oos", "stanford"]
+          },
+          "sponsor_optout": {
+            type: "boolean"
           }
         }
       },
@@ -446,6 +449,42 @@ const swagger = {
                   "properties": {
                     "nModified": {"type": "integer"}
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users_resumes": {
+      "post": {
+        "summary": "Bulk download resumes",
+        "description": "Bulk download resumes as a zip by sending in a list of IDs.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "description": "Zip file of all resumes"
                 }
               }
             }
