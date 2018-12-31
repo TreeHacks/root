@@ -7,7 +7,7 @@ describe('projectAllowedApplicationFields', () => {
 
   test('don\'t change query for admin', () => {
     let query = new Query<IApplication>();
-    query.setOptions({"treehacks:groups": ["admin"]});
+    query.setOptions({"treehacks:groups": ["admin", "sponsor"]});
     query.setQuery({"a":"b"});
     projectAllowedApplicationFields.call(query);
     expect(query.getQuery()).toEqual({"a":"b"});

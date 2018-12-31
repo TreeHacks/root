@@ -17,9 +17,7 @@ authenticatedRoute.use(function (req, res, next) {
 
   cognitoExpress.validate(accessTokenFromClient, function (err, response) {
     if (err) return res.status(401).send(err);
-    // TODO: check permissions here.
     res.locals.user = response;
-    // console.log(res.locals.user['cognito:groups'].indexOf('admin'));
     next();
   });
 });
@@ -35,7 +33,7 @@ authenticatedRoute.param('userId', (req, res, next, userId) => {
     else {
       return res.status(401).send("User does not have access to user ID: " + userId + "; user id is " + res.locals.user.sub);
     }
-  }//
+  }
   next();
 });
 

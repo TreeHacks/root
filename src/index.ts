@@ -17,8 +17,6 @@ import { getUserDetail } from "./routes/user_detail";
 import { getUserList, getUserStats } from "./routes/user_list";
 import { getApplicationStatus, setApplicationStatus, confirmAdmission, declineAdmission } from "./routes/user_status";
 import { setAdminInfo } from "./routes/admin_info";
-import { MongoClient, ObjectId } from "mongodb";
-import Application from "./models/Application";
 import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } from "./routes/user_review";
 import { bulkChangeUsers } from "./routes/user_bulk_change";
 import { bulkCreateUsers } from "./routes/user_bulk_create";

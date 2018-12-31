@@ -4,7 +4,7 @@ import { CognitoUser } from "./models/cognitoUser";
 import {sinon} from "sinon";
 // import {jest} from "jest";
 
-jest.mock("./router/authenticatedRoute");
+// jest.mock("./router/authenticatedRoute");
 import app from "./index";
 
 
