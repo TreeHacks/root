@@ -108,7 +108,7 @@ class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor:
             >
               <button className="btn btn-info" type="submit">Sign In</button>
             </AuthForm>
-            <div className="label-text centered">or</div>
+            {!this.state.sponsor && <div className="label-text centered">or</div>}
             {!this.state.sponsor && <StanfordLogin />}
           </div>
         }
