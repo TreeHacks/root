@@ -59,7 +59,7 @@ export async function injectDynamicApplicationContent(doc: IApplication) {
 /*
  * Only filter by allowed applications and fields.
  * 
- * For example, only reviewers and admins can view all fields.
+ * For example, only admins can view all fields.
  * Sponsors can only view certain fields, and can only view admitted people who have not opted out.
  * 
  * Also, exclude application files by default (we usually don't want to return them in aggregate queries).
@@ -68,7 +68,7 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
   let query = this.getQuery();
   const options = (this as any).getOptions(); // Todo: fix mongoose types when https://github.com/DefinitelyTyped/DefinitelyTyped/pull/31798 is merged
   let groups = get(options, "treehacks:groups", []);
-  if (groups.indexOf("admin") > -1 || groups.indexOf("reviewer") > -1) {
+  if (groups.indexOf("admin") > -1) {
   }
   else if (groups.indexOf("sponsor")) {
     query = {"$and": [
@@ -78,7 +78,10 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
     ]};
     this.setQuery(query);
     if (!this.selected()) {
-      this.select(["email", ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)].join(" "));
+      this.select([
+        "user.email",
+        ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
+      ].join(" "));
     }
   }
 
