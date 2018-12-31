@@ -191,9 +191,9 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
   [TRANSPORTATION_BUS_ROUTES.UCI]: [
     {
       day: 'Friday, Februrary 15th',
-      time: '8:45am',
-      stop: 'Check in at UCI (location added later)',
-      location: 'Irvine'
+      time: '9:45am',
+      stop: 'Check in at CalTech (location added later)',
+      location: 'Pasadena'
     },
 
     {
@@ -217,8 +217,8 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
     {
       day: 'Sunday, Februrary 17th',
       time: '11:00pm',
-      stop: 'UCI',
-      location: 'Irvine'
+      stop: 'CalTech',
+      location: 'Pasadena'
     }
   ],
   [TRANSPORTATION_BUS_ROUTES.POMONA]: [
