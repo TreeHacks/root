@@ -86,7 +86,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => (dispatch
     return fetch(ENDPOINT_URL + '/users_resumes', options)
   }).then(res => res.blob())
   .then(e => {
-    saveAs(e, "resumes.zip");
+    saveAs(e, `treehacks-resumes-${Date.now()}.zip`);
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
@@ -98,7 +98,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => (dispatch
 export const getExportedApplications = (tableState: IReactTableState) => (dispatch, getState) => {
   dispatch(loadingStart());
   return dispatch(fetchApplications(tableState, {"forms.application_info.resume": 0}, true)).then((e: { count: number, results: any[] }) => {
-    saveAs(new Blob([JSON.stringify(e.results)]), "data.json");
+    saveAs(new Blob([JSON.stringify(e.results)]), `treehacks-applications-${Date.now()}.json`);
     dispatch(setExportedApplications(e.results));
     dispatch(loadingEnd());
   }).catch(e => {
@@ -129,7 +129,7 @@ export const getExportedApplicationsCSV = (tableState: IReactTableState, columns
       return newItem;
     }
     );
-    saveAs(new Blob([Papa.unparse(results)]), "data.csv");
+    saveAs(new Blob([Papa.unparse(results)]), `treehacks-applications-${Date.now()}.csv`);
     dispatch(setExportedApplications(results));
     dispatch(loadingEnd());
   }).catch(e => {
