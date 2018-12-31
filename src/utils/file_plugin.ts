@@ -7,7 +7,7 @@ import { STATUS, sponsorApplicationDisplayFields } from '../constants';
 // Paths on the application that store file data that should be uploaded to S3.
 const APPLICATION_FILE_PATHS = ["forms.application_info.resume", "forms.transportation.receipt"];
 
-export default function s3FilePlugin(schema: mongoose.Schema, options) {
+export default function s3FilePlugin(schema: mongoose.Schema) {
   schema.pre('save', uploadDynamicApplicationContent);
   schema.pre('find', projectAllowedApplicationFields);
   // schema.post('findOne', injectDynamicApplicationContent);
