@@ -5,7 +5,7 @@ import { IApplication } from '../models/Application.d';
 import { STATUS, sponsorApplicationDisplayFields } from '../constants';
 
 // Paths on the application that store file data that should be uploaded to S3.
-const PATHS = ["forms.application_info.resume", "forms.transportation.receipt"];
+const APPLICATION_FILE_PATHS = ["forms.application_info.resume", "forms.transportation.receipt"];
 
 export default function s3FilePlugin(schema: mongoose.Schema, options) {
   schema.pre('save', uploadDynamicApplicationContent);
@@ -14,7 +14,7 @@ export default function s3FilePlugin(schema: mongoose.Schema, options) {
 }
 
 async function uploadDynamicApplicationContent(this: mongoose.Document) {
-  for (let path of PATHS) {
+  for (let path of APPLICATION_FILE_PATHS) {
     // Handle base64 resumes => s3
     // If upload fails for whatever reason, just persist the base64
     const resume = get(this, path);
@@ -41,7 +41,7 @@ async function uploadDynamicApplicationContent(this: mongoose.Document) {
 }
 
 export async function injectDynamicApplicationContent(doc: IApplication) {
-    for (let path of PATHS) {
+    for (let path of APPLICATION_FILE_PATHS) {
       const resume = get(doc, path);
       if (resume && resume.indexOf('data:') !== 0) {
         try {
@@ -58,8 +58,11 @@ export async function injectDynamicApplicationContent(doc: IApplication) {
 
 /*
  * Only filter by allowed applications and fields.
+ * 
  * For example, only reviewers and admins can view all fields.
  * Sponsors can only view certain fields, and can only view admitted people who have not opted out.
+ * 
+ * Also, exclude application files by default (we usually don't want to return them in aggregate queries).
  */
 export function projectAllowedApplicationFields(this: mongoose.Query<IApplication>) {
   let query = this.getQuery();
@@ -67,7 +70,7 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
   let groups = get(options, "treehacks:groups", []);
   if (groups.indexOf("admin") > -1 || groups.indexOf("reviewer") > -1) {
   }
-  else { // Sponsors
+  else if (groups.indexOf("sponsor")) {
     query = {"$and": [
       query,
       {"sponsor_optout": {"$ne": false}},
@@ -77,5 +80,10 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
     if (!this.selected()) {
       this.select(["email", ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)].join(" "));
     }
+  }
+
+  // Exclude application files by default
+  if (!this.selected()) {
+    this.select(APPLICATION_FILE_PATHS.map(e => "-" + e).join(" "));
   }
 }
