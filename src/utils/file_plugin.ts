@@ -75,11 +75,12 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
   else if (groups.indexOf("sponsor") > -1) {
     query = {"$and": [
       query,
-      {"sponsor_optout": {"$ne": false}},
+      {"sponsor_optout": {"$ne": true}},
       {"status": STATUS.ADMISSION_CONFIRMED}
     ]};
     this.setQuery(query);
-    if (!this.selected()) {
+    if (!this.selectedInclusively()) {
+      (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
       this.select([
         "user.email",
         ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
