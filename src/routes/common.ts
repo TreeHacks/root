@@ -26,7 +26,8 @@ function getDeadline(type) {
  */
 export async function getApplicationAttribute(req: Request, res: Response, getter: (e: IApplication) => any, createIfNotFound = false) {
   let application: IApplication | null = await Application.findOne(
-    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 });
+    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 },
+    {"treehacks:groups": res.locals.user['cognito:groups']});
 
   if (!application) {
     if (createIfNotFound) {

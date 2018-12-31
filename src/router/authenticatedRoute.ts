@@ -1,5 +1,6 @@
 import CognitoExpress from "cognito-express";
 import express from "express";
+import {get} from "lodash";
 
 //Initializing CognitoExpress constructor
 const cognitoExpress = new CognitoExpress({
@@ -23,10 +24,18 @@ authenticatedRoute.use(function (req, res, next) {
   });
 });
 authenticatedRoute.param('userId', (req, res, next, userId) => {
-  if (res.locals.user.sub !== userId &&
-    !(res.locals.user['cognito:groups'] && ~res.locals.user['cognito:groups'].indexOf('admin'))) {
-    return res.status(401).send("User does not have access to user ID: " + userId + "; user id is " + res.locals.user.sub);
-  }
+  if (res.locals.user.sub !== userId) {
+    let groups = get(res.locals.user, "cognito:groups", []);
+    let isViewingUser = req.route.path === "/users/:userId/forms/application_info" && req.method === "GET";
+    if (groups.indexOf('admin') > -1) {
+    }
+    else if (groups.indexOf('sponsor') > -1 && isViewingUser) {
+      // Sponsors are able to view users (with a filter implemented on the route itself).
+    }
+    else {
+      return res.status(401).send("User does not have access to user ID: " + userId + "; user id is " + res.locals.user.sub);
+    }
+  }//
   next();
 });
 

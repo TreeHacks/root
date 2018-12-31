@@ -10,6 +10,7 @@ const APPLICATION_FILE_PATHS = ["forms.application_info.resume", "forms.transpor
 export default function s3FilePlugin(schema: mongoose.Schema) {
   schema.pre('save', uploadDynamicApplicationContent);
   schema.pre('find', projectAllowedApplicationFields);
+  schema.pre('findOne', projectAllowedApplicationFields);
   // schema.post('findOne', injectDynamicApplicationContent);
 }
 
@@ -62,7 +63,8 @@ export async function injectDynamicApplicationContent(doc: IApplication) {
  * For example, only admins can view all fields.
  * Sponsors can only view certain fields, and can only view admitted people who have not opted out.
  * 
- * Also, exclude application files by default (we usually don't want to return them in aggregate queries).
+ * This is run on the find hook (aggregate view for admins and sponsors)
+ * and findOne hook (admin table view, and for a normal applicant viewing their application)
  */
 export function projectAllowedApplicationFields(this: mongoose.Query<IApplication>) {
   let query = this.getQuery();
@@ -70,7 +72,7 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
   let groups = get(options, "treehacks:groups", []);
   if (groups.indexOf("admin") > -1) {
   }
-  else if (groups.indexOf("sponsor")) {
+  else if (groups.indexOf("sponsor") > -1) {
     query = {"$and": [
       query,
       {"sponsor_optout": {"$ne": false}},
@@ -83,10 +85,11 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
         ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
       ].join(" "));
     }
-  }
 
-  // Exclude application files by default
-  if (!this.selected()) {
-    this.select(APPLICATION_FILE_PATHS.map(e => "-" + e).join(" "));
+    // Exclude application files by default
+    if (!this.selected()) {
+      this.select(APPLICATION_FILE_PATHS.map(e => "-" + e).join(" "));
+    }
+
   }
 }
