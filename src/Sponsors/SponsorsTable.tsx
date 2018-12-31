@@ -6,7 +6,7 @@ import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicati
 import ReactTable from "react-table";
 import { pickBy, values } from "lodash-es";
 import 'react-table/react-table.css';
-import { STATUS, TYPE } from "../constants";
+import { STATUS, TYPE, sponsorApplicationDisplayFields } from "../constants";
 import { IAdminState } from "../store/admin/types";
 import ApplicationView from "../Admin/ApplicationView";
 import { IBaseState } from "src/store/base/types";
@@ -75,7 +75,7 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
                     }}
                 </ReactTable>
             </div>
-            {props.selectedForm && <ApplicationView />}
+            {props.selectedForm && <ApplicationView shownFields={sponsorApplicationDisplayFields} />}
         </div>
     );
 }

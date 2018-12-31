@@ -25,7 +25,8 @@ interface IApplicationViewProps {
     setFormName: (e) => void,
     setSelectedForm: (e) => void,
     form: IFormState,
-    admin: IAdminState
+    admin: IAdminState,
+    shownFields: string[]
 }
 
 class ApplicationView extends React.Component<IApplicationViewProps, {}> {
@@ -43,6 +44,7 @@ class ApplicationView extends React.Component<IApplicationViewProps, {}> {
                 onChange={e => null}
                 onError={e => null}
                 onSubmit={e => null}
+                shownFields={this.props.shownFields}
                 schema={this.props.form.schemas[this.props.form.formName].schema}
                 uiSchema={this.props.form.schemas[this.props.form.formName].uiSchema}
                 formData={this.props.form.formData} /> : <Loading />}
