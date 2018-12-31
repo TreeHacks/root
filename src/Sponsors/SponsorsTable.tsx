@@ -13,21 +13,17 @@ import { IBaseState } from "src/store/base/types";
 
 const SponsorsTable = (props: ISponsorsTableProps) => {
     const columns = [
-        // {
-        //     "Header": "Preview",
-        //     "accessor": "_id",
-        //     "id": "view",
-        //     "Cell": (p) => <div onClick={(e) => {
-        //         e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "application_info" })
-        //     }}><a href="#">View</a></div>
-        // },
+        {
+            "Header": "Preview",
+            "accessor": "_id",
+            "id": "view",
+            "Cell": (p) => <div onClick={(e) => {
+                e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "application_info" })
+            }}><a href="#">View</a></div>
+        },
         {
             "Header": "email",
             "accessor": "user.email"
-        },
-        {
-            "Header": "Location",
-            "accessor": "location"
         },
         {
             "Header": "University",
@@ -46,27 +42,15 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
             "accessor": "forms.application_info.major"
         },
         {
-            "Header": "Resume",
-            "accessor": "forms.application_info.resume",
-            "Cell": p => <a href={p}>View Resume</a>
-        },
-        {
-            "Header": "Q1 - Why do you want to come to TreeHacks?",
-            "accessor": "forms.application_info.q1_goodfit"
-        },
-        {
             "Header": "Q2 - Tell us a story about creating the project you're most proud of (technical or nontechnical). Why did you choose to work on it? What did you learn from it?",
-            "accessor": "forms.application_info.q2_experience"
-        },
-        {
-            "Header": "Q3 - Tell us a fun fact about you",
-            "accessor": "forms.application_info.q3"
+            "accessor": "forms.application_info.q2_experience",
+            "show": false
         },
         {
             "Header": "Q4 (Optional) - Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
-            "accessor": "forms.application_info.q4"
+            "accessor": "forms.application_info.q4",
+            "show": false
         },
-
     ];
     const columnsToExport = columns.filter(e => e.accessor !== "_id");
     return (
@@ -85,14 +69,6 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
                             <div>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export</button> (Export all pages of filtered results as CSV)</p>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getApplicationResumes(state)}>Get resumes</button> (Get resumes of all pages of filtered results)</p>
-                                {props.applicationEmails && <div>
-                                    <textarea
-                                        readOnly
-                                        className="form-control"
-                                        style={{ width: "100%" }}
-                                    >
-                                        {props.applicationEmails.join(", ")}
-                                    </textarea></div>}
                                 {makeTable()}
                             </div>
                         );
