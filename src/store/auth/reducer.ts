@@ -11,6 +11,7 @@ const initialState: IAuthState = {
   authPage: 'signIn',
   admin: null,
   reviewer: null,
+  sponsor: null,
   attemptedLoginEmail: null
 };
 
@@ -23,7 +24,8 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         user: action.attributes,
         userId: action.userId,
         admin: action.admin,
-        reviewer: action.reviewer
+        reviewer: action.reviewer,
+        sponsor: action.sponsor
       };
     case 'LOGIN_FAILURE':
       return {
@@ -55,6 +57,11 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
       return {
         ...state,
         error: action.error
+      }
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user
       }
     case "SET_ATTEMPTED_LOGIN_EMAIL":
       return {

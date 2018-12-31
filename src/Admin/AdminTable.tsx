@@ -53,7 +53,7 @@ const AdminTable = (props: IAdminTableProps) => {
             "accessor": "_id"
         },
         {
-            "Header": "email",
+            "Header": "Email",
             "accessor": "user.email"
         },
         {

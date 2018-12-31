@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import "./Login.scss";
-import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup } from "../store/auth/actions";
+import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup, changePassword } from "../store/auth/actions";
 import { withFederated } from 'aws-amplify-react';
 import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
@@ -21,7 +21,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   signUp: data => dispatch(signUp(data)),
   forgotPassword: data => dispatch(forgotPassword(data)),
   forgotPasswordSubmit: data => dispatch(forgotPasswordSubmit(data)),
-  resendSignup: () => dispatch(resendSignup())
+  resendSignup: () => dispatch(resendSignup()),
+  changePassword: data => dispatch(changePassword(data))
 });
 
 
@@ -33,7 +34,8 @@ interface ILoginProps extends IAuthState {
   signUp: (e) => void,
   forgotPassword: (e) => void,
   forgotPasswordSubmit: (e) => void,
-  resendSignup: () => void
+  resendSignup: () => void,
+  changePassword: (e) => void
 };
 
 function transformErrors(errors) {
@@ -50,11 +52,12 @@ function validate(formData, errors) {
 function AuthForm(props) {
   return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} className="treehacks-form" />
 }
-class Login extends React.Component<ILoginProps, { signupFormData: any }> {
+class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor: boolean }> {
   constructor(props) {
     super(props);
     this.state = {
-      signupFormData: {}
+      signupFormData: {},
+      sponsor: false
     };
   }
 
@@ -66,20 +69,24 @@ class Login extends React.Component<ILoginProps, { signupFormData: any }> {
       localStorage.setItem("jwt", hash.id_token);
       window.location.hash = "";
     }
+    else if (hash && hash["sponsor"]) {
+      // https://apply.treehacks.com/#sponsor=true
+      this.setState({sponsor: true});
+    }
 
     this.props.checkLoginStatus();
   }
 
   render() {
     const isStanfordSignup = (this.state.signupFormData.email || '').indexOf('@stanford.edu') !== -1;
-
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
         <div className="text-center">
           <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginTop": 49 }} />
         </div>
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
-        <DeadlinesWidget />
+        {this.state.sponsor && <h3 className="h3-style">sponsors</h3>}
+        {["signIn", "signUp"].indexOf(this.props.authPage) !== -1 && !this.state.sponsor && <DeadlinesWidget />}
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
         </div>
@@ -102,7 +109,7 @@ class Login extends React.Component<ILoginProps, { signupFormData: any }> {
               <button className="btn btn-info" type="submit">Sign In</button>
             </AuthForm>
             <div className="label-text centered">or</div>
-            <StanfordLogin />
+            {!this.state.sponsor && <StanfordLogin />}
           </div>
         }
         {this.props.authPage == "signUp" &&
@@ -138,16 +145,27 @@ class Login extends React.Component<ILoginProps, { signupFormData: any }> {
             uiSchema={this.props.schemas.forgotPasswordSubmit.uiSchema}
             onSubmit={e => this.props.forgotPasswordSubmit(e.formData)} />
         }
+        {this.props.authPage === "changePassword" &&
+          <AuthForm
+            schema={this.props.schemas.changePassword.schema}
+            uiSchema={this.props.schemas.changePassword.uiSchema}
+            onSubmit={e => this.props.changePassword(e.formData)}
+          >
+            <button className="btn btn-info" type="submit">Update password</button>
+          </AuthForm>
+        }
         {this.props.authPage === "signUp" ?
           <div className="label-text">Already have an account?</div>
-          : this.props.authPage === "signIn" ?
-            <div className="label-text">Don't have an account yet?</div>
-            : null}
-        <div className="mt-4 left-btn">
-          <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In" />
-          <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />
-          <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
-        </div>
+        : this.props.authPage === "signIn" && !this.state.sponsor ?
+          <div className="label-text">Don't have an account yet?</div>
+        : null}
+        {this.props.authPage !== "changePassword" &&
+          <div className="mt-4 left-btn">
+            <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In" />
+            {!this.state.sponsor && <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />}
+            <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
+          </div>
+        }
       </div>);
     }
     else {

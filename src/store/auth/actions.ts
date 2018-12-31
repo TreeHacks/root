@@ -2,14 +2,15 @@ import { IUserAttributes, IAuthState } from "./types";
 import { API, Auth } from "aws-amplify";
 import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";
-import { userInfo } from "os";
+import {get} from "lodash-es";
 
-export const loggedIn = (userId, attributes, admin, reviewer) => ({
+export const loggedIn = (userId, attributes, admin, reviewer, sponsor) => ({
   type: 'LOGIN_SUCCESS',
   userId,
   attributes,
   admin,
-  reviewer
+  reviewer,
+  sponsor
 });
 
 export const notLoggedIn = () => ({
@@ -82,7 +83,7 @@ async function getCurrentUser() {
   // Need to parse our local JWT as well to get cognito:groups attribute, because Auth.currentAuthenticatedUser() does not return user groups.
   return Promise.all([
     Auth.currentAuthenticatedUser(),
-    parseJwt((await Auth.currentSession()).idToken.jwtToken)
+    parseJwt((await Auth.currentSession()).getIdToken().getJwtToken())
   ]).then(([user, token]) => {
     user.attributes["cognito:groups"] = token["cognito:groups"];
     return user;
@@ -95,17 +96,14 @@ export function checkLoginStatus() {
     return getCurrentUser()
       .then((user: { username: string, attributes: IUserAttributes, "cognito:groups"?: string[] }) => {
         if (!user) throw "No credentials";
-        let admin = false;
-        let reviewer = false;
-        if (user.attributes["cognito:groups"] &&
-          (user.attributes["cognito:groups"].indexOf("admin") > -1)) {
-          admin = true;
-        }
-        if (user.attributes["cognito:groups"] &&
-        (user.attributes["cognito:groups"].indexOf("reviewer") > -1)) {
-        reviewer = true;
-      }
-        dispatch(loggedIn(user.username, user.attributes, admin, reviewer));
+        const groups = get(user.attributes, "cognito:groups", []);
+        const checkInGroup = group => groups.indexOf(group) > -1;
+        const [admin, reviewer, sponsor] = [
+          checkInGroup("admin"),
+          checkInGroup("reviewer"),
+          checkInGroup("sponsor")
+        ];
+        dispatch(loggedIn(user.username, user.attributes, admin, reviewer, sponsor));
       }).catch(e => {
         dispatch(notLoggedIn());
         console.error(e);
@@ -125,6 +123,11 @@ export const setMessage = (message) => ({
   message: message
 })
 
+export const setUser = (user) => ({
+  type: 'SET_USER',
+  user
+})
+
 export const onAuthError = (error) => ({
   type: 'SET_ERROR',
   error: error
@@ -141,7 +144,14 @@ export function signIn(data) {
     dispatch(loadingStart());
     dispatch(setAttemptedLoginEmail(email));
     Auth.signIn(email, data.password)
-      .then(() => dispatch(checkLoginStatus()))
+      .then(user => {
+        if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+          dispatch(setUser(user));
+          dispatch(setAuthPage("changePassword", "Welcome to TreeHacks. To finish logging in, please set a new password for your account."));
+        } else {
+          dispatch(checkLoginStatus());
+        }
+      })
       .catch(e => dispatch(onAuthError(e.message)))
       .then(() => dispatch(loadingEnd()))
   }
@@ -149,7 +159,7 @@ export function signIn(data) {
 
 export function signUp(data) {
   return dispatch => {
-    if (data.password != data.password2) {
+    if (data.password !== data.password2) {
       dispatch(onAuthError("Passwords do not match."));
       return;
     }
@@ -185,7 +195,7 @@ export function forgotPassword(data) {
 
 export function forgotPasswordSubmit(data) {
   return dispatch => {
-    if (data.password != data.password2) {
+    if (data.password !== data.password2) {
       dispatch(onAuthError("Passwords do not match."));
       return;
     }
@@ -207,5 +217,26 @@ export function resendSignup() {
         dispatch(onAuthError(""));
       }).catch(e => dispatch(onAuthError("Error sending confirmation email link: " + e)))
       .then(() => dispatch(loadingEnd()));
+  }
+}
+
+export function changePassword(data) {
+  return (dispatch, getState) => {
+    const user = (getState().auth as IAuthState).user;
+    if (!user) {
+      dispatch(onAuthError("No user for whom to change password."));
+      return;
+    }
+    if (data.password !== data.password2) {
+      dispatch(onAuthError("Passwords do not match."));
+      return;
+    }
+
+    dispatch(loadingStart());
+
+    Auth.completeNewPassword(user, data.password, {})
+      .then(() => dispatch(checkLoginStatus()))
+      .catch(e => dispatch(onAuthError(e.message)))
+      .then(() => dispatch(loadingEnd()))
   }
 }

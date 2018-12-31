@@ -1,12 +1,15 @@
 import { API } from "aws-amplify";
 import { loadingStart, loadingEnd } from "../base/actions";
-import { IReactTableState } from "src/Admin/types";
+import { IReactTableState, IReactTableHeader } from "src/Admin/types";
 import { get } from "lodash-es";
 import saveAs from 'file-saver';
 import { IAdminState } from "./types";
 import Papa from "papaparse";
 import { STATUS } from "../../constants";
-import {some} from "lodash-es";
+import {pick} from "lodash-es";
+import { custom_header } from "../../index";
+
+declare const ENDPOINT_URL: string;
 
 export const setApplicationList = (applicationList, pages) => ({
   type: "SET_APPLICATION_LIST",
@@ -61,11 +64,73 @@ export const getApplicationEmails = (tableState: IReactTableState) => (dispatch,
   });
 };
 
+export const getApplicationResumes = (tableState: IReactTableState) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  const applicationIds = (getState().admin as IAdminState).applicationList.map(e => e._id);
+  // Using fetch workaround; once Amplify library supports responseType, we can use the below code instead.
+  // return API.post("treehacks", `/users_resumes`, {
+  //   body: {
+  //     ids: applicationIds
+  //   },
+  //   responseType: "blob"
+  // })
+  custom_header().then(headers => {
+    const options = {
+      method: "POST",
+      headers: {
+          ...headers,
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ids: applicationIds})
+    };
+    return fetch(ENDPOINT_URL + '/users_resumes', options)
+  }).then(res => res.blob())
+  .then(e => {
+    saveAs(e, `treehacks-resumes-${Date.now()}.zip`);
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error getting application resumes " + e);
+  });
+};
+
 export const getExportedApplications = (tableState: IReactTableState) => (dispatch, getState) => {
   dispatch(loadingStart());
-  return dispatch(fetchApplications(tableState, {"forms.application_info.resume": 0}, true)).then((e: { count: number, results: any[] }) => {
-    saveAs(new Blob([JSON.stringify(e.results)]), "data.json");
+  return dispatch(fetchApplications(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
+    saveAs(new Blob([JSON.stringify(e.results)]), `treehacks-applications-${Date.now()}.json`);
     dispatch(setExportedApplications(e.results));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error getting exported applications " + e);
+  });
+};
+
+/*
+ * Get exported applications as CSV.
+ */
+export const getExportedApplicationsCSV = (tableState: IReactTableState, columns: IReactTableHeader[]) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return dispatch(fetchApplications(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
+    let results = e.results.map(item => {
+      let newItem = {};
+      for (let column of columns) {
+        let value = "";
+        if (typeof column.accessor === "function") {
+          value = column.accessor(item);
+        }
+        else {
+          value = get(item, column.accessor);
+        }
+        newItem[column.Header] = value;
+      }
+      return newItem;
+    }
+    );
+    saveAs(new Blob([Papa.unparse(results)]), `treehacks-applications-${Date.now()}.csv`);
+    dispatch(setExportedApplications(results));
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
@@ -76,7 +141,7 @@ export const getExportedApplications = (tableState: IReactTableState) => (dispat
 
 const fetchApplications = (tableState: IReactTableState, project=null, retrieveAllPages = false) => (dispatch, getState) => {
   if (project === null) {
-    project = {"forms.application_info.resume": 0};
+    project = {};
   }
   let sort = {};
   for (let item of tableState.sorted) {
@@ -157,6 +222,35 @@ export const performBulkChange = () => (dispatch, getState) => {
   });
 }
 
+export const setBulkCreateGroup = (group) => ({
+  type: "SET_BULK_CREATE_GROUP",
+  group
+});
+
+export const setBulkCreateEmails = (emails) => ({
+  type: "SET_BULK_CREATE_EMAILS",
+  emails
+});
+
+export const performBulkCreate = () => (dispatch, getState) => {
+  const {group, emails} = (getState().admin as IAdminState).bulkCreate;
+  dispatch(loadingStart());
+  return API.post("treehacks", `/users_bulkcreate`, {
+    body: {
+      emails: emails.split('\n').map(e => e.trim()),
+      group
+    }
+  }).then(e => {
+    saveAs(new Blob([Papa.unparse(e.users)]), `bulk-creation-${Date.now()}.csv`);
+    dispatch(setBulkCreateGroup(""));
+    dispatch(setBulkCreateEmails(""));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error performing bulk creation: " + e);
+  });
+}
 
 export const setApplicationStatus = (status, userId) => (dispatch, getState) => {
   // todo

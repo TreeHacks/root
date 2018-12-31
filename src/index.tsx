@@ -23,16 +23,21 @@ const asyncLocalStorage = {
         });
     }
 };
+export const custom_header = async () => { 
+    try {
+        return { Authorization: (await Auth.currentSession()).getIdToken().getJwtToken() }
+    }
+    catch (e) {
+        console.warn(e, "Defaulting to stored JWT in localStorage...");
+        // Get JWT from SAML.
+        return { Authorization: await asyncLocalStorage.getItem("jwt") } 
+    }
+}
 Amplify.configure({
   Auth: {
-  // REQUIRED - Amazon Cognito Identity Pool ID
-  // REQUIRED - Amazon Cognito Region
       region: 'us-east-1',
-  // OPTIONAL - Amazon Cognito User Pool ID
       userPoolId: COGNITO_USER_POOL_ID,
-  // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
       userPoolWebClientId: COGNITO_CLIENT_ID,
-  // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
       mandatorySignIn: false
   },
   API: {
@@ -40,16 +45,7 @@ Amplify.configure({
         {
             name: "treehacks",
             endpoint: ENDPOINT_URL,
-            custom_header: async () => { 
-                try {
-                    return { Authorization: (await Auth.currentSession()).idToken.jwtToken }
-                }
-                catch (e) {
-                    console.warn(e, "Defaulting to stored JWT in localStorage...");
-                    // Get JWT from SAML.
-                    return { Authorization: await asyncLocalStorage.getItem("jwt") } 
-                }
-            }
+            custom_header: custom_header
         }
     ]
   }
@@ -67,4 +63,3 @@ I18n.setLanguage('en');
 I18n.putVocabularies(authScreenLabels);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('main'));
-// ReactDOM.render(<App />, document.getElementById('main'));

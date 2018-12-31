@@ -95,16 +95,31 @@ export default (props: IFormPageProps) => {
     else {
         widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget };
     }
+    let uiSchema = (props.uiSchema);
+    let schema = (props.schema);
+    if (props.shownFields) {
+        // Hide other fields and make them not required.
+        for (let field in schema.properties) {
+            if (props.shownFields.indexOf(field) === -1) {
+                set(uiSchema, `${field}.classNames`, "treehacks-hidden");
+                if (schema.required) {
+                    pull(schema.required, field);
+                }
+            }
+        }
+    }
+
+    //sponsorApplicationDisplayFields
     return (<Form
         className={`treehacks-form ${props.submitted ? "treehacks-form-disabled" : ""}`}
-        schema={props.schema}
+        schema={schema}
         uiSchema={{
-            ...props.uiSchema,
+            ...uiSchema,
             "ui:readonly": props.submitted,
         }} formData={props.formData}
         //liveValidate={true}
         showErrorList={true}
-        validate={(a, b) => validate(a, b, props.schema)}
+        validate={(a, b) => validate(a, b, schema)}
         fields={{ typeahead: TypeaheadField }}
         widgets={widgets}
         onChange={e => props.onChange(e)}

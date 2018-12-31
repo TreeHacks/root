@@ -11,6 +11,10 @@ const initialState: IAdminState = {
   bulkChange: {
     status: "",
     ids: ""
+  },
+  bulkCreate: {
+    group: "",
+    emails: ""
   }
 };
 
@@ -56,6 +60,22 @@ const admin: Reducer<any> = (state: any = initialState, action): any => {
         bulkChange: {
           ...state.bulkChange,
           ids: action.ids
+        }
+      };
+    case "SET_BULK_CREATE_GROUP":
+      return {
+        ...state,
+        bulkCreate: {
+          ...state.bulkCreate,
+          group: action.group
+        }
+      };
+    case "SET_BULK_CREATE_EMAILS":
+      return {
+        ...state,
+        bulkCreate: {
+          ...state.bulkCreate,
+          emails: action.emails
         }
       };
     default:

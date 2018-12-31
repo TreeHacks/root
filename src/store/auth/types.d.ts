@@ -24,12 +24,14 @@ export interface IAuthState {
     signIn: IAuthStateSchemaItem,
     signUp: IAuthStateSchemaItem,
     forgotPassword: IAuthStateSchemaItem,
-    forgotPasswordSubmit: IAuthStateSchemaItem
+    forgotPasswordSubmit: IAuthStateSchemaItem,
+    changePassword: IAuthStateSchemaItem
   },
   error: string,
   message: string,
   admin: boolean,
   reviewer: boolean,
-  authPage: "forgotPassword" | "forgotPasswordSubmit" | "signIn" | "signUp",
+  sponsor: boolean,
+  authPage: "forgotPassword" | "forgotPasswordSubmit" | "signIn" | "signUp" | "changePassword",
   attemptedLoginEmail: string
 }

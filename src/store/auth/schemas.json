@@ -138,5 +138,38 @@
         "ui:placeholder": "confirm new password"
       }
     }
+  },
+  "changePassword": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "title": "new password",
+          "description": "Password needs to have at least 8 characters, a number, and an uppercase and a lowercase letter."
+        },
+        "password2": {
+          "type": "string",
+          "title": "confirm new password"
+        }
+      },
+      "required": [
+        "password",
+        "password2"
+      ]
+    },
+    "uiSchema": {
+      "email": {
+        "ui:placeholder": "email address"
+      },
+      "password": {
+        "ui:widget": "password",
+        "ui:placeholder": "new password"
+      },
+      "password2": {
+        "ui:widget": "password",
+        "ui:placeholder": "confirm new password"
+      }
+    }
   }
 }
