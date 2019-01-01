@@ -5,6 +5,7 @@ import { CognitoUser } from "../models/cognitoUser";
 import { STATUS } from "../constants";
 import { uploadBase64Content, generateSignedUrlForFile } from "../services/file_actions";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
+import { ServerResponse } from "http";
 
 function getDeadline(type) {
   switch (type) {
@@ -47,7 +48,7 @@ export async function getApplicationAttribute(req: Request, res: Response, gette
  * Set application attribute from current request, return updated values.
  * req - Request (must have userId param)
  * res - Response
- * setter - a function describing what happens to the application before save.
+ * setter - a function describing what happens to the application before save. It can also return an error (server response), in which case the application isn't saved.
  * getter - function describing what part of the application should be returned from the endpoint.
  */
 export async function setApplicationAttribute(req: Request, res: Response, setter: (e: IApplication) => any, getter: (e: IApplication) => any = e => e, considerDeadline = false) {
@@ -65,7 +66,11 @@ export async function setApplicationAttribute(req: Request, res: Response, sette
     return;
   }
 
-  setter(application);
+  let setResponse = setter(application);
+  if (setResponse instanceof ServerResponse) {
+    // Which means the setter found and sent validation error
+    return;
+  }
 
   await application.save();
 

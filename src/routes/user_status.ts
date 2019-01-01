@@ -17,12 +17,10 @@ export function confirmAdmission(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
     (e: IApplication) => {
       if (e.status !== STATUS.ADMITTED) {
-        res.status(403).send("Status is not admitted. It is " + e.status);
-        return;
+        return res.status(403).send("Status is not admitted. It is " + e.status);
       }
       if (new Date(e.admin_info.acceptance.deadline) < new Date()) {
-        res.status(403).send("Acceptance deadline has passed.");
-        return;
+        return res.status(403).send("Acceptance deadline has passed.");
       }
       e.status = STATUS.ADMISSION_CONFIRMED
     },
@@ -33,12 +31,10 @@ export function declineAdmission(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
     (e: IApplication) => {
       if (e.status !== STATUS.ADMITTED && e.status !== STATUS.ADMISSION_CONFIRMED) {
-        res.status(403).send("Status is not admitted or admission_confirmed. It is " + e.status);
-        return;
+        return res.status(403).send("Status is not admitted or admission_confirmed. It is " + e.status);
       }
       if (new Date(e.admin_info.acceptance.deadline) < new Date()) {
-        res.status(403).send("Acceptance deadline has passed.");
-        return;
+        return res.status(403).send("Acceptance deadline has passed.");
       }
       e.status = STATUS.ADMISSION_DECLINED
     },

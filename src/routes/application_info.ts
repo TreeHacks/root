@@ -12,8 +12,7 @@ export function setApplicationInfo(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
     (e: IApplication) => {
       if (e.status !== STATUS.INCOMPLETE) {
-        res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
-        return;
+        return res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
       }
       e.forms.application_info = req.body
     },
@@ -26,8 +25,7 @@ export function submitApplicationInfo(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
     e => {
       if (e.status !== STATUS.INCOMPLETE) {
-        res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
-        return;
+        return res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
       }
       // todo: share this with the frontend in some common configuration.
       let requiredFields = [
@@ -62,6 +60,9 @@ export function submitApplicationInfo(req: Request, res: Response) {
       if (completed) {
         e.status = STATUS.SUBMITTED;
         sendApplicationSubmittedEmail(res.locals.user.email);
+      }
+      else {
+        return res.status(403).send("Not all required fields are complete. Required fields are " + requiredFields.join(", "));
       }
     },
     e => e.forms.application_info,
