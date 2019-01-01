@@ -11,7 +11,7 @@
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r dotenv/config ./src/index.ts",
     "build": "tsc",
     "heroku-postbuild": "npm run build",
-    "start:prod": "node build/index.js"
+    "start:prod": "node build/src/index.js"
   },
   "repository": {
     "type": "git",
