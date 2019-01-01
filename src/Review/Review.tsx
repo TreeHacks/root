@@ -4,8 +4,9 @@ import { API } from "aws-amplify";
 import Form from "react-jsonschema-form";
 import FormPage from '../FormPage/FormPage';
 import { connect } from "react-redux";
-import { IFormState } from 'src/store/form/types';
+import { IFormState } from '../store/form/types';
 import { cloneDeep } from "lodash-es";
+import { applicationReviewDisplayFields } from '../constants';
 interface IReviewProps {
 	applicationSchema: { schema: any, uiSchema: any }
 }
@@ -15,9 +16,6 @@ interface IReviewComponentState {
 	stats_data: any,
 	reviewFormData: any
 }
-
-// Sync with server.
-const applicationReviewDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "skill_level", "hackathon_experience", "resume", "q1_goodfit", "q2_experience", "q3", "q4"];
 
 const schema = {
 	"type": "object",
