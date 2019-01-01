@@ -115,18 +115,17 @@ describe('user status after deadline', () => {
             .expect(403);
     });
     test('admission_confirmed user declines - success', async () => {
-        // Todo - should this be success or fail?
-        // await new Application({ ..._doc, status: STATUS.ADMISSION_CONFIRMED }).save();
-        // await request(app)
-        //     .post("/users/applicanttreehacks/status/decline")
-        //     .set({ Authorization: 'applicant' })
-        //     .expect(200);
-        // await request(app)
-        //     .get("/users/applicanttreehacks/status")
-        //     .set({ Authorization: 'applicant' })
-        //     .expect(200)
-        //     .then(e => {
-        //         expect(e.body.status).toEqual(STATUS.ADMISSION_DECLINED);
-        //     });
+        await new Application({ ..._doc, status: STATUS.ADMISSION_CONFIRMED }).save();
+        await request(app)
+            .post("/users/applicanttreehacks/status/decline")
+            .set({ Authorization: 'applicant' })
+            .expect(200);
+        await request(app)
+            .get("/users/applicanttreehacks/status")
+            .set({ Authorization: 'applicant' })
+            .expect(200)
+            .then(e => {
+                expect(e.body.status).toEqual(STATUS.ADMISSION_DECLINED);
+            });
     });
 });

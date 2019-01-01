@@ -33,7 +33,8 @@ export function declineAdmission(req: Request, res: Response) {
       if (e.status !== STATUS.ADMITTED && e.status !== STATUS.ADMISSION_CONFIRMED) {
         return res.status(403).send("Status is not admitted or admission_confirmed. It is " + e.status);
       }
-      if (new Date(e.admin_info.acceptance.deadline) < new Date()) {
+      if (e.status === STATUS.ADMITTED && new Date(e.admin_info.acceptance.deadline) < new Date()) {
+        // Acceptance deadline does not apply for admission_confirmed applicants who decline.
         return res.status(403).send("Acceptance deadline has passed.");
       }
       e.status = STATUS.ADMISSION_DECLINED
