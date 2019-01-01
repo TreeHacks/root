@@ -17,6 +17,7 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
             "Header": "Preview",
             "accessor": "_id",
             "id": "view",
+            "filterable": false,
             "Cell": (p) => <div onClick={(e) => {
                 e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "application_info" })
             }}><a href="#">View</a></div>

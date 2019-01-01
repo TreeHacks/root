@@ -36,17 +36,12 @@ const AdminTable = (props: IAdminTableProps) => {
             "Header": "Preview",
             "accessor": "_id",
             "id": "preview",
-            "Cell": (p) => <div onClick={(e) => {
+            "filterable": false,
+            "Cell": (p) => <div><a onClick={(e) => {
                 e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "application_info" })
-            }}><a href="#">View</a></div>
-        },
-        {
-            "Header": "Travel Preview",
-            "accessor": "_id",
-            "id": "travel",
-            "Cell": (p) => <div onClick={(e) => {
-                e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "transportation" })
-            }}><a href="#">View Travel</a></div>
+            }} href="#">View</a> | <a onClick={(e) => {
+                e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "travel" })
+            }} href="#">Travel</a></div>
         },
         {
             "Header": "ID",
