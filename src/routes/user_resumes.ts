@@ -13,18 +13,22 @@ export function getUserResumes(req: Request, res: Response) {
         "treehacks:groups": res.locals.user['cognito:groups']
     })
     .then(results => {
-        let requests: Promise<S3.Types.GetObjectOutput>[] = [];
+        let requests: Promise<S3.Types.GetObjectOutput | null>[] = [];
         for (let result of results) {
             let resume = get(result, "forms.application_info.resume");
             if (resume) {
                 requests.push(getFile(resume));
             }
+            else {
+                requests.push(new Promise((resolve, reject) => resolve(null)));
+            }
         }
         return Promise.all(requests).then(resumes => {
             const zip = JSZip();
             for (let i in resumes) {
-                if (resumes[i] && resumes[i].Body) {
-                    zip.file(`${results[i].forms.application_info.first_name} ${results[i].forms.application_info.last_name}.pdf`, resumes[i].Body);
+                if (resumes[i] && resumes[i]!.Body) {
+                    let name = `${results[i].forms.application_info.first_name} ${results[i].forms.application_info.last_name}`;
+                    zip.file(`${name}.pdf`, resumes[i]!.Body);
                 }
             }
             zip.generateNodeStream({type:'nodebuffer',streamFiles:true})
