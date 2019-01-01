@@ -90,6 +90,10 @@ const AdminTable = (props: IAdminTableProps) => {
             "accessor": "admin_info.transportation.type"
         },
         {
+            "Header": "Bus ID",
+            "accessor": "admin_info.transportation.id"
+        },
+        {
             "Header": "Number of Reviews",
             "id": "reviews",
             "accessor": e => e.reviews.length,
