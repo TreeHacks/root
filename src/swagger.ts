@@ -398,7 +398,7 @@ const swagger = {
     "/users/{userId}/status/decline": {
       "post": {
         "summary": "Decline admission",
-        "description": "Used by applicants. Status must already be STATUS.ADMITTED.",
+        "description": "Used by applicants. Status must already be STATUS.ADMISSION_CONFIRMED or STATUS.ADMITTED.",
         "requestBody": {
           "content": {
             "application/json": {
