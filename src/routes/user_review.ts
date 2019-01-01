@@ -1,5 +1,5 @@
 import Application from "../models/Application";
-import { STATUS } from "../constants";
+import { STATUS, applicationReviewDisplayFields } from "../constants";
 import { IApplication } from "../models/Application.d";
 import {find} from "lodash";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
@@ -51,13 +51,13 @@ export const rateReview = (req, res) => {
     Application.findOne(
         { "_id": req.body.application_id }).then((application: IApplication | null) => {
             if (!application) {
-                res.status(404).send("Application to rate not found");
+                return res.status(404).send("Application to rate not found");
             }
             else if (application.reviews && application.reviews.length >= 3) {
-                res.status(403).send("Application already has 3 reviews.");
+                return res.status(403).send("Application already has 3 reviews.");
             }
             else if (application.reviews && find(application.reviews, {"reader": {"id": res.locals.user.sub}})) {
-                res.status(403).send("Application already has a review submitted by user " + res.locals.user.sub);
+                return res.status(403).send("Application already has a review submitted by user " + res.locals.user.sub);
             }
             else {
                 application.reviews.push({
@@ -74,7 +74,7 @@ export const rateReview = (req, res) => {
                 return application.save();
             }
         }).then(() => {
-            res.json({
+            return res.json({
                 "results": {
                     "status": "success"
                 }
@@ -83,7 +83,6 @@ export const rateReview = (req, res) => {
 };
 
 export const reviewNextApplication = (req, res) => {
-    const applicationReviewDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "skill_level", "hackathon_experience", "resume", "q1_goodfit", "q2_experience", "q3", "q4"];
     let projectedFields = { "_id": 1 };
     for (let field of applicationReviewDisplayFields) {
         projectedFields[`forms.application_info.${field}`] = 1;
