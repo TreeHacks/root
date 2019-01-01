@@ -55,7 +55,9 @@ describe('user form view by applicant', () => {
         return request(app)
             .get("/users/applicanttreehacks/forms/application_info")
             .set({ Authorization: 'applicant' })
-            .expect(200);
+            .expect(200).then(e => {
+                expect(e.body["race"]).toEqual(["test"]);
+            });
     });
     test('view form with different id - unauthorized', () => {
         return request(app)
