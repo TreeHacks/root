@@ -1,4 +1,3 @@
-import mockingoose from 'mockingoose';
 import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
