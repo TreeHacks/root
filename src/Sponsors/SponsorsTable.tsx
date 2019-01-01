@@ -23,7 +23,15 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
             }}><a href="#">View</a></div>
         },
         {
-            "Header": "email",
+            "Header": "Last Name",
+            "accessor": "forms.application_info.last_name"
+        },
+        {
+            "Header": "First Name",
+            "accessor": "forms.application_info.first_name"
+        },
+        {
+            "Header": "Email",
             "accessor": "user.email"
         },
         {
@@ -35,12 +43,12 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
             "accessor": "forms.application_info.graduation_year"
         },
         {
-            "Header": "Level of Study",
-            "accessor": "forms.application_info.level_of_study"
-        },
-        {
             "Header": "Major",
             "accessor": "forms.application_info.major"
+        },
+        {
+            "Header": "Level of Study",
+            "accessor": "forms.application_info.level_of_study"
         },
         {
             "Header": "Q2 - Tell us a story about creating the project you're most proud of (technical or nontechnical). Why did you choose to work on it? What did you learn from it?",
