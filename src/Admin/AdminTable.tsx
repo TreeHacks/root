@@ -6,7 +6,7 @@ import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicati
 import ReactTable from "react-table";
 import { get, values } from "lodash-es";
 import 'react-table/react-table.css';
-import { STATUS, TYPE } from "../constants";
+import { STATUS, TYPE, TRANSPORTATION_STATUS, TRANSPORTATION_TYPES, TRANSPORTATION_BUS_ROUTES, LOCATIONS } from "../constants";
 import { IAdminState } from "../store/admin/types";
 import ApplicationView from "./ApplicationView";
 import { IBaseState } from "src/store/base/types";
@@ -64,6 +64,8 @@ const AdminTable = (props: IAdminTableProps) => {
         },
         {
             "Header": "Location",
+            "filterMethod": defaultFilterMethod,
+            "Filter": createFilterSelect(values(LOCATIONS)),
             "accessor": "location"
         },
         {
@@ -75,6 +77,8 @@ const AdminTable = (props: IAdminTableProps) => {
         },
         {
             "Header": "Transportation Status",
+            "filterMethod": defaultFilterMethod,
+            "Filter": createFilterSelect(values(TRANSPORTATION_STATUS)),
             "accessor": "transportation_status"
         },
         {
@@ -87,10 +91,14 @@ const AdminTable = (props: IAdminTableProps) => {
         },
         {
             "Header": "Transportation Type",
+            "filterMethod": defaultFilterMethod,
+            "Filter": createFilterSelect(values(TRANSPORTATION_TYPES)),
             "accessor": "admin_info.transportation.type"
         },
         {
             "Header": "Bus ID",
+            "filterMethod": defaultFilterMethod,
+            "Filter": createFilterSelect(values(TRANSPORTATION_BUS_ROUTES)),
             "accessor": "admin_info.transportation.id"
         },
         {
@@ -99,31 +107,6 @@ const AdminTable = (props: IAdminTableProps) => {
             "accessor": e => e.reviews.length,
             "filterMethod": defaultFilterMethod,
             "Filter": createFilterSelect([0, 1, 2, 3])
-        },
-        {
-            "Header": "culture fit",
-            "id": "cultureFit",
-            "accessor": e => e.reviews.map(e => e["cultureFit"]).join(", ")
-        },
-        {
-            "Header": "experience",
-            "id": "experience",
-            "accessor": e => e.reviews.map(e => e["experience"]).join(", ")
-        },
-        {
-            "Header": "passion",
-            "id": "passion",
-            "accessor": e => e.reviews.map(e => e["passion"]).join(", ")
-        },
-        {
-            "Header": "is organizer",
-            "id": "isOrganizer",
-            "accessor": e => e.reviews.map(e => e["isOrganizer"] ? "yes" : "no").join(", ")
-        },
-        {
-            "Header": "is beginner",
-            "id": "isBeginner",
-            "accessor": e => e.reviews.map(e => e["isBeginner"] ? "yes" : "no").join(", ")
         }
     ];
     return (
