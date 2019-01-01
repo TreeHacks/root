@@ -6,7 +6,6 @@ import saveAs from 'file-saver';
 import { IAdminState } from "./types";
 import Papa from "papaparse";
 import { STATUS } from "../../constants";
-import {pick} from "lodash-es";
 import { custom_header } from "../../index";
 
 declare const ENDPOINT_URL: string;
@@ -64,35 +63,36 @@ export const getApplicationEmails = (tableState: IReactTableState) => (dispatch,
   });
 };
 
-export const getApplicationResumes = (tableState: IReactTableState) => (dispatch, getState) => {
+export const getApplicationResumes = (tableState: IReactTableState) => async (dispatch, getState) => {
   dispatch(loadingStart());
-  const applicationIds = (getState().admin as IAdminState).applicationList.map(e => e._id);
-  // Using fetch workaround; once Amplify library supports responseType, we can use the below code instead.
-  // return API.post("treehacks", `/users_resumes`, {
-  //   body: {
-  //     ids: applicationIds
-  //   },
-  //   responseType: "blob"
-  // })
-  custom_header().then(headers => {
+  try {
+    // const applicationIds = (getState().admin as IAdminState).applicationList.map(e => e._id);
+    let applicationIds = (await dispatch(fetchApplications(tableState, { "_id": 1 }, true))).results.map(e => e._id);
+    // Using fetch workaround; once Amplify library supports responseType, we can use the below code instead.
+    // return API.post("treehacks", `/users_resumes`, {
+    //   body: {
+    //     ids: applicationIds
+    //   },
+    //   responseType: "blob"
+    // })
+    let headers = await custom_header();
     const options = {
       method: "POST",
       headers: {
-          ...headers,
-          "Content-Type": "application/json"
+        ...headers,
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ids: applicationIds})
+      body: JSON.stringify({ ids: applicationIds })
     };
-    return fetch(ENDPOINT_URL + '/users_resumes', options)
-  }).then(res => res.blob())
-  .then(e => {
-    saveAs(e, `treehacks-resumes-${Date.now()}.zip`);
+    let res = await fetch(ENDPOINT_URL + '/users_resumes', options)
+    saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
     dispatch(loadingEnd());
-  }).catch(e => {
+  }
+  catch (e) {
     console.error(e);
     dispatch(loadingEnd());
     alert("Error getting application resumes " + e);
-  });
+  }
 };
 
 export const getExportedApplications = (tableState: IReactTableState) => (dispatch, getState) => {
@@ -139,7 +139,7 @@ export const getExportedApplicationsCSV = (tableState: IReactTableState, columns
   });
 };
 
-const fetchApplications = (tableState: IReactTableState, project=null, retrieveAllPages = false) => (dispatch, getState) => {
+const fetchApplications = (tableState: IReactTableState, project = null, retrieveAllPages = false) => (dispatch, getState) => {
   if (project === null) {
     project = {};
   }
@@ -190,9 +190,9 @@ export const setBulkChangeIds = (ids) => ({
 const headersAdmitted = ["id", "acceptanceDeadline", "transportationType", "transportationDeadline", "transportationAmount", "transportationId"];
 const headers = ["id"];
 export const performBulkChange = () => (dispatch, getState) => {
-  const {ids, status} = (getState().admin as IAdminState).bulkChange;
+  const { ids, status } = (getState().admin as IAdminState).bulkChange;
   let csvData = null;
-  const opts = {header: true, skipEmptyLines: true};
+  const opts = { header: true, skipEmptyLines: true };
   if (status === STATUS.ADMITTED) {
     csvData = Papa.parse(headersAdmitted.join(",") + "\n" + ids, opts).data;
   }
@@ -233,7 +233,7 @@ export const setBulkCreateEmails = (emails) => ({
 });
 
 export const performBulkCreate = () => (dispatch, getState) => {
-  const {group, emails} = (getState().admin as IAdminState).bulkCreate;
+  const { group, emails } = (getState().admin as IAdminState).bulkCreate;
   dispatch(loadingStart());
   return API.post("treehacks", `/users_bulkcreate`, {
     body: {
