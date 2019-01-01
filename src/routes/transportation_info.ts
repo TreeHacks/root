@@ -5,7 +5,7 @@ import { IApplication } from '../models/Application.d';
 
 export function getTransportationInfo(req: Request, res: Response) {
     return getApplicationAttribute(req, res, e => e.forms.transportation || {});
-  }
+}
 
 export function setTransportationInfo(req: Request, res: Response) {
     return setApplicationAttribute(req, res,
