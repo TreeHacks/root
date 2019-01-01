@@ -59,16 +59,3 @@ describe('user form edit by applicant', () => {
         clock.uninstall();
     });
 });
-
-describe('user form edit by sponsor', () => {
-    test('save form - unauthorized', () => {
-        return request(app)
-            .put("/users/applicanttreehacks/forms/application_info")
-            .send({
-                'university': 'Univ'
-            })
-            .set('Content-Type', 'application/json')
-            .set({ Authorization: 'applicant' })
-            .expect(403);
-    });
-});
