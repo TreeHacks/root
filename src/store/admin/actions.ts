@@ -145,7 +145,7 @@ const fetchApplications = (tableState: IReactTableState, project=null, retrieveA
   }
   let sort = {};
   for (let item of tableState.sorted) {
-    sort[item.id] = item.desc ? 1 : 0;
+    sort[item.id] = item.desc ? -1 : 1;
   }
   let filter = {};
   for (let item of tableState.filtered) {
