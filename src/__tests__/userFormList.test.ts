@@ -4,15 +4,20 @@ import app from "../index";
 import Application from "../models/Application";
 import { isEqual, omit } from "lodash";
 import { STATUS, sponsorApplicationDisplayFields } from '../constants';
+import queryString from "query-string";
+import { merge, cloneDeep } from "lodash";
 
 const _doc = {
     _id: null,
     reviews: [],
     status: STATUS.INCOMPLETE,
     transportation_status: null,
+    user: {
+        email: 'test@treehacks'
+    },
     forms: {
         application_info: {
-            first_name: "test",
+            first_name: "fir",
             last_name: "test",
             phone: "test",
             dob: "test",
@@ -35,11 +40,30 @@ const _doc = {
     }
 };
 
-const docs = [
+let docs = [
     { ..._doc, _id: 'applicanttreehacks' },
     { ..._doc, _id: 'applicant-optout-confirmed', sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
     { ..._doc, _id: 'applicant-confirmed', status: STATUS.ADMISSION_CONFIRMED },
-    { ..._doc, _id: 'applicant-confirmed-2', status: STATUS.ADMISSION_CONFIRMED }
+    { ..._doc, _id: 'applicant-confirmed-2', status: STATUS.ADMISSION_CONFIRMED },
+    { ..._doc, _id: 'applicant-submitted', status: STATUS.SUBMITTED },
+    {
+        ..._doc, _id: 'applicant-name-thomas',
+        forms: {
+            ..._doc.forms, application_info: {
+                ..._doc.forms.application_info,
+                first_name: 'thomas'
+            }
+        }
+    },
+    {
+        ..._doc, _id: 'applicant-name-tracey',
+        forms: {
+            ..._doc.forms, application_info: {
+                ..._doc.forms.application_info,
+                first_name: 'tracey'
+            }
+        }
+    }
 ];
 
 beforeAll(() => {
@@ -80,7 +104,65 @@ describe('user form list by admin', () => {
             .get("/users")
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
-                expect(e.body.results.map(item => omit(item, "__v"))).toEqual(docs);
+                expect(e.body.results.map(item => omit(item, "__v")).sort()).toEqual(docs.sort());
+            });
+    });
+    test('filter by status', () => {
+        return request(app)
+            .get("/users?" + queryString.stringify({
+                filter: JSON.stringify({ 'status': STATUS.SUBMITTED })
+            }))
+            .set({ Authorization: 'admin' })
+            .expect(200).then(e => {
+                expect(e.body.results.length).toEqual(1);
+                expect(e.body.results[0]._id).toEqual('applicant-submitted');
+            });
+    });
+    test('filter by status and project email', () => {
+        return request(app)
+            .get("/users?" + queryString.stringify({
+                filter: JSON.stringify({ 'status': STATUS.SUBMITTED }),
+                project: JSON.stringify(['user.email']),
+            }))
+            .set({ Authorization: 'admin' })
+            .expect(200).then(e => {
+                expect(e.body.results.length).toEqual(1);
+                expect(e.body.results[0]).toEqual({ _id: 'applicant-submitted', user: { email: 'test@treehacks' } });
+            });
+    });
+    test('filter by name (partial filter)', () => {
+        return request(app)
+            .get("/users?" + queryString.stringify({
+                filter: JSON.stringify({ 'forms.application_info.first_name': 't' })
+            }))
+            .set({ Authorization: 'admin' })
+            .expect(200).then(e => {
+                expect(e.body.results.length).toEqual(2);
+                expect(e.body.results.map(item => item.forms.application_info.first_name).sort()).toEqual(["thomas", "tracey"]);
+            });
+    });
+    test('filter by name (partial filter) and sort asc', () => {
+        return request(app)
+            .get("/users?" + queryString.stringify({
+                filter: JSON.stringify({ 'forms.application_info.first_name': 't' }),
+                sort: JSON.stringify({ 'forms.application_info.first_name': 1 })
+            }))
+            .set({ Authorization: 'admin' })
+            .expect(200).then(e => {
+                expect(e.body.results.length).toEqual(2);
+                expect(e.body.results.map(item => item.forms.application_info.first_name)).toEqual(["thomas", "tracey"]);
+            });
+    });
+    test('filter by name (partial filter) and sort desc', () => {
+        return request(app)
+            .get("/users?" + queryString.stringify({
+                filter: JSON.stringify({ 'forms.application_info.first_name': 't' }),
+                sort: JSON.stringify({ 'forms.application_info.first_name': -1 })
+            }))
+            .set({ Authorization: 'admin' })
+            .expect(200).then(e => {
+                expect(e.body.results.length).toEqual(2);
+                expect(e.body.results.map(item => item.forms.application_info.first_name)).toEqual(["tracey", "thomas"]);
             });
     });
 });
