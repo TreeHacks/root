@@ -5,14 +5,14 @@ import mapValues from "lodash/mapValues";
 export function getUserList(req: Request, res: Response) {
 
   // Text matching search
-  let filter = JSON.parse(req.query.filter);
+  let filter = JSON.parse(req.query.filter || "{}");
   for (let key in filter) {
     filter[key] = { $regex: filter[key], $options : 'i' };
   }
-  let query = Application.find(filter, JSON.parse(req.query.project) || {}, {
+  let query = Application.find(filter, JSON.parse(req.query.project || "{}"), {
     "treehacks:groups": res.locals.user['cognito:groups']
   })
-    .sort(JSON.parse(req.query.sort) || {})
+    .sort(JSON.parse(req.query.sort || "{}"))
     .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
   
   if (parseInt(req.query.pageSize) >= 0) {

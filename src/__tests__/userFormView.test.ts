@@ -7,6 +7,9 @@ import { STATUS, sponsorApplicationDisplayFields } from '../constants';
 
 const _doc = {
     _id: null,
+    reviews: [],
+    status: STATUS.INCOMPLETE,
+    transportation_status: null,
     forms: {
         application_info: {
             first_name: "test",
@@ -32,14 +35,15 @@ const _doc = {
     }
 };
 
+const docs = [
+    {..._doc, _id: 'applicanttreehacks' },
+    {..._doc, _id: 'applicanttreehacks2' },
+    {..._doc, _id: 'applicant-optout-confirmed', sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
+    {..._doc, _id: 'applicant-confirmed', status: STATUS.ADMISSION_CONFIRMED },
+    {..._doc, _id: 'applicant-admitted', status: STATUS.ADMITTED }
+];
 beforeAll(() => {
-    return Application.insertMany([
-        {..._doc, _id: 'applicanttreehacks' },
-        {..._doc, _id: 'applicanttreehacks2' },
-        {..._doc, _id: 'applicant-optout-confirmed', sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
-        {..._doc, _id: 'applicant-confirmed', status: STATUS.ADMISSION_CONFIRMED },
-        {..._doc, _id: 'applicant-admitted', status: STATUS.ADMITTED }
-    ]);
+    return Application.insertMany(docs);
 });
 
 afterAll(() => {
