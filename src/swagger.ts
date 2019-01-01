@@ -131,7 +131,7 @@ const swagger = {
             "schema": {
               "type": "string",
             },
-            "description": "Sort query. Must be a JSON-serialized string of an array of objects such as {'a': 1}"
+            "description": "Sort query. Must be a JSON-serialized string of an array of objects such as {'a': 1} (ascending) or {'a': -1} (descending)."
           },
           {
             "in": "query",
