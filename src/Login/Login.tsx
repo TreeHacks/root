@@ -71,6 +71,10 @@ class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor:
     }
     else if (hash && hash["sponsor"]) {
       // https://apply.treehacks.com/#sponsor=true
+      sessionStorage.setItem('sponsor', 'true')
+      this.setState({sponsor: true});
+    }
+    if (sessionStorage.getItem('sponsor') === 'true') {
       this.setState({sponsor: true});
     }
 
