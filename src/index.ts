@@ -56,7 +56,7 @@ app.use(cors());
 // Starts the Express server, which will run locally @ localhost:3000
 if (!module.parent) {
     app.listen(port, () => {
-        console.log('App listening on port 3000!');
+        console.log(`App listening on port ${port}!`);
     });
 }
 
