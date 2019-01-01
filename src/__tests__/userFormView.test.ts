@@ -63,7 +63,7 @@ describe('user form view by applicant', () => {
         return request(app)
             .get("/users/applicanttreehacks2/forms/application_info")
             .set({ Authorization: 'applicant' })
-            .expect(401);
+            .expect(403);
     });
 });
 

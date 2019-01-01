@@ -31,7 +31,7 @@ authenticatedRoute.param('userId', (req, res, next, userId) => {
       // Sponsors are able to view users (with a filter implemented on the route itself).
     }
     else {
-      return res.status(401).send("User does not have access to user ID: " + userId + "; user id is " + res.locals.user.sub);
+      return res.status(403).send("User does not have access to user ID: " + userId + ".");
     }
   }
   next();
@@ -53,7 +53,7 @@ const validateGroup = (group) => (req, res, next) => {
       next();
     }
     else {
-      return res.status(401).send("Unauthorized; user is not a " + group + ". User is in groups: " + res.locals.user['cognito:groups']);
+      return res.status(403).send("Unauthorized; user is not in group " + group  + ".");
     }
   });
 }

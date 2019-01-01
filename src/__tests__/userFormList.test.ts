@@ -79,7 +79,7 @@ describe('user form list by applicant', () => {
         return request(app)
             .get("/users")
             .set({ Authorization: 'applicant' })
-            .expect(401);
+            .expect(403);
     });
 });
 
