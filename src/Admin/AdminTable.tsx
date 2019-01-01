@@ -40,7 +40,7 @@ const AdminTable = (props: IAdminTableProps) => {
             "Cell": (p) => <div><a onClick={(e) => {
                 e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "application_info" })
             }} href="#">View</a> | <a onClick={(e) => {
-                e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "travel" })
+                e.preventDefault(); props.setSelectedForm && props.setSelectedForm({ "id": p.value, "name": "transportation" })
             }} href="#">Travel</a></div>
         },
         {
