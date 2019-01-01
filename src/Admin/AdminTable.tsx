@@ -21,13 +21,13 @@ const defaultFilterMethod = (filter, row) => {
 const createFilterSelect = (values) => ({ filter, onChange }) =>
     <select
         className="form-control"
-        value={filter ? filter.value : "all"}
+        value={filter ? filter.value : ""}
         onChange={event => onChange(event.target.value)}
     >
         {values.map(e =>
             <option key={e}>{e}</option>
         )}
-        <option>all</option>
+        <option value={""}>all</option>
     </select>;
 
 const AdminTable = (props: IAdminTableProps) => {
