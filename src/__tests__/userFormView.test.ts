@@ -56,6 +56,7 @@ describe('user form view by applicant', () => {
             .set({ Authorization: 'applicant' })
             .expect(200).then(e => {
                 expect(e.body["race"]).toEqual(["test"]);
+                expect(e.body.reviews).toBeFalsy();
             });
     });
     test('view form with different id - unauthorized', () => {
