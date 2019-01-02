@@ -103,6 +103,7 @@ export function checkLoginStatus() {
           checkInGroup("reviewer"),
           checkInGroup("sponsor")
         ];
+        dispatch(setAuthPage("signIn"));
         dispatch(loggedIn(user.username, user.attributes, admin, reviewer, sponsor));
       }).catch(e => {
         dispatch(notLoggedIn());
