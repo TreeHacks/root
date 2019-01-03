@@ -7,21 +7,22 @@ export function getUserList(req: Request, res: Response) {
   // Text matching search
   let filter = JSON.parse(req.query.filter || "{}");
   for (let key in filter) {
-    filter[key] = { $regex: filter[key], $options : 'i' };
+    filter[key] = { $regex: filter[key], $options: 'i' };
   }
-  let query = Application.find(filter, JSON.parse(req.query.project || "{}"), {
+  let buildQuery = () => Application.find(filter, JSON.parse(req.query.project || "{}"), {
     "treehacks:groups": res.locals.user['cognito:groups']
-  })
-    .sort(JSON.parse(req.query.sort || "{}"))
-    .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
-  
+  });
+  let sortedAndFilteredQuery =
+    buildQuery().sort(JSON.parse(req.query.sort || "{}"))
+      .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
+
   if (parseInt(req.query.pageSize) >= 0) {
-    query = query.limit(parseInt(req.query.pageSize));
+    sortedAndFilteredQuery = sortedAndFilteredQuery.limit(parseInt(req.query.pageSize));
   }
 
   Promise.all([
-    query.lean().exec(),
-    Application.find(filter).count()
+    sortedAndFilteredQuery.lean().exec(),
+    buildQuery().then(e => e ? e.length : 0) // Todo: Should be buildQuery().count() - when we fix mongoose issue on count() not triggering a pre-find hook.
   ])
     .then(([results, count]) => {
       return res.status(200).json({

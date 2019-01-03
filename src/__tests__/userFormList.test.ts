@@ -88,6 +88,7 @@ describe('user form list by sponsor', () => {
             .get("/users")
             .set({ Authorization: 'sponsor' })
             .expect(200).then(e => {
+                expect(e.body.count).toEqual(2);
                 expect(e.body.results.map(item => item._id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2'].sort());
                 for (let result of e.body.results) {
                     expect(Object.keys(result.forms.application_info).sort()).toEqual(sponsorApplicationDisplayFields.sort());
