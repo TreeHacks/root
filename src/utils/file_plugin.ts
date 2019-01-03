@@ -68,7 +68,7 @@ export async function injectDynamicApplicationContent(doc: IApplication) {
  */
 export function projectAllowedApplicationFields(this: mongoose.Query<IApplication>) {
   let query = this.getQuery();
-  const options = (this as any).getOptions(); // Todo: fix mongoose types when https://github.com/DefinitelyTyped/DefinitelyTyped/pull/31798 is merged
+  const options = this.getOptions();
   let groups = get(options, "treehacks:groups", []);
   if (groups.indexOf("admin") > -1) {
   }

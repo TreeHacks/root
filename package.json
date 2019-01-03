@@ -25,7 +25,6 @@
     "@types/jest": "^23.1.6",
     "@types/mongodb": "^3.1.12",
     "@types/mongodb-memory-server": "^1.8.0",
-    "@types/mongoose": "^5.3.5",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.5.2",
     "@types/supertest": "^2.0.5",
@@ -55,6 +54,7 @@
   },
   "homepage": "https://github.com/TreeHacks/application-portal#readme",
   "devDependencies": {
+    "@types/mongoose": "^5.3.6",
     "cognito-express": "^2.0.10",
     "concurrently": "^3.6.0",
     "cross-env": "^5.2.0",
