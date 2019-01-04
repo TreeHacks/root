@@ -11,7 +11,10 @@ export default function s3FilePlugin(schema: mongoose.Schema) {
   schema.pre('save', uploadDynamicApplicationContent);
   schema.pre('find', projectAllowedApplicationFields);
   schema.pre('findOne', projectAllowedApplicationFields);
-  schema.pre('countDocuments', projectAllowedApplicationFields);
+  schema.pre('countDocuments', function (next) {
+    projectAllowedApplicationFields.call(this as mongoose.Query<IApplication>);
+    next();
+  });
   // schema.post('findOne', injectDynamicApplicationContent);
 }
 
@@ -43,19 +46,19 @@ async function uploadDynamicApplicationContent(this: mongoose.Document) {
 }
 
 export async function injectDynamicApplicationContent(doc: IApplication) {
-    for (let path of APPLICATION_FILE_PATHS) {
-      const resume = get(doc, path);
-      if (resume && resume.indexOf('data:') !== 0) {
-        try {
-          const url = await generateSignedUrlForFile(resume);
-          set(doc, path, url);
-        } catch (e) {
-          // fall through - fixme add error logging
-          console.error(e);
-        }
+  for (let path of APPLICATION_FILE_PATHS) {
+    const resume = get(doc, path);
+    if (resume && resume.indexOf('data:') !== 0) {
+      try {
+        const url = await generateSignedUrlForFile(resume);
+        set(doc, path, url);
+      } catch (e) {
+        // fall through - fixme add error logging
+        console.error(e);
       }
     }
-    return doc;
+  }
+  return doc;
 }
 
 /*
@@ -74,11 +77,13 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
   if (groups.indexOf("admin") > -1) {
   }
   else if (groups.indexOf("sponsor") > -1) {
-    query = {"$and": [
-      query,
-      {"sponsor_optout": {"$ne": true}},
-      {"status": STATUS.ADMISSION_CONFIRMED}
-    ]};
+    query = {
+      "$and": [
+        query,
+        { "sponsor_optout": { "$ne": true } },
+        { "status": STATUS.ADMISSION_CONFIRMED }
+      ]
+    };
     this.setQuery(query);
     if (!this.selectedInclusively()) {
       (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
