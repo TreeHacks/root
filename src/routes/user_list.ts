@@ -9,11 +9,11 @@ export function getUserList(req: Request, res: Response) {
   for (let key in filter) {
     filter[key] = { $regex: filter[key], $options: 'i' };
   }
-  let buildQuery = () => Application.find(filter, JSON.parse(req.query.project || "{}"), {
+  let query = Application.find(filter, JSON.parse(req.query.project || "{}"), {
     "treehacks:groups": res.locals.user['cognito:groups']
   });
   let sortedAndFilteredQuery =
-    buildQuery().sort(JSON.parse(req.query.sort || "{}"))
+    query.sort(JSON.parse(req.query.sort || "{}"))
       .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
 
   if (parseInt(req.query.pageSize) >= 0) {
@@ -22,7 +22,9 @@ export function getUserList(req: Request, res: Response) {
 
   Promise.all([
     sortedAndFilteredQuery.lean().exec(),
-    buildQuery().then(e => e ? e.length : 0) // Todo: Should be buildQuery().count() - when we fix mongoose issue on count() not triggering a pre-find hook.
+    Application.find(filter, { "_id": 1 }, {
+      "treehacks:groups": res.locals.user['cognito:groups']
+    }).then(e => e ? e.length : 0) // Todo: Should be buildQuery().count() - when we fix mongoose issue on count() not triggering on a pre-find hook.
   ])
     .then(([results, count]) => {
       return res.status(200).json({
