@@ -11,6 +11,7 @@ export default function s3FilePlugin(schema: mongoose.Schema) {
   schema.pre('save', uploadDynamicApplicationContent);
   schema.pre('find', projectAllowedApplicationFields);
   schema.pre('findOne', projectAllowedApplicationFields);
+  schema.pre('countDocuments', projectAllowedApplicationFields);
   // schema.post('findOne', injectDynamicApplicationContent);
 }
 
