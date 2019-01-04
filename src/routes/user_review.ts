@@ -1,7 +1,7 @@
 import Application from "../models/Application";
 import { STATUS, applicationReviewDisplayFields } from "../constants";
 import { IApplication } from "../models/Application.d";
-import {find} from "lodash";
+import { find } from "lodash";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
 
 // Uncomment to insert dummy data for testing.
@@ -47,39 +47,37 @@ export const getReviewStats = (req, res) => {
         })
 };
 
-export const rateReview = (req, res) => {
-    Application.findOne(
-        { "_id": req.body.application_id }).then((application: IApplication | null) => {
-            if (!application) {
-                return res.status(404).send("Application to rate not found");
+export const rateReview = async (req, res) => {
+    let application = await Application.findOne(
+        { "_id": req.body.application_id });
+    if (!application) {
+        return res.status(404).send("Application to rate not found");
+    }
+    else if (application.reviews && application.reviews.length >= 3) {
+        return res.status(403).send("Application already has 3 reviews.");
+    }
+    else if (application.reviews && find(application.reviews, { "reader": { "id": res.locals.user.sub } })) {
+        return res.status(403).send("Application already has a review submitted by user " + res.locals.user.sub);
+    }
+    else {
+        application.reviews.push({
+            reader: {
+                id: res.locals.user.sub,
+                email: res.locals.user.email
+            },
+            cultureFit: req.body.cultureFit,
+            experience: req.body.experience,
+            passion: req.body.passion,
+            isOrganizer: req.body.isOrganizer,
+            isBeginner: req.body.isBeginner
+        });
+        await application.save();
+        return res.json({
+            "results": {
+                "status": "success"
             }
-            else if (application.reviews && application.reviews.length >= 3) {
-                return res.status(403).send("Application already has 3 reviews.");
-            }
-            else if (application.reviews && find(application.reviews, {"reader": {"id": res.locals.user.sub}})) {
-                return res.status(403).send("Application already has a review submitted by user " + res.locals.user.sub);
-            }
-            else {
-                application.reviews.push({
-                    reader: {
-                        id: res.locals.user.sub,
-                        email: res.locals.user.email
-                    },
-                    cultureFit: req.body.cultureFit,
-                    experience: req.body.experience,
-                    passion: req.body.passion,
-                    isOrganizer: req.body.isOrganizer,
-                    isBeginner: req.body.isBeginner
-                });
-                return application.save();
-            }
-        }).then(() => {
-            return res.json({
-                "results": {
-                    "status": "success"
-                }
-            });
-        })
+        });
+    }
 };
 
 export const reviewNextApplication = (req, res) => {
