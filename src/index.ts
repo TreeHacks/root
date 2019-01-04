@@ -28,7 +28,7 @@ const app = express();
 app.use(forceSsl);
 app.use(compression());
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:65210/test").catch(function (reason: string) {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:65210/test", { useNewUrlParser: true }).catch(function (reason: string) {
     console.log('Unable to connect to the mongodb instance. Error: ', reason);
 });
 mongoose.plugin(filePlugin);
