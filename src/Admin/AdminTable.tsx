@@ -25,7 +25,7 @@ const createFilterSelect = (values) => ({ filter, onChange }) =>
         onChange={event => onChange(event.target.value)}
     >
         {values.map(e =>
-            <option key={e}>{e}</option>
+            <option key={e}>{String(e)}</option>
         )}
         <option value={""}>all</option>
     </select>;
@@ -89,6 +89,13 @@ const AdminTable = (props: IAdminTableProps) => {
             "filterMethod": defaultFilterMethod,
             "Filter": createFilterSelect(values(TRANSPORTATION_TYPES)),
             "accessor": "admin_info.transportation.type"
+        },
+        {
+            "Header": "Bus RSVP status",
+            "filterMethod": defaultFilterMethod,
+            "Filter": createFilterSelect([true, false]),
+            "accessor": "forms.transportation.accept",
+            "Cell": e => String(e.value)
         },
         {
             "Header": "Bus ID",
