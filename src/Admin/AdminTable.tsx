@@ -93,14 +93,6 @@ const AdminTable = (props: IAdminTableProps) => {
             "accessor": "transportation_status"
         },
         {
-            "Header": "Acceptance Deadline",
-            "accessor": "admin_info.acceptance.deadline"
-        },
-        {
-            "Header": "Transportation Deadline",
-            "accessor": "admin_info.transportation.deadline"
-        },
-        {
             "Header": "Transportation Type",
             "filterMethod": defaultFilterMethod,
             "Filter": createFilterSelect(values(TRANSPORTATION_TYPES)),
@@ -120,12 +112,13 @@ const AdminTable = (props: IAdminTableProps) => {
             "accessor": "admin_info.transportation.id"
         },
         {
-            "Header": "Number of Reviews",
-            "id": "reviews",
-            "accessor": e => e.reviews.length,
-            "filterMethod": defaultFilterMethod,
-            "Filter": createFilterSelect([0, 1, 2, 3])
-        }
+            "Header": "Acceptance Deadline",
+            "accessor": "admin_info.acceptance.deadline"
+        },
+        {
+            "Header": "Transportation Deadline",
+            "accessor": "admin_info.transportation.deadline"
+        },
     ];
     return (
         <div>
