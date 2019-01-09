@@ -18,17 +18,33 @@ const defaultFilterMethod = (filter, row) => {
     return row[filter.id] == filter.value;
 };
 
-const createFilterSelect = (values) => ({ filter, onChange }) =>
-    <select
+const createFilterSelect = (values) => ({ filter, onChange }) => {
+    let transform = e => e;
+    if (typeof values[0] === "boolean") {
+        // Select dropdown doesn't support boolean values, so cast strings to booleans if needed.
+        transform = e => {
+            if (e === "true") {
+                return true;
+            }
+            if (e === "false") {
+                return false;
+            }
+            else {
+                return "";
+            }
+        };
+    }
+    return (<select
         className="form-control"
         value={filter ? filter.value : ""}
-        onChange={event => onChange(event.target.value)}
+        onChange={event => onChange(transform(event.target.value))}
     >
         {values.map(e =>
-            <option key={e}>{String(e)}</option>
+            <option key={e} value={e}>{String(e)}</option>
         )}
         <option value={""}>all</option>
-    </select>;
+    </select>);
+};
 
 const AdminTable = (props: IAdminTableProps) => {
     const columns = [
