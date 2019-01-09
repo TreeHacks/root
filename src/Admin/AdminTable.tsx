@@ -103,7 +103,7 @@ const AdminTable = (props: IAdminTableProps) => {
             "filterMethod": defaultFilterMethod,
             "Filter": createFilterSelect([true, false]),
             "accessor": "forms.transportation.accept",
-            "Cell": e => String(e.value)
+            "Cell": e => typeof(e.value) === 'boolean' ? String(e.value) : ""
         },
         {
             "Header": "Bus ID",
