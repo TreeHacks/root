@@ -7,7 +7,10 @@ export function getUserList(req: Request, res: Response) {
   // Text matching search
   let filter = JSON.parse(req.query.filter || "{}");
   for (let key in filter) {
-    filter[key] = { $regex: filter[key], $options: 'i' };
+    // Matching by a string in any location
+    if (typeof filter[key] === 'string') {
+      filter[key] = { $regex: filter[key], $options: 'i' };
+    }
   }
   let queryOptions = {
     "treehacks:groups": res.locals.user['cognito:groups']

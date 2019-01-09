@@ -165,4 +165,15 @@ describe('user form list by admin', () => {
                 expect(e.body.results.map(item => item.forms.application_info.first_name)).toEqual(["tracey", "thomas"]);
             });
     });
+    test('filter by boolean value', () => {
+        return request(app)
+            .get("/users?" + queryString.stringify({
+                filter: JSON.stringify({ 'sponsor_optout': true })
+            }))
+            .set({ Authorization: 'admin' })
+            .expect(200).then(e => {
+                expect(e.body.results.length).toEqual(1);
+                expect(e.body.results[0]._id).toEqual('applicant-optout-confirmed');
+            });
+    });
 });
