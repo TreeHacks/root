@@ -119,6 +119,13 @@ const AdminTable = (props: IAdminTableProps) => {
             "Header": "Transportation Deadline",
             "accessor": "admin_info.transportation.deadline"
         },
+        {
+            "Header": "Sponsor optout",
+            "filterMethod": defaultFilterMethod,
+            "Filter": createFilterSelect([true, false]),
+            "accessor": "sponsor_optout",
+            "Cell": e => typeof(e.value) === 'boolean' ? String(e.value) : ""
+        }
     ];
     return (
         <div>
