@@ -112,6 +112,10 @@ const AdminTable = (props: IAdminTableProps) => {
             "accessor": "admin_info.transportation.id"
         },
         {
+            "Header": "Reimbursement Amount",
+            "accessor": "admin_info.transportation.amount"
+        },
+        {
             "Header": "Acceptance Deadline",
             "accessor": "admin_info.acceptance.deadline"
         },
