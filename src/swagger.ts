@@ -494,6 +494,7 @@ const swagger = {
     },
     "/review/leaderboard": {
       "get": {
+        "tags": ["review"],
         "summary": "Get review leaderboard",
         "description": "List of reviewers, ranked.",
         "responses": {
@@ -510,6 +511,7 @@ const swagger = {
     },
     "/review/stats": {
       "get": {
+        "tags": ["review"],
         "summary": "Get review stats",
         "description": "Returns number of applications remaining to be removed.",
         "responses": {
@@ -526,6 +528,7 @@ const swagger = {
     },
     "/review/rate": {
       "post": {
+        "tags": ["review"],
         "summary": "Rate review.",
         "description": ".",
         "responses": {
@@ -542,6 +545,7 @@ const swagger = {
     },
     "/review/next_application": {
       "get": {
+        "tags": ["review"],
         "summary": "Get review next application",
         "description": ".",
         "responses": {
