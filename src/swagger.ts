@@ -51,6 +51,15 @@ const swagger = {
           "isBeginner": { "type": "boolean" }
         }
       },
+      "JudgeReview": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "_id": {"type": "string"},
+            "email": {"type": "string"}
+          }
+        }
+      },
       "Application": {
         "type": "object",
         "properties": {
@@ -563,7 +572,7 @@ const swagger = {
     "/hacks": {
       "get": {
         "tags": ["hacks"],
-        "summary": "Get list of hacks. If run by admin, gets all hacks. If run by a judge, only gets hacks that the judge has access to.",
+        "summary": "Get list of hacks. Accessible to both judges and admins.",
         "description": ".",
         "responses": {
           "200": {
@@ -571,7 +580,8 @@ const swagger = {
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array"
+                  "type": "array",
+                  "items": { "type": "object" }
                 }
               }
             }
@@ -583,6 +593,30 @@ const swagger = {
       "get": {
         "tags": ["hacks"],
         "summary": "Get hack info by id.",
+        "description": ".",
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "devpost_url": { "type": "string" },
+                    "title": { "type": "string" },
+                    "categories": { "type": "array", "items": {"type": "object"} },
+                    "table": { "type": "string" },
+                    "reviews": { "type": "array", "items": {"ref": "#/components/schemas/JudgeReview"} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["hacks"],
+        "summary": "Edit hack info. Can set title, table, assign judges.",
         "description": ".",
         "responses": {
           "200": {
@@ -618,10 +652,12 @@ const swagger = {
             "application/json": {
               "schema": {
                 "type": "object",
-                "creativity": {"type": "number"},
-                "technical_complexity": {"type": "number"},
-                "social_impact": {"type": "number"},
-                "comments": {"type": "string"}
+                "properties": {
+                  "creativity": { "type": "number" },
+                  "technical_complexity": { "type": "number" },
+                  "social_impact": { "type": "number" },
+                  "comments": { "type": "string" }
+                }
               }
             }
           }
@@ -633,27 +669,32 @@ const swagger = {
         }
       }
     },
-    "/hacks/{hackId}/judges": {
-      "put": {
+    "/judges": {
+      "get": {
         "tags": ["hacks"],
-        "summary": "Add judge to a hack. Only available to admins.",
+        "summary": "Get list of judges. Accessible only to admins.",
         "description": ".",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string"
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "reviews": { "type": "array", "items": { "$ref": "#/components/schemas/JudgeReview" } },
+                      "name": { "type": "string" },
+                      "email": { "type": "string" }
+                    }
+                  }
+                }
               }
             }
           }
-        },
-        "responses": {
-          "200": {
-            "description": "Response"
-          }
         }
       }
-    }
+    },
   }
 }
 
