@@ -559,6 +559,100 @@ const swagger = {
           }
         }
       }
+    },
+    "/hacks": {
+      "get": {
+        "tags": ["hacks"],
+        "summary": "Get list of hacks. If run by admin, gets all hacks. If run by a judge, only gets hacks that the judge has access to.",
+        "description": ".",
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hacks/{hackId}": {
+      "get": {
+        "tags": ["hacks"],
+        "summary": "Get hack info by id.",
+        "description": ".",
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["hacks"],
+        "summary": "Delete hack. Only available to admins.",
+        "description": ".",
+        "responses": {
+          "200": {
+            "description": "Response"
+          }
+        }
+      }
+    },
+    "/hacks/{hackId}/rate": {
+      "post": {
+        "tags": ["hacks"],
+        "summary": "Rate hack. Only available to judges (judges can rate *any* hack).",
+        "description": ".",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "creativity": {"type": "number"},
+                "technical_complexity": {"type": "number"},
+                "social_impact": {"type": "number"},
+                "comments": {"type": "string"}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response"
+          }
+        }
+      }
+    },
+    "/hacks/{hackId}/judges": {
+      "put": {
+        "tags": ["hacks"],
+        "summary": "Add judge to a hack. Only available to admins.",
+        "description": ".",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response"
+          }
+        }
+      }
     }
   }
 }
