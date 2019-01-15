@@ -39,8 +39,8 @@ const swagger = {
           "transportation": {
             "type": "object",
             "properties": {
-              "type": {"type": "string"},
-              "amount": {"type": "number"}
+              "type": { "type": "string" },
+              "amount": { "type": "number" }
             }
           }
         }
@@ -87,10 +87,10 @@ const swagger = {
       "Transportation": {
         "type": "object",
         "properties": {
-          "address": {"type": "object"},
-          "vendor": {"type": "string"},
-          "receipt": {"type": "string"},
-          "accept": {"type": "boolean"}
+          "address": { "type": "object" },
+          "vendor": { "type": "string" },
+          "receipt": { "type": "string" },
+          "accept": { "type": "boolean" }
         }
       }
     }
@@ -264,7 +264,7 @@ const swagger = {
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/Transportation"}
+              "schema": { "$ref": "#/components/schemas/Transportation" }
             }
           }
         },
@@ -276,7 +276,7 @@ const swagger = {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "nModified": {"type": "integer"}
+                    "nModified": { "type": "integer" }
                   }
                 }
               }
@@ -292,7 +292,7 @@ const swagger = {
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/Transportation"}
+              "schema": { "$ref": "#/components/schemas/Transportation" }
             }
           }
         },
@@ -304,7 +304,7 @@ const swagger = {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "nModified": {"type": "integer"}
+                    "nModified": { "type": "integer" }
                   }
                 }
               }
@@ -433,7 +433,7 @@ const swagger = {
                       "type": "string"
                     }
                   },
-                  "status": {"type": "string"}
+                  "status": { "type": "string" }
                 }
               }
             }
@@ -447,7 +447,7 @@ const swagger = {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "nModified": {"type": "integer"}
+                    "nModified": { "type": "integer" }
                   }
                 }
               }
@@ -472,7 +472,7 @@ const swagger = {
                       "type": "string"
                     }
                   },
-                  "status": {"type": "string"}
+                  "status": { "type": "string" }
                 }
               }
             }
