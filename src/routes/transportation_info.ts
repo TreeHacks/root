@@ -39,20 +39,22 @@ export function submitTransportationInfo(req: Request, res: Response) {
             if (e.admin_info.transportation.type !== TRANSPORTATION_TYPE.FLIGHT && e.admin_info.transportation.type !== TRANSPORTATION_TYPE.OTHER) {
                 return res.status(403).send("Transportation type is not FLIGHT or OTHER.");
             }
-            // todo: make list of required fields.
             // todo: share this with the frontend in some common configuration.
-            // const requiredFields = [];
+            const requiredFields = {
+                [TRANSPORTATION_TYPE.FLIGHT]: ["vendor", "address1", "city", "state", "zip", "receipt"],
+                [TRANSPORTATION_TYPE.OTHER]: ["vendor", "address1", "city", "state", "zip", "receipt"]
+            };
             let completed = true;
-            // for (let requiredField of requiredFields) {
-            //     if (typeof e.forms.application_info[requiredField] === "undefined") {
-            //         completed = false;
-            //     }
-            // }
+            for (let requiredField of requiredFields[e.admin_info.transportation.type]) {
+                if (typeof e.forms.transportation[requiredField] === "undefined") {
+                    completed = false;
+                }
+            }
             if (completed) {
                 e.transportation_status = TRANSPORTATION_STATUS.SUBMITTED;
             }
             else {
-                res.status(400).send("Not all required fields have been submitted.");
+                return res.status(403).send("Not all required fields have been submitted.");
             }
         },
         e => e.forms.transportation

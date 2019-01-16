@@ -62,7 +62,7 @@ describe('flight transportation rsvp', () => {
         await new Application({
             _id: 'applicanttreehacks',
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
-            forms: {transportation: {} },
+            forms: {transportation: {vendor: "a", address1: "a", city: "a", state: "a", zip: "a", receipt: "a"} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.FLIGHT, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
         }).save();
     });
@@ -120,7 +120,7 @@ describe('other transportation rsvp', () => {
         await new Application({
             _id: 'applicanttreehacks',
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
-            forms: {transportation: {} },
+            forms: {transportation: {vendor: "a", address1: "a", city: "a", state: "a", zip: "a", receipt: "a"} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.OTHER, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
         }).save();
     });
@@ -212,7 +212,7 @@ describe('bus transportation rsvp', () => {
         await new Application({
             _id: 'applicanttreehacks',
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
-            forms: {transportation: {} },
+            forms: {transportation: {accept: true} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.BUS, deadline: "2018-11-27T07:59:00.000Z"}}
         }).save();
         const clock = lolex.install({ now: new Date("01/01/1999") });
@@ -256,3 +256,54 @@ describe('bus transportation rsvp', () => {
         clock.uninstall();
     });
 });
+
+describe('incomplete transportation submit - fail', () => {
+    test('other submit incomplete transportation - fail', async () => {
+        await new Application({
+            _id: 'applicanttreehacks',
+            transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+            forms: {transportation: {address1: "a", city: "a", state: "a", zip: "a", receipt: "a"} },
+            admin_info: {transportation: {type: TRANSPORTATION_TYPE.OTHER, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
+        }).save();
+        const clock = lolex.install({ now: new Date("01/01/1999") });
+        await request(app)
+            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .set({ Authorization: 'applicant' })
+            .expect(403)
+            .then(e => {
+                expect(e.text).toEqual("Not all required fields have been submitted.");
+            });
+        await request(app)
+            .get("/users/applicanttreehacks")
+            .set({ Authorization: 'applicant' })
+            .expect(200)
+            .then(e => {
+                expect(e.body.transportation_status).toEqual(TRANSPORTATION_STATUS.AVAILABLE);
+            })
+        clock.uninstall();
+    });
+    test('flight submit incomplete transportation - fail', async () => {
+        await new Application({
+            _id: 'applicanttreehacks',
+            transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+            forms: {transportation: {address1: "a", city: "a", state: "a", zip: "a", receipt: "a"} },
+            admin_info: {transportation: {type: TRANSPORTATION_TYPE.FLIGHT, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
+        }).save();
+        const clock = lolex.install({ now: new Date("01/01/1999") });
+        await request(app)
+            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .set({ Authorization: 'applicant' })
+            .expect(403)
+            .then(e => {
+                expect(e.text).toEqual("Not all required fields have been submitted.");
+            });
+        await request(app)
+            .get("/users/applicanttreehacks")
+            .set({ Authorization: 'applicant' })
+            .expect(200)
+            .then(e => {
+                expect(e.body.transportation_status).toEqual(TRANSPORTATION_STATUS.AVAILABLE);
+            })
+        clock.uninstall();
+    });
+})
