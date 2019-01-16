@@ -572,8 +572,8 @@ const swagger = {
     "/hacks": {
       "get": {
         "tags": ["hacks"],
-        "summary": "Get list of hacks. Accessible to both judges and admins.",
-        "description": ".",
+        "summary": "Get list of hacks.",
+        "description": "Accessible to both judges and admins. Also available to hackers, but hackers can't see the reviews.",
         "responses": {
           "200": {
             "description": "Response",
@@ -582,6 +582,41 @@ const swagger = {
                 "schema": {
                   "type": "array",
                   "items": { "type": "object" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hacks_import": {
+      "post": {
+        "tags": ["hacks"],
+        "summary": "Import hacks from devpost csv.",
+        "description": "Only accessible to admins.",
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                  "type": "object",
+                    "properties": {
+                      "title": {"type": "string"},
+                      "url": {"type": "string"},
+                      "description": {"type": "string"},
+                      "video": {"type": "string"},
+                      "website": {"type": "string"},
+                      "file_url": {"type": "string"},
+                      "desired_prizes": {"type": "array", "items": {"type": "string"}},
+                      "submitter_screen_name": {"type": "string"},
+                      "submitter_first_name": {"type": "string"},
+                      "submitter_last_name": {"type": "string"},
+                      "submitter_email": {"type": "string"}
+                    }
+                  }
                 }
               }
             }
