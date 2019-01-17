@@ -639,7 +639,7 @@ const swagger = {
                   "properties": {
                     "devpost_url": { "type": "string" },
                     "title": { "type": "string" },
-                    "categories": { "type": "array", "items": {"type": "object"} },
+                    "categories": { "type": "array", "items": {"type": "string"} },
                     "table": { "type": "string" },
                     "reviews": { "type": "array", "items": {"ref": "#/components/schemas/JudgeReview"} }
                   }
