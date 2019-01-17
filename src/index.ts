@@ -22,6 +22,7 @@ import { bulkChangeUsers } from "./routes/user_bulk_change";
 import { bulkCreateUsers } from "./routes/user_bulk_create";
 import { setTransportationInfo, submitTransportationInfo, getTransportationInfo } from "./routes/transportation_info";
 import { getUserResumes } from "./routes/user_resumes";
+import { importHacks } from "./routes/hacks/hacks_import";
 
 // Set up the Express app
 const app = express();
@@ -95,6 +96,7 @@ authenticatedRoute.post('/users_resumes', [sponsorRoute], getUserResumes);
 authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);
 authenticatedRoute.post('/users_bulkcreate', [adminRoute], bulkCreateUsers);
+authenticatedRoute.post('/hacks_import', [adminRoute], importHacks);
 
 // Need custom auth:
 authenticatedRoute.put('/users/:userId/admin_info', [adminRoute], setAdminInfo);
@@ -104,6 +106,5 @@ authenticatedRoute.get('/review/leaderboard', [reviewerRoute], getLeaderboard);
 authenticatedRoute.get('/review/stats', [reviewerRoute], getReviewStats);
 authenticatedRoute.post('/review/rate', [reviewerRoute], rateReview);
 authenticatedRoute.get('/review/next_application', [reviewerRoute], reviewNextApplication);
-
 
 export default app;

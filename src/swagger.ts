@@ -600,21 +600,26 @@ const swagger = {
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
                   "type": "object",
-                    "properties": {
-                      "title": {"type": "string"},
-                      "url": {"type": "string"},
-                      "description": {"type": "string"},
-                      "video": {"type": "string"},
-                      "website": {"type": "string"},
-                      "file_url": {"type": "string"},
-                      "desired_prizes": {"type": "array", "items": {"type": "string"}},
-                      "submitter_screen_name": {"type": "string"},
-                      "submitter_first_name": {"type": "string"},
-                      "submitter_last_name": {"type": "string"},
-                      "submitter_email": {"type": "string"}
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                      "type": "object",
+                        "properties": {
+                          "title": {"type": "string"},
+                          "url": {"type": "string"},
+                          "description": {"type": "string"},
+                          "video": {"type": "string"},
+                          "website": {"type": "string"},
+                          "file_url": {"type": "string"},
+                          "desired_prizes": {"type": "array", "items": {"type": "string"}},
+                          "submitter_screen_name": {"type": "string"},
+                          "submitter_first_name": {"type": "string"},
+                          "submitter_last_name": {"type": "string"},
+                          "submitter_email": {"type": "string"}
+                        }
+                      }
                     }
                   }
                 }
