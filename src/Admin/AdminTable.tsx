@@ -114,6 +114,7 @@ const AdminTable = (props: IAdminTableProps) => {
         {
             "Header": "Reimbursement Amount",
             "accessor": "admin_info.transportation.amount"
+            // todo: use Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(500)
         },
         {
             "Header": "Acceptance Deadline",
