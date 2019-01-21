@@ -4,13 +4,15 @@ import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";
 import {get} from "lodash-es";
 
-export const loggedIn = (userId, attributes, admin, reviewer, sponsor) => ({
+export const loggedIn = (userId, attributes, admin, reviewer, sponsor, judge, applicant) => ({
   type: 'LOGIN_SUCCESS',
   userId,
   attributes,
   admin,
   reviewer,
-  sponsor
+  sponsor,
+  judge,
+  applicant
 });
 
 export const notLoggedIn = () => ({
@@ -98,13 +100,15 @@ export function checkLoginStatus() {
         if (!user) throw "No credentials";
         const groups = get(user.attributes, "cognito:groups", []);
         const checkInGroup = group => groups.indexOf(group) > -1;
-        const [admin, reviewer, sponsor] = [
+        const [admin, reviewer, sponsor, judge] = [
           checkInGroup("admin"),
           checkInGroup("reviewer"),
-          checkInGroup("sponsor")
+          checkInGroup("sponsor"),
+          checkInGroup("judge")
         ];
+        const applicant = !admin && !reviewer && !sponsor && !judge;
         dispatch(setAuthPage("signIn"));
-        dispatch(loggedIn(user.username, user.attributes, admin, reviewer, sponsor));
+        dispatch(loggedIn(user.username, user.attributes, admin, reviewer, sponsor, judge, applicant));
       }).catch(e => {
         dispatch(notLoggedIn());
         console.error(e);

@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login screen tests login screen applicant 1`] = `
+<div
+  className="treehacks-login"
+>
+  <div
+    className="text-center"
+  >
+    <img
+      height="65px"
+      src={null}
+      style={
+        Object {
+          "marginTop": 49,
+        }
+      }
+      width="85px"
+    />
+  </div>
+  <h2
+    className="h3-style"
+  >
+    tree
+    <strong>
+      hacks
+    </strong>
+  </h2>
+  <Component />
+  <div
+    className="top-form"
+  >
+    <AuthForm
+      onSubmit={[Function]}
+      schema={Object {}}
+      uiSchema={Object {}}
+    >
+      <button
+        className="btn btn-info"
+        type="submit"
+      >
+        Sign In
+      </button>
+    </AuthForm>
+    <div
+      className="label-text centered"
+    >
+      or
+    </div>
+    <Component />
+  </div>
+  <div
+    className="label-text"
+  >
+    Don't have an account yet?
+  </div>
+  <div
+    className="mt-4 left-btn"
+  >
+    <Connect(AuthPageNavButton)
+      current="signIn"
+      label="Sign In"
+      page="signIn"
+    />
+    <Connect(AuthPageNavButton)
+      current="signIn"
+      label="Sign Up"
+      page="signUp"
+    />
+    <Connect(AuthPageNavButton)
+      current="signIn"
+      label="Forgot Password"
+      page="forgotPassword"
+    />
+  </div>
+</div>
+`;
+
+exports[`Login screen tests login screen judge 1`] = `
+<div
+  className="treehacks-login"
+>
+  <div
+    className="text-center"
+  >
+    <img
+      height="65px"
+      src={null}
+      style={
+        Object {
+          "marginTop": 49,
+        }
+      }
+      width="85px"
+    />
+  </div>
+  <h2
+    className="h3-style"
+  >
+    tree
+    <strong>
+      hacks
+    </strong>
+  </h2>
+  <h3
+    className="h3-style"
+  >
+    judges
+  </h3>
+  <div
+    className="top-form"
+  >
+    <AuthForm
+      onSubmit={[Function]}
+      schema={Object {}}
+      uiSchema={Object {}}
+    >
+      <button
+        className="btn btn-info"
+        type="submit"
+      >
+        Sign In
+      </button>
+    </AuthForm>
+  </div>
+  <div
+    className="mt-4 left-btn"
+  >
+    <Connect(AuthPageNavButton)
+      current="signIn"
+      label="Sign In"
+      page="signIn"
+    />
+    <Connect(AuthPageNavButton)
+      current="signIn"
+      label="Forgot Password"
+      page="forgotPassword"
+    />
+  </div>
+</div>
+`;
+
+exports[`Login screen tests login screen sponsor 1`] = `
+<div
+  className="treehacks-login"
+>
+  <div
+    className="text-center"
+  >
+    <img
+      height="65px"
+      src={null}
+      style={
+        Object {
+          "marginTop": 49,
+        }
+      }
+      width="85px"
+    />
+  </div>
+  <h2
+    className="h3-style"
+  >
+    tree
+    <strong>
+      hacks
+    </strong>
+  </h2>
+  <h3
+    className="h3-style"
+  >
+    sponsors
+  </h3>
+  <div
+    className="top-form"
+  >
+    <AuthForm
+      onSubmit={[Function]}
+      schema={Object {}}
+      uiSchema={Object {}}
+    >
+      <button
+        className="btn btn-info"
+        type="submit"
+      >
+        Sign In
+      </button>
+    </AuthForm>
+  </div>
+  <div
+    className="mt-4 left-btn"
+  >
+    <Connect(AuthPageNavButton)
+      current="signIn"
+      label="Sign In"
+      page="signIn"
+    />
+    <Connect(AuthPageNavButton)
+      current="signIn"
+      label="Forgot Password"
+      page="forgotPassword"
+    />
+  </div>
+</div>
+`;

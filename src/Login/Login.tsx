@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 
-interface ILoginProps extends IAuthState {
+export interface ILoginProps extends IAuthState {
   checkLoginStatus: () => void,
   logout: () => void,
   setup: () => void,
@@ -52,12 +52,13 @@ function validate(formData, errors) {
 function AuthForm(props) {
   return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} className="treehacks-form" />
 }
-class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor: boolean }> {
+export class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor: boolean, judge: boolean }> {
   constructor(props) {
     super(props);
     this.state = {
       signupFormData: {},
-      sponsor: false
+      sponsor: false,
+      judge: false
     };
   }
 
@@ -69,19 +70,36 @@ class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor:
       localStorage.setItem("jwt", hash.id_token);
       window.location.hash = "";
     }
-    else if (hash && hash["sponsor"]) {
-      // https://apply.treehacks.com/#sponsor=true
-      sessionStorage.setItem('sponsor', 'true')
-      this.setState({sponsor: true});
-    }
-    if (sessionStorage.getItem('sponsor') === 'true') {
-      this.setState({sponsor: true});
-    }
+
+    this.setState({
+      sponsor: this.props.sponsor,
+      judge: this.props.judge
+    }, () => {
+      if (hash && hash["sponsor"]) {
+        // https://root.treehacks.com/#sponsor=true
+        sessionStorage.setItem('sponsor', 'true');
+        this.setState({ sponsor: true });
+      }
+      else if (hash && hash["judge"]) {
+        // https://root.treehacks.com/#judge=true
+        sessionStorage.setItem('judge', 'true');
+        this.setState({ judge: true });
+      }
+      else if (sessionStorage.getItem('sponsor') === 'true') {
+        sessionStorage.setItem('judge', 'false');
+        this.setState({ sponsor: true });
+      }
+      else if (sessionStorage.getItem('judge') === 'true') {
+        sessionStorage.setItem('sponsor', 'false');
+        this.setState({ judge: true });
+      }
+    });
 
     this.props.checkLoginStatus();
   }
 
   render() {
+    const applicant = !this.state.sponsor && !this.state.judge;
     const isStanfordSignup = (this.state.signupFormData.email || '').indexOf('@stanford.edu') !== -1;
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
@@ -90,7 +108,8 @@ class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor:
         </div>
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
         {this.state.sponsor && <h3 className="h3-style">sponsors</h3>}
-        {["signIn", "signUp"].indexOf(this.props.authPage) !== -1 && !this.state.sponsor && <DeadlinesWidget />}
+        {this.state.judge && <h3 className="h3-style">judges</h3>}
+        {["signIn", "signUp"].indexOf(this.props.authPage) !== -1 && applicant && <DeadlinesWidget />}
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
         </div>
@@ -112,8 +131,8 @@ class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor:
             >
               <button className="btn btn-info" type="submit">Sign In</button>
             </AuthForm>
-            {!this.state.sponsor && <div className="label-text centered">or</div>}
-            {!this.state.sponsor && <StanfordLogin />}
+            {applicant && <div className="label-text centered">or</div>}
+            {applicant && <StanfordLogin />}
           </div>
         }
         {this.props.authPage == "signUp" &&
@@ -127,11 +146,11 @@ class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor:
             >
               {!isStanfordSignup ?
                 <button className="btn btn-info" type="submit">Sign Up</button>
-              : <div></div>}
+                : <div></div>}
             </AuthForm>
             {isStanfordSignup ?
-              <div style={{marginTop: -40}}><StanfordLogin label="Sign up with Stanford" /></div>
-            : null}
+              <div style={{ marginTop: -40 }}><StanfordLogin label="Sign up with Stanford" /></div>
+              : null}
           </div>
         }
         {this.props.authPage == "forgotPassword" &&
@@ -160,13 +179,13 @@ class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor:
         }
         {this.props.authPage === "signUp" ?
           <div className="label-text">Already have an account?</div>
-        : this.props.authPage === "signIn" && !this.state.sponsor ?
-          <div className="label-text">Don't have an account yet?</div>
-        : null}
+          : this.props.authPage === "signIn" && applicant ?
+            <div className="label-text">Don't have an account yet?</div>
+            : null}
         {this.props.authPage !== "changePassword" &&
           <div className="mt-4 left-btn">
             <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In" />
-            {!this.state.sponsor && <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />}
+            {applicant && <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />}
             <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
           </div>
         }

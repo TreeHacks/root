@@ -32,6 +32,8 @@ export interface IAuthState {
   admin: boolean,
   reviewer: boolean,
   sponsor: boolean,
+  judge: boolean,
+  applicant: boolean,
   authPage: "forgotPassword" | "forgotPasswordSubmit" | "signIn" | "signUp" | "changePassword",
   attemptedLoginEmail: string
 }

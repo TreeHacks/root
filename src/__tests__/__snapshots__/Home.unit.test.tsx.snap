@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home screen tests home screen admin 1`] = `
+<div
+  className="nav"
+>
+  <div
+    className="header-logo"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/"
+    >
+      <img
+        height="40px"
+        src={[Function]}
+      />
+      <span
+        className="logo-text-tree"
+      >
+        tree
+      </span>
+      <span
+        className="logo-text-hacks"
+      >
+        hacks
+      </span>
+    </NavLink>
+  </div>
+  <div
+    className="treehacks-navbar-links"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      isActive={[Function]}
+      to="/"
+    >
+      dashboard
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/application_info"
+    >
+      application
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/transportation"
+    >
+      travel
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/admin"
+    >
+      admin
+    </NavLink>
+  </div>
+  <div
+    className="logoutText"
+  >
+    <a
+      onClick={[Function]}
+    >
+      log out
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Home screen tests home screen applicant 1`] = `
+<div
+  className="nav"
+>
+  <div
+    className="header-logo"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/"
+    >
+      <img
+        height="40px"
+        src={[Function]}
+      />
+      <span
+        className="logo-text-tree"
+      >
+        tree
+      </span>
+      <span
+        className="logo-text-hacks"
+      >
+        hacks
+      </span>
+    </NavLink>
+  </div>
+  <div
+    className="treehacks-navbar-links"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      isActive={[Function]}
+      to="/"
+    >
+      dashboard
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/application_info"
+    >
+      application
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/transportation"
+    >
+      travel
+    </NavLink>
+  </div>
+  <div
+    className="logoutText"
+  >
+    <a
+      onClick={[Function]}
+    >
+      log out
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Home screen tests home screen judge 1`] = `
+<div
+  className="nav"
+>
+  <div
+    className="header-logo"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/"
+    >
+      <img
+        height="40px"
+        src={[Function]}
+      />
+      <span
+        className="logo-text-tree"
+      >
+        tree
+      </span>
+      <span
+        className="logo-text-hacks"
+      >
+        hacks
+      </span>
+    </NavLink>
+  </div>
+  <div
+    className="treehacks-navbar-links"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/judge"
+    >
+      judge
+    </NavLink>
+  </div>
+  <div
+    className="logoutText"
+  >
+    <a
+      onClick={[Function]}
+    >
+      log out
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Home screen tests home screen reviewer 1`] = `
+<div
+  className="nav"
+>
+  <div
+    className="header-logo"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/"
+    >
+      <img
+        height="40px"
+        src={[Function]}
+      />
+      <span
+        className="logo-text-tree"
+      >
+        tree
+      </span>
+      <span
+        className="logo-text-hacks"
+      >
+        hacks
+      </span>
+    </NavLink>
+  </div>
+  <div
+    className="treehacks-navbar-links"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      isActive={[Function]}
+      to="/"
+    >
+      dashboard
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/application_info"
+    >
+      application
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/transportation"
+    >
+      travel
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/review"
+    >
+      review
+    </NavLink>
+  </div>
+  <div
+    className="logoutText"
+  >
+    <a
+      onClick={[Function]}
+    >
+      log out
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Home screen tests home screen sponsor 1`] = `
+<div
+  className="nav"
+>
+  <div
+    className="header-logo"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/"
+    >
+      <img
+        height="40px"
+        src={[Function]}
+      />
+      <span
+        className="logo-text-tree"
+      >
+        tree
+      </span>
+      <span
+        className="logo-text-hacks"
+      >
+        hacks
+      </span>
+    </NavLink>
+  </div>
+  <div
+    className="treehacks-navbar-links"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      to="/sponsors"
+    >
+      sponsors
+    </NavLink>
+  </div>
+  <div
+    className="logoutText"
+  >
+    <a
+      onClick={[Function]}
+    >
+      log out
+    </a>
+  </div>
+</div>
+`;

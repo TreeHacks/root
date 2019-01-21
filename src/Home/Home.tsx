@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   logout: () => dispatch(logout()),
 });
 
-class Login extends React.Component<IHomeProps, {}> {
+export class Home extends React.Component<IHomeProps, {}> {
   componentDidMount() {
   }
 
@@ -30,9 +30,9 @@ class Login extends React.Component<IHomeProps, {}> {
         </NavLink>
       </div>
       <div className="treehacks-navbar-links">
-        {!this.props.auth.sponsor && <NavLink to="/" isActive={(_, loc) => loc.pathname === "/"}>dashboard</NavLink>}
-        {!this.props.auth.sponsor && <NavLink to="/application_info">application</NavLink>}
-        {!this.props.auth.sponsor && <NavLink to="/transportation">travel</NavLink>}
+        {this.props.auth.applicant && <NavLink to="/" isActive={(_, loc) => loc.pathname === "/"}>dashboard</NavLink>}
+        {this.props.auth.applicant && <NavLink to="/application_info">application</NavLink>}
+        {this.props.auth.applicant && <NavLink to="/transportation">travel</NavLink>}
         {this.props.auth.admin &&
           <NavLink to="/admin">admin</NavLink>
         }
@@ -42,6 +42,9 @@ class Login extends React.Component<IHomeProps, {}> {
         {this.props.auth.sponsor &&
           <NavLink to="/sponsors">sponsors</NavLink>
         }
+        {this.props.auth.judge &&
+          <NavLink to="/judge">judge</NavLink>
+        }
       </div>
       <div className="logoutText">
         <a onClick={() => this.props.logout()}>log out</a>
@@ -50,4 +53,4 @@ class Login extends React.Component<IHomeProps, {}> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

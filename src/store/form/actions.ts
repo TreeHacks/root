@@ -51,10 +51,6 @@ export const saveData = () => (dispatch, getState) => {
     dispatch(setData(e, false));
     dispatch(loadingEnd());
     dispatch(setUserEdited(false));
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error saving data " + e);
   });
 }
 
