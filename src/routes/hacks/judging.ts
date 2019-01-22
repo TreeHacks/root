@@ -30,7 +30,7 @@ export const getJudgeStats = async (req, res) => {
 
 export const rateHack = async (req, res) => {
     let hack = await Hack.findOne(
-        { "_id": req.body.hack_id });
+        { "_id": {"$oid": req.body.hack_id} });
     if (!hack) {
         return res.status(404).send("Hack to rate not found");
     }
