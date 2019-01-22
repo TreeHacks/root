@@ -600,21 +600,26 @@ const swagger = {
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
                   "type": "object",
-                    "properties": {
-                      "title": {"type": "string"},
-                      "url": {"type": "string"},
-                      "description": {"type": "string"},
-                      "video": {"type": "string"},
-                      "website": {"type": "string"},
-                      "file_url": {"type": "string"},
-                      "desired_prizes": {"type": "array", "items": {"type": "string"}},
-                      "submitter_screen_name": {"type": "string"},
-                      "submitter_first_name": {"type": "string"},
-                      "submitter_last_name": {"type": "string"},
-                      "submitter_email": {"type": "string"}
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                      "type": "object",
+                        "properties": {
+                          "title": {"type": "string"},
+                          "url": {"type": "string"},
+                          "description": {"type": "string"},
+                          "video": {"type": "string"},
+                          "website": {"type": "string"},
+                          "file_url": {"type": "string"},
+                          "desired_prizes": {"type": "array", "items": {"type": "string"}},
+                          "submitter_screen_name": {"type": "string"},
+                          "submitter_first_name": {"type": "string"},
+                          "submitter_last_name": {"type": "string"},
+                          "submitter_email": {"type": "string"}
+                        }
+                      }
                     }
                   }
                 }
@@ -625,30 +630,6 @@ const swagger = {
       }
     },
     "/hacks/{hackId}": {
-      "get": {
-        "tags": ["hacks"],
-        "summary": "Get hack info by id.",
-        "description": ".",
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "devpost_url": { "type": "string" },
-                    "title": { "type": "string" },
-                    "categories": { "type": "array", "items": {"type": "object"} },
-                    "table": { "type": "string" },
-                    "reviews": { "type": "array", "items": {"ref": "#/components/schemas/JudgeReview"} }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "patch": {
         "tags": ["hacks"],
         "summary": "Edit hack info. Can set title, table, assign judges.",
@@ -677,9 +658,9 @@ const swagger = {
         }
       }
     },
-    "/hacks/{hackId}/rate": {
+    "/judge/rate": {
       "post": {
-        "tags": ["hacks"],
+        "tags": ["judge"],
         "summary": "Rate hack. Only available to judges (judges can rate *any* hack).",
         "description": ".",
         "requestBody": {
@@ -688,9 +669,10 @@ const swagger = {
               "schema": {
                 "type": "object",
                 "properties": {
+                  "hack_id": {"type": "string"},
                   "creativity": { "type": "number" },
-                  "technical_complexity": { "type": "number" },
-                  "social_impact": { "type": "number" },
+                  "technicalComplexity": { "type": "number" },
+                  "socialImpact": { "type": "number" },
                   "comments": { "type": "string" }
                 }
               }
@@ -704,10 +686,22 @@ const swagger = {
         }
       }
     },
-    "/judges": {
+    "/judge/next_hack": {
       "get": {
-        "tags": ["hacks"],
-        "summary": "Get list of judges. Accessible only to admins.",
+        "tags": ["judge"],
+        "summary": "Get next hack. Only available to judges. (Does not return reviews property)",
+        "description": ".",
+        "responses": {
+          "200": {
+            "$ref": "Hack"
+          }
+        }
+      }
+    },
+    "/judge/leaderboard": {
+      "get": {
+        "tags": ["judges"],
+        "summary": "Get list of judges and their stats. Accessible only to admins.",
         "description": ".",
         "responses": {
           "200": {
@@ -718,9 +712,34 @@ const swagger = {
                   "items": {
                     "type": "object",
                     "properties": {
-                      "reviews": { "type": "array", "items": { "$ref": "#/components/schemas/JudgeReview" } },
-                      "name": { "type": "string" },
-                      "email": { "type": "string" }
+                      "_id": {"type": "string"},
+                      "count": {"type": "number"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/judge/stats": {
+      "get": {
+        "tags": ["judges"],
+        "summary": "Get stats of hacks remaining.",
+        "description": ".",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "object",
+                      "properties": {
+                        "num_remaining": {"type": "number"}
+                      }
                     }
                   }
                 }

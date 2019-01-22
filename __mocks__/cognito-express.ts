@@ -47,6 +47,11 @@ CognitoExpress.prototype.validate = (accessToken, callback) => {
             sub = "sponsortreehacks";
             groups = ["sponsor"];
             break;
+        case "judge":
+            email = "judge@treehacks";
+            sub = "judgetreehacks";
+            groups = ["judge"];
+            break;
         case "applicant":
             email = "applicant@treehacks";
             sub = "applicanttreehacks";
