@@ -106,7 +106,7 @@ export function checkLoginStatus() {
           checkInGroup("sponsor"),
           checkInGroup("judge")
         ];
-        const applicant = !admin && !reviewer && !sponsor && !judge;
+        const applicant = !sponsor && !judge;
         dispatch(setAuthPage("signIn"));
         dispatch(loggedIn(user.username, user.attributes, admin, reviewer, sponsor, judge, applicant));
       }).catch(e => {
