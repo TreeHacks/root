@@ -139,7 +139,7 @@ export const getExportedApplicationsCSV = (tableState: IReactTableState, columns
   });
 };
 
-const fetchApplications = (tableState: IReactTableState, project = null, retrieveAllPages = false) => (dispatch, getState) => {
+const fetchGenericData = endpoint => (tableState: IReactTableState, project = null, retrieveAllPages = false) => (dispatch, getState) => {
   if (project === null) {
     project = {};
   }
@@ -160,7 +160,23 @@ const fetchApplications = (tableState: IReactTableState, project = null, retriev
     params.page = tableState.page,
       params.pageSize = tableState.pageSize
   }
-  return API.get("treehacks", `/users`, { "queryStringParameters": params });
+  return API.get("treehacks", endpoint, { "queryStringParameters": params });
+};
+
+const fetchApplications = fetchGenericData(`/users`);
+
+const fetchHacks = fetchGenericData(`/hacks`);
+
+export const getHackList = (tableState: IReactTableState) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return dispatch(fetchHacks(tableState)).then((e: { count: number, results: any[] }) => {
+    dispatch(setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize)));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error getting application list " + e);
+  });
 };
 
 export const getApplicationStats = () => (dispatch, getState) => {
