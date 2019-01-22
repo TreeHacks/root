@@ -23,7 +23,7 @@ import { bulkCreateUsers } from "./routes/user_bulk_create";
 import { setTransportationInfo, submitTransportationInfo, getTransportationInfo } from "./routes/transportation_info";
 import { getUserResumes } from "./routes/user_resumes";
 import { importHacks } from "./routes/hacks/hacks_import";
-import { reviewNextHack, getJudgeLeaderboard, getJudgeStats } from "./routes/hacks/judging";
+import { reviewNextHack, getJudgeLeaderboard, getJudgeStats, rateHack } from "./routes/hacks/judging";
 
 // Set up the Express app
 const app = express();
@@ -112,7 +112,7 @@ authenticatedRoute.get('/review/next_application', [reviewerRoute], reviewNextAp
 // Judging routes:
 authenticatedRoute.get('/judge/leaderboard', [judgeRoute], getJudgeLeaderboard); // todo: make this adminRoute?
 authenticatedRoute.get('/judge/stats', [judgeRoute], getJudgeStats);
-authenticatedRoute.post('/judge/rate', [judgeRoute], reviewNextHack);
+authenticatedRoute.post('/judge/rate', [judgeRoute], rateHack);
 authenticatedRoute.get('/judge/next_hack', [judgeRoute], reviewNextHack);
 
 // Public routes:

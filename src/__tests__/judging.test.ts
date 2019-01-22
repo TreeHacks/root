@@ -98,6 +98,132 @@ describe('review next hack', () => {
     });
 });
 
+describe('rate hacks', () => {
+    test('rate a hack', async () => {
+        await new Hack({
+            _id: 'applicationToReview',
+            reviews: [],
+        }).save();
+        await request(app)
+            .post("/judge/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 'applicationToReview',
+                creativity: 2,
+                technicalComplexity: 2,
+                socialImpact: 3,
+                comments: "test"
+            })
+            .expect(200)
+            .then(e => {
+                expect(e.body.results.status).toEqual("success");
+            })
+        let application = (await Hack.findById('applicationToReview'))!.toObject();
+        expect(application.reviews.length).toEqual(1);
+        expect(application.reviews[0]).toEqual({
+            reader: {
+                id: 'judgetreehacks',
+                email: 'judge@treehacks'
+            },
+            creativity: 2,
+            technicalComplexity: 2,
+            socialImpact: 3,
+            comments: "test"
+        });
+    });
+    test('rate a hack with an existing review', async () => {
+        await new Hack({
+            _id: 'applicationToReview',
+            reviews: [{
+                reader: {
+                    id: 'judgetreehacks2',
+                    email: 'reviewer2@treehacks'
+                },
+                creativity: 2,
+                technicalComplexity: 2,
+                socialImpact: 3,
+                comments: "test"
+            }],
+        }).save();
+        await request(app)
+            .post("/judge/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 'applicationToReview',
+                creativity: 2,
+                technicalComplexity: 2,
+                socialImpact: 3,
+                comments: "test"
+            })
+            .expect(200);
+    });
+    test('rate a hack that is not found - fail', async () => {
+        await request(app)
+            .post("/judge/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 'applicationNotFound',
+                creativity: 2,
+                technicalComplexity: 2,
+                socialImpact: 3,
+                comments: "test"
+            })
+            .expect(404)
+            .then(e => {
+                expect(e.text).toContain("Hack to rate not found");
+            });
+    });
+    test('rate a hack twice - fail', async () => {
+        await new Hack({
+            _id: 'applicationToReview',
+            reviews: [{
+                reader: {
+                    id: 'judgetreehacks',
+                    email: 'judge@treehacks'
+                },
+                creativity: 2,
+                technicalComplexity: 2,
+                socialImpact: 3,
+                comments: "test"
+            }],
+        }).save();
+        await request(app)
+            .post("/judge/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 'applicationToReview',
+                creativity: 2,
+                technicalComplexity: 2,
+                socialImpact: 3,
+                comments: "test"
+            })
+            .expect(403)
+            .then(e => {
+                expect(e.text).toContain("already has a review");
+            });
+    });
+    test('rate a hack with three reviews already - fail', async () => {
+        await new Hack({
+            _id: 'applicationToReview',
+            reviews: [{}, {}, {}],
+        }).save();
+        await request(app)
+            .post("/judge/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 'applicationToReview',
+                creativity: 2,
+                technicalComplexity: 2,
+                socialImpact: 3,
+                comments: "test"
+            })
+            .expect(403)
+            .then(e => {
+                expect(e.text).toContain("already has 3 reviews");
+            });
+    });
+});
+
 describe('judge leaderboard', () => {
     test('simple leaderboard test', async () => {
         await Hack.insertMany([
@@ -126,7 +252,7 @@ describe('judge stats', () => {
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
-                expect(e.body).toEqual({ "results": { "num_remaining": 2} });
+                expect(e.body).toEqual({ "results": { "num_remaining": 2 } });
             })
     });
 });
