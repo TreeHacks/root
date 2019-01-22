@@ -47,12 +47,15 @@ const uiSchema = {
 	"ui:order": ["creativity", "technicalComplexity", "socialImpact", "comments"]
 };
 const hackSchema = {
-	"title": {"type": "string"},
-	"devpostUrl": {"type": "string"},
-	"categories": {
-		"type": "array",
-		"items": {
-			"type": "string"
+	"type": "object",
+	"properties": {
+		"title": {"type": "string"},
+		"devpostUrl": {"type": "string"},
+		"categories": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
 		}
 	}
 };
