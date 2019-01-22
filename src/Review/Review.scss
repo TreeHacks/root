@@ -16,10 +16,10 @@
 }
 
 .rate-form {
-    .form-group.field.field-boolean + .form-group.field.field-boolean {
+    .form-group.field.field-boolean+.form-group.field.field-boolean {
         margin-top: -1em;
     }
-} 
+}
 
 .treehacks-body-text {
     color: #09da7a;
@@ -35,9 +35,19 @@
     padding-bottom: 5px;
 }
 
+@media only screen and (min-width:768px) {
+    .treehacks-review-form {
+        position: fixed;
+        max-height: 100vh;
+        overflow: auto;
+    }
+}
+
 /* judge */
+
 .review-form-container {
-    .array-item-remove, .btn-add {
+    .array-item-remove,
+    .btn-add {
         display: none;
     }
 }

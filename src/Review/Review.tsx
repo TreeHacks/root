@@ -98,7 +98,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			}
 		}
 		return (<div className="row">
-			<div className="col-12 col-sm-4" style={{ "position": "fixed", "maxHeight": "100vh", "overflow": "auto" }} >
+			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
 					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}

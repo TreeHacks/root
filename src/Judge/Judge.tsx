@@ -17,7 +17,7 @@ interface IJudgeComponentState {
 
 const schema = {
 	"type": "object",
-	"title": "Rate",
+	"title": "Judge",
 	"properties": {
 		"creativity": {
 			"type": "number",
@@ -100,13 +100,14 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 
 	render() {
 		return (<div className="row">
-			<div className="col-12 col-sm-4" style={{ "position": "fixed", "maxHeight": "100vh", "overflow": "auto" }} >
+			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
 					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}
 						formData={this.state.reviewFormData}
 						onChange={e => this.setState({ reviewFormData: e.formData })}
 					/>
+					<button className="btn m-4" onClick={() => this.nextApplication()}>Skip this hack</button>
 				</div>
 				<div className="container left-sidebar-content">
 					{this.state.stats_data &&
@@ -127,7 +128,7 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 				</div>
 			</div>
 			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
-				<div>
+				<div className="container">
 					{this.state.hack_data && <div className="">
 						<FormPage
 							submitted={true}
