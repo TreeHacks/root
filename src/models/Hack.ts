@@ -16,7 +16,7 @@ const hackSchema: Schema = new mongoose.Schema({
     "title": String,
     "categories": [String],
     "table": String,
-    "reviews": hackReviewSchema
+    "reviews": [hackReviewSchema]
 });
 
 const model: Model<IHack> = mongoose.model("Hack", hackSchema);

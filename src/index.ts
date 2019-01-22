@@ -11,7 +11,7 @@ import filePlugin from './utils/file_plugin';
 const port = process.env.PORT || 3000;
 
 
-import { authenticatedRoute, adminRoute, reviewerRoute, sponsorRoute } from "./router/authenticatedRoute";
+import { authenticatedRoute, adminRoute, reviewerRoute, judgeRoute, sponsorRoute } from "./router/authenticatedRoute";
 import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
 import { getUserList, getUserStats } from "./routes/user_list";
@@ -23,6 +23,7 @@ import { bulkCreateUsers } from "./routes/user_bulk_create";
 import { setTransportationInfo, submitTransportationInfo, getTransportationInfo } from "./routes/transportation_info";
 import { getUserResumes } from "./routes/user_resumes";
 import { importHacks } from "./routes/hacks/hacks_import";
+import { reviewNextHack, getJudgeLeaderboard, getJudgeStats } from "./routes/hacks/judging";
 
 // Set up the Express app
 const app = express();
@@ -97,6 +98,7 @@ authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);
 authenticatedRoute.post('/users_bulkcreate', [adminRoute], bulkCreateUsers);
 authenticatedRoute.post('/hacks_import', [adminRoute], importHacks);
+// edit hacks
 
 // Need custom auth:
 authenticatedRoute.put('/users/:userId/admin_info', [adminRoute], setAdminInfo);
@@ -106,5 +108,14 @@ authenticatedRoute.get('/review/leaderboard', [reviewerRoute], getLeaderboard);
 authenticatedRoute.get('/review/stats', [reviewerRoute], getReviewStats);
 authenticatedRoute.post('/review/rate', [reviewerRoute], rateReview);
 authenticatedRoute.get('/review/next_application', [reviewerRoute], reviewNextApplication);
+
+// Judging routes:
+authenticatedRoute.get('/judge/leaderboard', [judgeRoute], getJudgeLeaderboard); // todo: make this adminRoute?
+authenticatedRoute.get('/judge/stats', [judgeRoute], getJudgeStats);
+authenticatedRoute.post('/judge/rate', [judgeRoute], reviewNextHack);
+authenticatedRoute.get('/judge/next_hack', [judgeRoute], reviewNextHack);
+
+// Public routes:
+// app.get('/hacks') get all hacks
 
 export default app;

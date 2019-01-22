@@ -3,7 +3,7 @@ import app from "../index";
 import Hack from "../models/Hack";
 import {isEqual} from "lodash";
 
-describe.only('import hacks', () => {
+describe('import hacks', () => {
     test('/review/leaderboard as an applicant - fail', async () => {
         let result = await request(app)
             .post("/hacks_import")

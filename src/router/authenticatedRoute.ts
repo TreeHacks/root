@@ -64,5 +64,8 @@ adminRoute.use(validateGroup("admin"));
 export const reviewerRoute = express.Router();
 reviewerRoute.use(validateGroup("reviewer"));
 
+export const judgeRoute = express.Router();
+judgeRoute.use(validateGroup("judge"));
+
 export const sponsorRoute = express.Router();
 sponsorRoute.use(validateGroup(["admin", "sponsor"]));
