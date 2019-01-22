@@ -22,7 +22,8 @@ import Sponsors from "./Sponsors/Sponsors";
 const mapStateToProps = state => ({
   ...state.base,
   loggedIn: (state.auth as IAuthState).loggedIn,
-  sponsor: (state.auth as IAuthState).sponsor
+  sponsor: (state.auth as IAuthState).sponsor,
+  judge: (state.auth as IAuthState).judge
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -30,7 +31,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 interface IAppProps extends IBaseState {
   loggedIn: boolean,
-  sponsor: boolean
+  sponsor: boolean,
+  judge: boolean
 }
 
 const App = (props: IAppProps) => (
@@ -59,9 +61,8 @@ const MainRoutes = (props: IAppProps) => (
       <div>
         <Route path="" component={Home} />
         <Switch>
-          {props.sponsor ?
-            <Redirect exact path="/" to="/sponsors" />
-          :
+          {props.sponsor ? <Redirect exact path="/" to="/sponsors" /> :
+          props.judge ? <Redirect exact path="/" to="/judge" /> :
             <Route path="/" exact component={Dashboard} />
           }
           <Route path="/application_info" render={() => { return <FormPageWrapper incomingFormName="application_info" />; }} />
