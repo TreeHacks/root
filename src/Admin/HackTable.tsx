@@ -14,7 +14,7 @@ import { IBaseState } from "src/store/base/types";
 const HackTable = (props: IAdminTableProps) => {
     const columns = [
         {
-            "Header": "Preview",
+            "Header": "ID",
             "accessor": "_id",
             "id": "preview",
             "filterable": false,
