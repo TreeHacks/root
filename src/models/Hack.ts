@@ -12,7 +12,7 @@ const hackReviewSchema: Schema = new mongoose.Schema({
 
 const hackSchema: Schema = new mongoose.Schema({
     "_id": String,
-    "devpost_url": String,
+    "devpostUrl": String,
     "title": String,
     "categories": [String],
     "table": String,

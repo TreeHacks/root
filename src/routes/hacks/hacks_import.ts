@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import Hack from "../../models/Hack";
-import { STATUS, TRANSPORTATION_TYPE, TRANSPORTATION_STATUS } from '../constants';
 import { mapValues } from "lodash";
 import { IHack } from '../../models/Hack.d';
 
@@ -14,5 +13,5 @@ export async function importHacks(req: Request, res: Response) {
     //     return res.status(400).send("Invalid request body");
     // }
     await Hack.insertMany(body.items);
-    res.status(200).send("Bulk hack import successful.");
+    res.status(200).json({status: "Bulk hack import successful."});
 }
