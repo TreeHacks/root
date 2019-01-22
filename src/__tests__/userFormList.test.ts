@@ -74,7 +74,7 @@ afterAll(() => {
 });
 
 describe('user form list by applicant', () => {
-    test('view form with applicant - fail', () => {
+    test('view form list with applicant - fail', () => {
         return request(app)
             .get("/users")
             .set({ Authorization: 'applicant' })

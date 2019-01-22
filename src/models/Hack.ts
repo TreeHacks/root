@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { Model, Schema } from "mongoose";
 import { IHack } from "./Hack.d"
+import hackPlugin from "../utils/hack_plugin";
 
 const hackReviewSchema: Schema = new mongoose.Schema({
     reader: { id: String, email: String },
@@ -18,6 +19,8 @@ const hackSchema: Schema = new mongoose.Schema({
     "table": String,
     "reviews": [hackReviewSchema]
 });
+
+hackSchema.plugin(hackPlugin);
 
 const model: Model<IHack> = mongoose.model("Hack", hackSchema);
 export default model; 

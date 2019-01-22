@@ -24,6 +24,7 @@ import { setTransportationInfo, submitTransportationInfo, getTransportationInfo 
 import { getUserResumes } from "./routes/user_resumes";
 import { importHacks } from "./routes/hacks/hacks_import";
 import { reviewNextHack, getJudgeLeaderboard, getJudgeStats, rateHack } from "./routes/hacks/judging";
+import { getHackList } from "./routes/hacks/hacks_list";
 
 // Set up the Express app
 const app = express();
@@ -116,6 +117,8 @@ authenticatedRoute.post('/judge/rate', [judgeRoute], rateHack);
 authenticatedRoute.get('/judge/next_hack', [judgeRoute], reviewNextHack);
 
 // Public routes:
+app.get('/hacks', getHackList);
+// todo: admin route to get hack list with reviews.
 // app.get('/hacks') get all hacks
 
 export default app;

@@ -3,6 +3,10 @@ import app from "../index";
 import Hack from "../models/Hack";
 import {isEqual} from "lodash";
 
+afterEach(() => {
+    return Hack.deleteMany({});
+})
+
 describe('import hacks', () => {
     test('/review/leaderboard as an applicant - fail', async () => {
         let result = await request(app)

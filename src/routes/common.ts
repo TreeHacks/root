@@ -6,6 +6,7 @@ import { STATUS } from "../constants";
 import { uploadBase64Content, generateSignedUrlForFile } from "../services/file_actions";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
 import { ServerResponse } from "http";
+import { Model } from "mongoose";
 
 function getDeadline(type) {
   switch (type) {
@@ -146,4 +147,42 @@ export async function createApplication(user: CognitoUser) {
     "location": applicationLocation
   });
   return await application.save(); // todo: return something else here?
+}
+
+export function getGenericList(req: Request, res: Response, Model: Model<any>) {
+  // Text matching search
+  let filter = JSON.parse(req.query.filter || "{}");
+  for (let key in filter) {
+    // Matching by a string in any location
+    if (typeof filter[key] === 'string') {
+      filter[key] = { $regex: filter[key], $options: 'i' };
+    }
+  }
+  let queryOptions = {
+    "treehacks:groups": res.locals.user && res.locals.user['cognito:groups']
+  }
+  let query = Model.find(filter, JSON.parse(req.query.project || "{}"), queryOptions);
+  let sortedAndFilteredQuery =
+    query.sort(JSON.parse(req.query.sort || "{}"))
+      .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
+
+  if (parseInt(req.query.pageSize) >= 0) {
+    sortedAndFilteredQuery = sortedAndFilteredQuery.limit(parseInt(req.query.pageSize));
+  }
+
+  let countQuery = Model.countDocuments(filter);
+  countQuery.setOptions(queryOptions);
+
+  Promise.all([
+    sortedAndFilteredQuery.lean().exec(),
+    countQuery
+  ])
+    .then(([results, count]) => {
+      return res.status(200).json({
+        results: results,
+        count: count
+      });
+    }).catch(err => {
+      return res.status(400).json(err);
+    })
 }

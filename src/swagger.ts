@@ -55,8 +55,8 @@ const swagger = {
         "type": "object",
         "properties": {
           "user": {
-            "_id": {"type": "string"},
-            "email": {"type": "string"}
+            "_id": { "type": "string" },
+            "email": { "type": "string" }
           }
         }
       },
@@ -574,19 +574,67 @@ const swagger = {
         "tags": ["hacks"],
         "summary": "Get list of hacks.",
         "description": "Accessible to both judges and admins. Also available to hackers, but hackers can't see the reviews.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page size"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter query. Must be a JSON-serialized string of an array of objects such as {'a': 'b'}"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "schema": {
+              "type": "string",
+            },
+            "description": "Sort query. Must be a JSON-serialized string of an array of objects such as {'a': 1} (ascending) or {'a': -1} (descending)."
+          },
+          {
+            "in": "query",
+            "name": "project",
+            "schema": {
+              "type": "string",
+            },
+            "description": "Projection query. Must be a JSON-serialized string of an array of objects such as {'a': 1, 'b': 0}"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Response",
+            "description": "User list response (does not resolve the resume field to a URL)",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": { "type": "object" }
+                  "type": "object",
+                  "properties": {
+                    "count": { "type": "integer" },
+                    "results": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Application" }
+                    }
+                  }
                 }
               }
             }
-          }
-        }
+          },
+        },
       }
     },
     "/hacks_import": {
@@ -605,19 +653,19 @@ const swagger = {
                     "items": {
                       "type": "array",
                       "items": {
-                      "type": "object",
+                        "type": "object",
                         "properties": {
-                          "title": {"type": "string"},
-                          "url": {"type": "string"},
-                          "description": {"type": "string"},
-                          "video": {"type": "string"},
-                          "website": {"type": "string"},
-                          "file_url": {"type": "string"},
-                          "desired_prizes": {"type": "array", "items": {"type": "string"}},
-                          "submitter_screen_name": {"type": "string"},
-                          "submitter_first_name": {"type": "string"},
-                          "submitter_last_name": {"type": "string"},
-                          "submitter_email": {"type": "string"}
+                          "title": { "type": "string" },
+                          "url": { "type": "string" },
+                          "description": { "type": "string" },
+                          "video": { "type": "string" },
+                          "website": { "type": "string" },
+                          "file_url": { "type": "string" },
+                          "desired_prizes": { "type": "array", "items": { "type": "string" } },
+                          "submitter_screen_name": { "type": "string" },
+                          "submitter_first_name": { "type": "string" },
+                          "submitter_last_name": { "type": "string" },
+                          "submitter_email": { "type": "string" }
                         }
                       }
                     }
@@ -669,7 +717,7 @@ const swagger = {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "hack_id": {"type": "string"},
+                  "hack_id": { "type": "string" },
                   "creativity": { "type": "number" },
                   "technicalComplexity": { "type": "number" },
                   "socialImpact": { "type": "number" },
@@ -712,8 +760,8 @@ const swagger = {
                   "items": {
                     "type": "object",
                     "properties": {
-                      "_id": {"type": "string"},
-                      "count": {"type": "number"}
+                      "_id": { "type": "string" },
+                      "count": { "type": "number" }
                     }
                   }
                 }
@@ -738,7 +786,7 @@ const swagger = {
                     "results": {
                       "type": "object",
                       "properties": {
-                        "num_remaining": {"type": "number"}
+                        "num_remaining": { "type": "number" }
                       }
                     }
                   }
