@@ -76,6 +76,9 @@ app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 app.get("/", (req, res) => res.redirect("/doc"));
 
+// Public routes:
+app.get('/hacks', getHackList);
+
 app.use("/", authenticatedRoute);
 
 // Auth - user must be signed in:
@@ -115,10 +118,5 @@ authenticatedRoute.get('/judge/leaderboard', [judgeRoute], getJudgeLeaderboard);
 authenticatedRoute.get('/judge/stats', [judgeRoute], getJudgeStats);
 authenticatedRoute.post('/judge/rate', [judgeRoute], rateHack);
 authenticatedRoute.get('/judge/next_hack', [judgeRoute], reviewNextHack);
-
-// Public routes:
-app.get('/hacks', getHackList);
-// todo: admin route to get hack list with reviews.
-// app.get('/hacks') get all hacks
 
 export default app;
