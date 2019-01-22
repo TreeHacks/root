@@ -1,6 +1,6 @@
 # TreeHacks application portal frontend
 
-Treehacks application portal frontend for 2019. See it at https://apply.treehacks.com
+Treehacks application portal frontend for 2019. See it at https://root.treehacks.com
 
 ## Local setup
 1. Download the appropriate `.env` file with the proper environment variables set, and put it in your working directory.
