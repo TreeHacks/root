@@ -10,7 +10,7 @@ interface IJudgeProps {
 }
 interface IJudgeComponentState {
 	leaderboard_data: any[],
-	hack_data: { _id: string, forms: { application_info: any } },
+	hack_data: any, // todo: IHack
 	stats_data: any,
 	reviewFormData: any
 }

@@ -40,6 +40,11 @@ export interface IBulkCreateProps extends IAdminState {
     setBulkCreateEmails: (x: string) => void,
 }
 
+export interface IBulkImportHacksProps extends IAdminState {
+    performBulkImportHacks: () => void,
+    setBulkImportHacks: (e: any) => void
+}
+
 export interface IReactTableHeader {
     Header?: string,
     id?: string,

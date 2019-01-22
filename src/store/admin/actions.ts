@@ -186,10 +186,9 @@ export const setBulkChangeIds = (ids) => ({
   ids
 });
 
-
-const headersAdmitted = ["id", "acceptanceDeadline", "transportationType", "transportationDeadline", "transportationAmount", "transportationId"];
-const headers = ["id"];
 export const performBulkChange = () => (dispatch, getState) => {
+  const headersAdmitted = ["id", "acceptanceDeadline", "transportationType", "transportationDeadline", "transportationAmount", "transportationId"];
+  const headers = ["id"];
   const { ids, status } = (getState().admin as IAdminState).bulkChange;
   let csvData = null;
   const opts = { header: true, skipEmptyLines: true };
@@ -251,6 +250,34 @@ export const performBulkCreate = () => (dispatch, getState) => {
     alert("Error performing bulk creation: " + e);
   });
 }
+
+export const setBulkImportHacks = (bulkImportHacks) => ({
+  type: "SET_BULK_IMPORT_HACKS",
+  bulkImportHacks
+});
+
+export const performBulkImportHacks = () => (dispatch, getState) => {
+  const headers = ["title", "devpostUrl", "categories", "table"];
+  const bulkImportHacks = (getState().admin as IAdminState).bulkImportHacks;
+  const opts = { header: true, skipEmptyLines: true };
+  const csvData = Papa.parse(headers.join(",") + "\n" + bulkImportHacks, opts).data;
+  csvData.map(e => ({...e, categories: (e.categories || "").split(",") }));
+  dispatch(loadingStart());
+  return API.post("treehacks", `/hacks_import`, {
+    body: {
+      items: csvData
+    }
+  }).then(e => {
+    dispatch(setBulkImportHacks(""));
+    dispatch(setBulkCreateEmails(""));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error performing bulk creation: " + e);
+  });
+}
+
 
 export const setApplicationStatus = (status, userId) => (dispatch, getState) => {
   // todo

@@ -15,5 +15,6 @@ export interface IAdminState {
   bulkCreate: {
     group: string,
     emails: string
-  }
+  },
+  bulkImportHacks: string
 }
