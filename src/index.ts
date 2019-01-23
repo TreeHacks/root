@@ -11,7 +11,7 @@ import filePlugin from './utils/file_plugin';
 const port = process.env.PORT || 3000;
 
 
-import { authenticatedRoute, adminRoute, reviewerRoute, judgeRoute, sponsorRoute } from "./router/authenticatedRoute";
+import { authenticatedRoute, adminRoute, reviewerRoute, judgeRoute, sponsorRoute, anonymousRoute } from "./router/authenticatedRoute";
 import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from "./routes/application_info";
 import { getUserDetail } from "./routes/user_detail";
 import { getUserList, getUserStats } from "./routes/user_list";
@@ -76,8 +76,8 @@ app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 app.get("/", (req, res) => res.redirect("/doc"));
 
-// Public routes:
-app.get('/hacks', getHackList);
+// Public routes
+app.get('/hacks', [anonymousRoute], getHackList);
 
 app.use("/", authenticatedRoute);
 

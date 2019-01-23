@@ -58,10 +58,10 @@ CognitoExpress.prototype.validate = (accessToken, callback) => {
             groups = [];
             break;
         case "error":
-            callback("Cognito Mocked Error", null);
-            break;
         default:
-            throw "No case found";
+            // Anonymous auth.
+            callback("Cognito Mocked Error", null);
+            return;
     }
     response.email = email;
     response.sub = sub;
