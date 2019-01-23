@@ -273,10 +273,14 @@ export const setBulkImportHacks = (bulkImportHacks) => ({
 });
 
 export const performBulkImportHacks = () => (dispatch, getState) => {
-  const headers = ["title", "devpostUrl", "description", "video", "website", "fileUrl", "categories", "builtWith"];
+
+  const headers = ["title", "devpostUrl", "description", "video", "website", "fileUrl", "categories"];
   const bulkImportHacks = (getState().admin as IAdminState).bulkImportHacks;
   const opts = { header: true, skipEmptyLines: true };
-  const csvData = Papa.parse(headers.join(",") + "\n" + bulkImportHacks, opts).data.map(e => ({...e, categories: (e.categories || "").split(", ") }));
+  const csvData = Papa.parse(headers.join(",") + "\n" + bulkImportHacks, opts).data.map(e => ({
+    ...e,
+    categories: (e.categories || "").split(", ")
+  }));
   dispatch(loadingStart());
   return API.post("treehacks", `/hacks_import`, {
     body: {

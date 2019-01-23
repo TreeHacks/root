@@ -19,9 +19,9 @@ const BulkImportHacks = (props: IBulkImportHacksProps) => {
             </div>
             <div className="col-12 col-sm-6"><small>
                 <div>
-                    Please enter hacks addresses, separated by newlines. 
+                    Please enter hacks addresses, separated by newlines. (No header row). (Also, only title, devpostUrl, and categories are actually imported. Extra columns are ignored.)
                         <pre>
-                        "title", "devpostUrl", "categories", "table"{"\n"} 
+                        "title", "devpostUrl", "description", "video", "website", "fileUrl", "categories"{"\n"} 
                         "title1", "https://google.com", "1, 2, 3", "table123"{"\n"}
                         "title2", "https://google.com", "1, 2, 3", "table123"{"\n"}
                         ...{"\n"}
