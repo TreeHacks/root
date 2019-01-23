@@ -717,7 +717,7 @@ const swagger = {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "hack_id": { "type": "string" },
+                  "hack_id": { "type": "number" },
                   "creativity": { "type": "number" },
                   "technicalComplexity": { "type": "number" },
                   "socialImpact": { "type": "number" },

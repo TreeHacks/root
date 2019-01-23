@@ -12,7 +12,7 @@ const hackReviewSchema: Schema = new mongoose.Schema({
   }, { _id: false });
 
 const hackSchema: Schema = new mongoose.Schema({
-    "_id": String,
+    "_id": Number,
     "devpostUrl": String,
     "title": String,
     "categories": [String],

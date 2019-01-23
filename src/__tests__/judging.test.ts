@@ -6,8 +6,7 @@ import { STATUS, TYPE, hackReviewDisplayFields } from '../constants';
 
 const _doc = {
     "title": "sample title",
-    "devpostUrl": "sample url",
-    "table": "tabletable"
+    "devpostUrl": "sample url"
 };
 
 afterEach(() => {
@@ -55,17 +54,17 @@ describe('judge endpoint permissions', () => {
 
 describe('review next hack', () => {
     test('review hack gets the right fields', async () => {
-        await new Hack({ ..._doc, _id: 'hacktreehacks' }).save();
+        await new Hack({ ..._doc, _id: 1, reviews: [{}, {}] }).save();
         return request(app)
             .get("/judge/next_hack")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(async e => {
-                expect(Object.keys(e.body).sort()).toEqual(["_id", ...hackReviewDisplayFields].sort());
+                expect(Object.keys(e.body).sort()).toEqual(hackReviewDisplayFields.sort());
             });
     });
     test('review hack does not get hack with 3+ reviews', async () => {
-        await new Hack({ _id: "hackOos", reviews: [{}, {}, {}] }).save();
+        await new Hack({ _id: 1, reviews: [{}, {}, {}] }).save();
         await request(app)
             .get("/judge/next_hack")
             .set({ Authorization: 'judge' })
@@ -76,7 +75,7 @@ describe('review next hack', () => {
     });
     test('review hack does not get hack already reviewed by current user', async () => {
         await new Hack({
-            _id: "hackIs",
+            _id: 1,
             reviews: [{
                 reader: {
                     id: 'judgetreehacks',
@@ -101,14 +100,14 @@ describe('review next hack', () => {
 describe('rate hacks', () => {
     test('rate a hack', async () => {
         await new Hack({
-            _id: 'applicationToReview',
+            _id: 1,
             reviews: [],
         }).save();
         await request(app)
             .post("/judge/rate")
             .set({ Authorization: 'judge' })
             .send({
-                hack_id: 'applicationToReview',
+                hack_id: 1,
                 creativity: 2,
                 technicalComplexity: 2,
                 socialImpact: 3,
@@ -118,7 +117,7 @@ describe('rate hacks', () => {
             .then(e => {
                 expect(e.body.results.status).toEqual("success");
             })
-        let application = (await Hack.findById('applicationToReview'))!.toObject();
+        let application = (await Hack.findById(1))!.toObject();
         expect(application.reviews.length).toEqual(1);
         expect(application.reviews[0]).toEqual({
             reader: {
@@ -133,7 +132,7 @@ describe('rate hacks', () => {
     });
     test('rate a hack with an existing review', async () => {
         await new Hack({
-            _id: 'applicationToReview',
+            _id: 1,
             reviews: [{
                 reader: {
                     id: 'judgetreehacks2',
@@ -149,7 +148,7 @@ describe('rate hacks', () => {
             .post("/judge/rate")
             .set({ Authorization: 'judge' })
             .send({
-                hack_id: 'applicationToReview',
+                hack_id: 1,
                 creativity: 2,
                 technicalComplexity: 2,
                 socialImpact: 3,
@@ -162,7 +161,7 @@ describe('rate hacks', () => {
             .post("/judge/rate")
             .set({ Authorization: 'judge' })
             .send({
-                hack_id: 'applicationNotFound',
+                hack_id: 0,
                 creativity: 2,
                 technicalComplexity: 2,
                 socialImpact: 3,
@@ -175,7 +174,7 @@ describe('rate hacks', () => {
     });
     test('rate a hack twice - fail', async () => {
         await new Hack({
-            _id: 'applicationToReview',
+            _id: 1,
             reviews: [{
                 reader: {
                     id: 'judgetreehacks',
@@ -191,7 +190,7 @@ describe('rate hacks', () => {
             .post("/judge/rate")
             .set({ Authorization: 'judge' })
             .send({
-                hack_id: 'applicationToReview',
+                hack_id: 1,
                 creativity: 2,
                 technicalComplexity: 2,
                 socialImpact: 3,
@@ -204,14 +203,14 @@ describe('rate hacks', () => {
     });
     test('rate a hack with three reviews already - fail', async () => {
         await new Hack({
-            _id: 'applicationToReview',
+            _id: 1,
             reviews: [{}, {}, {}],
         }).save();
         await request(app)
             .post("/judge/rate")
             .set({ Authorization: 'judge' })
             .send({
-                hack_id: 'applicationToReview',
+                hack_id: 1,
                 creativity: 2,
                 technicalComplexity: 2,
                 socialImpact: 3,
@@ -227,8 +226,8 @@ describe('rate hacks', () => {
 describe('judge leaderboard', () => {
     test('simple leaderboard test', async () => {
         await Hack.insertMany([
-            { _id: "applicationOos", reviews: [{ reader: { email: "reviewer1@treehacks" } }] },
-            { _id: "applicationOos2", reviews: [{ reader: { email: "reviewer1@treehacks" } }, { reader: { email: "reviewer2@treehacks" } }] },
+            { _id: 1, reviews: [{ reader: { email: "reviewer1@treehacks" } }] },
+            { _id: 2, reviews: [{ reader: { email: "reviewer1@treehacks" } }, { reader: { email: "reviewer2@treehacks" } }] },
         ]);
         await request(app)
             .get("/judge/leaderboard")
@@ -243,9 +242,9 @@ describe('judge leaderboard', () => {
 describe('judge stats', () => {
     test('simple stats test', async () => {
         await Hack.insertMany([
-            { _id: "applicationOos", reviews: [] },
-            { _id: "applicationOos2", reviews: [{}, {}, {}] },
-            { _id: "applicationIss", reviews: [{}] }
+            { _id: 1, reviews: [] },
+            { _id: 2, reviews: [{}, {}, {}] },
+            { _id: 3, reviews: [{}] }
         ]);
         await request(app)
             .get("/judge/stats")

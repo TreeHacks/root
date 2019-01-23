@@ -38,22 +38,36 @@ authenticatedRoute.param('userId', (req, res, next, userId) => {
 });
 
 
-const validateGroup = (group) => (req, res, next) => {
+const validateGroup = (group, allowAnonymous = false) => (req, res, next) => {
   // Allow either a single group or multiple valid groups passed as an array
   if (!Array.isArray(group)) { group = [group]; }
 
   let accessTokenFromClient = req.headers.authorization;
-  if (!accessTokenFromClient) return res.status(401).send("Access Token missing from header");
 
   cognitoExpress.validate(accessTokenFromClient, function (err, response) {
-    if (err) return res.status(401).send(err);
-    // TODO: check permissions here.
+    if (err) {
+      if (allowAnonymous) {
+        res.locals.user = {};
+        next();
+        return;
+      }
+      else {
+        return res.status(401).send(err);
+      }
+    }
     res.locals.user = response;
     if (res.locals.user['cognito:groups'] && group.some(g => res.locals.user['cognito:groups'].indexOf(g) !== -1)) {
       next();
     }
     else {
-      return res.status(403).send("Unauthorized; user is not in group " + group  + ".");
+      if (allowAnonymous) {
+        res.locals.user = {};
+        next();
+        return;
+      }
+      else {
+        return res.status(403).send("Unauthorized; user is not in group " + group  + ".");
+      }
     }
   });
 }
@@ -69,3 +83,6 @@ judgeRoute.use(validateGroup("judge"));
 
 export const sponsorRoute = express.Router();
 sponsorRoute.use(validateGroup(["admin", "sponsor"]));
+
+export const anonymousRoute = express.Router();
+anonymousRoute.use(validateGroup(["admin"], true));
