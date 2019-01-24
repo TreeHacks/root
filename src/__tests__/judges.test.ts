@@ -63,9 +63,9 @@ describe('judge modify', () => {
             .expect(200)
             .then(async e => {
                 let judge = await Judge.findById("a");
-                expect(judge.categories.length).toEqual(1);
-                expect(judge.categories[0]).toEqual("new");
-                expect(judge.email).toEqual("newemail");
+                expect(judge!.categories.length).toEqual(1);
+                expect(judge!.categories[0]).toEqual("new");
+                expect(judge!.email).toEqual("newemail");
             });
     });
 });
