@@ -31,9 +31,9 @@ describe('judge endpoint permissions', () => {
 describe('judge list', () => {
     test('judge list simple test', async () => {
         const docs = [
-            {_id: "a", email: "1", categories: ["1"]},
-            {_id: "b", email: "1", categories: ["1"]},
-            {_id: "c", email: "1", categories: ["1"]}
+            {_id: "a", email: "1", verticals: ["1"]},
+            {_id: "b", email: "1", verticals: ["1"]},
+            {_id: "c", email: "1", verticals: ["1"]}
         ]
         await Judge.insertMany(docs);
         return request(app)
@@ -50,7 +50,7 @@ describe('judge list', () => {
 describe('judge modify', () => {
     test('judge modify simple test', async () => {
         const docs = [
-            {_id: "a", email: "1", categories: ["1"]}
+            {_id: "a", email: "1", verticals: ["1"]}
         ]
         await Judge.insertMany(docs);
         return request(app)
@@ -58,13 +58,13 @@ describe('judge modify', () => {
             .set({ Authorization: 'admin' })
             .send({
                 email: "newemail",
-                categories: ["new"]
+                verticals: ["new"]
             })
             .expect(200)
             .then(async e => {
                 let judge = await Judge.findById("a");
-                expect(judge!.categories.length).toEqual(1);
-                expect(judge!.categories[0]).toEqual("new");
+                expect(judge!.verticals.length).toEqual(1);
+                expect(judge!.verticals[0]).toEqual("new");
                 expect(judge!.email).toEqual("newemail");
             });
     });

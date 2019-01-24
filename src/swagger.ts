@@ -107,7 +107,7 @@ const swagger = {
         "properties": {
           "_id": {"type": "string"},
           "email": {"type": "string"},
-          "categories": {
+          "verticals": {
             "type": "array",
             "items": {"type": "string"}
           }

@@ -1,5 +1,5 @@
 import Hack from "../../models/Hack";
-import { STATUS, applicationReviewDisplayFields, hackReviewDisplayFields } from "../../constants";
+import { STATUS, applicationReviewDisplayFields, VERTICALS_TO_CATEGORIES, hackReviewDisplayFields } from "../../constants";
 import { IHack } from "../../models/Hack.d";
 import { find } from "lodash";
 import Judge from "../../models/Judge";
@@ -63,7 +63,7 @@ export const rateHack = async (req, res) => {
 };
 
 export const reviewNextHack = async (req, res) => {
-    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || {categories: []};
+    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || {verticals: []};
     let projectedFields = {};
     for (let field of hackReviewDisplayFields) {
         projectedFields[field] = 1;
@@ -81,7 +81,7 @@ export const reviewNextHack = async (req, res) => {
         { $sample: { size: 1 } }, // Pick random
         { $project: projectedFields }
     ]);
-    let data = await Hack.aggregate(createAggregationPipeline(judge.categories));
+    let data = await Hack.aggregate(createAggregationPipeline(judge.verticals.map(e => VERTICALS_TO_CATEGORIES[e])));
     if (data[0]) {
         return res.json(data[0]);
     }

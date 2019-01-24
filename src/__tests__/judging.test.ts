@@ -66,7 +66,7 @@ describe('review next hack', () => {
             });
     });
     test('review hack does not get hack with 3+ reviews', async () => {
-        await new Hack({ _id: 1, categories: ["a"], reviews: [{}, {}, {}] }).save();
+        await new Hack({ _id: 1, verticals: ["test1"], reviews: [{}, {}, {}] }).save();
         await request(app)
             .get("/judging/next_hack")
             .set({ Authorization: 'judge' })
@@ -77,10 +77,10 @@ describe('review next hack', () => {
     });
     test('review hack prioritizes verticals for judges assigned to one vertical', async () => {
         await Hack.insertMany([
-            { _id: 1, categories: ['health', 'other'], reviews: [] },
-            ...Array(100).fill({ categories: ['government'], reviews: [] })
+            { _id: 1, categories: ['test1', 'test2'], reviews: [] },
+            ...Array(100).fill({ categories: ['test3'], reviews: [] })
         ]);
-        await new Judge({ _id: 'judgetreehacks', categories: ['health'] }).save();
+        await new Judge({ _id: 'judgetreehacks', verticals: ['test1'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
                 .get("/judging/next_hack")
@@ -93,11 +93,11 @@ describe('review next hack', () => {
     });
     test('review hack prioritizes verticals for judges assigned to more than one vertical', async () => {
         await Hack.insertMany([
-            { _id: 1, categories: ['health', 'other'], reviews: [] },
-            { _id: 2, categories: ['other'], reviews: [] },
-            ...Array(100).fill({ categories: ['government'], reviews: [] })
+            { _id: 1, categories: ['test1', 'test2'], reviews: [] },
+            { _id: 2, categories: ['test1'], reviews: [] },
+            ...Array(100).fill({ categories: ['test3'], reviews: [] })
         ]);
-        await new Judge({ _id: 'judgetreehacks', categories: ['health', 'other'] }).save();
+        await new Judge({ _id: 'judgetreehacks', verticals: ['test1', 'test2'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
                 .get("/judging/next_hack")
@@ -110,10 +110,10 @@ describe('review next hack', () => {
     });
     test('review hack gives non-vertical hacks for judges assigned to one vertical when vertical hacks have run out', async () => {
         await Hack.insertMany([
-            { _id: 1, categories: ['health', 'other'], reviews: [] },
-            ...Array(100).fill({ categories: ['government'], reviews: [{}, {}, {}] })
+            { _id: 1, categories: ['test2', 'test3'], reviews: [] },
+            ...Array(100).fill({ categories: ['test1'], reviews: [{}, {}, {}] })
         ]);
-        await new Judge({ _id: 'judgetreehacks', categories: ['government'] }).save();
+        await new Judge({ _id: 'judgetreehacks', categories: ['test1'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
                 .get("/judging/next_hack")
