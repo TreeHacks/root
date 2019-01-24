@@ -7,6 +7,7 @@ import { IAdminState } from "./types";
 import Papa from "papaparse";
 import { STATUS } from "../../constants";
 import { custom_header } from "../../index";
+import { find, set } from "lodash";
 
 declare const ENDPOINT_URL: string;
 
@@ -248,6 +249,26 @@ export const performBulkChange = () => (dispatch, getState) => {
     console.error(e);
     dispatch(loadingEnd());
     alert("Error performing bulk change: " + e);
+  });
+}
+
+export const editRow = (endpoint, rowId, data) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return API.patch("treehacks", `/${endpoint}/${rowId}`, {
+    body: data
+  }).then(e => {
+    const adminState = (getState().admin as IAdminState);
+    const applicationList = adminState.applicationList;
+    let application = find(applicationList, { "_id": rowId });
+    for (let key in data) {
+      set(application, key, data[key]);
+    }
+    dispatch(setApplicationList(applicationList, adminState.pages)); // So that the table refreshes
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error performing edit row " + e);
   });
 }
 

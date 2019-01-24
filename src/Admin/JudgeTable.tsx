@@ -6,7 +6,10 @@ import 'react-table/react-table.css';
 import { IAdminState } from "../store/admin/types";
 import ApplicationView from "./ApplicationView";
 import { IBaseState } from "../store/base/types";
-import { getJudgeList } from "../store/admin/actions";
+import { getJudgeList, editRow } from "../store/admin/actions";
+import Form from "react-jsonschema-form";
+import { VERTICALS } from "../constants";
+import "./AdminTable.scss";
 
 const JudgeTable = (props: IAdminTableProps) => {
     const columns = [
@@ -19,9 +22,26 @@ const JudgeTable = (props: IAdminTableProps) => {
             "accessor": "email"
         },
         {
-            "Header": "Categories",
-            "id": "categories",
-            "accessor": e => e.categories && e.categories.join(", ")
+            "Header": "Verticals",
+            "accessor": "verticals",
+            "Cell": p => <div>
+                <Form schema={{
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": VERTICALS
+                    },
+                    "uniqueItems": true
+                }} uiSchema={{
+                    "ui:widget": "checkboxes",
+                    "ui:options": {
+                        "inline": true
+                    },
+                    "classNames": "treehacks-admin-table-form"
+                }} formData={p.value}
+                onChange={e => props.editRow("judges", p.row._id, {"verticals": e.formData})}
+                ><div></div></Form>
+            </div>
         }
     ];
     return (
@@ -46,7 +66,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getApplicationList: (e) => dispatch(getJudgeList(e))
+    getApplicationList: (e) => dispatch(getJudgeList(e)),
+    editRow: (a, b, c) => dispatch(editRow(a, b, c))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JudgeTable);

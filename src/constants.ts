@@ -323,3 +323,5 @@ export const stanfordApplicationDisplayFields = [
   "accept_terms",
   "accept_share"
 ];
+
+export const VERTICALS = ["health", "safety", "awareness"];
