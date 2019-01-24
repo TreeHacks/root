@@ -101,6 +101,17 @@ const swagger = {
           "receipt": { "type": "string" },
           "accept": { "type": "boolean" }
         }
+      },
+      "Judge": {
+        "type": "object",
+        "properties": {
+          "_id": "string",
+          "email": "string",
+          "categories": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
       }
     }
   },
@@ -618,7 +629,7 @@ const swagger = {
         ],
         "responses": {
           "200": {
-            "description": "User list response (does not resolve the resume field to a URL)",
+            "description": "Hack list response",
             "content": {
               "application/json": {
                 "schema": {
@@ -627,7 +638,7 @@ const swagger = {
                     "count": { "type": "integer" },
                     "results": {
                       "type": "array",
-                      "items": { "$ref": "#/components/schemas/Application" }
+                      "items": { "type": "object" }
                     }
                   }
                 }
@@ -702,6 +713,98 @@ const swagger = {
         "responses": {
           "200": {
             "description": "Response"
+          }
+        }
+      }
+    },
+    "/judges": {
+      "get": {
+        "tags": ["judges"],
+        "summary": "Get list of judges.",
+        "description": "Accessible to only judges.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page size"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter query. Must be a JSON-serialized string of an array of objects such as {'a': 'b'}"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "schema": {
+              "type": "string",
+            },
+            "description": "Sort query. Must be a JSON-serialized string of an array of objects such as {'a': 1} (ascending) or {'a': -1} (descending)."
+          },
+          {
+            "in": "query",
+            "name": "project",
+            "schema": {
+              "type": "string",
+            },
+            "description": "Projection query. Must be a JSON-serialized string of an array of objects such as {'a': 1, 'b': 0}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Judge list response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": { "type": "integer" },
+                    "results": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Judge" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+        },
+      }
+    },
+    "/judges/{judgeId}": {
+      "put": {
+        "tags": ["judges"],
+        "summary": "Edit judge info.",
+        "description": "Available only to admins.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Judge" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User application info response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Judge" }
+              }
+            }
           }
         }
       }

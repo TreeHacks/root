@@ -25,6 +25,7 @@ import { getUserResumes } from "./routes/user_resumes";
 import { importHacks } from "./routes/hacks/hacks_import";
 import { reviewNextHack, getJudgeLeaderboard, getJudgeStats, rateHack } from "./routes/hacks/judging";
 import { getHackList } from "./routes/hacks/hacks_list";
+import { getJudgeList, editJudge } from "./routes/hacks/judges";
 
 // Set up the Express app
 const app = express();
@@ -102,6 +103,8 @@ authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);
 authenticatedRoute.post('/users_bulkcreate', [adminRoute], bulkCreateUsers);
 authenticatedRoute.post('/hacks_import', [adminRoute], importHacks);
+authenticatedRoute.get('/judges', [adminRoute], getJudgeList);
+authenticatedRoute.put('/judges/:judgeId', [adminRoute], editJudge);
 // edit hacks
 
 // Need custom auth:
