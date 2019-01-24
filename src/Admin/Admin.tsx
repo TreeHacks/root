@@ -15,12 +15,12 @@ const Admin = ({ match }) => {
   return (
     <div className="bg-white col-8 offset-2 p-4">
       <NavTab to={`${match.path}/table`}>Application Table</NavTab>
-      <NavTab to={`${match.path}/stats`}>View Stats</NavTab>
-      <NavTab to={`${match.path}/bulkchange`}>Bulk change status</NavTab>
-      <NavTab to={`${match.path}/bulkcreate`}>Bulk create users</NavTab>
       <NavTab to={`${match.path}/hack_table`}>Hack Table</NavTab>
-      <NavTab to={`${match.path}/bulk_import_hacks`}>Bulk import hacks</NavTab>
       <NavTab to={`${match.path}/judge_table`}>Judge Table</NavTab>
+      <NavTab to={`${match.path}/bulkchange`}>Bulk Change Status</NavTab>
+      <NavTab to={`${match.path}/bulkcreate`}>Bulk Create Users</NavTab>
+      <NavTab to={`${match.path}/bulk_import_hacks`}>Bulk Import Hacks</NavTab>
+      <NavTab to={`${match.path}/stats`}>Application Stats</NavTab>
 
       <Switch>
         <Route exact path={`${match.path}`} render={() => <Redirect replace to={`${match.path}/table`} />} />
