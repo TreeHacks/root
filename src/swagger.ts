@@ -105,8 +105,8 @@ const swagger = {
       "Judge": {
         "type": "object",
         "properties": {
-          "_id": "string",
-          "email": "string",
+          "_id": {"type": "string"},
+          "email": {"type": "string"},
           "categories": {
             "type": "array",
             "items": {"type": "string"}
