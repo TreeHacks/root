@@ -49,18 +49,27 @@ const uiSchema = {
 const hackSchema = {
 	"type": "object",
 	"properties": {
+		"_id": {"type": "string", "title": "table number"},
 		"title": {"type": "string"},
 		"devpostUrl": {"type": "string"},
 		"categories": {
 			"type": "array",
 			"items": {
 				"type": "string"
-			}
+			},
+			"uniqueItems": true,
 		}
 	}
 };
 const hackUiSchema = {
-
+	"categories": {
+		"ui:widget": "checkboxes",
+		"ui:options": {
+			"addable": false,
+			"orderable": false,
+		}
+	},
+	"ui:order": ["_id", "title", "devpostUrl", "categories"]
 };
 
 const mapStateToProps = state => ({

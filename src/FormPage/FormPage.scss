@@ -7,7 +7,7 @@
     max-width: 800px;
     color: #09da7a;
     &.treehacks-form-disabled {
-        input {
+        input[role=combobox] {
             cursor: default;
             pointer-events: none;
         }
