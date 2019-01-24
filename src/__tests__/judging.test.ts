@@ -1,6 +1,7 @@
 import request from "supertest";
 import app from "../index";
 import Hack from "../models/Hack";
+import Judge from "../models/Judge";
 import { isEqual, omit } from "lodash";
 import { STATUS, TYPE, hackReviewDisplayFields } from '../constants';
 
@@ -9,8 +10,9 @@ const _doc = {
     "devpostUrl": "sample url"
 };
 
-afterEach(() => {
-    return Hack.deleteMany({});
+afterEach(async () => {
+    await Hack.deleteMany({});
+    await Judge.deleteMany({});
 })
 
 describe('judge endpoint permissions', () => {
@@ -64,7 +66,7 @@ describe('review next hack', () => {
             });
     });
     test('review hack does not get hack with 3+ reviews', async () => {
-        await new Hack({ _id: 1, reviews: [{}, {}, {}] }).save();
+        await new Hack({ _id: 1, categories: ["a"], reviews: [{}, {}, {}] }).save();
         await request(app)
             .get("/judge/next_hack")
             .set({ Authorization: 'judge' })
@@ -72,6 +74,55 @@ describe('review next hack', () => {
             .then(e => {
                 expect(e.body).toEqual("");
             });
+    });
+    test('review hack prioritizes verticals for judges assigned to one vertical', async () => {
+        await Hack.insertMany([
+            { _id: 1, categories: ['health', 'other'], reviews: [] },
+            ...Array(100).fill({ categories: ['government'], reviews: [] })
+        ]);
+        await new Judge({ _id: 'judgetreehacks', categories: ['health'] }).save();
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judge/next_hack")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(e => {
+                    expect(e.body._id).toEqual(1);
+                });
+        }
+    });
+    test('review hack prioritizes verticals for judges assigned to more than one vertical', async () => {
+        await Hack.insertMany([
+            { _id: 1, categories: ['health', 'other'], reviews: [] },
+            { _id: 2, categories: ['other'], reviews: [] },
+            ...Array(100).fill({ categories: ['government'], reviews: [] })
+        ]);
+        await new Judge({ _id: 'judgetreehacks', categories: ['health', 'other'] }).save();
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judge/next_hack")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(e => {
+                    expect(e.body._id === 1 || e.body._id === 2).toBe(true);
+                });
+        }
+    });
+    test('review hack gives non-vertical hacks for judges assigned to one vertical when vertical hacks have run out', async () => {
+        await Hack.insertMany([
+            { _id: 1, categories: ['health', 'other'], reviews: [] },
+            ...Array(100).fill({ categories: ['government'], reviews: [{}, {}, {}] })
+        ]);
+        await new Judge({ _id: 'judgetreehacks', categories: ['government'] }).save();
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judge/next_hack")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(e => {
+                    expect(e.body._id).toEqual(1);
+                });
+        }
     });
     test('review hack does not get hack already reviewed by current user', async () => {
         await new Hack({

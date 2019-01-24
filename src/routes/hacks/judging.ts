@@ -2,6 +2,7 @@ import Hack from "../../models/Hack";
 import { STATUS, applicationReviewDisplayFields, hackReviewDisplayFields } from "../../constants";
 import { IHack } from "../../models/Hack.d";
 import { find } from "lodash";
+import Judge from "../../models/Judge";
 
 
 export const getJudgeLeaderboard = (req, res) => {
@@ -62,16 +63,17 @@ export const rateHack = async (req, res) => {
 };
 
 export const reviewNextHack = async (req, res) => {
+    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || {categories: []};
     let projectedFields = {};
     for (let field of hackReviewDisplayFields) {
         projectedFields[field] = 1;
     }
-    let createAggregationPipeline = (type: string) => ([
+    let createAggregationPipeline = (categories: string[] = []) => ([
         {
             $match: {
                 $and: [
                     { 'reviews.reader.id': { $ne: res.locals.user.sub } }, // Not already reviewed by current user
-                    // todo: add some verticals filtering here.
+                    categories && categories.length ? { 'categories': { $in: categories } } : {},
                     { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }
@@ -79,6 +81,13 @@ export const reviewNextHack = async (req, res) => {
         { $sample: { size: 1 } }, // Pick random
         { $project: projectedFields }
     ]);
-    let data = await Hack.aggregate(createAggregationPipeline(""));
-    return res.json(data[0]);
+    let data = await Hack.aggregate(createAggregationPipeline(judge.categories));
+    if (data[0]) {
+        return res.json(data[0]);
+    }
+    else {
+        data = await Hack.aggregate(createAggregationPipeline());
+        return res.json(data[0]);
+    }
+
 };
