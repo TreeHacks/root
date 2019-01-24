@@ -38,8 +38,8 @@ export const hackReviewDisplayFields = ["_id", "devpostUrl", "title", "categorie
 // Maps vertical names (keys) to corresponding hack categories i.e. prizes (values)
 export const VERTICALS_TO_CATEGORIES = {
   "health": "Health Grand Prize",
-  "safety": "Safety Grand Prize",
-  "awareness": "Awareness Grand Prize",
+  "safety": "Security Grand Prize",
+  "awareness": "Energy Grand Prize",
   // Required for unit tests:
   "test1": "test1",
   "test2": "test2",
