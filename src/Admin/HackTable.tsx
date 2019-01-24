@@ -38,7 +38,6 @@ const HackTable = (props: IAdminTableProps) => {
     return (
         <div>
             <div className="col-12">
-                <h3>Hacks</h3>
                 <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}
                     pages={props.pages}
                     manual

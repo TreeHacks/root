@@ -27,7 +27,6 @@ const JudgeTable = (props: IAdminTableProps) => {
     return (
         <div>
             <div className="col-12">
-                <h3>Judges</h3>
                 <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}
                     pages={props.pages}
                     manual
