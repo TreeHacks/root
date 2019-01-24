@@ -809,9 +809,9 @@ const swagger = {
         }
       }
     },
-    "/judge/rate": {
+    "/judging/rate": {
       "post": {
-        "tags": ["judge"],
+        "tags": ["judging"],
         "summary": "Rate hack. Only available to judges (judges can rate *any* hack).",
         "description": ".",
         "requestBody": {
@@ -837,9 +837,9 @@ const swagger = {
         }
       }
     },
-    "/judge/next_hack": {
+    "/judging/next_hack": {
       "get": {
-        "tags": ["judge"],
+        "tags": ["judging"],
         "summary": "Get next hack. Only available to judges. (Does not return reviews property)",
         "description": ".",
         "responses": {
@@ -849,9 +849,9 @@ const swagger = {
         }
       }
     },
-    "/judge/leaderboard": {
+    "/judging/leaderboard": {
       "get": {
-        "tags": ["judges"],
+        "tags": ["judging"],
         "summary": "Get list of judges and their stats. Accessible only to admins.",
         "description": ".",
         "responses": {
@@ -874,9 +874,9 @@ const swagger = {
         }
       }
     },
-    "/judge/stats": {
+    "/judging/stats": {
       "get": {
-        "tags": ["judges"],
+        "tags": ["judging"],
         "summary": "Get stats of hacks remaining.",
         "description": ".",
         "responses": {

@@ -16,36 +16,36 @@ afterEach(async () => {
 })
 
 describe('judge endpoint permissions', () => {
-    test('/judge/rate as an applicant - fail', () => {
+    test('/judging/rate as an applicant - fail', () => {
         return request(app)
-            .post("/judge/rate")
+            .post("/judging/rate")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
                 expect(e.text).toContain("Unauthorized");
             });
     });
-    test('/judge/next_hack as an applicant - fail', () => {
+    test('/judging/next_hack as an applicant - fail', () => {
         return request(app)
-            .get("/judge/next_hack")
+            .get("/judging/next_hack")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
                 expect(e.text).toContain("Unauthorized");
             });
     });
-    test('/judge/stats as an applicant - fail', () => {
+    test('/judging/stats as an applicant - fail', () => {
         return request(app)
-            .get("/judge/next_hack")
+            .get("/judging/next_hack")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
                 expect(e.text).toContain("Unauthorized");
             });
     });
-    test('/judge/leaderboard as an applicant - fail', () => {
+    test('/judging/leaderboard as an applicant - fail', () => {
         return request(app)
-            .get("/judge/leaderboard")
+            .get("/judging/leaderboard")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
@@ -58,7 +58,7 @@ describe('review next hack', () => {
     test('review hack gets the right fields', async () => {
         await new Hack({ ..._doc, _id: 1, reviews: [{}, {}] }).save();
         return request(app)
-            .get("/judge/next_hack")
+            .get("/judging/next_hack")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(async e => {
@@ -68,7 +68,7 @@ describe('review next hack', () => {
     test('review hack does not get hack with 3+ reviews', async () => {
         await new Hack({ _id: 1, categories: ["a"], reviews: [{}, {}, {}] }).save();
         await request(app)
-            .get("/judge/next_hack")
+            .get("/judging/next_hack")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
@@ -83,7 +83,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks', categories: ['health'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judge/next_hack")
+                .get("/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -100,7 +100,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks', categories: ['health', 'other'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judge/next_hack")
+                .get("/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -116,7 +116,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks', categories: ['government'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judge/next_hack")
+                .get("/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -139,7 +139,7 @@ describe('review next hack', () => {
             }]
         }).save();
         await request(app)
-            .get("/judge/next_hack")
+            .get("/judging/next_hack")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
@@ -155,7 +155,7 @@ describe('rate hacks', () => {
             reviews: [],
         }).save();
         await request(app)
-            .post("/judge/rate")
+            .post("/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -196,7 +196,7 @@ describe('rate hacks', () => {
             }],
         }).save();
         await request(app)
-            .post("/judge/rate")
+            .post("/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -209,7 +209,7 @@ describe('rate hacks', () => {
     });
     test('rate a hack that is not found - fail', async () => {
         await request(app)
-            .post("/judge/rate")
+            .post("/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 0,
@@ -238,7 +238,7 @@ describe('rate hacks', () => {
             }],
         }).save();
         await request(app)
-            .post("/judge/rate")
+            .post("/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -258,7 +258,7 @@ describe('rate hacks', () => {
             reviews: [{}, {}, {}],
         }).save();
         await request(app)
-            .post("/judge/rate")
+            .post("/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -281,7 +281,7 @@ describe('judge leaderboard', () => {
             { _id: 2, reviews: [{ reader: { email: "reviewer1@treehacks" } }, { reader: { email: "reviewer2@treehacks" } }] },
         ]);
         await request(app)
-            .get("/judge/leaderboard")
+            .get("/judging/leaderboard")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
@@ -298,7 +298,7 @@ describe('judge stats', () => {
             { _id: 3, reviews: [{}] }
         ]);
         await request(app)
-            .get("/judge/stats")
+            .get("/judging/stats")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
