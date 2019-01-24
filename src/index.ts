@@ -104,7 +104,7 @@ authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);
 authenticatedRoute.post('/users_bulkcreate', [adminRoute], bulkCreateUsers);
 authenticatedRoute.post('/hacks_import', [adminRoute], importHacks);
 authenticatedRoute.get('/judges', [adminRoute], getJudgeList);
-authenticatedRoute.put('/judges/:judgeId', [adminRoute], editJudge);
+authenticatedRoute.patch('/judges/:judgeId', [adminRoute], editJudge);
 // edit hacks
 
 // Need custom auth:

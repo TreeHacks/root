@@ -1,16 +1,20 @@
 import { Request, Response } from 'express';
 import Judge from "../../models/Judge";
 import { getGenericList } from '../common';
+import {set} from "lodash";
 
 export function getJudgeList(req: Request, res: Response) {
     return getGenericList(req, res, Judge);
 }
 
 export async function editJudge(req: Request, res: Response) {
-    try {
-        res.status(200).send(await Judge.replaceOne({_id: req.params.judgeId}, req.body));
+    let judge = await Judge.findById(req.params.judgeId);
+    if (!judge) {
+        return res.status(400).send("Judge not found");
     }
-    catch (e) {
-        res.status(500).send("Error: " + e);
+    for (let key in req.body) {
+        set(judge, key, req.body[key]);
     }
+    await judge.save();
+    res.status(200).send(judge);
 }

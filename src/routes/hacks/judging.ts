@@ -81,7 +81,7 @@ export const reviewNextHack = async (req, res) => {
         { $sample: { size: 1 } }, // Pick random
         { $project: projectedFields }
     ]);
-    let data = await Hack.aggregate(createAggregationPipeline(judge.verticals.map(e => VERTICALS_TO_CATEGORIES[e])));
+    let data = await Hack.aggregate(createAggregationPipeline((judge.verticals as string[]).map(e => VERTICALS_TO_CATEGORIES[e])));
     if (data[0]) {
         return res.json(data[0]);
     }

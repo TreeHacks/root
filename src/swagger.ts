@@ -786,7 +786,7 @@ const swagger = {
       }
     },
     "/judges/{judgeId}": {
-      "put": {
+      "patch": {
         "tags": ["judges"],
         "summary": "Edit judge info.",
         "description": "Available only to admins.",
