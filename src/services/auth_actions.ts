@@ -1,5 +1,6 @@
 import AWS from "aws-sdk";
 import passwordGenerator from "generate-password";
+import Judge from "../models/Judge";
 
 const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
 
@@ -45,7 +46,10 @@ export async function bulkAutoCreateUser({ email, group }) {
       Username: User.Username
     };
     await cognitoIdentityServiceProvider.adminAddUserToGroup(groupParams).promise();
-
+    
+    if (group === "judge") {
+      await new Judge({_id: User.Username, email: email}).save();
+    }
     return {
       id: User.Username,
       email,
@@ -53,6 +57,7 @@ export async function bulkAutoCreateUser({ email, group }) {
     };
 
   } catch (e) {
+    console.error(e.message);
     return {
       id: 'ERROR',
       email,
