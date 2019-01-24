@@ -86,9 +86,9 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 	}
 	nextApplication() {
 		Promise.all([
-			API.get("treehacks", '/judge/leaderboard', {}),
-			API.get("treehacks", '/judge/next_hack', {}),
-			API.get("treehacks", '/judge/stats', {})
+			API.get("treehacks", '/judging/leaderboard', {}),
+			API.get("treehacks", '/judging/next_hack', {}),
+			API.get("treehacks", '/judging/stats', {})
 		]).then(([leaderboard_data, hack_data, stats_data]) => {
 			window.scrollTo(0, 0);
 			this.setState({ leaderboard_data, hack_data, stats_data, reviewFormData: null });
@@ -150,7 +150,7 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 	}
 
 	handleSubmit() {
-		API.post("treehacks", '/judge/rate', {
+		API.post("treehacks", '/judging/rate', {
 			body: {
 				"hack_id": this.state.hack_data._id,
 				...this.state.reviewFormData
