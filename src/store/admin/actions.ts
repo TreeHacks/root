@@ -167,6 +167,8 @@ const fetchApplications = fetchGenericData(`/users`);
 
 const fetchHacks = fetchGenericData(`/hacks`);
 
+const fetchJudges = fetchGenericData(`/judges`);
+
 export const getHackList = (tableState: IReactTableState) => (dispatch, getState) => {
   dispatch(loadingStart());
   return dispatch(fetchHacks(tableState)).then((e: { count: number, results: any[] }) => {
@@ -175,7 +177,19 @@ export const getHackList = (tableState: IReactTableState) => (dispatch, getState
   }).catch(e => {
     console.error(e);
     dispatch(loadingEnd());
-    alert("Error getting application list " + e);
+    alert("Error getting hack list " + e);
+  });
+};
+
+export const getJudgeList = (tableState: IReactTableState) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return dispatch(fetchJudges(tableState)).then((e: { count: number, results: any[] }) => {
+    dispatch(setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize)));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error getting judge list " + e);
   });
 };
 
