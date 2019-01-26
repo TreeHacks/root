@@ -900,6 +900,34 @@ const swagger = {
         }
       }
     },
+    "/announcements": {
+      "get": {
+        "tags": ["announcements"],
+        "summary": "Get announcements.",
+        "description": "Populated from slack channel.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "client_msg_id": {"type": "string"},
+                      "type": {"type": "string"},
+                      "text": {"type": "string"},
+                      "user": {"type": "string"},
+                      "ts": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   }
 }
 

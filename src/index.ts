@@ -26,6 +26,7 @@ import { importHacks } from "./routes/hacks/hacks_import";
 import { reviewNextHack, getJudgeLeaderboard, getJudgeStats, rateHack } from "./routes/hacks/judging";
 import { getHackList } from "./routes/hacks/hacks_list";
 import { getJudgeList, editJudge } from "./routes/hacks/judges";
+import { getAnnouncements } from "./routes/announcements";
 
 // Set up the Express app
 const app = express();
@@ -79,6 +80,7 @@ app.get("/", (req, res) => res.redirect("/doc"));
 
 // Public routes
 app.get('/hacks', [anonymousRoute], getHackList);
+app.get('/announcements', [anonymousRoute], getAnnouncements);
 
 app.use("/", authenticatedRoute);
 
