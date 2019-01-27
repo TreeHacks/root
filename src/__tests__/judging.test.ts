@@ -148,6 +148,7 @@ describe('review next hack', () => {
     });
     test('prefers to pick hacks with less reviews as opposed to more reviews', async () => {
         await Hack.insertMany([
+            { _id: 0, reviews: [{}] },
             { _id: 1, reviews: [{}] },
             { _id: 2, reviews: [{}] },
             { _id: 3, reviews: [{}] },
