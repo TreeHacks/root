@@ -252,7 +252,7 @@ describe('rate hacks', () => {
                 expect(e.text).toContain("already has a review");
             });
     });
-    test('rate a hack with three reviews already - fail', async () => {
+    test('rate a hack with three reviews already - success', async () => {
         await new Hack({
             _id: 1,
             reviews: [{}, {}, {}],
@@ -267,10 +267,7 @@ describe('rate hacks', () => {
                 socialImpact: 3,
                 comments: "test"
             })
-            .expect(403)
-            .then(e => {
-                expect(e.text).toContain("already has 3 reviews");
-            });
+            .expect(200);
     });
 });
 

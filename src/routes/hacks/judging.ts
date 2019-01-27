@@ -35,10 +35,6 @@ export const rateHack = async (req, res) => {
     if (!hack) {
         return res.status(404).send("Hack to rate not found");
     }
-    // TODO: change the max number of reviews?
-    else if (hack.reviews && hack.reviews.length >= 3) {
-        return res.status(403).send("Hack already has 3 reviews.");
-    }
     else if (hack.reviews && find(hack.reviews, { "reader": { "id": res.locals.user.sub } })) {
         return res.status(403).send("Hack already has a review submitted by user " + res.locals.user.sub);
     }
