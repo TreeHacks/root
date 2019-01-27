@@ -74,7 +74,7 @@ export const reviewNextHack = async (req, res) => {
                 ]
             }
         },
-        // Prefer to pick applications with less applications first
+        // Prefer to pick applications with less reviews first
         { $project: { ...projectedFields, _reviewSize: { $size: '$reviews' } } },
         { $sort: { _reviewSize: 1 } },
         { $limit: 5 },
