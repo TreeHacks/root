@@ -59,7 +59,7 @@ export const rateHack = async (req, res) => {
 };
 
 export const reviewNextHack = async (req, res) => {
-    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || {verticals: []};
+    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || { verticals: [] };
     let projectedFields = {};
     for (let field of hackReviewDisplayFields) {
         projectedFields[field] = 1;
@@ -70,10 +70,14 @@ export const reviewNextHack = async (req, res) => {
                 $and: [
                     { 'reviews.reader.id': { $ne: res.locals.user.sub } }, // Not already reviewed by current user
                     categories && categories.length ? { 'categories': { $in: categories } } : {},
-                    { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                    { ['reviews.2']: { $exists: false } }, // Look for when length of "reviews" is less than 3.
                 ]
             }
         },
+        // Prefer to pick applications with less applications first
+        { $project: { ...projectedFields, _reviewSize: { $size: '$reviews' } } },
+        { $sort: { _reviewSize: 1 } },
+        { $limit: 5 },
         { $sample: { size: 1 } }, // Pick random
         { $project: projectedFields }
     ]);
