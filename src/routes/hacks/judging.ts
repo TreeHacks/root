@@ -70,7 +70,7 @@ export const reviewNextHack = async (req, res) => {
                 $and: [
                     { 'reviews.reader.id': { $ne: res.locals.user.sub } }, // Not already reviewed by current user
                     categories && categories.length ? { 'categories': { $in: categories } } : {},
-                    { ['reviews.2']: { $exists: false } }, // Look for when length of "reviews" is less than 3.
+                    { 'reviews.2': { $exists: false } }, // Look for when length of "reviews" is less than 3.
                 ]
             }
         },
