@@ -59,11 +59,23 @@ export const rateHack = async (req, res) => {
 };
 
 export const reviewNextHack = async (req, res) => {
-    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || { verticals: [] };
     let projectedFields = {};
     for (let field of hackReviewDisplayFields) {
         projectedFields[field] = 1;
     }
+    if (req.query.hack_id) {
+        const hack = await Hack.findOne(
+            {"_id": parseInt(req.query.hack_id), 'reviews.reader.id': { $ne: res.locals.user.sub } },
+            projectedFields);
+        if (hack) {
+            return res.json(hack);
+        }
+        else {
+            return res.status(404).send("Hack not found, or you have already rated this hack before.");
+        }
+    }
+
+    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || { verticals: [] };
     let createAggregationPipeline = (categories: string[] = []) => ([
         {
             $match: {

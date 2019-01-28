@@ -154,7 +154,8 @@ describe('review next hack', () => {
             { _id: 3, reviews: [{}] },
             { _id: 4, reviews: [{}] },
             ...Array(100).fill({ reviews: [{}, {}] })
-        ]);
+        ]);  
+        
         await new Judge({ _id: 'judgetreehacks' }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
@@ -165,6 +166,45 @@ describe('review next hack', () => {
                     expect(0 <= e.body._id && e.body._id <= 4).toEqual(true);
                 });
         }
+    });
+    test('by custom hack_id', async () => {
+        await Hack.insertMany([
+            { _id: 0, reviews: [{}] },
+            ...Array(100).fill({ reviews: [{}, {}] })
+        ]);
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judging/next_hack?hack_id=0")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(async e => {
+                    expect(e.body._id).toEqual(0);
+                });
+        }
+    });
+    test('by custom hack_id should fail when not found', async () => {
+        await Hack.insertMany([
+            { _id: 0, reviews: [{}] }
+        ]);
+        await request(app)
+        .get("/judging/next_hack?hack_id=1")
+        .set({ Authorization: 'judge' })
+        .expect(404)
+        .then(e => {
+            expect(e.text).toContain("not found");
+        });
+    });
+    test('by custom hack_id should fail when already rated', async () => {
+        await Hack.insertMany([
+            { _id: 0, reviews: [{reader: {id: "judgetreehacks"}}] }
+        ]);
+        await request(app)
+        .get("/judging/next_hack?hack_id=0")
+        .set({ Authorization: 'judge' })
+        .expect(404)
+        .then(e => {
+            expect(e.text).toContain("not found"); // todo: change this error message?
+        });
     });
 });
 
