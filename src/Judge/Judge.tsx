@@ -49,9 +49,9 @@ const uiSchema = {
 const hackSchema = {
 	"type": "object",
 	"properties": {
-		"_id": {"type": "string", "title": "table number"},
-		"title": {"type": "string"},
-		"devpostUrl": {"type": "string"},
+		"_id": { "type": "string", "title": "table number" },
+		"title": { "type": "string" },
+		"devpostUrl": { "type": "string" },
 		"categories": {
 			"type": "array",
 			"items": {
@@ -109,6 +109,24 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 
 	render() {
 		return (<div className="row">
+			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
+				<div className="container">
+					{this.state.hack_data && <div className="">
+						<FormPage
+							submitted={true}
+							onChange={e => null}
+							onError={e => null}
+							onSubmit={e => null}
+							schema={hackSchema}
+							uiSchema={hackUiSchema}
+							formData={this.state.hack_data} />
+					</div>}
+					{!this.state.hack_data && <div className="treehacks-form">
+						<div className="application-name">No more hacks to judge!</div>
+						<div className="application-school">Congrats!</div>
+					</div>}
+				</div>
+			</div>
 			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
 					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
@@ -134,24 +152,6 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 							)}
 						</tbody>
 					</table>
-				</div>
-			</div>
-			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
-				<div className="container">
-					{this.state.hack_data && <div className="">
-						<FormPage
-							submitted={true}
-							onChange={e => null}
-							onError={e => null}
-							onSubmit={e => null}
-							schema={hackSchema}
-							uiSchema={hackUiSchema}
-							formData={this.state.hack_data} />
-					</div>}
-					{!this.state.hack_data && <div className="treehacks-form">
-						<div className="application-name">No more hacks to judge!</div>
-						<div className="application-school">Congrats!</div>
-					</div>}
 				</div>
 			</div>
 		</div>
