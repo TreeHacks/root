@@ -93,10 +93,10 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 	componentDidMount() {
 		this.nextApplication();
 	}
-	nextApplication() {
+	nextApplication(id?: string) {
 		Promise.all([
 			API.get("treehacks", '/judging/leaderboard', {}),
-			API.get("treehacks", '/judging/next_hack', {}),
+			API.get("treehacks", '/judging/next_hack', { queryStringParameters: id ? { hack_id: id } : {} }),
 			API.get("treehacks", '/judging/stats', {})
 		]).then(([leaderboard_data, hack_data, stats_data]) => {
 			window.scrollTo(0, 0);
@@ -135,6 +135,26 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 						onChange={e => this.setState({ reviewFormData: e.formData })}
 					/>
 					<button className="btn m-4" onClick={() => this.nextApplication()}>Skip this hack</button>
+					<Form
+						schema={{ "type": "number" }}
+						uiSchema={{
+							"classNames": "treehacks-form mt-0",
+							"ui:placeholder": "Enter custom table number",
+							"ui:widget": props => <div className="row">
+								<input type="number"
+									className="form-control float-left col-8"
+									value={props.value}
+									required={props.required}
+									placeholder="Custom table number..."
+									onChange={(event) => props.onChange(event.target.value)} />
+								<input type="submit" value="Load hack" className="btn col-4"
+								style={{"height": "100%", "margin": "auto"}}
+								/>
+							</div>
+						}}
+						onSubmit={e => this.nextApplication(e.formData)}>
+						<div></div>
+					</Form>
 				</div>
 				<div className="container left-sidebar-content">
 					{this.state.stats_data &&
