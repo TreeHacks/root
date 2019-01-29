@@ -149,7 +149,7 @@ export const getExportedHacks = (tableState: IReactTableState) => (dispatch, get
   }).catch(e => {
     console.error(e);
     dispatch(loadingEnd());
-    alert("Error getting exported applications " + e);
+    alert("Error getting exported hacks " + e);
   });
 };
 
