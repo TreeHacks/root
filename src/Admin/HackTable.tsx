@@ -1,12 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { IAdminTableProps } from "./types";
-import Loading from "../Loading/Loading";
-import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicationEmails, getExportedApplications, getHackList } from "../store/admin/actions";
+import { getHackList, getExportedHacks } from "../store/admin/actions";
 import ReactTable from "react-table";
-import { get, values } from "lodash-es";
 import 'react-table/react-table.css';
-import { STATUS, TYPE, TRANSPORTATION_STATUS, TRANSPORTATION_TYPES, TRANSPORTATION_BUS_ROUTES, LOCATIONS } from "../constants";
 import { IAdminState } from "../store/admin/types";
 import ApplicationView from "./ApplicationView";
 import { IBaseState } from "src/store/base/types";
@@ -40,7 +37,17 @@ const HackTable = (props: IAdminTableProps) => {
                     // loading={props.base.loading}
                     // defaultPageSize={1}
                     onFetchData={(state, instance) => props.getApplicationList && props.getApplicationList(state)}
-                />
+                >
+                    {(state, makeTable, instance) => {
+                        return (
+                            <React.Fragment>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export</button> (Export all pages of filtered results as JSON)</p>
+                                {makeTable()}
+                            </React.Fragment>
+                        );
+                    }}
+                </ReactTable>
+
             </div>
             {props.selectedForm && <ApplicationView />}
         </div>
@@ -53,7 +60,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getApplicationList: (e) => dispatch(getHackList(e))
+    getApplicationList: (e) => dispatch(getHackList(e)),
+    getExportedApplications: e => dispatch(getExportedHacks(e))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HackTable);
