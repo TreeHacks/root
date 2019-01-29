@@ -140,6 +140,19 @@ export const getExportedApplicationsCSV = (tableState: IReactTableState, columns
   });
 };
 
+export const getExportedHacks = (tableState: IReactTableState) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return dispatch(fetchHacks(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
+    saveAs(new Blob([JSON.stringify(e.results)]), `treehacks-hacks-${Date.now()}.json`);
+    dispatch(setExportedApplications(e.results));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error getting exported applications " + e);
+  });
+};
+
 const fetchGenericData = endpoint => (tableState: IReactTableState, project = null, retrieveAllPages = false) => (dispatch, getState) => {
   if (project === null) {
     project = {};
