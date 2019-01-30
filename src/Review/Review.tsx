@@ -98,6 +98,24 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			}
 		}
 		return (<div className="row">
+			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
+				<div >
+					{this.state.application_data && <div className="">
+						<FormPage
+							submitted={true}
+							onChange={e => null}
+							onError={e => null}
+							onSubmit={e => null}
+							schema={this.props.applicationSchema.schema}
+							uiSchema={applicationUiSchema}
+							formData={this.state.application_data.forms.application_info} />
+					</div>}
+					{!this.state.application_data && <div className="treehacks-form">
+						<div className="application-name">No more apps to read!</div>
+						<div className="application-school">Congrats!</div>
+					</div>}
+				</div>
+			</div>
 			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
 					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
@@ -123,24 +141,6 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 							)}
 						</tbody>
 					</table>
-				</div>
-			</div>
-			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
-				<div >
-					{this.state.application_data && <div className="">
-						<FormPage
-							submitted={true}
-							onChange={e => null}
-							onError={e => null}
-							onSubmit={e => null}
-							schema={this.props.applicationSchema.schema}
-							uiSchema={applicationUiSchema}
-							formData={this.state.application_data.forms.application_info} />
-					</div>}
-					{!this.state.application_data && <div className="treehacks-form">
-						<div className="application-name">No more apps to read!</div>
-						<div className="application-school">Congrats!</div>
-					</div>}
 				</div>
 			</div>
 		</div>

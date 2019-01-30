@@ -49,9 +49,9 @@ const uiSchema = {
 const hackSchema = {
 	"type": "object",
 	"properties": {
-		"_id": {"type": "string", "title": "table number"},
-		"title": {"type": "string"},
-		"devpostUrl": {"type": "string"},
+		"_id": { "type": "string", "title": "table number" },
+		"title": { "type": "string" },
+		"devpostUrl": { "type": "string" },
 		"categories": {
 			"type": "array",
 			"items": {
@@ -93,14 +93,13 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 	componentDidMount() {
 		this.nextApplication();
 	}
-	nextApplication() {
+	nextApplication(id?: string) {
 		Promise.all([
-			API.get("treehacks", '/judging/leaderboard', {}),
-			API.get("treehacks", '/judging/next_hack', {}),
+			API.get("treehacks", '/judging/next_hack', { queryStringParameters: id ? { hack_id: id } : {} }),
 			API.get("treehacks", '/judging/stats', {})
-		]).then(([leaderboard_data, hack_data, stats_data]) => {
+		]).then(([hack_data, stats_data]) => {
 			window.scrollTo(0, 0);
-			this.setState({ leaderboard_data, hack_data, stats_data, reviewFormData: null });
+			this.setState({ hack_data, stats_data, reviewFormData: null });
 		}).catch((err) => {
 			alert("Error, " + err);
 			console.log(err);
@@ -109,6 +108,24 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 
 	render() {
 		return (<div className="row">
+			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
+				<div className="container">
+					{this.state.hack_data && <div className="">
+						<FormPage
+							submitted={true}
+							onChange={e => null}
+							onError={e => null}
+							onSubmit={e => null}
+							schema={hackSchema}
+							uiSchema={hackUiSchema}
+							formData={this.state.hack_data} />
+					</div>}
+					{!this.state.hack_data && <div className="treehacks-form">
+						<div className="application-name">No more hacks to judge!</div>
+						<div className="application-school">Congrats!</div>
+					</div>}
+				</div>
+			</div>
 			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
 					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
@@ -117,6 +134,26 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 						onChange={e => this.setState({ reviewFormData: e.formData })}
 					/>
 					<button className="btn m-4" onClick={() => this.nextApplication()}>Skip this hack</button>
+					<Form
+						schema={{ "type": "number" }}
+						uiSchema={{
+							"classNames": "treehacks-form mt-0",
+							"ui:placeholder": "Enter custom table number",
+							"ui:widget": props => <div className="row">
+								<input type="number"
+									className="form-control float-left col-8"
+									value={props.value}
+									required={props.required}
+									placeholder="Custom table number..."
+									onChange={(event) => props.onChange(event.target.value)} />
+								<input type="submit" value="Load hack" className="btn col-4"
+								style={{"height": "100%", "margin": "auto"}}
+								/>
+							</div>
+						}}
+						onSubmit={e => this.nextApplication(e.formData)}>
+						<div></div>
+					</Form>
 				</div>
 				<div className="container left-sidebar-content">
 					{this.state.stats_data &&
@@ -134,24 +171,6 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 							)}
 						</tbody>
 					</table>
-				</div>
-			</div>
-			<div className="col-12 col-sm-8 offset-sm-4 review-form-container treehacks-body-text">
-				<div className="container">
-					{this.state.hack_data && <div className="">
-						<FormPage
-							submitted={true}
-							onChange={e => null}
-							onError={e => null}
-							onSubmit={e => null}
-							schema={hackSchema}
-							uiSchema={hackUiSchema}
-							formData={this.state.hack_data} />
-					</div>}
-					{!this.state.hack_data && <div className="treehacks-form">
-						<div className="application-name">No more hacks to judge!</div>
-						<div className="application-school">Congrats!</div>
-					</div>}
 				</div>
 			</div>
 		</div>
