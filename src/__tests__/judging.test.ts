@@ -55,7 +55,7 @@ describe('judge endpoint permissions', () => {
 });
 
 describe('review next hack', () => {
-    test('review hack gets the right fields', async () => {
+    test('gets the right fields', async () => {
         await new Hack({ ..._doc, _id: 1, reviews: [{}, {}] }).save();
         return request(app)
             .get("/judging/next_hack")
@@ -65,7 +65,7 @@ describe('review next hack', () => {
                 expect(Object.keys(e.body).sort()).toEqual(hackReviewDisplayFields.sort());
             });
     });
-    test('review hack does not get hack with 3+ reviews', async () => {
+    test('does not get hack with 3+ reviews', async () => {
         await new Hack({ _id: 1, verticals: ["test1"], reviews: [{}, {}, {}] }).save();
         await request(app)
             .get("/judging/next_hack")
@@ -75,7 +75,7 @@ describe('review next hack', () => {
                 expect(e.body).toEqual("");
             });
     });
-    test('review hack prioritizes verticals for judges assigned to one vertical', async () => {
+    test('prioritizes verticals for judges assigned to one vertical', async () => {
         await Hack.insertMany([
             { _id: 1, categories: ['test1', 'test2'], reviews: [] },
             ...Array(100).fill({ categories: ['test3'], reviews: [] })
@@ -91,7 +91,7 @@ describe('review next hack', () => {
                 });
         }
     });
-    test('review hack prioritizes verticals for judges assigned to more than one vertical', async () => {
+    test('prioritizes verticals for judges assigned to more than one vertical', async () => {
         await Hack.insertMany([
             { _id: 1, categories: ['test1', 'test2'], reviews: [] },
             { _id: 2, categories: ['test1'], reviews: [] },
@@ -108,7 +108,7 @@ describe('review next hack', () => {
                 });
         }
     });
-    test('review hack gives non-vertical hacks for judges assigned to one vertical when vertical hacks have run out', async () => {
+    test('gives non-vertical hacks for judges assigned to one vertical when vertical hacks have run out', async () => {
         await Hack.insertMany([
             { _id: 1, categories: ['test2', 'test3'], reviews: [] },
             ...Array(100).fill({ categories: ['test1'], reviews: [{}, {}, {}] })
@@ -124,7 +124,7 @@ describe('review next hack', () => {
                 });
         }
     });
-    test('review hack does not get hack already reviewed by current user', async () => {
+    test('does not get hack already reviewed by current user', async () => {
         await new Hack({
             _id: 1,
             reviews: [{
@@ -145,6 +145,78 @@ describe('review next hack', () => {
             .then(e => {
                 expect(e.body).toEqual("");
             });
+    });
+    test('prefers to pick hacks with less reviews as opposed to more reviews', async () => {
+        await Hack.insertMany([
+            { _id: 0, reviews: [{}] },
+            ...Array(100).fill({ reviews: [{}, {}] })
+        ]);  
+        
+        await new Judge({ _id: 'judgetreehacks' }).save();
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judging/next_hack")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(e => {
+                    expect(e.body._id).toEqual(0);
+                });
+        }
+    });
+    test('prioritizes verticals over # of reviews for judges assigned to one vertical', async () => {
+        await Hack.insertMany([
+            { _id: 1, categories: ['test1', 'test2'], reviews: [{}, {}] },
+            ...Array(100).fill({ categories: ['test3'], reviews: [] })
+        ]);
+        await new Judge({ _id: 'judgetreehacks', verticals: ['test1'] }).save();
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judging/next_hack")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(e => {
+                    expect(e.body._id).toEqual(1);
+                });
+        }
+    });
+    test('by custom hack_id', async () => {
+        await Hack.insertMany([
+            { _id: 0, reviews: [{}] },
+            ...Array(100).fill({ reviews: [{}, {}] })
+        ]);
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judging/next_hack?hack_id=0")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(async e => {
+                    expect(e.body._id).toEqual(0);
+                });
+        }
+    });
+    test('by custom hack_id should fail when not found', async () => {
+        await Hack.insertMany([
+            { _id: 0, reviews: [{}] }
+        ]);
+        await request(app)
+        .get("/judging/next_hack?hack_id=1")
+        .set({ Authorization: 'judge' })
+        .expect(404)
+        .then(e => {
+            expect(e.text).toContain("not found");
+        });
+    });
+    test('by custom hack_id should fail when already rated', async () => {
+        await Hack.insertMany([
+            { _id: 0, reviews: [{reader: {id: "judgetreehacks"}}] }
+        ]);
+        await request(app)
+        .get("/judging/next_hack?hack_id=0")
+        .set({ Authorization: 'judge' })
+        .expect(404)
+        .then(e => {
+            expect(e.text).toContain("not found"); // todo: change this error message?
+        });
     });
 });
 
@@ -252,7 +324,7 @@ describe('rate hacks', () => {
                 expect(e.text).toContain("already has a review");
             });
     });
-    test('rate a hack with three reviews already - fail', async () => {
+    test('rate a hack with three reviews already - success', async () => {
         await new Hack({
             _id: 1,
             reviews: [{}, {}, {}],
@@ -267,10 +339,7 @@ describe('rate hacks', () => {
                 socialImpact: 3,
                 comments: "test"
             })
-            .expect(403)
-            .then(e => {
-                expect(e.text).toContain("already has 3 reviews");
-            });
+            .expect(200);
     });
 });
 
