@@ -149,10 +149,6 @@ describe('review next hack', () => {
     test('prefers to pick hacks with less reviews as opposed to more reviews', async () => {
         await Hack.insertMany([
             { _id: 0, reviews: [{}] },
-            { _id: 1, reviews: [{}] },
-            { _id: 2, reviews: [{}] },
-            { _id: 3, reviews: [{}] },
-            { _id: 4, reviews: [{}] },
             ...Array(100).fill({ reviews: [{}, {}] })
         ]);  
         
@@ -163,7 +159,23 @@ describe('review next hack', () => {
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
-                    expect(0 <= e.body._id && e.body._id <= 4).toEqual(true);
+                    expect(e.body._id).toEqual(0);
+                });
+        }
+    });
+    test('prioritizes verticals over # of reviews for judges assigned to one vertical', async () => {
+        await Hack.insertMany([
+            { _id: 1, categories: ['test1', 'test2'], reviews: [{}, {}] },
+            ...Array(100).fill({ categories: ['test3'], reviews: [] })
+        ]);
+        await new Judge({ _id: 'judgetreehacks', verticals: ['test1'] }).save();
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judging/next_hack")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(e => {
+                    expect(e.body._id).toEqual(1);
                 });
         }
     });

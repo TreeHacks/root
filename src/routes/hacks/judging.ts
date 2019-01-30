@@ -65,7 +65,7 @@ export const reviewNextHack = async (req, res) => {
     }
     if (req.query.hack_id) {
         const hack = await Hack.findOne(
-            {"_id": parseInt(req.query.hack_id), 'reviews.reader.id': { $ne: res.locals.user.sub } },
+            { "_id": parseInt(req.query.hack_id), 'reviews.reader.id': { $ne: res.locals.user.sub } },
             projectedFields);
         if (hack) {
             return res.json(hack);
@@ -76,30 +76,31 @@ export const reviewNextHack = async (req, res) => {
     }
 
     let judge = await Judge.findOne({ _id: res.locals.user.sub }) || { verticals: [] };
-    let createAggregationPipeline = (categories: string[] = []) => ([
+    let createAggregationPipeline = (categories: string[], maxLength: number) => ([
         {
             $match: {
                 $and: [
                     { 'reviews.reader.id': { $ne: res.locals.user.sub } }, // Not already reviewed by current user
                     categories && categories.length ? { 'categories': { $in: categories } } : {},
-                    { 'reviews.2': { $exists: false } }, // Look for when length of "reviews" is less than 3.
+                    { [`reviews.${maxLength - 1}`]: { $exists: false } }, // Look for when length of "reviews" is less than maxLength.
                 ]
             }
         },
-        // Prefer to pick applications with less reviews first
-        { $project: { ...projectedFields, _reviewSize: { $size: '$reviews' } } },
-        { $sort: { _reviewSize: 1 } },
-        { $limit: 5 },
         { $sample: { size: 1 } }, // Pick random
         { $project: projectedFields }
     ]);
-    let data = await Hack.aggregate(createAggregationPipeline((judge.verticals as string[]).map(e => VERTICALS_TO_CATEGORIES[e])));
-    if (data[0]) {
-        return res.json(data[0]);
+    let aggregateHackGetFirst = async (categories: string[], maxLength: number) => {
+        let hacks = await Hack.aggregate(createAggregationPipeline(categories, maxLength));
+        return hacks[0];
     }
-    else {
-        data = await Hack.aggregate(createAggregationPipeline());
-        return res.json(data[0]);
-    }
+    let judgeCategories = (judge.verticals as string[]).map(e => VERTICALS_TO_CATEGORIES[e]);
+    let data =
+        await aggregateHackGetFirst(judgeCategories, 1) ||
+        await aggregateHackGetFirst(judgeCategories, 2) ||
+        await aggregateHackGetFirst(judgeCategories, 3) ||
+        await aggregateHackGetFirst([], 1) ||
+        await aggregateHackGetFirst([], 2) ||
+        await aggregateHackGetFirst([], 3);
+    return res.json(data);
 
 };
