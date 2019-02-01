@@ -86,7 +86,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
   [TRANSPORTATION_BUS_ROUTES.USC]: [
     {
       day: 'Friday, February 15th',
-      time: '8:00am',
+      time: '8:30am',
       stop: 'Check in at 37th & McClintock',
       location: 'Los Angeles'
     },
@@ -101,13 +101,13 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
     },
     {
       day: 'Sunday, February 17th',
-      time: '4:00pm',
+      time: '3:30pm',
       stop: 'Check in at Panama St. & Via Ortega',
       location: 'Stanford'
     },
     {
       day: 'Sunday, February 17th',
-      time: '11:00pm',
+      time: '10:30pm',
       stop: '37th & McClintock',
       location: 'Los Angeles'
     }
@@ -132,7 +132,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
   [TRANSPORTATION_BUS_ROUTES.UCLA]: [
     {
       day: 'Friday, February 15th',
-      time: '9:00am',
+      time: '9:15am',
       stop: 'Check in at 10 Charles E. Young',
       location: 'Los Angeles'
     },
@@ -150,7 +150,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
 
     {
       day: 'Sunday, February 17th',
-      time: '4:00pm',
+      time: '3:30pm',
       stop: 'Check in at Panama St. & Via Ortega',
       location: 'Stanford'
     },
@@ -198,14 +198,14 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
   [TRANSPORTATION_BUS_ROUTES.UCI]: [
     {
       day: 'Friday, Februrary 15th',
-      time: '9:45am',
-      stop: 'Check in at CalTech (location added later)',
+      time: '7:30am',
+      stop: 'Check in at Caltech (location added later)',
       location: 'Pasadena'
     },
 
     {
       day: 'Friday, Feburary 15th',
-      time: '6:00pm',
+      time: '4:30pm',
       stop: 'Panama St. & Via Ortega',
       location: 'Stanford'
     },
@@ -289,7 +289,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
 
     {
       day: 'Sunday, Februrary 17th',
-      time: '10:00pm',
+      time: '5:30pm',
       stop: 'West Circle / University Drive',
       location: 'Berkeley'
     }
