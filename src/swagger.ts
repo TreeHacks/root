@@ -953,7 +953,7 @@ const swagger = {
     "/rooms/status": {
       "get": {
         "tags": ["rooms"],
-        "summary": "Get room status (public endpoint). Only returns the room if the room is not expired.",
+        "summary": "Get room status (public endpoint).",
         "parameters": [
           {
             "in": "query",
