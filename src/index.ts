@@ -27,6 +27,7 @@ import { reviewNextHack, getJudgeLeaderboard, getJudgeStats, rateHack } from "./
 import { getHackList } from "./routes/hacks/hacks_list";
 import { getJudgeList, editJudge } from "./routes/hacks/judges";
 import { getAnnouncements } from "./routes/announcements";
+import { getRooms, reserveRoom, dropCurrentRoom } from "./routes/rooms";
 
 // Set up the Express app
 const app = express();
@@ -94,6 +95,11 @@ authenticatedRoute.post('/users/:userId/forms/application_info/submit', submitAp
 // What permission should this one be?
 authenticatedRoute.get('/users/:userId/status', getApplicationStatus);
 authenticatedRoute.get('/users/:userId', getUserDetail);
+
+// Room reservations
+authenticatedRoute.get('/rooms', getRooms);
+authenticatedRoute.post('/rooms', reserveRoom);
+authenticatedRoute.delete('/rooms', dropCurrentRoom);
 
 // Admin protected functions.
 authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStatus);

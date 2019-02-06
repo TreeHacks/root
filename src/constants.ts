@@ -45,3 +45,56 @@ export const VERTICALS_TO_CATEGORIES = {
   "test2": "test2",
   "test3": "test3"
 }
+
+export const AVAILABLE_ROOMS = [
+  {
+    "id": "007",
+    "name": "007 The Leo Chan",
+    "description": ""
+  },
+  {
+    "id": "008",
+    "name": "008 The George Tang",
+    "description": ""
+  },
+  {
+    "id": "019",
+    "name": "019 Phi",
+    "description": ""
+  },
+  {
+    "id": "020",
+    "name": "020 Theta",
+    "description": ""
+  },
+  {
+    "id": "203",
+    "name": "203 Pi",
+    "description": ""
+  },
+  {
+    "id": "218",
+    "name": "218 The Barnholt Family",
+    "description": ""
+  },
+  {
+    "id": "219",
+    "name": "219 The Robert B Taggart and Donna F Taggart",
+    "description": ""
+  },
+  {
+    "id": "304",
+    "name": "304 Alpha",
+    "description": ""
+  },
+  {
+    "id": "305",
+    "name": "305 Leone Perkins",
+    "description": ""
+  },
+  {
+    "id": "306",
+    "name": "306 Koshland Family",
+    "description": ""
+  },
+];

@@ -112,6 +112,16 @@ const swagger = {
             "items": {"type": "string"}
           }
         }
+      },
+      "Room": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "expiry": {"type": "string"},
+          "error": {"type": "string"},
+        }
       }
     }
   },
@@ -919,6 +929,46 @@ const swagger = {
                       "text": {"type": "string"},
                       "user": {"type": "string"},
                       "ts": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/rooms": {
+        "get": {
+          "tags": ["rooms"],
+          "summary": "Get rooms.",
+          "description": "Get details about rooms available for reservation.",
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Room"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["rooms"],
+          "summary": "Reserve a room.",
+          "description": "Reserve a room.",
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Room"
                     }
                   }
                 }
