@@ -31,7 +31,6 @@ export class Home extends React.Component<IHomeProps, {}> {
       </div>
       <div className="treehacks-navbar-links">
         {this.props.auth.applicant && <NavLink to="/" isActive={(_, loc) => loc.pathname === "/"}>dashboard</NavLink>}
-        {this.props.auth.applicant && <NavLink to="/rooms">rooms</NavLink>}
         {this.props.auth.applicant && <NavLink to="/application_info">application</NavLink>}
         {this.props.auth.applicant && <NavLink to="/transportation">travel</NavLink>}
         {this.props.auth.admin &&
