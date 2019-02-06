@@ -121,6 +121,18 @@ const swagger = {
           "description": { "type": "string" },
           "expiry": { "type": "string" },
           "error": { "type": "string" },
+        },
+      },
+      "GetRoomResponse": {
+        "type": "object",
+        "properties": {
+          "current_room": { "$ref": "#/components/schemas/Room" },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Room"
+            }
+          }
         }
       }
     }
@@ -938,21 +950,43 @@ const swagger = {
         }
       }
     },
-    "/rooms": {
+    "/rooms/status": {
       "get": {
         "tags": ["rooms"],
-        "summary": "Get rooms.",
-        "description": "Get details about rooms available for reservation.",
+        "summary": "Get room status (public endpoint). Only returns the room if the room is not expired.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Room id"
+          }
+        ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Room"
-                  }
+                  "$ref": "#/components/schemas/Room"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms": {
+      "get": {
+        "tags": ["rooms"],
+        "summary": "Get rooms.",
+        "description": "Get details about rooms available for reservation, and the current room.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GetRoomResponse" }
               }
             }
           }
@@ -966,12 +1000,20 @@ const swagger = {
           "200": {
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Room"
-                  }
-                }
+                "schema": { "$ref": "#/components/schemas/GetRoomResponse" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["rooms"],
+        "summary": "Drop current room.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GetRoomResponse" }
               }
             }
           }
