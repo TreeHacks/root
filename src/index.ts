@@ -27,7 +27,7 @@ import { reviewNextHack, getJudgeLeaderboard, getJudgeStats, rateHack } from "./
 import { getHackList } from "./routes/hacks/hacks_list";
 import { getJudgeList, editJudge } from "./routes/hacks/judges";
 import { getAnnouncements } from "./routes/announcements";
-import { getRooms, reserveRoom, dropCurrentRoom } from "./routes/rooms";
+import { getRooms, reserveRoom, dropCurrentRoom, getPublicRoomStatus } from "./routes/rooms";
 
 // Set up the Express app
 const app = express();
@@ -82,6 +82,7 @@ app.get("/", (req, res) => res.redirect("/doc"));
 // Public routes
 app.get('/hacks', [anonymousRoute], getHackList);
 app.get('/announcements', [anonymousRoute], getAnnouncements);
+app.get('/rooms/status', [anonymousRoute], getPublicRoomStatus);
 
 app.use("/", authenticatedRoute);
 

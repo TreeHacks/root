@@ -4,6 +4,23 @@ import RoomReservation from "../models/RoomReservation";
 
 const RESERVATION_LENGTH = 1 * 60 * 60 * 1000; // 1 hour
 
+export async function getPublicRoomStatus(req: Request, res: Response) {
+  const room = AVAILABLE_ROOMS.find(r => r.id === req.query.id);
+
+  if (!room) {
+    res.status(500).json({ message: "Room not found" });
+  }
+
+  const currentReservation = await RoomReservation.findOne({
+    room_id: req.query.id,
+    expiry: { $gte: Date.now() }
+  });
+
+  res.json(Object.assign({}, room, {
+    expiry: currentReservation ? currentReservation.expiry : null
+  }));
+}
+
 export async function getRooms(req: Request, res: Response) {
   try {
     const now = Date.now();
