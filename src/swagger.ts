@@ -105,22 +105,22 @@ const swagger = {
       "Judge": {
         "type": "object",
         "properties": {
-          "_id": {"type": "string"},
-          "email": {"type": "string"},
+          "_id": { "type": "string" },
+          "email": { "type": "string" },
           "verticals": {
             "type": "array",
-            "items": {"type": "string"}
+            "items": { "type": "string" }
           }
         }
       },
       "Room": {
         "type": "object",
         "properties": {
-          "id": {"type": "string"},
-          "name": {"type": "string"},
-          "description": {"type": "string"},
-          "expiry": {"type": "string"},
-          "error": {"type": "string"},
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "expiry": { "type": "string" },
+          "error": { "type": "string" },
         }
       }
     }
@@ -924,51 +924,11 @@ const swagger = {
                   "items": {
                     "type": "object",
                     "properties": {
-                      "client_msg_id": {"type": "string"},
-                      "type": {"type": "string"},
-                      "text": {"type": "string"},
-                      "user": {"type": "string"},
-                      "ts": {"type": "string"}
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/rooms": {
-        "get": {
-          "tags": ["rooms"],
-          "summary": "Get rooms.",
-          "description": "Get details about rooms available for reservation.",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Room"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "tags": ["rooms"],
-          "summary": "Reserve a room.",
-          "description": "Reserve a room.",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Room"
+                      "client_msg_id": { "type": "string" },
+                      "type": { "type": "string" },
+                      "text": { "type": "string" },
+                      "user": { "type": "string" },
+                      "ts": { "type": "string" }
                     }
                   }
                 }
@@ -978,6 +938,46 @@ const swagger = {
         }
       }
     },
+    "/rooms": {
+      "get": {
+        "tags": ["rooms"],
+        "summary": "Get rooms.",
+        "description": "Get details about rooms available for reservation.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Room"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["rooms"],
+        "summary": "Reserve a room.",
+        "description": "Reserve a room.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Room"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
