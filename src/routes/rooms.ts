@@ -8,7 +8,7 @@ export async function getPublicRoomStatus(req: Request, res: Response) {
   const room = AVAILABLE_ROOMS.find(r => r.id === req.query.id);
 
   if (!room) {
-    res.status(500).json({ message: "Room not found" });
+    return res.status(500).json({ message: "Room not found" });
   }
 
   const currentReservation = await RoomReservation.findOne({
