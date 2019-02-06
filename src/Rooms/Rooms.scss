@@ -1,0 +1,56 @@
+.rooms {
+  .rules {
+    margin: 1rem auto 0;
+    text-align: left;
+    max-width: 450px;
+
+    li {
+      & + li {
+        margin-top: 0.2rem;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+  }
+
+  .rooms {
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+
+    & > div {
+      padding: 10px 20px 9px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      line-height: 1;
+
+      & div:first-child {
+        flex: 1;
+        align-self: start;
+        padding-right: 10px;
+      }
+
+      & div:last-child {
+        max-width: 60%;
+        text-align: right;
+      }
+
+      &:hover {
+        background-color: rgb(128, 135, 146);
+      }
+
+      & + div {
+        border-top: 1px solid #ccc;
+      }
+
+      a {
+        color: #02e074;
+      }
+    }
+  }
+}

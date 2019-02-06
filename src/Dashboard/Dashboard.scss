@@ -20,6 +20,18 @@
         max-width: 500px;
         min-width: 300px;
         padding: 20px;
+
+        & + .dashboard-design {
+            margin-top: 20px;
+        }
+
+        &.notice {
+            padding: 1rem 0;
+
+            a {
+                color: #02e074;
+            }
+        }
 	}
 
     .admitted-content {

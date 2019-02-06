@@ -13,6 +13,7 @@ import { get } from "lodash-es";
 import WaitlistedScreen from "./WaitlistedScreen";
 import RejectedScreen from "./RejectedScreen";
 import moment from "moment-timezone";
+import { Link } from "react-router-dom";
 
 export const Dashboard = (props: IDashboardProps) => {
     const deadline = DEADLINES.find(d => d.key === (props.profile.type || 'oos'));
@@ -26,6 +27,11 @@ export const Dashboard = (props: IDashboardProps) => {
     return (
         <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
             <div className="treehacks-dashboard-message-container">
+                {props.profile.status === STATUS.ADMISSION_CONFIRMED ?
+                    <div className="dashboard-design notice">
+                        Time to hack! Looking to <Link to="/rooms">reserve a room</Link> for your team?
+                    </div>
+                : null}
                 <div className="dashboard-design">
                     {
                         props.profile.status === STATUS.REJECTED ? <RejectedScreen /> :
