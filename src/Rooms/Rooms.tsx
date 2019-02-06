@@ -62,7 +62,7 @@ export class Rooms extends React.Component<IRoomsProps, IRoomsState> {
   }
 
   onCancel() {
-    if (!window.confirm('just making sure—are you sure you\'d like to drop this room? thanks for being so considerate and giving other hacks a chance!')) { return; }
+    if (!window.confirm('just making sure—are you sure you\'d like to drop this room? thanks for being so considerate and giving other hackers a chance!')) { return; }
 
     API.del("treehacks", `/rooms`, {})
       .then(this._updateFromApi)
