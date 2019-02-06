@@ -38,6 +38,7 @@ export class Rooms extends React.Component<IRoomsProps, IRoomsState> {
 
   componentWillUnmount() {
     clearInterval(this._clockInterval);
+    clearInterval(this._fetchInterval);
   }
 
   _updateFromApi({ current_room, rooms }) {
