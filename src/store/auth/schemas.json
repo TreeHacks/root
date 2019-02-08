@@ -39,7 +39,7 @@
         "password": {
           "type": "string",
           "title": "Password",
-          "description": "Password needs to have at least 8 characters, a number, and an uppercase and a lowercase letter."
+          "description": "Password needs to have at least 8 characters."
         },
         "password2": {
           "type": "string",
@@ -146,7 +146,7 @@
         "password": {
           "type": "string",
           "title": "new password",
-          "description": "Password needs to have at least 8 characters, a number, and an uppercase and a lowercase letter."
+          "description": "Password needs to have at least 8 characters."
         },
         "password2": {
           "type": "string",
