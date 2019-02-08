@@ -44,6 +44,18 @@ exports[`dashboard admission confirmed 1`] = `
     className="treehacks-dashboard-message-container"
   >
     <div
+      className="dashboard-design notice"
+    >
+      Time to hack! Looking to 
+      <Link
+        replace={false}
+        to="/rooms"
+      >
+        reserve a room
+      </Link>
+       for your team?
+    </div>
+    <div
       className="dashboard-design"
     >
       <Connect(Component)

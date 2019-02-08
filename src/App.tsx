@@ -10,6 +10,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { IAuthState } from "./store/auth/types";
 import Home from "./Home/Home";
 import Dashboard from "./Dashboard/Dashboard";
+import Rooms from "./Rooms/Rooms";
 import Transportation from "./Transportation/Transportation";
 import "./App.scss";
 import Review from "./Review/Review";
@@ -67,6 +68,7 @@ const MainRoutes = (props: IAppProps) => (
             <Route path="/" exact component={Dashboard} />
           }
           <Route path="/application_info" render={() => { return <FormPageWrapper incomingFormName="application_info" />; }} />
+          <Route path="/rooms" exact component={Rooms} />
           <Route path="/transportation" component={Transportation} />
           <Route path="/admin" component={Admin} />
           <Route path="/review" exact component={Review} />
