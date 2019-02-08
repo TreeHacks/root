@@ -111,14 +111,19 @@ export class Rooms extends React.Component<IRoomsProps, IRoomsState> {
           <div>
             <h3>Available rooms</h3>
             <div className="rooms">
-              {rooms.map(({ id, name, expiry, error }) => {
+              {rooms.map(({ id, name, expiry, next_unavailable, error }) => {
                 const delta = (+expiry - now) / 1000;
                 return (
                   <div>
-                    <div>{name}</div>
+                    <div>
+                      {name}
+                      {next_unavailable ?
+                        <small>"{next_unavailable.label}" begins here in {this._formatTimeDelta((+new Date(next_unavailable.start) - now) / 1000)}</small>
+                      : null}
+                    </div>
                     <div>{
                       error ?
-                        `${error}`
+                        `${error.replace(/%EXPIRY%/g, moment(expiry).format('h:mma'))}`
                       : currentRoom ?
                         `you already have a room!`
                       : (!expiry || delta <= 0) ?
