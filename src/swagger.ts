@@ -105,11 +105,33 @@ const swagger = {
       "Judge": {
         "type": "object",
         "properties": {
-          "_id": {"type": "string"},
-          "email": {"type": "string"},
+          "_id": { "type": "string" },
+          "email": { "type": "string" },
           "verticals": {
             "type": "array",
-            "items": {"type": "string"}
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "Room": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "expiry": { "type": "string" },
+          "error": { "type": "string" },
+        },
+      },
+      "GetRoomResponse": {
+        "type": "object",
+        "properties": {
+          "current_room": { "$ref": "#/components/schemas/Room" },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Room"
+            }
           }
         }
       }
@@ -914,11 +936,11 @@ const swagger = {
                   "items": {
                     "type": "object",
                     "properties": {
-                      "client_msg_id": {"type": "string"},
-                      "type": {"type": "string"},
-                      "text": {"type": "string"},
-                      "user": {"type": "string"},
-                      "ts": {"type": "string"}
+                      "client_msg_id": { "type": "string" },
+                      "type": { "type": "string" },
+                      "text": { "type": "string" },
+                      "user": { "type": "string" },
+                      "ts": { "type": "string" }
                     }
                   }
                 }
@@ -928,6 +950,76 @@ const swagger = {
         }
       }
     },
+    "/rooms/status": {
+      "get": {
+        "tags": ["rooms"],
+        "summary": "Get room status (public endpoint).",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Room id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Room"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms": {
+      "get": {
+        "tags": ["rooms"],
+        "summary": "Get rooms.",
+        "description": "Get details about rooms available for reservation, and the current room.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GetRoomResponse" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["rooms"],
+        "summary": "Reserve a room.",
+        "description": "Reserve a room.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GetRoomResponse" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["rooms"],
+        "summary": "Drop current room.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GetRoomResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
