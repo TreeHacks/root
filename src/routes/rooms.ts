@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import chrono from 'chrono-node';
 import { AVAILABLE_ROOMS } from "../constants";
 import RoomReservation from "../models/RoomReservation";
+import Application from "../models/Application";
 
 AVAILABLE_ROOMS.forEach(r => {
   r.unavailable = r.unavailable.map(({ start, end, ...rest }) => {
@@ -26,13 +27,21 @@ export async function getPublicRoomStatus(req: Request, res: Response) {
     return res.status(500).json({ message: "Room not found" });
   }
 
-  let expiry;
+  let expiry, reserver;
 
   const currentReservation = await RoomReservation.findOne({
     room_id: req.query.id,
     expiry: { $gte: Date.now() }
   });
-  if (currentReservation) { expiry = currentReservation.expiry; }
+  if (currentReservation) {
+    expiry = currentReservation.expiry;
+
+    // Inject reserver first name for display
+    const application = await Application.findOne({ _id: currentReservation.user });
+    if (application) {
+      reserver = application.forms.application_info.first_name;
+    }
+  }
 
   const availability = getAvailability(room);
   if (availability.current_unavailable) { expiry = availability.current_unavailable.end; }
@@ -41,7 +50,8 @@ export async function getPublicRoomStatus(req: Request, res: Response) {
     id: room.id,
     name: room.name,
     description: room.description,
-    expiry
+    expiry,
+    reserver
   });
 }
 
