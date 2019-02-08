@@ -50,7 +50,19 @@ export const VERTICALS_TO_CATEGORIES = {
 // [
 //   { label: "Public-facing event name", start: "2/15 10pm PST", end: "2/16 2am PST" }
 // ]
-export let AVAILABLE_ROOMS = [
+
+interface IRoom {
+  id: string,
+  name: string,
+  description: string,
+  unavailable: {
+    start: string,
+    end: string,
+    label: string
+  }[]
+};
+
+export let AVAILABLE_ROOMS: IRoom[] = [
   {
     "id": "007",
     "name": "007 The Leo Chan",
