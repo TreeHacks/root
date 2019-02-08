@@ -37,7 +37,12 @@ export async function getPublicRoomStatus(req: Request, res: Response) {
   const availability = getAvailability(room);
   if (availability.current_unavailable) { expiry = availability.current_unavailable.end; }
 
-  res.json(Object.assign({ expiry }, room));
+  res.json({
+    id: room.id,
+    name: room.name,
+    description: room.description,
+    expiry
+  });
 }
 
 export async function getRooms(req: Request, res: Response) {
@@ -65,13 +70,16 @@ export async function getRooms(req: Request, res: Response) {
 
       const availability = getAvailability(r);
 
-      return Object.assign({}, r, {
+      return {
+        id: r.id,
+        name: r.name,
+        description: r.description,
         expiry: availability.current_unavailable ? availability.current_unavailable.end :
           currentReservations[r.id] ? currentReservations[r.id].expiry : null,
         error: availability.current_unavailable ? `this room is in use for "${availability.current_unavailable.label}" until %EXPIRY%` :
           hasRecentlyReserved ? "you've already reserved this room rather recently" : null,
         next_unavailable: availability.next_unavailable
-      });
+      };
     });
 
     res.json({
