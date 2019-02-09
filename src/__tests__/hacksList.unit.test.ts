@@ -31,7 +31,6 @@ describe('hack list by anyone', () => {
     test('view hack list with no authorization', () => {
         return request(app)
             .get("/hacks")
-            .set({Authorization: 'abc'})
             .expect(200).then(e => {
                 expect(e.body.count).toEqual(3);
                 expect(e.body.results.map(item => item.title).sort()).toEqual(['test1', 'test2', 'test3'].sort());
