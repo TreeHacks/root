@@ -5,7 +5,7 @@
   "main": "webpack.common.js",
   "scripts": {
     "start": "dotenv gulp serve",
-    "heroku-postbuild": "npm test && webpack --config webpack.prod.js",
+    "heroku-postbuild": "webpack --config webpack.prod.js",
     "test": "dotenv jest"
   },
   "repository": {
