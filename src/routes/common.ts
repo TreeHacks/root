@@ -2,7 +2,7 @@ import Application from "../models/Application";
 import { IApplication } from "../models/Application.d";
 import { Request, Response } from 'express';
 import { CognitoUser } from "../models/cognitoUser";
-import { STATUS } from "../constants";
+import { STATUS, TYPE } from "../constants";
 import { uploadBase64Content, generateSignedUrlForFile } from "../services/file_actions";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
 import { ServerResponse } from "http";
@@ -128,12 +128,17 @@ export async function createApplication(user: CognitoUser) {
   let applicationInfo = {};
   let applicationLocation = user["custom:location"];
   let applicationType = user["custom:location"] === "California" ? "is" : "oos";
+  let applicationStatus = STATUS.INCOMPLETE;
   if (user.email.match(/@stanford.edu$/)) {
     applicationInfo = {
       "university": "Stanford University"
     };
     applicationType = "stanford";
     applicationLocation = "California";
+    // Auto-admit all Stanford students after the deadline.
+    if (new Date() >= getDeadline(TYPE.STANFORD)) {
+      applicationStatus = STATUS.ADMISSION_CONFIRMED; 
+    }
   }
   const application = new Application({
     "_id": user.sub,
@@ -144,7 +149,8 @@ export async function createApplication(user: CognitoUser) {
     "reviews": [],
     "user": { "email": user.email },
     "type": applicationType,
-    "location": applicationLocation
+    "location": applicationLocation,
+    "status": applicationStatus
   });
   return await application.save(); // todo: return something else here?
 }
