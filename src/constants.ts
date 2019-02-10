@@ -46,55 +46,81 @@ export const VERTICALS_TO_CATEGORIES = {
   "test3": "test3"
 }
 
-export const AVAILABLE_ROOMS = [
+// Format for unavailability:
+// [
+//   { label: "Public-facing event name", start: "2/15 10pm PST", end: "2/16 2am PST" }
+// ]
+
+interface IRoom {
+  id: string,
+  name: string,
+  description: string,
+  unavailable: {
+    start: string,
+    end: string,
+    label: string
+  }[]
+};
+
+export let AVAILABLE_ROOMS: IRoom[] = [
   {
     "id": "007",
     "name": "007 The Leo Chan",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "008",
     "name": "008 The George Tang",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "019",
     "name": "019 Phi",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "020",
     "name": "020 Theta",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "203",
     "name": "203 Pi",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "218",
     "name": "218 The Barnholt Family",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "219",
     "name": "219 The Robert B Taggart and Donna F Taggart",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "304",
     "name": "304 Alpha",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "305",
     "name": "305 Leone Perkins",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
   {
     "id": "306",
     "name": "306 Koshland Family",
-    "description": ""
+    "description": "",
+    "unavailable": []
   },
 ];

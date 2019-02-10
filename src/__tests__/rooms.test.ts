@@ -9,12 +9,14 @@ import * as constants from "../constants";
     {
         "id": "007",
         "name": "007 The Leo Chan",
-        "description": ""
+        "description": "",
+        "unavailable": []
     },
     {
         "id": "008",
         "name": "008 The George Tang",
-        "description": ""
+        "description": "",
+        "unavailable": []
     }
 ];
 
