@@ -234,7 +234,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       {
         day: 'Friday, Februrary 15th',
         time: '7:30am',
-        stop: 'In front of Avery House (293 S Holliston Ave, Pasadena, CA)',
+        stop: 'Check-in in front of Avery House (293 S Holliston Ave, Pasadena, CA)',
         location: 'Pasadena'
       },
 
