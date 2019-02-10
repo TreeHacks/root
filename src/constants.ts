@@ -157,7 +157,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCLA]: {
-    coordinator: { 'name': 'Meera Rachamallu', 'email': 'calebtho@usc.edu' },
+    coordinator: { 'name': 'Meera Rachamallu', 'email': 'mrachamallu@g.ucla.edu' },
     route: [
       {
         day: 'Friday, February 15th',
@@ -229,7 +229,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCI]: {
-    coordinator: null,
+    coordinator: { 'name': 'Tara Porter', 'email': 'tporter@caltech.edu' },
     route: [
       {
         day: 'Friday, Februrary 15th',
@@ -265,7 +265,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.POMONA]: {
-    coordinator: { 'name': 'Tara Porter', 'email': 'tporter@caltech.edu' },
+    coordinator: { 'name': 'Meera Rachamallu', 'email': 'mrachamallu@g.ucla.edu' },
     route: [
       {
         day: 'Friday, Februrary 15th',
