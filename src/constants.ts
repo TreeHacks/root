@@ -234,7 +234,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       {
         day: 'Friday, Februrary 15th',
         time: '7:30am',
-        stop: 'Check in at Caltech (location added later)',
+        stop: 'In front of Avery House (293 S Holliston Ave, Pasadena, CA)',
         location: 'Pasadena'
       },
 
@@ -259,7 +259,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       {
         day: 'Sunday, Februrary 17th',
         time: '11:00pm',
-        stop: 'CalTech',
+        stop: 'In front of Avery House (293 S Holliston Ave, Pasadena, CA)',
         location: 'Pasadena'
       }
     ]
