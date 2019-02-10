@@ -157,7 +157,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCLA]: {
-    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    coordinator: { 'name': 'Meera Rachamallu', 'email': 'calebtho@usc.edu' },
     route: [
       {
         day: 'Friday, February 15th',
@@ -193,7 +193,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.SANDIEGO]: {
-    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    coordinator: null,
     route: [
       {
         day: 'Friday, February 15th',
@@ -229,7 +229,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCI]: {
-    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    coordinator: null,
     route: [
       {
         day: 'Friday, Februrary 15th',
@@ -265,7 +265,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.POMONA]: {
-    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    coordinator: { 'name': 'Tara Porter', 'email': 'tporter@caltech.edu' },
     route: [
       {
         day: 'Friday, Februrary 15th',
@@ -301,7 +301,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.BERKELEY]: {
-    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    coordinator: { 'name': 'Adhiv Dhar', 'email': 'adhiv@calhacks.io' },
     route: [
       {
         day: 'Friday, Februrary 15th',
