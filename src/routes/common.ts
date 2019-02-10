@@ -2,7 +2,7 @@ import Application from "../models/Application";
 import { IApplication } from "../models/Application.d";
 import { Request, Response } from 'express';
 import { CognitoUser } from "../models/cognitoUser";
-import { STATUS, TYPE } from "../constants";
+import { STATUS, TYPE, TRANSPORTATION_STATUS } from "../constants";
 import { uploadBase64Content, generateSignedUrlForFile } from "../services/file_actions";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
 import { ServerResponse } from "http";
@@ -129,6 +129,7 @@ export async function createApplication(user: CognitoUser) {
   let applicationLocation = user["custom:location"];
   let applicationType = user["custom:location"] === "California" ? "is" : "oos";
   let applicationStatus = STATUS.INCOMPLETE;
+  let transportationStatus: (string | null) = null;
   if (user.email.match(/@stanford.edu$/)) {
     applicationInfo = {
       "university": "Stanford University"
@@ -138,6 +139,7 @@ export async function createApplication(user: CognitoUser) {
     // Auto-admit all Stanford students after the deadline.
     if (new Date() >= getDeadline(TYPE.STANFORD)) {
       applicationStatus = STATUS.ADMISSION_CONFIRMED; 
+      transportationStatus = TRANSPORTATION_STATUS.UNAVAILABLE;
     }
   }
   const application = new Application({
@@ -150,7 +152,8 @@ export async function createApplication(user: CognitoUser) {
     "user": { "email": user.email },
     "type": applicationType,
     "location": applicationLocation,
-    "status": applicationStatus
+    "status": applicationStatus,
+    "transportation_status": transportationStatus
   });
   return await application.save(); // todo: return something else here?
 }
