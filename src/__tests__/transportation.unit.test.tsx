@@ -142,6 +142,35 @@ it('bus reimbursement', () => {
         />
     );
     expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("Your bus coordinator is Tree Hack (treehack@treehacks.com)");
+    expect(wrapper.text()).toContain("You have been placed on a bus!");
+    expect(wrapper.text()).toContain("Hack, hack, hack!");
+    expect(wrapper.text()).toContain("37th & McClintock");
+});
+
+it('bus reimbursement route with no coordinator', () => {
+
+    const profile = {
+        status: STATUS.ADMISSION_CONFIRMED,
+        type: "oos",
+        admin_info: {
+            transportation: {
+                type: "bus",
+                id: TRANSPORTATION_BUS_ROUTES.TEST_NO_COORDINATOR,
+                deadline
+            }
+        },
+        applications: [],
+        transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
+        forms: {}
+    };
+    const wrapper = render(
+        <Transportation
+            profile={profile} {...commonProps}
+        />
+    );
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("We will add information for your bus coordinator");
     expect(wrapper.text()).toContain("You have been placed on a bus!");
     expect(wrapper.text()).toContain("Hack, hack, hack!");
     expect(wrapper.text()).toContain("37th & McClintock");

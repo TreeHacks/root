@@ -98,7 +98,7 @@ export class Transportation extends React.Component<ITransportationProps> {
     }
     
     if (transportationType === TRANSPORTATION_TYPES.BUS) {
-      const route = TRANSPORTATION_BUS_ROUTE_DETAILS[transportation.id] || [];
+      const busRouteInfo = TRANSPORTATION_BUS_ROUTE_DETAILS[transportation.id] || {coordinator: null, route: []};
 
       if (deadlinePassed && transportationForm.accept !== true) {
         return <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -115,8 +115,11 @@ export class Transportation extends React.Component<ITransportationProps> {
             <p style={{maxWidth: 575, margin: '20px auto 0'}}>You <u><strong>must</strong></u> have a <u><strong>government-issued ID</strong></u> to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.</p>
 
             <div style={{margin: 40, padding: 20, backgroundColor: '#535152'}}>
-              <p><small>We will add information for your bus coordinator in the weeks leading up to the event. If you have questions in the meantime, please reach out to hello@treehacks.com.</small></p>
-              <RouteMap route={route} />
+              <p><small>
+                {busRouteInfo.coordinator ? <React.Fragment>Your bus coordinator is <strong>{busRouteInfo.coordinator.name} ({busRouteInfo.coordinator.email}). </strong></React.Fragment> :
+                "We will add information for your bus coordinator in the weeks leading up to the event. If you have questions in the meantime, please reach out to hello@treehacks.com."}
+                </small></p>
+              <RouteMap route={busRouteInfo.route} />
             </div>
 
             <h5>{transportationForm.accept ? "Thanks, we've received your RSVP" :  <span>You must RSVP by <strong>{formattedDeadline}</strong></span>}</h5>

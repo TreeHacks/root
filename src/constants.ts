@@ -59,6 +59,7 @@ export var TRANSPORTATION_TYPES = {
 
 export var TRANSPORTATION_BUS_ROUTES = {
   TEST: "test",
+  TEST_NO_COORDINATOR: "test_no_coordinator",
   USC: "usc",
   UCLA: "ucla",
   SANDIEGO: "sandiego",
@@ -82,218 +83,259 @@ export type IBusRoute = {
   hack?: boolean
 };
 
-export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: IBusRoute[] } = {
-  [TRANSPORTATION_BUS_ROUTES.USC]: [
-    {
-      day: 'Friday, February 15th',
-      time: '8:30am',
-      stop: 'Check in at 37th & McClintock',
-      location: 'Los Angeles'
-    },
-    {
-      day: 'Friday, February 15th',
-      time: '4:30pm',
-      stop: 'Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
-    {
-      hack: true
-    },
-    {
-      day: 'Sunday, February 17th',
-      time: '3:30pm',
-      stop: 'Check in at Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
-    {
-      day: 'Sunday, February 17th',
-      time: '10:30pm',
-      stop: '37th & McClintock',
-      location: 'Los Angeles'
-    }
-  ],
-  [TRANSPORTATION_BUS_ROUTES.TEST]: [
-    {
-      day: 'Friday, February 15th',
-      time: '8:00am',
-      stop: 'Check in at 37th & McClintock',
-      location: 'Atlanta'
-    },
-    {
-      hack: true
-    },
-    {
-      day: 'Sunday, February 17th',
-      time: '11:00pm',
-      stop: '37th & McClintock',
-      location: 'Los Angeles'
-    }
-  ],
-  [TRANSPORTATION_BUS_ROUTES.UCLA]: [
-    {
-      day: 'Friday, February 15th',
-      time: '9:15am',
-      stop: 'Check in at 10 Charles E. Young',
-      location: 'Los Angeles'
-    },
+export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { name: string, email: string }, route: IBusRoute[] } } = {
+  [TRANSPORTATION_BUS_ROUTES.USC]: {
+    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    route: [
+      {
+        day: 'Friday, February 15th',
+        time: '8:30am',
+        stop: 'Check in at 37th & McClintock',
+        location: 'Los Angeles'
+      },
+      {
+        day: 'Friday, February 15th',
+        time: '4:30pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        hack: true
+      },
+      {
+        day: 'Sunday, February 17th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        day: 'Sunday, February 17th',
+        time: '10:30pm',
+        stop: '37th & McClintock',
+        location: 'Los Angeles'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.TEST]: {
+    coordinator: { 'name': 'Tree Hack', 'email': 'treehack@treehacks.com' },
+    route: [
+      {
+        day: 'Friday, February 15th',
+        time: '8:00am',
+        stop: 'Check in at 37th & McClintock',
+        location: 'Atlanta'
+      },
+      {
+        hack: true
+      },
+      {
+        day: 'Sunday, February 17th',
+        time: '11:00pm',
+        stop: '37th & McClintock',
+        location: 'Los Angeles'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.TEST_NO_COORDINATOR]: {
+    coordinator: null,
+    route: [
+      {
+        day: 'Friday, February 15th',
+        time: '8:00am',
+        stop: 'Check in at 37th & McClintock',
+        location: 'Atlanta'
+      },
+      {
+        hack: true
+      },
+      {
+        day: 'Sunday, February 17th',
+        time: '11:00pm',
+        stop: '37th & McClintock',
+        location: 'Los Angeles'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.UCLA]: {
+    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    route: [
+      {
+        day: 'Friday, February 15th',
+        time: '9:15am',
+        stop: 'Check in at 10 Charles E. Young',
+        location: 'Los Angeles'
+      },
 
-    {
-      day: 'Friday, February 15th',
-      time: '4:30pm',
-      stop: 'Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Friday, February 15th',
+        time: '4:30pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      hack: true
-    },
+      {
+        hack: true
+      },
 
-    {
-      day: 'Sunday, February 17th',
-      time: '3:30pm',
-      stop: 'Check in at Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Sunday, February 17th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      day: 'Sunday, February 17th',
-      time: '10:30pm',
-      stop: '10 Charles E. Young',
-      location: 'Los Angeles'
-    }
-  ],
-  [TRANSPORTATION_BUS_ROUTES.SANDIEGO]: [
-    {
-      day: 'Friday, February 15th',
-      time: '7:30am',
-      stop: 'Check in at UCSD (location added later)',
-      location: 'Los Angeles'
-    },
+      {
+        day: 'Sunday, February 17th',
+        time: '10:30pm',
+        stop: '10 Charles E. Young',
+        location: 'Los Angeles'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.SANDIEGO]: {
+    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    route: [
+      {
+        day: 'Friday, February 15th',
+        time: '7:30am',
+        stop: 'Check in at UCSD (location added later)',
+        location: 'Los Angeles'
+      },
 
-    {
-      day: 'Friday, February 15th',
-      time: '6:00pm',
-      stop: 'Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Friday, February 15th',
+        time: '6:00pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      hack: true
-    },
+      {
+        hack: true
+      },
 
-    {
-      day: 'Sunday, February 17th',
-      time: '3:30pm',
-      stop: 'Check in at Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Sunday, February 17th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      day: 'Sunday, February 17th',
-      time: '11:45pm',
-      stop: 'UCSD',
-      location: 'San Diego'
-    }
-  ],
-  [TRANSPORTATION_BUS_ROUTES.UCI]: [
-    {
-      day: 'Friday, Februrary 15th',
-      time: '7:30am',
-      stop: 'Check in at Caltech (location added later)',
-      location: 'Pasadena'
-    },
+      {
+        day: 'Sunday, February 17th',
+        time: '11:45pm',
+        stop: 'UCSD',
+        location: 'San Diego'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.UCI]: {
+    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    route: [
+      {
+        day: 'Friday, Februrary 15th',
+        time: '7:30am',
+        stop: 'Check in at Caltech (location added later)',
+        location: 'Pasadena'
+      },
 
-    {
-      day: 'Friday, Feburary 15th',
-      time: '4:30pm',
-      stop: 'Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Friday, Feburary 15th',
+        time: '4:30pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      hack: true
-    },
+      {
+        hack: true
+      },
 
-    {
-      day: 'Sunday, Februrary 17th',
-      time: '3:30pm',
-      stop: 'Check in at Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Sunday, Februrary 17th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      day: 'Sunday, Februrary 17th',
-      time: '11:00pm',
-      stop: 'CalTech',
-      location: 'Pasadena'
-    }
-  ],
-  [TRANSPORTATION_BUS_ROUTES.POMONA]: [
-    {
-      day: 'Friday, Februrary 15th',
-      time: '10:45am',
-      stop: 'Check in at Harvey Mudd (location added later)',
-      location: 'Claremont'
-    },
+      {
+        day: 'Sunday, Februrary 17th',
+        time: '11:00pm',
+        stop: 'CalTech',
+        location: 'Pasadena'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.POMONA]: {
+    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    route: [
+      {
+        day: 'Friday, Februrary 15th',
+        time: '10:45am',
+        stop: 'Check in at Harvey Mudd (location added later)',
+        location: 'Claremont'
+      },
 
-    {
-      day: 'Friday, Feburary 15th',
-      time: '6:00pm',
-      stop: 'Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Friday, Feburary 15th',
+        time: '6:00pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      hack: true
-    },
+      {
+        hack: true
+      },
 
-    {
-      day: 'Sunday, Februrary 17th',
-      time: '3:30pm',
-      stop: 'Check in at Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Sunday, Februrary 17th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      day: 'Sunday, Februrary 17th',
-      time: '10:00pm',
-      stop: 'Harvey Mudd',
-      location: 'Claremont'
-    }
-  ],
-  [TRANSPORTATION_BUS_ROUTES.BERKELEY]: [
-    {
-      day: 'Friday, Februrary 15th',
-      time: '2:30pm',
-      stop: 'Check in at West Circle / University Drive',
-      location: 'Berkeley'
-    },
+      {
+        day: 'Sunday, Februrary 17th',
+        time: '10:00pm',
+        stop: 'Harvey Mudd',
+        location: 'Claremont'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.BERKELEY]: {
+    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    route: [
+      {
+        day: 'Friday, Februrary 15th',
+        time: '2:30pm',
+        stop: 'Check in at West Circle / University Drive',
+        location: 'Berkeley'
+      },
 
-    {
-      day: 'Friday, Feburary 15th',
-      time: '4:30pm',
-      stop: 'Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Friday, Feburary 15th',
+        time: '4:30pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      hack: true
-    },
+      {
+        hack: true
+      },
 
-    {
-      day: 'Sunday, Februrary 17th',
-      time: '3:30pm',
-      stop: 'Check in at Panama St. & Via Ortega',
-      location: 'Stanford'
-    },
+      {
+        day: 'Sunday, Februrary 17th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
 
-    {
-      day: 'Sunday, Februrary 17th',
-      time: '5:30pm',
-      stop: 'West Circle / University Drive',
-      location: 'Berkeley'
-    }
-  ]
+      {
+        day: 'Sunday, Februrary 17th',
+        time: '5:30pm',
+        stop: 'West Circle / University Drive',
+        location: 'Berkeley'
+      }
+    ]
+  }
 };
 
 export const HACKATHON_YEAR = 2019;
