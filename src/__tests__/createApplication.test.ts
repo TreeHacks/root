@@ -4,7 +4,7 @@ import Application from "../models/Application";
 import { createApplication } from "../routes/common";
 import { IApplication } from "../models/Application.d";
 import lolex from "lolex";
-import { STATUS } from "../constants";
+import { STATUS, TRANSPORTATION_STATUS } from "../constants";
 
 beforeAll(async () => {
     await request(app);
@@ -57,6 +57,7 @@ describe('create application after deadline', () => {
         const application: IApplication = await createApplication({ email: "test@stanford.edu", sub: "123123" });
         expect(application.type).toEqual("stanford");
         expect(application.status).toEqual(STATUS.ADMISSION_CONFIRMED);
+        expect(application.transportation_status).toEqual(TRANSPORTATION_STATUS.UNAVAILABLE);
     });
 
     test('should create user application in-state', async () => {
