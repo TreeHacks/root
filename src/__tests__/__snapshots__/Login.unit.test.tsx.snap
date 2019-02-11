@@ -42,12 +42,6 @@ exports[`Login screen tests login screen applicant 1`] = `
         Sign In
       </button>
     </AuthForm>
-    <div
-      className="label-text centered"
-    >
-      or
-    </div>
-    <Component />
   </div>
   <div
     className="label-text"
