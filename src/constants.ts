@@ -157,11 +157,11 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCLA]: {
-    coordinator: { 'name': 'Meera Rachamallu', 'email': 'calebtho@usc.edu' },
+    coordinator: { 'name': 'Meera Rachamallu', 'email': 'mrachamallu@g.ucla.edu' },
     route: [
       {
         day: 'Friday, February 15th',
-        time: '9:15am',
+        time: '9:00am',
         stop: 'Check in at 10 Charles E. Young',
         location: 'Los Angeles'
       },
@@ -229,12 +229,12 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCI]: {
-    coordinator: null,
+    coordinator: { 'name': 'Tara Porter', 'email': 'tporter@caltech.edu' },
     route: [
       {
         day: 'Friday, Februrary 15th',
         time: '7:30am',
-        stop: 'In front of Avery House (293 S Holliston Ave, Pasadena, CA)',
+        stop: 'Check-in in front of Avery House (293 S Holliston Ave, Pasadena, CA)',
         location: 'Pasadena'
       },
 
@@ -265,7 +265,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.POMONA]: {
-    coordinator: { 'name': 'Tara Porter', 'email': 'tporter@caltech.edu' },
+    coordinator: { 'name': 'Meera Rachamallu', 'email': 'mrachamallu@g.ucla.edu' },
     route: [
       {
         day: 'Friday, Februrary 15th',
