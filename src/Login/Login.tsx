@@ -100,7 +100,7 @@ export class Login extends React.Component<ILoginProps, { signupFormData: any, s
 
   render() {
     const applicant = !this.state.sponsor && !this.state.judge;
-    const isStanfordSignup = (this.state.signupFormData.email || '').indexOf('@stanford.edu') !== -1;
+    const isStanfordSignup = false; // (this.state.signupFormData.email || '').indexOf('@stanford.edu') !== -1;
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
         <div className="text-center">
@@ -131,8 +131,8 @@ export class Login extends React.Component<ILoginProps, { signupFormData: any, s
             >
               <button className="btn btn-info" type="submit">Sign In</button>
             </AuthForm>
-            {applicant && <div className="label-text centered">or</div>}
-            {applicant && <StanfordLogin />}
+            {/* {applicant && <div className="label-text centered">or</div>}
+            {applicant && <StanfordLogin />} */}
           </div>
         }
         {this.props.authPage == "signUp" &&
