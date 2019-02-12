@@ -162,7 +162,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       {
         day: 'Friday, February 15th',
         time: '9:00am',
-        stop: 'Check in at 10 Charles E. Young',
+        stop: 'Check in at 10 Charles E. Young N',
         location: 'Los Angeles'
       },
 
