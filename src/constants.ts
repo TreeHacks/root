@@ -187,7 +187,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       {
         day: 'Sunday, February 17th',
         time: '10:30pm',
-        stop: '10 Charles E. Young',
+        stop: '10 Charles E. Young N',
         location: 'Los Angeles'
       }
     ]
