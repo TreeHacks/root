@@ -31,7 +31,8 @@ const props: ILoginProps = {
     forgotPassword: (e) => null,
     forgotPasswordSubmit: (e) => null,
     resendSignup: () => null,
-    changePassword: (e) => null
+    changePassword: (e) => null,
+    exchangeAuthCode: e => null
 };
 
 describe('Login screen tests', () => {

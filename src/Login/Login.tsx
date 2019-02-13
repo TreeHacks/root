@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import "./Login.scss";
-import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup, changePassword } from "../store/auth/actions";
+import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup, changePassword, exchangeAuthCode } from "../store/auth/actions";
 import { withFederated } from 'aws-amplify-react';
 import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
@@ -22,7 +22,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   forgotPassword: data => dispatch(forgotPassword(data)),
   forgotPasswordSubmit: data => dispatch(forgotPasswordSubmit(data)),
   resendSignup: () => dispatch(resendSignup()),
-  changePassword: data => dispatch(changePassword(data))
+  changePassword: data => dispatch(changePassword(data)),
+  exchangeAuthCode: e => dispatch(exchangeAuthCode(e))
 });
 
 
@@ -35,7 +36,8 @@ export interface ILoginProps extends IAuthState {
   forgotPassword: (e) => void,
   forgotPasswordSubmit: (e) => void,
   resendSignup: () => void,
-  changePassword: (e) => void
+  changePassword: (e) => void,
+  exchangeAuthCode: (e) => void
 };
 
 function transformErrors(errors) {
@@ -63,6 +65,12 @@ export class Login extends React.Component<ILoginProps, { signupFormData: any, s
   }
 
   componentDidMount() {
+    
+    const search = queryString.parse(window.location.search);
+    if (search && search.code) {
+      this.props.exchangeAuthCode(search.code);
+      return;
+    }
 
     // Parse ID Token from SAML
     const hash = queryString.parse(window.location.hash);

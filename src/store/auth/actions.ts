@@ -2,7 +2,10 @@ import { IUserAttributes, IAuthState } from "./types";
 import { API, Auth } from "aws-amplify";
 import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";
-import {get} from "lodash-es";
+import { get } from "lodash-es";
+
+declare const COGNITO_CLIENT_ID: string;
+declare const COGNITO_ENDPOINT_URL: string;
 
 export const loggedIn = (userId, attributes, admin, reviewer, sponsor, judge, applicant) => ({
   type: 'LOGIN_SUCCESS',
@@ -245,3 +248,38 @@ export function changePassword(data) {
       .then(() => dispatch(loadingEnd()))
   }
 }
+
+export const exchangeAuthCode = (code) => async (dispatch) => {
+  dispatch(loadingStart());
+  let data = new URLSearchParams();
+  data.append('grant_type', 'authorization_code');
+  data.append('client_id', COGNITO_CLIENT_ID);
+  data.append('code', code);
+  data.append('redirect_uri', window.location.origin);
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      // "Authorization": "Basic " + btoa(COGNITO_CLIENT_ID + ":")
+    },
+    body: data.toString()
+  };
+  let res = await fetch(`${COGNITO_ENDPOINT_URL}/oauth2/token`, options);
+  /*
+    // https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html
+    {
+    "access_token":"eyJz9sdfsdfsdfsd",
+    "refresh_token":"dn43ud8uj32nk2je",
+    "id_token":"dmcxd329ujdmkemkd349r",
+    "token_type":"Bearer", 
+    "expires_in":3600
+    }
+  */
+  let response: { access_token: string, refresh_token: string, token_type: string, id_token: string, expires_in: number } = await res.json();
+  localStorage.setItem("jwt", response.id_token);
+  localStorage.setItem("refresh_token", response.refresh_token);
+  window.location.search = "";
+  dispatch(checkLoginStatus());
+  // dispatch(loadingEnd());
+  // localStorage.setItem("jwt", hash.id_token);
+};
