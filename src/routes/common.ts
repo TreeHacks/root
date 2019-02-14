@@ -13,7 +13,7 @@ function getDeadline(type) {
       case "is":
           return new Date("2018-11-27T07:59:00.000Z");
       case "stanford":
-          return new Date("2019-02-14T07:59:00.000Z");
+          return new Date("2019-02-17T07:59:00.000Z");
       case "oos":
       default:
           return new Date("2018-11-20T07:59:00.000Z");
@@ -136,8 +136,9 @@ export async function createApplication(user: CognitoUser) {
     };
     applicationType = "stanford";
     applicationLocation = "California";
-    // Auto-admit all Stanford students after the deadline.
-    if (new Date() >= getDeadline(TYPE.STANFORD)) {
+    // Always auto-admit all Stanford students for now (change this to false later.)
+    // if (new Date() >= getDeadline(TYPE.STANFORD)) {
+    if (true) {
       applicationStatus = STATUS.ADMISSION_CONFIRMED; 
       transportationStatus = TRANSPORTATION_STATUS.UNAVAILABLE;
     }

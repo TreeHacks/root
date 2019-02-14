@@ -24,7 +24,7 @@ describe('create application before deadline', () => {
         clock.uninstall();
     })
 
-    test('should create stanford user application', async () => {
+    test.skip('should create stanford user application', async () => {
         const application: IApplication = await createApplication({ email: "test@stanford.edu", sub: "123123" });
         expect(application.type).toEqual("stanford");
         expect(application.status).toEqual(STATUS.INCOMPLETE);
