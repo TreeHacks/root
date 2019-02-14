@@ -49,7 +49,7 @@ function parseJwt(token) {
   return JSON.parse(window.atob(base64));
 };
 
-async function getCurrentUser() {
+const getCurrentUser = () => async (dispatch) => {
   const jwt = localStorage.getItem("jwt");
   if (jwt) {
     /*
@@ -73,6 +73,10 @@ async function getCurrentUser() {
     if (new Date().getTime() / 1000 >= parseInt(parsed.exp)) {
       console.log("JWT expired");
       localStorage.removeItem("jwt");
+      let refreshToken = localStorage.getItem("refresh_token");
+      if (refreshToken) {
+        dispatch(exchangeRefreshToken(refreshToken));
+      }
     }
     else {
       Auth.signOut();
@@ -98,7 +102,7 @@ async function getCurrentUser() {
 export function checkLoginStatus() {
   return (dispatch, getState) => {
     dispatch(loadingStart());
-    return getCurrentUser()
+    return dispatch(getCurrentUser())
       .then((user: { username: string, attributes: IUserAttributes, "cognito:groups"?: string[] }) => {
         if (!user) throw "No credentials";
         const groups = get(user.attributes, "cognito:groups", []);
@@ -256,11 +260,25 @@ export const exchangeAuthCode = (code) => async (dispatch) => {
   data.append('client_id', COGNITO_CLIENT_ID);
   data.append('code', code);
   data.append('redirect_uri', window.location.origin);
+  await callTokenEndpoint(data);
+  dispatch(checkLoginStatus());
+};
+
+export const exchangeRefreshToken = (refreshToken) => async (dispatch) => {
+  dispatch(loadingStart());
+  let data = new URLSearchParams();
+  data.append('grant_type', 'refresh_token');
+  data.append('client_id', COGNITO_CLIENT_ID);
+  data.append('refresh_token', refreshToken);
+  await callTokenEndpoint(data);
+  dispatch(checkLoginStatus());
+};
+
+const callTokenEndpoint = async (data: URLSearchParams) => {
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
-      // "Authorization": "Basic " + btoa(COGNITO_CLIENT_ID + ":")
     },
     body: data.toString()
   };
@@ -279,9 +297,5 @@ export const exchangeAuthCode = (code) => async (dispatch) => {
   if (response) {
     localStorage.setItem("jwt", response.id_token);
     localStorage.setItem("refresh_token", response.refresh_token);
-    window.location.search = "";
   }
-  dispatch(checkLoginStatus());
-  // dispatch(loadingEnd());
-  // localStorage.setItem("jwt", hash.id_token);
-};
+}

@@ -69,6 +69,8 @@ export class Login extends React.Component<ILoginProps, { signupFormData: any, s
     const search = queryString.parse(window.location.search);
     if (search && search.code) {
       this.props.exchangeAuthCode(search.code);
+      // Clear window.location.search without refreshing the page.
+      window.history.pushState({}, document.title, window.location.pathname);
       return;
     }
 
