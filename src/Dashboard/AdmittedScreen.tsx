@@ -15,6 +15,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => <div className="a
     {props.confirmedYet && <div>
         <h4>You're coming to TreeHacks {HACKATHON_YEAR}!</h4>
         <p>Admission confirmed &ndash; see you there! Make sure to review and confirm your <Link to="/transportation">travel information</Link>.</p>
+        <p>Make sure to check out the <a href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-">Ultimate TreeHacks Guide 🌲</a> to learn more!</p>
     </div>}
     {!props.confirmedYet && <div>
         <h4>Congratulations! You've been accepted to TreeHacks {HACKATHON_YEAR}!</h4>

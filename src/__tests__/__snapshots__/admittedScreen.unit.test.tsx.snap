@@ -20,6 +20,15 @@ exports[`Admission confirmed screen 1`] = `
       </Link>
       .
     </p>
+    <p>
+      Make sure to check out the 
+      <a
+        href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-"
+      >
+        Ultimate TreeHacks Guide 🌲
+      </a>
+       to learn more!
+    </p>
   </div>
   <button
     className="btn btn-custom inverted"
