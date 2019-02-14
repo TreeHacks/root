@@ -37,8 +37,8 @@ export var DEADLINES = [
   {
     "key": "stanford",
     "label": "Stanford student",
-    "date": "2019-02-14T07:59:00.000Z",
-    "display_date": "February 13, 2019"
+    "date": "2019-02-17T07:59:00.000Z",
+    "display_date": "as soon as possible"
   }
 ];
 
