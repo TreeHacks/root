@@ -259,7 +259,7 @@ export const exchangeAuthCode = (code) => async (dispatch) => {
   const options = {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/x-www-form-urlencoded"
       // "Authorization": "Basic " + btoa(COGNITO_CLIENT_ID + ":")
     },
     body: data.toString()
@@ -276,9 +276,11 @@ export const exchangeAuthCode = (code) => async (dispatch) => {
     }
   */
   let response: { access_token: string, refresh_token: string, token_type: string, id_token: string, expires_in: number } = await res.json();
-  localStorage.setItem("jwt", response.id_token);
-  localStorage.setItem("refresh_token", response.refresh_token);
-  window.location.search = "";
+  if (response) {
+    localStorage.setItem("jwt", response.id_token);
+    localStorage.setItem("refresh_token", response.refresh_token);
+    window.location.search = "";
+  }
   dispatch(checkLoginStatus());
   // dispatch(loadingEnd());
   // localStorage.setItem("jwt", hash.id_token);
