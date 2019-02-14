@@ -260,7 +260,13 @@ export const exchangeAuthCode = (code) => async (dispatch) => {
   data.append('client_id', COGNITO_CLIENT_ID);
   data.append('code', code);
   data.append('redirect_uri', window.location.origin);
-  await callTokenEndpoint(data);
+  try {
+    await callTokenEndpoint(data);
+  }
+  catch (e) {
+    console.error(e);
+    dispatch(loadingEnd());
+  }
   dispatch(checkLoginStatus());
 };
 
@@ -270,7 +276,13 @@ export const exchangeRefreshToken = (refreshToken) => async (dispatch) => {
   data.append('grant_type', 'refresh_token');
   data.append('client_id', COGNITO_CLIENT_ID);
   data.append('refresh_token', refreshToken);
-  await callTokenEndpoint(data);
+  try {
+    await callTokenEndpoint(data);
+  }
+  catch (e) {
+    console.error(e);
+    dispatch(loadingEnd());
+  }
   dispatch(checkLoginStatus());
 };
 
