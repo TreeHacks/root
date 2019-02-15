@@ -1,5 +1,4 @@
 import React from "react";
-import { Types } from "aws-sdk/clients/configservice";
 declare const COGNITO_CLIENT_ID: string;
 declare const COGNITO_ENDPOINT_URL: string;
 
