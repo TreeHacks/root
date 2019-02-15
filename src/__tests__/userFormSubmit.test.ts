@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
-import { STATUS } from '../constants';
+import { STATUS, TRANSPORTATION_STATUS, TYPE } from '../constants';
 import lolex from "lolex";
 
 const _doc = {
@@ -71,6 +71,20 @@ describe('user form submit by applicant', () => {
             .post("/users/applicanttreehacks/forms/application_info/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
+        clock.uninstall();
+    });
+    test('(TEMPORARY) submit form before deadline and stanford - success with auto admit', async () => {
+        const clock = lolex.install({ now: new Date("01/01/1999") });
+        await new Application({ ..._doc, type: TYPE.STANFORD, status: STATUS.INCOMPLETE }).save();
+        await request(app)
+            .post("/users/applicanttreehacks/forms/application_info/submit")
+            .set({ Authorization: 'applicant' })
+            .expect(200)
+            .then(async e => {
+                const application = await Application.findById('applicanttreehacks');
+                expect(application!.status).toEqual(STATUS.ADMISSION_CONFIRMED);
+                expect(application!.transportation_status).toEqual(TRANSPORTATION_STATUS.UNAVAILABLE);
+            })
         clock.uninstall();
     });
     test('submit form with not all fields complete - fail', async () => {

@@ -8,7 +8,7 @@ import { injectDynamicApplicationContent } from "../utils/file_plugin";
 import { ServerResponse } from "http";
 import { Model } from "mongoose";
 
-function getDeadline(type) {
+export function getDeadline(type) {
   switch (type) {
       case "is":
           return new Date("2018-11-27T07:59:00.000Z");
@@ -136,12 +136,6 @@ export async function createApplication(user: CognitoUser) {
     };
     applicationType = "stanford";
     applicationLocation = "California";
-    // Always auto-admit all Stanford students for now (change this to false later.)
-    // if (new Date() >= getDeadline(TYPE.STANFORD)) {
-    if (true) {
-      applicationStatus = STATUS.ADMISSION_CONFIRMED; 
-      transportationStatus = TRANSPORTATION_STATUS.UNAVAILABLE;
-    }
   }
   const application = new Application({
     "_id": user.sub,

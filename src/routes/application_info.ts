@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { getApplicationAttribute, setApplicationAttribute } from "./common"
-import { STATUS, TYPE } from '../constants';
+import { getApplicationAttribute, setApplicationAttribute, getDeadline } from "./common"
+import { STATUS, TYPE, TRANSPORTATION_STATUS } from '../constants';
 import { sendApplicationSubmittedEmail } from "../services/send_email";
 import { IApplication } from '../models/Application.d';
 
@@ -58,8 +58,15 @@ export function submitApplicationInfo(req: Request, res: Response) {
         }
       }
       if (completed) {
-        e.status = STATUS.SUBMITTED;
-        sendApplicationSubmittedEmail(res.locals.user.email);
+        // Auto-admit Stanford students. Todo: disable
+        if (e.type === TYPE.STANFORD) {
+          e.status = STATUS.ADMISSION_CONFIRMED;
+          e.transportation_status = TRANSPORTATION_STATUS.UNAVAILABLE;
+        }
+        else {
+          e.status = STATUS.SUBMITTED;
+          sendApplicationSubmittedEmail(res.locals.user.email);
+        }
       }
       else {
         return res.status(403).send("Not all required fields are complete. Required fields are " + requiredFields.join(", "));

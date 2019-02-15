@@ -24,7 +24,7 @@ describe('create application before deadline', () => {
         clock.uninstall();
     })
 
-    test.skip('should create stanford user application', async () => {
+    test('should create stanford user application', async () => {
         const application: IApplication = await createApplication({ email: "test@stanford.edu", sub: "123123" });
         expect(application.type).toEqual("stanford");
         expect(application.status).toEqual(STATUS.INCOMPLETE);
@@ -52,13 +52,6 @@ describe('create application after deadline', () => {
     afterEach(() => {
         clock.uninstall();
     })
-
-    test('should create stanford user application and auto-admit them', async () => {
-        const application: IApplication = await createApplication({ email: "test@stanford.edu", sub: "123123" });
-        expect(application.type).toEqual("stanford");
-        expect(application.status).toEqual(STATUS.ADMISSION_CONFIRMED);
-        expect(application.transportation_status).toEqual(TRANSPORTATION_STATUS.UNAVAILABLE);
-    });
 
     test('should create user application in-state', async () => {
         const application: IApplication = await createApplication({ email: "test@berkeley.edu", sub: "123125", "custom:location": "California" });
