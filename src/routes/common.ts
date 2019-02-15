@@ -136,6 +136,12 @@ export async function createApplication(user: CognitoUser) {
     };
     applicationType = "stanford";
     applicationLocation = "California";
+    const existingApplication = await Application.findOne({"user.email": user.email});
+    if (existingApplication) {
+      existingApplication.toDelete = true;
+      await existingApplication.save();
+      return await new Application({...existingApplication.toJSON(), toDelete: false, _id: user.sub}).save();
+    }
   }
   const application = new Application({
     "_id": user.sub,

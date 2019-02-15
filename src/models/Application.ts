@@ -41,6 +41,9 @@ export const applicationSchema: Schema = new mongoose.Schema({
     },
     "sponsor_optout": {
         type: Boolean
+    },
+    "toDelete": {
+        type: Boolean
     }
 });
 
