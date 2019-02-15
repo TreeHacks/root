@@ -31,6 +31,8 @@ exports[`Login screen tests login screen applicant 1`] = `
     className="top-form"
   >
     <AuthForm
+      formData={Object {}}
+      onChange={[Function]}
       onSubmit={[Function]}
       schema={Object {}}
       uiSchema={Object {}}
@@ -111,6 +113,8 @@ exports[`Login screen tests login screen judge 1`] = `
     className="top-form"
   >
     <AuthForm
+      formData={Object {}}
+      onChange={[Function]}
       onSubmit={[Function]}
       schema={Object {}}
       uiSchema={Object {}}
@@ -175,6 +179,8 @@ exports[`Login screen tests login screen sponsor 1`] = `
     className="top-form"
   >
     <AuthForm
+      formData={Object {}}
+      onChange={[Function]}
       onSubmit={[Function]}
       schema={Object {}}
       uiSchema={Object {}}
