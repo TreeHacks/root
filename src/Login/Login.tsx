@@ -54,18 +54,18 @@ function validate(formData, errors) {
 function AuthForm(props) {
   return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} className="treehacks-form" />
 }
-export class Login extends React.Component<ILoginProps, { signupFormData: any, sponsor: boolean, judge: boolean }> {
+export class Login extends React.Component<ILoginProps, { formData: any, sponsor: boolean, judge: boolean }> {
   constructor(props) {
     super(props);
     this.state = {
-      signupFormData: {},
+      formData: {},
       sponsor: false,
       judge: false
     };
   }
 
   componentDidMount() {
-    
+
     const search = queryString.parse(window.location.search);
     if (search && search.code) {
       this.props.exchangeAuthCode(search.code);
@@ -110,7 +110,7 @@ export class Login extends React.Component<ILoginProps, { signupFormData: any, s
 
   render() {
     const applicant = !this.state.sponsor && !this.state.judge;
-    const isStanfordSignup = (this.state.signupFormData.email || '').indexOf('@stanford.edu') !== -1;
+    const isStanfordEmail = (this.state.formData.email || '').indexOf('@stanford.edu') !== -1;
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
         <div className="text-center">
@@ -135,30 +135,34 @@ export class Login extends React.Component<ILoginProps, { signupFormData: any, s
         {this.props.authPage == "signIn" &&
           <div className="top-form">
             <AuthForm
-              schema={this.props.schemas.signIn.schema}
-              uiSchema={this.props.schemas.signIn.uiSchema}
+              formData={this.state.formData}
+              schema={Object.assign({}, this.props.schemas.signIn.schema, isStanfordEmail && { properties: { email: this.props.schemas.signIn.schema.properties.email }, required: ['email'] })}
+              uiSchema={Object.assign({}, this.props.schemas.signIn.uiSchema, isStanfordEmail && { 'ui:order': ['email'] })}
               onSubmit={e => this.props.signIn(e.formData)}
+              onChange={e => this.setState({ formData: e.formData }) }
             >
-              <button className="btn btn-info" type="submit">Sign In</button>
+              {!isStanfordEmail ?
+                <button className="btn btn-info" type="submit">Sign In</button>
+                : <div></div>}
             </AuthForm>
-            {applicant && <div className="label-text centered">or</div>}
+            {applicant && !isStanfordEmail && <div className="label-text centered">or</div>}
             {applicant && <StanfordLogin />}
           </div>
         }
         {this.props.authPage == "signUp" &&
           <div className="top-form">
             <AuthForm
-              formData={this.state.signupFormData}
-              schema={Object.assign({}, this.props.schemas.signUp.schema, isStanfordSignup && { properties: { email: this.props.schemas.signUp.schema.properties.email }, required: ['email'] })}
-              uiSchema={Object.assign({}, this.props.schemas.signUp.uiSchema, isStanfordSignup && { 'ui:order': ['email'] })}
+              formData={this.state.formData}
+              schema={Object.assign({}, this.props.schemas.signUp.schema, isStanfordEmail && { properties: { email: this.props.schemas.signUp.schema.properties.email }, required: ['email'] })}
+              uiSchema={Object.assign({}, this.props.schemas.signUp.uiSchema, isStanfordEmail && { 'ui:order': ['email'] })}
               onSubmit={e => this.props.signUp(e.formData)}
-              onChange={e => this.setState({ signupFormData: e.formData })}
+              onChange={e => this.setState({ formData: e.formData })}
             >
-              {!isStanfordSignup ?
+              {!isStanfordEmail ?
                 <button className="btn btn-info" type="submit">Sign Up</button>
                 : <div></div>}
             </AuthForm>
-            {isStanfordSignup ?
+            {isStanfordEmail ?
               <div style={{ marginTop: -40 }}><StanfordLogin label="Sign up with Stanford" /></div>
               : null}
           </div>
