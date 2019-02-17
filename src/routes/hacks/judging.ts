@@ -21,53 +21,62 @@ export const getJudgeStats = async (req, res) => {
         "results": {
             "num_remaining": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }).count().exec(),
             "num_remaining_floor_0_with_0_or_less_reviews": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     {'floor': 0},
                     { 'reviews.0': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }).count().exec(),
             "num_remaining_floor_0_with_1_or_less_reviews": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     {'floor': 0},
                     { 'reviews.1': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }).count().exec(),
             "num_remaining_floor_0_with_2_or_less_reviews": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     {'floor': 0},
                     { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }).count().exec(),
             "num_remaining_floor_0_with_3_or_less_reviews": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     {'floor': 0},
                     { 'reviews.3': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }).count().exec(),
             "num_remaining_floor_3_with_0_or_less_reviews": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     {'floor': 3},
                     { 'reviews.0': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }).count().exec(),
             "num_remaining_floor_3_with_1_or_less_reviews": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     {'floor': 3},
                     { 'reviews.1': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }).count().exec(),
             "num_remaining_floor_3_with_2_or_less_reviews": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     {'floor': 3},
                     { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
             }).count().exec(),
             "num_remaining_floor_3_with_3_or_less_reviews": await Hack.find({
                 $and: [
+                    { 'disabled': { $ne: true } },
                     {'floor': 3},
                     { 'reviews.3': { $exists: false } } // Look for when length of "reviews" is less than 3.
                 ]
