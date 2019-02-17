@@ -41,6 +41,8 @@ authenticatedRoute.param('userId', (req, res, next, userId) => {
 const validateGroup = (group, allowAnonymous = false) => (req, res, next) => {
   // Allow either a single group or multiple valid groups passed as an array
   if (!Array.isArray(group)) { group = [group]; }
+  
+  group.push("admin"); // admins have access to all routes.
 
   let accessTokenFromClient = req.headers.authorization;
 

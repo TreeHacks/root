@@ -127,7 +127,7 @@ authenticatedRoute.post('/review/rate', [reviewerRoute], rateReview);
 authenticatedRoute.get('/review/next_application', [reviewerRoute], reviewNextApplication);
 
 // Judging routes:
-authenticatedRoute.get('/judging/leaderboard', [judgeRoute], getJudgeLeaderboard); // todo: make this adminRoute?
+authenticatedRoute.get('/judging/leaderboard', [judgeRoute], getJudgeLeaderboard);
 authenticatedRoute.get('/judging/stats', [judgeRoute], getJudgeStats);
 authenticatedRoute.post('/judging/rate', [judgeRoute], rateHack);
 authenticatedRoute.get('/judging/next_hack', [judgeRoute], reviewNextHack);
