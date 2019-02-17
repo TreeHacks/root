@@ -17,7 +17,7 @@ interface IJudgeComponentState {
 
 const schema = {
 	"type": "object",
-	"title": "Judge",
+	"title": "",
 	"properties": {
 		"creativity": {
 			"type": "number",
@@ -104,8 +104,8 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 		return (<div className="row">
 			<div className="col-12 col-sm-8 offset-sm-4 review-form-container text-center treehacks-body-text">
 				<div className="container mt-4">
-					{this.state.hack_data && <div className="">
-						<h3>Current Hack</h3>
+					{this.state.hack_data && <div className="treehacks-judge-hack-info">
+						<h3>Judge Current Hack</h3>
 						<p style={{marginBottom: 0}}>Floor: {this.state.hack_data.floor}</p>
 						<p style={{marginBottom: 0}}>Table Number: {this.state.hack_data._id}</p>
 						<p style={{marginBottom: 0}}>Title: {this.state.hack_data.title}</p>
