@@ -488,7 +488,7 @@ describe('judge stats', () => {
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
-                expect(e.body.results.num_reamining).toEqual(2);
+                expect(e.body.results.num_remaining).toEqual(2);
             })
     });
 });
