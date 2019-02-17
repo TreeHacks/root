@@ -140,11 +140,29 @@ export const getExportedApplicationsCSV = (tableState: IReactTableState, columns
   });
 };
 
-export const getExportedHacks = (tableState: IReactTableState, csv = false) => (dispatch, getState) => {
+export const getExportedHacks = (tableState: IReactTableState, columns?: IReactTableHeader[]) => (dispatch, getState) => {
   dispatch(loadingStart());
   return dispatch(fetchHacks(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
-    saveAs(new Blob([JSON.stringify(e.results)]), `treehacks-hacks-${Date.now()}.json`);
-    dispatch(setExportedApplications(e.results));
+    let results = e.results;
+    if (columns) {
+      results = e.results.map(item => {
+        let newItem = {};
+        for (let column of columns) {
+          let value = "";
+          if (typeof column.accessor === "function") {
+            value = column.accessor(item);
+          }
+          else {
+            value = get(item, column.accessor);
+          }
+          newItem[column.Header] = value;
+        }
+        return newItem;
+      }
+      );
+    }
+    saveAs(new Blob([JSON.stringify(results)]), `treehacks-hacks-${Date.now()}.json`);
+    dispatch(setExportedApplications(results));
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);

@@ -53,7 +53,7 @@ const HackTable = (props: IAdminTableProps) => {
             "accessor": "numSkips"
         },
     ];
-    const columnsToExport = columns.filter(e => ~["_id", "title", "categories"].indexOf(String(e.accessor))  );
+    const columnsToExport = columns.filter(e => ~["_id", "title", "categories", "devpostUrl"].indexOf(String(e.accessor))  );
     return (
         <div>
             <div className="col-12">
@@ -67,8 +67,10 @@ const HackTable = (props: IAdminTableProps) => {
                     {(state, makeTable, instance) => {
                         return (
                             <React.Fragment>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export</button> (Export all pages of filtered results as JSON)</p>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export</button> (Export all pages of filtered results as CSV)</p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export all + reviews as JSON</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state, columnsToExport)}>Export public data as JSON</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export public data as CSV</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export all + reviews as CSV</button></p>
                                 {makeTable()}
                             </React.Fragment>
                         );
@@ -88,7 +90,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getApplicationList: (e) => dispatch(getHackList(e)),
-    getExportedApplications: e => dispatch(getExportedHacks(e)),
+    getExportedApplications: (e, b) => dispatch(getExportedHacks(e, b)),
     getExportedApplicationsCSV: (e, b) => dispatch(getExportedHacksCSV(e, b)),
     editRow: (a, b, c) => dispatch(editRow(a, b, c))
 });
