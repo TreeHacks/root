@@ -17,7 +17,7 @@ export async function importHacks(req: Request, res: Response) {
         return res.status(400).send("No floor specified");
     }
     let maxHack = (await Hack.find().sort({_id:-1}).limit(1))[0];
-    let maxNumber = (maxHack && maxHack._id) || -1;
+    let maxNumber = (maxHack && maxHack._id) || 0;
     for (let item of body.items) {
         maxNumber++;
         item._id = maxNumber;
