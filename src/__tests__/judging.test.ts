@@ -369,7 +369,26 @@ describe('rate hacks', () => {
     })
 });
 describe('skip hack', () => {
-    test('skip a hack with three reviews and skips 0 - success', async () => {
+    test('skip a hack with three reviews and disabled and skips 0 - success', async () => {
+        await new Hack({
+            _id: 1,
+            reviews: [{}, {}, {}],
+            numSkips: 0,
+            disabled: true
+        }).save();
+        await request(app)
+            .post("/judging/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 1,
+                skip_hack: true
+            })
+            .expect(200);
+        let hack = (await Hack.findById(1))!.toObject();
+        expect(hack.numSkips).toEqual(1);
+        expect(hack.disabled).toEqual(true);
+    });
+    test('skip a hack with three reviews and not disabled and skips 0 - success', async () => {
         await new Hack({
             _id: 1,
             reviews: [{}, {}, {}],
@@ -385,8 +404,9 @@ describe('skip hack', () => {
             .expect(200);
         let hack = (await Hack.findById(1))!.toObject();
         expect(hack.numSkips).toEqual(1);
+        expect(hack.disabled).toEqual(true);
     });
-    test('skip a hack with three reviews and skips 1 - success', async () => {
+    test('skip a hack with three reviews and not disabled and skips 1 - success', async () => {
         await new Hack({
             _id: 1,
             reviews: [{}, {}, {}],
@@ -402,6 +422,7 @@ describe('skip hack', () => {
             .expect(200);
         let hack = (await Hack.findById(1))!.toObject();
         expect(hack.numSkips).toEqual(2);
+        expect(hack.disabled).toEqual(true);
     });
 });
 

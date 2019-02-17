@@ -37,6 +37,7 @@ export const rateHack = async (req, res) => {
     }
     else if (req.body.skip_hack === true) {
         hack.numSkips = (hack.numSkips || 0) + 1;
+        hack.disabled = true;
         await hack.save();
         return res.json({
             "results": {
