@@ -90,10 +90,10 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 	nextApplication(id?: string) {
 		Promise.all([
 			API.get("treehacks", '/judging/next_hack', { queryStringParameters: id ? { hack_id: id } : {} }),
-			API.get("treehacks", '/judging/stats', {})
-		]).then(([hack_data, stats_data]) => {
+			// API.get("treehacks", '/judging/stats', {})
+		]).then(([hack_data]) => {
 			window.scrollTo(0, 0);
-			this.setState({ hack_data, stats_data, reviewFormData: null });
+			this.setState({ hack_data, reviewFormData: null });
 		}).catch((err) => {
 			alert("Error, " + err);
 			console.log(err);
