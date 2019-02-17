@@ -42,6 +42,19 @@ const JudgeTable = (props: IAdminTableProps) => {
                 onChange={e => props.editRow("judges", p.row._id, {"verticals": e.formData})}
                 ><div></div></Form>
             </div>
+        },
+        {
+            "Header": "Floor",
+            "accessor": "floor",
+            "Cell": p => <div>
+                <Form schema={{
+                    "type": "string",
+                    "enum": [1, 2]
+                }} uiSchema={{
+                }} formData={p.value}
+                onChange={e => props.editRow("judges", p.row._id, {"floor": e.formData})}
+                ><div></div></Form>
+            </div>
         }
     ];
     return (
