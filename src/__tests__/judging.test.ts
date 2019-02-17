@@ -135,6 +135,21 @@ describe('review next hack', () => {
                 });
         }
     });
+    test('only gives hacks with same floor for judges assigned to a different floor', async () => {
+        await Hack.insertMany([
+            ...Array(100).fill({ categories: [], reviews: [], floor: 1 })
+        ]);
+        await new Judge({ _id: 'judgetreehacks', floor: 0 }).save();
+        for (let i = 0; i < 10; i++) {
+            await request(app)
+                .get("/judging/next_hack")
+                .set({ Authorization: 'judge' })
+                .expect(200)
+                .then(e => {
+                    expect(e.body).toEqual("");
+                });
+        }
+    });
     test('does not get hack already reviewed by current user', async () => {
         await new Hack({
             _id: 1,

@@ -84,12 +84,13 @@ export const reviewNextHack = async (req, res) => {
         }
     }
 
-    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || { verticals: [] };
+    let judge = await Judge.findOne({ _id: res.locals.user.sub }) || { verticals: [], floor: undefined };
     let createAggregationPipeline = (categories: string[], maxLength: number) => ([
         {
             $match: {
                 $and: [
                     { 'disabled': { $ne: true } },
+                    judge.floor !== undefined ? { 'floor': judge.floor } : {},
                     { 'reviews.reader.id': { $ne: res.locals.user.sub } }, // Not already reviewed by current user
                     categories && categories.length ? { 'categories': { $in: categories } } : {},
                     { [`reviews.${maxLength - 1}`]: { $exists: false } }, // Look for when length of "reviews" is less than maxLength.
