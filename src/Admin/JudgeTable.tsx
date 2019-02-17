@@ -8,7 +8,7 @@ import ApplicationView from "./ApplicationView";
 import { IBaseState } from "../store/base/types";
 import { getJudgeList, editRow } from "../store/admin/actions";
 import Form from "react-jsonschema-form";
-import { VERTICALS } from "../constants";
+import { VERTICALS, FLOORS } from "../constants";
 import "./AdminTable.scss";
 
 const JudgeTable = (props: IAdminTableProps) => {
@@ -49,8 +49,8 @@ const JudgeTable = (props: IAdminTableProps) => {
             "width": 60,
             "Cell": p => <div>
                 <Form schema={{
-                    "type": "string",
-                    "enum": [1, 2]
+                    "type": "number",
+                    "enum": FLOORS
                 }} uiSchema={{
                 }} formData={p.value}
                 onChange={e => props.editRow("judges", p.row._id, {"floor": e.formData})}

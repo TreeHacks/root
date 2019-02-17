@@ -367,3 +367,5 @@ export const stanfordApplicationDisplayFields = [
 ];
 
 export const VERTICALS = ["health", "safety", "awareness"];
+
+export const FLOORS = [0, 1, 2, 3];

@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { IStatsWrapperProps, IStatsProps, IBulkCreateProps, IBulkImportHacksProps } from "./types";
 import { performBulkCreate, setBulkCreateEmails, setBulkCreateGroup, performBulkImportHacks, setBulkImportHacks, setBulkImportHacksFloor } from "../store/admin/actions";
 import { IAdminState } from "../store/admin/types";
-import { GROUPS } from "../constants";
+import Form from "react-jsonschema-form";
+import { FLOORS } from "../constants";
 
 const BulkImportHacks = (props: IBulkImportHacksProps) => {
     return <div>
@@ -14,12 +15,14 @@ const BulkImportHacks = (props: IBulkImportHacksProps) => {
                         value={props.bulkImportHacks}
                         onChange={e => props.setBulkImportHacks(e.target.value)}>
                     </textarea>
-                    Floor <select required className="form-control" value={props.bulkImportHacksFloor}
-                    onChange={e => props.setBulkImportHacksFloor(parseInt(e.target.value))}>
-                        <option disabled selected>Select floor</option>
-                        <option>1</option>
-                        <option>2</option>
-                    </select>
+                    Floor
+                    <Form schema={{
+                        "type": "number",
+                        "enum": FLOORS
+                    }} uiSchema={{
+                    }} formData={props.bulkImportHacksFloor}
+                        onChange={e => props.setBulkImportHacksFloor(parseInt(e.formData))}
+                    ><div></div></Form>
                     <input className="form-control" type="submit" />
                 </form>
             </div>
@@ -27,7 +30,7 @@ const BulkImportHacks = (props: IBulkImportHacksProps) => {
                 <div>
                     Please enter hacks addresses, separated by newlines. (No header row; no spaces between commas). (Also, only title, devpostUrl, and categories are actually imported. Extra columns are ignored.)
                         <pre>
-                        "title", "devpostUrl", "description", "video", "website", "fileUrl", "categories"{"\n"} 
+                        "title", "devpostUrl", "description", "video", "website", "fileUrl", "categories"{"\n"}
                         title1,https://google.com,,,,,"Best 1, Best 2, Best 3",{"\n"}
                         title2,https://google.com,,,,,"Best 1, Best 2",{"\n"}
                         ...{"\n"}
