@@ -46,6 +46,7 @@ const JudgeTable = (props: IAdminTableProps) => {
         {
             "Header": "Floor",
             "accessor": "floor",
+            "width": 60,
             "Cell": p => <div>
                 <Form schema={{
                     "type": "string",
