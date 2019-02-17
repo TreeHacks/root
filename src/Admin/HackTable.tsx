@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { IAdminTableProps } from "./types";
-import { getHackList, getExportedHacks } from "../store/admin/actions";
+import { getHackList, getExportedHacks, getExportedApplicationsCSV, getExportedHacksCSV } from "../store/admin/actions";
 import ReactTable from "react-table";
 import 'react-table/react-table.css';
 import { IAdminState } from "../store/admin/types";
@@ -28,6 +28,7 @@ const HackTable = (props: IAdminTableProps) => {
             "accessor": "categories"
         }
     ];
+    const columnsToExport = columns.filter(e => e.accessor !== "devpostUrl");
     return (
         <div>
             <div className="col-12">
@@ -42,6 +43,7 @@ const HackTable = (props: IAdminTableProps) => {
                         return (
                             <React.Fragment>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export</button> (Export all pages of filtered results as JSON)</p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export</button> (Export all pages of filtered results as CSV)</p>
                                 {makeTable()}
                             </React.Fragment>
                         );
@@ -61,7 +63,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getApplicationList: (e) => dispatch(getHackList(e)),
-    getExportedApplications: e => dispatch(getExportedHacks(e))
+    getExportedApplications: e => dispatch(getExportedHacks(e)),
+    getExportedApplicationsCSV: (e, b) => dispatch(getExportedHacksCSV(e, b))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HackTable);

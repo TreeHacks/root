@@ -140,11 +140,39 @@ export const getExportedApplicationsCSV = (tableState: IReactTableState, columns
   });
 };
 
-export const getExportedHacks = (tableState: IReactTableState) => (dispatch, getState) => {
+export const getExportedHacks = (tableState: IReactTableState, csv = false) => (dispatch, getState) => {
   dispatch(loadingStart());
   return dispatch(fetchHacks(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
     saveAs(new Blob([JSON.stringify(e.results)]), `treehacks-hacks-${Date.now()}.json`);
     dispatch(setExportedApplications(e.results));
+    dispatch(loadingEnd());
+  }).catch(e => {
+    console.error(e);
+    dispatch(loadingEnd());
+    alert("Error getting exported hacks " + e);
+  });
+};
+
+export const getExportedHacksCSV = (tableState: IReactTableState, columns: IReactTableHeader[]) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return dispatch(fetchHacks(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
+    let results = e.results.map(item => {
+      let newItem = {};
+      for (let column of columns) {
+        let value = "";
+        if (typeof column.accessor === "function") {
+          value = column.accessor(item);
+        }
+        else {
+          value = get(item, column.accessor);
+        }
+        newItem[column.Header] = value;
+      }
+      return newItem;
+    }
+    );
+    saveAs(new Blob([Papa.unparse(results)]), `treehacks-hacks-${Date.now()}.csv`);
+    dispatch(setExportedApplications(results));
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);

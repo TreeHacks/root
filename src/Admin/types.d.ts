@@ -17,6 +17,7 @@ export interface IAdminTableProps extends IAdminState {
     getExportedApplications: (state: IReactTableState) => void,
     setSelectedForm: (e: { id: string, name: string }) => void,
     editRow?: (endpoint: string, id: string, data: any) => Promise<any>,
+    getExportedApplicationsCSV: (state: IReactTableState, columns: IReactTableHeader[]) => void,
     base: IBaseState
 }
 
