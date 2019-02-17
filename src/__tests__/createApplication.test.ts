@@ -47,7 +47,6 @@ describe('create application before deadline', () => {
         expect(application.toJSON().forms).toEqual(oldApplication!.toJSON().forms);
         expect(application.toJSON().user).toEqual(oldApplication!.toJSON().user);
         expect(application._id).toEqual("123123");
-        console.error(oldApplication);
         // expect(oldApplication!.toDelete).toEqual(true);
         expect(application.toDelete).not.toEqual(true);
     });
