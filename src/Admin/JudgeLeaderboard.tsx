@@ -30,7 +30,14 @@ export default class JudgeLeaderboard extends React.Component<{}, { refreshing: 
     }
     render() {
         return (<div className="container">
-            <div style={{marginTop: 10}}><a href="#" onClick={e => { this.loadData(); e.preventDefault(); }}>{this.state.refreshing ? "Refreshing..." : "Refresh"}</a></div>
+            <div style={{ marginTop: 10 }}><a href="#" onClick={e => { this.loadData(); e.preventDefault(); }}>{this.state.refreshing ? "Refreshing..." : "Refresh"}</a></div>
+            {this.state.stats_data &&
+                <div className="">
+                    {Object.keys(this.state.stats_data.results).map(key =>
+                        <div>
+                            {key}: <strong>{this.state.stats_data.results[key]}</strong>
+                        </div>)}
+                </div>}
             <table className="table">
                 <tbody>
                     {this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
@@ -40,13 +47,6 @@ export default class JudgeLeaderboard extends React.Component<{}, { refreshing: 
                     )}
                 </tbody>
             </table>
-            {this.state.stats_data &&
-                <div className="">
-                    {Object.keys(this.state.stats_data.results).map(key => 
-                        <div>
-                            {key}: <strong>{this.state.stats_data.results[key]}</strong>
-                        </div>)}
-                </div>}
         </div>);
     }
 }
