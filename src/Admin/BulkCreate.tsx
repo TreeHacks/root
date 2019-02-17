@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { IStatsWrapperProps, IStatsProps, IBulkCreateProps } from "./types";
-import { performBulkCreate, setBulkCreateEmails, setBulkCreateGroup } from "../store/admin/actions";
+import { performBulkCreate, setBulkCreateEmails, setBulkCreateGroup, setBulkCreatePassword } from "../store/admin/actions";
 import { IAdminState } from "../store/admin/types";
 import { GROUPS } from "../constants";
 
@@ -18,6 +18,10 @@ const BulkCreate = (props: IBulkCreateProps) => {
                         <option disabled value="">Set group to...</option>
                         {Object.keys(GROUPS).map(statusName => <option key={statusName} value={statusName}>{GROUPS[statusName]}</option>)};
                     </select>
+                    <input className="form-control" type="text" placeholder="Password"
+                        value={props.bulkCreate.password}
+                        onChange={e => props.setBulkCreatePassword(e.target.value)}
+                    />
                     <input className="form-control" type="submit" />
                 </form>
             </div>
@@ -44,7 +48,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
     performBulkCreate: () => dispatch(performBulkCreate()),
     setBulkCreateEmails: e => dispatch(setBulkCreateEmails(e)),
-    setBulkCreateGroup: e => dispatch(setBulkCreateGroup(e))
+    setBulkCreateGroup: e => dispatch(setBulkCreateGroup(e)),
+    setBulkCreatePassword: e => dispatch(setBulkCreatePassword(e))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BulkCreate);

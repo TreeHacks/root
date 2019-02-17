@@ -342,18 +342,25 @@ export const setBulkCreateEmails = (emails) => ({
   emails
 });
 
+export const setBulkCreatePassword = (password) => ({
+  type: "SET_BULK_CREATE_PASSWORD",
+  password
+});
+
 export const performBulkCreate = () => (dispatch, getState) => {
-  const { group, emails } = (getState().admin as IAdminState).bulkCreate;
+  const { group, emails, password } = (getState().admin as IAdminState).bulkCreate;
   dispatch(loadingStart());
   return API.post("treehacks", `/users_bulkcreate`, {
     body: {
       emails: emails.split('\n').map(e => e.trim()),
-      group
+      group,
+      password
     }
   }).then(e => {
     saveAs(new Blob([Papa.unparse(e.users)]), `bulk-creation-${Date.now()}.csv`);
     dispatch(setBulkCreateGroup(""));
     dispatch(setBulkCreateEmails(""));
+    dispatch(setBulkCreateGroup(""));
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
@@ -390,7 +397,7 @@ export const performBulkImportHacks = () => (dispatch, getState) => {
     }
   }).then(e => {
     dispatch(setBulkImportHacks(""));
-    dispatch(setBulkCreateEmails(""));
+    dispatch(setBulkImportHacksFloor(null));
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);

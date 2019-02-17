@@ -1,6 +1,5 @@
 import { IAdminState } from "./types";
 import { Reducer } from 'redux';
-import { stat } from "fs";
 
 const initialState: IAdminState = {
   applicationList: [],
@@ -15,7 +14,8 @@ const initialState: IAdminState = {
   },
   bulkCreate: {
     group: "",
-    emails: ""
+    emails: "",
+    password: ""
   },
   bulkImportHacks: "",
   bulkImportHacksFloor: null
@@ -79,6 +79,14 @@ const admin: Reducer<any> = (state: any = initialState, action): any => {
         bulkCreate: {
           ...state.bulkCreate,
           emails: action.emails
+        }
+      };
+      case "SET_BULK_CREATE_PASSWORD":
+      return {
+        ...state,
+        bulkCreate: {
+          ...state.bulkCreate,
+          password: action.password
         }
       };
     case "SET_BULK_IMPORT_HACKS":

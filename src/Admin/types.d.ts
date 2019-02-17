@@ -40,6 +40,7 @@ export interface IBulkCreateProps extends IAdminState {
     performBulkCreate: () => void,
     setBulkCreateGroup: (x: string) => void,
     setBulkCreateEmails: (x: string) => void,
+    setBulkCreatePassword: (x: string) => void
 }
 
 export interface IBulkImportHacksProps extends IAdminState {
