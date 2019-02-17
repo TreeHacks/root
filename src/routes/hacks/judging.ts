@@ -93,7 +93,11 @@ export const rateHack = async (req, res) => {
         });
     }
     else if (hack.reviews && find(hack.reviews, { "reader": { "id": res.locals.user.sub } })) {
-        return res.status(403).send("Hack already has a review submitted by user " + res.locals.user.sub);
+        return res.json({
+            "results": {
+                "status": "success"
+            }
+        });
     }
     else {
         hack.disabled = false;
