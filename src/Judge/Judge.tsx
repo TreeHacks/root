@@ -68,6 +68,21 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 	componentDidMount() {
 		this.nextApplication();
 	}
+	skipHack() {
+		return API.post("treehacks", '/judging/rate', {
+			body: {
+				"hack_id": this.state.hack_data._id,
+				"skip_hack": true
+			}
+		}).then((data) => {
+			if (data.results.status === "success") {
+				this.nextApplication();
+			}
+		}).catch(err => {
+			alert("Error, " + err);
+			console.error(err);
+		})
+	}
 	nextApplication(id?: string) {
 		Promise.all([
 			API.get("treehacks", '/judging/next_hack', { queryStringParameters: id ? { hack_id: id } : {} }),
@@ -103,7 +118,7 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 						formData={this.state.reviewFormData}
 						onChange={e => this.setState({ reviewFormData: e.formData })}
 					/>
-					<button className="btn m-4" onClick={() => this.nextApplication()}>Skip this hack</button>
+					<button className="btn m-4" onClick={() => this.skipHack()}>This team is not here -- skip this hack.</button>
 					<Form
 						schema={{ "type": "number" }}
 						uiSchema={{
