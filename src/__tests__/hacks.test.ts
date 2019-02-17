@@ -49,8 +49,8 @@ describe('import hacks', () => {
         expect(hacks.map(h => h.devpostUrl).sort()).toEqual(["devpostUrl1", "devpostUrl2"].sort());
         expect(hacks.map(h => h.title).sort()).toEqual(["title1", "title2"].sort());
         expect(isEqual(hacks.map(h => h.categories).sort(), [["cat11", "cat12", "cat13"], ["cat21", "cat22", "cat23"]])).toBe(true);
-        expect(hacks[0]._id).toEqual(0);
-        expect(hacks[1]._id).toEqual(1);
+        expect(hacks[0]._id).toEqual(1);
+        expect(hacks[1]._id).toEqual(2);
         expect(hacks[0].floor).toEqual(2);
         expect(hacks[1].floor).toEqual(2);
     });
