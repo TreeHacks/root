@@ -13,7 +13,7 @@ export async function importHacks(req: Request, res: Response) {
     // if (!(req.body instanceof IHacksImportRequestBody)) {
     //     return res.status(400).send("Invalid request body");
     // }
-    if (!body.floor) {
+    if (typeof(body.floor) !== "number") {
         return res.status(400).send("No floor specified");
     }
     let maxHack = (await Hack.find().sort({_id:-1}).limit(1))[0];
