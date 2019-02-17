@@ -5,7 +5,8 @@ export async function bulkCreateUsers(req: Request, res: Response) {
   try {
     const users = await bulkAutoCreateUsers({
       emails: req.body.emails,
-      group: req.body.group
+      group: req.body.group,
+      password: req.body.password
     });
     res.json({ users });
 

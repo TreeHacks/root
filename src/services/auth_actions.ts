@@ -4,8 +4,8 @@ import Judge from "../models/Judge";
 
 const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
 
-export async function bulkAutoCreateUser({ email, group }) {
-  const password = passwordGenerator.generate({
+export async function bulkAutoCreateUser({ email, group, password }) {
+  password = password || passwordGenerator.generate({
     length: 10,
     numbers: true,
     uppercase: true,
@@ -66,8 +66,8 @@ export async function bulkAutoCreateUser({ email, group }) {
   }
 } 
 
-export async function bulkAutoCreateUsers({ emails, group }) {
-  const requests = emails.map(email => bulkAutoCreateUser({ email, group }));
+export async function bulkAutoCreateUsers({ emails, group, password }) {
+  const requests = emails.map(email => bulkAutoCreateUser({ email, group, password }));
   const results = await Promise.all(requests);
   return results;
 }
