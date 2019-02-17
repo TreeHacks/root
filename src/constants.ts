@@ -81,12 +81,12 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "description": "",
     "unavailable": []
   },
-  {
-    "id": "020",
-    "name": "020 Theta",
-    "description": "",
-    "unavailable": []
-  },
+//   {
+//     "id": "020",
+//     "name": "020 Theta",
+//     "description": "",
+//     "unavailable": []
+//   },
   {
     "id": "203",
     "name": "203 Pi",
