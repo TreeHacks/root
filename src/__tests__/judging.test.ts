@@ -75,6 +75,16 @@ describe('review next hack', () => {
                 expect(e.body).toEqual("");
             });
     });
+    test('does not get hack that is disabled', async () => {
+        await new Hack({ _id: 1, verticals: ["test1"], reviews: [], disabled: true }).save();
+        await request(app)
+            .get("/judging/next_hack")
+            .set({ Authorization: 'judge' })
+            .expect(200)
+            .then(e => {
+                expect(e.body).toEqual("");
+            });
+    });
     test('prioritizes verticals for judges assigned to one vertical', async () => {
         await Hack.insertMany([
             { _id: 1, categories: ['test1', 'test2'], reviews: [] },

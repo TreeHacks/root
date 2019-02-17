@@ -89,6 +89,7 @@ export const reviewNextHack = async (req, res) => {
         {
             $match: {
                 $and: [
+                    { 'disabled': { $ne: true } },
                     { 'reviews.reader.id': { $ne: res.locals.user.sub } }, // Not already reviewed by current user
                     categories && categories.length ? { 'categories': { $in: categories } } : {},
                     { [`reviews.${maxLength - 1}`]: { $exists: false } }, // Look for when length of "reviews" is less than maxLength.
