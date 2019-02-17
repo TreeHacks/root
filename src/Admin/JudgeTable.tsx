@@ -50,10 +50,11 @@ const JudgeTable = (props: IAdminTableProps) => {
             "Cell": p => <div>
                 <Form schema={{
                     "type": "number",
-                    "enum": FLOORS
+                    "enum": FLOORS,
+                    "default": FLOORS[0]
                 }} uiSchema={{
                 }} formData={p.value}
-                onChange={e => props.editRow("judges", p.row._id, {"floor": e.formData})}
+                onChange={e => e.formData !== undefined && props.editRow("judges", p.row._id, {"floor": e.formData})}
                 ><div></div></Form>
             </div>
         }
