@@ -12,7 +12,11 @@ import { IBaseState } from "src/store/base/types";
 const HackTable = (props: IAdminTableProps) => {
     const columns = [
         {
-            "Header": "ID / Table",
+            "Header": "Floor",
+            "accessor": "floor",
+        },
+        {
+            "Header": "Table",
             "accessor": "_id",
         },
         {
@@ -53,7 +57,7 @@ const HackTable = (props: IAdminTableProps) => {
             "accessor": "numSkips"
         },
     ];
-    const columnsToExport = columns.filter(e => ~["_id", "title", "categories", "devpostUrl"].indexOf(String(e.accessor))  );
+    const columnsToExport = columns.filter(e => ~["floor", "_id", "title", "categories", "devpostUrl"].indexOf(String(e.accessor))  );
     return (
         <div>
             <div className="col-12">

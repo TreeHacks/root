@@ -155,7 +155,7 @@ export const getExportedHacks = (tableState: IReactTableState, columns?: IReactT
           else {
             value = get(item, column.accessor);
           }
-          newItem[column.Header] = value;
+          newItem[column.accessor] = value;
         }
         return newItem;
       }
@@ -366,10 +366,16 @@ export const setBulkImportHacks = (bulkImportHacks) => ({
   bulkImportHacks
 });
 
+export const setBulkImportHacksFloor = (bulkImportHacksFloor) => ({
+  type: "SET_BULK_IMPORT_HACKS_FLOOR",
+  bulkImportHacksFloor
+});
+
 export const performBulkImportHacks = () => (dispatch, getState) => {
 
   const headers = ["title", "devpostUrl", "description", "video", "website", "fileUrl", "categories"];
   const bulkImportHacks = (getState().admin as IAdminState).bulkImportHacks;
+  const bulkImportHacksFloor = (getState().admin as IAdminState).bulkImportHacksFloor;
   const opts = { header: true, skipEmptyLines: true };
   const csvData = Papa.parse(headers.join(",") + "\n" + bulkImportHacks, opts).data.map(e => ({
     ...e,
@@ -378,7 +384,8 @@ export const performBulkImportHacks = () => (dispatch, getState) => {
   dispatch(loadingStart());
   return API.post("treehacks", `/hacks_import`, {
     body: {
-      items: csvData
+      items: csvData,
+      floor: bulkImportHacksFloor
     }
   }).then(e => {
     dispatch(setBulkImportHacks(""));

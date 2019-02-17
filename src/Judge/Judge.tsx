@@ -102,6 +102,7 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 				<div className="container mt-4">
 					{this.state.hack_data && <div className="">
 						<h3>Current Hack</h3>
+						<p style={{marginBottom: 0}}>Floor: {this.state.hack_data.floor}</p>
 						<p style={{marginBottom: 0}}>Table Number: {this.state.hack_data._id}</p>
 						<p style={{marginBottom: 0}}>Title: {this.state.hack_data.title}</p>
 					</div>}

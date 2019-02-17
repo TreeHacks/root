@@ -17,7 +17,8 @@ const initialState: IAdminState = {
     group: "",
     emails: ""
   },
-  bulkImportHacks: ""
+  bulkImportHacks: "",
+  bulkImportHacksFloor: null
 };
 
 const admin: Reducer<any> = (state: any = initialState, action): any => {
@@ -80,11 +81,16 @@ const admin: Reducer<any> = (state: any = initialState, action): any => {
           emails: action.emails
         }
       };
-      case "SET_BULK_IMPORT_HACKS":
-        return {
-          ...state,
-          bulkImportHacks: action.bulkImportHacks
-        };
+    case "SET_BULK_IMPORT_HACKS":
+      return {
+        ...state,
+        bulkImportHacks: action.bulkImportHacks
+      };
+    case "SET_BULK_IMPORT_HACKS_FLOOR":
+      return {
+        ...state,
+        bulkImportHacksFloor: action.bulkImportHacksFloor
+      };
     default:
       return state;
   }

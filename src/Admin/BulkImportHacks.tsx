@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { IStatsWrapperProps, IStatsProps, IBulkCreateProps, IBulkImportHacksProps } from "./types";
-import { performBulkCreate, setBulkCreateEmails, setBulkCreateGroup, performBulkImportHacks, setBulkImportHacks } from "../store/admin/actions";
+import { performBulkCreate, setBulkCreateEmails, setBulkCreateGroup, performBulkImportHacks, setBulkImportHacks, setBulkImportHacksFloor } from "../store/admin/actions";
 import { IAdminState } from "../store/admin/types";
 import { GROUPS } from "../constants";
 
@@ -14,6 +14,12 @@ const BulkImportHacks = (props: IBulkImportHacksProps) => {
                         value={props.bulkImportHacks}
                         onChange={e => props.setBulkImportHacks(e.target.value)}>
                     </textarea>
+                    Floor <select required className="form-control" value={props.bulkImportHacksFloor}
+                    onChange={e => props.setBulkImportHacksFloor(parseInt(e.target.value))}>
+                        <option disabled selected>Select floor</option>
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
                     <input className="form-control" type="submit" />
                 </form>
             </div>
@@ -38,7 +44,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     performBulkImportHacks: () => dispatch(performBulkImportHacks()),
-    setBulkImportHacks: e => dispatch(setBulkImportHacks(e))
+    setBulkImportHacks: e => dispatch(setBulkImportHacks(e)),
+    setBulkImportHacksFloor: e => dispatch(setBulkImportHacksFloor(e))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BulkImportHacks);

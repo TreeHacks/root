@@ -44,7 +44,8 @@ export interface IBulkCreateProps extends IAdminState {
 
 export interface IBulkImportHacksProps extends IAdminState {
     performBulkImportHacks: () => void,
-    setBulkImportHacks: (e: any) => void
+    setBulkImportHacks: (e: any) => void,
+    setBulkImportHacksFloor: (e: number) => void
 }
 
 export interface IReactTableHeader {
