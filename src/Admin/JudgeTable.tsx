@@ -54,7 +54,7 @@ const JudgeTable = (props: IAdminTableProps) => {
                     "default": FLOORS[0]
                 }} uiSchema={{
                 }} formData={p.value}
-                onChange={e => e.formData !== undefined && props.editRow("judges", p.row._id, {"floor": e.formData})}
+                onChange={e => e.formData !== undefined && setTimeout(() => props.editRow("judges", p.row._id, {"floor": e.formData}), 100)}
                 ><div></div></Form>
             </div>
         }
