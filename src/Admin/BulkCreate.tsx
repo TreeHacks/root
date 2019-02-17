@@ -18,7 +18,7 @@ const BulkCreate = (props: IBulkCreateProps) => {
                         <option disabled value="">Set group to...</option>
                         {Object.keys(GROUPS).map(statusName => <option key={statusName} value={statusName}>{GROUPS[statusName]}</option>)};
                     </select>
-                    <input className="form-control" type="text" placeholder="Password"
+                    <input className="form-control" type="text" placeholder="Password (optional)"
                         value={props.bulkCreate.password}
                         onChange={e => props.setBulkCreatePassword(e.target.value)}
                     />
