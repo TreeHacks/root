@@ -35,6 +35,15 @@ export const rateHack = async (req, res) => {
     if (!hack) {
         return res.status(404).send("Hack to rate not found");
     }
+    else if (req.body.skip_hack === true) {
+        hack.numSkips = (hack.numSkips || 0) + 1;
+        await hack.save();
+        return res.json({
+            "results": {
+                "status": "success"
+            }
+        });
+    }
     else if (hack.reviews && find(hack.reviews, { "reader": { "id": res.locals.user.sub } })) {
         return res.status(403).send("Hack already has a review submitted by user " + res.locals.user.sub);
     }

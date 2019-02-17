@@ -5,9 +5,9 @@ import { omit } from "lodash";
 import { hackReviewDisplayFields } from "../constants";
 
 let docs = [
-    { _id: 1, title: 'test1', categories: [], devpostUrl: "abc", reviews: [{ reader: { id: "test", email: "test@test" } }] },
-    { _id: 2, title: 'test2', categories: [], devpostUrl: "abc", reviews: [] },
-    { _id: 3, title: 'test3', categories: [], devpostUrl: "abc", reviews: [] }
+    { _id: 1, title: 'test1', categories: [], devpostUrl: "abc", numSkips: 0, reviews: [{ reader: { id: "test", email: "test@test" } }] },
+    { _id: 2, title: 'test2', categories: [], devpostUrl: "abc", numSkips: 0, reviews: [] },
+    { _id: 3, title: 'test3', categories: [], devpostUrl: "abc", numSkips: 0, reviews: [] }
 ];
 
 beforeAll(() => {

@@ -19,7 +19,7 @@ const hackSchema: Schema = new mongoose.Schema({
     "table": String,
     "reviews": [hackReviewSchema],
     "disabled": Boolean,
-    "numSkips": Number
+    "numSkips": {type: Number, default: 0}
 });
 
 hackSchema.plugin(hackPlugin);

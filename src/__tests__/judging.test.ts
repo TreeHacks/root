@@ -340,6 +340,42 @@ describe('rate hacks', () => {
                 comments: "test"
             })
             .expect(200);
+    })
+});
+describe('skip hack', () => {
+    test('skip a hack with three reviews and skips 0 - success', async () => {
+        await new Hack({
+            _id: 1,
+            reviews: [{}, {}, {}],
+            numSkips: 0
+        }).save();
+        await request(app)
+            .post("/judging/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 1,
+                skip_hack: true
+            })
+            .expect(200);
+        let hack = (await Hack.findById(1))!.toObject();
+        expect(hack.numSkips).toEqual(1);
+    });
+    test('skip a hack with three reviews and skips 1 - success', async () => {
+        await new Hack({
+            _id: 1,
+            reviews: [{}, {}, {}],
+            numSkips: 1
+        }).save();
+        await request(app)
+            .post("/judging/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 1,
+                skip_hack: true
+            })
+            .expect(200);
+        let hack = (await Hack.findById(1))!.toObject();
+        expect(hack.numSkips).toEqual(2);
     });
 });
 
