@@ -24,7 +24,7 @@ import { setTransportationInfo, submitTransportationInfo, getTransportationInfo 
 import { getUserResumes } from "./routes/user_resumes";
 import { importHacks } from "./routes/hacks/hacks_import";
 import { reviewNextHack, getJudgeLeaderboard, getJudgeStats, rateHack } from "./routes/hacks/judging";
-import { getHackList } from "./routes/hacks/hacks_list";
+import { getHackList, editHack } from "./routes/hacks/hacks_list";
 import { getJudgeList, editJudge } from "./routes/hacks/judges";
 import { getAnnouncements } from "./routes/announcements";
 import { getRooms, reserveRoom, dropCurrentRoom, getPublicRoomStatus } from "./routes/rooms";
@@ -114,6 +114,7 @@ authenticatedRoute.post('/users_bulkcreate', [adminRoute], bulkCreateUsers);
 authenticatedRoute.post('/hacks_import', [adminRoute], importHacks);
 authenticatedRoute.get('/judges', [adminRoute], getJudgeList);
 authenticatedRoute.patch('/judges/:judgeId', [adminRoute], editJudge);
+authenticatedRoute.patch('/hacks/:hackId', [adminRoute], editHack);
 // edit hacks
 
 // Need custom auth:

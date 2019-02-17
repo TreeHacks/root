@@ -14,5 +14,7 @@ export interface IHack extends Document {
     "categories": string[],
     "table": string,
     "reviews": IHackReview[],
-    "_id": number
+    "_id": number,
+    "disabled": boolean,
+    "numSkips": number
 }

@@ -65,3 +65,25 @@ describe('import hacks', () => {
         expect(hacks[2]._id).toEqual(1001);
     });
 });
+
+describe('hack modify', () => {
+    test('hack modify simple test', async () => {
+        await new Hack({
+            "_id": 999,
+            "devpostUrl": "devpostUrl1",
+            "title": "title1",
+            "categories": ["cat11", "cat12", "cat13"]
+        }).save();
+        return request(app)
+            .patch("/hacks/999")
+            .set({ Authorization: 'admin' })
+            .send({
+                "disabled": true
+            })
+            .expect(200)
+            .then(async e => {
+                let hack = await Hack.findById(999);
+                expect(hack!.disabled).toEqual(true);
+            });
+    });
+});
