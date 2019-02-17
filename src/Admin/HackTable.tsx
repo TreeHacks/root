@@ -71,11 +71,11 @@ const HackTable = (props: IAdminTableProps) => {
                     {(state, makeTable, instance) => {
                         return (
                             <React.Fragment>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export all + reviews as JSON</button></p>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state, columnsToExport)}>Export public data as JSON</button></p>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport, true)}>Export as JSON in Google Sheets backup plan format</button></p>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export public data as CSV</button></p>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export all + reviews as CSV</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export all + reviews as JSON (for final judging scripts)</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state, columnsToExport)}>Export public data as JSON (for hacks.treehacks.com)</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport, true)}>Export as CSV, unwound (for MLH Google Sheets backup plan)</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export public data as CSV (not in use for now)</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export all + reviews as CSV (for emergency backup)</button></p>
                                 {makeTable()}
                             </React.Fragment>
                         );
