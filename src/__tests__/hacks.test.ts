@@ -8,11 +8,30 @@ afterEach(() => {
 })
 
 describe('import hacks', () => {
+    test('import hacks test with no floor - FAIL', async () => {
+        let result = await request(app)
+            .post("/hacks_import")
+            .set({ Authorization: 'admin' })
+            .send({
+                items: [{
+                    "devpostUrl": "devpostUrl1",
+                    "title": "title1",
+                    "categories": ["cat11", "cat12", "cat13"]
+                },
+                {
+                    "devpostUrl": "devpostUrl2",
+                    "title": "title2",
+                    "categories": ["cat21", "cat22", "cat23"]
+                }]
+            })
+            .expect(400);
+    });
     test('import hacks test simple', async () => {
         let result = await request(app)
             .post("/hacks_import")
             .set({ Authorization: 'admin' })
             .send({
+                floor: 2,
                 items: [{
                     "devpostUrl": "devpostUrl1",
                     "title": "title1",
@@ -32,6 +51,8 @@ describe('import hacks', () => {
         expect(isEqual(hacks.map(h => h.categories).sort(), [["cat11", "cat12", "cat13"], ["cat21", "cat22", "cat23"]])).toBe(true);
         expect(hacks[0]._id).toEqual(0);
         expect(hacks[1]._id).toEqual(1);
+        expect(hacks[0].floor).toEqual(2);
+        expect(hacks[1].floor).toEqual(2);
     });
     test('import hacks multiple times should increment starting with highest-numbered hack', async () => {
         await new Hack({
@@ -45,6 +66,7 @@ describe('import hacks', () => {
         .post("/hacks_import")
         .set({ Authorization: 'admin' })
         .send({
+            floor: 1,
             items: [{
                 "devpostUrl": "devpostUrl1",
                 "title": "title1",
@@ -61,6 +83,7 @@ describe('import hacks', () => {
         
         let hacks = await Hack.find({});
         expect(hacks[0]._id).toEqual(999);
+        expect(hacks[1].floor).toEqual(1);
         expect(hacks[1]._id).toEqual(1000);
         expect(hacks[2]._id).toEqual(1001);
     });

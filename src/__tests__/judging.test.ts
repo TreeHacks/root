@@ -7,7 +7,8 @@ import { STATUS, TYPE, hackReviewDisplayFields } from '../constants';
 
 const _doc = {
     "title": "sample title",
-    "devpostUrl": "sample url"
+    "devpostUrl": "sample url",
+    "floor": 0
 };
 
 afterEach(async () => {
