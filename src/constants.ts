@@ -1,13 +1,13 @@
 export var USER_ID_UPDATE = "test_user_id_update";
 export var USER_ID = "test_user_id";
 export var STATUS = {
-    INCOMPLETE: "incomplete",
-    SUBMITTED: "submitted",
-    WAITLISTED: "waitlisted",
-    REJECTED: "rejected",
-    ADMITTED: "admitted",
-    ADMISSION_CONFIRMED: "admission_confirmed",
-    ADMISSION_DECLINED: "admission_declined"
+  INCOMPLETE: "incomplete",
+  SUBMITTED: "submitted",
+  WAITLISTED: "waitlisted",
+  REJECTED: "rejected",
+  ADMITTED: "admitted",
+  ADMISSION_CONFIRMED: "admission_confirmed",
+  ADMISSION_DECLINED: "admission_declined"
 }
 export var TRANSPORTATION_STATUS = {
   UNAVAILABLE: "unavailable",
@@ -73,7 +73,11 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "id": "008",
     "name": "008 The George Tang",
     "description": "",
-    "unavailable": []
+    "unavailable": [{
+      start: "2/16 6 PM PST",
+      end: "2/17 1 AM PST",
+      label: "Ali Partovi (Neo) Office Hours"
+    }]
   },
   {
     "id": "019",
@@ -81,12 +85,12 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "description": "",
     "unavailable": []
   },
-//   {
-//     "id": "020",
-//     "name": "020 Theta",
-//     "description": "",
-//     "unavailable": []
-//   },
+  //   {
+  //     "id": "020",
+  //     "name": "020 Theta",
+  //     "description": "",
+  //     "unavailable": []
+  //   },
   {
     "id": "203",
     "name": "203 Pi",
