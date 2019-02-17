@@ -37,7 +37,10 @@ export default class JudgeLeaderboard extends React.Component<{}, { leaderboard_
             </table>
             {this.state.stats_data &&
                 <div className="">
-                    <strong>{this.state.stats_data.results.num_remaining}</strong> hacks remaining
+                    {Object.keys(this.state.stats_data.results).map(key => 
+                        <div>
+                            {key}: <strong>{this.state.stats_data.results[key]}</strong>
+                        </div>)}
                 </div>}
         </div>);
     }
