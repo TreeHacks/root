@@ -279,6 +279,40 @@ describe('rate hacks', () => {
             comments: "test"
         });
     });
+    test('rate a hack that is disabled - enable it', async () => {
+        await new Hack({
+            _id: 1,
+            reviews: [],
+            disabled: true
+        }).save();
+        await request(app)
+            .post("/judging/rate")
+            .set({ Authorization: 'judge' })
+            .send({
+                hack_id: 1,
+                creativity: 2,
+                technicalComplexity: 2,
+                socialImpact: 3,
+                comments: "test"
+            })
+            .expect(200)
+            .then(e => {
+                expect(e.body.results.status).toEqual("success");
+            })
+        let application = (await Hack.findById(1))!.toObject();
+        expect(application.reviews.length).toEqual(1);
+        expect(application.reviews[0]).toEqual({
+            reader: {
+                id: 'judgetreehacks',
+                email: 'judge@treehacks'
+            },
+            creativity: 2,
+            technicalComplexity: 2,
+            socialImpact: 3,
+            comments: "test"
+        });
+        expect(application.disabled).toEqual(false);
+    });
     test('rate a hack with an existing review', async () => {
         await new Hack({
             _id: 1,

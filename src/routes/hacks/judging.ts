@@ -49,6 +49,7 @@ export const rateHack = async (req, res) => {
         return res.status(403).send("Hack already has a review submitted by user " + res.locals.user.sub);
     }
     else {
+        hack.disabled = false;
         hack.reviews.push({
             reader: {
                 id: res.locals.user.sub,
