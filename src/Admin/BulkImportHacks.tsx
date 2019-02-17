@@ -18,7 +18,8 @@ const BulkImportHacks = (props: IBulkImportHacksProps) => {
                     Floor
                     <Form schema={{
                         "type": "number",
-                        "enum": FLOORS
+                        "enum": FLOORS,
+                        default: FLOORS[0]
                     }} uiSchema={{
                     }} formData={props.bulkImportHacksFloor}
                         onChange={e => props.setBulkImportHacksFloor(parseInt(e.formData))}

@@ -5,7 +5,7 @@ import { get } from "lodash-es";
 import saveAs from 'file-saver';
 import { IAdminState } from "./types";
 import Papa from "papaparse";
-import { STATUS } from "../../constants";
+import { STATUS, FLOORS } from "../../constants";
 import { custom_header } from "../../index";
 import { find, set } from "lodash";
 import unwind from "javascript-unwind";
@@ -397,7 +397,7 @@ export const performBulkImportHacks = () => (dispatch, getState) => {
     }
   }).then(e => {
     dispatch(setBulkImportHacks(""));
-    dispatch(setBulkImportHacksFloor(null));
+    dispatch(setBulkImportHacksFloor(FLOORS[0]));
     dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
