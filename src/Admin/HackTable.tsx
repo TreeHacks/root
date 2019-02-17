@@ -73,6 +73,7 @@ const HackTable = (props: IAdminTableProps) => {
                             <React.Fragment>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export all + reviews as JSON</button></p>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state, columnsToExport)}>Export public data as JSON</button></p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport, true)}>Export as JSON in Google Sheets backup plan format</button></p>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export public data as CSV</button></p>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columnsToExport)}>Export all + reviews as CSV</button></p>
                                 {makeTable()}
@@ -95,7 +96,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getApplicationList: (e) => dispatch(getHackList(e)),
     getExportedApplications: (e, b) => dispatch(getExportedHacks(e, b)),
-    getExportedApplicationsCSV: (e, b) => dispatch(getExportedHacksCSV(e, b)),
+    getExportedApplicationsCSV: (e, b, c) => dispatch(getExportedHacksCSV(e, b, c)),
     editRow: (a, b, c) => dispatch(editRow(a, b, c))
 });
 

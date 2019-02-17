@@ -8,6 +8,7 @@ import Papa from "papaparse";
 import { STATUS } from "../../constants";
 import { custom_header } from "../../index";
 import { find, set } from "lodash";
+import unwind from "javascript-unwind";
 
 declare const ENDPOINT_URL: string;
 
@@ -171,10 +172,10 @@ export const getExportedHacks = (tableState: IReactTableState, columns?: IReactT
   });
 };
 
-export const getExportedHacksCSV = (tableState: IReactTableState, columns: IReactTableHeader[]) => (dispatch, getState) => {
+export const getExportedHacksCSV = (tableState: IReactTableState, columns: IReactTableHeader[], sheets?: boolean) => (dispatch, getState) => {
   dispatch(loadingStart());
   return dispatch(fetchHacks(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
-    let results = e.results.map(item => {
+    let results = (sheets ? unwind(e.results, "categories"): e.results).map(item => {
       let newItem = {};
       for (let column of columns) {
         let value = "";
