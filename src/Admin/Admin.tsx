@@ -10,6 +10,7 @@ import BulkChange from './BulkChange';
 import BulkImportHacks from './BulkImportHacks';
 import HackTable from './HackTable';
 import JudgeTable from './JudgeTable';
+import JudgeLeaderboard from './JudgeLeaderboard';
 
 const Admin = ({ match }) => {
   return (
@@ -17,6 +18,7 @@ const Admin = ({ match }) => {
       <NavTab to={`${match.path}/table`}>Application Table</NavTab>
       <NavTab to={`${match.path}/hack_table`}>Hack Table</NavTab>
       <NavTab to={`${match.path}/judge_table`}>Judge Table</NavTab>
+      <NavTab to={`${match.path}/judge_leaderboard`}>Judge Leaderboard</NavTab>
       <NavTab to={`${match.path}/bulkchange`}>Bulk Change Status</NavTab>
       <NavTab to={`${match.path}/bulkcreate`}>Bulk Create Users</NavTab>
       <NavTab to={`${match.path}/bulk_import_hacks`}>Bulk Import Hacks</NavTab>
@@ -31,6 +33,7 @@ const Admin = ({ match }) => {
         <Route path={`${match.path}/hack_table`} component={HackTable} />
         <Route path={`${match.path}/bulk_import_hacks`} component={BulkImportHacks} />
         <Route path={`${match.path}/judge_table`} component={JudgeTable} />
+        <Route path={`${match.path}/judge_leaderboard`} component={JudgeLeaderboard} />
       </Switch>
     </div>
   );
