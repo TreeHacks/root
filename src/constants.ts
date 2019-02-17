@@ -73,11 +73,7 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "id": "008",
     "name": "008 The George Tang",
     "description": "",
-    "unavailable": [{
-      start: "2/16 6 PM PST",
-      end: "2/17 1 AM PST",
-      label: "Ali Partovi (Neo) Office Hours"
-    }]
+    "unavailable": []
   },
   {
     "id": "019",
@@ -101,7 +97,11 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "id": "218",
     "name": "218 The Barnholt Family",
     "description": "",
-    "unavailable": []
+    "unavailable": [{
+      start: "2/16 6 PM PST",
+      end: "2/17 1 AM PST",
+      label: "Ali Partovi (Neo) Office Hours"
+    }]
   },
   {
     "id": "219",
