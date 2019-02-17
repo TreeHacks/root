@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { IAdminTableProps } from "./types";
-import { getHackList, getExportedHacks, getExportedApplicationsCSV, getExportedHacksCSV } from "../store/admin/actions";
+import { getHackList, getExportedHacks, getExportedApplicationsCSV, getExportedHacksCSV, editRow } from "../store/admin/actions";
 import ReactTable from "react-table";
 import 'react-table/react-table.css';
 import { IAdminState } from "../store/admin/types";
 import ApplicationView from "./ApplicationView";
+import Form from "react-jsonschema-form";
 import { IBaseState } from "src/store/base/types";
 
 const HackTable = (props: IAdminTableProps) => {
@@ -26,9 +27,33 @@ const HackTable = (props: IAdminTableProps) => {
         {
             "Header": "Categories",
             "accessor": "categories"
-        }
+        },
+        {
+            "Header": "Disabled",
+            "accessor": "disabled",
+            "Cell": p => <div>
+                <Form schema={{
+                    "type": "boolean"
+                }} uiSchema={{
+                    "ui:widget": "checkbox",
+                    "ui:options": {
+                        "inline": true
+                    }
+                }} formData={p.value}
+                onChange={e => e.formData !== undefined && props.editRow("hacks", p.row._id, {"disabled": e.formData})}
+                ><div></div></Form></div>
+        },
+        {
+            "Header": "Number of reviews",
+            "id": "numReviews",
+            "accessor": e => e.reviews.length
+        },
+        {
+            "Header": "Number of skips",
+            "accessor": "numSkips"
+        },
     ];
-    const columnsToExport = columns.filter(e => e.accessor !== "devpostUrl");
+    const columnsToExport = columns.filter(e => ~["_id", "title", "categories"].indexOf(String(e.accessor))  );
     return (
         <div>
             <div className="col-12">
@@ -64,7 +89,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getApplicationList: (e) => dispatch(getHackList(e)),
     getExportedApplications: e => dispatch(getExportedHacks(e)),
-    getExportedApplicationsCSV: (e, b) => dispatch(getExportedHacksCSV(e, b))
+    getExportedApplicationsCSV: (e, b) => dispatch(getExportedHacksCSV(e, b)),
+    editRow: (a, b, c) => dispatch(editRow(a, b, c))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HackTable);
