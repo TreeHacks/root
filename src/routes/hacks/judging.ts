@@ -17,14 +17,61 @@ export const getJudgeLeaderboard = (req, res) => {
 };
 
 export const getJudgeStats = async (req, res) => {
-    let numRemaining = await Hack.find({
-        $and: [
-            { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
-        ]
-    }).count().exec();
     res.json({
         "results": {
-            "num_remaining": numRemaining
+            "num_remaining": await Hack.find({
+                $and: [
+                    { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec(),
+            "num_remaining_floor_0_with_0_reviews": await Hack.find({
+                $and: [
+                    {'floor': 0},
+                    { 'reviews.0': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec(),
+            "num_remaining_floor_0_with_1_reviews": await Hack.find({
+                $and: [
+                    {'floor': 0},
+                    { 'reviews.1': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec(),
+            "num_remaining_floor_0_with_2_reviews": await Hack.find({
+                $and: [
+                    {'floor': 0},
+                    { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec(),
+            "num_remaining_floor_0_with_3_reviews": await Hack.find({
+                $and: [
+                    {'floor': 0},
+                    { 'reviews.3': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec(),
+            "num_remaining_floor_3_with_0_reviews": await Hack.find({
+                $and: [
+                    {'floor': 3},
+                    { 'reviews.0': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec(),
+            "num_remaining_floor_3_with_1_reviews": await Hack.find({
+                $and: [
+                    {'floor': 3},
+                    { 'reviews.1': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec(),
+            "num_remaining_floor_3_with_2_reviews": await Hack.find({
+                $and: [
+                    {'floor': 3},
+                    { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec(),
+            "num_remaining_floor_3_with_3_reviews": await Hack.find({
+                $and: [
+                    {'floor': 3},
+                    { 'reviews.3': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                ]
+            }).count().exec()
         }
     });
 };
