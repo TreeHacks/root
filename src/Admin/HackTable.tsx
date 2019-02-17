@@ -48,12 +48,12 @@ const HackTable = (props: IAdminTableProps) => {
                 ><div></div></Form></div>
         },
         {
-            "Header": "Number of reviews",
+            "Header": "Reviews",
             "id": "numReviews",
             "accessor": e => (e.reviews || []).length
         },
         {
-            "Header": "Number of skips",
+            "Header": "Skips",
             "accessor": "numSkips"
         },
     ];
