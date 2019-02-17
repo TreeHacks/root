@@ -69,6 +69,10 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 		this.nextApplication();
 	}
 	skipHack() {
+		if (!window.confirm(`Are you sure? This will mark table ${this.state.hack_data._id} as NOT HERE.`)) {
+			return;
+		}
+
 		return API.post("treehacks", '/judging/rate', {
 			body: {
 				"hack_id": this.state.hack_data._id,
