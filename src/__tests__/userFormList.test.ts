@@ -141,6 +141,16 @@ describe('user form list by admin', () => {
                 expect(e.body.results.map(item => item.forms.application_info.first_name).sort()).toEqual(["thomas", "tracey"]);
             });
     });
+    test('filter by name (partial filter) should only match beginning of the word', () => {
+        return request(app)
+            .get("/users?" + queryString.stringify({
+                filter: JSON.stringify({ 'forms.application_info.first_name': 'a' })
+            }))
+            .set({ Authorization: 'admin' })
+            .expect(200).then(e => {
+                expect(e.body.results.length).toEqual(0);
+            });
+    });
     test('filter by name (partial filter) and sort asc', () => {
         return request(app)
             .get("/users?" + queryString.stringify({

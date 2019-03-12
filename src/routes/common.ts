@@ -165,7 +165,7 @@ export function getGenericList(req: Request, res: Response, Model: Model<any>) {
   for (let key in filter) {
     // Matching by a string in any location
     if (typeof filter[key] === 'string') {
-      filter[key] = { $regex: filter[key], $options: 'i' };
+      filter[key] = { $regex: '^' + filter[key], $options: 'i' };
     }
   }
   let queryOptions = {
