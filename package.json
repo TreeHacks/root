@@ -4,7 +4,7 @@
   "description": "https://ap-frontend-test.herokuapp.com/",
   "main": "webpack.common.js",
   "scripts": {
-    "start": "dotenv gulp serve",
+    "start": "webpack-dev-server --config webpack.dev.js",
     "heroku-postbuild": "webpack --config webpack.prod.js",
     "test": "dotenv jest"
   },
@@ -36,9 +36,6 @@
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
     "file-loader": "^1.1.11",
-    "gulp": "^3.9.1",
-    "gulp-connect": "^5.5.0",
-    "gulp-shell": "^0.6.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
     "lolex": "^3.0.0",
