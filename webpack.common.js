@@ -3,7 +3,7 @@ var webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC_URL = "./src";
-const DEST_URL = "./dist";
+const DEST_URL = "./";
 
 module.exports = {
   entry: {
@@ -70,7 +70,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              publicPath: "/dist"
+              publicPath: "/"
             }
           }
         ]

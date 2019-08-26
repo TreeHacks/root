@@ -5,8 +5,8 @@ const webpack = require('webpack');
 module.exports = merge(common, {
   mode: 'development',
   devServer: {
-    contentBase: __dirname + "/dist",
-    publicPath: '/dist/',
+    contentBase: __dirname,
+    publicPath: '/',
     historyApiFallback: {
       index: 'index.html'
     },
