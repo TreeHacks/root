@@ -11,19 +11,12 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendor.bundle",
-          chunks: "initial"
-        }
-      }
+      chunks: 'all'
     }
   },
   output: {
     path: path.resolve(DEST_URL),
-    publicPath: '/dist',
-    filename: "[name].[chunkhash].js"
+    publicPath: '/'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -37,7 +30,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'TreeHacks Client',
       template: './src/index.html',
-      filename: `../index.html`
+      filename: `./index.html`
     })
   ],
   module: {
