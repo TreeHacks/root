@@ -145,9 +145,13 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
                 <button className="btn btn-info" type="submit">Sign In</button>
                 : <div></div>}
             </AuthForm>
+            {isStanfordEmail ?
+              <div style={{ marginTop: -40 }}><StanfordLogin label="Sign in with Stanford" /></div>
+              : null}
             {applicant && !isStanfordEmail && <div className="label-text centered">or</div>}
             {applicant && <StanfordLogin />}
           </div>
+          
         }
         {this.props.authPage == "signUp" &&
           <div className="top-form">
