@@ -1,5 +1,6 @@
+@import "../Global.scss";
 .transportation .treehacks-form .form-control {
-  background-color: #535152;
+  background-color: $background-color;
 }
 
 .transportation .treehacks-form .field-string:nth-child(4),
@@ -63,7 +64,7 @@
         height: 15px;
         left: -27px;
         top: 3px;
-        background-color: #535152;
+        background-color: $background-color;
       }
     }
 
@@ -78,4 +79,20 @@
       }
     }
   }
+}
+
+.treehacks-bus-coordinator-text {
+  margin: 40;
+  padding: 20;
+  background-color: #535152;
+}
+
+.treehacks-transportation-alert {
+  background-color: #686e77;
+  width: 100%;
+  max-width: 750px;
+  margin: 60px;
+  padding: 40px 20px;
+  color: $text-color;
+  text-align: center;
 }

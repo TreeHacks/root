@@ -77,7 +77,7 @@ export class Transportation extends React.Component<ITransportationProps> {
       // No travel info to show
       return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '500px', marginTop: '60px', padding: '20px', color: 'white', textAlign: 'center' }}>
+          <div className="treehacks-transportation-alert" style={{maxWidth: '500px', margin: '60px 0 0 0', padding: '20px' }}>
             <span>There are no travel options at this time.&nbsp;</span>
             {status !== STATUS.ADMISSION_DECLINED && <span>Check back after you have received a decision about your application.</span>}
             {status === STATUS.ADMISSION_DECLINED && <span>You have declined your admission, so no transportation options are available.</span>}
@@ -88,7 +88,7 @@ export class Transportation extends React.Component<ITransportationProps> {
     if (transportation_status === TRANSPORTATION_STATUS.UNAVAILABLE) {
       return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '700px', marginTop: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
+          <div className="treehacks-transportation-alert" style={{ maxWidth: '700px', padding: '40px 20px' }}>
             <h4>You have not been given a travel reimbursement.</h4>
             <p style={{maxWidth: 500, margin: '20px auto 0'}}>It looks like you're coming from close by, so we aren't planning to coordinate travel for you. Let us know if we made a mistake!</p>
           </div>
@@ -102,19 +102,19 @@ export class Transportation extends React.Component<ITransportationProps> {
 
       if (deadlinePassed && transportationForm.accept !== true) {
         return <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
+          <div className="treehacks-transportation-alert">
             <TransportationExpired />
           </div></div>;
       }
 
       return (
         <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
+          <div className="treehacks-transportation-alert" >
             <h4>You have been placed on a bus!</h4>
             <p style={{maxWidth: 575, margin: '20px auto 0'}}>We are running free buses from locations in California, and we would like you to offer a spot on one :) Buses leave on Friday morning and return Sunday night. If you would like a spot on the bus listed below, you must RSVP on this page by <strong>{formattedDeadline}</strong>. The bus will be first come, first served, but this shows us approximately how many seats we need. If you do not fill out this form, you will <u><strong>not</strong></u> be allowed to board the bus. Because you are near a bus, we do not anticipate offering you other travel reimbursement options.</p>
             <p style={{maxWidth: 575, margin: '20px auto 0'}}>You <u><strong>must</strong></u> have a <u><strong>government-issued ID</strong></u> to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.</p>
 
-            <div style={{margin: 40, padding: 20, backgroundColor: '#535152'}}>
+            <div className="treehacks-bus-coordinator-text">
               <p><small>
                 {busRouteInfo.coordinator ? <React.Fragment>Your bus coordinator is <strong>{busRouteInfo.coordinator.name} ({busRouteInfo.coordinator.email}). </strong></React.Fragment> :
                 "We will add information for your bus coordinator in the weeks leading up to the event. If you have questions in the meantime, please reach out to hello@treehacks.com."}
@@ -163,7 +163,7 @@ export class Transportation extends React.Component<ITransportationProps> {
 
       return (
         <div className="transportation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
+          <div className="treehacks-transportation-alert">
             
             {transportationType === TRANSPORTATION_TYPES.FLIGHT && <FlightReimbursementHeader />}
             {transportationType === TRANSPORTATION_TYPES.OTHER && <TravelReimbursementHeader /> }
