@@ -1,3 +1,5 @@
+import settings from "./themes/settings";
+
 export var GROUPS = {
   'admin': 'Administrator',
   'reviewer': 'Reviewer',
@@ -21,26 +23,7 @@ export var TYPE = {
   STANFORD: "stanford"
 }
 
-export var DEADLINES = [
-  {
-    "key": "oos",
-    "label": "out-of-state",
-    "date": "2018-11-20T07:59:00.000Z",
-    "display_date": "November 19, 2018"
-  },
-  {
-    "key": "is",
-    "label": "in-state",
-    "date": "2018-11-27T07:59:00.000Z",
-    "display_date": "November 26, 2018"
-  },
-  {
-    "key": "stanford",
-    "label": "Stanford student",
-    "date": "2019-02-18T07:59:00.000Z",
-    "display_date": "as soon as possible"
-  }
-];
+export var DEADLINES = settings.deadlines;
 
 export var TRANSPORTATION_STATUS = {
   UNAVAILABLE: "unavailable",
@@ -338,9 +321,9 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
   }
 };
 
-export const HACKATHON_YEAR = 2019;
-export const HACKATHON_DATE_RANGE = "February 15-17";
-export const LOCATIONS = ["Outside USA", "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District Of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "US Territories"];
+export const HACKATHON_YEAR = settings.hackathon_year;
+export const HACKATHON_DATE_RANGE = settings.hackathon_date_range;
+export const LOCATIONS = settings.locations;
 export const applicationReviewDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "skill_level", "hackathon_experience", "resume", "q1_goodfit", "q2_experience", "q3", "q4"];
 export const sponsorApplicationDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "resume", "q2_experience", "q4"];
 export const stanfordApplicationDisplayFields = [
