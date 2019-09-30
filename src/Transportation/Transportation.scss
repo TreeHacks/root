@@ -16,14 +16,14 @@
 
 .transportation p#root_receipt__description {
   font-size: 20px;
-  color: #fff;
+  color: $text-color;
   margin-top: 1rem;
 }
 
 .transportation input#root_receipt {
   border: 1px dashed white;
   padding: 10px;
-  color: #fff;
+  color: $text-color;
 }
 
 .transportation .route {
