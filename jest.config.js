@@ -17,7 +17,7 @@ module.exports = {
         "<rootDir>/node_modules/(?!lodash-es)"
     ],
     "moduleNameMapper": {
-        "^.+\\.(css|scss|png)$": "identity-obj-proxy",
+        "^.+\\.(css|scss|png|ico)$": "identity-obj-proxy",
     },
     "snapshotSerializers": [
         "enzyme-to-json/serializer"

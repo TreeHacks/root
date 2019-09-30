@@ -40,7 +40,7 @@ it('dashboard incomplete before deadline', () => {
     clock.uninstall();
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.text()).toContain("You haven't submitted your application yet.");
-    expect(wrapper.text()).toContain("before the deadline:November 19, 2018");
+    expect(wrapper.text()).toContain("before the deadline:November 19,");
 });
 
 it('dashboard submitted', () => {

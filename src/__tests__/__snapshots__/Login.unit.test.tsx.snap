@@ -9,7 +9,7 @@ exports[`Login screen tests login screen applicant 1`] = `
   >
     <img
       height="65px"
-      src={null}
+      src={[Function]}
       style={
         Object {
           "marginTop": 49,
@@ -87,7 +87,7 @@ exports[`Login screen tests login screen judge 1`] = `
   >
     <img
       height="65px"
-      src={null}
+      src={[Function]}
       style={
         Object {
           "marginTop": 49,
@@ -153,7 +153,7 @@ exports[`Login screen tests login screen sponsor 1`] = `
   >
     <img
       height="65px"
-      src={null}
+      src={[Function]}
       style={
         Object {
           "marginTop": 49,

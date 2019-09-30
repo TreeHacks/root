@@ -6,7 +6,7 @@ exports[`bus reimbursement 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <h4>
       You have been placed on a bus!
@@ -44,7 +44,7 @@ exports[`bus reimbursement 1`] = `
        to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.
     </p>
     <div
-      style="margin:40px;padding:20px;background-color:#535152"
+      class="treehacks-bus-coordinator-text"
     >
       <p>
         <small>
@@ -186,7 +186,7 @@ exports[`bus reimbursement route with no coordinator 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <h4>
       You have been placed on a bus!
@@ -224,7 +224,7 @@ exports[`bus reimbursement route with no coordinator 1`] = `
        to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.
     </p>
     <div
-      style="margin:40px;padding:20px;background-color:#535152"
+      class="treehacks-bus-coordinator-text"
     >
       <p>
         <small>
@@ -363,7 +363,7 @@ exports[`bus reimbursement with accept=true 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <h4>
       You have been placed on a bus!
@@ -401,7 +401,7 @@ exports[`bus reimbursement with accept=true 1`] = `
        to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.
     </p>
     <div
-      style="margin:40px;padding:20px;background-color:#535152"
+      class="treehacks-bus-coordinator-text"
     >
       <p>
         <small>
@@ -548,17 +548,7 @@ exports[`bus reimbursement with deadline passed and RSVP'd no, should show Trans
   }
 >
   <div
-    style={
-      Object {
-        "backgroundColor": "#686e77",
-        "color": "white",
-        "margin": "60px",
-        "maxWidth": "750px",
-        "padding": "40px 20px",
-        "textAlign": "center",
-        "width": "100%",
-      }
-    }
+    className="treehacks-transportation-alert"
   >
     <Component />
   </div>
@@ -571,7 +561,7 @@ exports[`bus reimbursement with deadline passed and RSVP'd yes, should show bus 
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <h4>
       You have been placed on a bus!
@@ -609,7 +599,7 @@ exports[`bus reimbursement with deadline passed and RSVP'd yes, should show bus 
        to get on the bus (this is because you must have one to check-in at TreeHacks!). Your bus coordinators will be checking IDs, and they will not be able to save a spot for you if you forget your ID. Because the bus is first come, first served, we recommend getting to your pickup spot early during the check in process. Buses depart 30 minutes after check-in begins or until spots are filled, whichever is first. Times on this page are tentative until February 1st.
     </p>
     <div
-      style="margin:40px;padding:20px;background-color:#535152"
+      class="treehacks-bus-coordinator-text"
     >
       <p>
         <small>
@@ -756,17 +746,7 @@ exports[`bus reimbursement with deadline passed and no RSVP, should show Transpo
   }
 >
   <div
-    style={
-      Object {
-        "backgroundColor": "#686e77",
-        "color": "white",
-        "margin": "60px",
-        "maxWidth": "750px",
-        "padding": "40px 20px",
-        "textAlign": "center",
-        "width": "100%",
-      }
-    }
+    className="treehacks-transportation-alert"
   >
     <Component />
   </div>
@@ -778,7 +758,8 @@ exports[`don't show reimbursement if status is unavailable, even if reimbursemen
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:700px;margin-top:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
+    style="max-width:700px;padding:40px 20px"
   >
     <h4>
       You have not been given a travel reimbursement.
@@ -798,7 +779,7 @@ exports[`flight reimbursement 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <div>
       <h4>
@@ -857,7 +838,7 @@ exports[`flight reimbursement 1`] = `
     <h5>
       TreeHacks is reimbursing you up to 
       <span
-        style="color:#00b65f;font-weight:bold"
+        class="treehacks-transportation-amount-text"
       >
         $500.30
       </span>
@@ -902,17 +883,7 @@ exports[`flight reimbursement with deadline passed, should not show expired mess
   }
 >
   <div
-    style={
-      Object {
-        "backgroundColor": "#686e77",
-        "color": "white",
-        "margin": "60px",
-        "maxWidth": "750px",
-        "padding": "40px 20px",
-        "textAlign": "center",
-        "width": "100%",
-      }
-    }
+    className="treehacks-transportation-alert"
   >
     <Component />
     <h5
@@ -927,12 +898,7 @@ exports[`flight reimbursement with deadline passed, should not show expired mess
     <h5>
       TreeHacks is reimbursing you up to 
       <span
-        style={
-          Object {
-            "color": "#00b65f",
-            "fontWeight": "bold",
-          }
-        }
+        className="treehacks-transportation-amount-text"
       >
         $500.30
       </span>
@@ -959,7 +925,7 @@ exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <div>
       <h4>
@@ -1013,7 +979,7 @@ exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
     <h5>
       TreeHacks is reimbursing you up to 
       <span
-        style="color:#00b65f;font-weight:bold"
+        class="treehacks-transportation-amount-text"
       >
         $500.30
       </span>
@@ -1032,7 +998,8 @@ exports[`no reimbursement 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:700px;margin-top:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
+    style="max-width:700px;padding:40px 20px"
   >
     <h4>
       You have not been given a travel reimbursement.
@@ -1051,7 +1018,8 @@ exports[`no reimbursement before submitting form 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:500px;margin-top:60px;padding:20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
+    style="max-width:500px;margin:60px 0 0 0;padding:20px"
   >
     <span>
       There are no travel options at this time. 
@@ -1069,7 +1037,7 @@ exports[`other reimbursement 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <div>
       <h4>
@@ -1115,7 +1083,7 @@ exports[`other reimbursement 1`] = `
     <h5>
       TreeHacks is reimbursing you up to 
       <span
-        style="color:#00b65f;font-weight:bold"
+        class="treehacks-transportation-amount-text"
       >
         $500.30
       </span>
@@ -1160,17 +1128,7 @@ exports[`other reimbursement with deadline passed, should not show expired messa
   }
 >
   <div
-    style={
-      Object {
-        "backgroundColor": "#686e77",
-        "color": "white",
-        "margin": "60px",
-        "maxWidth": "750px",
-        "padding": "40px 20px",
-        "textAlign": "center",
-        "width": "100%",
-      }
-    }
+    className="treehacks-transportation-alert"
   >
     <Component />
     <h5
@@ -1185,12 +1143,7 @@ exports[`other reimbursement with deadline passed, should not show expired messa
     <h5>
       TreeHacks is reimbursing you up to 
       <span
-        style={
-          Object {
-            "color": "#00b65f",
-            "fontWeight": "bold",
-          }
-        }
+        className="treehacks-transportation-amount-text"
       >
         $500.30
       </span>
@@ -1217,7 +1170,7 @@ exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <div>
       <h4>
@@ -1258,7 +1211,7 @@ exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
     <h5>
       TreeHacks is reimbursing you up to 
       <span
-        style="color:#00b65f;font-weight:bold"
+        class="treehacks-transportation-amount-text"
       >
         $500.30
       </span>
@@ -1277,7 +1230,8 @@ exports[`reimbursement screen when admission declined -- don't show reimbursemen
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:500px;margin-top:60px;padding:20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
+    style="max-width:500px;margin:60px 0 0 0;padding:20px"
   >
     <span>
       There are no travel options at this time. 
@@ -1295,7 +1249,7 @@ exports[`reimbursement screen when admission not yet confirmed 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    style="background-color:#686e77;width:100%;max-width:750px;margin:60px;padding:40px 20px;color:white;text-align:center"
+    class="treehacks-transportation-alert"
   >
     <div>
       <h4>
@@ -1354,7 +1308,7 @@ exports[`reimbursement screen when admission not yet confirmed 1`] = `
     <h5>
       TreeHacks is reimbursing you up to 
       <span
-        style="color:#00b65f;font-weight:bold"
+        class="treehacks-transportation-amount-text"
       >
         $500.30
       </span>

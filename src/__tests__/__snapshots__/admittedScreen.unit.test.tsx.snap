@@ -7,7 +7,7 @@ exports[`Admission confirmed screen 1`] = `
   <div>
     <h4>
       You're coming to TreeHacks 
-      2019
+      2020
       !
     </h4>
     <p>
@@ -53,7 +53,7 @@ exports[`Format admission deadline with PST time zone 1`] = `
   <div>
     <h4>
       Congratulations! You've been accepted to TreeHacks 
-      2019
+      2020
       !
     </h4>
     <p>
@@ -65,7 +65,7 @@ exports[`Format admission deadline with PST time zone 1`] = `
       You have until 
       November 27, 2048 8:39 PM PST
        to confirm your attendance at TreeHacks 
-      2019
+      2020
       . If you don't confirm by then, we'll assume you can't make it and give your spot to someone else.
     </p>
     <p>
