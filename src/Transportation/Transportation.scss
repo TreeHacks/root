@@ -57,7 +57,7 @@
 
       &:before {
         content: '';
-        border: 3px solid #00E174;
+        border: 3px solid $primary-color;
         border-radius: 100%;
         position: absolute;
         width: 15px;
@@ -71,7 +71,7 @@
     &:not(:last-child) {
       &:before {
         content: "";
-        border-left: 3px solid #00E174;
+        border-left: 3px solid $primary-color;
         position: absolute;
         left: calc(40% - 1px);
         top: 15px;
@@ -95,4 +95,9 @@
   padding: 40px 20px;
   color: $text-color;
   text-align: center;
+}
+
+.treehacks-transportation-text-amount {
+  color: $primary-color;
+  font-weight: 'bold';
 }

@@ -18,7 +18,7 @@
     padding: 0;
 }
 .form-link, .form-link:hover {
-    color: #00b65f;
+    color: $primary-color;
 }
 .left-btn{
 	margin-left:50px;
@@ -30,8 +30,8 @@
 	text-align: center;
 }
 .btn-custom{
-    background-color: #00b65f;
-    border-color: #00b65f!important;
+    background-color: $primary-color;
+    border-color: $primary-color!important;
     color: $text-color;
     width: 41%;
     margin-bottom: 20px;
@@ -39,8 +39,8 @@
     font-size: 20px!important;
 }
 .btn-stanford{
-  background-color: #00b65f;
-    border-color: #00b65f!important;
+  background-color: $primary-color;
+    border-color: $primary-color!important;
     color: $text-color;
     width: 89%;
     margin-bottom: 20px;
@@ -62,7 +62,7 @@
 .btn-subtle {
     border: none !important;
     background: transparent;
-    color: #00b65f;
+    color: $primary-color;
     font-size: initial !important;
 }
 

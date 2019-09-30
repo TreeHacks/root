@@ -21,7 +21,7 @@
     transition: 0.5s;
 
     &:hover, &.active {
-      border-bottom: 2px solid $green;
+      border-bottom: 2px solid $primary-color;
       text-decoration: none;
     }
   }

@@ -1,3 +1,4 @@
+@import "../Global.scss";
 .rooms {
   .rules {
     margin: 1rem auto 0;
@@ -49,7 +50,7 @@
       }
 
       a {
-        color: #02e074;
+        color: $primary-color;
       }
 
       small {
