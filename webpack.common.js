@@ -3,7 +3,7 @@ var webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC_URL = "./src";
-const DEST_URL = "./";
+const DEST_URL = "./dist/";
 
 module.exports = {
   entry: {
