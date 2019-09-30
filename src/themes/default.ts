@@ -22,4 +22,4 @@ export default {
             "display_date": "as soon as possible"
         }
     ]
-};
+}

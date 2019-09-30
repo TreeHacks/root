@@ -1,11 +1,4 @@
-$dark-gray: #535152;
-$light-gray: #696E76;
-$green: #00E174;
-$white: #FFFFFF;
-
-$navbar-font-size: 16px * 1.18;
-$navbar-margin: 1.25vw;
-$navbar-padding: 8px;
+@import "../Global.scss";
 
 .nav {
   background-color: $dark-gray;
@@ -45,7 +38,7 @@ $navbar-padding: 8px;
     }
 
     .logo-text-tree {
-      font-family: 'Avenir';
+      font-family: $base-font-family;
     }
 
     .logo-text-hacks {
