@@ -352,3 +352,6 @@ export const stanfordApplicationDisplayFields = [
 export const VERTICALS = ["health", "safety", "awareness"];
 
 export const FLOORS = [0, 1, 2, 3];
+
+export const logo = settings.logo;
+export const favicon = settings.favicon;

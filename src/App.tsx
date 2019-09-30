@@ -20,6 +20,7 @@ import Helmet from "react-helmet";
 import FormPageWrapper from "./FormPage/FormPageWrapper";
 import Sponsors from "./Sponsors/Sponsors";
 import Judge from "./Judge/Judge";
+import { favicon } from "./constants";
 
 const mapStateToProps = state => ({
   ...state.base,
@@ -41,7 +42,7 @@ const App = (props: IAppProps) => (
   <ConnectedRouter history={history}>
     <div className="treehacks-main">
       <Helmet>
-        <link rel="icon" type="image/png" href={require("./art/favicon.png")} />
+        <link rel="icon" type="image/png" href={favicon} />
       </Helmet>
       {props.loading && <Loading />}
       <Switch>

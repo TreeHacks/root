@@ -19,5 +19,7 @@ export default {
             "date": "2020-02-18T07:59:00.000Z",
             "display_date": "as soon as possible"
         }
-    ]
+    ],
+    "logo": require('./assets/logo.svg'),
+    "favicon": require("./assets/favicon.ico"),
 };
