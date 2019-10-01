@@ -13,6 +13,8 @@ module.exports = {
         "json",
         "node"
     ],
+    "globalSetup": "./backend/setupMongo.js",
+    "globalTeardown": "./backend/teardownMongo.js",
     "transformIgnorePatterns": [
         "<rootDir>/node_modules/(?!lodash-es)"
     ],
@@ -32,7 +34,7 @@ module.exports = {
         // "ENDPOINT_URL": "http://localhost:3000/",
         // COGNITO_USER_POOL_ID: process.env.COGNITO_USER_POOL_ID,
         // COGNITO_CLIENT_ID: process.env.COGNITO_CLIENT_ID,
-        ENDPOINT_URL: process.env.ENDPOINT_URL,
+        ENDPOINT_URL: "/api",
         // COGNITO_ENDPOINT_URL: process.env.COGNITO_ENDPOINT_URL,
         // GA_TRACKING_ID: process.env.GA_TRACKING_ID
     }
