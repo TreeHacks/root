@@ -6,7 +6,8 @@
     "scripts": {
         "mongo": "mongod",
         "test": "dotenv jest -- --runInBand",
-        "tdd": "dotenv jest -- --watch --runInBand",
+        "test:frontend": "dotenv jest -- --runInBand src",
+        "test:backend": "dotenv jest -- --runInBand backend",
         "start": "concurrently --kill-others \"npm run mongo\" \"npm run build:live\"",
         "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r dotenv/config ./backend/index.ts",
         "build:backend": "dotenv tsc ./backend/index.ts",
