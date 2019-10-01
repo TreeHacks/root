@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
 
 import { IFormPageProps } from "./types";
-import { cloneDeep, get, set, pull } from "lodash-es";
+import { cloneDeep, get, set, pull } from "lodash";
 import Loading from "../Loading/Loading";
 import { push } from 'connected-react-router';
 import "./FormPage.scss";

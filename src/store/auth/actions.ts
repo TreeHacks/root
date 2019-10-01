@@ -2,7 +2,7 @@ import { IUserAttributes, IAuthState } from "./types";
 import { API, Auth } from "aws-amplify";
 import { Cache } from 'aws-amplify';
 import { loadingStart, loadingEnd } from "../base/actions";
-import { get } from "lodash-es";
+import { get } from "lodash";
 
 declare const COGNITO_CLIENT_ID: string;
 declare const COGNITO_ENDPOINT_URL: string;

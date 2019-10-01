@@ -4,7 +4,7 @@ import { ISponsorsTableProps } from "./types";
 import Loading from "../Loading/Loading";
 import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicationEmails, getExportedApplications, getApplicationResumes, getExportedApplicationsCSV } from "../store/admin/actions";
 import ReactTable from "react-table";
-import { pickBy, values } from "lodash-es";
+import { pickBy, values } from "lodash";
 import 'react-table/react-table.css';
 import { STATUS, TYPE, sponsorApplicationDisplayFields } from "../constants";
 import { IAdminState } from "../store/admin/types";

@@ -7,13 +7,13 @@ import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFo
 
 import { DEADLINES, TYPE, stanfordApplicationDisplayFields } from '../constants';
 import { IFormPageWrapperProps } from "./types";
-import { cloneDeep, get, set, pull } from "lodash-es";
+import { cloneDeep, get, set, pull } from "lodash";
 import Loading from "../Loading/Loading";
 import { push } from 'connected-react-router';
 import CustomDateWidget from './CustomDateWidget';
 import { TypeaheadField } from "react-jsonschema-form-extras/lib/TypeaheadField";
 import FormPage from "./FormPage";
-import remove from "lodash-es";
+import remove from "lodash";
 import { isArray } from "util";
 
 const mapStateToProps = state => ({

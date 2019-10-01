@@ -9,7 +9,7 @@ import "./Dashboard.scss";
 import AdmittedScreen from "./AdmittedScreen";
 import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
 import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
-import { get } from "lodash-es";
+import { get } from "lodash";
 import WaitlistedScreen from "./WaitlistedScreen";
 import RejectedScreen from "./RejectedScreen";
 import moment from "moment-timezone";

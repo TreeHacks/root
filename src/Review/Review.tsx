@@ -5,7 +5,7 @@ import Form from "react-jsonschema-form";
 import FormPage from '../FormPage/FormPage';
 import { connect } from "react-redux";
 import { IFormState } from '../store/form/types';
-import { cloneDeep } from "lodash-es";
+import { cloneDeep } from "lodash";
 import { applicationReviewDisplayFields } from '../constants';
 interface IReviewProps {
 	applicationSchema: { schema: any, uiSchema: any }

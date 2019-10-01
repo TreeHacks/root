@@ -1,6 +1,6 @@
 import customConfig from "./custom";
 import defaultConfig from "./default";
-import { set } from "lodash-es";
+import { set } from "lodash";
 
 for (let key in customConfig) {
     set(defaultConfig, key, customConfig[key]);

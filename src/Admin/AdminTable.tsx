@@ -4,7 +4,7 @@ import { IAdminTableProps } from "./types";
 import Loading from "../Loading/Loading";
 import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicationEmails, getExportedApplications } from "../store/admin/actions";
 import ReactTable from "react-table";
-import { get, values } from "lodash-es";
+import { get, values } from "lodash";
 import 'react-table/react-table.css';
 import { STATUS, TYPE, TRANSPORTATION_STATUS, TRANSPORTATION_TYPES, TRANSPORTATION_BUS_ROUTES, LOCATIONS } from "../constants";
 import { IAdminState } from "../store/admin/types";
