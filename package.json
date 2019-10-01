@@ -7,10 +7,9 @@
         "mongo": "mongod",
         "test": "dotenv jest -- --runInBand",
         "tdd": "dotenv jest -- --watch --runInBand",
-        "start": "concurrently --kill-others \"npm run mongo\" \"npm run build:backend:live\" \"npm run build:frontend:live\"",
-        "build:backend:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r dotenv/config ./backend/index.ts",
+        "start": "concurrently --kill-others \"npm run mongo\" \"npm run build:live\"",
+        "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r dotenv/config ./backend/index.ts",
         "build:backend": "dotenv tsc ./backend/index.ts",
-        "build:frontend:live": "dotenv webpack-dev-server -- --config webpack.dev.js",
         "build:frontend": "webpack --config webpack.prod.js",
         "heroku-postbuild": "npm run build:backend && npm run build:frontend",
         "start:prod": "node build/src/index.js"
@@ -69,6 +68,7 @@
         "typescript": "^3.6.3",
         "webpack": "^4.20.2",
         "webpack-cli": "^3.1.2",
+        "webpack-dev-middleware": "^3.7.2",
         "webpack-dev-server": "^3.1.5",
         "webpack-merge": "^4.1.3",
         "whatwg-fetch": "^2.0.4"

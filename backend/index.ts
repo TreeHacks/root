@@ -5,10 +5,15 @@ mongoose.Promise = require('bluebird');
 const swaggerUi = require('swagger-ui-express');
 const forceSsl = require('force-ssl-heroku');
 const compression = require('compression');
+
+const webpack = require("webpack");
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const devConfig = require("../webpack.dev.js");
+
 import cors from "cors";
 import swaggerDocument from "./swagger";
 import filePlugin from './utils/file_plugin';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 9000;
 
 
 import { authenticatedRoute, adminRoute, reviewerRoute, judgeRoute, sponsorRoute, anonymousRoute } from "./router/authenticatedRoute";
@@ -39,52 +44,50 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).catch(funct
 });
 mongoose.plugin(filePlugin);
 
-// Set up static files
-app.use(express.static('public'));
-
 // Use body-parser to parse HTTP request parameters
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 
-// HTTP request Logging
-// app.use(morgan('combined'))
+if (process.env.MODE === "PROD") {
+    // Set up static files
+    app.use("/dist", express.static('dist'));
 
-// Error handling middleware
-// app.use((err: Error, req: Request, res: Response, next: Next) => {
-//     console.log(err); // To see properties of message in our console
-//     res.status(422).send({error: err.message});
-// });
+    // Serves the index.html file (our basic frontend)
+    app.get('/',(req, res) => {
+        res.sendFile('dist/index.html', {root: __dirname});
+    });
+}
+else {
+    // Dev mode
+    app.use(webpackDevMiddleware(webpack(devConfig), {
+        publicPath: devConfig.output.publicPath,
+    }));
+}
 
 
-
-// Starts the Express server, which will run locally @ localhost:3000
+// Starts the Express server, which will run locally @ localhost:9000
 if (!module.parent) {
     app.listen(port, () => {
         console.log(`App listening on port ${port}!`);
     });
 }
 
-// Serves the index.html file (our basic frontend)
-// app.get('/', (req: Request, res: Response) => {
-//     // res.sendFile('index.html', {root: __dirname});
-//     res.status(200).send('Welcome to treehacks.');
-// });
+const apiRouter = express.Router();
 
-const options = {
+apiRouter.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
     customCss: '.swagger-ui .topbar { display: none }'
-};
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+}));
 
-app.get("/", (req, res) => res.redirect("/doc"));
+apiRouter.get("/", (req, res) => res.redirect("/doc"));
 
 // Public routes
-app.get('/hacks', [anonymousRoute], getHackList);
-app.get('/announcements', [anonymousRoute], getAnnouncements);
-app.get('/rooms/status', [anonymousRoute], getPublicRoomStatus);
+apiRouter.get('/hacks', [anonymousRoute], getHackList);
+apiRouter.get('/announcements', [anonymousRoute], getAnnouncements);
+apiRouter.get('/rooms/status', [anonymousRoute], getPublicRoomStatus);
 
-app.use("/", authenticatedRoute);
+apiRouter.use("/", authenticatedRoute);
 
 // Auth - user must be signed in:
 authenticatedRoute.get('/users/:userId/forms/transportation', getTransportationInfo);
@@ -131,5 +134,7 @@ authenticatedRoute.get('/judging/leaderboard', [judgeRoute], getJudgeLeaderboard
 authenticatedRoute.get('/judging/stats', [judgeRoute], getJudgeStats);
 authenticatedRoute.post('/judging/rate', [judgeRoute], rateHack);
 authenticatedRoute.get('/judging/next_hack', [judgeRoute], reviewNextHack);
+
+app.use("/api", apiRouter);
 
 export default app;
