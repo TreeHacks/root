@@ -13,7 +13,7 @@ export function getUserResumes(req: Request, res: Response) {
         "treehacks:groups": res.locals.user['cognito:groups']
     })
     .then(results => {
-        let requests: Promise<S3.Types.GetObjectOutput | null>[] = [];
+        let requests: Promise<any>[] = [];
         for (let result of results) {
             let resume = get(result, "forms.application_info.resume");
             if (resume) {
