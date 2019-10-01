@@ -9,7 +9,7 @@ afterEach(async () => {
 describe('judge endpoint permissions', () => {
     test('GET /judges as an applicant - fail', () => {
         return request(app)
-            .get("/judges")
+            .get("/api/judges")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
@@ -19,7 +19,7 @@ describe('judge endpoint permissions', () => {
     test('PATCH /judges/1 as an applicant - fail', async () => {
         await new Judge({_id: 1}).save();
         return request(app)
-            .patch("/judges/1")
+            .patch("/api/judges/1")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
@@ -37,7 +37,7 @@ describe('judge list', () => {
         ]
         await Judge.insertMany(docs);
         return request(app)
-            .get("/judges")
+            .get("/api/judges")
             .set({ Authorization: 'admin' })
             .expect(200)
             .then(async e => {
@@ -54,7 +54,7 @@ describe('judge modify', () => {
         ]
         await Judge.insertMany(docs);
         return request(app)
-            .patch("/judges/a")
+            .patch("/api/judges/a")
             .set({ Authorization: 'admin' })
             .send({
                 verticals: ["new"]

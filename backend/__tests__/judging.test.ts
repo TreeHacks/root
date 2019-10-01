@@ -19,7 +19,7 @@ afterEach(async () => {
 describe('judge endpoint permissions', () => {
     test('/judging/rate as an applicant - fail', () => {
         return request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
@@ -28,7 +28,7 @@ describe('judge endpoint permissions', () => {
     });
     test('/judging/next_hack as an applicant - fail', () => {
         return request(app)
-            .get("/judging/next_hack")
+            .get("/api/judging/next_hack")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
@@ -37,7 +37,7 @@ describe('judge endpoint permissions', () => {
     });
     test('/judging/stats as an applicant - fail', () => {
         return request(app)
-            .get("/judging/next_hack")
+            .get("/api/judging/next_hack")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
@@ -46,7 +46,7 @@ describe('judge endpoint permissions', () => {
     });
     test('/judging/leaderboard as an applicant - fail', () => {
         return request(app)
-            .get("/judging/leaderboard")
+            .get("/api/judging/leaderboard")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
@@ -59,7 +59,7 @@ describe('review next hack', () => {
     test('gets the right fields', async () => {
         await new Hack({ ..._doc, _id: 1, reviews: [{}, {}] }).save();
         return request(app)
-            .get("/judging/next_hack")
+            .get("/api/judging/next_hack")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(async e => {
@@ -69,7 +69,7 @@ describe('review next hack', () => {
     test('does not get hack with 3+ reviews', async () => {
         await new Hack({ _id: 1, verticals: ["test1"], reviews: [{}, {}, {}] }).save();
         await request(app)
-            .get("/judging/next_hack")
+            .get("/api/judging/next_hack")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
@@ -79,7 +79,7 @@ describe('review next hack', () => {
     test('does not get hack that is disabled', async () => {
         await new Hack({ _id: 1, verticals: ["test1"], reviews: [], disabled: true }).save();
         await request(app)
-            .get("/judging/next_hack")
+            .get("/api/judging/next_hack")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
@@ -94,7 +94,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks', verticals: ['test1'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judging/next_hack")
+                .get("/api/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -111,7 +111,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks', verticals: ['test1', 'test2'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judging/next_hack")
+                .get("/api/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -127,7 +127,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks', categories: ['test1'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judging/next_hack")
+                .get("/api/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -142,7 +142,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks', floor: 0 }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judging/next_hack")
+                .get("/api/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -165,7 +165,7 @@ describe('review next hack', () => {
             }]
         }).save();
         await request(app)
-            .get("/judging/next_hack")
+            .get("/api/judging/next_hack")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
@@ -181,7 +181,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks' }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judging/next_hack")
+                .get("/api/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -197,7 +197,7 @@ describe('review next hack', () => {
         await new Judge({ _id: 'judgetreehacks', verticals: ['test1'] }).save();
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judging/next_hack")
+                .get("/api/judging/next_hack")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(e => {
@@ -212,7 +212,7 @@ describe('review next hack', () => {
         ]);
         for (let i = 0; i < 10; i++) {
             await request(app)
-                .get("/judging/next_hack?hack_id=0")
+                .get("/api/judging/next_hack?hack_id=0")
                 .set({ Authorization: 'judge' })
                 .expect(200)
                 .then(async e => {
@@ -225,7 +225,7 @@ describe('review next hack', () => {
             { _id: 0, reviews: [{}] }
         ]);
         await request(app)
-        .get("/judging/next_hack?hack_id=1")
+        .get("/api/judging/next_hack?hack_id=1")
         .set({ Authorization: 'judge' })
         .expect(404)
         .then(e => {
@@ -237,7 +237,7 @@ describe('review next hack', () => {
             { _id: 0, reviews: [{reader: {id: "judgetreehacks"}}] }
         ]);
         await request(app)
-        .get("/judging/next_hack?hack_id=0")
+        .get("/api/judging/next_hack?hack_id=0")
         .set({ Authorization: 'judge' })
         .expect(404)
         .then(e => {
@@ -253,7 +253,7 @@ describe('rate hacks', () => {
             reviews: [],
         }).save();
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -286,7 +286,7 @@ describe('rate hacks', () => {
             disabled: true
         }).save();
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -328,7 +328,7 @@ describe('rate hacks', () => {
             }],
         }).save();
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -341,7 +341,7 @@ describe('rate hacks', () => {
     });
     test('rate a hack that is not found - fail', async () => {
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 0,
@@ -370,7 +370,7 @@ describe('rate hacks', () => {
             }],
         }).save();
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -387,7 +387,7 @@ describe('rate hacks', () => {
             reviews: [{}, {}, {}],
         }).save();
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -408,7 +408,7 @@ describe('skip hack', () => {
             disabled: true
         }).save();
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -426,7 +426,7 @@ describe('skip hack', () => {
             numSkips: 0
         }).save();
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -444,7 +444,7 @@ describe('skip hack', () => {
             numSkips: 1
         }).save();
         await request(app)
-            .post("/judging/rate")
+            .post("/api/judging/rate")
             .set({ Authorization: 'judge' })
             .send({
                 hack_id: 1,
@@ -464,7 +464,7 @@ describe('judge leaderboard', () => {
             { _id: 2, reviews: [{ reader: { email: "reviewer1@treehacks" } }, { reader: { email: "reviewer2@treehacks" } }] },
         ]);
         await request(app)
-            .get("/judging/leaderboard")
+            .get("/api/judging/leaderboard")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {
@@ -481,7 +481,7 @@ describe('judge stats', () => {
             { _id: 3, reviews: [{}] }
         ]);
         await request(app)
-            .get("/judging/stats")
+            .get("/api/judging/stats")
             .set({ Authorization: 'judge' })
             .expect(200)
             .then(e => {

@@ -10,7 +10,7 @@ afterEach(() => {
 describe('import hacks', () => {
     test('import hacks test with no floor - FAIL', async () => {
         let result = await request(app)
-            .post("/hacks_import")
+            .post("/api/hacks_import")
             .set({ Authorization: 'admin' })
             .send({
                 items: [{
@@ -28,7 +28,7 @@ describe('import hacks', () => {
     });
     test('import hacks test simple', async () => {
         let result = await request(app)
-            .post("/hacks_import")
+            .post("/api/hacks_import")
             .set({ Authorization: 'admin' })
             .send({
                 floor: 2,
@@ -63,7 +63,7 @@ describe('import hacks', () => {
         }).save();
 
         let result = await request(app)
-        .post("/hacks_import")
+        .post("/api/hacks_import")
         .set({ Authorization: 'admin' })
         .send({
             floor: 1,
@@ -98,7 +98,7 @@ describe('hack modify', () => {
             "categories": ["cat11", "cat12", "cat13"]
         }).save();
         return request(app)
-            .patch("/hacks/999")
+            .patch("/api/hacks/999")
             .set({ Authorization: 'admin' })
             .send({
                 "disabled": true

@@ -52,7 +52,7 @@ afterAll(() => {
 describe('user form view by applicant', () => {
     test('view form with same id - success', () => {
         return request(app)
-            .get("/users/applicanttreehacks/forms/application_info")
+            .get("/api/users/applicanttreehacks/forms/application_info")
             .set({ Authorization: 'applicant' })
             .expect(200).then(e => {
                 expect(e.body["race"]).toEqual(["test"]);
@@ -61,7 +61,7 @@ describe('user form view by applicant', () => {
     });
     test('view form with different id - unauthorized', () => {
         return request(app)
-            .get("/users/applicanttreehacks2/forms/application_info")
+            .get("/api/users/applicanttreehacks2/forms/application_info")
             .set({ Authorization: 'applicant' })
             .expect(403);
     });
@@ -70,7 +70,7 @@ describe('user form view by applicant', () => {
 describe('user form view by admin', () => {
     test('view any form - success', () => {
         return request(app)
-            .get("/users/applicanttreehacks/forms/application_info")
+            .get("/api/users/applicanttreehacks/forms/application_info")
             .set({ Authorization: 'admin' })
             .expect(200);
     });
@@ -79,19 +79,19 @@ describe('user form view by admin', () => {
 describe('user form view by sponsor', () => {
     test('view a form with opt out - fail', () => {
         return request(app)
-            .get("/users/applicant-optout-confirmed/forms/application_info")
+            .get("/api/users/applicant-optout-confirmed/forms/application_info")
             .set({ Authorization: 'sponsor' })
             .expect(404); // Todo: should be 401 when implementation changes.
     });
     test('view a form with status admitted - fail', () => {
         return request(app)
-            .get("/users/applicant-incomplete/forms/application_info")
+            .get("/api/users/applicant-incomplete/forms/application_info")
             .set({ Authorization: 'sponsor' })
             .expect(404); // Todo: should be 401 when implementation changes.
     });
     test('view a form with status confirmed - pass', () => {
         return request(app)
-            .get("/users/applicant-confirmed/forms/application_info")
+            .get("/api/users/applicant-confirmed/forms/application_info")
             .set({ Authorization: 'sponsor' })
             .expect(200).then(e => {
                 expect(Object.keys(e.body).sort()).toEqual(sponsorApplicationDisplayFields.sort());

@@ -50,7 +50,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 
-if (process.env.MODE === "PROD") {
+if (process.env.NODE_ENV === "test") {
+    // Don't serve files when testing
+} else if (process.env.MODE === "PROD") {
     // Set up static files
     app.use("/dist", express.static('dist'));
 
@@ -58,8 +60,7 @@ if (process.env.MODE === "PROD") {
     app.get('/',(req, res) => {
         res.sendFile('dist/index.html', {root: __dirname});
     });
-}
-else {
+} else {
     // Dev mode
     app.use(webpackDevMiddleware(webpack(devConfig), {
         publicPath: devConfig.output.publicPath,

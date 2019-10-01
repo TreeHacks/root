@@ -30,11 +30,11 @@ describe('user status before deadline', () => {
     test('admitted user confirms - success', async () => {
         await new Application({ ..._doc, status: STATUS.ADMITTED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/confirm")
+            .post("/api/users/applicanttreehacks/status/confirm")
             .set({ Authorization: 'applicant' })
             .expect(200);
         await request(app)
-            .get("/users/applicanttreehacks/status")
+            .get("/api/users/applicanttreehacks/status")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -44,11 +44,11 @@ describe('user status before deadline', () => {
     test('admitted user declines - success', async () => {
         await new Application({ ..._doc, status: STATUS.ADMITTED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/decline")
+            .post("/api/users/applicanttreehacks/status/decline")
             .set({ Authorization: 'applicant' })
             .expect(200);
         await request(app)
-            .get("/users/applicanttreehacks/status")
+            .get("/api/users/applicanttreehacks/status")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -58,25 +58,25 @@ describe('user status before deadline', () => {
     test('submitted user confirms - fail', async () => {
         await new Application({ ..._doc, status: STATUS.SUBMITTED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/confirm")
+            .post("/api/users/applicanttreehacks/status/confirm")
             .set({ Authorization: 'applicant' })
             .expect(403);
     });
     test('submitted user declines - fail', async () => {
         await new Application({ ..._doc, status: STATUS.SUBMITTED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/decline")
+            .post("/api/users/applicanttreehacks/status/decline")
             .set({ Authorization: 'applicant' })
             .expect(403);
     });
     test('admission_confirmed user declines - success', async () => {
         await new Application({ ..._doc, status: STATUS.ADMISSION_CONFIRMED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/decline")
+            .post("/api/users/applicanttreehacks/status/decline")
             .set({ Authorization: 'applicant' })
             .expect(200);
         await request(app)
-            .get("/users/applicanttreehacks/status")
+            .get("/api/users/applicanttreehacks/status")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -86,7 +86,7 @@ describe('user status before deadline', () => {
     test('admission_declined user confirms - fail', async () => {
         await new Application({ ..._doc, status: STATUS.ADMISSION_DECLINED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/confirm")
+            .post("/api/users/applicanttreehacks/status/confirm")
             .set({ Authorization: 'applicant' })
             .expect(403);
     });
@@ -103,25 +103,25 @@ describe('user status after deadline', () => {
     test('admitted user confirms - fail', async () => {
         await new Application({ ..._doc, status: STATUS.ADMITTED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/confirm")
+            .post("/api/users/applicanttreehacks/status/confirm")
             .set({ Authorization: 'applicant' })
             .expect(403);
     });
     test('admitted user declines - fail', async () => {
         await new Application({ ..._doc, status: STATUS.ADMITTED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/decline")
+            .post("/api/users/applicanttreehacks/status/decline")
             .set({ Authorization: 'applicant' })
             .expect(403);
     });
     test('admission_confirmed user declines - success', async () => {
         await new Application({ ..._doc, status: STATUS.ADMISSION_CONFIRMED }).save();
         await request(app)
-            .post("/users/applicanttreehacks/status/decline")
+            .post("/api/users/applicanttreehacks/status/decline")
             .set({ Authorization: 'applicant' })
             .expect(200);
         await request(app)
-            .get("/users/applicanttreehacks/status")
+            .get("/api/users/applicanttreehacks/status")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {

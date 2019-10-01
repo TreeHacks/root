@@ -76,7 +76,7 @@ afterAll(() => {
 describe('user form list by applicant', () => {
     test('view form list with applicant - fail', () => {
         return request(app)
-            .get("/users")
+            .get("/api/users")
             .set({ Authorization: 'applicant' })
             .expect(403);
     });
@@ -85,7 +85,7 @@ describe('user form list by applicant', () => {
 describe('user form list by sponsor', () => {
     test('view only application confirmed forms with no opt out', () => {
         return request(app)
-            .get("/users")
+            .get("/api/users")
             .set({ Authorization: 'sponsor' })
             .expect(200).then(e => {
                 expect(e.body.count).toEqual(2);
@@ -101,7 +101,7 @@ describe('user form list by sponsor', () => {
 describe('user form list by admin', () => {
     test('view all forms', () => {
         return request(app)
-            .get("/users")
+            .get("/api/users")
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
                 expect(e.body.results.map(item => omit(item, "__v")).sort()).toEqual(docs.sort());
@@ -109,7 +109,7 @@ describe('user form list by admin', () => {
     });
     test('filter by status', () => {
         return request(app)
-            .get("/users?" + queryString.stringify({
+            .get("/api/users?" + queryString.stringify({
                 filter: JSON.stringify({ 'status': STATUS.SUBMITTED })
             }))
             .set({ Authorization: 'admin' })
@@ -120,7 +120,7 @@ describe('user form list by admin', () => {
     });
     test('filter by status and project email', () => {
         return request(app)
-            .get("/users?" + queryString.stringify({
+            .get("/api/users?" + queryString.stringify({
                 filter: JSON.stringify({ 'status': STATUS.SUBMITTED }),
                 project: JSON.stringify(['user.email']),
             }))
@@ -132,7 +132,7 @@ describe('user form list by admin', () => {
     });
     test('filter by name (partial filter)', () => {
         return request(app)
-            .get("/users?" + queryString.stringify({
+            .get("/api/users?" + queryString.stringify({
                 filter: JSON.stringify({ 'forms.application_info.first_name': 't' })
             }))
             .set({ Authorization: 'admin' })
@@ -143,7 +143,7 @@ describe('user form list by admin', () => {
     });
     test('filter by name (partial filter) should only match beginning of the word', () => {
         return request(app)
-            .get("/users?" + queryString.stringify({
+            .get("/api/users?" + queryString.stringify({
                 filter: JSON.stringify({ 'forms.application_info.first_name': 'a' })
             }))
             .set({ Authorization: 'admin' })
@@ -153,7 +153,7 @@ describe('user form list by admin', () => {
     });
     test('filter by name (partial filter) and sort asc', () => {
         return request(app)
-            .get("/users?" + queryString.stringify({
+            .get("/api/users?" + queryString.stringify({
                 filter: JSON.stringify({ 'forms.application_info.first_name': 't' }),
                 sort: JSON.stringify({ 'forms.application_info.first_name': 1 })
             }))
@@ -165,7 +165,7 @@ describe('user form list by admin', () => {
     });
     test('filter by name (partial filter) and sort desc', () => {
         return request(app)
-            .get("/users?" + queryString.stringify({
+            .get("/api/users?" + queryString.stringify({
                 filter: JSON.stringify({ 'forms.application_info.first_name': 't' }),
                 sort: JSON.stringify({ 'forms.application_info.first_name': -1 })
             }))
@@ -177,7 +177,7 @@ describe('user form list by admin', () => {
     });
     test('filter by boolean value', () => {
         return request(app)
-            .get("/users?" + queryString.stringify({
+            .get("/api/users?" + queryString.stringify({
                 filter: JSON.stringify({ 'sponsor_optout': true })
             }))
             .set({ Authorization: 'admin' })

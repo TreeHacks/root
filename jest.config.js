@@ -36,6 +36,7 @@ module.exports = {
         {
             ...commonConfig,
             "name": "backend",
+            "testEnvironment": "node",
             "testMatch": [
                 "<rootDir>/backend/**/__tests__/**/*.[jt]s?(x)"
             ]

@@ -21,7 +21,7 @@ afterAll(() => {
 describe('hack list by applicant', () => {
     test('view hack list with applicant - pass', () => {
         return request(app)
-            .get("/hacks")
+            .get("/api/hacks")
             .set({ Authorization: 'applicant' })
             .expect(200);
     });
@@ -30,7 +30,7 @@ describe('hack list by applicant', () => {
 describe('hack list by anyone', () => {
     test('view hack list with no authorization', () => {
         return request(app)
-            .get("/hacks")
+            .get("/api/hacks")
             .expect(200).then(e => {
                 expect(e.body.count).toEqual(3);
                 expect(e.body.results.map(item => item.title).sort()).toEqual(['test1', 'test2', 'test3'].sort());
@@ -44,7 +44,7 @@ describe('hack list by anyone', () => {
 describe('hack list by admin', () => {
     test('view all forms', () => {
         return request(app)
-            .get("/hacks")
+            .get("/api/hacks")
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
                 expect(e.body.results.map(item => omit(item, "__v")).sort()).toEqual(docs.sort());

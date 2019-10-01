@@ -14,7 +14,7 @@ describe('bulk create users endpoint', () => {
     });
     test('bulk create judges', async () => {
         let result = await request(app)
-            .post("/users_bulkcreate")
+            .post("/api/users_bulkcreate")
             .set({ Authorization: 'admin' })
             .send({
                 emails: ["j1@treehacks.com", "j2@treehacks.com"],

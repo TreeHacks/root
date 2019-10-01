@@ -43,11 +43,11 @@ describe('user form submit by applicant', () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await new Application({ ..._doc, status: STATUS.INCOMPLETE }).save();
         await request(app)
-            .post("/users/applicanttreehacks/forms/application_info/submit")
+            .post("/api/users/applicanttreehacks/forms/application_info/submit")
             .set({ Authorization: 'applicant' })
             .expect(200);
         await request(app)
-            .get("/users/applicanttreehacks/status")
+            .get("/api/users/applicanttreehacks/status")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -59,7 +59,7 @@ describe('user form submit by applicant', () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await new Application({ ..._doc, status: STATUS.INCOMPLETE }).save();
         await request(app)
-            .post("/users/applicanttreehacks2/forms/application_info/submit")
+            .post("/api/users/applicanttreehacks2/forms/application_info/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
         clock.uninstall();
@@ -68,7 +68,7 @@ describe('user form submit by applicant', () => {
         const clock = lolex.install({ now: new Date("01/01/2048") });
         await new Application({ ..._doc, status: STATUS.INCOMPLETE }).save();
         await request(app)
-            .post("/users/applicanttreehacks/forms/application_info/submit")
+            .post("/api/users/applicanttreehacks/forms/application_info/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
         clock.uninstall();
@@ -77,7 +77,7 @@ describe('user form submit by applicant', () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await new Application({ ..._doc, type: TYPE.STANFORD, status: STATUS.INCOMPLETE }).save();
         await request(app)
-            .post("/users/applicanttreehacks/forms/application_info/submit")
+            .post("/api/users/applicanttreehacks/forms/application_info/submit")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(async e => {
@@ -98,7 +98,7 @@ describe('user form submit by applicant', () => {
             }
         }).save();
         await request(app)
-            .post("/users/applicanttreehacks/forms/application_info/submit")
+            .post("/api/users/applicanttreehacks/forms/application_info/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
         clock.uninstall();
@@ -109,7 +109,7 @@ describe('user form submit by applicant', () => {
             ..._doc, status: STATUS.SUBMITTED
         }).save();
         await request(app)
-            .post("/users/applicanttreehacks/forms/application_info/submit")
+            .post("/api/users/applicanttreehacks/forms/application_info/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
         clock.uninstall();

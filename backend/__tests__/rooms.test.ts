@@ -27,22 +27,22 @@ afterEach(async () => {
 describe('room endpoint permissions', () => {
     test.skip('GET /rooms/status as anonymous - pass', () => {
         return request(app)
-            .get("/rooms/status")
+            .get("/api/rooms/status")
             .expect(200);
     });
     test('GET /rooms as anonymous - fail', () => {
         return request(app)
-            .get("/rooms")
+            .get("/api/rooms")
             .expect(401);
     });
     test('POST /rooms as anonymous - fail', () => {
         return request(app)
-            .post("/rooms")
+            .post("/api/rooms")
             .expect(401);
     });
     test('DELETE /rooms as anonymous - fail', () => {
         return request(app)
-            .delete("/rooms")
+            .delete("/api/rooms")
             .expect(401);
     });
 });
@@ -50,7 +50,7 @@ describe('room endpoint permissions', () => {
 describe('get rooms endpoint', () => {
     test('get rooms default', async () => {
         await request(app)
-            .get("/rooms")
+            .get("/api/rooms")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -68,7 +68,7 @@ describe('get rooms endpoint', () => {
             }
         ]);
         await request(app)
-            .get("/rooms")
+            .get("/api/rooms")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -85,7 +85,7 @@ describe('get rooms endpoint', () => {
             }
         ]);
         await request(app)
-            .get("/rooms")
+            .get("/api/rooms")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {

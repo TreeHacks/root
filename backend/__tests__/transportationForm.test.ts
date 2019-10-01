@@ -23,7 +23,7 @@ describe('transportation form before deadline', () => {
             forms: {transportation: {vendor: "vendor"} }
         }).save();
         await request(app)
-            .get("/users/applicanttreehacks/forms/transportation")
+            .get("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -38,7 +38,7 @@ describe('transportation form before deadline', () => {
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.OTHER, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
         }).save();
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({accept: true})
             .expect(403);
@@ -51,7 +51,7 @@ describe('transportation form before deadline', () => {
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.OTHER, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
         }).save();
         await request(app)
-            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .post("/api/users/applicanttreehacks/forms/transportation/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
     });
@@ -69,7 +69,7 @@ describe('flight transportation rsvp', () => {
     test('available user edits flight transportation', async () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ accept: true })
             .expect(200)
@@ -82,11 +82,11 @@ describe('flight transportation rsvp', () => {
     test('available user submits flight transportation', async () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await request(app)
-            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .post("/api/users/applicanttreehacks/forms/transportation/submit")
             .set({ Authorization: 'applicant' })
             .expect(200);
         await request(app)
-            .get("/users/applicanttreehacks")
+            .get("/api/users/applicanttreehacks")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -98,7 +98,7 @@ describe('flight transportation rsvp', () => {
     test('available user edits flight transportation after deadline - fail', async () => {
         const clock = lolex.install({ now: new Date("01/01/9999") });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ accept: true })
             .expect(403);
@@ -108,7 +108,7 @@ describe('flight transportation rsvp', () => {
     test('available user submits flight transportation after deadline - fail', async () => {
         const clock = lolex.install({ now: new Date("01/01/9999") });
         await request(app)
-            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .post("/api/users/applicanttreehacks/forms/transportation/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
         clock.uninstall();
@@ -127,7 +127,7 @@ describe('other transportation rsvp', () => {
     test('available user edits other transportation', async () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ accept: true })
             .expect(200)
@@ -140,11 +140,11 @@ describe('other transportation rsvp', () => {
     test('available user submits other transportation', async () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await request(app)
-            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .post("/api/users/applicanttreehacks/forms/transportation/submit")
             .set({ Authorization: 'applicant' })
             .expect(200);
         await request(app)
-            .get("/users/applicanttreehacks")
+            .get("/api/users/applicanttreehacks")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -156,7 +156,7 @@ describe('other transportation rsvp', () => {
     test('available user edits other transportation after deadline - fail', async () => {
         const clock = lolex.install({ now: new Date("01/01/9999") });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ accept: true })
             .expect(403);
@@ -166,7 +166,7 @@ describe('other transportation rsvp', () => {
     test('available user submits other transportation after deadline - fail', async () => {
         const clock = lolex.install({ now: new Date("01/01/9999") });
         await request(app)
-            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .post("/api/users/applicanttreehacks/forms/transportation/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
         clock.uninstall();
@@ -183,7 +183,7 @@ describe('bus transportation rsvp', () => {
         }).save();
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ 'accept': true })
             .expect(200)
@@ -191,7 +191,7 @@ describe('bus transportation rsvp', () => {
                 expect(e.body).toEqual({ accept: true });
             });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ 'accept': false })
             .expect(200)
@@ -199,7 +199,7 @@ describe('bus transportation rsvp', () => {
                 expect(e.body).toEqual({ accept: false });
             });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ 'accept': true })
             .expect(200)
@@ -217,7 +217,7 @@ describe('bus transportation rsvp', () => {
         }).save();
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await request(app)
-            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .post("/api/users/applicanttreehacks/forms/transportation/submit")
             .set({ Authorization: 'applicant' })
             .expect(403);
         clock.uninstall();
@@ -231,7 +231,7 @@ describe('bus transportation rsvp', () => {
         }).save();
         const clock = lolex.install({ now: new Date("01/01/9999") });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ 'accept': false })
             .expect(200)
@@ -249,7 +249,7 @@ describe('bus transportation rsvp', () => {
         }).save();
         const clock = lolex.install({ now: new Date("01/01/9999") });
         await request(app)
-            .put("/users/applicanttreehacks/forms/transportation")
+            .put("/api/users/applicanttreehacks/forms/transportation")
             .set({ Authorization: 'applicant' })
             .send({ 'accept': true })
             .expect(403);
@@ -267,14 +267,14 @@ describe('incomplete transportation submit - fail', () => {
         }).save();
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await request(app)
-            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .post("/api/users/applicanttreehacks/forms/transportation/submit")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
                 expect(e.text).toEqual("Not all required fields have been submitted.");
             });
         await request(app)
-            .get("/users/applicanttreehacks")
+            .get("/api/users/applicanttreehacks")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
@@ -291,14 +291,14 @@ describe('incomplete transportation submit - fail', () => {
         }).save();
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await request(app)
-            .post("/users/applicanttreehacks/forms/transportation/submit")
+            .post("/api/users/applicanttreehacks/forms/transportation/submit")
             .set({ Authorization: 'applicant' })
             .expect(403)
             .then(e => {
                 expect(e.text).toEqual("Not all required fields have been submitted.");
             });
         await request(app)
-            .get("/users/applicanttreehacks")
+            .get("/api/users/applicanttreehacks")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
