@@ -21,8 +21,8 @@ export function setApplicationInfo(req: Request, res: Response) {
   );
 }
 
-export function submitApplicationInfo(req: Request, res: Response) {
-  return setApplicationAttribute(req, res,
+export async function submitApplicationInfo(req: Request, res: Response) {
+  return await setApplicationAttribute(req, res,
     e => {
       if (e.status !== STATUS.INCOMPLETE) {
         return res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
