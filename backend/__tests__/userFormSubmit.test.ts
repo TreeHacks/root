@@ -34,6 +34,10 @@ const _doc = {
     }
 };
 
+beforeEach(() => {
+    return Application.deleteMany({});
+})
+
 afterEach(() => {
     return Application.deleteMany({});
 })
