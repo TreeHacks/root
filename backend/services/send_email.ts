@@ -7,7 +7,7 @@ AWS.config.update({ region: 'us-east-1' });
 
 export async function sendApplicationSubmittedEmail(toAddress) {
     
-    const buffer = await readFilePromise('submitted_email.html');
+    const buffer = await readFilePromise('util/submitted_email.html');
     const htmlBody = buffer.toString();
     const textBody = h2p(htmlBody);
 
