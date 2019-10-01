@@ -1,5 +1,6 @@
+@import "../Global.scss";
 .transportation .treehacks-form .form-control {
-  background-color: #535152;
+  background-color: $background-color;
 }
 
 .transportation .treehacks-form .field-string:nth-child(4),
@@ -16,14 +17,14 @@
 
 .transportation p#root_receipt__description {
   font-size: 20px;
-  color: #fff;
+  color: $text-color;
   margin-top: 1rem;
 }
 
 .transportation input#root_receipt {
   border: 1px dashed white;
   padding: 10px;
-  color: #fff;
+  color: $text-color;
 }
 
 .transportation .route {
@@ -56,21 +57,21 @@
 
       &:before {
         content: '';
-        border: 3px solid #00E174;
+        border: 3px solid $primary-color;
         border-radius: 100%;
         position: absolute;
         width: 15px;
         height: 15px;
         left: -27px;
         top: 3px;
-        background-color: #535152;
+        background-color: $background-color;
       }
     }
 
     &:not(:last-child) {
       &:before {
         content: "";
-        border-left: 3px solid #00E174;
+        border-left: 3px solid $primary-color;
         position: absolute;
         left: calc(40% - 1px);
         top: 15px;
@@ -78,4 +79,25 @@
       }
     }
   }
+}
+
+.treehacks-bus-coordinator-text {
+  margin: 40;
+  padding: 20;
+  background-color: #535152;
+}
+
+.treehacks-transportation-alert {
+  background-color: #686e77;
+  width: 100%;
+  max-width: 750px;
+  margin: 60px;
+  padding: 40px 20px;
+  color: $text-color;
+  text-align: center;
+}
+
+.treehacks-transportation-text-amount {
+  color: $primary-color;
+  font-weight: 'bold';
 }

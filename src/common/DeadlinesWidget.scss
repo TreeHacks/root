@@ -1,7 +1,8 @@
+@import "../Global.scss";
 .deadlines-widget {
   text-align: center;
   line-height: 1.5;
-  color: #fff;
+  color: $text-color;
 
   span {
     font-weight: bold;

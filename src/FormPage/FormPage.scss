@@ -16,7 +16,7 @@
     .checkboxes {
         background-color: $box-gray;
         color: white;
-        border: 2px solid $dark-gray;
+        border: 2px solid $background-color;
         border-radius: 0;
         font-size: 20px;
         height: auto;
@@ -31,7 +31,7 @@
         &:focus {
             background-color: white;
             color: $text-gray;
-            border: 2px solid $green;
+            border: 2px solid $primary-color;
             box-shadow: 0 0 0 0;
         }
     }
@@ -50,8 +50,8 @@
             background-color: white;
             transition: .2s;
             &:checked {
-                background-color: $green;
-                color: $green;
+                background-color: $primary-color;
+                color: $primary-color;
             }
         }
     }
@@ -111,8 +111,8 @@
         min-height: 43px;
     }
     .btn-info {
-        background-color: #00b65f;
-        border-color: #00b65f !important;
+        background-color: $primary-color;
+        border-color: $primary-color !important;
         color: white;
         width: 100%;
         font-size: 20px;
@@ -120,8 +120,8 @@
     .btn-info:not(:disabled):not(.disabled):active,
     .btn-info:not(:disabled):not(.disabled).active,
     .show>.btn-info.dropdown-toggle {
-        background-color: #00b65f;
-        border-color: #00b65f !important;
+        background-color: $primary-color;
+        border-color: $primary-color !important;
         color: white;
         width: 100%;
         font-size: 20px;
@@ -206,8 +206,8 @@ input[type="date"]:valid:before {
 }
 
 /*.checkbox input:checked {
-    background-color: #535152!important;
-    color: #535152!important;
+    background-color: $background-color!important;
+    color: $background-color!important;
 }*/
 
 #root_race {
@@ -235,8 +235,8 @@ input[type="date"]:valid:before {
 }
 
 .btn-custom {
-    background-color: #00b65f;
-    border-color: #00b65f !important;
+    background-color: $primary-color;
+    border-color: $primary-color !important;
     color: white;
     width: 41%;
     font-size: 20px !important;
@@ -251,6 +251,6 @@ input[type="date"]:valid:before {
 .btn-custom.inverted {
     background-color: transparent;
     border-width: 2px;
-    border-color: #00b65f !important;
-    color: #00b65f;
+    border-color: $primary-color !important;
+    color: $primary-color;
 }

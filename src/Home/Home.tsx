@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { getUserProfile, setPage } from "../store/form/actions";
+import { logo } from "../constants";
 import { logout } from "../store/auth/actions";
 
 import { IHomeProps } from "./types";
@@ -24,7 +24,7 @@ export class Home extends React.Component<IHomeProps, {}> {
     return <div className="nav">
       <div className="header-logo">
         <NavLink to="/">
-          <img src={require("../art/logo.svg")} height="40px" />
+          <img src={logo} height="40px" />
           <span className="logo-text-tree">tree</span>
           <span className="logo-text-hacks">hacks</span>
         </NavLink>

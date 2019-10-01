@@ -1,18 +1,11 @@
-$dark-gray: #535152;
-$light-gray: #696E76;
-$green: #00E174;
-$white: #FFFFFF;
-
-$navbar-font-size: 16px * 1.18;
-$navbar-margin: 1.25vw;
-$navbar-padding: 8px;
+@import "../Global.scss";
 
 .nav {
-  background-color: $dark-gray;
+  background-color: $background-color;
   height: 80px;
   width: 100vw;
   padding: 0 2vw;
-  border-bottom: 3px solid $light-gray;
+  border-bottom: 3px solid $background-color-light-border;
 
   display: flex;
   flex-flow: row nowrap;
@@ -20,15 +13,15 @@ $navbar-padding: 8px;
   align-items: center;
 
   a {
-    color: $white !important;
+    color: $text-color !important;
     margin: 0 $navbar-margin;
     padding: $navbar-padding 0;
     font-size: $navbar-font-size;
-    border-bottom: 2px solid $dark-gray;
+    border-bottom: 2px solid $background-color;
     transition: 0.5s;
 
     &:hover, &.active {
-      border-bottom: 2px solid $green;
+      border-bottom: 2px solid $primary-color;
       text-decoration: none;
     }
   }
@@ -45,7 +38,7 @@ $navbar-padding: 8px;
     }
 
     .logo-text-tree {
-      font-family: 'Avenir';
+      font-family: $base-font-family;
     }
 
     .logo-text-hacks {

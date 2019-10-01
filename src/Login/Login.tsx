@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import "./Login.scss";
 import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup, changePassword, exchangeAuthCode } from "../store/auth/actions";
-import { withFederated } from 'aws-amplify-react';
+import {logo} from "../constants";
 import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
 import { IAuthState } from "../store/auth/types";
@@ -114,7 +114,7 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
     if (!this.props.loggedIn) {
       return (<div className="treehacks-login">
         <div className="text-center">
-          <img src={require('../art/logo.png')} width="85px" height="65px" style={{ "marginTop": 49 }} />
+          <img src={logo} width="85px" height="65px" style={{ "marginTop": 49 }} />
         </div>
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
         {this.state.sponsor && <h3 className="h3-style">sponsors</h3>}

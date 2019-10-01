@@ -1,3 +1,4 @@
+@import "../Global.scss";
 .treehacks-login {
   max-width: 500px;
   margin: auto;
@@ -17,30 +18,30 @@
     padding: 0;
 }
 .form-link, .form-link:hover {
-    color: #00b65f;
+    color: $primary-color;
 }
 .left-btn{
 	margin-left:50px;
 }
 .h3-style{
 	margin-top: 10px;
-	color: white;
+	color: $text-color;
 	margin-bottom: 20px;
 	text-align: center;
 }
 .btn-custom{
-    background-color: #00b65f;
-    border-color: #00b65f!important;
-    color: white;
+    background-color: $primary-color;
+    border-color: $primary-color!important;
+    color: $primary-btn-text-color;
     width: 41%;
     margin-bottom: 20px;
 
     font-size: 20px!important;
 }
 .btn-stanford{
-  background-color: #00b65f;
-    border-color: #00b65f!important;
-    color: white;
+  background-color: $primary-color;
+    border-color: $primary-color!important;
+    color: $primary-btn-text-color;
     width: 89%;
     margin-bottom: 20px;
 
@@ -51,7 +52,7 @@
     text-align: center;
     margin-top: 30px;
     margin-bottom: -10px;
-    color: #fff;
+    color: $text-color;
 
     &.centered {
         margin-top: 0;
@@ -61,7 +62,7 @@
 .btn-subtle {
     border: none !important;
     background: transparent;
-    color: #00b65f;
+    color: $primary-color;
     font-size: initial !important;
 }
 
