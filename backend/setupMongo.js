@@ -7,10 +7,12 @@ const mongoServer = new MongodbMemoryServer.MongoMemoryServer({
 
 // mongoose.Promise = Promise;
 console.warn("Setting up mongodb server...");
-mongoServer.getConnectionString().then((uri) => {
-  process.env.MONGODB_URI = uri;
-  console.log("Mongodb server running on url", uri);
+module.exports = async function () {
+  await mongoServer.getConnectionString().then((uri) => {
+    process.env.MONGODB_URI = uri;
+    console.log("Mongodb server running on url", uri);
 
-  // Set reference to mongod in order to close the server during teardown.
-  global.__MONGOD__ = mongoServer;
-});
+    // Set reference to mongod in order to close the server during teardown.
+    global.__MONGOD__ = mongoServer;
+  });
+};
