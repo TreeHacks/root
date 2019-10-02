@@ -37,6 +37,7 @@ module.exports = {
             ...commonConfig,
             "name": "backend",
             "testEnvironment": "node",
+            "setupFilesAfterEnv": ["./backend/tearDownTests.ts"],
             "testMatch": [
                 "<rootDir>/backend/**/__tests__/**/*.[jt]s?(x)"
             ]
