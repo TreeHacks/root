@@ -10,7 +10,7 @@
         "test:backend": "dotenv jest -- --runInBand backend",
         "start": "concurrently --kill-others \"npm run mongo\" \"npm run build:live\"",
         "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r dotenv/config ./backend/index.ts",
-        "build:backend": "dotenv tsc ./backend/index.ts",
+        "build:backend": "dotenv tsc",
         "build:frontend": "webpack --config webpack.prod.js",
         "heroku-postbuild": "npm run build:backend && npm run build:frontend",
         "start:prod": "node build/src/index.js"
@@ -81,7 +81,7 @@
         "@types/jest": "^23.1.6",
         "@types/mongodb": "^3.1.12",
         "@types/morgan": "^1.7.35",
-        "@types/node": "^10.5.2",
+        "@types/node": "^12.7.9",
         "@types/supertest": "^2.0.5",
         "aws-amplify": "^1.0.4",
         "aws-amplify-react": "^1.0.4",
