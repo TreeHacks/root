@@ -39,7 +39,7 @@ const app = express();
 app.use(forceSsl);
 app.use(compression());
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017", { useNewUrlParser: true }).catch(function (reason: string) {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017", { useNewUrlParser: true, useUnifiedTopology: true }).catch(function (reason: string) {
     console.log('Unable to connect to the mongodb instance. Error: ', reason);
 });
 mongoose.plugin(filePlugin);
