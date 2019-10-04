@@ -37,7 +37,8 @@ module.exports = {
             ...commonConfig,
             "name": "backend",
             "testEnvironment": "node",
-            "setupFilesAfterEnv": ["./backend/tearDownTests.ts"],
+            "globalSetup": "./backend/setupMongo.js",
+            "globalTeardown": "./backend/teardownMongo.js",
             "testMatch": [
                 "<rootDir>/backend/**/__tests__/**/*.[jt]s?(x)"
             ]
