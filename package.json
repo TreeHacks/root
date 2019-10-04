@@ -5,9 +5,9 @@
     "main": "webpack.common.js",
     "scripts": {
         "mongo": "mongod",
-        "test": "dotenv jest",
+        "test": "dotenv jest -- --runInBand",
         "test:frontend": "dotenv jest src",
-        "test:backend": "dotenv jest backend",
+        "test:backend": "dotenv jest backend -- --runInBand",
         "start": "concurrently --kill-others \"npm run mongo\" \"npm run build:live\"",
         "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r dotenv/config ./backend/index.ts",
         "build:backend": "dotenv tsc",
