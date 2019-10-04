@@ -10,7 +10,6 @@ const webpack = require("webpack");
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const devConfig = require("../webpack.dev.js");
 
-import cors from "cors";
 import swaggerDocument from "./swagger";
 import filePlugin from './utils/file_plugin';
 const port = process.env.PORT || 9000;
@@ -47,8 +46,6 @@ mongoose.plugin(filePlugin);
 // Use body-parser to parse HTTP request parameters
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(cors());
 
 if (process.env.NODE_ENV === "test") {
     // Don't serve files when testing
