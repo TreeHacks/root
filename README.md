@@ -7,6 +7,7 @@ Hackathon registration framework. Used in TreeHacks since 2019. See it in action
 1. Download the appropriate `.env` file with the proper environment variables set, and put it in your working directory.
 1. Run `npm install`
 1. Run `npm start`
+1. Open http://localhost:9000 in your browser.
 
 ## Running tests
 Application will deploy to Heroku only if tests pass.
