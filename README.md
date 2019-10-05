@@ -3,9 +3,9 @@
 Hackathon registration framework. Used in TreeHacks since 2019. See it in action at https://root.treehacks.com
 
 ## Local setup
+1. Make sure you have MongoDB installed (so `mongod` is in your PATH)
 1. Download the appropriate `.env` file with the proper environment variables set, and put it in your working directory.
 1. Run `npm install`
-1. Run `npm run mongo` in one terminal to run mongodb.
 1. Run `npm start`
 
 ## Running tests
