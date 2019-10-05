@@ -14,7 +14,7 @@
         "build:frontend": "webpack --progress --config webpack.prod.js",
         "build": "npm run build:backend && npm run build:frontend",
         "heroku-postbuild": "npm run build",
-        "start:prod": "node build/src/index.js"
+        "start:prod": "node build/index.js"
     },
     "repository": {
         "type": "git",
