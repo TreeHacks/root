@@ -1,7 +1,7 @@
 import { API } from "aws-amplify";
 import { loadingStart, loadingEnd } from "../base/actions";
 import { IReactTableState, IReactTableHeader } from "src/Admin/types";
-import { get } from "lodash-es";
+import { get } from "lodash";
 import saveAs from 'file-saver';
 import { IAdminState } from "./types";
 import Papa from "papaparse";

@@ -5,7 +5,7 @@ import Loading from "../Loading/Loading";
 import { getApplicationStats } from "../store/admin/actions";
 import { Pie, PieChart, Tooltip } from "recharts";
 import { IAdminState } from "../store/admin/types";
-import {filter} from "lodash-es";
+import {filter} from "lodash";
 
 const Stats = (props: IStatsProps) => {
     return <div>

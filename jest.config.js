@@ -1,10 +1,13 @@
-module.exports = {
+const commonConfig = {
+    "globals": {
+        "MODE": "DEV",
+        ENDPOINT_URL: "/api"
+    },
     "transform": {
         "^.+\\.tsx?$": "ts-jest",
         "^.+\\.js$": "babel-jest",
         "^.+\\.svg$": "jest-svg-transformer"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
         "ts",
         "tsx",
@@ -12,28 +15,33 @@ module.exports = {
         "jsx",
         "json",
         "node"
-    ],
-    "transformIgnorePatterns": [
-        "<rootDir>/node_modules/(?!lodash-es)"
-    ],
-    "moduleNameMapper": {
-        "^.+\\.(css|scss|png|ico)$": "identity-obj-proxy",
-    },
-    "snapshotSerializers": [
-        "enzyme-to-json/serializer"
-    ],
-    "moduleDirectories": [
-        "node_modules",
-        "scripts"
-    ],
-    "setupTestFrameworkScriptFile": "./src/setupTests.ts",
-    "globals": {
-        "MODE": "DEV",
-        // "ENDPOINT_URL": "http://localhost:3000/",
-        // COGNITO_USER_POOL_ID: process.env.COGNITO_USER_POOL_ID,
-        // COGNITO_CLIENT_ID: process.env.COGNITO_CLIENT_ID,
-        ENDPOINT_URL: process.env.ENDPOINT_URL,
-        // COGNITO_ENDPOINT_URL: process.env.COGNITO_ENDPOINT_URL,
-        // GA_TRACKING_ID: process.env.GA_TRACKING_ID
-    }
+    ]
+};
+module.exports = {
+    "projects": [
+        {
+            ...commonConfig,
+            "name": "frontend",
+            "testMatch": [
+                "<rootDir>/src/**/__tests__/**/*.[jt]s?(x)"
+            ],
+            "setupFilesAfterEnv": ["./src/setupTests.ts"],
+            "moduleNameMapper": {
+                "^.+\\.(css|scss|png|ico)$": "identity-obj-proxy",
+            },
+            "snapshotSerializers": [
+                "enzyme-to-json/serializer"
+            ]
+        },
+        {
+            ...commonConfig,
+            "name": "backend",
+            "testEnvironment": "node",
+            "globalSetup": "./backend/setupMongo.js",
+            "globalTeardown": "./backend/teardownMongo.js",
+            "testMatch": [
+                "<rootDir>/backend/**/__tests__/**/*.[jt]s?(x)"
+            ]
+        },
+    ]
 };
