@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../index";
-import Application from "../models/ApplicationCurrentYear";
+import Application from "../models/Application";
 import { createApplication } from "../routes/common";
 import { IApplication } from "../models/Application.d";
 import lolex from "lolex";

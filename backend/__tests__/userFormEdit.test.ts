@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../index";
-import Application from "../models/ApplicationCurrentYear";
+import Application from "../models/Application";
 import { STATUS } from '../constants';
 import lolex from "lolex";
 

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import chrono from 'chrono-node';
 import { AVAILABLE_ROOMS } from "../constants";
 import RoomReservation from "../models/RoomReservation";
-import Application from "../models/ApplicationCurrentYear";
+import Application from "../models/Application";
 
 AVAILABLE_ROOMS.forEach(r => {
   r.unavailable = r.unavailable.map(({ start, end, ...rest }) => {

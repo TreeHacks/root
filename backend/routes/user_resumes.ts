@@ -1,4 +1,4 @@
-import Application from "../models/ApplicationCurrentYear";
+import Application from "../models/Application";
 import { Request, Response } from 'express';
 import { getFile } from "../services/file_actions";
 import { S3 } from "aws-sdk";

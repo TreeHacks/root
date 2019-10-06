@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../index";
-import Application from "../models/ApplicationCurrentYear";
+import Application from "../models/Application";
 import Judge from "../models/Judge";
 
 afterEach(async () => {

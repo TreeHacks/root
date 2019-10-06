@@ -1,4 +1,4 @@
-import Application from "../models/ApplicationCurrentYear";
+import Application from "../models/Application";
 import { STATUS, applicationReviewDisplayFields } from "../constants";
 import { IApplication } from "../models/Application.d";
 import { find } from "lodash";
