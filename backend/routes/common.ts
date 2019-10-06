@@ -1,4 +1,4 @@
-import Application from "../models/Application";
+import Application from "../models/ApplicationCurrentYear";
 import { IApplication } from "../models/Application.d";
 import { Request, Response } from 'express';
 import { CognitoUser } from "../models/cognitoUser";

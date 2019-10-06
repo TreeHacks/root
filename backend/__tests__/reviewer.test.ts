@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../index";
-import Application from "../models/Application";
+import Application from "../models/ApplicationCurrentYear";
 import { isEqual, omit } from "lodash";
 import { STATUS, sponsorApplicationDisplayFields, applicationReviewDisplayFields, TYPE } from '../constants';
 

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Application from "../models/Application";
+import Application from "../models/ApplicationCurrentYear";
 import { STATUS, TRANSPORTATION_TYPE, TRANSPORTATION_STATUS } from '../constants';
 import { mapValues } from "lodash";
 interface IElement {

@@ -1,4 +1,4 @@
-import Application from "../models/Application";
+import Application from "../models/ApplicationCurrentYear";
 import { Request, Response } from 'express';
 import { getGenericList } from "./common";
 
