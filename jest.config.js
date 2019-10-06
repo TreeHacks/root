@@ -8,6 +8,9 @@ const commonConfig = {
         "^.+\\.js$": "babel-jest",
         "^.+\\.svg$": "jest-svg-transformer"
     },
+    "moduleNameMapper": {
+        "^.+\\.(css|scss|png|ico)$": "identity-obj-proxy",
+    },
     "moduleFileExtensions": [
         "ts",
         "tsx",
@@ -26,9 +29,6 @@ module.exports = {
                 "<rootDir>/src/**/__tests__/**/*.[jt]s?(x)"
             ],
             "setupFilesAfterEnv": ["./src/setupTests.ts"],
-            "moduleNameMapper": {
-                "^.+\\.(css|scss|png|ico)$": "identity-obj-proxy",
-            },
             "snapshotSerializers": [
                 "enzyme-to-json/serializer"
             ]
