@@ -27,5 +27,5 @@ async function setCurrentYear(this: mongoose.Document) {
     }
 }
 
-const model: Model<IApplication> = mongoose.model("Application", applicationSchema, "Application");
+const model: Model<IApplication> = mongoose.model("ApplicationCurrentYear", applicationSchema, "Application");
 export default model;
