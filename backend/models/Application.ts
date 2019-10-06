@@ -44,10 +44,13 @@ export const applicationSchema: Schema = new mongoose.Schema({
     },
     "toDelete": {
         type: Boolean
+    },
+    "year": {
+        type: String
     }
 });
 
 applicationSchema.plugin(s3FilePlugin);
 
-const model: Model<IApplication> = mongoose.model("Application", applicationSchema);
+const model: Model<IApplication> = mongoose.model("Application", applicationSchema, "Application");
 export default model;
