@@ -51,7 +51,7 @@ export const Dashboard = (props: IDashboardProps) => {
                                             <div>
                                                 You haven't submitted your application yet. You have
                                             </div>
-                                            <div style={{ color: "#00E073", fontSize: '70px', marginBottom: -15 }}>
+                                            <div className="days-left">
                                                 {diffDays}
                                             </div>
                                             <div>
