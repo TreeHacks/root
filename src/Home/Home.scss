@@ -11,6 +11,10 @@
   justify-content: center;
   align-items: center;
 
+  .treehacks-navbar-links {
+    margin-top: 10px;
+  }
+
   a {
     color: $text-color;
     margin: 0 $navbar-margin;
@@ -61,4 +65,4 @@
     height: auto;
     padding: 10px 0;
   }
-} 
+}

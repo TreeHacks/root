@@ -5,7 +5,7 @@
     padding: 10px;
     width: 84%;
     max-width: 800px;
-    color: #09da7a;
+    color: $pink;
     &.treehacks-form-disabled {
         input[role=combobox] {
             cursor: default;
