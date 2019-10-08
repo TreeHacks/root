@@ -1,4 +1,4 @@
-import settings from "../src/themes/settings";
+// import settings from "../src/themes/settings";
 
 export var USER_ID_UPDATE = "test_user_id_update";
 export var USER_ID = "test_user_id";
@@ -131,5 +131,5 @@ export let AVAILABLE_ROOMS: IRoom[] = [
   },
 ];
 
-export const HACKATHON_YEAR = settings.hackathon_year;
+export const HACKATHON_YEAR = "2020"; //settings.hackathon_year;
 export const HACKATHON_YEAR_STRING = String(HACKATHON_YEAR);
