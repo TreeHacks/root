@@ -54,7 +54,7 @@ export async function getApplicationAttribute(req: Request, res: Response, gette
  */
 export async function setApplicationAttribute(req: Request, res: Response, setter: (e: IApplication) => any, getter: (e: IApplication) => any = e => e, considerDeadline = false) {
   const application: IApplication | null = await Application.findOne(
-    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 });
+    { "user.id": req.params.userId }, { "__v": 0, "reviews": 0 });
 
   if (!application) {
     res.status(404).send("Application not found.");

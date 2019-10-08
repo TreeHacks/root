@@ -58,7 +58,8 @@ export async function submitApplicationInfo(req: Request, res: Response) {
         }
       }
       if (completed) {
-        // Auto-admit Stanford students. Todo: disable
+        // Auto-admit Stanford students.
+        // TODO: disable
         if (e.type === TYPE.STANFORD) {
           e.status = STATUS.ADMISSION_CONFIRMED;
           e.transportation_status = TRANSPORTATION_STATUS.UNAVAILABLE;

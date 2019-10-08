@@ -1,11 +1,10 @@
 import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
-import { STATUS } from '../constants';
+import { STATUS, HACKATHON_YEAR_STRING } from '../constants';
 import lolex from "lolex";
 
 const _doc = {
-    _id: null,
     reviews: [],
     status: STATUS.INCOMPLETE,
     transportation_status: null,
@@ -13,12 +12,13 @@ const _doc = {
         application_info: {
             
         }
-    }
+    },
+    year: HACKATHON_YEAR_STRING,
 };
 
 const docs = [
-    { ..._doc, _id: 'applicanttreehacks' },
-    { ..._doc, _id: 'applicanttreehacks2' }
+    { ..._doc, user: { id: 'applicanttreehacks'} },
+    { ..._doc, user: { id: 'applicanttreehacks2'} }
 ];
 beforeAll(() => {
     return Application.insertMany(docs);

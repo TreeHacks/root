@@ -5,10 +5,10 @@ import { STATUS, TRANSPORTATION_STATUS, TYPE } from '../constants';
 import lolex from "lolex";
 
 const _doc = {
-    _id: 'applicanttreehacks',
     reviews: [],
     status: STATUS.INCOMPLETE,
     transportation_status: null,
+    user: { id: 'applicanttreehacks'},
     forms: {
         application_info: {
             first_name: "test",
@@ -77,6 +77,7 @@ describe('user form submit by applicant', () => {
             .expect(403);
         clock.uninstall();
     });
+    // TODO: REMOVE THIS
     test('(TEMPORARY) submit form before deadline and stanford - success with auto admit', async () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await new Application({ ..._doc, type: TYPE.STANFORD, status: STATUS.INCOMPLETE }).save();
@@ -85,7 +86,7 @@ describe('user form submit by applicant', () => {
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(async e => {
-                const application = await Application.findById('applicanttreehacks');
+                const application = await Application.findOne({'user.id': 'applicanttreehacks'});
                 expect(application!.status).toEqual(STATUS.ADMISSION_CONFIRMED);
                 expect(application!.transportation_status).toEqual(TRANSPORTATION_STATUS.UNAVAILABLE);
             })

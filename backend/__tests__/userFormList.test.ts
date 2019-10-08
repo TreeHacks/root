@@ -2,18 +2,18 @@ import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
 import { isEqual, omit } from "lodash";
-import { STATUS, sponsorApplicationDisplayFields } from '../constants';
+import { STATUS, sponsorApplicationDisplayFields, HACKATHON_YEAR_STRING } from '../constants';
 import queryString from "query-string";
 import { merge, cloneDeep } from "lodash";
 
 const _doc = {
-    _id: null,
     reviews: [],
     status: STATUS.INCOMPLETE,
     transportation_status: null,
     user: {
         email: 'test@treehacks'
     },
+    year: HACKATHON_YEAR_STRING,
     forms: {
         application_info: {
             first_name: "fir",
@@ -40,13 +40,13 @@ const _doc = {
 };
 
 let docs = [
-    { ..._doc, _id: 'applicanttreehacks' },
-    { ..._doc, _id: 'applicant-optout-confirmed', sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
-    { ..._doc, _id: 'applicant-confirmed', status: STATUS.ADMISSION_CONFIRMED },
-    { ..._doc, _id: 'applicant-confirmed-2', status: STATUS.ADMISSION_CONFIRMED },
-    { ..._doc, _id: 'applicant-submitted', status: STATUS.SUBMITTED },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicanttreehacks'} },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-optout-confirmed'}, sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed'}, status: STATUS.ADMISSION_CONFIRMED },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed-2'}, status: STATUS.ADMISSION_CONFIRMED },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-submitted'}, status: STATUS.SUBMITTED },
     {
-        ..._doc, _id: 'applicant-name-thomas',
+        ..._doc, user: { email: 'test@treehacks', id: 'applicant-name-thomas'},
         forms: {
             ..._doc.forms, application_info: {
                 ..._doc.forms.application_info,
@@ -55,7 +55,7 @@ let docs = [
         }
     },
     {
-        ..._doc, _id: 'applicant-name-tracey',
+        ..._doc, user: { email: 'test@treehacks', id: 'applicant-name-tracey'},
         forms: {
             ..._doc.forms, application_info: {
                 ..._doc.forms.application_info,
@@ -89,7 +89,7 @@ describe('user form list by sponsor', () => {
             .set({ Authorization: 'sponsor' })
             .expect(200).then(e => {
                 expect(e.body.count).toEqual(2);
-                expect(e.body.results.map(item => item._id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2'].sort());
+                expect(e.body.results.map(item => item.user.id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2'].sort());
                 for (let result of e.body.results) {
                     expect(Object.keys(result.forms.application_info).sort()).toEqual(sponsorApplicationDisplayFields.sort());
                 }
@@ -104,7 +104,7 @@ describe('user form list by admin', () => {
             .get("/api/users")
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
-                expect(e.body.results.map(item => omit(item, "__v")).sort()).toEqual(docs.sort());
+                expect(e.body.results.map(item => omit(item, ["__v", "_id"])).sort()).toEqual(docs.sort());
             });
     });
     test('filter by status', () => {
@@ -115,7 +115,7 @@ describe('user form list by admin', () => {
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
                 expect(e.body.results.length).toEqual(1);
-                expect(e.body.results[0]._id).toEqual('applicant-submitted');
+                expect(e.body.results[0].user.id).toEqual('applicant-submitted');
             });
     });
     test('filter by status and project email', () => {
@@ -127,7 +127,8 @@ describe('user form list by admin', () => {
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
                 expect(e.body.results.length).toEqual(1);
-                expect(e.body.results[0]).toEqual({ _id: 'applicant-submitted', user: { email: 'test@treehacks' } });
+                expect(Object.keys(e.body.results[0])).toEqual(["_id", "user"]);
+                expect(e.body.results[0].user).toEqual({ email: 'test@treehacks' });
             });
     });
     test('filter by name (partial filter)', () => {
@@ -183,7 +184,7 @@ describe('user form list by admin', () => {
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
                 expect(e.body.results.length).toEqual(1);
-                expect(e.body.results[0]._id).toEqual('applicant-optout-confirmed');
+                expect(e.body.results[0].user.id).toEqual('applicant-optout-confirmed');
             });
     });
 });
