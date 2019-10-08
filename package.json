@@ -28,7 +28,7 @@
     },
     "homepage": "https://github.com/TreeHacks/application-portal-frontend#readme",
     "devDependencies": {
-        "@types/jest": "^23.3.10",
+        "@types/jest": "^23.3.14",
         "@types/mongoose": "^5.3.6",
         "@types/react": "^16.4.7",
         "@types/react-dom": "^16.0.6",
@@ -80,7 +80,6 @@
         "@redux-beacon/google-analytics-gtag": "^1.0.2",
         "@slack/client": "^4.8.0",
         "@types/express": "^4.16.0",
-        "@types/jest": "^23.1.6",
         "@types/mongodb": "^3.1.12",
         "@types/morgan": "^1.7.35",
         "@types/node": "^12.7.9",
