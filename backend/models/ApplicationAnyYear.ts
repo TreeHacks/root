@@ -17,6 +17,7 @@ export const applicationSchema: Schema = new mongoose.Schema({
     "admin_info": adminInfoSchema, // Only editable by admin.
     "reviews": [reviewSchema], // each review can only be modified by the reviewer who made it.
     "user": {
+        "id": String,
         "email": String
     },
     "status": {
