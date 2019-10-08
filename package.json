@@ -10,7 +10,7 @@
         "test:backend": "dotenv jest backend -- --runInBand",
         "start": "concurrently --kill-others \"npm run mongo\" \"npm run build:live\"",
         "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- -r dotenv/config ./backend/index.ts",
-        "build:backend": "dotenv tsc",
+        "build:backend": "tsc",
         "build:frontend": "webpack --progress --config webpack.prod.js",
         "build": "npm run build:backend && npm run build:frontend",
         "heroku-postbuild": "npm run build",
