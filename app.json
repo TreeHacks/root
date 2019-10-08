@@ -1,0 +1,57 @@
+{
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "AWS_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "AWS_S3_BUCKET": {
+      "required": true
+    },
+    "AWS_S3_REGION": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "COGNITO_CLIENT_ID": {
+      "required": true
+    },
+    "COGNITO_ENDPOINT_URL": {
+      "required": true
+    },
+    "COGNITO_USER_POOL_ID": {
+      "required": true
+    },
+    "GA_TRACKING_ID": {
+      "required": true
+    },
+    "MODE": {
+      "required": true
+    },
+    "MONGODB_URI": {
+      "required": true
+    },
+    "SLACK_ANNOUNCEMENTS_CHANNEL_ID": {
+      "required": true
+    },
+    "SLACK_OAUTH_ACCESS_TOKEN": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "root",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
