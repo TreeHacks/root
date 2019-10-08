@@ -6,10 +6,6 @@ const swaggerUi = require('swagger-ui-express');
 const forceSsl = require('force-ssl-heroku');
 const compression = require('compression');
 
-const webpack = require("webpack");
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const devConfig = require("../webpack.dev.js");
-
 import swaggerDocument from "./swagger";
 import filePlugin from './utils/file_plugin';
 const port = process.env.PORT || 9000;
@@ -59,6 +55,9 @@ if (process.env.NODE_ENV === "test") {
     });
 } else {
     // Dev mode
+    const webpack = require("webpack");
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const devConfig = require("../webpack.dev.js");
     app.use(webpackDevMiddleware(webpack(devConfig), {
         publicPath: devConfig.output.publicPath,
     }));
