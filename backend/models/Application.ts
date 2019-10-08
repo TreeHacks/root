@@ -15,17 +15,18 @@ applicationCurrentYearSchema.pre('aggregate', function (this: mongoose.Aggregate
 
 applicationCurrentYearSchema.pre('find', projectCurrentYear);
 applicationCurrentYearSchema.pre('findOne', projectCurrentYear);
+applicationCurrentYearSchema.pre('save', setCurrentYear);
 
-export function projectCurrentYear(this: mongoose.Query<IApplication>) {
+function projectCurrentYear(this: mongoose.Query<IApplication>) {
     let query = this.getQuery();
     this.setQuery({ ...query, year: HACKATHON_YEAR_STRING });
 }
 
-async function setCurrentYear(this: mongoose.Document) {
-    if (!(this as any).year) {
-        (this as any).year = HACKATHON_YEAR_STRING;
+function setCurrentYear(this: IApplication) {
+    if (!this.year) {
+        this.year = HACKATHON_YEAR_STRING;
     }
 }
 
-const model: Model<IApplication> = mongoose.model("ApplicationCurrentYear", applicationSchema, "Application");
+const model: Model<IApplication> = mongoose.model("Application", applicationCurrentYearSchema, "Application");
 export default model;

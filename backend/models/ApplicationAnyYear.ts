@@ -10,8 +10,6 @@ import transportationInfoSchema from "./transportationInfoSchema";
 import s3FilePlugin from "../utils/file_plugin";
 
 export const applicationSchema: Schema = new mongoose.Schema({
-    // user id is _id.
-    "_id": String,
     "forms": { // can only be modified by user/editors
         "application_info": applicationInfoSchema,
         "transportation": transportationInfoSchema
@@ -42,9 +40,6 @@ export const applicationSchema: Schema = new mongoose.Schema({
     "sponsor_optout": {
         type: Boolean
     },
-    "toDelete": {
-        type: Boolean
-    },
     "year": {
         type: String
     }
@@ -52,5 +47,5 @@ export const applicationSchema: Schema = new mongoose.Schema({
 
 applicationSchema.plugin(s3FilePlugin);
 
-const model: Model<IApplication> = mongoose.model("Application", applicationSchema, "Application");
+const model: Model<IApplication> = mongoose.model("ApplicationAnyYear", applicationSchema, "Application");
 export default model;

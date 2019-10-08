@@ -10,13 +10,13 @@ import { Model } from "mongoose";
 
 export function getDeadline(type) {
   switch (type) {
-      case "is":
-          return new Date("2018-11-27T07:59:00.000Z");
-      case "stanford":
-          return new Date("2019-02-18T07:59:00.000Z");
-      case "oos":
-      default:
-          return new Date("2018-11-20T07:59:00.000Z");
+    case "is":
+      return new Date("2018-11-27T07:59:00.000Z");
+    case "stanford":
+      return new Date("2019-02-18T07:59:00.000Z");
+    case "oos":
+    default:
+      return new Date("2018-11-20T07:59:00.000Z");
   }
 }
 
@@ -28,8 +28,8 @@ export function getDeadline(type) {
  */
 export async function getApplicationAttribute(req: Request, res: Response, getter: (e: IApplication) => any, createIfNotFound = false) {
   let application: IApplication | null = await Application.findOne(
-    { "_id": req.params.userId }, { "__v": 0, "reviews": 0 },
-    {"treehacks:groups": res.locals.user['cognito:groups']});
+    { "user.id": req.params.userId }, { "__v": 0, "reviews": 0 },
+    { "treehacks:groups": res.locals.user['cognito:groups'] });
 
   if (!application) {
     if (createIfNotFound) {
@@ -136,21 +136,18 @@ export async function createApplication(user: CognitoUser) {
     };
     applicationType = "stanford";
     applicationLocation = "California";
-    const existingApplication = await Application.findOne({"user.email": user.email});
+    const existingApplication = await Application.findOne({ "user.email": user.email });
     if (existingApplication) {
-      existingApplication.toDelete = true;
-      await existingApplication.save();
-      return await new Application({...existingApplication.toJSON(), toDelete: false, _id: user.sub}).save();
+      return existingApplication;
     }
   }
   const application = new Application({
-    "_id": user.sub,
     "forms": {
       "application_info": applicationInfo
     },
     "admin_info": {},
     "reviews": [],
-    "user": { "email": user.email },
+    "user": { "email": user.email, "id": user.sub },
     "type": applicationType,
     "location": applicationLocation,
     "status": applicationStatus,
