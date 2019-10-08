@@ -82,7 +82,7 @@ describe('review next application', () => {
             .set({ Authorization: 'reviewer' })
             .expect(200)
             .then(e => {
-                expect(Object.keys(e.body)).toEqual(["_id", "forms",  "user"]);
+                expect(Object.keys(e.body)).toEqual(["_id", "forms", "user"]);
                 expect(Object.keys(e.body.forms.application_info).sort()).toEqual(applicationReviewDisplayFields.sort());
             });
     });
