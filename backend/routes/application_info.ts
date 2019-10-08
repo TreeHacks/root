@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute, getDeadline } from "./common"
-import { STATUS, TYPE, TRANSPORTATION_STATUS } from '../constants';
+import { STATUS, TYPE, TRANSPORTATION_STATUS, AUTO_ADMIT_STANFORD } from '../constants';
 import { sendApplicationSubmittedEmail } from "../services/send_email";
 import { IApplication } from '../models/Application.d';
 
@@ -59,8 +59,7 @@ export async function submitApplicationInfo(req: Request, res: Response) {
       }
       if (completed) {
         // Auto-admit Stanford students.
-        // TODO: disable
-        if (e.type === TYPE.STANFORD) {
+        if (AUTO_ADMIT_STANFORD && e.type === TYPE.STANFORD) {
           e.status = STATUS.ADMISSION_CONFIRMED;
           e.transportation_status = TRANSPORTATION_STATUS.UNAVAILABLE;
         }
