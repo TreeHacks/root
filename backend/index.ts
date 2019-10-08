@@ -50,7 +50,7 @@ if (process.env.NODE_ENV === "test") {
     app.use("/dist", express.static('dist'));
 
     // Serves the index.html file (our basic frontend)
-    app.get('/',(req, res) => {
+    app.get('*',(req, res) => {
         res.sendFile('dist/index.html', {root: __dirname});
     });
 } else {
