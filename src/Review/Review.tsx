@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Review.scss';
-import { API } from "aws-amplify";
+import API from "@aws-amplify/api";
 import Form from "react-jsonschema-form";
 import FormPage from '../FormPage/FormPage';
 import { connect } from "react-redux";

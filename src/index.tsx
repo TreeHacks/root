@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./App";
-import Amplify, {Auth} from "aws-amplify";
-import { I18n } from 'aws-amplify';
+import Auth from "@aws-amplify/auth";
+import API from "@aws-amplify/api";
+import { I18n } from "@aws-amplify/core";
 import store from "./store";
 import {Provider} from "react-redux";
 
@@ -33,14 +34,13 @@ export const custom_header = async () => {
         return { Authorization: await asyncLocalStorage.getItem("jwt") } 
     }
 }
-Amplify.configure({
-  Auth: {
-      region: 'us-east-1',
-      userPoolId: COGNITO_USER_POOL_ID,
-      userPoolWebClientId: COGNITO_CLIENT_ID,
-      mandatorySignIn: false
-  },
-  API: {
+Auth.configure({
+    region: 'us-east-1',
+    userPoolId: COGNITO_USER_POOL_ID,
+    userPoolWebClientId: COGNITO_CLIENT_ID,
+    mandatorySignIn: false
+});
+API.configure({
     endpoints: [
         {
             name: "treehacks",
@@ -48,7 +48,6 @@ Amplify.configure({
             custom_header: custom_header
         }
     ]
-  }
 });
 
 const authScreenLabels = {

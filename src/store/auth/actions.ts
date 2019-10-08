@@ -1,6 +1,6 @@
 import { IUserAttributes, IAuthState } from "./types";
-import { API, Auth } from "aws-amplify";
-import { Cache } from 'aws-amplify';
+import Auth from "@aws-amplify/auth";
+import Cache from "@aws-amplify/cache";
 import { loadingStart, loadingEnd } from "../base/actions";
 import { get } from "lodash";
 
