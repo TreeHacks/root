@@ -5,7 +5,7 @@
     padding: 10px;
     width: 84%;
     max-width: 800px;
-    color: $pink;
+    color: $primary-color;
     &.treehacks-form-disabled {
         input[role=combobox] {
             cursor: default;
@@ -14,8 +14,8 @@
     }
     .form-control,
     .checkboxes {
-        background-color: white;
-        color: black;
+        background-color: $background-color;
+        color: $text-color;
         border: 1px solid $primary-color;
         border-radius: 0;
         font-size: 20px;

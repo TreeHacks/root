@@ -14,7 +14,7 @@
     }
 
     .days-left {
-        color: $pink;
+        color: $primary-color;
         font-size: 70px;
         margin-bottom: -15px;
     }
@@ -28,7 +28,7 @@
         min-width: 300px;
         padding: 20px;
         border-radius: 5px;
-        border: 2px solid $pink;
+        border: 2px solid $primary-color;
         transition: 0.2s;
 
         & + .dashboard-design {
