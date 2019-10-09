@@ -3,7 +3,7 @@ var webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC_URL = "./src";
-const DEST_URL = "./dist/";
+const DEST_URL = "./build/dist/";
 
 module.exports = {
   entry: {
@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(DEST_URL),
-    publicPath: '/'
+    publicPath: '/dist'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -70,7 +70,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              publicPath: "/"
+              publicPath: "/dist"
             }
           }
         ]
