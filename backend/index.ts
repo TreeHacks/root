@@ -129,6 +129,7 @@ if (process.env.NODE_ENV === "test") {
     const webpack = require("webpack");
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const devConfig = require("../webpack.dev.js");
+    app.get('/', (req, res) => res.redirect('/dist'));
     app.use(webpackDevMiddleware(webpack(devConfig), {
         publicPath: devConfig.output.publicPath,
     }));
