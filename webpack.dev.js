@@ -6,7 +6,7 @@ module.exports = merge(common, {
   mode: 'development',
   devServer: {
     contentBase: __dirname,
-    publicPath: '/',
+    publicPath: '/dist',
     historyApiFallback: {
       index: 'index.html'
     },

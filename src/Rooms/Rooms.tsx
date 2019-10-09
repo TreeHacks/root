@@ -1,5 +1,5 @@
 import React from 'react';
-import { API } from "aws-amplify";
+import API from "@aws-amplify/api";
 import { connect } from 'react-redux';
 import './Rooms.scss';
 import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";

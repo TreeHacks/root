@@ -1,5 +1,5 @@
 import React from "react";
-import { API } from "aws-amplify";
+import API from "@aws-amplify/api";
 
 export default class JudgeLeaderboard extends React.Component<{}, { refreshing: boolean, leaderboard_data: any, stats_data: any }> {
     constructor(props) {

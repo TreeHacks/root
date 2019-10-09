@@ -1,4 +1,4 @@
-import { API } from "aws-amplify";
+import API from "@aws-amplify/api";
 import { loadingStart, loadingEnd } from "../base/actions";
 import { IReactTableState, IReactTableHeader } from "src/Admin/types";
 import { get } from "lodash";

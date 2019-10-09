@@ -1,4 +1,4 @@
-import { API } from "aws-amplify";
+import API from "@aws-amplify/api";
 import { IAuthState } from "../auth/types";
 import { IFormState } from "./types";
 import { loadingStart, loadingEnd } from "../base/actions";

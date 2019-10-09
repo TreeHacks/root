@@ -1,8 +1,7 @@
 import queryString from "query-string";
 import React from "react";
 import { Redirect, Link } from "react-router-dom";
-import { Auth } from "aws-amplify";
-
+import Auth from "@aws-amplify/auth";
 export default class Verify extends React.Component<any, any> {
     constructor(props) {
         super(props);
