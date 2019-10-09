@@ -6,10 +6,6 @@ const swaggerUi = require('swagger-ui-express');
 const forceSsl = require('force-ssl-heroku');
 const compression = require('compression');
 
-const webpack = require("webpack");
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const devConfig = require("../webpack.dev.js");
-
 import swaggerDocument from "./swagger";
 import filePlugin from './utils/file_plugin';
 const port = process.env.PORT || 9000;
@@ -46,23 +42,6 @@ mongoose.plugin(filePlugin);
 // Use body-parser to parse HTTP request parameters
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
-
-if (process.env.NODE_ENV === "test") {
-    // Don't serve files when testing
-} else if (process.env.MODE === "PROD") {
-    // Set up static files
-    app.use("/dist", express.static('dist'));
-
-    // Serves the index.html file (our basic frontend)
-    app.get('/',(req, res) => {
-        res.sendFile('dist/index.html', {root: __dirname});
-    });
-} else {
-    // Dev mode
-    app.use(webpackDevMiddleware(webpack(devConfig), {
-        publicPath: devConfig.output.publicPath,
-    }));
-}
 
 
 // Starts the Express server, which will run locally @ localhost:9000
@@ -134,5 +113,26 @@ authenticatedRoute.post('/judging/rate', [judgeRoute], rateHack);
 authenticatedRoute.get('/judging/next_hack', [judgeRoute], reviewNextHack);
 
 app.use("/api", apiRouter);
+
+if (process.env.NODE_ENV === "test") {
+    // Don't serve files when testing
+} else if (process.env.MODE === "PROD") {
+    // Set up static files
+    app.use("/dist", express.static('build/dist'));
+
+    // Serves the index.html file (our basic frontend)
+    app.get('*',(req, res) => {
+        res.sendFile('dist/index.html', {root: __dirname});
+    });
+} else {
+    // Dev mode
+    const webpack = require("webpack");
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const devConfig = require("../webpack.dev.js");
+    app.get('/', (req, res) => res.redirect('/dist'));
+    app.use(webpackDevMiddleware(webpack(devConfig), {
+        publicPath: devConfig.output.publicPath,
+    }));
+}
 
 export default app;
