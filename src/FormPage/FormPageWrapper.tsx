@@ -90,7 +90,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Beforeunload onBeforeunload={e => showUnsavedWarning ? unsavedChangesWarning : true} />
                 <Prompt when={showUnsavedWarning} message={unsavedChangesWarning} />
-                {alertMessage && <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '550px', marginTop: '60px', marginBottom: '-40px', padding: '20px', color: 'white', textAlign: 'center' }}>
+                {alertMessage && <div className="treehacks-alert" style={{ maxWidth: '550px', marginTop: '60px', marginBottom: '-40px' }}>
                     {alertMessage}
                 </div>}
                 {!hasDeadlinePassed ?
