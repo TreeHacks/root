@@ -4,7 +4,7 @@ import { getUserProfile } from "../store/form/actions";
 import { IFormState } from "../store/form/types";
 import { IDashboardProps, IDashboardWrapperProps } from "./types";
 import Loading from "../Loading/Loading";
-import { DEADLINES, STATUS } from '../constants';
+import { DEADLINES, STATUS, dashboardBackground } from '../constants';
 import "./Dashboard.scss";
 import AdmittedScreen from "./AdmittedScreen";
 import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
@@ -25,7 +25,7 @@ export const Dashboard = (props: IDashboardProps) => {
     const acceptanceConfirmDeadline = get(props.profile, "admin_info.acceptance.deadline");
     const acceptanceConfirmDeadlineObject = moment(acceptanceConfirmDeadline);
     return (
-        <div className="dashboard" style={{ "backgroundImage": `url('${require('../art/combined_circuit.svg')}')` }}>
+        <div className="dashboard" style={{ "backgroundImage": `url('${dashboardBackground}')` }}>
             <div className="treehacks-dashboard-message-container">
                 {props.profile.status === STATUS.ADMISSION_CONFIRMED ?
                     <div className="dashboard-design notice">
@@ -51,7 +51,7 @@ export const Dashboard = (props: IDashboardProps) => {
                                             <div>
                                                 You haven't submitted your application yet. You have
                                             </div>
-                                            <div style={{ color: "#00E073", fontSize: '70px', marginBottom: -15 }}>
+                                            <div className="days-left">
                                                 {diffDays}
                                             </div>
                                             <div>

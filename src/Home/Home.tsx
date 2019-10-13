@@ -45,9 +45,7 @@ export class Home extends React.Component<IHomeProps, {}> {
         {this.props.auth.judge &&
           <NavLink to="/judge">judge</NavLink>
         }
-      </div>
-      <div className="logoutText">
-        <a onClick={() => this.props.logout()}>log out</a>
+        <a className="logout" onClick={() => this.props.logout()}>log out</a>
       </div>
     </div>
   }

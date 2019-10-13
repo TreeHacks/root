@@ -60,11 +60,8 @@ exports[`Home screen tests home screen admin 1`] = `
     >
       admin
     </NavLink>
-  </div>
-  <div
-    className="logoutText"
-  >
     <a
+      className="logout"
       onClick={[Function]}
     >
       log out
@@ -126,11 +123,8 @@ exports[`Home screen tests home screen applicant 1`] = `
     >
       travel
     </NavLink>
-  </div>
-  <div
-    className="logoutText"
-  >
     <a
+      className="logout"
       onClick={[Function]}
     >
       log out
@@ -177,11 +171,8 @@ exports[`Home screen tests home screen judge 1`] = `
     >
       judge
     </NavLink>
-  </div>
-  <div
-    className="logoutText"
-  >
     <a
+      className="logout"
       onClick={[Function]}
     >
       log out
@@ -250,11 +241,8 @@ exports[`Home screen tests home screen reviewer 1`] = `
     >
       review
     </NavLink>
-  </div>
-  <div
-    className="logoutText"
-  >
     <a
+      className="logout"
       onClick={[Function]}
     >
       log out
@@ -301,11 +289,8 @@ exports[`Home screen tests home screen sponsor 1`] = `
     >
       sponsors
     </NavLink>
-  </div>
-  <div
-    className="logoutText"
-  >
     <a
+      className="logout"
       onClick={[Function]}
     >
       log out
