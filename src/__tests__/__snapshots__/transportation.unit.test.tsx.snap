@@ -802,7 +802,7 @@ exports[`flight reimbursement 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2019 :)
+          Attend TreeHacks 2020 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -811,7 +811,13 @@ exports[`flight reimbursement 1`] = `
           Submit your flight receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.
         </li>
         <li>
-          Follow any and all TreeHacks rules & the MLH Code of Conduct.
+          Follow any and all TreeHacks rules & the 
+          <a
+            href="https://www.treehacks.com/code-of-conduct"
+            target="_blank"
+          >
+            TreeHacks Code of Conduct.
+          </a>
         </li>
       </ul>
       <p
@@ -948,7 +954,7 @@ exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2019 :)
+          Attend TreeHacks 2020 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -957,7 +963,13 @@ exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
           Submit your flight receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.
         </li>
         <li>
-          Follow any and all TreeHacks rules & the MLH Code of Conduct.
+          Follow any and all TreeHacks rules & the 
+          <a
+            href="https://www.treehacks.com/code-of-conduct"
+            target="_blank"
+          >
+            TreeHacks Code of Conduct.
+          </a>
         </li>
       </ul>
       <p
@@ -1057,7 +1069,7 @@ exports[`other reimbursement 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2019 :)
+          Attend TreeHacks 2020 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -1066,7 +1078,13 @@ exports[`other reimbursement 1`] = `
           Submit your receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.
         </li>
         <li>
-          Follow any and all TreeHacks rules & the MLH Code of Conduct.
+          Follow any and all TreeHacks rules & the 
+          <a
+            href="https://www.treehacks.com/code-of-conduct"
+            target="_blank"
+          >
+            TreeHacks Code of Conduct.
+          </a>
         </li>
       </ul>
     </div>
@@ -1190,7 +1208,7 @@ exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2019 :)
+          Attend TreeHacks 2020 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -1199,7 +1217,13 @@ exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
           Submit your receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.
         </li>
         <li>
-          Follow any and all TreeHacks rules & the MLH Code of Conduct.
+          Follow any and all TreeHacks rules & the 
+          <a
+            href="https://www.treehacks.com/code-of-conduct"
+            target="_blank"
+          >
+            TreeHacks Code of Conduct.
+          </a>
         </li>
       </ul>
     </div>
@@ -1272,7 +1296,7 @@ exports[`reimbursement screen when admission not yet confirmed 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2019 :)
+          Attend TreeHacks 2020 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -1281,7 +1305,13 @@ exports[`reimbursement screen when admission not yet confirmed 1`] = `
           Submit your flight receipts by the deadline listed on this page. We will only be able to reimburse your reimbursement if they are submitted by then.
         </li>
         <li>
-          Follow any and all TreeHacks rules & the MLH Code of Conduct.
+          Follow any and all TreeHacks rules & the 
+          <a
+            href="https://www.treehacks.com/code-of-conduct"
+            target="_blank"
+          >
+            TreeHacks Code of Conduct.
+          </a>
         </li>
       </ul>
       <p
