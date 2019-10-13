@@ -1,11 +1,10 @@
 @import '../Global';
 .treehacks-form {
     margin: auto;
-    margin-top: 40px;
-    padding: 10px;
+    padding: 20px;
     width: 84%;
     max-width: 800px;
-    color: #09da7a;
+    color: $primary-color;
     &.treehacks-form-disabled {
         input[role=combobox] {
             cursor: default;
@@ -14,9 +13,9 @@
     }
     .form-control,
     .checkboxes {
-        background-color: $box-gray;
-        color: white;
-        border: 2px solid $background-color;
+        background-color: $background-color;
+        color: $text-color;
+        border: 1px solid $primary-color;
         border-radius: 0;
         font-size: 20px;
         height: auto;
@@ -29,7 +28,7 @@
             color: $text-gray;
         }
         &:focus {
-            background-color: white;
+            background-color: $background-color;
             color: $text-gray;
             border: 2px solid $primary-color;
             box-shadow: 0 0 0 0;
@@ -47,8 +46,9 @@
             margin-bottom: -2px;
             width: 16px;
             height: 16px;
-            background-color: white;
+            background-color: $background-color;
             transition: .2s;
+            border: 1px solid $background-color;
             &:checked {
                 background-color: $primary-color;
                 color: $primary-color;
@@ -127,7 +127,7 @@
         font-size: 20px;
     }
     legend {
-        color: white;
+        color: $primary-color;
         text-align: center;
         padding-top: 38px;
         margin-bottom: 40px;

@@ -5,24 +5,35 @@
   height: 80px;
   width: 100vw;
   padding: 0 2vw;
-  border-bottom: 3px solid $background-color-light-border;
 
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
 
+  .treehacks-navbar-links {
+    margin-top: 10px;
+  }
+
   a {
-    color: $text-color !important;
+    color: $text-color;
     margin: 0 $navbar-margin;
     padding: $navbar-padding 0;
     font-size: $navbar-font-size;
     border-bottom: 2px solid $background-color;
     transition: 0.5s;
+    cursor: pointer;
 
     &:hover, &.active {
       border-bottom: 2px solid $primary-color;
       text-decoration: none;
+    }
+  }
+
+  a.logout {
+    color: $secondary-color;
+    &:hover {
+      color: $secondary-color;
     }
   }
 
@@ -45,14 +56,6 @@
       font-family: 'Avenir Heavy';
     }
   }
-
-  .logoutText {
-    flex: 1;
-    text-align: right;
-    cursor: pointer;
-    display: inline-block;
-    padding: $navbar-padding/2 0;
-  }
 }
 
 
@@ -62,4 +65,4 @@
     height: auto;
     padding: 10px 0;
   }
-} 
+}
