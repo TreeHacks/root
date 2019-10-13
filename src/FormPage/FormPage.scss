@@ -48,6 +48,7 @@
             height: 16px;
             background-color: $background-color;
             transition: .2s;
+            border: 1px solid $background-color;
             &:checked {
                 background-color: $primary-color;
                 color: $primary-color;
