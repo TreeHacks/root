@@ -355,3 +355,4 @@ export const FLOORS = [0, 1, 2, 3];
 
 export const logo = settings.logo;
 export const favicon = settings.favicon;
+export const dashboardBackground = settings.dashboard_background;

@@ -174,13 +174,7 @@ exports[`dashboard incomplete before deadline 1`] = `
           You haven't submitted your application yet. You have
         </div>
         <div
-          style={
-            Object {
-              "color": "#00E073",
-              "fontSize": "70px",
-              "marginBottom": -15,
-            }
-          }
+          className="days-left"
         >
           7628
         </div>
