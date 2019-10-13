@@ -24,4 +24,5 @@ export default {
     ],
     "logo": require('../art/logo.svg'),
     "favicon": require("../art/favicon.png"),
+    "dashboard_background": require("../art/combined_circuit.svg")
 }
