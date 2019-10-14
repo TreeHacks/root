@@ -79,7 +79,7 @@ const swagger = {
           "user": {
             "type": "object",
             "properties": {
-              "name": { "type": "string" },
+              "id": { "type": "string" },
               "email": { "type": "string" }
             }
           },

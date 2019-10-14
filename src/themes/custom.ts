@@ -1,5 +1,5 @@
 export default {
-    "hackathon_year": "2020",
+    "hackathon_year": 2020,
     "deadlines": [
         {
             "key": "oos",

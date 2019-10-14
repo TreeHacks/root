@@ -88,6 +88,7 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
     if (!this.selectedInclusively()) {
       (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
       this.select([
+        "user.id",
         "user.email",
         ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
       ].join(" "));

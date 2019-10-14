@@ -12,7 +12,7 @@ interface IReviewProps {
 }
 interface IReviewComponentState {
 	leaderboard_data: any[],
-	application_data: { _id: string, forms: { application_info: any } },
+	application_data: { _id: string, user: { id: string }, forms: { application_info: any } },
 	stats_data: any,
 	reviewFormData: any
 }
@@ -150,7 +150,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 	handleSubmit() {
 		API.post("treehacks", '/review/rate', {
 			body: {
-				"application_id": this.state.application_data._id,
+				"application_id": this.state.application_data.user.id,
 				...this.state.reviewFormData
 			}
 		}).then((data) => {

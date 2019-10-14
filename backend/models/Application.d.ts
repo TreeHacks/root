@@ -58,5 +58,5 @@ export interface IApplication extends Document {
   "location": String,
   "transportation_status": String,
   "sponsor_optout": Boolean,
-  "toDelete": Boolean
+  "year": String
 }

@@ -1,14 +1,15 @@
 import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
+import ApplicationAnyYear from "../models/Application";
 import { isEqual, omit } from "lodash";
-import { STATUS, sponsorApplicationDisplayFields } from '../constants';
+import { STATUS, HACKATHON_YEAR_STRING, sponsorApplicationDisplayFields } from '../constants';
 
 const _doc = {
-    _id: null,
     reviews: [],
     status: STATUS.INCOMPLETE,
     transportation_status: null,
+    year: HACKATHON_YEAR_STRING,
     forms: {
         application_info: {
             first_name: "test",
@@ -35,19 +36,22 @@ const _doc = {
 };
 
 const docs = [
-    {..._doc, _id: 'applicanttreehacks' },
-    {..._doc, _id: 'applicanttreehacks2' },
-    {..._doc, _id: 'applicant-optout-confirmed', sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
-    {..._doc, _id: 'applicant-confirmed', status: STATUS.ADMISSION_CONFIRMED },
-    {..._doc, _id: 'applicant-admitted', status: STATUS.ADMITTED }
+    {..._doc, user: { id: 'applicanttreehacks' } },
+    {..._doc, user: { id: 'applicanttreehacks2' } },
+    {..._doc, user: { id: 'applicant-optout-confirmed' }, sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
+    {..._doc, user: { id: 'applicant-confirmed' }, status: STATUS.ADMISSION_CONFIRMED },
+    {..._doc, user: { id: 'applicant-admitted' }, status: STATUS.ADMITTED }
 ];
-beforeAll(() => {
-    return Application.insertMany(docs);
-});
 
-afterAll(() => {
-    return Application.deleteMany({});
-})
+describe('userformview', () => {
+
+    beforeAll(() => {
+        return Application.insertMany(docs);
+    });
+    
+    afterAll(() => {
+        return Application.deleteMany({});
+    })
 
 describe('user form view by applicant', () => {
     test('view form with same id - success', () => {
@@ -99,3 +103,15 @@ describe('user form view by sponsor', () => {
     });
 
 });
+
+});
+
+describe('user form view last year\'s application - fail', () => {
+    test('test', async () => {
+        await new ApplicationAnyYear({..._doc, user: { id: 'applicanttreehacks' }, year: "1999" }).save();
+        return request(app)
+            .get("/api/users/applicanttreehacks/forms/application_info")
+            .set({ Authorization: 'applicant' })
+            .expect(404);
+    });
+})
