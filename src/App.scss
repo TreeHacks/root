@@ -10,3 +10,15 @@ body {
 .btn-now, .btn-clear {
     display: none;
 }
+
+.treehacks-alert {
+  background-color: $background-color;
+  width: 100%;
+  max-width: 750px;
+  margin: 60px;
+  padding: 40px 20px;
+  color: $text-color;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid $primary-color;
+}

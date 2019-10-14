@@ -6,7 +6,7 @@ exports[`bus reimbursement 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <h4>
       You have been placed on a bus!
@@ -186,7 +186,7 @@ exports[`bus reimbursement route with no coordinator 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <h4>
       You have been placed on a bus!
@@ -363,7 +363,7 @@ exports[`bus reimbursement with accept=true 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <h4>
       You have been placed on a bus!
@@ -548,7 +548,7 @@ exports[`bus reimbursement with deadline passed and RSVP'd no, should show Trans
   }
 >
   <div
-    className="treehacks-transportation-alert"
+    className="treehacks-alert"
   >
     <Component />
   </div>
@@ -561,7 +561,7 @@ exports[`bus reimbursement with deadline passed and RSVP'd yes, should show bus 
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <h4>
       You have been placed on a bus!
@@ -746,7 +746,7 @@ exports[`bus reimbursement with deadline passed and no RSVP, should show Transpo
   }
 >
   <div
-    className="treehacks-transportation-alert"
+    className="treehacks-alert"
   >
     <Component />
   </div>
@@ -758,7 +758,7 @@ exports[`don't show reimbursement if status is unavailable, even if reimbursemen
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
     style="max-width:700px;padding:40px 20px"
   >
     <h4>
@@ -779,7 +779,7 @@ exports[`flight reimbursement 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <div>
       <h4>
@@ -883,7 +883,7 @@ exports[`flight reimbursement with deadline passed, should not show expired mess
   }
 >
   <div
-    className="treehacks-transportation-alert"
+    className="treehacks-alert"
   >
     <Component />
     <h5
@@ -925,7 +925,7 @@ exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <div>
       <h4>
@@ -998,7 +998,7 @@ exports[`no reimbursement 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
     style="max-width:700px;padding:40px 20px"
   >
     <h4>
@@ -1018,7 +1018,7 @@ exports[`no reimbursement before submitting form 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
     style="max-width:500px;margin:60px 0 0 0;padding:20px"
   >
     <span>
@@ -1037,7 +1037,7 @@ exports[`other reimbursement 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <div>
       <h4>
@@ -1128,7 +1128,7 @@ exports[`other reimbursement with deadline passed, should not show expired messa
   }
 >
   <div
-    className="treehacks-transportation-alert"
+    className="treehacks-alert"
   >
     <Component />
     <h5
@@ -1170,7 +1170,7 @@ exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <div>
       <h4>
@@ -1230,7 +1230,7 @@ exports[`reimbursement screen when admission declined -- don't show reimbursemen
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
     style="max-width:500px;margin:60px 0 0 0;padding:20px"
   >
     <span>
@@ -1249,7 +1249,7 @@ exports[`reimbursement screen when admission not yet confirmed 1`] = `
   style="display:flex;flex-direction:column;align-items:center"
 >
   <div
-    class="treehacks-transportation-alert"
+    class="treehacks-alert"
   >
     <div>
       <h4>
