@@ -61,9 +61,9 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
         let schema = cloneDeep(props.schemas[props.formName].schema);
         const uiSchema = cloneDeep(props.schemas[props.formName].uiSchema);
 
-        // Inject direct link to MLH COC into accept_terms
+        // Inject direct link to COC into accept_terms
         if (get(schema, 'properties.accept_terms')) {
-            schema.properties.accept_terms.title = <span>I have read and agree to the <a className="form-link" href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank" onClick={e => e.stopPropagation()}>MLH Code of Conduct</a>.</span>;
+            schema.properties.accept_terms.title = <span>I have read and agree to the <a className="form-link" href="https://www.treehacks.com/code-of-conduct" target="_blank">TreeHacks Code of Conduct.</a></span>;
         }
         if (get(schema, 'properties.accept_share')) {
             schema.properties.accept_share.title = <span>I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a className="form-link" href="https://mlh.io/privacy" target="_blank" onClick={e => e.stopPropagation()}>MLH Privacy Policy</a>. I further I agree to the terms of both the <a className="form-link" href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md" target="_blank" onClick={e => e.stopPropagation()}>MLH Contest Terms and Conditions</a> and the MLH Privacy Policy.</span>;
