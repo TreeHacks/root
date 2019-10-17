@@ -1,3 +1,5 @@
+// import settings from "../src/themes/settings";
+
 export var USER_ID_UPDATE = "test_user_id_update";
 export var USER_ID = "test_user_id";
 export var STATUS = {
@@ -128,3 +130,7 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "unavailable": []
   },
 ];
+
+export const HACKATHON_YEAR = "2020"; //settings.hackathon_year;
+export const HACKATHON_YEAR_STRING = String(HACKATHON_YEAR);
+export const AUTO_ADMIT_STANFORD = false;

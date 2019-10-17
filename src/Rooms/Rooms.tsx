@@ -80,7 +80,7 @@ export class Rooms extends React.Component<IRoomsProps, IRoomsState> {
 
     return (
       <div className="rooms" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ backgroundColor: '#686e77', width: '100%', maxWidth: '750px', margin: '60px', padding: '40px 20px', color: 'white', textAlign: 'center' }}>
+        <div className="treehacks-alert" style={{ maxWidth: '750px' }}>
           <div>
             Sometimes, you need private space for your team to work. Now you can have it! So that we can keep offering dedicated room space, make sure you follow the rules:
             <ul className="rules">

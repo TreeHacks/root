@@ -49,7 +49,7 @@ export const getReviewStats = (req, res) => {
 
 export const rateReview = async (req, res) => {
     let application = await Application.findOne(
-        { "_id": req.body.application_id });
+        { "user.id": req.body.application_id });
     if (!application) {
         return res.status(404).send("Application to rate not found");
     }
@@ -80,8 +80,8 @@ export const rateReview = async (req, res) => {
     }
 };
 
-export const reviewNextApplication = (req, res) => {
-    let projectedFields = { "_id": 1 };
+export const reviewNextApplication = async (req, res) => {
+    let projectedFields = { "_id": 1, "user": 1 };
     for (let field of applicationReviewDisplayFields) {
         projectedFields[`forms.application_info.${field}`] = 1;
     }
@@ -99,21 +99,12 @@ export const reviewNextApplication = (req, res) => {
         { $sample: { size: 1 } }, // Pick random
         { $project: projectedFields }
     ]);
-    Application.findOne({
-        _id: (res.locals.user.sub)
-    }).then(data => {
-        Application.aggregate(createAggregationPipeline("oos")).then(async data => {
-            if (!data || data.length === 0) {
-                return await Application.aggregate(createAggregationPipeline("is"));
-            }
-            else {
-                return await data;
-            }
-        }).then(async data => {
-            const application = await injectDynamicApplicationContent(data[0]);
-            res.json(application);
-        });
-    })
+    let data = await Application.aggregate(createAggregationPipeline("oos"));
+    if (!data || (data.length === 0)) {
+        data = await Application.aggregate(createAggregationPipeline("is"));
+    }
+    // const application = await injectDynamicApplicationContent(data[0]);
+    res.json(data[0]);
 };
 
 // db.applications.find({'type': 'oos', 'status': 'submitted', 'reviews.0': { $exists: false }}).count()

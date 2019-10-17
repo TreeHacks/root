@@ -18,7 +18,7 @@ describe('transportation form before deadline', () => {
     });
     test('available user view transportation', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {vendor: "vendor"} }
         }).save();
@@ -32,7 +32,7 @@ describe('transportation form before deadline', () => {
     });
     test('submitted user edits other transportation - fail', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.SUBMITTED,
             forms: {transportation: {vendor: "vendor"} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.OTHER, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -45,7 +45,7 @@ describe('transportation form before deadline', () => {
     });
     test('submitted user submits other transportation - fail', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.SUBMITTED,
             forms: {transportation: {vendor: "vendor"} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.OTHER, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -60,7 +60,7 @@ describe('transportation form before deadline', () => {
 describe('flight transportation rsvp', () => {
     beforeEach(async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {vendor: "a", address1: "a", city: "a", state: "a", zip: "a", receipt: "a"} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.FLIGHT, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -118,7 +118,7 @@ describe('flight transportation rsvp', () => {
 describe('other transportation rsvp', () => {
     beforeEach(async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {vendor: "a", address1: "a", city: "a", state: "a", zip: "a", receipt: "a"} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.OTHER, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -176,7 +176,7 @@ describe('other transportation rsvp', () => {
 describe('bus transportation rsvp', () => {
     test('available user bus rsvp change yes to no to yes before deadline', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.BUS, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -210,7 +210,7 @@ describe('bus transportation rsvp', () => {
     });
     test('available user submits bus transportation - fail', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {accept: true} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.BUS, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -224,7 +224,7 @@ describe('bus transportation rsvp', () => {
     });
     test('available user bus rsvp change yes to no after deadline', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {accept: true} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.BUS, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -242,7 +242,7 @@ describe('bus transportation rsvp', () => {
     });
     test('available user bus rsvp change no to yes after deadline - fail', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {accept: false} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.BUS, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -260,7 +260,7 @@ describe('bus transportation rsvp', () => {
 describe('incomplete transportation submit - fail', () => {
     test('other submit incomplete transportation - fail', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {address1: "a", city: "a", state: "a", zip: "a", receipt: "a"} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.OTHER, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}
@@ -284,7 +284,7 @@ describe('incomplete transportation submit - fail', () => {
     });
     test('flight submit incomplete transportation - fail', async () => {
         await new Application({
-            _id: 'applicanttreehacks',
+            user: { id: 'applicanttreehacks' },
             transportation_status: TRANSPORTATION_STATUS.AVAILABLE,
             forms: {transportation: {address1: "a", city: "a", state: "a", zip: "a", receipt: "a"} },
             admin_info: {transportation: {type: TRANSPORTATION_TYPE.FLIGHT, amount: 500, deadline: "2018-11-27T07:59:00.000Z"}}

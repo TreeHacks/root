@@ -5,14 +5,14 @@ import { STATUS } from '../constants';
 import lolex from "lolex";
 
 const _doc = {
-    _id: 'applicanttreehacks',
     reviews: [],
     status: STATUS.INCOMPLETE,
     admin_info: {
         acceptance: {
             deadline: "2048-01-30T04:39:47.512Z"
         }
-    }
+    },
+    user: {id: 'applicanttreehacks'}
 };
 
 afterEach(() => {

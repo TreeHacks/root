@@ -4,7 +4,7 @@ import Application from "../models/Application";
 import { createApplication } from "../routes/common";
 import { IApplication } from "../models/Application.d";
 import lolex from "lolex";
-import { STATUS, TRANSPORTATION_STATUS, TYPE } from "../constants";
+import { STATUS, TRANSPORTATION_STATUS, TYPE, HACKATHON_YEAR_STRING } from "../constants";
 
 beforeAll(async () => {
     await request(app);
@@ -28,39 +28,38 @@ describe('create application before deadline', () => {
         const application: IApplication = await createApplication({ email: "test@stanford.edu", sub: "123123" });
         expect(application.type).toEqual("stanford");
         expect(application.status).toEqual(STATUS.INCOMPLETE);
+        expect(application.year).toEqual(HACKATHON_YEAR_STRING);
     });
 
     test('should create stanford user application and copy from existing application', async () => {
         const doc = {
-            _id: "test",
             forms: { application_info: { "first_name": "b" } },
-            user: { email: "test@stanford.edu" },
+            user: { email: "test@stanford.edu", id: "test" },
             type: TYPE.STANFORD,
             status: STATUS.ADMISSION_CONFIRMED,
             TRANSPORTATION_STATUS: TRANSPORTATION_STATUS.UNAVAILABLE
         };
-        await new Application(doc).save();
-        const oldApplication = await Application.findById("test");
+        const oldApplication = await new Application(doc).save();
         const application: IApplication = await createApplication({ email: "test@stanford.edu", sub: "123123" });
         expect(application.type).toEqual("stanford");
         expect(application.status).toEqual(STATUS.ADMISSION_CONFIRMED);
         expect(application.toJSON().forms).toEqual(oldApplication!.toJSON().forms);
         expect(application.toJSON().user).toEqual(oldApplication!.toJSON().user);
-        expect(application._id).toEqual("123123");
-        // expect(oldApplication!.toDelete).toEqual(true);
-        expect(application.toDelete).not.toEqual(true);
+        expect(application.year).toEqual(HACKATHON_YEAR_STRING);
     });
 
     test('should create user application in-state', async () => {
         const application: IApplication = await createApplication({ email: "test@berkeley.edu", sub: "123125", "custom:location": "California" });
         expect(application.type).toEqual("is");
         expect(application.status).toEqual(STATUS.INCOMPLETE);
+        expect(application.year).toEqual(HACKATHON_YEAR_STRING);
     });
 
     test('should create user application out-of-state', async () => {
         const application: IApplication = await createApplication({ email: "test@gatech.edu", sub: "123126", "custom:location": "Georgia" });
         expect(application.type).toEqual("oos");
         expect(application.status).toEqual(STATUS.INCOMPLETE);
+        expect(application.year).toEqual(HACKATHON_YEAR_STRING);
     });
 
 });
@@ -78,12 +77,14 @@ describe('create application after deadline', () => {
         const application: IApplication = await createApplication({ email: "test@berkeley.edu", sub: "123125", "custom:location": "California" });
         expect(application.type).toEqual("is");
         expect(application.status).toEqual(STATUS.INCOMPLETE);
+        expect(application.year).toEqual(HACKATHON_YEAR_STRING);
     });
 
     test('should create user application out-of-state', async () => {
         const application: IApplication = await createApplication({ email: "test@gatech.edu", sub: "123126", "custom:location": "Georgia" });
         expect(application.type).toEqual("oos");
         expect(application.status).toEqual(STATUS.INCOMPLETE);
+        expect(application.year).toEqual(HACKATHON_YEAR_STRING);
     });
 
 });

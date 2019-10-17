@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import Application from "../models/Application";
-import { STATUS, TRANSPORTATION_TYPE, TRANSPORTATION_STATUS } from '../constants';
+import { STATUS, TRANSPORTATION_TYPE, TRANSPORTATION_STATUS, HACKATHON_YEAR_STRING } from '../constants';
 import { mapValues } from "lodash";
+
 interface IElement {
     acceptanceDeadline: string;
     transportationDeadline: string;
@@ -27,7 +28,7 @@ export function bulkChangeUsers(req: Request, res: Response) {
                 case TRANSPORTATION_TYPE.OTHER:
                     break;
                 case "":
-                    bulk.find({ "_id": element.id }).updateOne({
+                    bulk.find({ "user.id": element.id, "year": HACKATHON_YEAR_STRING }).updateOne({
                         "$set": {
                             "status": body.status,
                             "admin_info.acceptance.deadline": new Date(element.acceptanceDeadline),
@@ -39,7 +40,7 @@ export function bulkChangeUsers(req: Request, res: Response) {
                     res.status(400).send(`Invalid transportation type specified: ${element.transportationType}`);
                     return;
             }
-            bulk.find({ "_id": element.id }).updateOne({
+            bulk.find({ "user.id": element.id, "year": HACKATHON_YEAR_STRING }).updateOne({
                 $set: {
                     "status": body.status,
                     "admin_info.acceptance.deadline": new Date(element.acceptanceDeadline),
@@ -55,7 +56,7 @@ export function bulkChangeUsers(req: Request, res: Response) {
         }
         else {
             // todo: append history.
-            bulk.find({ "_id": element.id }).updateOne({ $set: { status: body.status } });
+            bulk.find({ "user.id": element.id, "year": HACKATHON_YEAR_STRING }).updateOne({ $set: { status: body.status } });
         }
     }
     return bulk.execute().then(e => {

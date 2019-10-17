@@ -59,7 +59,7 @@ mongoose.connect(connStr).then(res => {
         var bulk = res.models.Application.collection.initializeOrderedBulkOp();
         let paginationToken = null;
         let updateUser = (sub, location) => bulk.find({
-            '_id': sub, "location": {
+            'user.id': sub, "location": {
                 "$exists": false
             }
         }).update({ '$set': { 'location': location } });
