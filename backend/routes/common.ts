@@ -11,12 +11,12 @@ import { Model } from "mongoose";
 export function getDeadline(type) {
   switch (type) {
       case "is":
-          return new Date("2019-11-27T07:59:00.000Z");
+          return new Date("2019-11-26T07:59:00.000Z");
       case "stanford":
-          return new Date("2020-02-18T07:59:00.000Z");
+          return new Date("2020-02-14T07:59:00.000Z");
       case "oos":
       default:
-          return new Date("2019-11-20T07:59:00.000Z");
+          return new Date("2019-11-19T07:59:00.000Z");
   }
 }
 
