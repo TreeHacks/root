@@ -123,7 +123,7 @@
                 },
                 "accept_share": {
                     "type": "boolean",
-                    "title": "I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy."
+                    "title": "I authorize you to share my application/registration information for event administration, ranking, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the TreeHacks Privacy Policy."
                 },
                 "q1_goodfit": {
                     "title": "Why do you want to come to TreeHacks? Max 100 words.",
