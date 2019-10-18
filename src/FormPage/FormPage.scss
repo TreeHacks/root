@@ -137,6 +137,9 @@
         box-shadow: none !important;
         /* remove firefox highlight */
     }
+    textarea:focus {
+        margin: -1px; 
+    }
     .form-link {
         color: inherit;
         text-decoration: underline;
