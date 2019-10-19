@@ -5,6 +5,10 @@ body {
   background-color: $background-color;
   font-family: $base-font-family;
   min-height: 100vh;
+
+  #page-elems {
+    margin-top: 80px;
+  }
 }
 
 .btn-now, .btn-clear {

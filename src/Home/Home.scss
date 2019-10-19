@@ -18,13 +18,11 @@
 
   box-shadow: 0 5px 30px -5px rgba(0,0,0,0.2);
 
-
   .treehacks-navbar-links {
-    margin-top: 10px;
   }
 
   a {
-    color: $text-color;
+    color: $secondary-text-color;
     margin: 0 $navbar-margin;
     padding: $navbar-padding 0;
     font-size: $navbar-font-size;
@@ -46,13 +44,11 @@
   }
 
   .header-logo {
-    flex: 1;
+    margin-right: $navbar-margin * 30;
+    padding: 0 $navbar-padding 0 $navbar-padding;
     text-align: left;
-    margin-left: -10px;
 
     a {
-      border-bottom: 0px;
-      margin: 0;
       font-size: 36px;
     }
 
@@ -69,8 +65,9 @@
 
 @media only screen and (max-width: 1024px) {
   .nav {
-    flex-flow: column;
-    height: auto;
     padding: 10px 0;
+  }
+  .header-logo {
+    display: none;
   }
 }

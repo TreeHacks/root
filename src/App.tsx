@@ -63,19 +63,21 @@ const MainRoutes = (props: IAppProps) => (
     {props.loggedIn === true &&
       <div>
         <Route path="" component={Home} />
-        <Switch>
-          {props.sponsor ? <Redirect exact path="/" to="/sponsors" /> :
-          props.judge ? <Redirect exact path="/" to="/judge" /> :
-            <Route path="/" exact component={Dashboard} />
-          }
-          <Route path="/application_info" render={() => { return <FormPageWrapper incomingFormName="application_info" />; }} />
-          <Route path="/rooms" exact component={Rooms} />
-          <Route path="/transportation" component={Transportation} />
-          <Route path="/admin" component={Admin} />
-          <Route path="/review" exact component={Review} />
-          <Route path="/sponsors" component={Sponsors} />
-          <Route path="/judge" exact component={Judge} />
-        </Switch>
+        <div id="page-elems">
+          <Switch>
+            {props.sponsor ? <Redirect exact path="/" to="/sponsors" /> :
+            props.judge ? <Redirect exact path="/" to="/judge" /> :
+              <Route path="/" exact component={Dashboard} />
+            }
+            <Route path="/application_info" render={() => { return <FormPageWrapper incomingFormName="application_info" />; }} />
+            <Route path="/rooms" exact component={Rooms} />
+            <Route path="/transportation" component={Transportation} />
+            <Route path="/admin" component={Admin} />
+            <Route path="/review" exact component={Review} />
+            <Route path="/sponsors" component={Sponsors} />
+            <Route path="/judge" exact component={Judge} />
+          </Switch>
+        </div>
       </div>
     }
   </div>);
