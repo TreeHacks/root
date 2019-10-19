@@ -25,7 +25,7 @@
 .h3-style{
     font-size: 50px;
 	margin-top: 10px;
-	color: $text-color;
+	color: $primary-color;
 	margin-bottom: 20px;
 	text-align: center;
 }
@@ -41,7 +41,7 @@
 .btn-stanford{
   background-color: $primary-color;
     border-color: $primary-color!important;
-    color: $primary-btn-text-color;
+    color: $secondary-text-color!important;
     width: 89%;
     margin-bottom: 20px;
 
@@ -62,7 +62,7 @@
 .btn-subtle {
     border: none !important;
     background: transparent;
-    color: $primary-color;
+    color: $text-color!important;
     font-size: initial !important;
 }
 

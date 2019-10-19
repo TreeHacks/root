@@ -2,14 +2,22 @@
 
 .nav {
   background-color: $background-color;
-  height: 80px;
-  width: 100vw;
-  padding: 0 2vw;
 
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+
+  position: fixed;
+  top: 0;
+  z-index: 101;
+
+  background-color: $background-color;
+  height: 80px;
+  width: 100vw;
+
+  box-shadow: 0 5px 30px -5px rgba(0,0,0,0.2);
+
 
   .treehacks-navbar-links {
     margin-top: 10px;
@@ -21,11 +29,11 @@
     padding: $navbar-padding 0;
     font-size: $navbar-font-size;
     border-bottom: 2px solid $background-color;
-    transition: 0.5s;
+    transition: 0.2s;
     cursor: pointer;
 
     &:hover, &.active {
-      border-bottom: 2px solid $primary-color;
+      color: $primary-color;
       text-decoration: none;
     }
   }

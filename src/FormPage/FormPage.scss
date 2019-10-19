@@ -14,7 +14,7 @@
     .form-control,
     .checkboxes {
         background-color: $background-color;
-        color: $text-color;
+        color: $secondary-text-color;
         border-radius: 0;
         font-size: 20px;
         height: auto;
@@ -28,7 +28,7 @@
         }
         &:focus {
             background-color: $background-color;
-            color: $text-color;
+            color: $secondary-text-color;
             border: 2px solid $primary-color;
             box-shadow: 0 0 0 0;
         }
@@ -112,7 +112,7 @@
     .btn-info {
         background-color: $primary-color;
         border-color: $primary-color !important;
-        color: white;
+        color: $primary-btn-text-color;
         width: 100%;
         font-size: 20px;
     }
@@ -239,7 +239,7 @@ input[type="date"]:valid:before {
 .btn-custom {
     background-color: $primary-color;
     border-color: $primary-color !important;
-    color: white;
+    color: $primary-btn-text-color;
     width: 41%;
     font-size: 20px !important;
     margin-bottom: 25px;
