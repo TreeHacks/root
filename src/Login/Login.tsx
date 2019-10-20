@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import "./Login.scss";
-import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup, changePassword, exchangeAuthCode } from "../store/auth/actions";
+import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup, changePassword, exchangeAuthCode, validateEmail } from "../store/auth/actions";
 import {logo} from "../constants";
 import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   logout: () => dispatch(logout()),
   signIn: data => dispatch(signIn(data)),
   signUp: data => dispatch(signUp(data)),
+  validateEmail: data => dispatch(validateEmail(data)),
   forgotPassword: data => dispatch(forgotPassword(data)),
   forgotPasswordSubmit: data => dispatch(forgotPasswordSubmit(data)),
   resendSignup: () => dispatch(resendSignup()),
@@ -33,6 +34,7 @@ export interface ILoginProps extends IAuthState {
   setup: () => void,
   signIn: (e) => void,
   signUp: (e) => void,
+  validateEmail: (e) => void,
   forgotPassword: (e) => void,
   forgotPasswordSubmit: (e) => void,
   resendSignup: () => void,
@@ -119,7 +121,7 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
         {this.state.sponsor && <h3 className="h3-style">sponsors</h3>}
         {this.state.judge && <h3 className="h3-style">judges</h3>}
-        {["signIn", "signUp"].indexOf(this.props.authPage) !== -1 && applicant && <DeadlinesWidget />}
+        {["signIn", "signUp", "defaultPage"].indexOf(this.props.authPage) !== -1 && applicant && <DeadlinesWidget />}
         {this.props.message && <div className="alert alert-info" role="alert">
           {this.props.message}
         </div>
@@ -132,6 +134,26 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
             </div>
           }
         </div>}
+        {this.props.authPage == "defaultPage" &&
+          <div className="top-form">
+            <AuthForm
+              formData={this.state.formData}
+              schema={Object.assign({}, this.props.schemas.validateEmail.schema, isStanfordEmail && { properties: { email: this.props.schemas.validateEmail.schema.properties.email }, required: ['email'] })}
+              uiSchema={Object.assign({}, this.props.schemas.validateEmail.uiSchema, isStanfordEmail && { 'ui:order': ['email'] })}
+              onSubmit={e => this.props.validateEmail(e.formData)}
+              onChange={e => this.setState({ formData: e.formData }) }
+            >
+              {!isStanfordEmail ?
+                <button className="btn btn-info" type="submit">Continue</button>
+                : <div></div>}
+            </AuthForm>
+            {isStanfordEmail ?
+              <div style={{ marginTop: -40 }}><StanfordLogin label="Sign in with Stanford" /></div>
+              : null}
+            {applicant && !isStanfordEmail && <div className="label-text centered">or</div>}
+            {applicant && !isStanfordEmail && <StanfordLogin />}
+          </div>
+        }
         {this.props.authPage == "signIn" &&
           <div className="top-form">
             <AuthForm
@@ -149,7 +171,10 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
               <div style={{ marginTop: -40 }}><StanfordLogin label="Sign in with Stanford" /></div>
               : null}
             {applicant && !isStanfordEmail && <div className="label-text centered">or</div>}
-            {applicant && <StanfordLogin />}
+            {applicant && !isStanfordEmail && <StanfordLogin />}
+            <div className="mt-2 left-btn"> 
+              <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
+            </div>
           </div>
           
         }
@@ -200,11 +225,9 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
           : this.props.authPage === "signIn" && applicant ?
             <div className="label-text">Don't have an account yet?</div>
             : null}
-        {this.props.authPage !== "changePassword" &&
+        {this.props.authPage !== "defaultPage" &&
           <div className="mt-4 left-btn">
-            <AuthPageNavButton current={this.props.authPage} page="signIn" label="Sign In" />
-            {applicant && <AuthPageNavButton current={this.props.authPage} page="signUp" label="Sign Up" />}
-            <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
+            <AuthPageNavButton current={this.props.authPage} page="defaultPage" label="Back" />
           </div>
         }
       </div>);
