@@ -13,4 +13,4 @@ Hackathon registration framework. Used in TreeHacks since 2019. See it in action
 Application will deploy to Heroku only if tests pass.
 Run `npm test` to run tests.
 
-Run `npm test -- -- -u` to update snapshots.
+Run `npm test -- -u` to update snapshots.
