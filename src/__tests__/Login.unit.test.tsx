@@ -12,7 +12,8 @@ const props: ILoginProps = {
         signUp: {schema: {}, uiSchema: {}},
         forgotPassword: {schema: {}, uiSchema: {}},
         forgotPasswordSubmit: {schema: {}, uiSchema: {}},
-        changePassword: {schema: {}, uiSchema: {}}
+        changePassword: {schema: {}, uiSchema: {}},
+        validateEmail: {schema: {}, uiSchema: {}}
     },
     error: "",
     message: "",
@@ -28,6 +29,7 @@ const props: ILoginProps = {
     setup: () => null,
     signIn: (e) => null,
     signUp: (e) => null,
+    validateEmail: (e) => null,
     forgotPassword: (e) => null,
     forgotPasswordSubmit: (e) => null,
     resendSignup: () => null,
