@@ -200,14 +200,11 @@ export function validateEmail(data) { //checks if email is already registered
   return dispatch => {
     dispatch(loadingStart());
     let email = data.email.toLowerCase().trim();
-    let dummyPass = "_";
-    Auth.confirmSignUp(email, dummyPass, {
+    let dummyCode = "_";
+    Auth.confirmSignUp(email, dummyCode, {
       forceAliasCreation: false
-    }).then(data => {
-      console.log(data);
-      })
-      .catch(err => {
-        if(err.code == "UserNotFoundException") {
+    }).catch(err => {
+        if(err.code === "UserNotFoundException") {
           dispatch(setAuthPage("signUp", "Welcome to Treehacks! Enter the rest of your info to sign up."));
           dispatch(loadingEnd());
         } else {
@@ -215,7 +212,6 @@ export function validateEmail(data) { //checks if email is already registered
           dispatch(loadingEnd());
         }
       });
-    console.log(email);
   }
 }
 

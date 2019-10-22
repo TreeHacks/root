@@ -134,12 +134,12 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
             </div>
           }
         </div>}
-        {this.props.authPage == "defaultPage" &&
+        {this.props.authPage === "defaultPage" &&
           <div className="top-form">
             <AuthForm
               formData={this.state.formData}
-              schema={Object.assign({}, this.props.schemas.validateEmail.schema, isStanfordEmail && { properties: { email: this.props.schemas.validateEmail.schema.properties.email }, required: ['email'] })}
-              uiSchema={Object.assign({}, this.props.schemas.validateEmail.uiSchema, isStanfordEmail && { 'ui:order': ['email'] })}
+              schema={Object.assign({}, this.props.schemas.validateEmail.schema)}
+              uiSchema={Object.assign({}, this.props.schemas.validateEmail.uiSchema)}
               onSubmit={e => this.props.validateEmail(e.formData)}
               onChange={e => this.setState({ formData: e.formData }) }
             >
@@ -147,9 +147,8 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
                 <button className="btn btn-info" type="submit">Continue</button>
                 : <div></div>}
             </AuthForm>
-            {isStanfordEmail ?
-              <div style={{ marginTop: -40 }}><StanfordLogin label="Sign in with Stanford" /></div>
-              : null}
+            {isStanfordEmail &&
+              <div style={{ marginTop: -40 }}><StanfordLogin label="Sign in with Stanford" /></div>}
             {applicant && !isStanfordEmail && <div className="label-text centered">or</div>}
             {applicant && !isStanfordEmail && <StanfordLogin />}
           </div>
