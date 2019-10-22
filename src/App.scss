@@ -1,15 +1,18 @@
 @import './Global';
 @import './Fonts';
 
+/* Make sure that page elements aren't hidden by the navbar */
+$navbar-space: 80px;
+
 body {
   background-color: $background-color;
   font-family: $base-font-family;
-  min-height: 100vh;
+  min-height: calc(100vh - $navbar-space);
   font-size: $font-size;
   font-weight: normal;
 
   #page-elems {
-    margin-top: 80px;
+    margin-top: $navbar-space;
   }
 }
 
