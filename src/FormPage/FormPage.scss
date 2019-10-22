@@ -13,7 +13,6 @@
     }
     .form-control,
     .checkboxes {
-        background-color: $background-color;
         color: $secondary-text-color;
         border-radius: 0;
         font-size: 20px;
@@ -45,7 +44,7 @@
             margin-bottom: -2px;
             width: 16px;
             height: 16px;
-            background-color: $background-color;
+            background-color: $box-color;
             transition: .2s;
             border: 1px solid $primary-color;
             &:checked {
@@ -104,6 +103,7 @@
         display: none !important;
     }
     .form-control {
+        background-color: $box-color;
         padding: 6px 10px 3px;
         border-radius: 5px;
         word-break: break-word;
@@ -251,7 +251,7 @@ input[type="date"]:valid:before {
 }
 
 .btn-custom.inverted {
-    background-color: transparent;
+    background-color: $box-color!important;
     border-width: 2px;
     border-color: $primary-color !important;
     color: $primary-color;

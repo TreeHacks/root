@@ -29,6 +29,8 @@ export const Dashboard = (props: IDashboardProps) => {
     const relax = require("../art/relax.svg") as string;
     return (
         <div className="dashboard">
+            <div className="stripe accent-blue"/>
+            <div className="stripe accent-orange bottom"/>
             <div className="floating-illustration drone"><img src={drone} /></div>
             <div className="floating-illustration relax"><img src={relax} /></div>
             <div className="treehacks-dashboard-message-container">

@@ -1,7 +1,7 @@
 @import "../Global.scss";
 
 .nav {
-  background-color: $background-color;
+  background-color: $box-color;
 
   display: flex;
   flex-flow: row nowrap;
@@ -12,14 +12,10 @@
   top: 0;
   z-index: 101;
 
-  background-color: $background-color;
   height: 80px;
   width: 100vw;
 
   box-shadow: 0 5px 30px -5px rgba(0,0,0,0.2);
-
-  .treehacks-navbar-links {
-  }
 
   a {
     color: $secondary-text-color;
@@ -44,9 +40,14 @@
   }
 
   .header-logo {
+    margin-top: -0.5vh;
     margin-right: $navbar-margin * 25;
     padding: 0 $navbar-padding 0 $navbar-padding;
     text-align: left;
+
+    img {
+      padding-right: $navbar-padding;
+    }
 
     a {
       font-size: 36px;
