@@ -44,7 +44,7 @@
   }
 
   .header-logo {
-    margin-right: $navbar-margin * 30;
+    margin-right: $navbar-margin * 25;
     padding: 0 $navbar-padding 0 $navbar-padding;
     text-align: left;
 
@@ -53,11 +53,10 @@
     }
 
     .logo-text-tree {
-      font-family: $base-font-family;
     }
 
     .logo-text-hacks {
-      font-family: 'Avenir Heavy';
+      font-weight: bold;
     }
   }
 }
