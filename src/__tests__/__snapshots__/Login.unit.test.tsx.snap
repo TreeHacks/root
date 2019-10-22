@@ -50,6 +50,15 @@ exports[`Login screen tests login screen applicant 1`] = `
       or
     </div>
     <Component />
+    <div
+      className="mt-2 left-btn"
+    >
+      <Connect(AuthPageNavButton)
+        current="signIn"
+        label="Forgot Password"
+        page="forgotPassword"
+      />
+    </div>
   </div>
   <div
     className="label-text"
@@ -61,18 +70,8 @@ exports[`Login screen tests login screen applicant 1`] = `
   >
     <Connect(AuthPageNavButton)
       current="signIn"
-      label="Sign In"
-      page="signIn"
-    />
-    <Connect(AuthPageNavButton)
-      current="signIn"
-      label="Sign Up"
-      page="signUp"
-    />
-    <Connect(AuthPageNavButton)
-      current="signIn"
-      label="Forgot Password"
-      page="forgotPassword"
+      label="Back"
+      page="defaultPage"
     />
   </div>
 </div>
@@ -126,19 +125,23 @@ exports[`Login screen tests login screen judge 1`] = `
         Sign In
       </button>
     </AuthForm>
+    <div
+      className="mt-2 left-btn"
+    >
+      <Connect(AuthPageNavButton)
+        current="signIn"
+        label="Forgot Password"
+        page="forgotPassword"
+      />
+    </div>
   </div>
   <div
     className="mt-4 left-btn"
   >
     <Connect(AuthPageNavButton)
       current="signIn"
-      label="Sign In"
-      page="signIn"
-    />
-    <Connect(AuthPageNavButton)
-      current="signIn"
-      label="Forgot Password"
-      page="forgotPassword"
+      label="Back"
+      page="defaultPage"
     />
   </div>
 </div>
@@ -192,19 +195,23 @@ exports[`Login screen tests login screen sponsor 1`] = `
         Sign In
       </button>
     </AuthForm>
+    <div
+      className="mt-2 left-btn"
+    >
+      <Connect(AuthPageNavButton)
+        current="signIn"
+        label="Forgot Password"
+        page="forgotPassword"
+      />
+    </div>
   </div>
   <div
     className="mt-4 left-btn"
   >
     <Connect(AuthPageNavButton)
       current="signIn"
-      label="Sign In"
-      page="signIn"
-    />
-    <Connect(AuthPageNavButton)
-      current="signIn"
-      label="Forgot Password"
-      page="forgotPassword"
+      label="Back"
+      page="defaultPage"
     />
   </div>
 </div>

@@ -114,7 +114,7 @@ export function checkLoginStatus() {
           checkInGroup("judge")
         ];
         const applicant = !sponsor && !judge;
-        dispatch(setAuthPage("signIn"));
+        dispatch(setAuthPage("defaultPage"));
         dispatch(loggedIn(user.username, user.attributes, admin, reviewer, sponsor, judge, applicant));
       }).catch(e => {
         dispatch(notLoggedIn());
@@ -192,6 +192,26 @@ export function signUp(data) {
       .then(() => dispatch(setAuthPage("signIn", "Account creation complete. Please check your email for a confirmation link to confirm your email address, then sign in below. If you don't see the email, please check your spam folder.")))
       .catch(e => dispatch(onAuthError(e.message)))
       .then(() => dispatch(loadingEnd()))
+  }
+}
+
+export function validateEmail(data) { //checks if email is already registered
+  //somewhat hacky way to check, but apparently the best way currently
+  return dispatch => {
+    dispatch(loadingStart());
+    let email = data.email.toLowerCase().trim();
+    let dummyCode = "_";
+    Auth.confirmSignUp(email, dummyCode, {
+      forceAliasCreation: false
+    }).catch(err => {
+        if(err.code === "UserNotFoundException") {
+          dispatch(setAuthPage("signUp", "Welcome to Treehacks! Enter the rest of your info to sign up."));
+          dispatch(loadingEnd());
+        } else {
+          dispatch(setAuthPage("signIn", "Welcome back! Please enter your password to continue."));
+          dispatch(loadingEnd());
+        }
+      });
   }
 }
 
