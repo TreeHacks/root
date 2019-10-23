@@ -25,6 +25,7 @@ const applicationInfoSchema: Schema = new mongoose.Schema({
   // Fields only used in 2020:
   q1: String,
   q2: String,
+  q5: String,
   q_team_matching_1: String,
   q_team_matching_2: String
 }, { _id : false });

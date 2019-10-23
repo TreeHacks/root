@@ -26,6 +26,7 @@ export interface IApplicationInfo {
     accept_share: boolean,
     q3: String,
     q4: String,
+    q5: String,
     // Fields only used in 2019:
     q1_goodfit: String,
     q2_experience: String,
