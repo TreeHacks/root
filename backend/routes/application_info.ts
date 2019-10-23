@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute, getDeadline } from "./common"
-import { STATUS, TYPE, TRANSPORTATION_STATUS, AUTO_ADMIT_STANFORD } from '../constants';
+import { STATUS, TYPE, TRANSPORTATION_STATUS, AUTO_ADMIT_STANFORD, applicationRequiredFields } from '../constants';
 import { sendApplicationSubmittedEmail } from "../services/send_email";
 import { IApplication } from '../models/Application.d';
 
@@ -27,30 +27,14 @@ export async function submitApplicationInfo(req: Request, res: Response) {
       if (e.status !== STATUS.INCOMPLETE) {
         return res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
       }
-      // todo: share this with the frontend in some common configuration.
-      let requiredFields = [
-        "first_name",
-        "last_name",
-        "phone",
-        "dob",
-        "gender",
-        "race",
-        "university",
-        "graduation_year",
-        "level_of_study",
-        "major",
-        "skill_level",
-        "hackathon_experience",
-        "accept_terms",
-        "accept_share"
-      ];
-      if (e.type !== TYPE.STANFORD) {
-        requiredFields.push(...[
-          "q1_goodfit",
-          "q2_experience",
-          "q3"
-        ]);
-      }
+      let requiredFields = applicationRequiredFields;
+      // if (e.type !== TYPE.STANFORD) {
+      //   requiredFields.push(...[
+      //     "q1_goodfit",
+      //     "q2_experience",
+      //     "q3"
+      //   ]);
+      // }
       let completed = true;
       for (let requiredField of requiredFields) {
         if (typeof e.forms.application_info[requiredField] === "undefined") {
