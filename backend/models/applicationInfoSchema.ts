@@ -17,10 +17,16 @@ const applicationInfoSchema: Schema = new mongoose.Schema({
   resume: String,
   accept_terms: Boolean,
   accept_share: Boolean,
+  q3: String,
+  q4: String,
+  // Fields only used in 2019:
   q1_goodfit: String,
   q2_experience: String,
-  q3: String,
-  q4: String
+  // Fields only used in 2020:
+  q1: String,
+  q2: String,
+  q_team_matching_1: String,
+  q_team_matching_2: String
 }, { _id : false });
 
 export default applicationInfoSchema;
