@@ -66,7 +66,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
             schema.properties.accept_terms.title = <span>I have read and agree to the <a className="form-link" href="https://www.treehacks.com/code-of-conduct" target="_blank">TreeHacks Code of Conduct.</a></span>;
         }
         if (get(schema, 'properties.accept_share')) {
-            schema.properties.accept_share.title = <span>I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the <a className="form-link" href="https://mlh.io/privacy" target="_blank" onClick={e => e.stopPropagation()}>MLH Privacy Policy</a>. I further I agree to the terms of both the <a className="form-link" href="https://github.com/MLH/mlh-policies/blob/master/prize-terms-and-conditions/contest-terms.md" target="_blank" onClick={e => e.stopPropagation()}>MLH Contest Terms and Conditions</a> and the MLH Privacy Policy.</span>;
+            schema.properties.accept_share.title = <span>I authorize you to share my application/registration information for purposes in-line with the <a className="form-link" href="https://www.treehacks.com/privacy-policy" target="_blank" onClick={e => e.stopPropagation()}>TreeHacks Privacy Policy</a>.</span>;
         }
         let shownFields = null;
         if (get(props, "profile.type") === TYPE.STANFORD) {

@@ -25,7 +25,8 @@ export interface IAuthState {
     signUp: IAuthStateSchemaItem,
     forgotPassword: IAuthStateSchemaItem,
     forgotPasswordSubmit: IAuthStateSchemaItem,
-    changePassword: IAuthStateSchemaItem
+    changePassword: IAuthStateSchemaItem,
+    validateEmail: IAuthStateSchemaItem,
   },
   error: string,
   message: string,
@@ -34,6 +35,6 @@ export interface IAuthState {
   sponsor: boolean,
   judge: boolean,
   applicant: boolean,
-  authPage: "forgotPassword" | "forgotPasswordSubmit" | "signIn" | "signUp" | "changePassword",
+  authPage: "forgotPassword" | "forgotPasswordSubmit" | "signIn" | "signUp" | "changePassword" | "defaultPage",
   attemptedLoginEmail: string
 }

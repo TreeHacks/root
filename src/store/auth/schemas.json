@@ -171,5 +171,24 @@
         "ui:placeholder": "confirm new password"
       }
     }
+  },
+  "validateEmail": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email Address"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "uiSchema": {
+      "email": {
+        "ui:placeholder": "email address"
+      }
+    }
   }
 }
