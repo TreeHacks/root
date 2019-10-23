@@ -80,6 +80,12 @@
         margin-top: 40px;
     }
 
+    .form-group.field.field-array {
+        background: $box-color;
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+    }
+
     /* Skill level / hackathons attended */
     .form-group.field.field-integer {
         width: calc(50% - 0.5rem);
@@ -176,6 +182,7 @@
 
 .field>ul.list-inline>li {
     flex: 1 0 33.3% !important;
+    max-width: calc(33% - 0.5rem);
 }
 
 .form-control,
