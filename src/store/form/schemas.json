@@ -117,7 +117,7 @@
                 "section4": {
                     "title": "demographics",
                     "type": "string",
-                    "custom_description": "We want TreeHacks to be a supportive and welcoming event for all participants. If you’re comfortable with these demographic questions, please fill them out. If you’re not, no worries – you can select \"prefer not to answer\"."
+                    "custom_description": "We want TreeHacks to be a supportive and welcoming event for all participants. If you’re comfortable with these demographic questions, please fill them out. If you’re not, no worries – you can select \"prefer not to say\"."
                 },
                 "gender": {
                     "type": "string",
@@ -246,9 +246,9 @@
             },
             "q3": {
                 "ui:widget": "textarea",
-                "ui:placeholder": "Why do you want to come to TreeHacks 2020? Max 250 words.",
+                "ui:placeholder": "Why do you want to come to TreeHacks 2020? Max 150 words.",
                 "ui:options": {
-                    "rows": 6
+                    "rows": 4
                 }
             },
             "q4": {

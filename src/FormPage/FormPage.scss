@@ -80,6 +80,14 @@
         margin-top: 40px;
     }
 
+    .form-group.field.field-boolean + .form-group.field.field-boolean {
+        margin-top: -1rem;
+    }
+
+    .form-group.field.field-boolean {
+        margin-top: 2rem;
+    }
+
     .form-group.field.field-array {
         background: $box-color;
         border-radius: 0.25rem;
