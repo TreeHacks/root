@@ -79,6 +79,10 @@
                     "type": "boolean",
                     "title": "I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy."
                 },
+                "section1": {
+                    "title": "your application",
+                    "type": "string"
+                },
                 "section2": {
                     "title": "short answer questions",
                     "type": "string"
@@ -176,7 +180,6 @@
                 "major",
                 "skill_level",
                 "hackathon_experience",
-                "resume",
                 "q1",
                 "q2",
                 "q3",

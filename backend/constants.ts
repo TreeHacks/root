@@ -99,7 +99,6 @@ export const applicationRequiredFields = [
   "major",
   "skill_level",
   "hackathon_experience",
-  "resume",
   "q1",
   "q2",
   "q3",
