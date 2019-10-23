@@ -2,8 +2,8 @@ import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
 import ApplicationAnyYear from "../models/Application";
-import { isEqual, omit } from "lodash";
-import { STATUS, HACKATHON_YEAR_STRING, sponsorApplicationDisplayFields } from '../constants';
+import { omit } from "lodash";
+import { STATUS, HACKATHON_YEAR_STRING, sponsorApplicationDisplayFieldsNoSection } from '../constants';
 
 const _doc = {
     reviews: [],
@@ -27,10 +27,11 @@ const _doc = {
             resume: "testtesttest",
             accept_terms: true,
             accept_share: true,
-            q1_goodfit: "test",
-            q2_experience: "test",
+            q1: "test",
+            q2: "test",
             q3: "test",
-            q4: "test"
+            q4: "test",
+            q5: "test"
         }
     }
 };
@@ -98,7 +99,7 @@ describe('user form view by sponsor', () => {
             .get("/api/users/applicant-confirmed/forms/application_info")
             .set({ Authorization: 'sponsor' })
             .expect(200).then(e => {
-                expect(Object.keys(e.body).sort()).toEqual(sponsorApplicationDisplayFields.sort());
+                expect(Object.keys(e.body).sort()).toEqual(sponsorApplicationDisplayFieldsNoSection.sort());
             });
     });
 

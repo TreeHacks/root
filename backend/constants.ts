@@ -33,7 +33,6 @@ export var TRANSPORTATION_TYPE = {
 }
 
 export const sponsorApplicationDisplayFields = [
-  "section1",
   "first_name",
   "last_name",
   // "phone",
@@ -61,7 +60,6 @@ export const sponsorApplicationDisplayFields = [
   // "accept_share"
 ];
 export const applicationReviewDisplayFields = [
-  "section1",
   "first_name",
   "last_name",
   // "phone",
@@ -106,6 +104,8 @@ export const applicationRequiredFields = [
   "accept_terms",
   "accept_share"
 ];
+export const applicationReviewDisplayFieldsNoSection = applicationReviewDisplayFields.filter(e => !e.startsWith("section"));
+export const sponsorApplicationDisplayFieldsNoSection = sponsorApplicationDisplayFields.filter(e => !e.startsWith("section"));
 
 
 export const hackReviewDisplayFields = ["floor", "_id", "devpostUrl", "title", "categories"];

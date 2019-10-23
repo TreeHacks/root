@@ -2,9 +2,8 @@ import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
 import { isEqual, omit } from "lodash";
-import { STATUS, sponsorApplicationDisplayFields, HACKATHON_YEAR_STRING } from '../constants';
+import { STATUS, sponsorApplicationDisplayFieldsNoSection, HACKATHON_YEAR_STRING } from '../constants';
 import queryString from "query-string";
-import { merge, cloneDeep } from "lodash";
 
 const _doc = {
     reviews: [],
@@ -31,10 +30,11 @@ const _doc = {
             resume: "testtesttest",
             accept_terms: true,
             accept_share: true,
-            q1_goodfit: "test",
-            q2_experience: "test",
+            q1: "test",
+            q2: "test",
             q3: "test",
-            q4: "test"
+            q4: "test",
+            q5: "test"
         }
     }
 };
@@ -91,7 +91,7 @@ describe('user form list by sponsor', () => {
                 expect(e.body.count).toEqual(2);
                 expect(e.body.results.map(item => item.user.id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2'].sort());
                 for (let result of e.body.results) {
-                    expect(Object.keys(result.forms.application_info).sort()).toEqual(sponsorApplicationDisplayFields.sort());
+                    expect(Object.keys(result.forms.application_info).sort()).toEqual(sponsorApplicationDisplayFieldsNoSection.sort());
                 }
             });
     });

@@ -3,6 +3,7 @@ import app from "../index";
 import Application from "../models/Application";
 import { STATUS, TRANSPORTATION_STATUS, TYPE, AUTO_ADMIT_STANFORD } from '../constants';
 import lolex from "lolex";
+import { omit } from "lodash";
 
 const _doc = {
     reviews: [],
@@ -26,10 +27,11 @@ const _doc = {
             resume: "testtesttest",
             accept_terms: true,
             accept_share: true,
-            q1_goodfit: "test",
-            q2_experience: "test",
+            q1: "test",
+            q2: "test",
             q3: "test",
-            q4: "test"
+            q4: "test",
+            q5: "test"
         }
     }
 };
