@@ -44,7 +44,6 @@ describe('Login screen tests', () => {
         );
         expect(wrapper).toMatchSnapshot();
         expect(wrapper.find("button").text()).toContain("Sign In");
-        expect(wrapper.text()).toContain("Don't have an account yet?");
         expect(wrapper.text()).not.toContain("judges");
         expect(wrapper.text()).not.toContain("sponsors");
     });

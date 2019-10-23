@@ -51,7 +51,7 @@ exports[`Login screen tests login screen applicant 1`] = `
     </div>
     <Component />
     <div
-      className="mt-2 left-btn"
+      className="mt-1 left-btn"
     >
       <Connect(AuthPageNavButton)
         current="signIn"
@@ -61,12 +61,7 @@ exports[`Login screen tests login screen applicant 1`] = `
     </div>
   </div>
   <div
-    className="label-text"
-  >
-    Don't have an account yet?
-  </div>
-  <div
-    className="mt-4 left-btn"
+    className="mt-1 left-btn"
   >
     <Connect(AuthPageNavButton)
       current="signIn"
@@ -126,7 +121,7 @@ exports[`Login screen tests login screen judge 1`] = `
       </button>
     </AuthForm>
     <div
-      className="mt-2 left-btn"
+      className="mt-1 left-btn"
     >
       <Connect(AuthPageNavButton)
         current="signIn"
@@ -136,7 +131,7 @@ exports[`Login screen tests login screen judge 1`] = `
     </div>
   </div>
   <div
-    className="mt-4 left-btn"
+    className="mt-1 left-btn"
   >
     <Connect(AuthPageNavButton)
       current="signIn"
@@ -196,7 +191,7 @@ exports[`Login screen tests login screen sponsor 1`] = `
       </button>
     </AuthForm>
     <div
-      className="mt-2 left-btn"
+      className="mt-1 left-btn"
     >
       <Connect(AuthPageNavButton)
         current="signIn"
@@ -206,7 +201,7 @@ exports[`Login screen tests login screen sponsor 1`] = `
     </div>
   </div>
   <div
-    className="mt-4 left-btn"
+    className="mt-1 left-btn"
   >
     <Connect(AuthPageNavButton)
       current="signIn"
