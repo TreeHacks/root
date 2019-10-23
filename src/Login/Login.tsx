@@ -54,7 +54,7 @@ function validate(formData, errors) {
 }
 
 function AuthForm(props) {
-  return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} className="treehacks-form" />
+  return <Form {...props} showErrorList={false} transformErrors={transformErrors} validate={validate} className="treehacks-form login-form" />
 }
 export class Login extends React.Component<ILoginProps, { formData: any, sponsor: boolean, judge: boolean }> {
   constructor(props) {
@@ -171,7 +171,7 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
               : null}
             {applicant && !isStanfordEmail && <div className="label-text centered">or</div>}
             {applicant && !isStanfordEmail && <StanfordLogin />}
-            <div className="mt-2 left-btn"> 
+            <div className="mt-1 left-btn"> 
               <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
             </div>
           </div>
@@ -219,13 +219,8 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
             <button className="btn btn-info" type="submit">Update password</button>
           </AuthForm>
         }
-        {this.props.authPage === "signUp" ?
-          <div className="label-text">Already have an account?</div>
-          : this.props.authPage === "signIn" && applicant ?
-            <div className="label-text">Don't have an account yet?</div>
-            : null}
         {this.props.authPage !== "defaultPage" &&
-          <div className="mt-4 left-btn">
+          <div className="mt-1 left-btn">
             <AuthPageNavButton current={this.props.authPage} page="defaultPage" label="Back" />
           </div>
         }
