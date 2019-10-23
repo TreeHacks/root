@@ -79,10 +79,6 @@
                     "type": "boolean",
                     "title": "I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy."
                 },
-                "section1": {
-                    "title": "your application",
-                    "type": "string"
-                },
                 "section2": {
                     "title": "short answer questions",
                     "type": "string"
@@ -120,7 +116,7 @@
                 "section4": {
                     "title": "demographics",
                     "type": "string",
-                    "description": "We want TreeHacks to be a supportive and welcoming event for all participants. If you’re comfortable with these demographic questions, please fill them out. If you’re not, no worries – you can select \"prefer not to answer\"."
+                    "custom_description": "We want TreeHacks to be a supportive and welcoming event for all participants. If you’re comfortable with these demographic questions, please fill them out. If you’re not, no worries – you can select \"prefer not to answer\"."
                 },
                 "gender": {
                     "type": "string",
@@ -276,9 +272,6 @@
                     "rows": 3
                 }
             },
-            "section1": {
-                "ui:widget": "sectionHeader"
-            },
             "section2": {
                 "ui:widget": "sectionHeader"
             },
@@ -289,7 +282,6 @@
                 "ui:widget": "sectionHeader"
             },
             "ui:order": [
-                "section1",
                 "first_name",
                 "last_name",
                 "phone",

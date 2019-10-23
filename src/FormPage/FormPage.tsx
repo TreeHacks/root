@@ -14,10 +14,12 @@ import { TypeaheadField } from "react-jsonschema-form-extras/lib/TypeaheadField"
 
 const SectionHeaderWidget = (props) => {
     const { schema } = props;
-    return (
+    return (<>
         <legend>
             {schema.title}
         </legend>
+        {schema.custom_description && <p>{schema.custom_description}</p>}
+    </>
     );
 };
 
@@ -34,7 +36,7 @@ const FileInputAndPreviewWidget = (props) => {
     const output = [];
 
     if (props.value) {
-        output.push(<FilePreviewWidget key="preview" {...props} style={{marginBottom: 10}} />);
+        output.push(<FilePreviewWidget key="preview" {...props} style={{ marginBottom: 10 }} />);
     }
 
     output.push(<FileWidget key="file" {...props} value={undefined} onChange={v => {
@@ -44,7 +46,7 @@ const FileInputAndPreviewWidget = (props) => {
             props.onChange(v);
         }
     }} />);
- 
+
     return output;
 };
 
@@ -109,7 +111,6 @@ export default (props: IFormPageProps) => {
         }
     }
 
-    //sponsorApplicationDisplayFields
     return (<Form
         className={`treehacks-form ${props.submitted ? "treehacks-form-disabled" : ""}`}
         schema={schema}
