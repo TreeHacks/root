@@ -1,19 +1,20 @@
 import React from "react";
+import "./Dashboard.scss";
+import "../common/Aesthetics.scss";
+import WaitlistedScreen from "./WaitlistedScreen";
+import RejectedScreen from "./RejectedScreen";
+import Loading from "../Loading/Loading";
+import AdmittedScreen from "./AdmittedScreen";
+import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
+import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
+import moment from "moment-timezone";
+import { DEADLINES, STATUS, dashboardBackground } from '../constants';
+import { get } from "lodash";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserProfile } from "../store/form/actions";
 import { IFormState } from "../store/form/types";
 import { IDashboardProps, IDashboardWrapperProps } from "./types";
-import Loading from "../Loading/Loading";
-import { DEADLINES, STATUS, dashboardBackground } from '../constants';
-import "./Dashboard.scss";
-import AdmittedScreen from "./AdmittedScreen";
-import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
-import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
-import { get } from "lodash";
-import WaitlistedScreen from "./WaitlistedScreen";
-import RejectedScreen from "./RejectedScreen";
-import moment from "moment-timezone";
-import { Link } from "react-router-dom";
 
 export const Dashboard = (props: IDashboardProps) => {
     const deadline = DEADLINES.find(d => d.key === (props.profile.type || 'oos'));
@@ -24,8 +25,14 @@ export const Dashboard = (props: IDashboardProps) => {
     const displayDeadline = deadline.display_date || deadlineDate.toLocaleString('en-US', { month: 'long', year: 'numeric', day: 'numeric' });
     const acceptanceConfirmDeadline = get(props.profile, "admin_info.acceptance.deadline");
     const acceptanceConfirmDeadlineObject = moment(acceptanceConfirmDeadline);
+    const drone = require("../art/drone.svg") as string;
+    const relax = require("../art/relax.svg") as string;
     return (
-        <div className="dashboard" style={{ "backgroundImage": `url('${dashboardBackground}')` }}>
+        <div className="dashboard">
+            <div className="stripe accent-blue"/>
+            <div className="stripe accent-orange bottom"/>
+            <div className="floating-illustration drone"><img src={drone} /></div>
+            <div className="floating-illustration relax"><img src={relax} /></div>
             <div className="treehacks-dashboard-message-container">
                 {props.profile.status === STATUS.ADMISSION_CONFIRMED ?
                     <div className="dashboard-design notice">

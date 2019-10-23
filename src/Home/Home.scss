@@ -1,31 +1,32 @@
 @import "../Global.scss";
 
 .nav {
-  background-color: $background-color;
-  height: 80px;
-  width: 100vw;
-  padding: 0 2vw;
+  background-color: $box-color;
 
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
 
-  .treehacks-navbar-links {
-    margin-top: 10px;
-  }
+  position: fixed;
+  top: 0;
+  z-index: 101;
+
+  height: 80px;
+  width: 100vw;
+
+  box-shadow: 0 5px 30px -5px rgba(0,0,0,0.2);
 
   a {
-    color: $text-color;
+    color: $secondary-text-color;
     margin: 0 $navbar-margin;
     padding: $navbar-padding 0;
     font-size: $navbar-font-size;
-    border-bottom: 2px solid $background-color;
-    transition: 0.5s;
+    transition: 0.2s;
     cursor: pointer;
 
     &:hover, &.active {
-      border-bottom: 2px solid $primary-color;
+      color: $primary-color;
       text-decoration: none;
     }
   }
@@ -38,22 +39,24 @@
   }
 
   .header-logo {
-    flex: 1;
+    margin-top: -0.5vh;
+    margin-right: $navbar-margin * 25;
+    padding: 0 $navbar-padding 0 $navbar-padding;
     text-align: left;
-    margin-left: -10px;
+
+    img {
+      padding-right: $navbar-padding;
+    }
 
     a {
-      border-bottom: 0px;
-      margin: 0;
       font-size: 36px;
     }
 
     .logo-text-tree {
-      font-family: $base-font-family;
     }
 
     .logo-text-hacks {
-      font-family: 'Avenir Heavy';
+      font-weight: bold;
     }
   }
 }
@@ -61,8 +64,9 @@
 
 @media only screen and (max-width: 1024px) {
   .nav {
-    flex-flow: column;
-    height: auto;
     padding: 10px 0;
+  }
+  .header-logo {
+    display: none;
   }
 }
