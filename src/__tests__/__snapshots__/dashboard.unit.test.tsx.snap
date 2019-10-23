@@ -3,17 +3,27 @@
 exports[`dashboard admission confirm expired 1`] = `
 <div
   className="dashboard"
-  style={
-    Object {
-      "backgroundImage": "url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')",
-    }
-  }
 >
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
   <div
     className="treehacks-dashboard-message-container"
   >
@@ -29,17 +39,27 @@ exports[`dashboard admission confirm expired 1`] = `
 exports[`dashboard admission confirmed 1`] = `
 <div
   className="dashboard"
-  style={
-    Object {
-      "backgroundImage": "url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')",
-    }
-  }
 >
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
   <div
     className="treehacks-dashboard-message-container"
   >
@@ -69,17 +89,27 @@ exports[`dashboard admission confirmed 1`] = `
 exports[`dashboard admission declined 1`] = `
 <div
   className="dashboard"
-  style={
-    Object {
-      "backgroundImage": "url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')",
-    }
-  }
 >
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
   <div
     className="treehacks-dashboard-message-container"
   >
@@ -95,17 +125,27 @@ exports[`dashboard admission declined 1`] = `
 exports[`dashboard admitted 1`] = `
 <div
   className="dashboard"
-  style={
-    Object {
-      "backgroundImage": "url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')",
-    }
-  }
 >
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
   <div
     className="treehacks-dashboard-message-container"
   >
@@ -124,17 +164,27 @@ exports[`dashboard admitted 1`] = `
 exports[`dashboard incomplete after deadline 1`] = `
 <div
   className="dashboard"
-  style={
-    Object {
-      "backgroundImage": "url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')",
-    }
-  }
 >
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
   <div
     className="treehacks-dashboard-message-container"
   >
@@ -152,17 +202,27 @@ exports[`dashboard incomplete after deadline 1`] = `
 exports[`dashboard incomplete before deadline 1`] = `
 <div
   className="dashboard"
-  style={
-    Object {
-      "backgroundImage": "url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')",
-    }
-  }
 >
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
   <div
     className="treehacks-dashboard-message-container"
   >
@@ -195,17 +255,27 @@ exports[`dashboard incomplete before deadline 1`] = `
 exports[`dashboard rejected 1`] = `
 <div
   className="dashboard"
-  style={
-    Object {
-      "backgroundImage": "url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')",
-    }
-  }
 >
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
   <div
     className="treehacks-dashboard-message-container"
   >
@@ -221,13 +291,23 @@ exports[`dashboard rejected 1`] = `
 exports[`dashboard submitted 1`] = `
 <div
   class="dashboard"
-  style="background-image:url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')"
 >
+  <div
+    class="stripe accent-blue"
+  />
+  <div
+    class="stripe accent-orange bottom"
+  />
+  <div
+    class="floating-illustration drone"
+  >
+    <img />
+  </div>
+  <div
+    class="floating-illustration relax"
+  >
+    <img />
+  </div>
   <div
     class="treehacks-dashboard-message-container"
   >
@@ -248,17 +328,27 @@ exports[`dashboard submitted 1`] = `
 exports[`dashboard waitlisted 1`] = `
 <div
   className="dashboard"
-  style={
-    Object {
-      "backgroundImage": "url('function SvgCombined_circuit(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgCombined_circuit.name})
-  );
-}')",
-    }
-  }
 >
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
   <div
     className="treehacks-dashboard-message-container"
   >

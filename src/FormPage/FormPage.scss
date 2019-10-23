@@ -13,8 +13,7 @@
     }
     .form-control,
     .checkboxes {
-        background-color: $background-color;
-        color: $text-color;
+        color: $secondary-text-color;
         border-radius: 0;
         font-size: 20px;
         height: auto;
@@ -27,8 +26,8 @@
             color: $text-gray;
         }
         &:focus {
-            background-color: $background-color;
-            color: $text-color;
+            background-color: $box-color;
+            color: $secondary-text-color;
             border: 2px solid $primary-color;
             box-shadow: 0 0 0 0;
         }
@@ -45,7 +44,7 @@
             margin-bottom: -2px;
             width: 16px;
             height: 16px;
-            background-color: $background-color;
+            background-color: $box-color;
             transition: .2s;
             border: 1px solid $primary-color;
             &:checked {
@@ -81,6 +80,12 @@
         margin-top: 40px;
     }
 
+    .form-group.field.field-array {
+        background: $box-color;
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+    }
+
     /* Skill level / hackathons attended */
     .form-group.field.field-integer {
         width: calc(50% - 0.5rem);
@@ -104,6 +109,7 @@
         display: none !important;
     }
     .form-control {
+        background-color: $box-color;
         padding: 6px 10px 3px;
         border-radius: 5px;
         word-break: break-word;
@@ -112,7 +118,7 @@
     .btn-info {
         background-color: $primary-color;
         border-color: $primary-color !important;
-        color: white;
+        color: $primary-btn-text-color;
         width: 100%;
         font-size: 20px;
     }
@@ -176,6 +182,7 @@
 
 .field>ul.list-inline>li {
     flex: 1 0 33.3% !important;
+    max-width: calc(33% - 0.5rem);
 }
 
 .form-control,
@@ -239,7 +246,7 @@ input[type="date"]:valid:before {
 .btn-custom {
     background-color: $primary-color;
     border-color: $primary-color !important;
-    color: white;
+    color: $primary-btn-text-color;
     width: 41%;
     font-size: 20px !important;
     margin-bottom: 25px;
@@ -251,7 +258,7 @@ input[type="date"]:valid:before {
 }
 
 .btn-custom.inverted {
-    background-color: transparent;
+    background-color: $box-color!important;
     border-width: 2px;
     border-color: $primary-color !important;
     color: $primary-color;
