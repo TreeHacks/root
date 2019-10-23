@@ -12,7 +12,8 @@ const props: ILoginProps = {
         signUp: {schema: {}, uiSchema: {}},
         forgotPassword: {schema: {}, uiSchema: {}},
         forgotPasswordSubmit: {schema: {}, uiSchema: {}},
-        changePassword: {schema: {}, uiSchema: {}}
+        changePassword: {schema: {}, uiSchema: {}},
+        validateEmail: {schema: {}, uiSchema: {}}
     },
     error: "",
     message: "",
@@ -28,6 +29,7 @@ const props: ILoginProps = {
     setup: () => null,
     signIn: (e) => null,
     signUp: (e) => null,
+    validateEmail: (e) => null,
     forgotPassword: (e) => null,
     forgotPasswordSubmit: (e) => null,
     resendSignup: () => null,
@@ -42,7 +44,6 @@ describe('Login screen tests', () => {
         );
         expect(wrapper).toMatchSnapshot();
         expect(wrapper.find("button").text()).toContain("Sign In");
-        expect(wrapper.text()).toContain("Don't have an account yet?");
         expect(wrapper.text()).not.toContain("judges");
         expect(wrapper.text()).not.toContain("sponsors");
     });

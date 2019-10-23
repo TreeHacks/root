@@ -8,7 +8,7 @@ const initialState: IAuthState = {
   schemas: require("./schemas.json"),
   error: null,
   message: null,
-  authPage: 'signIn',
+  authPage: 'defaultPage',
   admin: null,
   reviewer: null,
   sponsor: null,

@@ -6,7 +6,7 @@
 .login-btn-style{
     margin: auto;
     margin-top: 10px;
-    padding: 10px;
+    padding: 10px 20px;
     width: 84%;
 
     .btn {
@@ -16,11 +16,17 @@
 .treehacks-form .login-btn-style {
     width: 100%;
 }
+
+.login-form {
+    padding-bottom: 10px !important;
+}
+
 .form-link, .form-link:hover {
     color: $primary-color;
 }
 .left-btn{
-	margin-left:50px;
+    margin-left:50px;
+    padding: 0px 10px;
 }
 .h3-style{
     font-size: 50px;
