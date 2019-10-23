@@ -104,7 +104,8 @@
                 },
                 "section3": {
                     "title": "team matching",
-                    "type": "string"
+                    "type": "string",
+                    "custom_description": "TreeHacks doesn’t accept teams as groups."
                 },
                 "q_team_matching_1": {
                     "type": "string",
