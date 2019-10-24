@@ -205,7 +205,7 @@ export function validateEmail(data) { //checks if email is already registered
       forceAliasCreation: false
     }).catch(err => {
         if(err.code === "UserNotFoundException") {
-          dispatch(setAuthPage("signUp", "Welcome to TreeHacks! Enter the rest of your info to sign up."));
+          dispatch(setAuthPage("signUp", "Welcome to TreeHacks! Enter the rest of your info to sign up. (Note: You must be a current undergraduate or graduate student to attend TreeHacks.)"));
           dispatch(loadingEnd());
         } else {
           dispatch(setAuthPage("signIn", "Welcome back! Please enter your password to continue."));
