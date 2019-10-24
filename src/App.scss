@@ -31,3 +31,11 @@ body {
   border-radius: 5px;
   border: 2px solid $primary-color;
 }
+
+.login-container {
+  min-height: 100vh;
+  flex: true;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
