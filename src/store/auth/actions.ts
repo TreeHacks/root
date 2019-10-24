@@ -44,8 +44,11 @@ export function logout() {
 }
 
 function parseJwt(token) {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace('-', '+').replace('_', '/');
+  var base64UrlSplit = token.split('.');
+  if (!base64UrlSplit) return null;
+  const base64Url = base64UrlSplit[1];
+  if (!base64Url) return null;
+  const base64 = base64Url.replace('-', '+').replace('_', '/');
   return JSON.parse(window.atob(base64));
 };
 
@@ -70,7 +73,7 @@ const getCurrentUser = () => async (dispatch) => {
 
     // Verify JWT here.
     const parsed = parseJwt(jwt);
-    if (new Date().getTime() / 1000 >= parseInt(parsed.exp)) {
+    if (parsed && (new Date().getTime() / 1000 >= parseInt(parsed.exp))) {
       console.log("JWT expired");
       localStorage.removeItem("jwt");
       let refreshToken = localStorage.getItem("refresh_token");
