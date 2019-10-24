@@ -85,7 +85,7 @@
                 },
                 "section2": {
                     "title": "short answer questions",
-                    "custom_description": "We strive to admit a diverse group of hackers of all exprience levels who will make the most of their time at TreeHacks. Help us get to know you and how awesome you are!",
+                    "custom_description": "We strive to admit a diverse group of hackers of all experience levels who will make the most of their time at TreeHacks. Help us get to know you and how awesome you are!",
                     "type": "string"
                 },
                 "q1": {
