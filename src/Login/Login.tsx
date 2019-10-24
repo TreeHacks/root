@@ -114,7 +114,7 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
     const applicant = !this.state.sponsor && !this.state.judge;
     const isStanfordEmail = (this.state.formData.email || '').indexOf('@stanford.edu') !== -1;
     if (!this.props.loggedIn) {
-      return (<div className="treehacks-login">
+      return (<div className="login-container"><div className="treehacks-login">
         <div className="text-center">
           <img src={logo} width="85px" height="65px" style={{ "marginTop": 49 }} />
         </div>
@@ -224,7 +224,7 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
             <AuthPageNavButton current={this.props.authPage} page="defaultPage" label="Back" />
           </div>
         }
-      </div>);
+      </div></div>);
     }
     else {
       return (<div className="text-left">

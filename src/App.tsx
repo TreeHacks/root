@@ -52,7 +52,7 @@ const App = (props: IAppProps) => (
     </div>
   </ConnectedRouter>);
 const MainRoutes = (props: IAppProps) => (
-  <div className="login-container">
+  <div>
     <Login />
     {props.loggedIn === false &&
       <Switch>

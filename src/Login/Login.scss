@@ -1,7 +1,15 @@
 @import "../Global.scss";
 .treehacks-login {
-  max-width: 500px;
-  margin: auto;
+    width: 500px;
+    max-width: 90%;
+    margin: auto;
+}
+.login-container {
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .login-btn-style{
     margin: auto;

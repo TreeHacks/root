@@ -77,25 +77,31 @@ const TextareaWordCountingWidget = (props) => {
     return onChange(value === "" ? options.emptyValue : value);
   };
 
+  const textarea = (
+      <textarea
+        id={id}
+        className="form-control"
+        value={typeof value === "undefined" ? "" : value}
+        placeholder={placeholder}
+        required={required}
+        disabled={disabled}
+        readOnly={readonly}
+        autoFocus={autofocus}
+        rows={options.rows}
+        onBlur={onBlur && (event => onBlur(id, event.target.value))}
+        onFocus={onFocus && (event => onFocus(id, event.target.value))}
+        onChange={_onChange}
+      />
+  );
+
+  if (!showWordCount) {
+      return textarea;
+  }
+
   return (
     <div>
-        <textarea
-          id={id}
-          className="form-control"
-          value={typeof value === "undefined" ? "" : value}
-          placeholder={placeholder}
-          required={required}
-          disabled={disabled}
-          readOnly={readonly}
-          autoFocus={autofocus}
-          rows={options.rows}
-          onBlur={onBlur && (event => onBlur(id, event.target.value))}
-          onFocus={onFocus && (event => onFocus(id, event.target.value))}
-          onChange={_onChange}
-        />
-        {showWordCount ?
-            <div className="form-control-word-count">{wordCount} / {schema.word_count} words</div>
-        : null}
+        {textarea}
+        <div className="form-control-word-count">{wordCount} / {schema.word_count} words</div>
     </div>
   );
 }
