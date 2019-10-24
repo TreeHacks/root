@@ -329,6 +329,7 @@ export const applicationReviewDisplayFields = applicationReviewDisplayFieldsObj;
 export const sponsorApplicationDisplayFields = sponsorApplicationDisplayFieldsObj;
 export const stanfordApplicationDisplayFields = [
   // All fields
+  "section1",
   "first_name",
   "last_name",
   "phone",
