@@ -2,7 +2,7 @@ import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
 import { isEqual, omit } from "lodash";
-import { STATUS, HACKATHON_YEAR_STRING, applicationReviewDisplayFields, TYPE } from '../constants';
+import { STATUS, HACKATHON_YEAR_STRING, applicationReviewDisplayFieldsNoSection, TYPE } from '../constants';
 
 afterEach(() => {
     return Application.deleteMany({});
@@ -68,10 +68,13 @@ describe('review next application', () => {
                     resume: "testtesttest",
                     accept_terms: true,
                     accept_share: true,
-                    q1_goodfit: "test",
-                    q2_experience: "test",
+                    q1: "test",
+                    q2: "test",
                     q3: "test",
-                    q4: "test"
+                    q4: "test",
+                    q5: "test",
+                    q_team_matching_1: "test",
+                    q_team_matching_2: "test"
                 }
             },
             status: STATUS.SUBMITTED,
@@ -83,7 +86,7 @@ describe('review next application', () => {
             .expect(200)
             .then(e => {
                 expect(Object.keys(e.body)).toEqual(["_id", "forms", "user"]);
-                expect(Object.keys(e.body.forms.application_info).sort()).toEqual(applicationReviewDisplayFields.sort());
+                expect(Object.keys(e.body.forms.application_info).sort()).toEqual(applicationReviewDisplayFieldsNoSection.sort());
             });
     });
     test('review application gets oos before is', async () => {

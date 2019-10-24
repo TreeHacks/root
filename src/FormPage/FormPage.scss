@@ -56,6 +56,10 @@
     label.control-label {
         display: none;
     }
+    label.control-label[for^="root_q"] {
+        display: block;
+        margin-top: 2rem;
+    }
     select.form-control {
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -65,6 +69,14 @@
         background-position: 100% 50%;
         background-size: 40px 20px;
     }
+
+    .form-control-word-count {
+        text-align: right;
+        font-size: 0.95rem;
+        color: #535152;
+        margin-top: 0.25rem;
+    }
+
     .field>ul.list-inline {
         display: flex;
         justify-content: space-between;
@@ -78,6 +90,14 @@
     }
     .form-group.field.field-string+.form-group.field.field-boolean {
         margin-top: 40px;
+    }
+
+    .form-group.field.field-boolean + .form-group.field.field-boolean {
+        margin-top: -1rem;
+    }
+
+    .form-group.field.field-boolean {
+        margin-top: 2rem;
     }
 
     .form-group.field.field-array {

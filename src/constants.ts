@@ -1,4 +1,5 @@
 import settings from "./themes/settings";
+import {sponsorApplicationDisplayFields as sponsorApplicationDisplayFieldsObj, applicationReviewDisplayFields as applicationReviewDisplayFieldsObj} from "../backend/constants";
 
 export var GROUPS = {
   'admin': 'Administrator',
@@ -324,15 +325,14 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
 export const HACKATHON_YEAR = settings.hackathon_year;
 export const HACKATHON_DATE_RANGE = settings.hackathon_date_range;
 export const LOCATIONS = settings.locations;
-export const applicationReviewDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "skill_level", "hackathon_experience", "resume", "q1_goodfit", "q2_experience", "q3", "q4"];
-export const sponsorApplicationDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "resume", "q2_experience", "q4"];
+export const applicationReviewDisplayFields = applicationReviewDisplayFieldsObj;
+export const sponsorApplicationDisplayFields = sponsorApplicationDisplayFieldsObj;
 export const stanfordApplicationDisplayFields = [
+  // All fields
   "first_name",
   "last_name",
   "phone",
   "dob",
-  "gender",
-  "race",
   "university",
   "graduation_year",
   "level_of_study",
@@ -341,10 +341,17 @@ export const stanfordApplicationDisplayFields = [
   "hackathon_experience",
   "resume",
   "section2",
-  // "q1_goodfit",
-  // "q2_experience",
-  // "q3",
+  "q1",
+  "q2",
+  "q3",
   "q4",
+  "q5",
+  "section3",
+  "q_team_matching_1",
+  "q_team_matching_2",
+  "section4",
+  "gender",
+  "race",
   "accept_terms",
   "accept_share"
 ];

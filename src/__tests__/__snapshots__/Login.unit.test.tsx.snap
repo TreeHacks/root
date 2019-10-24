@@ -2,212 +2,224 @@
 
 exports[`Login screen tests login screen applicant 1`] = `
 <div
-  className="treehacks-login"
+  className="login-container"
 >
   <div
-    className="text-center"
+    className="treehacks-login"
   >
-    <img
-      height="65px"
-      src={[Function]}
-      style={
-        Object {
-          "marginTop": 49,
-        }
-      }
-      width="85px"
-    />
-  </div>
-  <h2
-    className="h3-style"
-  >
-    tree
-    <strong>
-      hacks
-    </strong>
-  </h2>
-  <Component />
-  <div
-    className="top-form"
-  >
-    <AuthForm
-      formData={Object {}}
-      onChange={[Function]}
-      onSubmit={[Function]}
-      schema={Object {}}
-      uiSchema={Object {}}
-    >
-      <button
-        className="btn btn-info"
-        type="submit"
-      >
-        Sign In
-      </button>
-    </AuthForm>
     <div
-      className="label-text centered"
+      className="text-center"
     >
-      or
+      <img
+        height="65px"
+        src={[Function]}
+        style={
+          Object {
+            "marginTop": 49,
+          }
+        }
+        width="85px"
+      />
     </div>
+    <h2
+      className="h3-style"
+    >
+      tree
+      <strong>
+        hacks
+      </strong>
+    </h2>
     <Component />
+    <div
+      className="top-form"
+    >
+      <AuthForm
+        formData={Object {}}
+        onChange={[Function]}
+        onSubmit={[Function]}
+        schema={Object {}}
+        uiSchema={Object {}}
+      >
+        <button
+          className="btn btn-info"
+          type="submit"
+        >
+          Sign In
+        </button>
+      </AuthForm>
+      <div
+        className="label-text centered"
+      >
+        or
+      </div>
+      <Component />
+      <div
+        className="mt-1 left-btn"
+      >
+        <Connect(AuthPageNavButton)
+          current="signIn"
+          label="Forgot Password"
+          page="forgotPassword"
+        />
+      </div>
+    </div>
     <div
       className="mt-1 left-btn"
     >
       <Connect(AuthPageNavButton)
         current="signIn"
-        label="Forgot Password"
-        page="forgotPassword"
+        label="Back"
+        page="defaultPage"
       />
     </div>
-  </div>
-  <div
-    className="mt-1 left-btn"
-  >
-    <Connect(AuthPageNavButton)
-      current="signIn"
-      label="Back"
-      page="defaultPage"
-    />
   </div>
 </div>
 `;
 
 exports[`Login screen tests login screen judge 1`] = `
 <div
-  className="treehacks-login"
+  className="login-container"
 >
   <div
-    className="text-center"
+    className="treehacks-login"
   >
-    <img
-      height="65px"
-      src={[Function]}
-      style={
-        Object {
-          "marginTop": 49,
-        }
-      }
-      width="85px"
-    />
-  </div>
-  <h2
-    className="h3-style"
-  >
-    tree
-    <strong>
-      hacks
-    </strong>
-  </h2>
-  <h3
-    className="h3-style"
-  >
-    judges
-  </h3>
-  <div
-    className="top-form"
-  >
-    <AuthForm
-      formData={Object {}}
-      onChange={[Function]}
-      onSubmit={[Function]}
-      schema={Object {}}
-      uiSchema={Object {}}
+    <div
+      className="text-center"
     >
-      <button
-        className="btn btn-info"
-        type="submit"
+      <img
+        height="65px"
+        src={[Function]}
+        style={
+          Object {
+            "marginTop": 49,
+          }
+        }
+        width="85px"
+      />
+    </div>
+    <h2
+      className="h3-style"
+    >
+      tree
+      <strong>
+        hacks
+      </strong>
+    </h2>
+    <h3
+      className="h3-style"
+    >
+      judges
+    </h3>
+    <div
+      className="top-form"
+    >
+      <AuthForm
+        formData={Object {}}
+        onChange={[Function]}
+        onSubmit={[Function]}
+        schema={Object {}}
+        uiSchema={Object {}}
       >
-        Sign In
-      </button>
-    </AuthForm>
+        <button
+          className="btn btn-info"
+          type="submit"
+        >
+          Sign In
+        </button>
+      </AuthForm>
+      <div
+        className="mt-1 left-btn"
+      >
+        <Connect(AuthPageNavButton)
+          current="signIn"
+          label="Forgot Password"
+          page="forgotPassword"
+        />
+      </div>
+    </div>
     <div
       className="mt-1 left-btn"
     >
       <Connect(AuthPageNavButton)
         current="signIn"
-        label="Forgot Password"
-        page="forgotPassword"
+        label="Back"
+        page="defaultPage"
       />
     </div>
-  </div>
-  <div
-    className="mt-1 left-btn"
-  >
-    <Connect(AuthPageNavButton)
-      current="signIn"
-      label="Back"
-      page="defaultPage"
-    />
   </div>
 </div>
 `;
 
 exports[`Login screen tests login screen sponsor 1`] = `
 <div
-  className="treehacks-login"
+  className="login-container"
 >
   <div
-    className="text-center"
+    className="treehacks-login"
   >
-    <img
-      height="65px"
-      src={[Function]}
-      style={
-        Object {
-          "marginTop": 49,
-        }
-      }
-      width="85px"
-    />
-  </div>
-  <h2
-    className="h3-style"
-  >
-    tree
-    <strong>
-      hacks
-    </strong>
-  </h2>
-  <h3
-    className="h3-style"
-  >
-    sponsors
-  </h3>
-  <div
-    className="top-form"
-  >
-    <AuthForm
-      formData={Object {}}
-      onChange={[Function]}
-      onSubmit={[Function]}
-      schema={Object {}}
-      uiSchema={Object {}}
+    <div
+      className="text-center"
     >
-      <button
-        className="btn btn-info"
-        type="submit"
+      <img
+        height="65px"
+        src={[Function]}
+        style={
+          Object {
+            "marginTop": 49,
+          }
+        }
+        width="85px"
+      />
+    </div>
+    <h2
+      className="h3-style"
+    >
+      tree
+      <strong>
+        hacks
+      </strong>
+    </h2>
+    <h3
+      className="h3-style"
+    >
+      sponsors
+    </h3>
+    <div
+      className="top-form"
+    >
+      <AuthForm
+        formData={Object {}}
+        onChange={[Function]}
+        onSubmit={[Function]}
+        schema={Object {}}
+        uiSchema={Object {}}
       >
-        Sign In
-      </button>
-    </AuthForm>
+        <button
+          className="btn btn-info"
+          type="submit"
+        >
+          Sign In
+        </button>
+      </AuthForm>
+      <div
+        className="mt-1 left-btn"
+      >
+        <Connect(AuthPageNavButton)
+          current="signIn"
+          label="Forgot Password"
+          page="forgotPassword"
+        />
+      </div>
+    </div>
     <div
       className="mt-1 left-btn"
     >
       <Connect(AuthPageNavButton)
         current="signIn"
-        label="Forgot Password"
-        page="forgotPassword"
+        label="Back"
+        page="defaultPage"
       />
     </div>
-  </div>
-  <div
-    className="mt-1 left-btn"
-  >
-    <Connect(AuthPageNavButton)
-      current="signIn"
-      label="Back"
-      page="defaultPage"
-    />
   </div>
 </div>
 `;

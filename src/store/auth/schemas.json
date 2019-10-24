@@ -33,13 +33,12 @@
       "properties": {
         "email": {
           "type": "string",
-          "title": "Email Address",
-          "description": "Note: all attendees are required to prove current undergraduate or graduate status to attend TreeHacks."
+          "title": "Email Address"
         },
         "password": {
           "type": "string",
           "title": "Password",
-          "description": "Password needs to have at least 8 characters."
+          "description": "Choose a password with at least 8 characters."
         },
         "password2": {
           "type": "string",

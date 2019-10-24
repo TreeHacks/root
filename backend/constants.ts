@@ -32,8 +32,81 @@ export var TRANSPORTATION_TYPE = {
   OTHER: "other"
 }
 
-export const sponsorApplicationDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "resume", "q2_experience", "q4"];
-export const applicationReviewDisplayFields = ["first_name", "last_name", "university", "graduation_year", "level_of_study", "major", "skill_level", "hackathon_experience", "resume", "q1_goodfit", "q2_experience", "q3", "q4"];
+export const sponsorApplicationDisplayFields = [
+  "first_name",
+  "last_name",
+  // "phone",
+  // "dob",
+  "university",
+  "graduation_year",
+  "level_of_study",
+  "major",
+  "skill_level",
+  "hackathon_experience",
+  "resume",
+  "section2",
+  "q1",
+  "q2",
+  "q3",
+  "q4",
+  "q5",
+  // "section3",
+  // "q_team_matching_1",
+  // "q_team_matching_2",
+  // "section4",
+  // "gender",
+  // "race",
+  // "accept_terms",
+  // "accept_share"
+];
+export const applicationReviewDisplayFields = [
+  "first_name",
+  "last_name",
+  // "phone",
+  // "dob",
+  "university",
+  "graduation_year",
+  "level_of_study",
+  "major",
+  "skill_level",
+  "hackathon_experience",
+  "resume",
+  "section2",
+  "q1",
+  "q2",
+  "q3",
+  "q4",
+  "q5",
+  "section3",
+  "q_team_matching_1",
+  "q_team_matching_2",
+  // "section4",
+  // "gender",
+  // "race",
+  // "accept_terms",
+  // "accept_share"
+];
+export const applicationRequiredFields = [
+  "first_name",
+  "last_name",
+  "phone",
+  "dob",
+  "university",
+  "graduation_year",
+  "level_of_study",
+  "major",
+  "skill_level",
+  "hackathon_experience",
+  "q1",
+  "q2",
+  "q3",
+  "q4",
+  "accept_terms",
+  "accept_share"
+];
+export const applicationReviewDisplayFieldsNoSection = applicationReviewDisplayFields.filter(e => !e.startsWith("section"));
+export const sponsorApplicationDisplayFieldsNoSection = sponsorApplicationDisplayFields.filter(e => !e.startsWith("section"));
+
 
 export const hackReviewDisplayFields = ["floor", "_id", "devpostUrl", "title", "categories"];
 

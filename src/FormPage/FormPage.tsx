@@ -14,10 +14,12 @@ import { TypeaheadField } from "react-jsonschema-form-extras/lib/TypeaheadField"
 
 const SectionHeaderWidget = (props) => {
     const { schema } = props;
-    return (
+    return (<>
         <legend>
             {schema.title}
         </legend>
+        {schema.custom_description && <p>{schema.custom_description}</p>}
+    </>
     );
 };
 
@@ -34,7 +36,7 @@ const FileInputAndPreviewWidget = (props) => {
     const output = [];
 
     if (props.value) {
-        output.push(<FilePreviewWidget key="preview" {...props} style={{marginBottom: 10}} />);
+        output.push(<FilePreviewWidget key="preview" {...props} style={{ marginBottom: 10 }} />);
     }
 
     output.push(<FileWidget key="file" {...props} value={undefined} onChange={v => {
@@ -44,12 +46,64 @@ const FileInputAndPreviewWidget = (props) => {
             props.onChange(v);
         }
     }} />);
- 
+
     return output;
 };
 
 const TextareaReadOnlyWidget = (props) => {
     return <div className="form-control">{props.value}</div>;
+}
+
+const TextareaWordCountingWidget = (props) => {
+  const {
+    id,
+    options,
+    placeholder,
+    value,
+    required,
+    disabled,
+    readonly,
+    autofocus,
+    onChange,
+    onBlur,
+    onFocus,
+    schema,
+  } = props;
+
+  const showWordCount = !!schema.word_count;
+  const wordCount = value ? value.split(/\s+/g).length : 0;
+
+  const _onChange = ({ target: { value } }) => {
+    return onChange(value === "" ? options.emptyValue : value);
+  };
+
+  const textarea = (
+      <textarea
+        id={id}
+        className="form-control"
+        value={typeof value === "undefined" ? "" : value}
+        placeholder={placeholder}
+        required={required}
+        disabled={disabled}
+        readOnly={readonly}
+        autoFocus={autofocus}
+        rows={options.rows}
+        onBlur={onBlur && (event => onBlur(id, event.target.value))}
+        onFocus={onFocus && (event => onFocus(id, event.target.value))}
+        onChange={_onChange}
+      />
+  );
+
+  if (!showWordCount) {
+      return textarea;
+  }
+
+  return (
+    <div>
+        {textarea}
+        <div className="form-control-word-count">{wordCount} / {schema.word_count} words</div>
+    </div>
+  );
 }
 
 
@@ -93,7 +147,7 @@ export default (props: IFormPageProps) => {
         widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FilePreviewWidget, textarea: TextareaReadOnlyWidget };
     }
     else {
-        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget };
+        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget, textarea: TextareaWordCountingWidget };
     }
     let uiSchema = (props.uiSchema);
     let schema = (props.schema);
@@ -109,7 +163,6 @@ export default (props: IFormPageProps) => {
         }
     }
 
-    //sponsorApplicationDisplayFields
     return (<Form
         className={`treehacks-form ${props.submitted ? "treehacks-form-disabled" : ""}`}
         schema={schema}

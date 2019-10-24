@@ -19,13 +19,22 @@ export interface IApplicationInfo {
     graduation_year: String,
     level_of_study: String,
     major: String,
+    skill_level: Number,
+    hackathon_experience: Number,
     resume: String,
     accept_terms: boolean,
     accept_share: boolean,
+    q3: String,
+    q4: String,
+    q5: String,
+    // Fields only used in 2019:
     q1_goodfit: String,
     q2_experience: String,
-    q3: String,
-    q4: String
+    // Fields only used in 2020:
+    q1: String,
+    q2: String,
+    q_team_matching_1: String,
+    q_team_matching_2: String
 }
 export interface ITransportationInfo {
     [e: string]: any
