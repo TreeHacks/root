@@ -68,6 +68,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
         if (get(schema, 'properties.accept_share')) {
             schema.properties.accept_share.title = <span>I have read and agree to the <a className="form-link" href="https://www.treehacks.com/privacy-policy" target="_blank" onClick={e => e.stopPropagation()}>TreeHacks Privacy Policy</a>.</span>;
         }
+
         let shownFields = null;
         if (get(props, "profile.type") === TYPE.STANFORD) {
             shownFields = stanfordApplicationDisplayFields;

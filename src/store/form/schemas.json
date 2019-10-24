@@ -1,9 +1,13 @@
 {
     "application_info": {
         "schema": {
-            "title": "your application",
             "type": "object",
             "properties": {
+                "section1": {
+                    "title": "your application",
+                    "custom_description": "We’re so excited that you want to come to TreeHacks 2020! Let’s start with the basics.",
+                    "type": "string"
+                },
                 "first_name": {
                     "type": "string",
                     "title": "First Name"
@@ -81,38 +85,47 @@
                 },
                 "section2": {
                     "title": "short answer questions",
+                    "custom_description": "We strive to admit a diverse group of passionate hackers who are looking to build the most sensational hacks out there. Tell us what you’re passionate about, and some of the awesome things you’ve done and want to do.",
                     "type": "string"
                 },
                 "q1": {
+                    "title": "Tell us about something cool that you've built in the past. What was your process?",
                     "word_count": 150,
                     "type": "string"
                 },
                 "q2": {
+                    "title": "What’s something cool that you want to build in the future? How would you begin?",
                     "word_count": 150,
                     "type": "string"
                 },
                 "q3": {
+                    "title": "Why do you want to come to TreeHacks 2020?",
                     "word_count": 100,
                     "type": "string"
                 },
                 "q4": {
+                    "title": "Tell us a fun fact about you :)",
                     "word_count": 50,
                     "type": "string"
                 },
                 "q5": {
+                    "title":"Optional: Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
                     "type": "string"
                 },
                 "section3": {
-                    "title": "team matching",
+                    "title": "optional questions",
                     "type": "string",
-                    "custom_description": "TreeHacks doesn’t accept teams as groups."
+                    "custom_description": "You’re almost there — last few questions! These are optional, but all of our applicants are super interesting, and we want to learn as much as we can about what makes you you!"
                 },
                 "q_team_matching_1": {
                     "type": "string",
+                    "title": "Optional: List any CS-related activities (projects, classes, clubs, research, etc.) that you have been or are involved with.",
                     "word_count": 50
                 },
                 "q_team_matching_2": {
-                    "type": "string"
+                    "title": "Optional: List any skills (separated by commas) that you could bring to a potential team!",
+                    "type": "string",
+                    "word_count": 50
                 },
                 "section4": {
                     "title": "demographics",
@@ -171,6 +184,7 @@
                 "last_name",
                 "phone",
                 "dob",
+                "gender",
                 "university",
                 "graduation_year",
                 "level_of_study",
@@ -231,7 +245,6 @@
                 "ui:placeholder": "number of hackathons attended"
             },
             "q1": {
-                "ui:placeholder": "Tell us about something cool that you've built in the past. What was your process? Max 150 words.",
                 "ui:widget": "textarea",
                 "ui:options": {
                     "rows": 4
@@ -239,39 +252,36 @@
             },
             "q2": {
                 "ui:widget": "textarea",
-                "ui:placeholder": "What’s something cool that you want to build in the future? How would you begin? Max 150 words.",
                 "ui:options": {
                     "rows": 4
                 }
             },
             "q3": {
                 "ui:widget": "textarea",
-                "ui:placeholder": "Why do you want to come to TreeHacks 2020? Max 150 words.",
                 "ui:options": {
                     "rows": 4
                 }
             },
             "q4": {
-                "ui:widget": "textarea",
-                "ui:placeholder": "Tell us a fun fact about you :)"
+                "ui:widget": "textarea"
             },
             "q5": {
-                "ui:widget": "textarea",
-                "ui:placeholder":"(Optional) Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc."
+                "ui:widget": "textarea"
             },
             "q_team_matching_1": {
                 "ui:widget": "textarea",
-                "ui:placeholder": "(Optional) List any CS-related activities (projects, classes, clubs, research, etc.) that you have been or are involved with. Max 50 words.",
                 "ui:options": {
-                    "rows": 3
+                    "rows": 2
                 }
             },
             "q_team_matching_2": {
                 "ui:widget": "textarea",
-                "ui:placeholder": "(Optional) Skills",
                 "ui:options": {
-                    "rows": 3
+                    "rows": 2
                 }
+            },
+            "section1": {
+                "ui:widget": "sectionHeader"
             },
             "section2": {
                 "ui:widget": "sectionHeader"
@@ -283,6 +293,7 @@
                 "ui:widget": "sectionHeader"
             },
             "ui:order": [
+                "section1",
                 "first_name",
                 "last_name",
                 "phone",
@@ -299,10 +310,10 @@
                 "q2",
                 "q3",
                 "q4",
-                "q5",
                 "section3",
                 "q_team_matching_1",
                 "q_team_matching_2",
+                "q5",
                 "section4",
                 "gender",
                 "race",

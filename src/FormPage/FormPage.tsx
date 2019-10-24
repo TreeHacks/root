@@ -54,6 +54,52 @@ const TextareaReadOnlyWidget = (props) => {
     return <div className="form-control">{props.value}</div>;
 }
 
+const TextareaWordCountingWidget = (props) => {
+  const {
+    id,
+    options,
+    placeholder,
+    value,
+    required,
+    disabled,
+    readonly,
+    autofocus,
+    onChange,
+    onBlur,
+    onFocus,
+    schema,
+  } = props;
+
+  const showWordCount = !!schema.word_count;
+  const wordCount = value ? value.split(/\s+/g).length : 0;
+
+  const _onChange = ({ target: { value } }) => {
+    return onChange(value === "" ? options.emptyValue : value);
+  };
+
+  return (
+    <div>
+        <textarea
+          id={id}
+          className="form-control"
+          value={typeof value === "undefined" ? "" : value}
+          placeholder={placeholder}
+          required={required}
+          disabled={disabled}
+          readOnly={readonly}
+          autoFocus={autofocus}
+          rows={options.rows}
+          onBlur={onBlur && (event => onBlur(id, event.target.value))}
+          onFocus={onFocus && (event => onFocus(id, event.target.value))}
+          onChange={_onChange}
+        />
+        {showWordCount ?
+            <div className="form-control-word-count">{wordCount} / {schema.word_count} words</div>
+        : null}
+    </div>
+  );
+}
+
 
 function base64MimeType(encoded) {
     var result = null;
@@ -95,7 +141,7 @@ export default (props: IFormPageProps) => {
         widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FilePreviewWidget, textarea: TextareaReadOnlyWidget };
     }
     else {
-        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget };
+        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget, textarea: TextareaWordCountingWidget };
     }
     let uiSchema = (props.uiSchema);
     let schema = (props.schema);
