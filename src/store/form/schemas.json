@@ -85,21 +85,21 @@
                 },
                 "section2": {
                     "title": "short answer questions",
-                    "custom_description": "We strive to admit a diverse group of passionate hackers who are looking to build the most sensational hacks out there. Tell us what you’re passionate about, and some of the awesome things you’ve done and want to do.",
+                    "custom_description": "We strive to admit a diverse group of hackers of all exprience levels who will make the most of their time at TreeHacks. Help us get to know you and how awesome you are!",
                     "type": "string"
                 },
                 "q1": {
-                    "title": "Tell us about something cool that you've built in the past. What was your process?",
+                    "title": "Why do you want to come to TreeHacks 2020?",
                     "word_count": 150,
                     "type": "string"
                 },
                 "q2": {
-                    "title": "What’s something cool that you want to build in the future? How would you begin?",
                     "word_count": 150,
+                    "title": "Tell us about a project that you've worked on in the past, technical or nontechnical. Why did you choose to work on it?",
                     "type": "string"
                 },
                 "q3": {
-                    "title": "Why do you want to come to TreeHacks 2020?",
+                    "title": "Tell us about something that is meaningful to you, and why?",
                     "word_count": 150,
                     "type": "string"
                 },
@@ -109,7 +109,7 @@
                     "type": "string"
                 },
                 "q5": {
-                    "title":"Optional: Add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
+                    "title":"Optionally, add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
                     "type": "string"
                 },
                 "section3": {
@@ -119,13 +119,13 @@
                 },
                 "q_team_matching_1": {
                     "type": "string",
-                    "title": "Optional: List any CS-related activities (projects, classes, clubs, research, etc.) that you have been or are involved with.",
-                    "word_count": 50
+                    "title": "I would describe myself as a...",
+                    "word_count": 5
                 },
                 "q_team_matching_2": {
-                    "title": "Optional: List any skills (separated by commas) that you could bring to a potential team!",
+                    "title": "Is there anything else that we should know about you? (optional!)",
                     "type": "string",
-                    "word_count": 50
+                    "word_count": 100
                 },
                 "section4": {
                     "title": "demographics",
@@ -270,8 +270,9 @@
             },
             "q_team_matching_1": {
                 "ui:widget": "textarea",
+                "ui:placeholder": "Nature-Lover, iOS Extraordinaire, Crochet Wizard, etc...",
                 "ui:options": {
-                    "rows": 2
+                    "rows": 1
                 }
             },
             "q_team_matching_2": {
