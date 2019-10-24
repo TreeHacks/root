@@ -113,7 +113,7 @@
                     "type": "string"
                 },
                 "section3": {
-                    "title": "optional questions",
+                    "title": "other questions",
                     "type": "string",
                     "custom_description": "You’re almost there — last few questions! These are optional, but all of our applicants are super interesting, and we want to learn as much as we can about what makes you you!"
                 },
