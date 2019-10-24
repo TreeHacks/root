@@ -100,7 +100,7 @@
                 },
                 "q3": {
                     "title": "Why do you want to come to TreeHacks 2020?",
-                    "word_count": 100,
+                    "word_count": 150,
                     "type": "string"
                 },
                 "q4": {
