@@ -50,7 +50,7 @@ const AdminTable = (props: IAdminTableProps) => {
     const columns = [
         {
             "Header": "Preview",
-            "accessor": "_id",
+            "accessor": "user.id",
             "id": "preview",
             "filterable": false,
             "Cell": (p) => <div><a onClick={(e) => {
