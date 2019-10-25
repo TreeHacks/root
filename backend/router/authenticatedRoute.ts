@@ -1,6 +1,7 @@
 import CognitoExpress from "cognito-express";
 import express from "express";
 import {get} from "lodash";
+import {ALLOWED_GROUPS} from "../constants";
 
 //Initializing CognitoExpress constructor
 const cognitoExpress = new CognitoExpress({
@@ -41,6 +42,8 @@ authenticatedRoute.param('userId', (req, res, next, userId) => {
 const validateGroup = (group, allowAnonymous = false) => (req, res, next) => {
   // Allow either a single group or multiple valid groups passed as an array
   if (!Array.isArray(group)) { group = [group]; }
+
+  group = group.filter(e => ALLOWED_GROUPS.indexOf(e) > -1);
   
   group.push("admin"); // admins have access to all routes.
 

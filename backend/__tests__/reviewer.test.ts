@@ -4,6 +4,8 @@ import Application from "../models/Application";
 import { isEqual, omit } from "lodash";
 import { STATUS, HACKATHON_YEAR_STRING, applicationReviewDisplayFieldsNoSection, TYPE } from '../constants';
 
+jest.mock("../constants");
+
 afterEach(() => {
     return Application.deleteMany({});
 })
