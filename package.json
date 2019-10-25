@@ -3,6 +3,9 @@
     "version": "1.0.6",
     "description": "https://ap-frontend-test.herokuapp.com/",
     "main": "webpack.common.js",
+    "engines": {
+        "node": "10.16.0"
+    },
     "scripts": {
         "mongo": "mongod",
         "test": "dotenv jest -- --runInBand",
