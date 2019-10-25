@@ -2,7 +2,7 @@ import { uploadBase64Content, generateSignedUrlForFile } from '../services/file_
 import mongoose from 'mongoose';
 import { get, set } from "lodash";
 import { IApplication } from '../models/Application.d';
-import { STATUS, sponsorApplicationDisplayFields } from '../constants';
+import { STATUS, sponsorApplicationDisplayFields, HACKATHON_YEAR_STRING } from '../constants';
 
 // Paths on the application that store file data that should be uploaded to S3.
 const APPLICATION_FILE_PATHS = ["forms.application_info.resume", "forms.transportation.receipt"];
@@ -25,7 +25,7 @@ async function uploadDynamicApplicationContent(this: mongoose.Document) {
     const resume = get(this, path);
     if (resume && resume.indexOf('data:') === 0) {
       try {
-        const result = await uploadBase64Content(this._id + "-" + path, resume);
+        const result = await uploadBase64Content(HACKATHON_YEAR_STRING + "/" + this._id + "-" + path, resume);
         if (result.Key) {
           set(this, path, result.Key);
         }
