@@ -94,7 +94,6 @@
         "compression": "^1.7.3",
         "connected-react-router": "^4.3.0",
         "cors": "^2.8.4",
-        "dart-sass": "^1.23.1",
         "dotenv": "^6.1.0",
         "dotenv-cli": "^1.4.0",
         "express": "^4.16.2",
@@ -131,6 +130,7 @@
         "redux-mock-store": "^1.5.3",
         "redux-thunk": "^2.3.0",
         "request": "^2.83.0",
+        "sass": "^1.23.1",
         "swagger-ui-express": "^3.0.10",
         "yamljs": "^0.3.0"
     }
