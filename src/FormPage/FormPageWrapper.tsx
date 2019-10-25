@@ -48,7 +48,6 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
     }
     onSubmit(submit) {
         const props = this.props;
-        this.setState({showModal: true});
         (get(props, "profile.status") !== "incomplete" ? () => Promise.resolve(null) : props.saveData)().then(() => {
             if (submit) {
                 this.setState({showModal: true});
