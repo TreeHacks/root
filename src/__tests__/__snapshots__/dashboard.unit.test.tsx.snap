@@ -231,7 +231,14 @@ exports[`dashboard incomplete before deadline 1`] = `
     >
       <div>
         <div>
-          You haven't submitted your application yet. You have
+          You haven't submitted your 
+          <Link
+            replace={false}
+            to="/application_info"
+          >
+            application
+          </Link>
+           yet. You have
         </div>
         <div
           className="days-left"
