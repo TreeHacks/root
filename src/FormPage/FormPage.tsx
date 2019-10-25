@@ -138,6 +138,7 @@ function validate(formData, errors, schema) {
     if (schema.properties.university && !formData.university) {
         errors.university.addError("University is required");
     }
+    
     return errors;
 }
 
