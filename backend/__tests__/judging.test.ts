@@ -5,6 +5,8 @@ import Judge from "../models/Judge";
 import { isEqual, omit } from "lodash";
 import { STATUS, TYPE, hackReviewDisplayFields } from '../constants';
 
+jest.mock("../constants");
+
 const _doc = {
     "title": "sample title",
     "devpostUrl": "sample url",

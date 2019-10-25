@@ -5,6 +5,8 @@ import { isEqual, omit } from "lodash";
 import { STATUS, sponsorApplicationDisplayFieldsNoSection, HACKATHON_YEAR_STRING } from '../constants';
 import queryString from "query-string";
 
+jest.mock("../constants");
+
 const _doc = {
     reviews: [],
     status: STATUS.INCOMPLETE,
