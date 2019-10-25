@@ -56,7 +56,7 @@ export const Dashboard = (props: IDashboardProps) => {
                             ) : (
                                         <div>
                                             <div>
-                                                You haven't submitted your application yet. You have
+                                                You haven't submitted your <Link to="/application_info">application</Link> yet. You have
                                             </div>
                                             <div className="days-left">
                                                 {diffDays}
