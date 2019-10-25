@@ -123,7 +123,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
                 : null}
                 <Modal open={this.state.showModal} onClose={() => this.onCloseModal()}>
                     <div className="my-1 modal-window">
-                        <div className="my-3">
+                        <div className="my-4">
                             Are you sure? You won't be able to edit your application once you submit.
                         </div>
                         <div className="row">
