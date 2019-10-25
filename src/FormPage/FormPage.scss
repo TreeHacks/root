@@ -309,3 +309,11 @@ input[type="date"]:valid:before {
 .rbt-highlight-text {
     padding: 0rem;
 }
+
+.treehacks-form-disabled .form-control {
+    color: #adadad;
+}
+
+.treehacks-form-disabled input {
+    color: #adadad;
+}
