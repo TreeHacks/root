@@ -305,3 +305,15 @@ input[type="date"]:valid:before {
     border-color: $primary-color !important;
     color: $primary-color;
 }
+
+.rbt-highlight-text {
+    padding: 0rem;
+}
+
+.treehacks-form-disabled .form-control {
+    color: #adadad;
+}
+
+.treehacks-form-disabled input {
+    color: #adadad;
+}
