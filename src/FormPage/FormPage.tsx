@@ -141,6 +141,14 @@ function validate(formData, errors, schema) {
     if (formData.type) {
         errors.addError("Privacy Policy is required");
     }
+
+    if (formData.accept_share) {
+        errors.addError("Privacy Policy is required");
+    }
+
+    if (formData.accept_terms) {
+        errors.addError("Code of Conduct is required");
+    }
     return errors;
 }
 
