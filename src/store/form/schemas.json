@@ -77,11 +77,14 @@
                 },
                 "accept_terms": {
                     "type": "boolean",
+                    "const": true,
                     "title": "I have read and agree to the TreeHacks Code of Conduct."
                 },
                 "accept_share": {
                     "type": "boolean",
+                    "const": true,
                     "title": "I authorize you to share my application/registration information for purposes in-line with the TreeHacks Privacy Policy."
+                    
                 },
                 "section2": {
                     "title": "short answer questions",
