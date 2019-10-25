@@ -112,7 +112,9 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
                             const userEdited = JSON.stringify(e.formData) !== JSON.stringify(props.formData);
                             props.setData(e.formData, userEdited);
                         }}
-                        onError={() => window.scrollTo(0, 0)}
+                        onError={() => {
+                            this.setState({showSavedAlert: false}, () => window.scrollTo(0, 0));
+                        }}
                         onSubmit={(e) => this.onSubmit(e)}
                         schema={schema}
                         uiSchema={uiSchema}
