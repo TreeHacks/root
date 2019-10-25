@@ -28,5 +28,5 @@ function setCurrentYear(this: IApplication) {
     }
 }
 
-const model: Model<IApplication> = mongoose.model("Application", applicationCurrentYearSchema, "Application");
+const model: Model<IApplication> = mongoose.model("Application", applicationCurrentYearSchema, "applications");
 export default model;
