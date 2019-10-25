@@ -273,6 +273,28 @@ input[type="date"]:valid:before {
     white-space: pre-wrap;
 }
 
+.modal-window {
+    min-width: 30vw;
+}
+
+.btn-modal {
+    background-color: $primary-color;
+    border-color: $primary-color !important;
+    color: $primary-btn-text-color;
+    width: 100%;
+    font-size: 20px !important;
+    margin-bottom: 5px;
+    white-space: pre-wrap;
+    cursor: pointer;
+}
+
+.btn-modal.inverted {
+    background-color: #fff !important;
+    border-width: 2px;
+    border-color: #E51B5D !important;
+    color: #E51B5D;
+}
+
 .btn-custom+.btn-custom {
     margin-left: 20px;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Modal from "react-responsive-modal";
 import Form from "react-jsonschema-form";
 import Beforeunload from "react-beforeunload";
 import { Prompt } from "react-router";
@@ -31,27 +32,38 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setFormName: (e: string) => dispatch(setFormName(e))
 });
 
-class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSavedAlert: boolean }> {
+class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSavedAlert: boolean, showModal: boolean }> {
     constructor(props) {
         super(props);
-        this.state = { showSavedAlert: false };
+        this.state = { 
+            showSavedAlert: false,
+            showModal: false
+        };
     }
     componentDidMount() {
         this.props.setFormName(this.props.incomingFormName);
         this.props.loadData();
-        // this.props.setData({"first_name":"sad","last_name":"dsf","phone":"123123123","dob":"1901-01-02","gender":"F","race":["American Indian / Alaska Native"],"university":"2nd Military Medical University","graduation_year":"2018","level_of_study":"Graduate","major":"sa","accept_terms":true,"accept_share":true});
+        //this.props.setData({"first_name":"sad","last_name":"dsf","phone":"123123123","dob":"1901-01-02","gender":"F","race":["American Indian / Alaska Native"],"university":"2nd Military Medical University","graduation_year":"2018","level_of_study":"Graduate","major":"sa","accept_terms":true,"accept_share":true}, true);
         this.props.getUserProfile();
     }
     onSubmit(submit) {
         const props = this.props;
+        this.setState({showModal: true});
         (get(props, "profile.status") !== "incomplete" ? () => Promise.resolve(null) : props.saveData)().then(() => {
             if (submit) {
-                return props.submitForm().then(() => props.goHome());
+                this.setState({showModal: true});
             } else {
                 this.setState({ showSavedAlert: true });
                 window.scrollTo(0, 0);
             }
         });
+    }
+    submitData() {
+        const props = this.props;
+        return props.submitForm().then(() => props.goHome());
+    }
+    onCloseModal() {
+        this.setState({showModal: false});
     }
     render() {
         if (!this.props.formData || this.props.formName !== this.props.incomingFormName) {
@@ -109,6 +121,25 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
                         shownFields={shownFields}
                         />
                 : null}
+                <Modal open={this.state.showModal} onClose={() => this.onCloseModal()}>
+                    <div className="my-1 modal-window">
+                        <div className="my-3">
+                            Are you sure? You won't be able to edit your application once you submit.
+                        </div>
+                        <div className="row">
+                            <div className="col-6 text-left">
+                                <div className="mt-2 btn btn-modal inverted" onClick={() => this.onCloseModal()}>
+                                    Cancel
+                                </div>
+                            </div>
+                            <div className="col-6 text-right">
+                                <div className="mt-2 btn btn-modal" onClick={() => this.submitData()}>
+                                    Submit
+                                </div>
+                            </div>
+                        </div>
+                    </div>       
+                </Modal>
             </div>);
     };
 }
