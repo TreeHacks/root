@@ -64,9 +64,10 @@ exports[`Login screen tests login screen applicant 1`] = `
       </div>
     </div>
     <div
-      className="mt-1 left-btn"
+      className="mt-1 back-container"
     >
       <Connect(AuthPageNavButton)
+        className="btn-back"
         current="signIn"
         label="Back"
         page="defaultPage"
@@ -138,9 +139,10 @@ exports[`Login screen tests login screen judge 1`] = `
       </div>
     </div>
     <div
-      className="mt-1 left-btn"
+      className="mt-1 back-container"
     >
       <Connect(AuthPageNavButton)
+        className="btn-back"
         current="signIn"
         label="Back"
         page="defaultPage"
@@ -212,9 +214,10 @@ exports[`Login screen tests login screen sponsor 1`] = `
       </div>
     </div>
     <div
-      className="mt-1 left-btn"
+      className="mt-1 back-container"
     >
       <Connect(AuthPageNavButton)
+        className="btn-back"
         current="signIn"
         label="Back"
         page="defaultPage"

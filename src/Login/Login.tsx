@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import "./Login.scss";
 import { checkLoginStatus, logout, signIn, signUp, forgotPassword, forgotPasswordSubmit, resendSignup, changePassword, exchangeAuthCode, validateEmail } from "../store/auth/actions";
-import {logo} from "../constants";
+import { logo } from "../constants";
 import AuthPageNavButton from "./AuthPageNavButton";
 import Form from "react-jsonschema-form";
 import { IAuthState } from "../store/auth/types";
@@ -141,7 +141,7 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
               schema={Object.assign({}, this.props.schemas.validateEmail.schema)}
               uiSchema={Object.assign({}, this.props.schemas.validateEmail.uiSchema)}
               onSubmit={e => this.props.validateEmail(e.formData)}
-              onChange={e => this.setState({ formData: e.formData }) }
+              onChange={e => this.setState({ formData: e.formData })}
             >
               {!isStanfordEmail ?
                 <button className="btn btn-info" type="submit">Continue</button>
@@ -160,7 +160,7 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
               schema={Object.assign({}, this.props.schemas.signIn.schema, isStanfordEmail && { properties: { email: this.props.schemas.signIn.schema.properties.email }, required: ['email'] })}
               uiSchema={Object.assign({}, this.props.schemas.signIn.uiSchema, isStanfordEmail && { 'ui:order': ['email'] })}
               onSubmit={e => this.props.signIn(e.formData)}
-              onChange={e => this.setState({ formData: e.formData }) }
+              onChange={e => this.setState({ formData: e.formData })}
             >
               {!isStanfordEmail ?
                 <button className="btn btn-info" type="submit">Sign In</button>
@@ -171,11 +171,11 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
               : null}
             {applicant && !isStanfordEmail && <div className="label-text centered">or</div>}
             {applicant && !isStanfordEmail && <StanfordLogin />}
-            <div className="mt-1 left-btn"> 
+            <div className="mt-1 left-btn">
               <AuthPageNavButton current={this.props.authPage} page="forgotPassword" label="Forgot Password" />
             </div>
           </div>
-          
+
         }
         {this.props.authPage == "signUp" &&
           <div className="top-form">
@@ -220,8 +220,8 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
           </AuthForm>
         }
         {this.props.authPage !== "defaultPage" &&
-          <div className="mt-1 left-btn">
-            <AuthPageNavButton current={this.props.authPage} page="defaultPage" label="Back" />
+          <div className="mt-1 back-container">
+            <AuthPageNavButton current={this.props.authPage} page="defaultPage" label="Back" className="btn-back" />
           </div>
         }
       </div></div>);
