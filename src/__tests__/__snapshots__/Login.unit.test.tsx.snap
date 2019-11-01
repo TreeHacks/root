@@ -10,16 +10,20 @@ exports[`Login screen tests login screen applicant 1`] = `
     <div
       className="text-center"
     >
-      <img
-        height="65px"
-        src={[Function]}
-        style={
-          Object {
-            "marginTop": 49,
+      <a
+        href="https://treehacks.com/"
+      >
+        <img
+          height="65px"
+          src={[Function]}
+          style={
+            Object {
+              "marginTop": 49,
+            }
           }
-        }
-        width="85px"
-      />
+          width="85px"
+        />
+      </a>
     </div>
     <h2
       className="h3-style"
@@ -87,16 +91,20 @@ exports[`Login screen tests login screen judge 1`] = `
     <div
       className="text-center"
     >
-      <img
-        height="65px"
-        src={[Function]}
-        style={
-          Object {
-            "marginTop": 49,
+      <a
+        href="https://treehacks.com/"
+      >
+        <img
+          height="65px"
+          src={[Function]}
+          style={
+            Object {
+              "marginTop": 49,
+            }
           }
-        }
-        width="85px"
-      />
+          width="85px"
+        />
+      </a>
     </div>
     <h2
       className="h3-style"
@@ -162,16 +170,20 @@ exports[`Login screen tests login screen sponsor 1`] = `
     <div
       className="text-center"
     >
-      <img
-        height="65px"
-        src={[Function]}
-        style={
-          Object {
-            "marginTop": 49,
+      <a
+        href="https://treehacks.com/"
+      >
+        <img
+          height="65px"
+          src={[Function]}
+          style={
+            Object {
+              "marginTop": 49,
+            }
           }
-        }
-        width="85px"
-      />
+          width="85px"
+        />
+      </a>
     </div>
     <h2
       className="h3-style"

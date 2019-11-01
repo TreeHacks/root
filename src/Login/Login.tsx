@@ -116,7 +116,9 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
     if (!this.props.loggedIn) {
       return (<div className="login-container"><div className="treehacks-login">
         <div className="text-center">
-          <img src={logo} width="85px" height="65px" style={{ "marginTop": 49 }} />
+          <a href="https://treehacks.com/">
+            <img src={logo} width="85px" height="65px" style={{ "marginTop": 49 }} />
+          </a>
         </div>
         <h2 className="h3-style">tree<strong>hacks</strong></h2>
         {this.state.sponsor && <h3 className="h3-style">sponsors</h3>}
