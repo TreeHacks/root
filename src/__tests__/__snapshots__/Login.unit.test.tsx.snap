@@ -25,14 +25,19 @@ exports[`Login screen tests login screen applicant 1`] = `
         />
       </a>
     </div>
-    <h2
-      className="h3-style"
+    <a
+      className="wordmark"
+      href="https://treehacks.com/"
     >
-      tree
-      <strong>
-        hacks
-      </strong>
-    </h2>
+      <h2
+        className="h3-style"
+      >
+        tree
+        <strong>
+          hacks
+        </strong>
+      </h2>
+    </a>
     <Component />
     <div
       className="top-form"
@@ -106,14 +111,19 @@ exports[`Login screen tests login screen judge 1`] = `
         />
       </a>
     </div>
-    <h2
-      className="h3-style"
+    <a
+      className="wordmark"
+      href="https://treehacks.com/"
     >
-      tree
-      <strong>
-        hacks
-      </strong>
-    </h2>
+      <h2
+        className="h3-style"
+      >
+        tree
+        <strong>
+          hacks
+        </strong>
+      </h2>
+    </a>
     <h3
       className="h3-style"
     >
@@ -185,14 +195,19 @@ exports[`Login screen tests login screen sponsor 1`] = `
         />
       </a>
     </div>
-    <h2
-      className="h3-style"
+    <a
+      className="wordmark"
+      href="https://treehacks.com/"
     >
-      tree
-      <strong>
-        hacks
-      </strong>
-    </h2>
+      <h2
+        className="h3-style"
+      >
+        tree
+        <strong>
+          hacks
+        </strong>
+      </h2>
+    </a>
     <h3
       className="h3-style"
     >

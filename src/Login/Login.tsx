@@ -120,7 +120,9 @@ export class Login extends React.Component<ILoginProps, { formData: any, sponsor
             <img src={logo} width="85px" height="65px" style={{ "marginTop": 49 }} />
           </a>
         </div>
-        <h2 className="h3-style">tree<strong>hacks</strong></h2>
+        <a href="https://treehacks.com/" className="wordmark">
+          <h2 className="h3-style">tree<strong>hacks</strong></h2>
+        </a>
         {this.state.sponsor && <h3 className="h3-style">sponsors</h3>}
         {this.state.judge && <h3 className="h3-style">judges</h3>}
         {["signIn", "signUp", "defaultPage"].indexOf(this.props.authPage) !== -1 && applicant && <DeadlinesWidget />}
