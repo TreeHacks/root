@@ -10,25 +10,34 @@ exports[`Login screen tests login screen applicant 1`] = `
     <div
       className="text-center"
     >
-      <img
-        height="65px"
-        src={[Function]}
-        style={
-          Object {
-            "marginTop": 49,
+      <a
+        href="https://treehacks.com/"
+      >
+        <img
+          height="65px"
+          src={[Function]}
+          style={
+            Object {
+              "marginTop": 49,
+            }
           }
-        }
-        width="85px"
-      />
+          width="85px"
+        />
+      </a>
     </div>
-    <h2
-      className="h3-style"
+    <a
+      className="wordmark"
+      href="https://treehacks.com/"
     >
-      tree
-      <strong>
-        hacks
-      </strong>
-    </h2>
+      <h2
+        className="h3-style"
+      >
+        tree
+        <strong>
+          hacks
+        </strong>
+      </h2>
+    </a>
     <Component />
     <div
       className="top-form"
@@ -64,9 +73,10 @@ exports[`Login screen tests login screen applicant 1`] = `
       </div>
     </div>
     <div
-      className="mt-1 left-btn"
+      className="mt-1 back-container"
     >
       <Connect(AuthPageNavButton)
+        className="btn-back"
         current="signIn"
         label="Back"
         page="defaultPage"
@@ -86,25 +96,34 @@ exports[`Login screen tests login screen judge 1`] = `
     <div
       className="text-center"
     >
-      <img
-        height="65px"
-        src={[Function]}
-        style={
-          Object {
-            "marginTop": 49,
+      <a
+        href="https://treehacks.com/"
+      >
+        <img
+          height="65px"
+          src={[Function]}
+          style={
+            Object {
+              "marginTop": 49,
+            }
           }
-        }
-        width="85px"
-      />
+          width="85px"
+        />
+      </a>
     </div>
-    <h2
-      className="h3-style"
+    <a
+      className="wordmark"
+      href="https://treehacks.com/"
     >
-      tree
-      <strong>
-        hacks
-      </strong>
-    </h2>
+      <h2
+        className="h3-style"
+      >
+        tree
+        <strong>
+          hacks
+        </strong>
+      </h2>
+    </a>
     <h3
       className="h3-style"
     >
@@ -138,9 +157,10 @@ exports[`Login screen tests login screen judge 1`] = `
       </div>
     </div>
     <div
-      className="mt-1 left-btn"
+      className="mt-1 back-container"
     >
       <Connect(AuthPageNavButton)
+        className="btn-back"
         current="signIn"
         label="Back"
         page="defaultPage"
@@ -160,25 +180,34 @@ exports[`Login screen tests login screen sponsor 1`] = `
     <div
       className="text-center"
     >
-      <img
-        height="65px"
-        src={[Function]}
-        style={
-          Object {
-            "marginTop": 49,
+      <a
+        href="https://treehacks.com/"
+      >
+        <img
+          height="65px"
+          src={[Function]}
+          style={
+            Object {
+              "marginTop": 49,
+            }
           }
-        }
-        width="85px"
-      />
+          width="85px"
+        />
+      </a>
     </div>
-    <h2
-      className="h3-style"
+    <a
+      className="wordmark"
+      href="https://treehacks.com/"
     >
-      tree
-      <strong>
-        hacks
-      </strong>
-    </h2>
+      <h2
+        className="h3-style"
+      >
+        tree
+        <strong>
+          hacks
+        </strong>
+      </h2>
+    </a>
     <h3
       className="h3-style"
     >
@@ -212,9 +241,10 @@ exports[`Login screen tests login screen sponsor 1`] = `
       </div>
     </div>
     <div
-      className="mt-1 left-btn"
+      className="mt-1 back-container"
     >
       <Connect(AuthPageNavButton)
+        className="btn-back"
         current="signIn"
         label="Back"
         page="defaultPage"

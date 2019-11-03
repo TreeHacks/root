@@ -43,6 +43,9 @@
     margin-bottom: 20px;
     text-align: center;
 }
+.wordmark:hover{
+    text-decoration: none;
+}
 .btn-custom{
     background-color: $primary-color;
     border-color: $primary-color!important;
@@ -85,4 +88,13 @@
 }
 .alert {
     margin-top: 1rem;
+}
+.btn-back {
+    width: 100% !important;
+}
+.back-container {
+    margin: auto;
+    width: 84%;
+    padding: 10px 20px;
+    align-self: center;
 }
