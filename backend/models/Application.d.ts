@@ -63,7 +63,7 @@ export interface IApplication extends Document {
    }, // foreign key
   "id": String,
   "status": String, // only editable by admin (or this user, to a limited extent).
-  "type": String,
+  "type": string,
   "location": String,
   "transportation_status": String,
   "sponsor_optout": Boolean,

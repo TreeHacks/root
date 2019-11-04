@@ -35,11 +35,22 @@ export async function getUserStats(req: Request, res: Response) {
     return result[0];
   }
   const timelineStatsRequest = async () => {
-    const applications = await Application.find({}, { "type": 1, "_id": 1 });
-    return applications.map(application => ({
+    const applications = (await Application.find({}, { "type": 1, "_id": 1 })).map(application => ({
       type: application.type,
       date_created: application._id.getTimestamp()
-    }));
+    })).sort((a, b) => a.date_created - b.date_created);
+    let counter: {[x: string]: number} = {"is": 0, "oos": 0, "stanford": 0};
+    let results = [];
+    for (let application of applications) {
+      counter[application.type]++;
+      results.push({
+        num_is: counter.is,
+        num_oos: counter.oos,
+        num_stanford: counter.stanford,
+        date: application.date_created
+      });
+    };
+    return results;
   }
   const [facetStatsResponse, timelineStatsResponse] = await Promise.all([facetStatsRequest(), timelineStatsRequest()]);
   res.json({
