@@ -2,13 +2,14 @@ import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
 import { isEqual, omit } from "lodash";
-import { STATUS, sponsorApplicationDisplayFieldsNoSection, HACKATHON_YEAR_STRING } from '../constants';
+import { STATUS, TYPE, HACKATHON_YEAR_STRING } from '../constants';
 import queryString from "query-string";
 
 jest.mock("../constants");
 
 const _doc = {
     reviews: [],
+    type: TYPE.OUT_OF_STATE,
     status: STATUS.INCOMPLETE,
     transportation_status: null,
     user: {
@@ -84,7 +85,7 @@ describe('user stats by applicant', () => {
     });
 });
 
-describe('user form list by sponsor', () => {
+describe('user stats by sponsor', () => {
     test('view user stats - fail', () => {
         return request(app)
             .get("/api/users_stats")
@@ -93,8 +94,8 @@ describe('user form list by sponsor', () => {
     });
 });
 
-describe('user form list by admin', () => {
-    test('view all forms', async () => {
+describe('user stats by admin', () => {
+    test('view user stats', async () => {
         return request(app)
             .get("/api/users_stats")
             .set({ Authorization: 'admin' })
