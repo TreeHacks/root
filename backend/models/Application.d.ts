@@ -62,7 +62,7 @@ export interface IApplication extends Document {
     "email": String
    }, // foreign key
   "id": String,
-  "status": String, // only editable by admin (or this user, to a limited extent).
+  "status": string, // only editable by admin (or this user, to a limited extent).
   "type": string,
   "location": String,
   "transportation_status": String,

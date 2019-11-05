@@ -1,9 +1,8 @@
 import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
-import { isEqual, omit } from "lodash";
+import { omit } from "lodash";
 import { STATUS, TYPE, HACKATHON_YEAR_STRING } from '../constants';
-import queryString from "query-string";
 
 jest.mock("../constants");
 
@@ -68,14 +67,6 @@ let docs = [
     }
 ];
 
-beforeAll(() => {
-    return Application.insertMany(docs);
-});
-
-afterAll(() => {
-    return Application.deleteMany({});
-});
-
 describe('user stats by applicant', () => {
     test('view user stats - fail', () => {
         return request(app)
@@ -100,7 +91,11 @@ describe('user stats by admin', () => {
             .get("/api/users_stats")
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
-                expect(e.body).toMatchSnapshot();
+                let body = e.body;
+                for (let key in body) { // Date is not constant. TODO: Fix this
+                    body[key] = omit(body[key], "date");
+                }
+                expect(body).toMatchSnapshot();
             });
     });
 });
