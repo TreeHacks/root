@@ -103,8 +103,8 @@ export const reviewNextApplication = async (req, res) => {
     if (!data || (data.length === 0)) {
         data = await Application.aggregate(createAggregationPipeline("is"));
     }
-    // const application = await injectDynamicApplicationContent(data[0]);
-    res.json(data[0]);
+    const application = await injectDynamicApplicationContent(data[0]);
+    res.json(application);
 };
 
 // db.applications.find({'type': 'oos', 'status': 'submitted', 'reviews.0': { $exists: false }}).count()
