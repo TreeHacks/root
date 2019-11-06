@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`user stats by admin view user stats 1`] = `
+Object {
+  "gender": Object {},
+  "hackathon_experience": Object {},
+  "location": Object {},
+  "race": Object {},
+  "skill_level": Object {},
+  "status": Object {},
+  "timeline": Object {},
+  "type": Object {},
+  "university": Object {},
+}
+`;
