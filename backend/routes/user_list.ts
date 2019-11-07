@@ -45,8 +45,8 @@ const timelineStatsRequest = async () => {
   let results = [];
   for (let i in applications) {
     const application = applications[i];
-    counter.type[application.type]++;
-    counter.status[application.status]++;
+    counter.type[application.type] = counter.type[application.type] + 1;
+    counter.status[application.status] = counter.status[application.status] + 1;
     results.push({
       num_is: counter.type.is,
       num_oos: counter.type.oos,
@@ -54,7 +54,7 @@ const timelineStatsRequest = async () => {
       num_incomplete: counter.status.incomplete,
       num_submitted: counter.status.submitted,
       date: application.date_created,
-      num_total: i + 1
+      num_total: Number(i) + 1
     });
   };
   return results;
