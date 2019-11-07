@@ -269,7 +269,7 @@
                 "ui:widget": "textarea"
             },
             "q5": {
-                "ui:widget": "textarea"
+                "ui:widget": "linkarea"
             },
             "q_team_matching_1": {
                 "ui:widget": "textarea",
