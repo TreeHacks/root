@@ -6,10 +6,8 @@ module.exports = merge(common, {
   mode: 'development',
   devServer: {
     contentBase: __dirname,
-    publicPath: '/dist',
-    historyApiFallback: {
-      index: 'index.html'
-    },
+    publicPath: '/',
+    historyApiFallback: true,
     port: 9000,
     watchOptions: {
       poll: 1000
