@@ -147,8 +147,6 @@ describe('review next application', () => {
                 cultureFit: 1,
                 experience: 2,
                 passion: 3,
-                isOrganizer: true,
-                isBeginner: true
             }]
         }).save();
         await request(app)
@@ -185,8 +183,6 @@ describe('rate applications', () => {
                 cultureFit: 1,
                 experience: 2,
                 passion: 3,
-                isOrganizer: true,
-                isBeginner: true
             })
             .expect(200)
             .then(e => {
@@ -202,8 +198,6 @@ describe('rate applications', () => {
             cultureFit: 1,
             experience: 2,
             passion: 3,
-            isOrganizer: true,
-            isBeginner: true
         });
     });
     test('rate an application with an existing review', async () => {
@@ -217,8 +211,6 @@ describe('rate applications', () => {
                 cultureFit: 1,
                 experience: 2,
                 passion: 3,
-                isOrganizer: true,
-                isBeginner: true
             }],
             status: STATUS.SUBMITTED,
         }).save();
@@ -230,8 +222,6 @@ describe('rate applications', () => {
                 cultureFit: 1,
                 experience: 2,
                 passion: 3,
-                isOrganizer: true,
-                isBeginner: true
             })
             .expect(200);
     });
@@ -244,8 +234,6 @@ describe('rate applications', () => {
                 cultureFit: 1,
                 experience: 2,
                 passion: 3,
-                isOrganizer: true,
-                isBeginner: true
             })
             .expect(404)
             .then(e => {
@@ -263,8 +251,6 @@ describe('rate applications', () => {
                 cultureFit: 1,
                 experience: 2,
                 passion: 3,
-                isOrganizer: true,
-                isBeginner: true
             }],
             status: STATUS.SUBMITTED,
         }).save();
@@ -276,8 +262,6 @@ describe('rate applications', () => {
                 cultureFit: 1,
                 experience: 2,
                 passion: 3,
-                isOrganizer: true,
-                isBeginner: true
             })
             .expect(403)
             .then(e => {
@@ -298,8 +282,6 @@ describe('rate applications', () => {
                 cultureFit: 1,
                 experience: 2,
                 passion: 3,
-                isOrganizer: true,
-                isBeginner: true
             })
             .expect(403)
             .then(e => {

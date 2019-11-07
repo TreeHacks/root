@@ -6,8 +6,8 @@ import { injectDynamicApplicationContent } from "../utils/file_plugin";
 
 // Uncomment to insert dummy data for testing.
 // let TYPE = "oos";
-// Application.collection.insertMany(Array.apply(null, {length: 50}).map(e => (
-//     {"forms":{"application_info":{"first_name":Math.random() + "","last_name":Math.random() + "","phone":"1231232133","dob":"1900-01-01","gender":"M","race":["American Indian / Alaska Native"],"university":"Stanford University","graduation_year":"2018","level_of_study":"Undergraduate","major":"CS","accept_terms":true,"accept_share":true,"q1_goodfit":"asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd def def def dfef dfe fd sf ds fsd f sd fsd f dsfjskdlfjs dklf sld flsdj fkljsd fkl sjdlkfj sdklf jskdl fjlskd  asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd  ajskdlasj dklas jkdl ajskld ajskljdklasjdkla","q2_experience":"sad","q3":"asdf","q4":"asdf"}},"user":{"email":"aramaswamis@gmail.com"},"status":"submitted","_id": Math.random() + "abc", "admin_info":{"reimbursement_amount":null},"reviews":[],"type":TYPE}
+// Application.collection.insertMany(Array.apply(null, Array(50)).map(e => (
+//     {"yeat": 2019, "forms":{"application_info":{"first_name":Math.random() + "","last_name":Math.random() + "","phone":"1231232133","dob":"1900-01-01","gender":"M","race":["American Indian / Alaska Native"],"university":"Stanford University","graduation_year":"2018","level_of_study":"Undergraduate","major":"CS","accept_terms":true,"accept_share":true,"q1_goodfit":"asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd def def def dfef dfe fd sf ds fsd f sd fsd f dsfjskdlfjs dklf sld flsdj fkljsd fkl sjdlkfj sdklf jskdl fjlskd  asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd  ajskdlasj dklas jkdl ajskld ajskljdklasjdkla","q2_experience":"sad","q3":"asdf","q4":"asdf"}},"user":{"email":"aramaswamis@gmail.com"},"status":"submitted","_id": Math.random() + "abc", "admin_info":{"reimbursement_amount":null},"reviews":[],"type":TYPE}
 // )));
 
 
@@ -65,11 +65,7 @@ export const rateReview = async (req, res) => {
                 id: res.locals.user.sub,
                 email: res.locals.user.email
             },
-            cultureFit: req.body.cultureFit,
-            experience: req.body.experience,
-            passion: req.body.passion,
-            isOrganizer: req.body.isOrganizer,
-            isBeginner: req.body.isBeginner
+            ...req.body
         });
         await application.save();
         return res.json({

@@ -1,3 +1,5 @@
+@import "../Global.scss";
+
 * {
     -webkit-font-smoothing: antialiased;
 }
@@ -7,22 +9,46 @@
         display: none;
     }
     .treehacks-form {
+        margin-top: 20px;
         margin-left: 0px;
         margin-right: 0px;
         label.control-label {
             display: block;
+
+            &[for^="root_section"] {
+                display: none;
+            }
         }
     }
 }
 
-.rate-form {
+.treehacks-form.rate-form {
+    #root__title {
+        padding-top: 20px;
+        margin-bottom: 20px;
+    }
     .form-group.field.field-boolean+.form-group.field.field-boolean {
         margin-top: -1em;
+    }
+
+    .checkbox {
+        label {
+            display: flex;
+            padding-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        input {
+            min-width: 16px;
+            margin-top: 5px;
+            cursor: pointer;
+            transition-duration: 0.01s;
+        }
     }
 }
 
 .treehacks-body-text {
-    color: #09da7a;
+    color: $primary-color;
 }
 
 .left-sidebar-content {
