@@ -104,6 +104,10 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			}
 		}
 
+		let applicationSchema = cloneDeep(this.props.applicationSchema.schema);
+		applicationSchema.properties.hackathon_experience.title = '# hackathons attended';
+		applicationSchema.properties.resume.description = null;
+
 		const uiSchema = {
 			"experience": {
 				"ui:placeholder": "technical experience",
@@ -126,7 +130,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 							onChange={e => null}
 							onError={e => null}
 							onSubmit={e => null}
-							schema={this.props.applicationSchema.schema}
+							schema={applicationSchema}
 							uiSchema={applicationUiSchema}
 							formData={this.state.application_data.forms.application_info} />
 					</div>}

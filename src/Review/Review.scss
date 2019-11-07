@@ -19,6 +19,23 @@
                 display: none;
             }
         }
+
+        .form-control {
+            color: $text-color !important;
+        }
+
+        .field-string:nth-child(6), .field-string:nth-child(7),
+        .field-undefined:nth-child(8), .field-string:nth-child(9),
+        .field-integer:nth-child(10), .field-integer:nth-child(11) {
+            display: inline-block;
+            width: calc(33% - 0.5rem);
+            margin-right: 0.9rem;
+            margin-left: 0 !important;
+        }
+
+        .field-undefined:nth-child(8), .field-integer:nth-child(11) {
+            margin-right: 0;
+        }
     }
 }
 
