@@ -41,17 +41,17 @@ const schema = {
 		"experience": {
 			"type": "number",
 			"enum": [1,2,3,4,5],
-			"enumNames": ["1 = No experience", "2 = Intro (106/107 level and/or experience)", "3 = Intermediate (high-level classes, and/or major personal projects)", "4 = Advanced (CS research, grad courses, substantial projects, etc.)", "999 = GOD LEVEL CODER VERY RARE"]
+			"enumNames": ["1 = No experience", "2 = Intro (106/107 level and/or experience)", "3 = Intermediate (high-level classes, and/or major personal projects)", "4 = Advanced (CS research, grad courses, substantial projects, etc.)", "999 = OUTTA DIS WRLD CODER VERY RARE"]
 		},
 		"passion": {
 			"type": "number",
 			"enum": [1,2,3,4,5],
-			"enumNames": ["1 = No passion demonstrated", "2 = Discussed something they’re passionate about", "3 = Passionate about something and did something about it", "4 = Passionate about something and did something major about it", "999 = GOD LEVEL PASSION VERY RARE"]
+			"enumNames": ["1 = No passion demonstrated", "2 = Discussed something they’re passionate about", "3 = Passionate about something and did something about it", "4 = Passionate about something and did something major about it", "999 = OUTTA DIS WRLD PASSION VERY RARE"]
 		},
 		"cultureFit": {
 			"type": "number",
 			"enum": [1,2,3,4,5],
-			"enumNames": ["1 = Not a fit", "2 = Maybe", "3 = Yes, a fit", "4 = Awesome fit!!!", "999 = GOD LEVEL FIT VERY RARE"]
+			"enumNames": ["1 = Not a fit", "2 = Maybe", "3 = Yes, a fit", "4 = Awesome fit!!!", "999 = OUTTA DIS WRLD FIT VERY RARE"]
 		}
 	}, bools),
 	"required": ["experience", "passion", "cultureFit"]
