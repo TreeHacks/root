@@ -56,7 +56,7 @@ const TextareaReadOnlyWidget = (props) => {
 }
 
 const LinkWidget = (props) => {
-    return <Linkify properties={{target: '_blank'}}><div className="form-control">{props.value.replace(",", " ")}</div></Linkify>;
+    return <Linkify properties={{target: '_blank'}}><div className="form-control">{(props.value || '').replace(",", " ")}</div></Linkify>;
 }
 
 const TextareaWordCountingWidget = (props) => {
