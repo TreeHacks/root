@@ -24,6 +24,7 @@ const Stats = (props: IStatsProps) => {
                             <Line type="monotone" dataKey="num_oos" stroke="green" />
                             <Line type="monotone" dataKey="num_stanford" stroke="blue" />
                             <Line type="monotone" dataKey="num_total" stroke="black" />
+                            <Tooltip />
                         </LineChart><br />
                         <LineChart width={800} height={500}
                             data={props.applicationStats[key]}>
@@ -34,6 +35,7 @@ const Stats = (props: IStatsProps) => {
                             <Line type="monotone" dataKey="num_submitted" stroke="red" />
                             <Line type="monotone" dataKey="num_incomplete" stroke="green" />
                             <Line type="monotone" dataKey="num_total" stroke="black" />
+                            <Tooltip />
                         </LineChart>
                     </div>
                     :
