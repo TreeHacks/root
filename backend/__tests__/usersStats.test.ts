@@ -67,6 +67,14 @@ let docs = [
     }
 ];
 
+beforeAll(() => {
+    return Application.insertMany(docs);
+});
+
+afterAll(() => {
+    return Application.deleteMany({});
+});
+
 describe('user stats by applicant', () => {
     test('view user stats - fail', () => {
         return request(app)
@@ -92,8 +100,8 @@ describe('user stats by admin', () => {
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
                 let body = e.body;
-                for (let key in body) { // Date is not constant. TODO: Fix this
-                    body[key] = omit(body[key], "date");
+                for (let i in body.timeline) { // Date is not constant. TODO: Fix this
+                    body.timeline[i] = omit(body.timeline[i], "date");
                 }
                 expect(body).toMatchSnapshot();
             });
