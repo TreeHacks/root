@@ -81,7 +81,7 @@
 @media only screen and (min-width:768px) {
     .treehacks-review-form {
         position: fixed;
-        max-height: 100vh;
+        max-height: calc(100vh - 80px);
         overflow: auto;
     }
 }
