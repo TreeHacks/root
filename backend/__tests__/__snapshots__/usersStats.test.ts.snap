@@ -2,14 +2,119 @@
 
 exports[`user stats by admin view user stats 1`] = `
 Object {
-  "gender": Object {},
-  "hackathon_experience": Object {},
-  "location": Object {},
-  "race": Object {},
-  "skill_level": Object {},
-  "status": Object {},
-  "timeline": Object {},
-  "type": Object {},
-  "university": Object {},
+  "gender": Array [
+    Object {
+      "_id": "test",
+      "count": 7,
+    },
+  ],
+  "hackathon_experience": Array [
+    Object {
+      "_id": 2,
+      "count": 7,
+    },
+  ],
+  "location": Array [
+    Object {
+      "_id": null,
+      "count": 7,
+    },
+  ],
+  "race": Array [
+    Object {
+      "_id": "test",
+      "count": 7,
+    },
+  ],
+  "skill_level": Array [
+    Object {
+      "_id": 1,
+      "count": 7,
+    },
+  ],
+  "status": Array [
+    Object {
+      "_id": "admission_confirmed",
+      "count": 3,
+    },
+    Object {
+      "_id": "incomplete",
+      "count": 3,
+    },
+    Object {
+      "_id": "submitted",
+      "count": 1,
+    },
+  ],
+  "timeline": Array [
+    Object {
+      "num_incomplete": 1,
+      "num_is": 0,
+      "num_oos": 1,
+      "num_stanford": 0,
+      "num_submitted": 0,
+      "num_total": 1,
+    },
+    Object {
+      "num_incomplete": 1,
+      "num_is": 0,
+      "num_oos": 2,
+      "num_stanford": 0,
+      "num_submitted": 0,
+      "num_total": 2,
+    },
+    Object {
+      "num_incomplete": 1,
+      "num_is": 0,
+      "num_oos": 3,
+      "num_stanford": 0,
+      "num_submitted": 0,
+      "num_total": 3,
+    },
+    Object {
+      "num_incomplete": 1,
+      "num_is": 0,
+      "num_oos": 4,
+      "num_stanford": 0,
+      "num_submitted": 0,
+      "num_total": 4,
+    },
+    Object {
+      "num_incomplete": 1,
+      "num_is": 0,
+      "num_oos": 5,
+      "num_stanford": 0,
+      "num_submitted": 1,
+      "num_total": 5,
+    },
+    Object {
+      "num_incomplete": 2,
+      "num_is": 0,
+      "num_oos": 6,
+      "num_stanford": 0,
+      "num_submitted": 1,
+      "num_total": 6,
+    },
+    Object {
+      "num_incomplete": 3,
+      "num_is": 0,
+      "num_oos": 7,
+      "num_stanford": 0,
+      "num_submitted": 1,
+      "num_total": 7,
+    },
+  ],
+  "type": Array [
+    Object {
+      "_id": "oos",
+      "count": 7,
+    },
+  ],
+  "university": Array [
+    Object {
+      "_id": "test",
+      "count": 7,
+    },
+  ],
 }
 `;

@@ -34,7 +34,7 @@ const facetStatsRequest = async () => {
   return result[0];
 }
 const timelineStatsRequest = async () => {
-  const applications = (await Application.find({}, { "type": 1, "status": 1, "_id": 1 })).map(application => ({
+  const applications = (await Application.find({}, { "type": 1, "status": 1, "_id": 1 }).lean()).map(application => ({
     ...application,
     date_created: application._id.getTimestamp()
   })).sort((a, b) => a.date_created - b.date_created);
