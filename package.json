@@ -136,6 +136,7 @@
         "request": "^2.83.0",
         "sass": "^1.23.1",
         "swagger-ui-express": "^3.0.10",
+        "webpack-hot-middleware": "^2.25.0",
         "yamljs": "^0.3.0"
     }
 }
