@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "react-jsonschema-form";
+import Linkify from "react-linkify";
 import FileWidget from "react-jsonschema-form/lib/components/widgets/FileWidget";
 import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
@@ -52,6 +53,10 @@ const FileInputAndPreviewWidget = (props) => {
 
 const TextareaReadOnlyWidget = (props) => {
     return <div className="form-control">{props.value}</div>;
+}
+
+const LinkWidget = (props) => {
+    return <Linkify><div className="form-control">{props.value}</div></Linkify>;
 }
 
 const TextareaWordCountingWidget = (props) => {
@@ -145,10 +150,10 @@ function validate(formData, errors, schema) {
 export default (props: IFormPageProps) => {
     let widgets;
     if (props.submitted) {
-        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FilePreviewWidget, textarea: TextareaReadOnlyWidget };
+        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FilePreviewWidget, textarea: TextareaReadOnlyWidget, linkarea: LinkWidget };
     }
     else {
-        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget, textarea: TextareaWordCountingWidget };
+        widgets = { sectionHeader: SectionHeaderWidget, customDate: CustomDateWidget, FileWidget: FileInputAndPreviewWidget, textarea: TextareaWordCountingWidget, linkarea: TextareaWordCountingWidget };
     }
     let uiSchema = (props.uiSchema);
     let schema = (props.schema);
