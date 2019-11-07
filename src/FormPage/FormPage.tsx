@@ -52,11 +52,11 @@ const FileInputAndPreviewWidget = (props) => {
 };
 
 const TextareaReadOnlyWidget = (props) => {
-    return <div className="form-control">{props.value}</div>;
+    return <Linkify properties={{target: '_blank'}}><div className="form-control">{props.value}</div></Linkify>;
 }
 
 const LinkWidget = (props) => {
-    return <Linkify><div className="form-control">{props.value}</div></Linkify>;
+    return <Linkify properties={{target: '_blank'}}><div className="form-control">{props.value.replace(",", " ")}</div></Linkify>;
 }
 
 const TextareaWordCountingWidget = (props) => {
