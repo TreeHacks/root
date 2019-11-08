@@ -1,6 +1,7 @@
 import Application from "../models/Application";
 import { Request, Response, application } from 'express';
 import { getGenericList } from "./common";
+import { groupBy } from "lodash";
 
 export function getUserList(req: Request, res: Response) {
   return getGenericList(req, res, Application);
@@ -38,23 +39,27 @@ const timelineStatsRequest = async () => {
     ...application,
     date_created: application._id.getTimestamp()
   })).sort((a, b) => a.date_created - b.date_created);
+  let groupedByDay = groupBy(applications, e => e.date_created.toDateString());
   let counter: { [x: string]: any } = {
     "type": { "is": 0, "oos": 0, "stanford": 0 },
     "status": { "submitted": 0, "incomplete": 0 }
   };
   let results = [];
-  for (let i in applications) {
-    const application = applications[i];
-    counter.type[application.type] = counter.type[application.type] + 1;
-    counter.status[application.status] = counter.status[application.status] + 1;
+  let i = 0;
+  for (let day in groupedByDay) {
+    for (let application of groupedByDay[day]) {
+      counter.type[application.type] = counter.type[application.type] + 1;
+      counter.status[application.status] = counter.status[application.status] + 1;
+      i++;
+    }
     results.push({
       num_is: counter.type.is,
       num_oos: counter.type.oos,
       num_stanford: counter.type.stanford,
       num_incomplete: counter.status.incomplete,
       num_submitted: counter.status.submitted,
-      date: application.date_created,
-      num_total: Number(i) + 1
+      date: new Date(day).toISOString(),
+      num_total: i
     });
   };
   return results;

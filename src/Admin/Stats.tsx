@@ -16,7 +16,7 @@ const Stats = (props: IStatsProps) => {
                         <LineChart width={800} height={500}
                             data={props.applicationStats[key]}>
                             {/* data={[{num_is: 0, num_oos: 0, num_stanford: 10, date: "2019-10-25T15:46:22.000Z"}, {num_is: 50, num_oos: 0, num_stanford: 10, date: "2019-10-26T15:46:22.000Z"}, {num_is: 52, num_oos: 0, num_stanford: 10, date: "2019-10-27T15:46:22.000Z"}]}> */}
-                            <XAxis dataKey="date_created" />
+                            <XAxis dataKey="date" tickFormatter={timeStr => new Date(timeStr).toLocaleDateString()} />
                             <YAxis />
                             <Legend />
                             <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
@@ -28,7 +28,7 @@ const Stats = (props: IStatsProps) => {
                         </LineChart><br />
                         <LineChart width={800} height={500}
                             data={props.applicationStats[key]}>
-                            <XAxis dataKey="date_created" />
+                            <XAxis dataKey="date" tickFormatter={timeStr => new Date(timeStr).toLocaleDateString()} />
                             <YAxis />
                             <Legend />
                             <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
