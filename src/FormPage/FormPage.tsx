@@ -52,11 +52,17 @@ const FileInputAndPreviewWidget = (props) => {
 };
 
 const TextareaReadOnlyWidget = (props) => {
-    return <Linkify properties={{target: '_blank'}}><div className="form-control">{props.value}</div></Linkify>;
+    return <Linkify componentDecorator={LinkDecorator}><div className="form-control">{props.value}</div></Linkify>;
 }
 
 const LinkWidget = (props) => {
-    return <Linkify properties={{target: '_blank'}}><div className="form-control">{(props.value || '').replace(",", " ")}</div></Linkify>;
+    return <Linkify componentDecorator={LinkDecorator}><div className="form-control">{(props.value || '').replace(",", " ")}</div></Linkify>;
+}
+
+const LinkDecorator = (href, text, key) => {
+    return <a href={href} key={key} target="_blank">
+        {text}
+    </a>;
 }
 
 const TextareaWordCountingWidget = (props) => {
