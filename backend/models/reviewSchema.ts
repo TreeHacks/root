@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 const reviewSchema: Schema = new mongoose.Schema({
+  reviewedAt: Date,
+
   reader: { id: String, email: String },
 
   cultureFit: Number,

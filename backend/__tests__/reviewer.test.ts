@@ -170,6 +170,9 @@ describe('review next application', () => {
 });
 describe('rate applications', () => {
     test('rate an application', async () => {
+        const now = Date.now();
+        Date.now = jest.fn(() => now);
+
         await new Application({
             user: { id: 'applicationToReview' },
             reviews: [],
@@ -198,6 +201,7 @@ describe('rate applications', () => {
             cultureFit: 1,
             experience: 2,
             passion: 3,
+            reviewedAt: new Date(now)
         });
     });
     test('rate an application with an existing review', async () => {

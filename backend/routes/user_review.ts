@@ -65,7 +65,8 @@ export const rateReview = async (req, res) => {
                 id: res.locals.user.sub,
                 email: res.locals.user.email
             },
-            ...req.body
+            ...req.body,
+            reviewedAt: Date.now(),
         });
         await application.save();
         return res.json({
