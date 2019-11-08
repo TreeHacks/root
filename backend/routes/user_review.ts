@@ -61,11 +61,11 @@ export const rateReview = async (req, res) => {
     }
     else {
         application.reviews.push({
+            ...req.body,
             reader: {
                 id: res.locals.user.sub,
                 email: res.locals.user.email
             },
-            ...req.body,
             reviewedAt: Date.now(),
         });
         await application.save();
