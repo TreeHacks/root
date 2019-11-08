@@ -58,7 +58,7 @@ const timelineStatsRequest = async () => {
       num_stanford: counter.type.stanford,
       num_incomplete: counter.status.incomplete,
       num_submitted: counter.status.submitted,
-      date: new Date(day).toISOString(),
+      date: new Date(day).getMilliseconds(),
       num_total: i
     });
   };
