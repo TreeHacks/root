@@ -7,9 +7,14 @@ import { Pie, PieChart, Tooltip, LineChart, XAxis, YAxis, CartesianGrid, Line, R
 import { IAdminState } from "../store/admin/types";
 import { filter } from "lodash";
 
+// Test data
+// let DATA = [{ "num_is": 0, "num_oos": 2, "num_stanford": 2, "num_incomplete": 3, "num_submitted": 1, "date": "2019-10-25T00:00:00.000Z", "num_total": 4 }, { "num_is": 0, "num_oos": 2, "num_stanford": 3, "num_incomplete": 4, "num_submitted": 1, "date": "2019-10-26T00:00:00.000Z", "num_total": 5 }, { "num_is": 1, "num_oos": 3, "num_stanford": 4, "num_incomplete": 5, "num_submitted": 3, "date": "2019-11-05T00:00:00.000Z", "num_total": 8 }, { "num_is": 2, "num_oos": 6, "num_stanford": 4, "num_incomplete": 8, "num_submitted": 4, "date": "2019-11-06T00:00:00.000Z", "num_total": 12 }, { "num_is": 2, "num_oos": 7, "num_stanford": 4, "num_incomplete": 9, "num_submitted": 4, "date": "2019-11-07T00:00:00.000Z", "num_total": 13 }];
+
 const DateChart = ({ data, children }) => <LineChart width={800} height={500}
     data={data}>
-    <XAxis dataKey="date" tickFormatter={timeStr => new Date(timeStr).toLocaleDateString()} />
+    <XAxis dataKey={e => new Date(e.date).getTime()}
+        scale="linear"
+        tickFormatter={timestamp => new Date(timestamp).toLocaleDateString()} />
     <YAxis />
     <Legend />
     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
