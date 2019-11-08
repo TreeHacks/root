@@ -14,7 +14,7 @@ const DateChart = ({ data, children }) => <LineChart width={800} height={500}
     <Legend />
     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
     {children}
-    <Tooltip />
+    <Tooltip labelFormatter={e => new Date(e).toLocaleDateString()} />
 </LineChart>;
 
 const Stats = (props: IStatsProps) => {
