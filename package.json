@@ -122,6 +122,7 @@
         "react-helmet": "^5.2.0",
         "react-jsonschema-form": "^1.8.0",
         "react-jsonschema-form-extras": "^0.9.28",
+        "react-linkify": "^1.0.0-alpha",
         "react-redux": "^5.0.7",
         "react-responsive-modal": "^3.5.1",
         "react-router": "^4.3.1",
@@ -136,6 +137,7 @@
         "request": "^2.83.0",
         "sass": "^1.23.1",
         "swagger-ui-express": "^3.0.10",
+        "webpack-hot-middleware": "^2.25.0",
         "yamljs": "^0.3.0"
     }
 }

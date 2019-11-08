@@ -126,13 +126,36 @@ if (process.env.NODE_ENV === "test") {
     });
 } else {
     // Dev mode
+    const history = require('connect-history-api-fallback');
+    const path = require('path');
     const webpack = require("webpack");
     const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
     const devConfig = require("../webpack.dev.js");
-    app.get('/', (req, res) => res.redirect('/dist'));
-    app.use(webpackDevMiddleware(webpack(devConfig), {
+
+    devConfig.output.path = path.resolve('./build');
+    devConfig.output.publicPath = '/';
+    devConfig.entry.app.unshift('webpack-hot-middleware/client?reload=true&timeout=1000');
+    devConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+    devConfig.module.rules.forEach(r => {
+        r.use.forEach(u => {
+            if (u.options && u.options.publicPath) {
+                u.options.publicPath = "/";
+            }
+        });
+    })
+
+    const compiler = webpack(devConfig);
+
+    app.use(history());
+
+    app.use(webpackDevMiddleware(compiler, {
         publicPath: devConfig.output.publicPath,
+        historyApiFallback: true
     }));
+
+    app.use(webpackHotMiddleware(compiler));
+
 }
 
 export default app;

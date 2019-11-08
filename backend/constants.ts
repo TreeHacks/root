@@ -60,8 +60,8 @@ export const sponsorApplicationDisplayFields = [
   // "accept_share"
 ];
 export const applicationReviewDisplayFields = [
-  "first_name",
-  "last_name",
+  // "first_name",
+  // "last_name",
   // "phone",
   // "dob",
   "university",
@@ -71,13 +71,13 @@ export const applicationReviewDisplayFields = [
   "skill_level",
   "hackathon_experience",
   "resume",
-  "section2",
+  // "section2",
   "q1",
   "q2",
   "q3",
   "q4",
   "q5",
-  "section3",
+// "section3",
   "q_team_matching_1",
   "q_team_matching_2",
   // "section4",
