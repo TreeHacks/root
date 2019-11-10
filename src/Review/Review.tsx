@@ -91,6 +91,9 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			console.log(err);
 		});
 	}
+	getSortedLeaderboardByRecent(leaderboard) {
+		return leaderboard.concat().sort((a, b) => (a.recentCount > b.recentCount) ? 1 : -1);
+	}
 
 	render() {
 		let applicationUiSchema = cloneDeep(this.props.applicationSchema.uiSchema);
@@ -156,6 +159,23 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 						</div>}
 				</div>
 				<div className="container left-sidebar-content">
+					<div className="treehacks-body-text apps-remaining-countdown">
+						<strong>Leaderboard (last 7 days)</strong>
+					</div>
+					<table className="table treehacks-body-text">
+						<tbody>
+							{this.state.leaderboard_data && this.getSortedLeaderboardByRecent(this.state.leaderboard_data).map(person => <tr key={person._id}>
+								<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
+								<td>{person.recentCount}</td>
+							</tr>
+							)}
+						</tbody>
+					</table>
+				</div>
+				<div className="container left-sidebar-content">
+					<div className="treehacks-body-text apps-remaining-countdown">
+						<strong>Leaderboard (all time)</strong>
+					</div>
 					<table className="table treehacks-body-text">
 						<tbody>
 							{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
