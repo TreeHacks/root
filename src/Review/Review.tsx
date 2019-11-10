@@ -84,12 +84,16 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			API.get("treehacks", '/review/next_application', {}),
 			API.get("treehacks", '/review/stats', {})
 		]).then(([leaderboard_data, application_data, stats_data]) => {
+			console.log("leaderboard data", leaderboard_data); //TODO: remove this
 			window.scrollTo(0, 0);
 			this.setState({ leaderboard_data, application_data, stats_data, reviewFormData: null });
 		}).catch((err) => {
 			alert("Error, " + err);
 			console.log(err);
 		});
+	}
+	getSortedLeaderboardByRecent(leaderboard) {
+		return leaderboard.concat().sort((a, b) => (a.recentCount > b.recentCount) ? 1 : -1);
 	}
 
 	render() {
@@ -156,6 +160,23 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 						</div>}
 				</div>
 				<div className="container left-sidebar-content">
+					<div className="treehacks-body-text apps-remaining-countdown">
+						<strong>Leaderboard (last 7 days)</strong>
+					</div>
+					<table className="table treehacks-body-text">
+						<tbody>
+							{this.state.leaderboard_data && this.getSortedLeaderboardByRecent(this.state.leaderboard_data).map(person => <tr key={person._id}>
+								<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
+								<td>{person.recentCount}</td>
+							</tr>
+							)}
+						</tbody>
+					</table>
+				</div>
+				<div className="container left-sidebar-content">
+					<div className="treehacks-body-text apps-remaining-countdown">
+						<strong>Leaderboard (all time)</strong>
+					</div>
 					<table className="table treehacks-body-text">
 						<tbody>
 							{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
