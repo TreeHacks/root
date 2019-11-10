@@ -40,17 +40,17 @@ const schema = {
 	"properties": Object.assign({
 		"experience": {
 			"type": "number",
-			"enum": [1,2,3,4,5],
+			"enum": [1, 2, 3, 4, 5],
 			"enumNames": ["1 = No experience", "2 = Intro (106/107 level and/or experience)", "3 = Intermediate (high-level classes, and/or major personal projects)", "4 = Advanced (CS research, grad courses, substantial projects, etc.)", "999 = OUTTA DIS WRLD CODER VERY RARE"]
 		},
 		"passion": {
 			"type": "number",
-			"enum": [1,2,3,4,5],
+			"enum": [1, 2, 3, 4, 5],
 			"enumNames": ["1 = No passion demonstrated", "2 = Discussed something they’re passionate about", "3 = Passionate about something and did something about it", "4 = Passionate about something and did something major about it", "999 = OUTTA DIS WRLD PASSION VERY RARE"]
 		},
 		"cultureFit": {
 			"type": "number",
-			"enum": [1,2,3,4,5],
+			"enum": [1, 2, 3, 4, 5],
 			"enumNames": ["1 = Not a fit", "2 = Maybe", "3 = Yes, a fit", "4 = Awesome fit!!!", "999 = OUTTA DIS WRLD FIT VERY RARE"]
 		}
 	}, bools),
@@ -159,28 +159,17 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 						</div>}
 				</div>
 				<div className="container left-sidebar-content">
-					<div className="treehacks-body-text apps-remaining-countdown">
-						<strong>Leaderboard (last 7 days)</strong>
-					</div>
 					<table className="table treehacks-body-text">
 						<tbody>
-							{this.state.leaderboard_data && this.getSortedLeaderboardByRecent(this.state.leaderboard_data).map(person => <tr key={person._id}>
-								<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
-								<td>{person.recentCount}</td>
+							<tr>
+								<th></th>
+								<th>All</th>
+								<th>7d</th>
 							</tr>
-							)}
-						</tbody>
-					</table>
-				</div>
-				<div className="container left-sidebar-content">
-					<div className="treehacks-body-text apps-remaining-countdown">
-						<strong>Leaderboard (all time)</strong>
-					</div>
-					<table className="table treehacks-body-text">
-						<tbody>
 							{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
 								<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
 								<td>{person.count}</td>
+								<td>{person.recentCount}</td>
 							</tr>
 							)}
 						</tbody>
