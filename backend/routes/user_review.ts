@@ -13,7 +13,7 @@ import { injectDynamicApplicationContent } from "../utils/file_plugin";
 
 export const getLeaderboard = (req, res) => {
     var d = new Date();
-    d.setDate(d.getDate() - 7); //get reviews from last 7 days
+    d.setDate(d.getDate() - 7);
 
     Application.aggregate([
         { $match: { reviews: { "$exists": 1 } } },
@@ -22,7 +22,7 @@ export const getLeaderboard = (req, res) => {
         { $project: {
             _id: "$_id",
             count: "$count",
-            recentCount: {
+            recentCount: { //last seven days
                 $size: { $filter: { input: "$dates", as: "d", cond: { $gt: [ "$$d", new Date(new Date().setDate(new Date().getDate()-7)) ] } } }
             }
         }},
