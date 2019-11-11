@@ -23,7 +23,7 @@ export const getLeaderboard = (req, res) => {
             _id: "$_id",
             count: "$count",
             recentCount: { //last seven days
-                $size: { $filter: { input: "$dates", as: "d", cond: { $gt: [ "$$d", new Date(new Date().setDate(new Date().getDate()-7)) ] } } }
+                $size: { $filter: { input: "$dates", as: "d", cond: { $gt: [ "$$d", d ] } } }
             }
         }},
         { $sort: { count: -1 } }

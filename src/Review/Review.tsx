@@ -162,7 +162,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 					<table className="table treehacks-body-text">
 						<tbody>
 							<tr>
-								<th></th>
+								<th>Reviewer</th>
 								<th>All</th>
 								<th>7d</th>
 							</tr>
