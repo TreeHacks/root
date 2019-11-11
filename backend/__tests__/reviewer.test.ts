@@ -305,7 +305,7 @@ describe('review leaderboard', () => {
             .set({ Authorization: 'reviewer' })
             .expect(200)
             .then(e => {
-                expect(e.body.sort()).toEqual([{ "_id": "reviewer1@treehacks", "count": 2 }, { "_id": "reviewer2@treehacks", "count": 1 }]);
+                expect(e.body.sort()).toEqual([{ "_id": "reviewer1@treehacks", "count": 2, "recentCount": 0 }, { "_id": "reviewer2@treehacks", "count": 1, "recentCount": 0 }]);
             })
     });
 });

@@ -12,10 +12,20 @@ import { injectDynamicApplicationContent } from "../utils/file_plugin";
 
 
 export const getLeaderboard = (req, res) => {
+    var d = new Date();
+    d.setDate(d.getDate() - 7);
+
     Application.aggregate([
         { $match: { reviews: { "$exists": 1 } } },
         { $unwind: "$reviews" },
-        { $group: { _id: "$reviews.reader.email", count: { $sum: 1 } } },
+        { $group: { _id: "$reviews.reader.email", count: { $sum: 1 }, dates: { $push: "$reviews.reviewedAt"} } },
+        { $project: {
+            _id: "$_id",
+            count: "$count",
+            recentCount: { //last seven days
+                $size: { $filter: { input: "$dates", as: "d", cond: { $gt: [ "$$d", d ] } } }
+            }
+        }},
         { $sort: { count: -1 } }
     ]).then(data => {
         res.json(data);
