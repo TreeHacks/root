@@ -145,7 +145,10 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			</div>
 			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
-					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
+					<div className="text-center mt-4">
+						<a href="https://treehacks.quip.com/GEzbA3lZBNmb/Application-Reading-Guide" target="_blank">Application Review Guide</a>
+					</div>
+					<Form className="treehacks-form rate-form mt-0 pt-0" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}
 						formData={this.state.reviewFormData}
 						onChange={e => this.setState({ reviewFormData: e.formData })}
