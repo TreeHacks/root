@@ -34,9 +34,20 @@ Object.keys(bools).map(k => {
 	};
 });
 
+const TitleWidget = (props) => {
+	return (
+		<>
+			<div className="text-center mt-2">
+				<div> Rate </div>
+				<a href="https://treehacks.quip.com/GEzbA3lZBNmb/Application-Reading-Guide" target="_blank">Application Review Guide</a>
+			</div>
+		</>
+	);
+}
+
 const schema = {
 	"type": "object",
-	"title": "Rate",
+	"title": <TitleWidget />,
 	"properties": Object.assign({
 		"experience": {
 			"type": "number",
@@ -145,9 +156,6 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			</div>
 			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
-					<div className="text-center mt-4">
-						<a href="https://treehacks.quip.com/GEzbA3lZBNmb/Application-Reading-Guide" target="_blank">Application Review Guide</a>
-					</div>
 					<Form className="treehacks-form rate-form mt-0 pt-0" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}
 						formData={this.state.reviewFormData}
