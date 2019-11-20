@@ -35,20 +35,9 @@ Object.keys(bools).map(k => {
 	};
 });
 
-const TitleWidget = (props) => {
-	return (
-		<>
-			<div className="text-center mt-2">
-				<div> Rate </div>
-				<a href="https://treehacks.quip.com/GEzbA3lZBNmb/Application-Reading-Guide" target="_blank">Application Review Guide</a>
-			</div>
-		</>
-	);
-}
-
 const schema = {
 	"type": "object",
-	"title": <TitleWidget />,
+	"title": "Rate",
 	"properties": Object.assign({
 		"experience": {
 			"type": "number",
