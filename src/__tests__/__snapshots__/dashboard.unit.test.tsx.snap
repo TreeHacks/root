@@ -243,10 +243,11 @@ exports[`dashboard incomplete before deadline 1`] = `
         <div
           className="days-left"
         >
-          7627
+          7628
         </div>
         <div>
-          days to submit your application before the deadline:
+          days
+           to submit your application before the deadline:
           <br />
           <strong>
             November 18, 2019
