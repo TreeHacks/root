@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { IAdminTableProps } from "./types";
 import Loading from "../Loading/Loading";
-import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicationEmails, getExportedApplications } from "../store/admin/actions";
+import { getApplicationList, setApplicationStatus, setSelectedForm, getApplicationEmails, getExportedApplications, getExportedApplicationsCSV } from "../store/admin/actions";
 import ReactTable from "react-table";
 import { get, values } from "lodash";
 import 'react-table/react-table.css';
@@ -145,7 +145,8 @@ const AdminTable = (props: IAdminTableProps) => {
                     {(state, makeTable, instance) => {
                         return (
                             <div>
-                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export</button> (Export all pages of filtered results as JSON)</p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplications(state)}>Export JSON</button> (Export all pages of filtered results as JSON)</p>
+                                <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getExportedApplicationsCSV(state, columns)}>Export CSV</button> (Export all pages of filtered results as CSV)</p>
                                 <p><button className="btn btn-sm btn-outline-primary" onClick={() => props.getApplicationEmails(state)}>Get emails</button> (Get emails of all pages of filtered results)</p>
                                 {props.applicationEmails && <div>
                                     <textarea
@@ -176,7 +177,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setApplicationStatus: (a, b) => dispatch(setApplicationStatus(a, b)),
     setSelectedForm: e => dispatch(setSelectedForm(e)),
     getApplicationEmails: e => dispatch(getApplicationEmails(e)),
-    getExportedApplications: e => dispatch(getExportedApplications(e))
+    getExportedApplications: e => dispatch(getExportedApplications(e)),
+    getExportedApplicationsCSV: (a, b) => dispatch(getExportedApplicationsCSV(a, b))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminTable);

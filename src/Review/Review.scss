@@ -43,6 +43,9 @@
     #root__title {
         padding-top: 20px;
         margin-bottom: 20px;
+        a {
+            font-size: 1rem;
+        }
     }
     .form-group.field.field-boolean+.form-group.field.field-boolean {
         margin-top: -1em;
@@ -76,6 +79,10 @@
 .apps-remaining-countdown {
     text-align: center;
     padding-bottom: 5px;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 @media only screen and (min-width:768px) {

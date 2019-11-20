@@ -14,7 +14,8 @@ interface IReviewComponentState {
 	leaderboard_data: any[],
 	application_data: { _id: string, user: { id: string }, forms: { application_info: any } },
 	stats_data: any,
-	reviewFormData: any
+	reviewFormData: any,
+	sortByRecent: boolean
 }
 
 const bools = {
@@ -34,23 +35,34 @@ Object.keys(bools).map(k => {
 	};
 });
 
+const TitleWidget = (props) => {
+	return (
+		<>
+			<div className="text-center mt-2">
+				<div> Rate </div>
+				<a href="https://treehacks.quip.com/GEzbA3lZBNmb/Application-Reading-Guide" target="_blank">Application Review Guide</a>
+			</div>
+		</>
+	);
+}
+
 const schema = {
 	"type": "object",
-	"title": "Rate",
+	"title": <TitleWidget />,
 	"properties": Object.assign({
 		"experience": {
 			"type": "number",
-			"enum": [1,2,3,4,5],
+			"enum": [1, 2, 3, 4, 5],
 			"enumNames": ["1 = No experience", "2 = Intro (106/107 level and/or experience)", "3 = Intermediate (high-level classes, and/or major personal projects)", "4 = Advanced (CS research, grad courses, substantial projects, etc.)", "999 = OUTTA DIS WRLD CODER VERY RARE"]
 		},
 		"passion": {
 			"type": "number",
-			"enum": [1,2,3,4,5],
+			"enum": [1, 2, 3, 4, 5],
 			"enumNames": ["1 = No passion demonstrated", "2 = Discussed something they’re passionate about", "3 = Passionate about something and did something about it", "4 = Passionate about something and did something major about it", "999 = OUTTA DIS WRLD PASSION VERY RARE"]
 		},
 		"cultureFit": {
 			"type": "number",
-			"enum": [1,2,3,4,5],
+			"enum": [1, 2, 3, 4, 5],
 			"enumNames": ["1 = Not a fit", "2 = Maybe", "3 = Yes, a fit", "4 = Awesome fit!!!", "999 = OUTTA DIS WRLD FIT VERY RARE"]
 		}
 	}, bools),
@@ -71,7 +83,8 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			leaderboard_data: null,
 			application_data: null,
 			stats_data: null,
-			reviewFormData: null
+			reviewFormData: null,
+			sortByRecent: false,
 		}
 	}
 
@@ -90,6 +103,9 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			alert("Error, " + err);
 			console.log(err);
 		});
+	}
+	getSortedLeaderboardByRecent(leaderboard) {
+		return leaderboard.concat().sort((a, b) => (a.recentCount > b.recentCount) ? -1 : 1);
 	}
 
 	render() {
@@ -142,7 +158,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			</div>
 			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
-					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
+					<Form className="treehacks-form rate-form mt-0 pt-0" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}
 						formData={this.state.reviewFormData}
 						onChange={e => this.setState({ reviewFormData: e.formData })}
@@ -158,9 +174,15 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 				<div className="container left-sidebar-content">
 					<table className="table treehacks-body-text">
 						<tbody>
-							{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
+							<tr>
+								<th>Reviewer</th>
+								<th className="pointer" onClick={() => this.setState({ sortByRecent: false })}>All</th>
+								<th className="pointer" onClick={() => this.setState({ sortByRecent: true })}>7d</th>
+							</tr>
+							{this.state.leaderboard_data && (this.state.sortByRecent ? this.getSortedLeaderboardByRecent(this.state.leaderboard_data) : this.state.leaderboard_data).map(person => <tr key={person._id}>
 								<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
 								<td>{person.count}</td>
+								<td>{person.recentCount}</td>
 							</tr>
 							)}
 						</tbody>
