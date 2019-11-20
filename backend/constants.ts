@@ -208,5 +208,7 @@ export const HACKATHON_YEAR = "2020"; //settings.hackathon_year;
 export const HACKATHON_YEAR_STRING = String(HACKATHON_YEAR);
 export const AUTO_ADMIT_STANFORD = false;
 
+export const IGNORED_REVIEWERS = process.env.IGNORED_REVIEWERS ? JSON.parse(process.env.IGNORED_REVIEWERS) : [];
+
 export const ALLOWED_GROUPS = ["admin", "reviewer"];
 // ["admin", "reviewer", "sponsor", "judge"];
