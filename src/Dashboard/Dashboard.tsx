@@ -18,13 +18,40 @@ import { IDashboardProps, IDashboardWrapperProps } from "./types";
 
 export const Dashboard = (props: IDashboardProps) => {
     const deadline = DEADLINES.find(d => d.key === (props.profile.type || 'oos'));
-    const deadlineDate = moment(deadline.date);
-    const dateNow = moment();
-    // const diffDays = deadlineDate.diff(dateNow, "days");
-    const diffDays = Math.round(Math.abs((deadlineDate.valueOf() - dateNow.valueOf()) / (24 * 60 * 60 * 1000)));
+    var currentDate = Date.now();
+    var deadlineDate = new Date(deadline.date);
+    var deadlineDay = deadlineDate.getUTCDate() - 1; // Subtract 1 to account for UTC offset (+8 hours)
+    var deadlineMonth = deadlineDate.getUTCMonth();
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"
+                       ];
+    var dayEndings = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"];
+    if (Math.floor(deadlineDay / 10) == 1) {
+      dayEndings = ["th", "th", "th", "th", "th", "th", "th", "th", "th", "th"];
+    }
+    var minuteDiff = (deadlineDate.getTime() - currentDate) / (1000 * 60);
+    var daysLeft = Math.round(1 + minuteDiff / (60 * 24)); // Add 1 since it is inclusive
+    var timeLeft = daysLeft;
+    var unit = "days";
+    if (minuteDiff <= 60 * 24 && minuteDiff > 0) {
+      var hoursLeft = Math.round(minuteDiff / (60));
+      timeLeft = hoursLeft;
+      unit = "hours";
+      if (hoursLeft <= 1) {
+        var minutesLeft = Math.round(minuteDiff);
+        timeLeft = minutesLeft;
+        unit = "minutes";
+        if (minutesLeft === 1) {
+          unit = "minute";
+        }
+      }
+    } else if (minuteDiff <= 0) {
+      timeLeft = 0;
+    }
+
     const displayDeadline = deadline.display_date || deadlineDate.toLocaleString('en-US', { month: 'long', year: 'numeric', day: 'numeric' });
     const acceptanceConfirmDeadline = get(props.profile, "admin_info.acceptance.deadline");
-    const acceptanceConfirmDeadlineObject = moment(acceptanceConfirmDeadline);
+    const acceptanceConfirmDeadlineObject = new Date(acceptanceConfirmDeadline);
     const drone = require("../art/drone.svg") as string;
     const relax = require("../art/relax.svg") as string;
     return (
@@ -45,13 +72,13 @@ export const Dashboard = (props: IDashboardProps) => {
                         props.profile.status === STATUS.WAITLISTED ? <WaitlistedScreen /> :
                         props.profile.status === STATUS.ADMISSION_CONFIRMED ? <AdmittedScreen confirmedYet={true} /> :
                         props.profile.status === STATUS.ADMISSION_DECLINED ? <AdmissionDeclinedScreen /> :
-                        props.profile.status === STATUS.ADMITTED && dateNow > acceptanceConfirmDeadlineObject ? <AdmissionExpiredScreen /> :
+                        props.profile.status === STATUS.ADMITTED && currentDate > acceptanceConfirmDeadlineObject.getTime() ? <AdmissionExpiredScreen /> :
                         props.profile.status === STATUS.ADMITTED ? <AdmittedScreen confirmedYet={false} deadline={acceptanceConfirmDeadline} /> :
                         props.profile.status === STATUS.SUBMITTED ? (
                                 <span>
                                     Your application has been received &ndash; you are all good for now!<br /><br />We will email you when decisions are released and will handle any travel questions at that time. Thanks for applying :)
                                 </span>
-                            ) : dateNow > deadlineDate ? (
+                            ) : currentDate > deadlineDate.getTime() ? (
                                 <span>Sorry, the application window has closed.</span>
                             ) : (
                                         <div>
@@ -59,10 +86,10 @@ export const Dashboard = (props: IDashboardProps) => {
                                                 You haven't submitted your <Link to="/application_info">application</Link> yet. You have
                                             </div>
                                             <div className="days-left">
-                                                {diffDays}
+                                                {timeLeft}
                                             </div>
                                             <div>
-                                                days to submit your application before the deadline:<br /><strong>{displayDeadline}</strong>.
+                                                {unit} to submit your application before the deadline:<br /><strong>{displayDeadline}</strong>.
                                 </div>
                                         </div>
                                     )

@@ -14,7 +14,8 @@ interface IReviewComponentState {
 	leaderboard_data: any[],
 	application_data: { _id: string, user: { id: string }, forms: { application_info: any } },
 	stats_data: any,
-	reviewFormData: any
+	reviewFormData: any,
+	sortByRecent: boolean
 }
 
 const bools = {
@@ -71,7 +72,8 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			leaderboard_data: null,
 			application_data: null,
 			stats_data: null,
-			reviewFormData: null
+			reviewFormData: null,
+			sortByRecent: false,
 		}
 	}
 
@@ -92,7 +94,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 		});
 	}
 	getSortedLeaderboardByRecent(leaderboard) {
-		return leaderboard.concat().sort((a, b) => (a.recentCount > b.recentCount) ? 1 : -1);
+		return leaderboard.concat().sort((a, b) => (a.recentCount > b.recentCount) ? -1 : 1);
 	}
 
 	render() {
@@ -145,7 +147,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			</div>
 			<div className="col-12 col-sm-4 treehacks-review-form">
 				<div >
-					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
+					<Form className="treehacks-form rate-form mt-0 pt-0" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}
 						formData={this.state.reviewFormData}
 						onChange={e => this.setState({ reviewFormData: e.formData })}
@@ -163,10 +165,10 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 						<tbody>
 							<tr>
 								<th>Reviewer</th>
-								<th>All</th>
-								<th>7d</th>
+								<th className="pointer" onClick={() => this.setState({ sortByRecent: false })}>All</th>
+								<th className="pointer" onClick={() => this.setState({ sortByRecent: true })}>7d</th>
 							</tr>
-							{this.state.leaderboard_data && this.state.leaderboard_data.map(person => <tr key={person._id}>
+							{this.state.leaderboard_data && (this.state.sortByRecent ? this.getSortedLeaderboardByRecent(this.state.leaderboard_data) : this.state.leaderboard_data).map(person => <tr key={person._id}>
 								<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
 								<td>{person.count}</td>
 								<td>{person.recentCount}</td>

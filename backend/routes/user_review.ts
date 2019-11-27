@@ -1,5 +1,5 @@
 import Application from "../models/Application";
-import { STATUS, applicationReviewDisplayFields } from "../constants";
+import { STATUS, IGNORED_REVIEWERS, applicationReviewDisplayFields } from "../constants";
 import { IApplication } from "../models/Application.d";
 import { find } from "lodash";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
@@ -18,6 +18,7 @@ export const getLeaderboard = (req, res) => {
     Application.aggregate([
         { $match: { reviews: { "$exists": 1 } } },
         { $unwind: "$reviews" },
+        { $match: { "reviews.reader.id": { $nin: IGNORED_REVIEWERS } } },
         { $group: { _id: "$reviews.reader.email", count: { $sum: 1 }, dates: { $push: "$reviews.reviewedAt"} } },
         { $project: {
             _id: "$_id",
