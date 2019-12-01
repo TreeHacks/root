@@ -166,12 +166,12 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 							<tr>
 								<th>Reviewer</th>
 								<th className="pointer" onClick={() => this.setState({ sortByRecent: false })}>All</th>
-								<th className="pointer" onClick={() => this.setState({ sortByRecent: true })}>7d</th>
+								{/* <th className="pointer" onClick={() => this.setState({ sortByRecent: true })}>7d</th> */}
 							</tr>
 							{this.state.leaderboard_data && (this.state.sortByRecent ? this.getSortedLeaderboardByRecent(this.state.leaderboard_data) : this.state.leaderboard_data).map(person => <tr key={person._id}>
 								<td>{(person._id || "None").replace(/@stanford.edu/, "")}</td>
 								<td>{person.count}</td>
-								<td>{person.recentCount}</td>
+								{/* <td>{person.recentCount}</td> */}
 							</tr>
 							)}
 						</tbody>

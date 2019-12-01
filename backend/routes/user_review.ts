@@ -19,13 +19,14 @@ export const getLeaderboard = (req, res) => {
         { $match: { reviews: { "$exists": 1 } } },
         { $unwind: "$reviews" },
         { $match: { "reviews.reader.id": { $nin: IGNORED_REVIEWERS } } },
-        { $group: { _id: "$reviews.reader.email", count: { $sum: 1 }, dates: { $push: "$reviews.reviewedAt"} } },
+        { $group: { _id: "$reviews.reader.email", count: { $sum: 1 } } },
+        // { $group: { _id: "$reviews.reader.email", count: { $sum: 1 }, dates: { $push: "$reviews.reviewedAt"} } },
         { $project: {
             _id: "$_id",
             count: "$count",
-            recentCount: { //last seven days
-                $size: { $filter: { input: "$dates", as: "d", cond: { $gt: [ "$$d", d ] } } }
-            }
+            // recentCount: { //last seven days
+            //     $size: { $filter: { input: "$dates", as: "d", cond: { $gt: [ "$$d", d ] } } }
+            // }
         }},
         { $sort: { count: -1 } }
     ]).then(data => {
