@@ -50,6 +50,7 @@ export const sponsorApplicationDisplayFields = [
   "q3",
   "q4",
   "q5",
+  // "volunteer",
   // "section3",
   // "q_team_matching_1",
   // "q_team_matching_2",
@@ -77,7 +78,8 @@ export const applicationReviewDisplayFields = [
   "q3",
   "q4",
   "q5",
-// "section3",
+  // "volunteer",
+  // "section3",
   "q_team_matching_1",
   "q_team_matching_2",
   // "section4",
@@ -101,6 +103,21 @@ export const applicationRequiredFields = [
   "q2",
   "q3",
   "q4",
+  "accept_terms",
+  "accept_share"
+];
+export const applicationRequiredFieldsStanford = [
+  "first_name",
+  "last_name",
+  "phone",
+  "dob",
+  "university",
+  "graduation_year",
+  "level_of_study",
+  "major",
+  "skill_level",
+  "hackathon_experience",
+  "q5",
   "accept_terms",
   "accept_share"
 ];

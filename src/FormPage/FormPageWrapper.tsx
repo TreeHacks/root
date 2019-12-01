@@ -1,21 +1,16 @@
 import React from "react";
 import Modal from "react-responsive-modal";
-import Form from "react-jsonschema-form";
 import Beforeunload from "react-beforeunload";
 import { Prompt } from "react-router";
 import { connect } from 'react-redux';
 import { setPage, setData, saveData, loadData, getUserProfile, submitForm, setFormName } from "../store/form/actions";
 
-import { DEADLINES, TYPE, stanfordApplicationDisplayFields } from '../constants';
+import { DEADLINES, TYPE, applicationDisplayFields, applicationDisplayFieldsStanford } from '../constants';
 import { IFormPageWrapperProps } from "./types";
-import { cloneDeep, get, set, pull } from "lodash";
+import { cloneDeep, get } from "lodash";
 import Loading from "../Loading/Loading";
 import { push } from 'connected-react-router';
-import CustomDateWidget from './CustomDateWidget';
-import { TypeaheadField } from "react-jsonschema-form-extras/lib/TypeaheadField";
 import FormPage from "./FormPage";
-import remove from "lodash";
-import { isArray } from "util";
 
 const mapStateToProps = state => ({
     ...state.form
@@ -80,10 +75,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
             schema.properties.accept_share.title = <span>I have read and agree to the <a className="form-link" href="https://www.treehacks.com/privacy-policy" target="_blank" onClick={e => e.stopPropagation()}>TreeHacks Privacy Policy</a>.</span>;
         }
 
-        let shownFields = null;
-        if (get(props, "profile.type") === TYPE.STANFORD) {
-            shownFields = stanfordApplicationDisplayFields;
-        }
+        let shownFields = get(props, "profile.type") === TYPE.STANFORD ? applicationDisplayFieldsStanford : applicationDisplayFields;
 
 
         const deadline = DEADLINES.find(d => d.key === get(props, "profile.type"));

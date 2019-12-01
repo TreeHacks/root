@@ -115,6 +115,12 @@
                     "title":"Optionally, add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
                     "type": "string"
                 },
+                "volunteer": {
+                    "title": "Volunteer",
+                    "description": "Are you interested in volunteering at the event?",
+                    "type": "boolean",
+                    "enumNames": ["Yes", "No"]
+                },
                 "section3": {
                     "title": "other questions",
                     "type": "string",
@@ -271,6 +277,9 @@
             "q5": {
                 "ui:widget": "linkarea"
             },
+            "volunteer": {
+                "ui:widget": "radio"
+            },
             "q_team_matching_1": {
                 "ui:widget": "textarea",
                 "ui:placeholder": "Nature-Lover, iOS Extraordinaire, Crochet Wizard, etc...",
@@ -314,6 +323,7 @@
                 "q2",
                 "q3",
                 "q4",
+                "volunteer",
                 "section3",
                 "q_team_matching_1",
                 "q_team_matching_2",

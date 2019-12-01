@@ -33,6 +33,7 @@ export interface IApplicationInfo {
     // Fields only used in 2020:
     q1: String,
     q2: String,
+    volunteer: boolean,
     q_team_matching_1: String,
     q_team_matching_2: String
 }
