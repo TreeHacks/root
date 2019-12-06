@@ -234,6 +234,10 @@ input[type="date"]:valid:before {
     content: "";
 }
 
+input[type="radio"] {
+    margin-right: 5px;
+}
+
 /*.checkbox input:checked {
     background-color: $background-color!important;
     color: $background-color!important;
