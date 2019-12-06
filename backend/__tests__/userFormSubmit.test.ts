@@ -128,6 +128,55 @@ describe('user form submit by applicant', () => {
             .expect(403);
         clock.uninstall();
     });
+    test('submit stanford form with not all fields complete - fail', async () => {
+        const clock = lolex.install({ now: new Date("01/01/1999") });
+        await new Application({
+            ..._doc, status: STATUS.INCOMPLETE, type: TYPE.STANFORD, forms: {
+                ..._doc.forms,
+                application_info: {
+                    first_name: "test"
+                }
+            }
+        }).save();
+        await request(app)
+            .post("/api/users/applicanttreehacks/forms/application_info/submit")
+            .set({ Authorization: 'applicant' })
+            .expect(403);
+        clock.uninstall();
+    });
+    test('submit stanford form with only stanford-required fields complete - success', async () => {
+        const clock = lolex.install({ now: new Date("01/01/1999") });
+        await new Application({
+            ..._doc, status: STATUS.INCOMPLETE, type: TYPE.STANFORD, forms: {
+                ..._doc.forms,
+                application_info: {
+                    ..._doc.forms.application_info,
+                    first_name: "test",
+                    last_name: "test",
+                    phone: "test",
+                    dob: "test",
+                    gender: "test",
+                    race: ["test"],
+                    university: "test",
+                    graduation_year: "test",
+                    level_of_study: "test",
+                    major: "test",
+                    skill_level: 1,
+                    hackathon_experience: 2,
+                    resume: "testtesttest",
+                    accept_terms: true,
+                    accept_share: true,
+                    q5: "test",
+                    volunteer: true
+                }
+            }
+        }).save();
+        await request(app)
+            .post("/api/users/applicanttreehacks/forms/application_info/submit")
+            .set({ Authorization: 'applicant' })
+            .expect(200);
+        clock.uninstall();
+    });
     test('submit form with application already submitted - fail', async () => {
         const clock = lolex.install({ now: new Date("01/01/1999") });
         await new Application({

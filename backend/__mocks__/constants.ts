@@ -104,6 +104,21 @@ export const applicationRequiredFields = [
   "accept_terms",
   "accept_share"
 ];
+export const applicationRequiredFieldsStanford = [
+  "first_name",
+  "last_name",
+  "phone",
+  "dob",
+  "university",
+  "graduation_year",
+  "level_of_study",
+  "major",
+  "skill_level",
+  "hackathon_experience",
+  "q5",
+  "accept_terms",
+  "accept_share"
+];
 export const applicationReviewDisplayFieldsNoSection = applicationReviewDisplayFields.filter(e => !e.startsWith("section"));
 export const sponsorApplicationDisplayFieldsNoSection = sponsorApplicationDisplayFields.filter(e => !e.startsWith("section"));
 

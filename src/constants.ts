@@ -327,8 +327,7 @@ export const HACKATHON_DATE_RANGE = settings.hackathon_date_range;
 export const LOCATIONS = settings.locations;
 export const applicationReviewDisplayFields = applicationReviewDisplayFieldsObj;
 export const sponsorApplicationDisplayFields = sponsorApplicationDisplayFieldsObj;
-export const stanfordApplicationDisplayFields = [
-  // All fields
+export const applicationDisplayFields = [
   "section1",
   "first_name",
   "last_name",
@@ -346,10 +345,40 @@ export const stanfordApplicationDisplayFields = [
   "q2",
   "q3",
   "q4",
+  "section3",
   "q5",
+  // "volunteer",
+  "q_team_matching_1",
+  "q_team_matching_2",
+  "section4",
+  "gender",
+  "race",
+  "accept_terms",
+  "accept_share"
+];
+export const applicationDisplayFieldsStanford = [
+  "section1",
+  "first_name",
+  "last_name",
+  "phone",
+  "dob",
+  "university",
+  "graduation_year",
+  "level_of_study",
+  "major",
+  "skill_level",
+  "hackathon_experience",
+  "resume",
+  // "section2",
+  // "q1",
+  // "q2",
+  // "q3",
+  // "q4",
   "section3",
   "q_team_matching_1",
   "q_team_matching_2",
+  "q5",
+  "volunteer",
   "section4",
   "gender",
   "race",
