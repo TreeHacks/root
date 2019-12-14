@@ -20,15 +20,6 @@ exports[`Admission confirmed screen 1`] = `
       </Link>
       .
     </p>
-    <p>
-      Make sure to check out the 
-      <a
-        href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-"
-      >
-        Ultimate TreeHacks Guide 🌲
-      </a>
-       to learn more!
-    </p>
   </div>
   <button
     className="btn btn-custom inverted"
@@ -62,9 +53,11 @@ exports[`Format admission deadline with PST time zone 1`] = `
        at Stanford. We were blown away by your application and know that you’ll be an inspiring hacker. It'll be a super fun weekend filled with amazing hacks, delicious food, and fantastic people. We hope you can join us!
     </p>
     <p>
-      You have until 
+      You have until
+       
       November 27, 2048 8:39 PM PST
-       to confirm your attendance at TreeHacks 
+       
+      to confirm your attendance at TreeHacks 
       2020
       . If you don't confirm by then, we'll assume you can't make it and give your spot to someone else.
     </p>
