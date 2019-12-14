@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute, getDeadline } from "./common"
-import { STATUS, TYPE, TRANSPORTATION_STATUS, AUTO_ADMIT_STANFORD, applicationRequiredFields } from '../constants';
+import { STATUS, TYPE, TRANSPORTATION_STATUS, AUTO_ADMIT_STANFORD, applicationRequiredFieldsStanford, applicationRequiredFields } from '../constants';
 import { sendApplicationSubmittedEmail } from "../services/send_email";
 import { IApplication } from '../models/Application.d';
 
@@ -27,14 +27,7 @@ export async function submitApplicationInfo(req: Request, res: Response) {
       if (e.status !== STATUS.INCOMPLETE) {
         return res.status(403).send("Application is already submitted. If you need to change anything, please contact hello@treehacks.com.");
       }
-      let requiredFields = applicationRequiredFields;
-      // if (e.type !== TYPE.STANFORD) {
-      //   requiredFields.push(...[
-      //     "q1_goodfit",
-      //     "q2_experience",
-      //     "q3"
-      //   ]);
-      // }
+      let requiredFields = e.type === TYPE.STANFORD ? applicationRequiredFieldsStanford : applicationRequiredFields;
       let completed = true;
       for (let requiredField of requiredFields) {
         if (typeof e.forms.application_info[requiredField] === "undefined") {
