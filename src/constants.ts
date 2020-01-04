@@ -1,5 +1,5 @@
 import settings from "./themes/settings";
-import {sponsorApplicationDisplayFields as sponsorApplicationDisplayFieldsObj, applicationReviewDisplayFields as applicationReviewDisplayFieldsObj} from "../backend/constants";
+import { sponsorApplicationDisplayFields as sponsorApplicationDisplayFieldsObj, applicationReviewDisplayFields as applicationReviewDisplayFieldsObj } from "../backend/constants";
 
 export var GROUPS = {
   'admin': 'Administrator',
@@ -285,17 +285,17 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.BERKELEY]: {
-    coordinator: { 'name': 'Adhiv Dhar', 'email': 'adhiv@calhacks.io' },
+    coordinator: null,
     route: [
       {
-        day: 'Friday, Februrary 15th',
+        day: 'Friday, Februrary 14th',
         time: '2:30pm',
         stop: 'Check in at West Circle / University Drive',
         location: 'Berkeley'
       },
 
       {
-        day: 'Friday, Feburary 15th',
+        day: 'Friday, Feburary 14th',
         time: '4:30pm',
         stop: 'Panama St. & Via Ortega',
         location: 'Stanford'
@@ -306,14 +306,14 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       },
 
       {
-        day: 'Sunday, Februrary 17th',
+        day: 'Sunday, Februrary 16th',
         time: '3:30pm',
         stop: 'Check in at Panama St. & Via Ortega',
         location: 'Stanford'
       },
 
       {
-        day: 'Sunday, Februrary 17th',
+        day: 'Sunday, Februrary 16th',
         time: '5:30pm',
         stop: 'West Circle / University Drive',
         location: 'Berkeley'
