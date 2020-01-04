@@ -213,17 +213,17 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCI]: {
-    coordinator: { 'name': 'Tara Porter', 'email': 'tporter@caltech.edu' },
+    coordinator: null,
     route: [
       {
-        day: 'Friday, Februrary 15th',
+        day: 'Friday, Februrary 14th',
         time: '7:30am',
         stop: 'Check-in in front of Avery House (293 S Holliston Ave, Pasadena, CA)',
         location: 'Pasadena'
       },
 
       {
-        day: 'Friday, Feburary 15th',
+        day: 'Friday, Feburary 14th',
         time: '4:30pm',
         stop: 'Panama St. & Via Ortega',
         location: 'Stanford'
@@ -234,14 +234,14 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       },
 
       {
-        day: 'Sunday, Februrary 17th',
+        day: 'Sunday, Februrary 16th',
         time: '3:30pm',
         stop: 'Check in at Panama St. & Via Ortega',
         location: 'Stanford'
       },
 
       {
-        day: 'Sunday, Februrary 17th',
+        day: 'Sunday, Februrary 16th',
         time: '11:00pm',
         stop: 'In front of Avery House (293 S Holliston Ave, Pasadena, CA)',
         location: 'Pasadena'
