@@ -35,12 +35,14 @@
     margin-top: 3rem;
     font-size: 0.9rem;
 
-    .time, .stop {
+    .time,
+    .stop {
       font-size: 1.1rem;
       font-weight: bold;
     }
 
-    .left, .right {
+    .left,
+    .right {
       display: inline-block;
     }
 
@@ -56,7 +58,7 @@
       text-align: left;
 
       &:before {
-        content: '';
+        content: "";
         border: 3px solid $primary-color;
         border-radius: 100%;
         position: absolute;
@@ -82,12 +84,11 @@
 }
 
 .treehacks-bus-coordinator-text {
-  margin: 40;
-  padding: 20;
-  background-color: #fefafc;
+  margin: 40px;
+  padding: 20px;
 }
 
 .treehacks-transportation-text-amount {
   color: $primary-color;
-  font-weight: 'bold';
+  font-weight: "bold";
 }
