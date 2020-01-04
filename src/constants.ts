@@ -104,33 +104,19 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     coordinator: { 'name': 'TreeHacks', 'email': 'hello@treehacks.com' },
     route: [
       {
-        day: 'Friday, February 14th',
+        day: 'Friday, February 15th',
         time: '8:00am',
         stop: 'Check in at 37th & McClintock',
-        location: 'Middle of Nowhere'
+        location: 'Atlanta'
       },
-      {
-        day: 'Friday, February 14th',
-        time: '4:30pm',
-        stop: 'Panama St. & Via Ortega',
-        location: 'Stanford'
-      },
-
       {
         hack: true
       },
-
       {
-        day: 'Sunday, February 16th',
-        time: '3:30pm',
-        stop: 'Check in at Panama St. & Via Ortega',
-        location: 'Stanford'
-      },
-      {
-        day: 'Sunday, February 16th',
+        day: 'Sunday, February 17th',
         time: '11:00pm',
         stop: '37th & McClintock',
-        location: 'Middle of Somewhere'
+        location: 'Los Angeles'
       }
     ]
   },
@@ -138,33 +124,19 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     coordinator: null,
     route: [
       {
-        day: 'Friday, February 14th',
+        day: 'Friday, February 15th',
         time: '8:00am',
         stop: 'Check in at 37th & McClintock',
-        location: 'Middle of Nowhere'
+        location: 'Atlanta'
       },
-      {
-        day: 'Friday, February 14th',
-        time: '4:30pm',
-        stop: 'Panama St. & Via Ortega',
-        location: 'Stanford'
-      },
-
       {
         hack: true
       },
-
       {
-        day: 'Sunday, February 16th',
-        time: '3:30pm',
-        stop: 'Check in at Panama St. & Via Ortega',
-        location: 'Stanford'
-      },
-      {
-        day: 'Sunday, February 16th',
+        day: 'Sunday, February 17th',
         time: '11:00pm',
         stop: '37th & McClintock',
-        location: 'Middle of Somewhere'
+        location: 'Los Angeles'
       }
     ]
   },
