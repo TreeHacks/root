@@ -101,7 +101,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.TEST]: {
-    coordinator: { 'name': 'TreeHacks', 'email': 'hello@treehacks.com' },
+    coordinator: { 'name': 'Tree Hacks', 'email': 'treehack@treehacks.com' },
     route: [
       {
         day: 'Friday, February 15th',
