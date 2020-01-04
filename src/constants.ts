@@ -69,16 +69,16 @@ export type IBusRoute = {
 
 export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { name: string, email: string }, route: IBusRoute[] } } = {
   [TRANSPORTATION_BUS_ROUTES.USC]: {
-    coordinator: { 'name': 'Caleb Thomas', 'email': 'calebtho@usc.edu' },
+    coordinator: null,
     route: [
       {
-        day: 'Friday, February 15th',
+        day: 'Friday, February 14th',
         time: '8:30am',
         stop: 'Check in at 37th & McClintock',
         location: 'Los Angeles'
       },
       {
-        day: 'Friday, February 15th',
+        day: 'Friday, February 14th',
         time: '4:30pm',
         stop: 'Panama St. & Via Ortega',
         location: 'Stanford'
@@ -87,13 +87,13 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
         hack: true
       },
       {
-        day: 'Sunday, February 17th',
+        day: 'Sunday, February 16th',
         time: '3:30pm',
         stop: 'Check in at Panama St. & Via Ortega',
         location: 'Stanford'
       },
       {
-        day: 'Sunday, February 17th',
+        day: 'Sunday, February 16th',
         time: '10:30pm',
         stop: '37th & McClintock',
         location: 'Los Angeles'
@@ -101,57 +101,16 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.TEST]: {
-    coordinator: { 'name': 'Tree Hack', 'email': 'treehack@treehacks.com' },
+    coordinator: { 'name': 'TreeHacks', 'email': 'hello@treehacks.com' },
     route: [
       {
-        day: 'Friday, February 15th',
+        day: 'Friday, February 14th',
         time: '8:00am',
         stop: 'Check in at 37th & McClintock',
-        location: 'Atlanta'
+        location: 'Middle of Nowhere'
       },
       {
-        hack: true
-      },
-      {
-        day: 'Sunday, February 17th',
-        time: '11:00pm',
-        stop: '37th & McClintock',
-        location: 'Los Angeles'
-      }
-    ]
-  },
-  [TRANSPORTATION_BUS_ROUTES.TEST_NO_COORDINATOR]: {
-    coordinator: null,
-    route: [
-      {
-        day: 'Friday, February 15th',
-        time: '8:00am',
-        stop: 'Check in at 37th & McClintock',
-        location: 'Atlanta'
-      },
-      {
-        hack: true
-      },
-      {
-        day: 'Sunday, February 17th',
-        time: '11:00pm',
-        stop: '37th & McClintock',
-        location: 'Los Angeles'
-      }
-    ]
-  },
-  [TRANSPORTATION_BUS_ROUTES.UCLA]: {
-    coordinator: { 'name': 'Meera Rachamallu', 'email': 'mrachamallu@g.ucla.edu' },
-    route: [
-      {
-        day: 'Friday, February 15th',
-        time: '9:00am',
-        stop: 'Check in at 10 Charles E. Young N',
-        location: 'Los Angeles'
-      },
-
-      {
-        day: 'Friday, February 15th',
+        day: 'Friday, February 14th',
         time: '4:30pm',
         stop: 'Panama St. & Via Ortega',
         location: 'Stanford'
@@ -162,14 +121,83 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       },
 
       {
-        day: 'Sunday, February 17th',
+        day: 'Sunday, February 16th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        day: 'Sunday, February 16th',
+        time: '11:00pm',
+        stop: '37th & McClintock',
+        location: 'Middle of Somewhere'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.TEST_NO_COORDINATOR]: {
+    coordinator: null,
+    route: [
+      {
+        day: 'Friday, February 14th',
+        time: '8:00am',
+        stop: 'Check in at 37th & McClintock',
+        location: 'Middle of Nowhere'
+      },
+      {
+        day: 'Friday, February 14th',
+        time: '4:30pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+
+      {
+        hack: true
+      },
+
+      {
+        day: 'Sunday, February 16th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        day: 'Sunday, February 16th',
+        time: '11:00pm',
+        stop: '37th & McClintock',
+        location: 'Middle of Somewhere'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.UCLA]: {
+    coordinator: null,
+    route: [
+      {
+        day: 'Friday, February 14th',
+        time: '9:00am',
+        stop: 'Check in at 10 Charles E. Young N',
+        location: 'Los Angeles'
+      },
+
+      {
+        day: 'Friday, February 14th',
+        time: '4:30pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+
+      {
+        hack: true
+      },
+
+      {
+        day: 'Sunday, February 16th',
         time: '3:30pm',
         stop: 'Check in at Panama St. & Via Ortega',
         location: 'Stanford'
       },
 
       {
-        day: 'Sunday, February 17th',
+        day: 'Sunday, February 16th',
         time: '10:30pm',
         stop: '10 Charles E. Young N',
         location: 'Los Angeles'
