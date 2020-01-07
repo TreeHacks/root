@@ -115,7 +115,6 @@ export const applicationRequiredFieldsStanford = [
   "major",
   "skill_level",
   "hackathon_experience",
-  "q5",
   "accept_terms",
   "accept_share"
 ];
