@@ -3,9 +3,15 @@ import Auth from "@aws-amplify/auth";
 import Cache from "@aws-amplify/cache";
 import { loadingStart, loadingEnd } from "../base/actions";
 import { get } from "lodash";
+import Cookies from "js-cookie";
 
+declare const LOGIN_URL: string;
 declare const COGNITO_CLIENT_ID: string;
 declare const COGNITO_ENDPOINT_URL: string;
+
+function getJwt() {
+  return Cookies.get("jwt");
+}
 
 export const loggedIn = (userId, attributes, admin, reviewer, sponsor, judge, applicant) => ({
   type: 'LOGIN_SUCCESS',
@@ -32,14 +38,7 @@ export const renderProfile = (profileData) => ({
 
 export function logout() {
   return dispatch => {
-    loadingStart();
-    console.log("signing out");
-    Cache.removeItem("federatedInfo");
-    localStorage.clear();
-    Auth.signOut().then(e => {
-      loadingEnd();
-      dispatch(loggedOut());
-    })
+    window.location.href = `${LOGIN_URL}/logout?redirect=${window.location.href}`;
   }
 }
 
@@ -53,7 +52,7 @@ export function parseJwt(token) {
 };
 
 const getCurrentUser = () => async (dispatch) => {
-  const jwt = localStorage.getItem("jwt");
+  const jwt = getJwt();
   if (jwt) {
     /*
     ud: 
@@ -86,7 +85,6 @@ const getCurrentUser = () => async (dispatch) => {
       }
     }
     else {
-      Auth.signOut();
       let attributes: IUserAttributes = { "name": parsed["name"], "email": parsed["email"], "email_verified": parsed["email_verified"], "cognito:groups": parsed["cognito:groups"] };
       return await {
         "username": parsed["sub"],
@@ -96,14 +94,7 @@ const getCurrentUser = () => async (dispatch) => {
   }
 
   // If JWT from SAML has expired, or if there is no JWT in the first place, run this code.
-  // Need to parse our local JWT as well to get cognito:groups attribute, because Auth.currentAuthenticatedUser() does not return user groups.
-  return Promise.all([
-    Auth.currentAuthenticatedUser(),
-    parseJwt((await Auth.currentSession()).getIdToken().getJwtToken())
-  ]).then(([user, token]) => {
-    user.attributes["cognito:groups"] = token["cognito:groups"];
-    return user;
-  });
+  throw "No current user";
 }
 
 export function checkLoginStatus() {
@@ -125,6 +116,7 @@ export function checkLoginStatus() {
         dispatch(loggedIn(user.username, user.attributes, admin, reviewer, sponsor, judge, applicant));
       }).catch(e => {
         dispatch(notLoggedIn());
+        window.location.href = `${LOGIN_URL}?redirect=${window.location.href}`;
         console.error(e);
       }).then(() => dispatch(loadingEnd()));
   }
