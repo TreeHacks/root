@@ -1,18 +1,34 @@
 /* Color Palette */
-$background-color: #535152;
-$background-color-light-border: #696E76;
-$primary-color: #00E174;
-$secondary-color: #00E174;
-$tertiary-color: #00E174;
-$box-color: #fff;
+$background-color: #FFFFFF;
+$background-color-light-border: #DCDCDC;
 
-$text-color: #FFFFFF;
-$primary-btn-text-color: white;
+$primary-color: #888888;
+$secondary-color: #888888;
+$tertiary-color: #888888;
+$box-color: #FFFFFF;
 
 $text-gray: #ADADAD;
+$text-color: #000000;
+$secondary-text-color: #000000;
+$primary-btn-text-color: #FFFFFF;
 
+/* Fonts */
 $navbar-font-size: 16px * 1.18;
 $navbar-margin: 1.25vw;
 $navbar-padding: 15px;
 
+$base-font-size: 18px;
+$medium-font-size: $base-font-size + 2;
+$heading-font-size: $base-font-size * 3;
+$subheading-font-size: $base-font-size * 1.5;
 $base-font-family: 'Avenir', sans-serif;
+
+/* Spacing */
+$small-space: 2vh;
+$medium-space: 5vh;
+$large-space: 7.5vh;
+
+/* Other */
+$border-style: 1px solid $primary-color;
+$transition-speed: .2s;
+$transform-scale: 1.05;
