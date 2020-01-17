@@ -25,7 +25,7 @@ const asyncLocalStorage = {
     }
 };
 export const custom_header = async () => { 
-    return { Authorization: await Cookies.get("jwt") }
+    return { Authorization: await localStorage.getItem("jwt") }
 }
 API.configure({
     endpoints: [
