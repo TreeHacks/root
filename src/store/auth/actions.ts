@@ -1,12 +1,18 @@
 import { IUserAttributes } from "./types";
 import { loadingStart, loadingEnd } from "../base/actions";
 import { get } from "lodash";
-import Cookies from "js-cookie";
+import queryString from "query-string";
 
 declare const LOGIN_URL: string;
 
+const hash = queryString.parse(window.location.hash);
+if (hash && hash.jwt) {
+  localStorage.setItem("jwt", hash.jwt);
+  window.location.hash = "";
+}
+
 function getJwt() {
-  return Cookies.get("jwt");
+  return localStorage.getItem("jwt");
 }
 
 export const loggedIn = (userId, attributes, admin, reviewer, sponsor, judge, applicant) => ({
