@@ -1,6 +1,5 @@
 import React from "react";
-import { shallow, mount, render } from 'enzyme';
-import AuthPageNavButton from "../Login/AuthPageNavButton";
+import { shallow } from 'enzyme';
 import { IHomeProps } from "../Home/types";
 import { Home } from "../Home/Home";
 import {NavLink} from "react-router-dom";
@@ -16,16 +15,11 @@ const props: IHomeProps = {
         loggedIn: false,
         user: null,
         userId: "test",
-        schemas: null,
-        error: "",
-        message: "",
         admin: false,
         reviewer: false,
         sponsor: false,
         judge: false,
         applicant: false,
-        authPage: "signIn",
-        attemptedLoginEmail: null,
     },
     getUserProfile: () => null,
     logout: () => null,

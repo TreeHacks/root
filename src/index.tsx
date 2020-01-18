@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./App";
-import Auth from "@aws-amplify/auth";
 import API from "@aws-amplify/api";
 import { I18n } from "@aws-amplify/core";
 import store from "./store";
 import {Provider} from "react-redux";
+import Cookies from "js-cookie";
 
 declare var MODE: string;
 declare var ENDPOINT_URL: string;
@@ -25,21 +25,8 @@ const asyncLocalStorage = {
     }
 };
 export const custom_header = async () => { 
-    try {
-        return { Authorization: (await Auth.currentSession()).getIdToken().getJwtToken() }
-    }
-    catch (e) {
-        console.warn(e, "Defaulting to stored JWT in localStorage...");
-        // Get JWT from SAML.
-        return { Authorization: await asyncLocalStorage.getItem("jwt") } 
-    }
+    return { Authorization: await localStorage.getItem("jwt") }
 }
-Auth.configure({
-    region: 'us-east-1',
-    userPoolId: COGNITO_USER_POOL_ID,
-    userPoolWebClientId: COGNITO_CLIENT_ID,
-    mandatorySignIn: false
-});
 API.configure({
     endpoints: [
         {
