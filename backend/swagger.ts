@@ -33,6 +33,9 @@ const swagger = {
           "university": { "type": "string" }
         }
       },
+      "MeetInfo": {
+        "type": "object"
+      },
       "AdminInfo": {
         "type": "object",
         "properties": {
@@ -68,7 +71,8 @@ const swagger = {
             "type": "object",
             "properties": {
               "application_info": { "$ref": "#/components/schemas/ApplicationInfo" },
-              "transportation": { "$ref": "#/components/schemas/Transportation" }
+              "transportation": { "$ref": "#/components/schemas/Transportation" },
+              "meet_info": {"$ref": "#/components/schemas/MeetInfo"}
             }
           },
           "admin_info": { "$ref": "#/components/schemas/AdminInfo" }, // Only editable by admin.
@@ -349,6 +353,43 @@ const swagger = {
                     "nModified": { "type": "integer" }
                   }
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/meet": {
+      "get": {
+        "summary": "Get meet info",
+        "description": "Used by applicants",
+        "responses": {
+          "200": {
+            "description": "User meet info response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MeetInfo" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update meet info",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/MeetInfo" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User meet info response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MeetInfo" }
               }
             }
           }
