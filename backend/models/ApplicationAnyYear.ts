@@ -3,6 +3,7 @@ import { Model, Schema } from "mongoose";
 import { IApplication } from "./Application.d"
 import applicationInfoSchema from "./applicationInfoSchema";
 import adminInfoSchema from "./adminInfoSchema";
+import meetInfoSchema from "./meetInfoSchema";
 import reviewSchema from "./reviewSchema";
 import { STATUS, TRANSPORTATION_STATUS } from "../constants";
 import {values} from "lodash";
@@ -12,7 +13,8 @@ import s3FilePlugin from "../utils/file_plugin";
 export const applicationSchema: Schema = new mongoose.Schema({
     "forms": { // can only be modified by user/editors
         "application_info": applicationInfoSchema,
-        "transportation": transportationInfoSchema
+        "transportation": transportationInfoSchema,
+        "meet_info": meetInfoSchema
     },
     "admin_info": adminInfoSchema, // Only editable by admin.
     "reviews": [reviewSchema], // each review can only be modified by the reviewer who made it.

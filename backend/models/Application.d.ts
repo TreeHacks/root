@@ -41,10 +41,25 @@ export interface ITransportationInfo {
     [e: string]: any
 }
 
+export interface IMeetInfo {
+  first_name: String,
+  last_name: String,
+  phone: String,
+  verticals: [String],
+  university: String,
+  level_of_study: String,
+  major: String,
+  q1: String,
+  q2: String,
+  q3: String,
+  q_slack: String
+}
+
 export interface IApplication extends Document {
   "forms": { // can only be modified by user/editors
       "application_info": IApplicationInfo,
-      "transportation": ITransportationInfo
+      "transportation": ITransportationInfo,
+      "meet_info": IMeetInfo
       // we can conceivably add additional forms here.
   },
   "admin_info": { // Only editable by admin.
