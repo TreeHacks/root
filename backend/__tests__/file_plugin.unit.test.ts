@@ -20,5 +20,13 @@ describe('projectAllowedApplicationFields', () => {
     projectAllowedApplicationFields.call(query);
     expect(query.getQuery()).not.toEqual({"a":"b"});
   });
+
+  test('modify query for applicant', () => {
+    let query = new Query<IApplication>();
+    query.setOptions({"treehacks:groups": [""]});
+    query.setQuery({"a":"b"});
+    projectAllowedApplicationFields.call(query);
+    expect(query.getQuery()).not.toEqual({"a":"b"});
+  });
   
 });

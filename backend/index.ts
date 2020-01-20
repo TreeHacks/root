@@ -89,7 +89,9 @@ authenticatedRoute.delete('/rooms', dropCurrentRoom);
 authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStatus);
 authenticatedRoute.post('/users/:userId/status/confirm', confirmAdmission);
 authenticatedRoute.post('/users/:userId/status/decline', declineAdmission);
-authenticatedRoute.get('/users', [sponsorRoute], getUserList);
+// This one is not admin-protected.
+authenticatedRoute.get('/users', getUserList);
+// Admin protected
 authenticatedRoute.post('/users_resumes', [sponsorRoute], getUserResumes);
 authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);

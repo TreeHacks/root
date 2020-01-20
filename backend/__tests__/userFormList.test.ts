@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
-import { isEqual, omit } from "lodash";
+import { omit } from "lodash";
 import { STATUS, sponsorApplicationDisplayFieldsNoSection, HACKATHON_YEAR_STRING } from '../constants';
 import queryString from "query-string";
 
@@ -37,6 +37,11 @@ const _doc = {
             q3: "test",
             q4: "test",
             q5: "test"
+        },
+        transportation: {
+        },
+        meet_info: {
+            first_name: "test"
         }
     }
 };
@@ -76,11 +81,18 @@ afterAll(() => {
 });
 
 describe('user form list by applicant', () => {
-    test('view form list with applicant - fail', () => {
+    test('view form list with applicant should only return user id and meet_info of submitted participants', () => {
         return request(app)
             .get("/api/users")
             .set({ Authorization: 'applicant' })
-            .expect(403);
+            .expect(200).then(e => {
+                expect(e.body.count).toEqual(3);
+                for (let result of e.body.results) {
+                    expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
+                    expect(Object.keys(result.user).sort()).toEqual(["id"]);
+                    expect(result.forms).toEqual({meet_info: {first_name: "test"}});
+                }
+            });
     });
 });
 

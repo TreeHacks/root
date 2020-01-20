@@ -94,4 +94,21 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
       ].join(" "));
     }
   }
+  else {
+    // Regular applicants can only view user id's and meet_info of ADMISSION_CONFIRMED participants.
+    query = {
+      "$and": [
+        query,
+        { "status": STATUS.ADMISSION_CONFIRMED }
+      ]
+    };
+    this.setQuery(query);
+    if (!this.selectedInclusively()) {
+      (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
+      this.select([
+        "user.id",
+        "forms.meet_info"
+      ].join(" "));
+    }
+  }
 }
