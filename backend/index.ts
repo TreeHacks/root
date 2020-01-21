@@ -11,7 +11,7 @@ import filePlugin from './utils/file_plugin';
 const port = process.env.PORT || 9000;
 
 
-import { authenticatedRoute, adminRoute, reviewerRoute, judgeRoute, sponsorRoute, anonymousRoute } from "./router/authenticatedRoute";
+import { authenticatedRoute, adminRoute, reviewerRoute, judgeRoute, sponsorRoute, anonymousRoute, applicantRoute } from "./router/authenticatedRoute";
 import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from "./routes/application_info";
 import { getMeetInfo, setMeetInfo } from "./routes/meet_info";
 import { getUserDetail } from "./routes/user_detail";
@@ -89,7 +89,9 @@ authenticatedRoute.delete('/rooms', dropCurrentRoom);
 authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStatus);
 authenticatedRoute.post('/users/:userId/status/confirm', confirmAdmission);
 authenticatedRoute.post('/users/:userId/status/decline', declineAdmission);
-authenticatedRoute.get('/users', [sponsorRoute], getUserList);
+// This one is not admin-protected.
+authenticatedRoute.get('/users', [applicantRoute], getUserList);
+// Admin protected
 authenticatedRoute.post('/users_resumes', [sponsorRoute], getUserResumes);
 authenticatedRoute.get('/users_stats', [adminRoute], getUserStats);
 authenticatedRoute.post('/users_bulkchange', [adminRoute], bulkChangeUsers);

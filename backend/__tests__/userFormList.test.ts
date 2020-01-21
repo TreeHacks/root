@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../index";
 import Application from "../models/Application";
-import { isEqual, omit } from "lodash";
+import { omit } from "lodash";
 import { STATUS, sponsorApplicationDisplayFieldsNoSection, HACKATHON_YEAR_STRING } from '../constants';
 import queryString from "query-string";
 
@@ -37,18 +37,28 @@ const _doc = {
             q3: "test",
             q4: "test",
             q5: "test"
+        },
+        transportation: {
+        },
+        meet_info: {
+            first_name: "test"
         }
     }
 };
 
 let docs = [
-    { ..._doc, user: { email: 'test@treehacks', id: 'applicanttreehacks'} },
-    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-optout-confirmed'}, sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
-    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed'}, status: STATUS.ADMISSION_CONFIRMED },
-    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed-2'}, status: STATUS.ADMISSION_CONFIRMED },
-    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-submitted'}, status: STATUS.SUBMITTED },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicanttreehacks' } },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-optout-confirmed' }, sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed' }, status: STATUS.ADMISSION_CONFIRMED },
     {
-        ..._doc, user: { email: 'test@treehacks', id: 'applicant-name-thomas'},
+        ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed-2' }, status: STATUS.ADMISSION_CONFIRMED,
+        forms: {
+            ..._doc.forms, meet_info: undefined
+        }
+    },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-submitted' }, status: STATUS.SUBMITTED },
+    {
+        ..._doc, user: { email: 'test@treehacks', id: 'applicant-name-thomas' },
         forms: {
             ..._doc.forms, application_info: {
                 ..._doc.forms.application_info,
@@ -57,7 +67,7 @@ let docs = [
         }
     },
     {
-        ..._doc, user: { email: 'test@treehacks', id: 'applicant-name-tracey'},
+        ..._doc, user: { email: 'test@treehacks', id: 'applicant-name-tracey' },
         forms: {
             ..._doc.forms, application_info: {
                 ..._doc.forms.application_info,
@@ -76,11 +86,18 @@ afterAll(() => {
 });
 
 describe('user form list by applicant', () => {
-    test('view form list with applicant - fail', () => {
+    test('view form list with applicant should only return user id and meet_info of submitted participants', () => {
         return request(app)
             .get("/api/users")
             .set({ Authorization: 'applicant' })
-            .expect(403);
+            .expect(200).then(e => {
+                expect(e.body.count).toEqual(2);
+                for (let result of e.body.results) {
+                    expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
+                    expect(Object.keys(result.user).sort()).toEqual(["id"]);
+                    expect(result.forms).toEqual({ meet_info: { first_name: "test" } });
+                }
+            });
     });
 });
 

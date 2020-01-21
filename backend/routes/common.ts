@@ -166,8 +166,11 @@ export function getGenericList(req: Request, res: Response, Model: Model<any>) {
     }
   }
   let queryOptions = {
-    "treehacks:groups": res.locals.user && res.locals.user['cognito:groups']
-  }
+    "treehacks:groups": res.locals.user && res.locals.user['cognito:groups'],
+    "treehacks:getGenericList": true,
+    "treehacks:isApplicationModel": (new Model()) instanceof Application
+  };
+
   let query = Model.find(filter, JSON.parse(req.query.project || "{}"), queryOptions);
   let sortedAndFilteredQuery =
     query.sort(JSON.parse(req.query.sort || "{}"))

@@ -359,7 +359,7 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/meet": {
+    "/users/{userId}/meet_info": {
       "get": {
         "summary": "Get meet info",
         "description": "Used by applicants",

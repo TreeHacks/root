@@ -39,7 +39,7 @@ authenticatedRoute.param('userId', (req, res, next, userId) => {
 });
 
 
-const validateGroup = (group, allowAnonymous = false) => (req, res, next) => {
+const validateGroup = (group, allowAnonymous = false, allowNoGroupMatching = false) => (req, res, next) => {
   // Allow either a single group or multiple valid groups passed as an array
   if (!Array.isArray(group)) { group = [group]; }
 
@@ -65,6 +65,10 @@ const validateGroup = (group, allowAnonymous = false) => (req, res, next) => {
       next();
     }
     else {
+      if (allowNoGroupMatching) {
+        next();
+        return;
+      }
       if (allowAnonymous) {
         res.locals.user = {};
         next();
@@ -88,6 +92,9 @@ judgeRoute.use(validateGroup("judge"));
 
 export const sponsorRoute = express.Router();
 sponsorRoute.use(validateGroup(["admin", "sponsor"]));
+
+export const applicantRoute = express.Router();
+applicantRoute.use(validateGroup([], false, true));
 
 export const anonymousRoute = express.Router();
 anonymousRoute.use(validateGroup(["admin"], true));
