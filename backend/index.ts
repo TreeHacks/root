@@ -5,7 +5,7 @@ mongoose.Promise = require('bluebird');
 const swaggerUi = require('swagger-ui-express');
 const forceSsl = require('force-ssl-heroku');
 const compression = require('compression');
-
+const cors = require('cors');
 import swaggerDocument from "./swagger";
 import filePlugin from './utils/file_plugin';
 const port = process.env.PORT || 9000;
@@ -34,6 +34,7 @@ import { getRooms, reserveRoom, dropCurrentRoom, getPublicRoomStatus } from "./r
 const app = express();
 app.use(forceSsl);
 app.use(compression());
+app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }).catch(function (reason: string) {
     console.log('Unable to connect to the mongodb instance. Error: ', reason);
