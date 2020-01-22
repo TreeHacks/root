@@ -236,7 +236,7 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/application_info": {
+    "/users/{userId}/forms/application_info": {
       "get": {
         "summary": "Get application info",
         "description": "Used by applicants",
@@ -273,7 +273,7 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/application_info/submit": {
+    "/users/{userId}/forms/application_info/submit": {
       "post": {
         "summary": "Submit application",
         "description": "Submit application. This endpoint checks to make sure that all required fields in the application are complete, then sends a confirmation email. No request body.",
@@ -289,7 +289,7 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/transportation": {
+    "/users/{userId}/forms/transportation": {
       "get": {
         "summary": "Get transportation info",
         "description": "Used by applicants",
@@ -331,7 +331,7 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/transportation/submit": {
+    "/users/{userId}/forms/transportation/submit": {
       "post": {
         "summary": "Submit transportation info",
         "description": "",
@@ -359,7 +359,7 @@ const swagger = {
         }
       }
     },
-    "/users/{userId}/meet_info": {
+    "/users/{userId}/forms/meet_info": {
       "get": {
         "summary": "Get meet info",
         "description": "Used by applicants",
