@@ -23,7 +23,7 @@ describe('meet form', () => {
                 expect(e.body).toEqual({ first_name: "hello" });
             });
     });
-    test('submitted user edits other transportation - fail', async () => {
+    test('edit meet info', async () => {
         await new Application({
             user: { id: 'applicanttreehacks' }
         }).save();
