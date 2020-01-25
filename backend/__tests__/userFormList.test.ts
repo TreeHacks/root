@@ -41,7 +41,9 @@ const _doc = {
         transportation: {
         },
         meet_info: {
-            first_name: "test"
+            verticals: ["a", "b"],
+            idea: "..",
+            showProfile: true
         }
     }
 };
@@ -95,7 +97,11 @@ describe('user form list by applicant', () => {
                 for (let result of e.body.results) {
                     expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
                     expect(Object.keys(result.user).sort()).toEqual(["id"]);
-                    expect(result.forms).toEqual({ meet_info: { first_name: "test" } });
+                    expect(result.forms).toEqual({ meet_info: {
+                        idea: "..",
+                        showProfile: true,
+                        verticals: ["a", "b"]
+                    } });
                 }
             });
     });

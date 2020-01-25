@@ -13,14 +13,14 @@ describe('meet form', () => {
     test('view meet info', async () => {
         await new Application({
             user: { id: 'applicanttreehacks' },
-            forms: {meet_info: {first_name: "hello"} }
+            forms: {meet_info: {idea: "hello"} }
         }).save();
         await request(app)
             .get("/api/users/applicanttreehacks/forms/meet_info")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
-                expect(e.body).toEqual({ first_name: "hello" });
+                expect(e.body).toEqual({ idea: "hello" });
             });
     });
     test('edit meet info', async () => {
@@ -30,9 +30,9 @@ describe('meet form', () => {
         await request(app)
             .put("/api/users/applicanttreehacks/forms/meet_info")
             .set({ Authorization: 'applicant' })
-            .send({first_name: "hello"})
+            .send({idea: "hello"})
             .then(e => {
-                expect(e.body).toEqual({ first_name: "hello" });
+                expect(e.body).toEqual({ idea: "hello" });
             });
     });
 });
