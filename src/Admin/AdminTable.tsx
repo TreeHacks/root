@@ -68,6 +68,11 @@ const AdminTable = (props: IAdminTableProps) => {
             "accessor": "user.email"
         },
         {
+            "Header": "Name",
+            "id": "name",
+            "accessor": e => [get(e, "forms.application_info.first_name", ""), get(e, "forms.application_info.last_name")].join(" ")
+        },
+        {
             "Header": "type",
             "filterMethod": defaultFilterMethod,
             "Filter": createFilterSelect(values(TYPE)),
