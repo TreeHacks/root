@@ -13,14 +13,17 @@ describe('meet form', () => {
     test('view meet info', async () => {
         await new Application({
             user: { id: 'applicanttreehacks' },
-            forms: {meet_info: {idea: "hello"} }
+            forms: {
+                meet_info: {idea: "hello"},
+                application_info: {first_name: "ash", last_name: "ram"}
+            }
         }).save();
         await request(app)
             .get("/api/users/applicanttreehacks/forms/meet_info")
             .set({ Authorization: 'applicant' })
             .expect(200)
             .then(e => {
-                expect(e.body).toEqual({ idea: "hello" });
+                expect(e.body).toEqual({ idea: "hello", first_name: "ash", last_initial: "r" });
             });
     });
     test('edit meet info', async () => {

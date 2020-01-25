@@ -44,7 +44,11 @@ export interface ITransportationInfo {
 export interface IMeetInfo {
   verticals: String,
   idea: String,
-  showProfile: Boolean
+  showProfile: Boolean,
+  
+  // dynamically populated from API:
+  first_name?: String,
+  last_initial?: String
 }
 
 export interface IApplication extends Document {

@@ -110,7 +110,9 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
         (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
         this.select([
           "user.id",
-          "forms.meet_info"
+          "forms.meet_info",
+          "forms.application_info.first_name",
+          "forms.application_info.last_name"
         ].join(" "));
       }
     }

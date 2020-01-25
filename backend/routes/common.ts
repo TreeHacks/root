@@ -3,10 +3,11 @@ import { IApplication } from "../models/Application.d";
 import { Request, Response } from 'express';
 import { CognitoUser } from "../models/cognitoUser";
 import { STATUS, TYPE, TRANSPORTATION_STATUS } from "../constants";
-import { uploadBase64Content, generateSignedUrlForFile } from "../services/file_actions";
+import { isEqual } from "lodash";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
 import { ServerResponse } from "http";
 import { Model } from "mongoose";
+import { prepopulateMeetInfo } from "./meet_info";
 
 export function getDeadline(type) {
   switch (type) {
@@ -188,6 +189,16 @@ export function getGenericList(req: Request, res: Response, Model: Model<any>) {
     countQuery
   ])
     .then(([results, count]) => {
+      if (queryOptions["treehacks:isApplicationModel"]) {
+        // Pre-populate meet_info for regular applicant
+        for (let result of results) {
+          if (result.forms && result.forms.meet_info && result.forms.application_info && isEqual(Object.keys(result.forms.application_info).sort(), ["first_name", "last_name"])) {
+            prepopulateMeetInfo(result);
+          } else {
+            break;
+          }
+        }
+      }
       return res.status(200).json({
         results: results,
         count: count

@@ -100,7 +100,9 @@ describe('user form list by applicant', () => {
                     expect(result.forms).toEqual({ meet_info: {
                         idea: "..",
                         showProfile: true,
-                        verticals: ["a", "b"]
+                        verticals: ["a", "b"],
+                        first_name: "fir",
+                        last_initial: "t"
                     } });
                 }
             });
