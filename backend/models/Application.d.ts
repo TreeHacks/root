@@ -75,7 +75,7 @@ export interface IApplication extends Document {
   },
   "reviews": [IReview],
   "user": {
-    "email": String
+    "email": string
    }, // foreign key
   "id": String,
   "status": string, // only editable by admin (or this user, to a limited extent).

@@ -500,6 +500,45 @@ const swagger = {
         }
       }
     },
+    "/users/{userId}/contact": {
+      "get": {
+        "summary": "Contact user by slack or email",
+        "description": "Used by applicants",
+        "responses": {
+          "302": {
+            "description": "Redirects to DM link when slack user found"
+          },
+          "200": {
+            "description": "Shows email address when no slack user found",
+            "content": {
+              "text/html": {
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update status",
+        "description": "Used only by admins",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Status" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User status response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Status" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users_bulkchange": {
       "post": {
         "summary": "Bulk change application status",
