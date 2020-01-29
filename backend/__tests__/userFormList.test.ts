@@ -51,7 +51,11 @@ const _doc = {
 let docs = [
     { ..._doc, user: { email: 'test@treehacks', id: 'applicanttreehacks' } },
     { ..._doc, user: { email: 'test@treehacks', id: 'applicant-optout-confirmed' }, sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
-    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed' }, status: STATUS.ADMISSION_CONFIRMED },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed' },
+        forms: {
+            ..._doc.forms, meet_info: { showProfile: false }
+        },
+        status: STATUS.ADMISSION_CONFIRMED },
     {
         ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed-2' }, status: STATUS.ADMISSION_CONFIRMED,
         forms: {
@@ -88,12 +92,12 @@ afterAll(() => {
 });
 
 describe('user form list by applicant', () => {
-    test('view form list with applicant should only return user id and meet_info of submitted participants', () => {
+    test('view form list with applicant should only return user id and meet_info of admission_confirmed participants with showProfile = true', () => {
         return request(app)
             .get("/api/users")
             .set({ Authorization: 'applicant' })
             .expect(200).then(e => {
-                expect(e.body.count).toEqual(2);
+                expect(e.body.count).toEqual(1);
                 for (let result of e.body.results) {
                     expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
                     expect(Object.keys(result.user).sort()).toEqual(["id"]);

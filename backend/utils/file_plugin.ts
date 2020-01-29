@@ -96,13 +96,15 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
     }
   }
   else {
-    // Regular applicants can only view user id's and meet_info of ADMISSION_CONFIRMED participants with existing meet_info fields.
+    // Regular applicants can only view user id's and meet_info of ADMISSION_CONFIRMED participants
+    // with existing meet_info fields and meet_info.showProfile equal to true.
     if (getGenericList && isApplicationModel) {
       query = {
         "$and": [
           query,
           { "status": STATUS.ADMISSION_CONFIRMED },
-          { "forms.meet_info": {"$exists": true} }
+          { "forms.meet_info": { "$exists": true } },
+          { "forms.meet_info.showProfile": true }
         ]
       };
       this.setQuery(query);
