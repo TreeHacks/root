@@ -226,5 +226,5 @@ export const AUTO_ADMIT_STANFORD = false;
 
 export const IGNORED_REVIEWERS = process.env.IGNORED_REVIEWERS ? JSON.parse(process.env.IGNORED_REVIEWERS) : [];
 
-export const ALLOWED_GROUPS = ["admin", "reviewer"];
+export const ALLOWED_GROUPS = ["admin", "reviewer", "sponsor"];
 // ["admin", "reviewer", "sponsor", "judge"];
