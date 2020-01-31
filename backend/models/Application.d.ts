@@ -44,6 +44,7 @@ export interface ITransportationInfo {
 export interface IMeetInfo {
   verticals: String,
   idea: String,
+  pronouns: String,
   showProfile: Boolean,
   
   // dynamically populated from API:

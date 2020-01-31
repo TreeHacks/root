@@ -43,7 +43,8 @@ const _doc = {
         meet_info: {
             verticals: ["a", "b"],
             idea: "..",
-            showProfile: true
+            showProfile: true,
+            pronouns: "they/them"
         }
     }
 };
@@ -105,6 +106,7 @@ describe('user form list by applicant', () => {
                         idea: "..",
                         showProfile: true,
                         verticals: ["a", "b"],
+                        pronouns: "they/them",
                         first_name: "fir",
                         last_initial: "t"
                     } });
