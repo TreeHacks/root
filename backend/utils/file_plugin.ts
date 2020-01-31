@@ -86,14 +86,14 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
       ]
     };
     this.setQuery(query);
-    if (!this.selectedInclusively()) {
+    // if (!this.selectedInclusively()) {
       (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
       this.select([
         "user.id",
         "user.email",
         ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
       ].join(" "));
-    }
+    // }
   }
   else {
     // Regular applicants can only view user id's and meet_info of ADMISSION_CONFIRMED participants
@@ -108,7 +108,7 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
         ]
       };
       this.setQuery(query);
-      if (!this.selectedInclusively()) {
+      // if (!this.selectedInclusively()) {
         (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
         this.select([
           "user.id",
@@ -116,7 +116,7 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
           "forms.application_info.first_name",
           "forms.application_info.last_name"
         ].join(" "));
-      }
+      // }
     }
   }
 }

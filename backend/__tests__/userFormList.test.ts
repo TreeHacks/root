@@ -113,12 +113,41 @@ describe('user form list by applicant', () => {
                 }
             });
     });
+    test('view form list with applicant should not project extra info', () => {
+        return request(app)
+            .get("/api/users?" + queryString.stringify({
+                project: JSON.stringify(['forms.application_info', 'user.id'])
+            }))
+            .set({ Authorization: 'applicant' })
+            .expect(200).then(e => {
+                expect(e.body.count).toEqual(1);
+                for (let result of e.body.results) {
+                    expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
+                    expect(Object.keys(result.user).sort()).toEqual(["id"]);
+                    expect(Object.keys(result.forms)).toEqual(["meet_info"]);
+                }
+            });
+    });
 });
 
 describe('user form list by sponsor', () => {
     test('view only application confirmed forms with no opt out', () => {
         return request(app)
             .get("/api/users")
+            .set({ Authorization: 'sponsor' })
+            .expect(200).then(e => {
+                expect(e.body.count).toEqual(2);
+                expect(e.body.results.map(item => item.user.id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2'].sort());
+                for (let result of e.body.results) {
+                    expect(Object.keys(result.forms.application_info).sort()).toEqual(sponsorApplicationDisplayFieldsNoSection.sort());
+                }
+            });
+    });
+    test('sponsor cannot project info unavailable to them', () => {
+        return request(app)
+            .get("/api/users?" + queryString.stringify({
+                project: JSON.stringify(['forms.application_info', 'user.id'])
+            }))
             .set({ Authorization: 'sponsor' })
             .expect(200).then(e => {
                 expect(e.body.count).toEqual(2);
