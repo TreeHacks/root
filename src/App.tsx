@@ -15,7 +15,6 @@ import Transportation from "./Transportation/Transportation";
 import "./App.scss";
 import Review from "./Review/Review";
 import Admin from "./Admin/Admin";
-import Verify from "./Verify";
 import Helmet from "react-helmet";
 import FormPageWrapper from "./FormPage/FormPageWrapper";
 import Sponsors from "./Sponsors/Sponsors";
@@ -46,7 +45,6 @@ const App = (props: IAppProps) => (
       </Helmet>
       {props.loading && <Loading />}
       <Switch>
-        <Route path="/verify" component={Verify} />
         <Route render={() => <MainRoutes {...props} />} />
       </Switch>
     </div>
