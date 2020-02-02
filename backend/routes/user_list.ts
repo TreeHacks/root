@@ -25,7 +25,7 @@ export async function getMeetList(req: Request, res: Response) {
   let finalResults = results.map(result => {
     let obj = result.toObject();
     prepopulateMeetInfo(obj);
-    return obj; 
+    return obj;
   });
   res.status(200).json({
     results: finalResults,

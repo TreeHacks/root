@@ -52,6 +52,7 @@ const _doc = {
 let docs = [
     { ..._doc, user: { email: 'test@treehacks', id: 'applicanttreehacks' } },
     { ..._doc, user: { email: 'test@treehacks', id: 'applicant-optout-confirmed' }, sponsor_optout: true, status: STATUS.ADMISSION_CONFIRMED },
+    { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed-3' }, status: STATUS.ADMISSION_CONFIRMED },
     { ..._doc, user: { email: 'test@treehacks', id: 'applicant-confirmed' },
         forms: {
             ..._doc.forms, meet_info: { showProfile: false }
@@ -107,7 +108,7 @@ describe('users_meet list', () => {
             .get("/api/users_meet")
             .set({ Authorization: 'applicant' })
             .expect(200).then(e => {
-                expect(e.body.count).toEqual(1);
+                expect(e.body.count).toEqual(2);
                 for (let result of e.body.results) {
                     expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
                     expect(Object.keys(result.user).sort()).toEqual(["id"]);
@@ -127,7 +128,7 @@ describe('users_meet list', () => {
             .get("/api/users_meet")
             .set({ Authorization: 'admin' })
             .expect(200).then(e => {
-                expect(e.body.count).toEqual(1);
+                expect(e.body.count).toEqual(2);
                 for (let result of e.body.results) {
                     expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
                     expect(Object.keys(result.user).sort()).toEqual(["id"]);
@@ -150,8 +151,8 @@ describe('user form list by sponsor', () => {
             .get("/api/users")
             .set({ Authorization: 'sponsor' })
             .expect(200).then(e => {
-                expect(e.body.count).toEqual(2);
-                expect(e.body.results.map(item => item.user.id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2'].sort());
+                expect(e.body.count).toEqual(3);
+                expect(e.body.results.map(item => item.user.id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2', 'applicant-confirmed-3'].sort());
                 for (let result of e.body.results) {
                     expect(Object.keys(result.forms.application_info).sort()).toEqual(sponsorApplicationDisplayFieldsNoSection.sort());
                 }
@@ -164,8 +165,8 @@ describe('user form list by sponsor', () => {
             }))
             .set({ Authorization: 'sponsor' })
             .expect(200).then(e => {
-                expect(e.body.count).toEqual(2);
-                expect(e.body.results.map(item => item.user.id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2'].sort());
+                expect(e.body.count).toEqual(3);
+                expect(e.body.results.map(item => item.user.id).sort()).toEqual(['applicant-confirmed', 'applicant-confirmed-2', 'applicant-confirmed-3'].sort());
                 for (let result of e.body.results) {
                     expect(Object.keys(result.forms.application_info).sort()).toEqual(sponsorApplicationDisplayFieldsNoSection.sort());
                 }
