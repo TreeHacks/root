@@ -93,40 +93,11 @@ afterAll(() => {
 });
 
 describe('user form list by applicant', () => {
-    test('view form list with applicant should only return user id and meet_info of admission_confirmed participants with showProfile = true', () => {
+    test('view form list with applicant should fail', () => {
         return request(app)
             .get("/api/users")
             .set({ Authorization: 'applicant' })
-            .expect(200).then(e => {
-                expect(e.body.count).toEqual(1);
-                for (let result of e.body.results) {
-                    expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
-                    expect(Object.keys(result.user).sort()).toEqual(["id"]);
-                    expect(result.forms).toEqual({ meet_info: {
-                        idea: "..",
-                        showProfile: true,
-                        verticals: ["a", "b"],
-                        pronouns: "they/them",
-                        first_name: "fir",
-                        last_initial: "t"
-                    } });
-                }
-            });
-    });
-    test('view form list with applicant should not project extra info', () => {
-        return request(app)
-            .get("/api/users?" + queryString.stringify({
-                project: JSON.stringify(['forms.application_info', 'user.id'])
-            }))
-            .set({ Authorization: 'applicant' })
-            .expect(200).then(e => {
-                expect(e.body.count).toEqual(1);
-                for (let result of e.body.results) {
-                    expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
-                    expect(Object.keys(result.user).sort()).toEqual(["id"]);
-                    expect(Object.keys(result.forms)).toEqual(["meet_info"]);
-                }
-            });
+            .expect(403);
     });
 });
 

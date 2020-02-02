@@ -73,8 +73,6 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
   let query = this.getQuery();
   const options = this.getOptions();
   let groups = get(options, "treehacks:groups", []);
-  let getGenericList = get(options, "treehacks:getGenericList", false);
-  let isApplicationModel = get(options, "treehacks:isApplicationModel", "");
   if (groups.indexOf("admin") > -1) {
   }
   else if (groups.indexOf("sponsor") > -1) {
@@ -86,37 +84,11 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
       ]
     };
     this.setQuery(query);
-    // if (!this.selectedInclusively()) {
-      (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
-      this.select([
-        "user.id",
-        "user.email",
-        ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
-      ].join(" "));
-    // }
-  }
-  else {
-    // Regular applicants can only view user id's and meet_info of ADMISSION_CONFIRMED participants
-    // with existing meet_info fields and meet_info.showProfile equal to true.
-    if (getGenericList && isApplicationModel) {
-      query = {
-        "$and": [
-          query,
-          { "status": STATUS.ADMISSION_CONFIRMED },
-          { "forms.meet_info": { "$exists": true } },
-          { "forms.meet_info.showProfile": true }
-        ]
-      };
-      this.setQuery(query);
-      // if (!this.selectedInclusively()) {
-        (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
-        this.select([
-          "user.id",
-          "forms.meet_info",
-          "forms.application_info.first_name",
-          "forms.application_info.last_name"
-        ].join(" "));
-      // }
-    }
+    (this as any)._fields = {}; // Todo: change this when mongoose has a way to clear selection.
+    this.select([
+      "user.id",
+      "user.email",
+      ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
+    ].join(" "));
   }
 }

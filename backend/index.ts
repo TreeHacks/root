@@ -93,7 +93,7 @@ authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStat
 authenticatedRoute.post('/users/:userId/status/confirm', confirmAdmission);
 authenticatedRoute.post('/users/:userId/status/decline', declineAdmission);
 // This one is not admin-protected.
-authenticatedRoute.get('/users', [applicantRoute], getUserList);
+authenticatedRoute.get('/users', [sponsorRoute], getUserList);
 authenticatedRoute.get('/users_meet', [applicantRoute], getMeetList);
 // Admin protected
 authenticatedRoute.post('/users_resumes', [sponsorRoute], getUserResumes);

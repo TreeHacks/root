@@ -167,9 +167,7 @@ export function getGenericList(req: Request, res: Response, Model: Model<any>) {
     }
   }
   let queryOptions = {
-    "treehacks:groups": res.locals.user && res.locals.user['cognito:groups'],
-    "treehacks:getGenericList": true,
-    "treehacks:isApplicationModel": (new Model()) instanceof Application
+    "treehacks:groups": res.locals.user && res.locals.user['cognito:groups']
   };
 
   let query = Model.find(filter, JSON.parse(req.query.project || "{}"), queryOptions);
@@ -189,16 +187,6 @@ export function getGenericList(req: Request, res: Response, Model: Model<any>) {
     countQuery
   ])
     .then(([results, count]) => {
-      if (queryOptions["treehacks:isApplicationModel"]) {
-        // Pre-populate meet_info for regular applicant
-        for (let result of results) {
-          if (result.forms && result.forms.meet_info && result.forms.application_info && isEqual(Object.keys(result.forms.application_info).sort(), ["first_name", "last_name"])) {
-            prepopulateMeetInfo(result);
-          } else {
-            break;
-          }
-        }
-      }
       return res.status(200).json({
         results: results,
         count: count
