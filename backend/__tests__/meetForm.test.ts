@@ -26,6 +26,21 @@ describe('meet form', () => {
                 expect(e.body).toEqual({ idea: "hello", first_name: "ash", last_initial: "r" });
             });
     });
+    test('view meet info should work and show defaults when meet info is not defined', async () => {
+        await new Application({
+            user: { id: 'applicanttreehacks' },
+            forms: {
+                application_info: {first_name: "ash", last_name: "ram"}
+            }
+        }).save();
+        await request(app)
+            .get("/api/users/applicanttreehacks/forms/meet_info")
+            .set({ Authorization: 'applicant' })
+            .expect(200)
+            .then(e => {
+                expect(e.body).toEqual({ first_name: "ash", last_initial: "r" });
+            });
+    });
     test('edit meet info', async () => {
         await new Application({
             user: { id: 'applicanttreehacks' }
