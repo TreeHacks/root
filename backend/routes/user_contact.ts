@@ -34,7 +34,7 @@ export async function userContact(req: Request, res: Response) {
     } catch (e) {
         res.type('html').send(`
         <meta http-equiv="refresh" content="0;url=mailto:${email}" />
-        <a href="mailto:${email}">${email}</a>
+        This user has not connected with Slack yet. Try emailing them instead: <a href="mailto:${email}">${email}</a>
         `);
     }
 }
