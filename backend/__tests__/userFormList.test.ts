@@ -130,6 +130,49 @@ describe('user form list by applicant', () => {
     });
 });
 
+describe('users_meet list', () => {
+    test('should only return user id and meet_info of admission_confirmed participants with showProfile = true', () => {
+        return request(app)
+            .get("/api/users_meet")
+            .set({ Authorization: 'applicant' })
+            .expect(200).then(e => {
+                expect(e.body.count).toEqual(1);
+                for (let result of e.body.results) {
+                    expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
+                    expect(Object.keys(result.user).sort()).toEqual(["id"]);
+                    expect(result.forms).toEqual({ meet_info: {
+                        idea: "..",
+                        showProfile: true,
+                        verticals: ["a", "b"],
+                        pronouns: "they/them",
+                        first_name: "fir",
+                        last_initial: "t"
+                    } });
+                }
+            });
+    });
+    test('should work the same for admins as well as applicants', () => {
+        return request(app)
+            .get("/api/users_meet")
+            .set({ Authorization: 'admin' })
+            .expect(200).then(e => {
+                expect(e.body.count).toEqual(1);
+                for (let result of e.body.results) {
+                    expect(Object.keys(result).sort()).toEqual(["_id", "forms", "user"]);
+                    expect(Object.keys(result.user).sort()).toEqual(["id"]);
+                    expect(result.forms).toEqual({ meet_info: {
+                        idea: "..",
+                        showProfile: true,
+                        verticals: ["a", "b"],
+                        pronouns: "they/them",
+                        first_name: "fir",
+                        last_initial: "t"
+                    } });
+                }
+            });
+    });
+});
+
 describe('user form list by sponsor', () => {
     test('view only application confirmed forms with no opt out', () => {
         return request(app)
