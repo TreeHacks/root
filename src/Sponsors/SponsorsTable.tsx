@@ -15,7 +15,7 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
     const columns = [
         {
             "Header": "Preview",
-            "accessor": "_id",
+            "accessor": "user.id",
             "id": "view",
             "filterable": false,
             "Cell": (p) => <div onClick={(e) => {
