@@ -639,6 +639,17 @@ const swagger = {
         }
       }
     },
+    "/user_profile": {
+      "get": {
+        "summary": "Get user profile",
+        "description": "Authenticate to get user profile and permissions.",
+        "responses": {
+          "200": {
+            "description": "Response"
+          }
+        }
+      }
+    },
     "/review/leaderboard": {
       "get": {
         "tags": ["review"],

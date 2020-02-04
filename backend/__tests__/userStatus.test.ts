@@ -12,11 +12,61 @@ const _doc = {
             deadline: "2048-01-30T04:39:47.512Z"
         }
     },
-    user: {id: 'applicanttreehacks'}
+    forms: {
+        application_info: {
+            first_name: "First",
+            last_name: "Last",
+            phone: "1234567890"
+        }
+    },
+    user: { id: 'applicanttreehacks' }
 };
 
 afterEach(() => {
     return Application.deleteMany({});
+})
+
+describe('user profile endpoint info', () => {
+    beforeEach(async () => {
+        await new Application({ ..._doc }).save();
+    });
+    test('applicant - should return expected fields', async () => {
+        await request(app)
+            .get("/api/user_profile")
+            .set({ Authorization: 'applicant' })
+            .expect(200)
+            .then(e => {
+                expect(e.body).toEqual({
+                    status: STATUS.INCOMPLETE,
+                    groups: [],
+                    first_name: "First",
+                    last_name: "Last",
+                    email: "applicant@treehacks",
+                    id: "applicanttreehacks",
+                    phone: "1234567890"
+                });
+            });
+    });
+    test('admin - should include correct groups and not include application fields if they don\'t exist', async () => {
+        await request(app)
+            .get("/api/user_profile")
+            .set({ Authorization: 'admin' })
+            .expect(200)
+            .then(e => {
+                expect(e.body).toEqual({
+                    groups: ['admin'],
+                    email: "admin@treehacks",
+                    id: "admintreehacks"
+                });
+            });
+    });
+    test('should give error with invalid jwt', async () => {
+        await request(app)
+            .get("/api/user_profile")
+            .set({ Authorization: 'invalid' })
+            .expect(401);
+    });
+
 })
 
 describe('user status before deadline', () => {

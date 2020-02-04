@@ -1,7 +1,38 @@
 import { Request, Response } from 'express';
-import {getApplicationAttribute, setApplicationAttribute} from "./common";
+import { getApplicationAttribute, setApplicationAttribute } from "./common";
 import { STATUS } from '../constants';
 import { IApplication } from '../models/Application.d';
+import Application from '../models/Application';
+
+export async function getUserProfile(req: Request, res: Response) {
+  const userId = res.locals.user['sub'];
+  const groups = res.locals.user['cognito:groups'];
+  let response: any = {
+    email: res.locals.user['email'],
+    id: userId,
+    groups
+  };
+  let application = await Application.findOne(
+    { "user.id": userId }, { "status": 1, "user": 1, "forms.application_info": 1 },
+    { "treehacks:groups": groups });
+  if (!application) {
+    res.json(response);
+  } else {
+    response = {
+      ...response,
+      status: application.status
+    };
+    if (application.forms && application.forms.application_info) {
+      response = {
+        ...response,
+        first_name: application.forms.application_info.first_name,
+        last_name: application.forms.application_info.last_name,
+        phone: application.forms.application_info.phone
+      };
+    }
+    res.json(response);
+  }
+}
 
 export function getApplicationStatus(req: Request, res: Response) {
   return getApplicationAttribute(req, res, e => ({status: e.status}));
@@ -10,7 +41,7 @@ export function getApplicationStatus(req: Request, res: Response) {
 export function setApplicationStatus(req: Request, res: Response) {
   return setApplicationAttribute(req, res,
     e => e.status = req.body.status,
-    e => ({status: e.status}));
+    e => ({ status: e.status }));
 }
 
 export function confirmAdmission(req: Request, res: Response) {
@@ -24,7 +55,7 @@ export function confirmAdmission(req: Request, res: Response) {
       }
       e.status = STATUS.ADMISSION_CONFIRMED
     },
-    e => ({status: e.status}));
+    e => ({ status: e.status }));
 }
 
 export function declineAdmission(req: Request, res: Response) {
@@ -39,5 +70,5 @@ export function declineAdmission(req: Request, res: Response) {
       }
       e.status = STATUS.ADMISSION_DECLINED
     },
-    e => ({status: e.status}));
+    e => ({ status: e.status }));
 }
