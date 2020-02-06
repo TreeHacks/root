@@ -14,7 +14,7 @@ for app in applications:
     if 'meet_info' in app['forms']:
         user_email = app['user']['email']
         user_resp = slack_client.users_lookupByEmail(email=user_email)
-        image_link = user_resp['user']['profile']['image_192']
+        image_link = user_resp['user']['profile']['image_512']
         db.applications.update_one({
             '_id': app['_id']
         },{
