@@ -13,7 +13,10 @@ slack_client = slack.WebClient(token=os.environ['SLACK_OAUTH_ACCESS_TOKEN'])
 for app in applications:
     if 'meet_info' in app['forms']:
         user_email = app['user']['email']
-        user_resp = slack_client.users_lookupByEmail(email=user_email)
+        try:
+            user_resp = slack_client.users_lookupByEmail(email=user_email)
+        except slack.errors.SlackApiError:
+            continue
         image_link = user_resp['user']['profile']['image_512']
         db.applications.update_one({
             '_id': app['_id']
