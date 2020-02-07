@@ -17,6 +17,7 @@ uri_dict = uri_parser.parse_uri(mongo_uri)
 db = client[uri_dict['database']]
 applications = db.applications.find({'year': '2020', 'forms.meet_info': {'$exists': True}})
 slack_client = slack.WebClient(token=os.environ['SLACK_OAUTH_ACCESS_TOKEN'])
+count = 0
 
 for app in applications:
     user_email = app['user']['email']
@@ -34,5 +35,7 @@ for app in applications:
             'forms.meet_info.profilePicture': image_link
         }
     }, upsert=False)
+    count += 1
 
+print(count, "applications updated")
 client.close()
