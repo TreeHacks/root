@@ -1,3 +1,8 @@
+'''This script updates the profilePicture field in the Mongo database with users' Slack profile pictures. The script
+is intended to be run periodically with a cron job or similar. The script accesses MONGODB_URI and
+SLACK_OAUTH_ACCESS_TOKEN environment variables.
+'''
+
 import os
 import slack
 from dotenv import load_dotenv
