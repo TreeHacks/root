@@ -26,7 +26,7 @@ for app in applications:
     except slack.errors.SlackApiError:
         continue
     image_link = user_resp['user']['profile']['image_512']
-    if app['forms']['meet_info']['profilePicture'] and image_link == app['forms']['meet_info']['profilePicture']:
+    if 'profilePicture' in app['forms']['meet_info'] and image_link == app['forms']['meet_info']['profilePicture']:
         continue
     db.applications.update_one({
         '_id': app['_id']
