@@ -187,6 +187,71 @@ exports[`dashboard incomplete after deadline 1`] = `
 </div>
 `;
 
+exports[`dashboard incomplete before deadline - should have special wording for stanford students 1`] = `
+<div
+  className="dashboard"
+>
+  <div
+    className="stripe accent-blue"
+  />
+  <div
+    className="stripe accent-orange bottom"
+  />
+  <div
+    className="floating-illustration drone"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="floating-illustration relax"
+  >
+    <img
+      src={[Function]}
+    />
+  </div>
+  <div
+    className="treehacks-dashboard-message-container"
+  >
+    <div
+      className="dashboard-design"
+    >
+      <div>
+        <div>
+          All Stanford students who register by the deadline will be accepted to the event. Late registration and day-of walk-ins will not be allowed.
+        </div>
+        <div>
+          You haven't submitted your
+           
+          <Link
+            replace={false}
+            to="/application_info"
+          >
+            application
+          </Link>
+           yet. You have
+        </div>
+        <div
+          className="days-left"
+        >
+          7715
+        </div>
+        <div>
+          days
+           to submit your application before the deadline:
+          <br />
+          <strong>
+            February 13, 2020
+          </strong>
+          .
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`dashboard incomplete before deadline 1`] = `
 <div
   className="dashboard"

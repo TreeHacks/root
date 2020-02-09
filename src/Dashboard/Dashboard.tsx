@@ -7,13 +7,11 @@ import Loading from "../Loading/Loading";
 import AdmittedScreen from "./AdmittedScreen";
 import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
 import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
-import moment from "moment-timezone";
-import { DEADLINES, STATUS, dashboardBackground } from "../constants";
+import { DEADLINES, STATUS, TYPE } from "../constants";
 import { get } from "lodash";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserProfile } from "../store/form/actions";
-import { IFormState } from "../store/form/types";
 import { IDashboardProps, IDashboardWrapperProps } from "./types";
 
 export const Dashboard = (props: IDashboardProps) => {
@@ -121,6 +119,8 @@ export const Dashboard = (props: IDashboardProps) => {
             <span>Sorry, the application window has closed.</span>
           ) : (
             <div>
+              {props.profile.type === TYPE.STANFORD && <div>All Stanford students who register by the deadline will be accepted to the event. Late registration and day-of walk-ins will not be allowed.
+              </div>}
               <div>
                 You haven't submitted your{" "}
                 <Link to="/application_info">application</Link> yet. You have
