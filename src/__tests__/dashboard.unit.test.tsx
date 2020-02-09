@@ -43,6 +43,23 @@ it('dashboard incomplete before deadline', () => {
     expect(wrapper.text()).toContain("before the deadline:November 18,");
 });
 
+it('dashboard incomplete before deadline - should have special wording for stanford students', () => {
+    const profile = {
+        status: STATUS.INCOMPLETE,
+        type: TYPE.STANFORD
+    };
+    const clock = lolex.install({now: new Date("01/01/1999")});
+  
+    const wrapper = shallow(
+        <Dashboard profile={ profile } />
+    );
+    clock.uninstall();
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.text()).toContain("You haven't submitted");
+    expect(wrapper.text()).toContain("All Stanford students");
+    expect(wrapper.text()).toContain("before the deadline:February 13,");
+});
+
 it('dashboard submitted', () => {
     const profile = {
         status: STATUS.SUBMITTED,

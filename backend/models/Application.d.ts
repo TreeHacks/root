@@ -42,11 +42,14 @@ export interface ITransportationInfo {
 }
 
 export interface IMeetInfo {
-  verticals: String,
-  idea: String,
-  pronouns: String,
-  showProfile: Boolean,
-  
+  verticals?: String,
+  idea?: String,
+  pronouns?: String,
+  showProfile?: Boolean,
+
+  // populated from script
+  profilePicture?: String,
+
   // dynamically populated from API:
   first_name?: String,
   last_initial?: String

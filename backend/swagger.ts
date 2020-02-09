@@ -209,6 +209,31 @@ const swagger = {
         }
       }
     },
+    "/users_meet": {
+      "get": {
+        "summary": "Get list of user meet info",
+        "description": "Used by participants to view meet info of other participants",
+        "responses": {
+          "200": {
+            "description": "User list response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": { "type": "integer" },
+                    "results": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Application" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+        }
+      }
+    },
     "/users_stats": {
       "get": {
         "summary": "Get user stats",
@@ -610,6 +635,17 @@ const swagger = {
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/user_profile": {
+      "get": {
+        "summary": "Get user profile",
+        "description": "Authenticate to get user profile and permissions.",
+        "responses": {
+          "200": {
+            "description": "Response"
           }
         }
       }

@@ -2,9 +2,35 @@ import Application from "../models/Application";
 import { Request, Response, application } from 'express';
 import { getGenericList } from "./common";
 import { groupBy } from "lodash";
+import { STATUS } from "../constants";
+import { prepopulateMeetInfo } from "./meet_info";
 
 export function getUserList(req: Request, res: Response) {
   return getGenericList(req, res, Application);
+}
+
+export async function getMeetList(req: Request, res: Response) {
+  const results = await Application.find({
+    "$and": [
+      { "status": STATUS.ADMISSION_CONFIRMED },
+      { "forms.meet_info": { "$exists": true } },
+      { "forms.meet_info.showProfile": true }
+    ]
+  }, {
+    "user.id": 1,
+    "forms.meet_info": 1,
+    "forms.application_info.first_name": 1,
+    "forms.application_info.last_name": 1
+  });
+  let finalResults = results.map(result => {
+    let obj = result.toObject();
+    prepopulateMeetInfo(obj);
+    return obj;
+  });
+  res.status(200).json({
+    results: finalResults,
+    count: results.length
+  })
 }
 
 const facetStatsRequest = async () => {

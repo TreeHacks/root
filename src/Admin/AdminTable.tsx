@@ -135,6 +135,13 @@ const AdminTable = (props: IAdminTableProps) => {
             "Filter": createFilterSelect([true, false]),
             "accessor": "sponsor_optout",
             "Cell": e => typeof(e.value) === 'boolean' ? String(e.value) : ""
+        },
+        {
+            "Header": "Volunteer",
+            "filterMethod": defaultFilterMethod,
+            "Filter": createFilterSelect([true, false]),
+            "accessor": "forms.application_info.volunteer",
+            "Cell": e => typeof(e.value) === 'boolean' ? String(e.value) : ""
         }
     ];
     return (
