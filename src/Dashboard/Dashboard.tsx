@@ -119,7 +119,7 @@ export const Dashboard = (props: IDashboardProps) => {
             <span>Sorry, the application window has closed.</span>
           ) : (
             <div>
-              {props.profile.type === TYPE.STANFORD && <div>All Stanford students who register by the deadline will be accepted to the event. Late registration and day-of walk-ins will not be allowed.
+              {props.profile.type === TYPE.STANFORD && <div>All Stanford students who register by the deadline will be accepted to the event. Late registration and day-of walk-ins will not be allowed.<br /><br />
               </div>}
               <div>
                 You haven't submitted your{" "}

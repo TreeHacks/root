@@ -220,6 +220,8 @@ exports[`dashboard incomplete before deadline - should have special wording for 
       <div>
         <div>
           All Stanford students who register by the deadline will be accepted to the event. Late registration and day-of walk-ins will not be allowed.
+          <br />
+          <br />
         </div>
         <div>
           You haven't submitted your
