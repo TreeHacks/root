@@ -172,6 +172,38 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       }
     ]
   },
+  [TRANSPORTATION_BUS_ROUTES.UBER]: {
+    coordinator: null,
+    route: [
+      {
+        day: 'Friday, February 14th',
+        time: '8:00am',
+        stop: 'Check in at 293 S Holliston Ave (In Front of Avery House)',
+        location: 'Pasadena'
+      },
+      {
+        day: 'Friday, February 14th',
+        time: '4:03pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        hack: true
+      },
+      {
+        day: 'Sunday, February 16th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        day: 'Monday, February 17th',
+        time: '10:26pm',
+        stop: '293 S Holliston Ave (In Front of Avery House)',
+        location: 'Pasadena'
+      }
+    ]
+  },
   [TRANSPORTATION_BUS_ROUTES.USC]: {
     coordinator: null,
     route: [
