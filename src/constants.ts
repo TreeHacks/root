@@ -5,7 +5,8 @@ export var GROUPS = {
   'admin': 'Administrator',
   'reviewer': 'Reviewer',
   'sponsor': 'Sponsor',
-  'judge': 'Judge'
+  'judge': 'Judge',
+  'mentor': 'Mentor'
 };
 
 export var STATUS = {
