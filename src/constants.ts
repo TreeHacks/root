@@ -141,7 +141,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.CALTECH]: {
-    coordinator: null,
+    coordinator: {'name': 'Alex Cui', 'email': 'acui@caltech.edu'},
     route: [
       {
         day: 'Friday, February 14th',
@@ -205,7 +205,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.USC]: {
-    coordinator: null,
+    coordinator: {'name': 'Lily Perry', 'email': 'lilyperr@usc.edu'},
     route: [
       {
         day: 'Friday, February 14th',
@@ -277,7 +277,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCLA]: {
-    coordinator: null,
+    coordinator: {'name': 'Aryan Arora', 'email': 'aryan.arora@ucla.edu'},
     route: [
       {
         day: 'Friday, February 14th',
@@ -349,7 +349,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCI]: {
-    coordinator: null,
+    coordinator: { 'name': 'Kevin Truong', 'email': 'kctruon1@uci.edu' },
     route: [
       {
         day: 'Friday, Februrary 14th',
