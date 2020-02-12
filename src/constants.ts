@@ -47,6 +47,10 @@ export var TRANSPORTATION_BUS_ROUTES = {
   TEST_NO_COORDINATOR: "test_no_coordinator",
   USC: "usc",
   UCLA: "ucla",
+  CALTECH: "caltech",
+  UBER: "uber",
+  UCIUBER: "uci-uber",
+  USCUBER: "usc-uber",
   SANDIEGO: "sandiego",
   UCI: "uci",
   POMONA: "pomona",
@@ -69,7 +73,7 @@ export type IBusRoute = {
 };
 
 export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { name: string, email: string }, route: IBusRoute[] } } = {
-  [TRANSPORTATION_BUS_ROUTES.USC]: {
+  [TRANSPORTATION_BUS_ROUTES.USCUBER]: {
     coordinator: null,
     route: [
       {
@@ -80,7 +84,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       },
       {
         day: 'Friday, February 14th',
-        time: '4:30pm',
+        time: '4:00pm',
         stop: 'Panama St. & Via Ortega',
         location: 'Stanford'
       },
@@ -96,6 +100,138 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       {
         day: 'Sunday, February 16th',
         time: '10:30pm',
+        stop: '37th & McClintock',
+        location: 'Los Angeles'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.UCIUBER]: {
+    coordinator: null,
+    route: [
+      {
+        day: 'Friday, Februrary 14th',
+        time: '6:30am',
+        stop: 'Check-in in at West Peltason & Mesa',
+        location: 'Irvine'
+      },
+
+      {
+        day: 'Friday, Feburary 14th',
+        time: '5:30pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+
+      {
+        hack: true
+      },
+
+      {
+        day: 'Sunday, Februrary 16th',
+        time: '4:00pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+
+      {
+        day: 'Monday, Februrary 17th',
+        time: '1:00am',
+        stop: 'West Peltason & Mesa',
+        location: 'Irvine'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.CALTECH]: {
+    coordinator: {'name': 'Alex Cui', 'email': 'acui@caltech.edu'},
+    route: [
+      {
+        day: 'Friday, February 14th',
+        time: '8:00am',
+        stop: 'Check in at 293 S Holliston Ave (In Front of Avery House)',
+        location: 'Pasadena'
+      },
+      {
+        day: 'Friday, February 14th',
+        time: '4:03pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        hack: true
+      },
+      {
+        day: 'Sunday, February 16th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        day: 'Monday, February 17th',
+        time: '10:26pm',
+        stop: '293 S Holliston Ave (In Front of Avery House)',
+        location: 'Pasadena'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.UBER]: {
+    coordinator: null,
+    route: [
+      {
+        day: 'Friday, February 14th',
+        time: '8:00am',
+        stop: 'Check in at 293 S Holliston Ave (In Front of Avery House)',
+        location: 'Pasadena'
+      },
+      {
+        day: 'Friday, February 14th',
+        time: '4:03pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        hack: true
+      },
+      {
+        day: 'Sunday, February 16th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        day: 'Monday, February 17th',
+        time: '10:26pm',
+        stop: '293 S Holliston Ave (In Front of Avery House)',
+        location: 'Pasadena'
+      }
+    ]
+  },
+  [TRANSPORTATION_BUS_ROUTES.USC]: {
+    coordinator: {'name': 'Lily Perry', 'email': 'lilyperr@usc.edu'},
+    route: [
+      {
+        day: 'Friday, February 14th',
+        time: '9:28am',
+        stop: 'Check in at 37th & McClintock',
+        location: 'Los Angeles'
+      },
+      {
+        day: 'Friday, February 14th',
+        time: '4:40pm',
+        stop: 'Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        hack: true
+      },
+      {
+        day: 'Sunday, February 16th',
+        time: '3:30pm',
+        stop: 'Check in at Panama St. & Via Ortega',
+        location: 'Stanford'
+      },
+      {
+        day: 'Sunday, February 16th',
+        time: '9:59pm',
         stop: '37th & McClintock',
         location: 'Los Angeles'
       }
@@ -142,18 +278,18 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCLA]: {
-    coordinator: null,
+    coordinator: {'name': 'Aryan Arora', 'email': 'aryan.arora@ucla.edu'},
     route: [
       {
         day: 'Friday, February 14th',
-        time: '9:00am',
+        time: '9:31am',
         stop: 'Check in at 10 Charles E. Young N',
         location: 'Los Angeles'
       },
 
       {
         day: 'Friday, February 14th',
-        time: '4:30pm',
+        time: '4:03pm',
         stop: 'Panama St. & Via Ortega',
         location: 'Stanford'
       },
@@ -171,7 +307,7 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
 
       {
         day: 'Sunday, February 16th',
-        time: '10:30pm',
+        time: '9:48pm',
         stop: '10 Charles E. Young N',
         location: 'Los Angeles'
       }
@@ -214,18 +350,18 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     ]
   },
   [TRANSPORTATION_BUS_ROUTES.UCI]: {
-    coordinator: null,
+    coordinator: { 'name': 'Kevin Truong', 'email': 'kctruon1@uci.edu' },
     route: [
       {
         day: 'Friday, Februrary 14th',
-        time: '7:30am',
-        stop: 'Check-in in front of Avery House (293 S Holliston Ave, Pasadena, CA)',
-        location: 'Pasadena'
+        time: '8:00am',
+        stop: 'Check-in in at West Peltason & Mesa',
+        location: 'Irvine'
       },
 
       {
         day: 'Friday, Feburary 14th',
-        time: '4:30pm',
+        time: '4:40pm',
         stop: 'Panama St. & Via Ortega',
         location: 'Stanford'
       },
@@ -242,10 +378,10 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
       },
 
       {
-        day: 'Sunday, Februrary 16th',
+        day: 'Sunday, February 17th',
         time: '11:00pm',
-        stop: 'In front of Avery House (293 S Holliston Ave, Pasadena, CA)',
-        location: 'Pasadena'
+        stop: 'West Peltason & Mesa',
+        location: 'Irvine'
       }
     ]
   },
@@ -290,14 +426,14 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
     route: [
       {
         day: 'Friday, Februrary 14th',
-        time: '2:30pm',
+        time: '3:00pm',
         stop: 'Check in at West Circle / University Drive',
         location: 'Berkeley'
       },
 
       {
         day: 'Friday, Feburary 14th',
-        time: '4:30pm',
+        time: '5:00pm',
         stop: 'Panama St. & Via Ortega',
         location: 'Stanford'
       },
@@ -308,14 +444,14 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: { [x: string]: { coordinator: { nam
 
       {
         day: 'Sunday, Februrary 16th',
-        time: '3:30pm',
+        time: '4:00pm',
         stop: 'Check in at Panama St. & Via Ortega',
         location: 'Stanford'
       },
 
       {
         day: 'Sunday, Februrary 16th',
-        time: '5:30pm',
+        time: '6:00pm',
         stop: 'West Circle / University Drive',
         location: 'Berkeley'
       }
