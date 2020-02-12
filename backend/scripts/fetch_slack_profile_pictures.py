@@ -25,7 +25,8 @@ for app in applications:
         user_resp = slack_client.users_lookupByEmail(email=user_email)
     except slack.errors.SlackApiError:
         continue
-    image_link = user_resp['user']['profile']['image_512']
+    print(user_resp['user']['profile'])
+    image_link = user_resp['user']['profile']['image_192']
     if 'profilePicture' in app['forms']['meet_info'] and image_link == app['forms']['meet_info']['profilePicture']:
         continue
     db.applications.update_one({
