@@ -245,6 +245,17 @@ const swagger = {
         }
       }
     },
+    "/mentor_create": {
+      "post": {
+        "summary": "Create mentor",
+        "description": "Used by mentor signup link on login.treehacks.com.",
+        "responses": {
+          "200": {
+            "description": "Response",
+          },
+        }
+      }
+    },
     "/users/{userId}": {
       "get": {
         "summary": "Get full user and application information",

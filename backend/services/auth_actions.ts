@@ -4,7 +4,7 @@ import Judge from "../models/Judge";
 
 const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
 
-export async function bulkAutoCreateUser({ email, group, password }) {
+export async function bulkAutoCreateUser({ email, group, password = null }) {
   password = password || passwordGenerator.generate({
     length: 10,
     numbers: true,
