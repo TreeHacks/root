@@ -80,7 +80,7 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules', 'scripts'],
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts', '.tsx', '.mjs', '.js']
   },
   node: {
     fs: "empty"

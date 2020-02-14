@@ -67,7 +67,7 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
             <div className="col-12">
                 <h3>Applications</h3>
                 <ReactTable filterable columns={columns} data={props.applicationList} minRows={0}
-                    pages={props.pages}
+                    pages={props.pages as any}
                     manual
                     // loading={props.base.loading}
                     // defaultPageSize={1}

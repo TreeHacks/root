@@ -6,7 +6,7 @@ import { IBaseState } from "src/store/base/types";
 export interface IReactTableState {
     page: number,
     pageSize: number,
-    sorted: { id: string, desc: string }[],
+    sorted: { id: string, desc: string }[] | any,
     filtered: { id: string, value: boolean }[]
 }
 
@@ -18,7 +18,8 @@ export interface IAdminTableProps extends IAdminState {
     setSelectedForm: (e: { id: string, name: string }) => void,
     editRow?: (endpoint: string, id: string, data: any) => Promise<any>,
     getExportedApplicationsCSV: (state: IReactTableState, columns: IReactTableHeader[], sheets?: boolean) => void,
-    base: IBaseState
+    base: IBaseState,
+    pages: any
 }
 
 export interface IStatsWrapperProps extends IAdminState {
