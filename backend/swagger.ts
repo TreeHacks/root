@@ -256,6 +256,17 @@ const swagger = {
         }
       }
     },
+    "/leaderboard": {
+      "get": {
+        "summary": "Get hacker leaderboard",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Response",
+          },
+        }
+      }
+    },
     "/users/{userId}": {
       "get": {
         "summary": "Get full user and application information",

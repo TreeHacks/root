@@ -31,6 +31,7 @@ import { getAnnouncements } from "./routes/announcements";
 import { userContact } from "./routes/user_contact";
 import { getRooms, reserveRoom, dropCurrentRoom, getPublicRoomStatus } from "./routes/rooms";
 import { mentorCreate } from "./routes/mentor_create";
+import { leaderboard } from "./routes/leaderboard";
 
 // Set up the Express app
 const app = express();
@@ -68,6 +69,7 @@ apiRouter.get('/hacks', [anonymousRoute], getHackList);
 apiRouter.get('/announcements', [anonymousRoute], getAnnouncements);
 apiRouter.get('/rooms/status', [anonymousRoute], getPublicRoomStatus);
 apiRouter.get('/users/:userId/contact', [anonymousRoute], userContact);
+apiRouter.get('/leaderboard', [anonymousRoute], leaderboard);
 apiRouter.post('/mentor_create', [anonymousRoute], mentorCreate);
 
 apiRouter.use("/", authenticatedRoute);
