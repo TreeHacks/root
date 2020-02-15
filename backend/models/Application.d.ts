@@ -35,7 +35,10 @@ export interface IApplicationInfo {
     q2: String,
     volunteer: boolean,
     q_team_matching_1: String,
-    q_team_matching_2: String
+    q_team_matching_2: String,
+
+    // populated from script
+    profilePicture?: String
 }
 export interface ITransportationInfo {
     [e: string]: any
