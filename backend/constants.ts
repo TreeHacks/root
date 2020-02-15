@@ -185,16 +185,6 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "unavailable": []
   },
   {
-    "id": "218",
-    "name": "218 The Barnholt Family",
-    "description": "",
-    "unavailable": [{
-      start: "2/16 6 PM PST",
-      end: "2/17 1 AM PST",
-      label: "Ali Partovi (Neo) Office Hours"
-    }]
-  },
-  {
     "id": "219",
     "name": "219 The Robert B Taggart and Donna F Taggart",
     "description": "",
