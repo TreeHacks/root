@@ -57,7 +57,6 @@ export async function leaderboard(req: Request, res: Response) {
             !best_ids.includes(data_point["id"]) && best_ids.push(data_point["id"]);
           })
         );
-        best_ids = ["e221eed3-4bcb-4ff3-91fc-30ca734118d0"];
         const user_response = await Application.find({"user.id": {$in: best_ids}}, {"forms.application_info.first_name": 1, "forms.application_info.last_name": 1, "forms.meet_info.profilePicture": 1, "user.id": 1});
 
         user_response.map(data =>
@@ -66,7 +65,6 @@ export async function leaderboard(req: Request, res: Response) {
               console.log(data.user["id"]);
               console.log(data_point["id"]);
               if (data.user["id"] == data_point["id"]) {
-                console.log("lajdlkaj");
                 data_point["first_name"] = data.forms.application_info.first_name;
                 data_point["last_name"] = data.forms.application_info.last_name;
                 data_point["picture"] = data.forms.meet_info.profilePicture;
@@ -77,7 +75,7 @@ export async function leaderboard(req: Request, res: Response) {
 
         return res.json({
             success: true,
-            data: sorted_data
+            data: user_response
         });
     } catch (e) {
         res.status(500).json({
