@@ -197,12 +197,6 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "unavailable": []
   },
   {
-    "id": "305",
-    "name": "305 Leone Perkins",
-    "description": "",
-    "unavailable": []
-  },
-  {
     "id": "306",
     "name": "306 Koshland Family",
     "description": "",
