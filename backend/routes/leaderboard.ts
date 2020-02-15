@@ -58,15 +58,18 @@ export async function leaderboard(req: Request, res: Response) {
         );
         const user_response = await Application.find({"user.id": {$in: best_ids}}, {"forms.application_info.first_name": 1, "forms.application_info.last_name": 1, "forms.meet_info.profilePicture": 1, "user.id": 1});
 
-        user_response.map(data =>
-          sorted_data.map(type_data =>
-            type_data["data"].map(data_point => {
+        user_response.forEach(data =>
+          sorted_data.forEach(type_data =>
+            type_data["data"].forEach(data_point => {
               console.log(data.user["id"]);
               console.log(data_point["id"]);
               if (data.user["id"] == data_point["id"]) {
+                if (!data.forms || !data.forms.application_info) {
+                  return;
+                }
                 data_point["first_name"] = data.forms.application_info.first_name;
                 data_point["last_name"] = data.forms.application_info.last_name;
-                data_point["picture"] = data.forms.meet_info.profilePicture;
+                data_point["picture"] = data.forms.meet_info && data.forms.meet_info.profilePicture;
               }
             })
           )
