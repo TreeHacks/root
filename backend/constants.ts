@@ -185,12 +185,6 @@ export let AVAILABLE_ROOMS: IRoom[] = [
     "unavailable": []
   },
   {
-    "id": "219",
-    "name": "219 The Robert B Taggart and Donna F Taggart",
-    "description": "",
-    "unavailable": []
-  },
-  {
     "id": "304",
     "name": "304 Alpha",
     "description": "",
