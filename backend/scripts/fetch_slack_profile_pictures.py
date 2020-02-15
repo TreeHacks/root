@@ -15,7 +15,7 @@ mongo_uri = os.environ['MONGODB_URI']
 client = MongoClient(mongo_uri, retryWrites=False);
 uri_dict = uri_parser.parse_uri(mongo_uri)
 db = client[uri_dict['database']]
-applications = db.applications.find({'year': '2020', 'forms.meet_info': {'$exists': True}})
+applications = db.applications.find({'year': '2020', 'status': 'admission_confirmed'})
 slack_client = slack.WebClient(token=os.environ['SLACK_OAUTH_ACCESS_TOKEN'])
 count = 0
 
@@ -26,7 +26,7 @@ for app in applications:
     except slack.errors.SlackApiError:
         continue
     image_link = user_resp['user']['profile']['image_192']
-    if 'profilePicture' in app['forms']['meet_info'] and image_link == app['forms']['meet_info']['profilePicture']:
+    if 'meet_info' in app['forms'] and 'profilePicture' in app['forms']['meet_info'] and image_link == app['forms']['meet_info']['profilePicture']:
         continue
     db.applications.update_one({
         '_id': app['_id']
