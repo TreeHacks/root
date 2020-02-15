@@ -50,7 +50,6 @@ export async function leaderboard(req: Request, res: Response) {
             data: type_data
           });
         });
-
         let best_ids = [];
         sorted_data.map(type_data =>
           type_data["data"].map(data_point => {
@@ -75,7 +74,7 @@ export async function leaderboard(req: Request, res: Response) {
 
         return res.json({
             success: true,
-            data: user_response
+            data: sorted_data
         });
     } catch (e) {
         res.status(500).json({
