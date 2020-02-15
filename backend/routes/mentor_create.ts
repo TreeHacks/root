@@ -31,14 +31,15 @@ export async function mentorCreate(req: Request, res: Response) {
         const url = "https://slack.com/api/users.admin.invite?" + queryString.stringify({
             token: process.env.SLACK_LEGACY_INVITE_TOKEN,
             email: req.body.email,
-            channels: process.env.MENTOR_SLACK_INVITE_DEFAULT_CHANNEL
+            channels: process.env.MENTOR_SLACK_INVITE_DEFAULT_CHANNEL || ""
         });
         const slackResponse = await axios.get(url);
         if (!slackResponse.data.ok) {
-            throw "not ok";
+            throw slackResponse.data.error;
         }
         slackInviteSent = true;
     } catch (e) {
+        console.error("slack invite error", e);
     }
     res.json({
         success: true,
