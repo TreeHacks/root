@@ -4,6 +4,7 @@ import { IApplication } from "./Application.d"
 import applicationInfoSchema from "./applicationInfoSchema";
 import adminInfoSchema from "./adminInfoSchema";
 import meetInfoSchema from "./meetInfoSchema";
+import submitInfoSchema from "./submitInfoSchema";
 import reviewSchema from "./reviewSchema";
 import { STATUS, TRANSPORTATION_STATUS } from "../constants";
 import {values} from "lodash";
@@ -14,7 +15,8 @@ export const applicationSchema: Schema = new mongoose.Schema({
     "forms": { // can only be modified by user/editors
         "application_info": applicationInfoSchema,
         "transportation": transportationInfoSchema,
-        "meet_info": meetInfoSchema
+        "meet_info": meetInfoSchema,
+        "submit_info": submitInfoSchema
     },
     "admin_info": adminInfoSchema, // Only editable by admin.
     "reviews": [reviewSchema], // each review can only be modified by the reviewer who made it.

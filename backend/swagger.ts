@@ -36,6 +36,9 @@ const swagger = {
       "MeetInfo": {
         "type": "object"
       },
+      "SubmitInfo": {
+        "type": "object"
+      },
       "AdminInfo": {
         "type": "object",
         "properties": {
@@ -400,6 +403,43 @@ const swagger = {
                     "nModified": { "type": "integer" }
                   }
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/forms/submit_info": {
+      "get": {
+        "summary": "Get submit info",
+        "description": "Used by applicants",
+        "responses": {
+          "200": {
+            "description": "User submit info response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SubmitInfo" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update submit info",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SubmitInfo" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User submit info response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SubmitInfo" }
               }
             }
           }

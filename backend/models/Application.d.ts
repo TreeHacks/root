@@ -55,11 +55,17 @@ export interface IMeetInfo {
   last_initial?: String
 }
 
+export interface ISubmitInfo {
+  members?: String[],
+  url?: String
+}
+
 export interface IApplication extends Document {
   "forms": { // can only be modified by user/editors
       "application_info": IApplicationInfo,
       "transportation": ITransportationInfo,
-      "meet_info": IMeetInfo
+      "meet_info": IMeetInfo,
+      "submit_info": ISubmitInfo
       // we can conceivably add additional forms here.
   },
   "admin_info": { // Only editable by admin.
