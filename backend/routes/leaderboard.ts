@@ -37,6 +37,7 @@ export async function leaderboard(req: Request, res: Response) {
             !display_types.includes(key) && display_types.push(key)
           );
         }
+        display_types.push("Total");
 
         let sorted_data = []
         display_types.map(type => {
@@ -46,6 +47,16 @@ export async function leaderboard(req: Request, res: Response) {
               type_data.push({
                 id: id["id"],
                 num: id["events"][type]
+              })
+            }
+            if (type == "Total") {
+              var total_num = 0;
+              Object.keys(id["events"]).forEach(key =>
+                total_num += id["events"][key]
+              )
+              type_data.push({
+                id: id["id"],
+                num: total_num
               })
             }
           });
@@ -70,8 +81,6 @@ export async function leaderboard(req: Request, res: Response) {
         user_response.forEach(data =>
           sorted_data.forEach(type_data =>
             type_data["data"].forEach(data_point => {
-              console.log(data.user["id"]);
-              console.log(data_point["id"]);
               if (data.user["id"] == data_point["id"]) {
                 if (!data.forms || !data.forms.application_info) {
                   return;
