@@ -46,6 +46,10 @@ export interface IMeetInfo {
   idea?: String,
   pronouns?: String,
   showProfile?: Boolean,
+  commitment?: String,
+  skills?: String,
+  timezoneOffset?: Number,
+  socialLinks?: String,
 
   // populated from script
   profilePicture?: String,
