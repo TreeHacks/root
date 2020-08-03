@@ -50,7 +50,6 @@ export interface IMeetInfo {
   commitment?: String,
   skills?: String,
   timezoneOffset?: String,
-  socialLinks?: String,
   githubLink?: String,
   devpostLink?: String,
   linkedinLink?: String,
