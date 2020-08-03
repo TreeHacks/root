@@ -43,13 +43,17 @@ export interface ITransportationInfo {
 
 export interface IMeetInfo {
   verticals?: String,
+  profileDesc?: String,
   idea?: String,
   pronouns?: String,
   showProfile?: Boolean,
   commitment?: String,
   skills?: String,
-  timezoneOffset?: Number,
-  socialLinks?: String,
+  timezoneOffset?: String,
+  githubLink?: String,
+  devpostLink?: String,
+  linkedinLink?: String,
+  portfolioLink?: String,
 
   // populated from script
   profilePicture?: String,
