@@ -20,16 +20,17 @@
     animation-timing-function: ease;
   }
 
-  &.drone {
+  &.hoover {
     img {
       animation-name: updown;
       margin-top: 150px;
+      max-height: 30vh;
     }
   }
 
-  &.relax {
+  &.laptop {
     img {
-      margin-top: 500px;
+      margin-top: 450px;
       left: 5%;
       right: auto;
     }

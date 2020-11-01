@@ -70,17 +70,17 @@ export const Dashboard = (props: IDashboardProps) => {
     "admin_info.acceptance.deadline"
   );
   const acceptanceConfirmDeadlineObject = new Date(acceptanceConfirmDeadline);
-  const drone = require("../art/drone.svg") as string;
-  const relax = require("../art/relax.svg") as string;
+  const laptop = require("../art/laptop.svg") as string;
+  const hoover = require("../art/hoover.svg") as string;
   return (
     <div className="dashboard">
       <div className="stripe accent-blue" />
       <div className="stripe accent-orange bottom" />
-      <div className="floating-illustration drone">
-        <img src={drone} />
+      <div className="floating-illustration hoover">
+        <img src={hoover} />
       </div>
-      <div className="floating-illustration relax">
-        <img src={relax} />
+      <div className="floating-illustration laptop">
+        <img src={laptop} />
       </div>
       <div className="treehacks-dashboard-message-container">
         {false && props.profile.status === STATUS.ADMISSION_CONFIRMED ? (
