@@ -84,7 +84,10 @@
                     "type": "boolean",
                     "const": true,
                     "title": "I authorize you to share my application/registration information for purposes in-line with the TreeHacks Privacy Policy."
-                    
+                },
+                "beginner_info": {
+                    "type": "boolean",
+                    "title": "I would like to receive additional information geared towards beginners."
                 },
                 "section2": {
                     "title": "short answer questions",
@@ -332,7 +335,8 @@
                 "gender",
                 "race",
                 "accept_terms",
-                "accept_share"
+                "accept_share",
+                "beginner_info"
             ]
         }
     },

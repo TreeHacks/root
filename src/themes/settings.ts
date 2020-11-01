@@ -1,4 +1,4 @@
-import customConfig from "./pink_palm_tree";
+import customConfig from "./green_sprout";
 import defaultConfig from "./default";
 import { set } from "lodash";
 
