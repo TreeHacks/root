@@ -492,7 +492,8 @@ export const applicationDisplayFields = [
   "gender",
   "race",
   "accept_terms",
-  "accept_share"
+  "accept_share",
+  "beginner_info"
 ];
 export const applicationDisplayFieldsStanford = [
   "section1",
@@ -521,7 +522,8 @@ export const applicationDisplayFieldsStanford = [
   "gender",
   "race",
   "accept_terms",
-  "accept_share"
+  "accept_share",
+  "beginner_info"
 ];
 
 export const VERTICALS = ["health", "safety", "awareness"];
