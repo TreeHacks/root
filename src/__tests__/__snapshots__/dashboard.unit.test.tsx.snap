@@ -11,14 +11,14 @@ exports[`dashboard admission confirm expired 1`] = `
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
@@ -47,14 +47,14 @@ exports[`dashboard admission confirmed 1`] = `
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
@@ -85,14 +85,14 @@ exports[`dashboard admission declined 1`] = `
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
@@ -121,14 +121,14 @@ exports[`dashboard admitted 1`] = `
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
@@ -160,14 +160,14 @@ exports[`dashboard incomplete after deadline 1`] = `
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
@@ -198,14 +198,14 @@ exports[`dashboard incomplete before deadline - should have special wording for 
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
@@ -219,7 +219,7 @@ exports[`dashboard incomplete before deadline - should have special wording for 
     >
       <div>
         <div>
-          All Stanford students who register by the deadline will be accepted to the event. Late registration and day-of walk-ins will not be allowed.
+          All Stanford students who register by the deadline will be accepted to the event.
           <br />
           <br />
         </div>
@@ -237,14 +237,14 @@ exports[`dashboard incomplete before deadline - should have special wording for 
         <div
           className="days-left"
         >
-          7715
+          8051
         </div>
         <div>
           days
            to submit your application before the deadline:
           <br />
           <strong>
-            February 13, 2020
+            January 15, 2021
           </strong>
           .
         </div>
@@ -265,14 +265,14 @@ exports[`dashboard incomplete before deadline 1`] = `
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
@@ -299,14 +299,14 @@ exports[`dashboard incomplete before deadline 1`] = `
         <div
           className="days-left"
         >
-          7628
+          8021
         </div>
         <div>
           days
            to submit your application before the deadline:
           <br />
           <strong>
-            November 18, 2019
+            December 15, 2020
           </strong>
           .
         </div>
@@ -327,14 +327,14 @@ exports[`dashboard rejected 1`] = `
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
@@ -363,12 +363,12 @@ exports[`dashboard submitted 1`] = `
     class="stripe accent-orange bottom"
   />
   <div
-    class="floating-illustration drone"
+    class="floating-illustration hoover"
   >
     <img />
   </div>
   <div
-    class="floating-illustration relax"
+    class="floating-illustration laptop"
   >
     <img />
   </div>
@@ -400,14 +400,14 @@ exports[`dashboard waitlisted 1`] = `
     className="stripe accent-orange bottom"
   />
   <div
-    className="floating-illustration drone"
+    className="floating-illustration hoover"
   >
     <img
       src={[Function]}
     />
   </div>
   <div
-    className="floating-illustration relax"
+    className="floating-illustration laptop"
   >
     <img
       src={[Function]}
