@@ -802,7 +802,7 @@ exports[`flight reimbursement 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2020 :)
+          Attend TreeHacks 2021 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -953,7 +953,7 @@ exports[`flight reimbursement with transportation_status=SUBMITTED 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2020 :)
+          Attend TreeHacks 2021 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -1068,7 +1068,7 @@ exports[`other reimbursement 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2020 :)
+          Attend TreeHacks 2021 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -1206,7 +1206,7 @@ exports[`other reimbursement with transportation_status=SUBMITTED 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2020 :)
+          Attend TreeHacks 2021 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.
@@ -1294,7 +1294,7 @@ exports[`reimbursement screen when admission not yet confirmed 1`] = `
         style="text-align:left;margin:20px auto;max-width:575px"
       >
         <li>
-          Attend TreeHacks 2020 :)
+          Attend TreeHacks 2021 :)
         </li>
         <li>
           Submit a project by the project deadline the weekend-of.

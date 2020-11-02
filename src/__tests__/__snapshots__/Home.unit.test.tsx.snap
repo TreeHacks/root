@@ -49,13 +49,6 @@ exports[`Home screen tests home screen admin 1`] = `
     <NavLink
       activeClassName="active"
       aria-current="page"
-      to="/transportation"
-    >
-      travel
-    </NavLink>
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
       to="/admin"
     >
       admin
@@ -115,13 +108,6 @@ exports[`Home screen tests home screen applicant 1`] = `
       to="/application_info"
     >
       application
-    </NavLink>
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      to="/transportation"
-    >
-      travel
     </NavLink>
     <a
       className="logout"
@@ -226,13 +212,6 @@ exports[`Home screen tests home screen reviewer 1`] = `
       to="/application_info"
     >
       application
-    </NavLink>
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      to="/transportation"
-    >
-      travel
     </NavLink>
     <NavLink
       activeClassName="active"
