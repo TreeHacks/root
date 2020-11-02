@@ -4,13 +4,7 @@ export default {
   "deadlines": [
       {
           "key": "oos",
-          "label": "out-of-state",
-          "date": "2020-12-16T07:59:00.000Z",
-          "display_date": "December 15, 2020"
-      },
-      {
-          "key": "is",
-          "label": "in-state",
+          "label": "Non-Stanford student",
           "date": "2020-12-16T07:59:00.000Z",
           "display_date": "December 15, 2020"
       },
@@ -18,7 +12,7 @@ export default {
           "key": "stanford",
           "label": "Stanford student",
           "date": "2021-01-15T07:59:00.000Z",
-          "display_date": "February 13, 2021"
+          "display_date": "January 15, 2021"
       }
   ],
   "logo": require('./assets/logo.svg'),
