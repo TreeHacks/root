@@ -5,7 +5,7 @@
             "properties": {
                 "section1": {
                     "title": "your application",
-                    "custom_description": "We’re so excited that you want to come to TreeHacks 2021! Let’s start with the basics.",
+                    "custom_description": "We’re so excited that you want to come to TreeHacks 2021! If you have any questions, feel free to reach out at hello@treehacks.com. Let’s start with the basics.",
                     "type": "string"
                 },
                 "first_name": {

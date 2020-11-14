@@ -67,6 +67,11 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
         let schema = cloneDeep(props.schemas[props.formName].schema);
         const uiSchema = cloneDeep(props.schemas[props.formName].uiSchema);
 
+        // Inject mailing link and style into section1 description
+        if (get(schema, 'properties.section1')) {
+            schema.properties.section1.custom_description = <span>We’re so excited that you want to come to TreeHacks 2021! <b>If you have any questions, feel free to reach out at <a className="email-link" href="mailto:hello@treehacks.com">hello@treehacks.com</a>.</b> Let’s start with the basics.</span>
+        }
+
         // Inject direct link to COC into accept_terms
         if (get(schema, 'properties.accept_terms')) {
             schema.properties.accept_terms.title = <span>I have read and agree to the <a className="form-link" href="https://www.treehacks.com/code-of-conduct" target="_blank">TreeHacks Code of Conduct.</a></span>;
