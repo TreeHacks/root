@@ -112,8 +112,7 @@ export const Dashboard = (props: IDashboardProps) => {
               now!
               <br />
               <br />
-              We will email you when decisions are released and will handle any
-              travel questions at that time. Thanks for applying :)
+              We will email you when decisions are released. Thanks for applying :)
             </span>
           ) : currentDate > deadlineDate.getTime() ? (
             <span>Sorry, the application window has closed.</span>
