@@ -1,6 +1,6 @@
 import Application from "../models/Application";
 import { IApplication } from "../models/Application.d";
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 import { CognitoUser } from "../models/cognitoUser";
 import { STATUS, TYPE, TRANSPORTATION_STATUS } from "../constants";
 import { isEqual } from "lodash";
@@ -11,13 +11,13 @@ import { prepopulateMeetInfo } from "./meet_info";
 
 export function getDeadline(type) {
   switch (type) {
-      case "is":
-          return new Date("2020-12-16T07:59:00.000Z");
-      case "stanford":
-          return new Date("2021-01-15T07:59:00.000Z");
-      case "oos":
-      default:
-          return new Date("2020-12-16T07:59:00.000Z");
+    case "is":
+      return new Date("2020-12-23T07:59:00.000Z");
+    case "stanford":
+      return new Date("2021-01-15T07:59:00.000Z");
+    case "oos":
+    default:
+      return new Date("2020-12-23T07:59:00.000Z");
   }
 }
 
@@ -27,21 +27,30 @@ export function getDeadline(type) {
  * res - Response
  * getter - function describing what part of the application should be returned from the endpoint.
  */
-export async function getApplicationAttribute(req: Request, res: Response, getter: (e: IApplication) => any, createIfNotFound = false) {
+export async function getApplicationAttribute(
+  req: Request,
+  res: Response,
+  getter: (e: IApplication) => any,
+  createIfNotFound = false
+) {
   let application: IApplication | null = await Application.findOne(
-    { "user.id": req.params.userId }, { "__v": 0, "reviews": 0 },
-    { "treehacks:groups": res.locals.user['cognito:groups'] });
+    { "user.id": req.params.userId },
+    { __v: 0, reviews: 0 },
+    { "treehacks:groups": res.locals.user["cognito:groups"] }
+  );
 
   if (!application) {
     if (createIfNotFound) {
-      return createApplication(res.locals.user as CognitoUser).then(e => getApplicationAttribute(req, res, getter, false));
-    }
-    else {
+      return createApplication(res.locals.user as CognitoUser).then((e) =>
+        getApplicationAttribute(req, res, getter, false)
+      );
+    } else {
       res.status(404).send("Application not found.");
     }
-  }
-  else {
-    application = await injectDynamicApplicationContent(application) as IApplication;
+  } else {
+    application = (await injectDynamicApplicationContent(
+      application
+    )) as IApplication;
     res.status(200).send(getter(application));
   }
 }
@@ -53,9 +62,17 @@ export async function getApplicationAttribute(req: Request, res: Response, gette
  * setter - a function describing what happens to the application before save. It can also return an error (server response), in which case the application isn't saved.
  * getter - function describing what part of the application should be returned from the endpoint.
  */
-export async function setApplicationAttribute(req: Request, res: Response, setter: (e: IApplication) => any, getter: (e: IApplication) => any = e => e, considerDeadline = false) {
+export async function setApplicationAttribute(
+  req: Request,
+  res: Response,
+  setter: (e: IApplication) => any,
+  getter: (e: IApplication) => any = (e) => e,
+  considerDeadline = false
+) {
   const application: IApplication | null = await Application.findOne(
-    { "user.id": req.params.userId }, { "__v": 0, "reviews": 0 });
+    { "user.id": req.params.userId },
+    { __v: 0, reviews: 0 }
+  );
 
   if (!application) {
     res.status(404).send("Application not found.");
@@ -63,8 +80,12 @@ export async function setApplicationAttribute(req: Request, res: Response, sette
   }
 
   let deadline = getDeadline(application.type);
-  if (considerDeadline && (deadline < new Date())) {
-    res.status(403).send(`Application deadline has already passed: ${deadline.toLocaleString()}`);
+  if (considerDeadline && deadline < new Date()) {
+    res
+      .status(403)
+      .send(
+        `Application deadline has already passed: ${deadline.toLocaleString()}`
+      );
     return;
   }
 
@@ -130,29 +151,31 @@ export async function createApplication(user: CognitoUser) {
   let applicationLocation = user["custom:location"];
   let applicationType = user["custom:location"] === "California" ? "is" : "oos";
   let applicationStatus = STATUS.INCOMPLETE;
-  let transportationStatus: (string | null) = null;
+  let transportationStatus: string | null = null;
   if (user.email.match(/@stanford.edu$/)) {
     applicationInfo = {
-      "university": "Stanford University"
+      university: "Stanford University",
     };
     applicationType = "stanford";
     applicationLocation = "California";
-    const existingApplication = await Application.findOne({ "user.email": user.email });
+    const existingApplication = await Application.findOne({
+      "user.email": user.email,
+    });
     if (existingApplication) {
       return existingApplication;
     }
   }
   const application = new Application({
-    "forms": {
-      "application_info": applicationInfo
+    forms: {
+      application_info: applicationInfo,
     },
-    "admin_info": {},
-    "reviews": [],
-    "user": { "email": user.email, "id": user.sub },
-    "type": applicationType,
-    "location": applicationLocation,
-    "status": applicationStatus,
-    "transportation_status": transportationStatus
+    admin_info: {},
+    reviews: [],
+    user: { email: user.email, id: user.sub },
+    type: applicationType,
+    location: applicationLocation,
+    status: applicationStatus,
+    transportation_status: transportationStatus,
   });
   return await application.save(); // todo: return something else here?
 }
@@ -162,36 +185,40 @@ export function getGenericList(req: Request, res: Response, Model: Model<any>) {
   let filter = JSON.parse(req.query.filter || "{}");
   for (let key in filter) {
     // Matching by a string in any location
-    if (typeof filter[key] === 'string') {
-      filter[key] = { $regex: '^' + filter[key], $options: 'i' };
+    if (typeof filter[key] === "string") {
+      filter[key] = { $regex: "^" + filter[key], $options: "i" };
     }
   }
   let queryOptions = {
-    "treehacks:groups": res.locals.user && res.locals.user['cognito:groups']
+    "treehacks:groups": res.locals.user && res.locals.user["cognito:groups"],
   };
 
-  let query = Model.find(filter, JSON.parse(req.query.project || "{}"), queryOptions);
-  let sortedAndFilteredQuery =
-    query.sort(JSON.parse(req.query.sort || "{}"))
-      .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
+  let query = Model.find(
+    filter,
+    JSON.parse(req.query.project || "{}"),
+    queryOptions
+  );
+  let sortedAndFilteredQuery = query
+    .sort(JSON.parse(req.query.sort || "{}"))
+    .skip(parseInt(req.query.page) * parseInt(req.query.pageSize));
 
   if (parseInt(req.query.pageSize) >= 0) {
-    sortedAndFilteredQuery = sortedAndFilteredQuery.limit(parseInt(req.query.pageSize));
+    sortedAndFilteredQuery = sortedAndFilteredQuery.limit(
+      parseInt(req.query.pageSize)
+    );
   }
 
   let countQuery = Model.countDocuments(filter);
   countQuery.setOptions(queryOptions);
 
-  Promise.all([
-    sortedAndFilteredQuery.lean().exec(),
-    countQuery
-  ])
+  Promise.all([sortedAndFilteredQuery.lean().exec(), countQuery])
     .then(([results, count]) => {
       return res.status(200).json({
         results: results,
-        count: count
+        count: count,
       });
-    }).catch(err => {
-      return res.status(400).json(err);
     })
+    .catch((err) => {
+      return res.status(400).json(err);
+    });
 }
