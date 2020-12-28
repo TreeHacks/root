@@ -1,5 +1,5 @@
 import Application from "../models/Application";
-import { STATUS, IGNORED_REVIEWERS, applicationReviewDisplayFields } from "../constants";
+import { STATUS, IGNORED_REVIEWERS, applicationReviewDisplayFields, REVIEWS_PER_APP } from "../constants";
 import { IApplication } from "../models/Application.d";
 import { find } from "lodash";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
@@ -35,17 +35,18 @@ export const getLeaderboard = (req, res) => {
 };
 
 export const getReviewStats = (req, res) => {
+    let key = `reviews.${REVIEWS_PER_APP - 1}`
     Promise.all([Application.find({
         $and: [
             { status: STATUS.SUBMITTED },
             { type: 'is' },
-            { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
+            { [key]: { $exists: false } } // Look for when length of "reviews" is less than REVIEWS_PER_APP.
         ]
     }).count().exec(), Application.find({
         $and: [
             { status: STATUS.SUBMITTED },
             { type: 'oos' },
-            { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
+            { [key]: { $exists: false } } // Look for when length of "reviews" is less than REVIEWS_PER_APP.
         ]
     }).count().exec()])
         .then(([num_is, num_oos]) => {
@@ -65,8 +66,8 @@ export const rateReview = async (req, res) => {
     if (!application) {
         return res.status(404).send("Application to rate not found");
     }
-    else if (application.reviews && application.reviews.length >= 3) {
-        return res.status(403).send("Application already has 3 reviews.");
+    else if (application.reviews && application.reviews.length >= REVIEWS_PER_APP) {
+        return res.status(403).send(`Application already has ${REVIEWS_PER_APP} reviews.`);
     }
     else if (application.reviews && find(application.reviews, { "reader": { "id": res.locals.user.sub } })) {
         return res.status(403).send("Application already has a review submitted by user " + res.locals.user.sub);
@@ -101,7 +102,7 @@ export const reviewNextApplication = async (req, res) => {
                     { 'reviews.reader.id': { $ne: res.locals.user.sub } }, // Not already reviewed by current user
                     { status: STATUS.SUBMITTED },
                     { type: type },
-                    { 'reviews.2': { $exists: false } } // Look for when length of "reviews" is less than 3.
+                    { [`reviews.${REVIEWS_PER_APP-1}`]: { $exists: false } } // Look for when length of "reviews" is less than REVIEWS_PER_APP.
                 ]
             }
         },

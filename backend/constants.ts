@@ -220,3 +220,5 @@ export const IGNORED_REVIEWERS = process.env.IGNORED_REVIEWERS ? JSON.parse(proc
 
 export const ALLOWED_GROUPS = ["admin", "reviewer", "sponsor"];
 // ["admin", "reviewer", "sponsor", "judge"];
+
+export const REVIEWS_PER_APP = 2;

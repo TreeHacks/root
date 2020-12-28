@@ -289,7 +289,7 @@ describe('rate applications', () => {
             })
             .expect(403)
             .then(e => {
-                expect(e.text).toContain("already has 3 reviews");
+                expect(e.text).toContain("already has 2 reviews");
             });
     });
 });
