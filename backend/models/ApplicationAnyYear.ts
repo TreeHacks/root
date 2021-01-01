@@ -47,6 +47,9 @@ export const applicationSchema: Schema = new mongoose.Schema({
     },
     "year": {
         type: String
+    },
+    "tags": {
+        type: [String]
     }
 });
 
