@@ -51,6 +51,14 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
             "accessor": "forms.application_info.level_of_study"
         },
         {
+            "Header": "Tags",
+            "accessor": "tags",
+            "Cell": row => {
+                if(!row.value) return "";
+                return row.value.join(", ");
+            }
+        },
+        {
             "Header": "Q2 - Tell us a story about creating the project you're most proud of (technical or nontechnical). Why did you choose to work on it? What did you learn from it?",
             "accessor": "forms.application_info.q2_experience",
             "show": false

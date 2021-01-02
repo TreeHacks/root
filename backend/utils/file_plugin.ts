@@ -88,6 +88,7 @@ export function projectAllowedApplicationFields(this: mongoose.Query<IApplicatio
     this.select([
       "user.id",
       "user.email",
+      "tags",
       ...sponsorApplicationDisplayFields.map(e => "forms.application_info." + e)
     ].join(" "));
   }
