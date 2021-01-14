@@ -33,6 +33,7 @@ import { userContact } from "./routes/user_contact";
 import { getRooms, reserveRoom, dropCurrentRoom, getPublicRoomStatus } from "./routes/rooms";
 import { mentorCreate } from "./routes/mentor_create";
 import { leaderboard } from "./routes/leaderboard";
+import { createTeam, setTeamData, joinTeam, leaveTeam, getUserTeamData} from "./routes/teams";
 
 // Set up the Express app
 const app = express();
@@ -95,6 +96,15 @@ authenticatedRoute.get('/users/:userId', getUserDetail);
 authenticatedRoute.get('/rooms', getRooms);
 authenticatedRoute.post('/rooms', reserveRoom);
 authenticatedRoute.delete('/rooms', dropCurrentRoom);
+
+// Team management
+authenticatedRoute.post('/users/:userId/teams/create', createTeam);
+authenticatedRoute.post('/users/:userId/teams/join', joinTeam);
+authenticatedRoute.get('/users/:userId/teams/team', getUserTeamData);
+authenticatedRoute.put('/users/:userId/teams/team', setTeamData);
+authenticatedRoute.post('/users/:userId/teams/leave', leaveTeam);
+authenticatedRoute.get('/users/teams/list');
+
 
 // Admin protected functions.
 authenticatedRoute.put('/users/:userId/status', [adminRoute], setApplicationStatus);
