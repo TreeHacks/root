@@ -17,8 +17,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
       <div>
         <h4>You're coming to TreeHacks {HACKATHON_YEAR}!</h4>
         <p>
-          Admission confirmed &ndash; see you there! Make sure to review and
-          confirm your <Link to="/transportation">travel information</Link>.
+          Admission confirmed &ndash; see you there!
         </p>
         {/*<p>Make sure to check out the <a href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-">Ultimate TreeHacks Guide 🌲</a> to learn more!</p>*/}
       </div>
@@ -29,10 +28,10 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           Congratulations! You've been accepted to TreeHacks {HACKATHON_YEAR}!
         </h4>
         <p>
-          We're so stoked to see you the weekend of {HACKATHON_DATE_RANGE} at
-          Stanford. We were blown away by your application and know that you’ll
+          We're so stoked to see you the weekend of {HACKATHON_DATE_RANGE} at our virtual TreeHacks 2021! 
+          We were blown away by your application and know that you’ll
           be an inspiring hacker. It'll be a super fun weekend filled with
-          amazing hacks, delicious food, and fantastic people. We hope you can
+          amazing hacks, and fantastic people. We hope you can
           join us!
         </p>
         <p>
@@ -68,12 +67,12 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
     >
       {props.confirmedYet ? "already confirmed" : "confirm spot"}
     </button>
-    {!props.confirmedYet && (
+    {/* {!props.confirmedYet && (
       <p>
         We are committed to helping every admitted hacker get here! Check out
         the <Link to="/transportation">travel section</Link> for details.
       </p>
-    )}
+    )} */}
   </div>
 );
 
