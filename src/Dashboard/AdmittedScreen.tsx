@@ -19,6 +19,9 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
         <p>
           Admission confirmed &ndash; see you there!
         </p>
+        <p>
+          Keep an eye on your inbox in the coming weeks -- we'll be sending more details to you shortly!
+        </p>
         {/*<p>Make sure to check out the <a href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-">Ultimate TreeHacks Guide 🌲</a> to learn more!</p>*/}
       </div>
     )}
