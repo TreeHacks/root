@@ -6,19 +6,19 @@ export default {
         {
             "key": "oos",
             "label": "out-of-state",
-            "date": "2018-11-20T07:59:00.000Z",
+            "date": "2022-11-20T07:59:00.000Z",
             "display_date": "November 19, 2018"
         },
         {
             "key": "is",
             "label": "in-state",
-            "date": "2018-11-27T07:59:00.000Z",
+            "date": "2022-11-27T07:59:00.000Z",
             "display_date": "November 26, 2018"
         },
         {
             "key": "stanford",
             "label": "Stanford student",
-            "date": "2019-02-18T07:59:00.000Z",
+            "date": "2022-02-18T07:59:00.000Z",
             "display_date": "as soon as possible"
         }
     ],

@@ -5,19 +5,19 @@ export default {
     {
       key: "oos",
       label: "Non-Stanford student",
-      date: "2020-12-24T07:59:00.000Z",
+      date: "2022-12-24T07:59:00.000Z",
       display_date: "December 22, 2020",
     },
     {
       key: "is",
       label: "Non-Stanford student",
-      date: "2020-12-24T07:59:00.000Z",
+      date: "2022-12-24T07:59:00.000Z",
       display_date: "December 22, 2020",
     },
     {
       key: "stanford",
       label: "Stanford student",
-      date: "2021-02-13T07:59:00.000Z",
+      date: "2022-02-13T07:59:00.000Z",
       display_date: "February 12, 2021",
     },
   ],
