@@ -87,7 +87,7 @@
         "@types/node": "^12.7.9",
         "@types/supertest": "^2.0.5",
         "aws-amplify-react": "^1.0.4",
-        "aws-sdk": "^2.340.0",
+        "aws-sdk": "^2.814.0",
         "axios": "^0.19.2",
         "bluebird": "^3.7.0",
         "body-parser": "^1.18.2",
