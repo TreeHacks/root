@@ -54,7 +54,8 @@ const facetStatsRequest = async () => {
         "university": [{ $sortByCount: "$forms.application_info.university" }],
         "location": [{ $sortByCount: "$location" }],
         "type": [{ $sortByCount: "$type" }],
-        "status": [{ $sortByCount: "$status" }]
+        "status": [{ $sortByCount: "$status" }],
+        "graduation_year": [{ $sortByCount: "$forms.application_info.graduation_year" }]
       }
     }
   ]);
