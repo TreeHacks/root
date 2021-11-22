@@ -5,7 +5,7 @@
             "properties": {
                 "section1": {
                     "title": "your application",
-                    "custom_description": "We’re so excited that you want to come to TreeHacks 2021! If you have any questions, feel free to reach out at hello@treehacks.com. Let’s start with the basics.",
+                    "custom_description": "We’re so excited that you want to come to TreeHacks 2022! If you have any questions, feel free to reach out at hello@treehacks.com. Let’s start with the basics.",
                     "type": "string"
                 },
                 "first_name": {
@@ -69,6 +69,31 @@
                     "enum": [0, 1, 2, 3, 4, 5],
                     "enumNames": ["0", "1", "2", "3", "4", "5 or more"]
                 },
+                "shipping": {
+                    "title": "your shipping address",
+                    "custom_description": "We want to send you a token of our appreciation for participating in TreeHacks!",
+                    "type": "string"
+                },
+                "address1": {
+                    "type": "string",
+                    "title": "Your address"
+                },
+                "address2": {
+                    "type": "string",
+                    "title": "Address line 2"
+                },
+                "city": {
+                    "type": "string",
+                    "title": "City"
+                },
+                "state": {
+                    "type": "string",
+                    "title": "State"
+                },
+                "zip": {
+                    "type": "string",
+                    "title": "Zip code"
+                },
                 "resume": {
                     "title": "Resume",
                     "description": "Upload your resume (optional) - Must be a PDF file, 10 MB max",
@@ -95,7 +120,7 @@
                     "type": "string"
                 },
                 "q1": {
-                    "title": "Why do you want to come to TreeHacks 2021?",
+                    "title": "Why do you want to come to TreeHacks 2022?",
                     "word_count": 150,
                     "type": "string"
                 },
@@ -251,6 +276,21 @@
             "major": {
                 "ui:placeholder": "major"
             },
+            "address1": {
+                "ui:placeholder": "your mailing address"
+            },
+            "address2": {
+                "ui:placeholder": "address line 2"
+            },
+            "city": {
+                "ui:placeholder": "city"
+            },
+            "state": {
+                "ui:placeholder": "state"
+            },
+            "zip": {
+                "ui:placeholder": "zip code"
+            },
             "skill_level": {
                 "ui:placeholder": "skill level"
             },
@@ -297,6 +337,9 @@
                     "rows": 2
                 }
             },
+            "shipping": {
+                "ui:widget": "sectionHeader"
+            },
             "section1": {
                 "ui:widget": "sectionHeader"
             },
@@ -321,6 +364,12 @@
                 "major",
                 "skill_level",
                 "hackathon_experience",
+                "shipping",
+                "address1",
+                "address2",
+                "city",
+                "state",
+                "zip",
                 "resume",
                 "section2",
                 "q1",

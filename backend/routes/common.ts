@@ -12,12 +12,12 @@ import { prepopulateMeetInfo } from "./meet_info";
 export function getDeadline(type) {
     switch (type) {
         case "is":
-            return new Date("2020-12-24T07:59:00.000Z");
+            return new Date("2021-12-26T07:59:00.000Z");
         case "stanford":
-            return new Date("2021-02-13T07:59:00.000Z");
+            return new Date("2022-01-30T07:59:00.000Z");
         case "oos":
         default:
-            return new Date("2020-12-24T07:59:00.000Z");
+            return new Date("2021-12-26T07:59:00.000Z");
     }
 }
 
@@ -149,7 +149,7 @@ website
 export async function createApplication(user: CognitoUser) {
     let applicationInfo = {};
     let applicationLocation = user["custom:location"];
-    let applicationType = user["custom:location"] === "California" ? "is" : "oos";
+    let applicationType = user["custom:location"] === "In Person" ? "is" : "oos";
     let applicationStatus = STATUS.INCOMPLETE;
     let transportationStatus: string | null = null;
     if (user.email.match(/@stanford.edu$/)) {

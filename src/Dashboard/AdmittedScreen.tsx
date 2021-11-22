@@ -31,7 +31,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           Congratulations! You've been accepted to TreeHacks {HACKATHON_YEAR}!
         </h4>
         <p>
-          We're so stoked to see you the weekend of {HACKATHON_DATE_RANGE} at our virtual TreeHacks 2021! 
+          We're so stoked to see you the weekend of {HACKATHON_DATE_RANGE} at TreeHacks {HACKATHON_YEAR}! 
           We were blown away by your application and know that you’ll
           be an inspiring hacker. It'll be a super fun weekend filled with
           amazing hacks, and fantastic people. We hope you can

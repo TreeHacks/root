@@ -1,4 +1,4 @@
-import customConfig from "./green_sprout";
+import customConfig from "./bonsai_chip";
 import defaultConfig from "./default";
 import { set } from "lodash";
 

@@ -69,7 +69,7 @@ class FormPageWrapper extends React.Component<IFormPageWrapperProps, { showSaved
 
         // Inject mailing link and style into section1 description
         if (get(schema, 'properties.section1')) {
-            schema.properties.section1.custom_description = <span>We’re so excited that you want to come to TreeHacks 2021! <b>If you have any questions, feel free to reach out at <a className="email-link" href="mailto:hello@treehacks.com">hello@treehacks.com</a>.</b> Let’s start with the basics.</span>
+            schema.properties.section1.custom_description = <span>We’re so excited that you want to come to TreeHacks 2022! <b>If you have any questions, feel free to reach out at <a className="email-link" href="mailto:hello@treehacks.com">hello@treehacks.com</a>.</b> Let’s start with the basics.</span>
         }
 
         // Inject direct link to COC into accept_terms

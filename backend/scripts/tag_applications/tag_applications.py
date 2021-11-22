@@ -42,7 +42,7 @@ if __name__ == "__main__":
     client = MongoClient(mongo_uri, retryWrites=False)
     uri_dict = uri_parser.parse_uri(mongo_uri)
     db = client[uri_dict["database"]]
-    applications = db.applications.find({"year": "2021", "status": "submitted"})
+    applications = db.applications.find({"year": "2022", "status": "submitted"})
     for app in applications:
         if "resume" in app["forms"]["application_info"]:
             resume_key = app["forms"]["application_info"]["resume"]
