@@ -116,7 +116,7 @@
                 },
                 "section_virtual_inperson": {
                     "title": "in-person / virtual",
-                    "custom_description": "Due to Covid restrictions, only in-state applicants (i.e. those attending university in or otherwise living in California) will be invited to attend in-person. Please only choose the 'In-Person' option if you satisfy the above.",
+                    "custom_description": "Due to Covid restrictions, only in-state applicants (i.e. those attending university in or otherwise living in California) will potentially be invited to attend in-person. Please only choose the 'In-Person' option if you satisfy the above.",
                     "type": "string"
                 },
                 "virtual_inperson": {
