@@ -114,6 +114,18 @@
                     "type": "boolean",
                     "title": "I would like to receive additional information geared towards beginners."
                 },
+                "section_virtual_inperson": {
+                    "title": "in-person / virtual",
+                    "custom_description": "Due to Covid restrictions, only in-state applicants (i.e. those attending university in or otherwise living in California) will be invited to attend in-person. Please only choose the 'In-Person' option if you satisfy the above.",
+                    "type": "string"
+                },
+                "virtual_inperson": {
+                    "enum": [
+                        "In-Person",
+                        "Virtually"
+                    ],
+                    "title":"How will you be joining us?"
+                },
                 "section2": {
                     "title": "short answer questions",
                     "custom_description": "We strive to admit a diverse group of hackers of all experience levels who will make the most of their time at TreeHacks. Help us get to know you and how awesome you are!",
@@ -238,7 +250,9 @@
                 "q3",
                 "q4",
                 "accept_terms",
-                "accept_share"
+                "accept_share",
+                "section_virtual_inperson",
+                "virtual_inperson"
             ]
         },
         "uiSchema": {
@@ -277,6 +291,9 @@
             },
             "level_of_study": {
                 "ui:placeholder": "level of study"
+            },
+            "virtual_inperson": {
+                "ui:placeholder": "How will you be joining us?"
             },
             "major": {
                 "ui:placeholder": "major"
@@ -357,6 +374,9 @@
             "section4": {
                 "ui:widget": "sectionHeader"
             },
+            "section_virtual_inperson": {
+                "ui:widget": "sectionHeader"
+            },
             "ui:order": [
                 "section1",
                 "first_name",
@@ -391,7 +411,9 @@
                 "race",
                 "accept_terms",
                 "accept_share",
-                "beginner_info"
+                "beginner_info",
+                "section_virtual_inperson",
+                "virtual_inperson"
             ]
         }
     },

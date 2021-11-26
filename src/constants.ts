@@ -500,7 +500,9 @@ export const applicationDisplayFields = [
   "race",
   "accept_terms",
   "accept_share",
-  "beginner_info"
+  "beginner_info",
+  "section_virtual_inperson",
+  "virtual_inperson"
 ];
 export const applicationDisplayFieldsStanford = [
   "section1",

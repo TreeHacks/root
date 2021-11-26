@@ -23,6 +23,7 @@ const applicationInfoSchema: Schema = new mongoose.Schema({
   accept_terms: Boolean,
   accept_share: Boolean,
   beginner_info: Boolean,
+  virtual_inperson: String,
   q3: String,
   q4: String,
   // Fields only used in 2019:

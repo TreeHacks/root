@@ -109,7 +109,9 @@ export const applicationRequiredFields = [
   "q3",
   "q4",
   "accept_terms",
-  "accept_share"
+  "accept_share",
+  "section_virtual_inperson",
+  "virtual_inperson"
 ];
 export const applicationRequiredFieldsStanford = [
   "first_name",

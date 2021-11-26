@@ -30,6 +30,7 @@ export interface IApplicationInfo {
     accept_terms: boolean,
     accept_share: boolean,
     beginner_info: boolean,
+    virtual_inperson: String,
     q3: String,
     q4: String,
     q5: String,
