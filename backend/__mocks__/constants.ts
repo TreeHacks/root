@@ -98,7 +98,6 @@ export const applicationRequiredFields = [
   "skill_level",
   "hackathon_experience",
   "address1",
-  "address2",
   "city",
   "state",
   "zip",
@@ -108,7 +107,6 @@ export const applicationRequiredFields = [
   "q4",
   "accept_terms",
   "accept_share",
-  "section_virtual_inperson",
   "virtual_inperson"
 ];
 export const applicationRequiredFieldsStanford = [
