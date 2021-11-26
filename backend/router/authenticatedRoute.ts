@@ -8,7 +8,7 @@ const cognitoExpress = new CognitoExpress({
   region: "us-east-1",
   cognitoUserPoolId: process.env.COGNITO_USER_POOL_ID,
   tokenUse: "id", //Possible Values: access | id
-  tokenExpiration: 3600000 //Up to default expiration of 1 hour (3600000 ms)
+  tokenExpiration: 86400000 //Up to default expiration of 24 hours (86400000 ms)
 });
 
 export const authenticatedRoute = express.Router();
