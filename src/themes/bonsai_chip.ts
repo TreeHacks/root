@@ -1,6 +1,6 @@
 export default {
     // TODO: Make these dates the actual dates of the hackathon
-    "hackathon_year": 2021,
+    "hackathon_year": 2022,
     "hackathon_date_range": "February 18-20",
     "locations": ["In-Person", "Virtually"],
     "deadlines": [
