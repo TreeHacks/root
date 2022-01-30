@@ -19,7 +19,7 @@ export default {
         {
             "key": "stanford",
             "label": "Stanford student",
-            "date": "2022-01-30T07:59:00.000Z",
+            "date": "2022-02-10T07:59:00.000Z",
             "display_date": "January 30, 2022"
         }
     ],
