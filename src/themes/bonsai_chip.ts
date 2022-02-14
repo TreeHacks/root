@@ -19,8 +19,8 @@ export default {
         {
             "key": "stanford",
             "label": "Stanford student",
-            "date": "2022-02-10T07:59:00.000Z",
-            "display_date": "January 30, 2022"
+            "date": "2022-02-18T07:59:00.000Z",
+            "display_date": "Feb 17, 2022"
         }
     ],
     "logo": require('./assets/logo.svg'),
