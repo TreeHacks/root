@@ -20,7 +20,7 @@ jsonschema==3.2.0
 MarkupSafe==1.1.1
 murmurhash==1.0.4
 nltk==3.5
-numpy==1.19.4
+numpy==1.22.0
 pandas==1.1.4
 pdfminer.six==20201018
 plac==1.1.3
