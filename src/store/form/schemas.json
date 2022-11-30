@@ -122,7 +122,7 @@
         },
         "section_track": {
           "type": "string",
-          "custom_description": "TreeHacks offers an incredible lineup of tracks that you can centralize your project around and we are curious which track you are most interested in! This selection will not influence your acceptance, we just want to see what space you find cool to work in! "
+          "custom_description": "TreeHacks offers an incredible lineup of tracks that you can centralize your project around and we are curious which track you are most interested in! This selection will not influence your acceptance, we just want to see what space you find cool to work in! To learn more about each track, visit https://www.treehacks.com/#challenges"
         },
         "top_track": {
           "enum": [
