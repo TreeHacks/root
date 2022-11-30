@@ -74,7 +74,6 @@
         },
         "shipping": {
           "title": "your shipping address",
-          "custom_description": "We want to send you a token of our appreciation for participating in TreeHacks!",
           "type": "string"
         },
         "address1": {
@@ -117,14 +116,24 @@
           "type": "boolean",
           "title": "I would like to receive additional information geared towards beginners."
         },
-        "section_virtual_inperson": {
-          "title": "in-person / virtual",
-          "custom_description": "Due to Covid restrictions, only in-state applicants (i.e. those attending university in or otherwise living in California) will potentially be invited to attend in-person. Please only choose the 'In-Person' option if you satisfy the above.",
-          "type": "string"
-        },
         "virtual_inperson": {
           "enum": ["In-Person", "Virtually"],
           "title": "How will you be joining us?"
+        },
+        "section_track": {
+          "type": "string",
+          "custom_description": "TreeHacks offers an incredible lineup of tracks that you can centralize your project around and we are curious which track you are most interested in! This selection will not influence your acceptance, we just want to see what space you find cool to work in! "
+        },
+        "top_track": {
+          "enum": [
+            "Healthcare",
+            "Sustainability",
+            "Emerging Tech",
+            "Web 3.0 & Fintech",
+            "Education",
+            "Privacy & Safety"
+          ],
+          "title": "choose your top track"
         },
         "section2": {
           "title": "short answer questions",
@@ -138,7 +147,7 @@
         },
         "q2": {
           "word_count": 150,
-          "title": "Tell us about a project that you've worked on in the past, technical or nontechnical. Why did you choose to work on it?",
+          "title": "Tell us about the most impactful project you’ve worked on, technical or non-technical.",
           "type": "string"
         },
         "q3": {
@@ -153,6 +162,10 @@
         },
         "q5": {
           "title": "Optionally, add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
+          "type": "string"
+        },
+        "q6": {
+          "title": "If you plan on participating as a team, your decision for this can change at any time and is non-binding, please enter the emails of your teammates, seperated by a single comma.",
           "type": "string"
         },
         "volunteer": {
@@ -9859,6 +9872,9 @@
       "virtual_inperson": {
         "ui:placeholder": "How will you be joining us?"
       },
+      "top_track": {
+        "ui:placeholder": "choose your top track"
+      },
       "major": {
         "ui:placeholder": "major"
       },
@@ -9907,6 +9923,9 @@
       "q5": {
         "ui:widget": "linkarea"
       },
+      "q6": {
+        "ui:widget": "linkarea"
+      },
       "volunteer": {
         "ui:widget": "radio"
       },
@@ -9938,9 +9957,10 @@
       "section4": {
         "ui:widget": "sectionHeader"
       },
-      "section_virtual_inperson": {
+      "section_track": {
         "ui:widget": "sectionHeader"
       },
+
       "ui:order": [
         "section1",
         "first_name",
@@ -9965,10 +9985,13 @@
         "q2",
         "q3",
         "q4",
+        "section_track",
+        "top_track",
         "section3",
         "q_team_matching_1",
         "q_team_matching_2",
         "q5",
+        "q6",
         "volunteer",
         "section4",
         "gender",
@@ -9976,7 +9999,6 @@
         "accept_terms",
         "accept_share",
         "beginner_info",
-        "section_virtual_inperson",
         "virtual_inperson"
       ]
     }
