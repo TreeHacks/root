@@ -511,7 +511,6 @@ export const applicationDisplayFields = [
   "accept_terms",
   "accept_share",
   "beginner_info",
-  "virtual_inperson",
 ];
 export const applicationDisplayFieldsStanford = [
   "section1",

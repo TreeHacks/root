@@ -24,7 +24,6 @@ const applicationInfoSchema: Schema = new mongoose.Schema(
     accept_terms: Boolean,
     accept_share: Boolean,
     beginner_info: Boolean,
-    virtual_inperson: String,
     top_track: String,
     q3: String,
     q4: String,

@@ -116,10 +116,6 @@
           "type": "boolean",
           "title": "I would like to receive additional information geared towards beginners."
         },
-        "virtual_inperson": {
-          "enum": ["In-Person", "Virtually"],
-          "title": "How will you be joining us?"
-        },
         "section_track": {
           "type": "string",
           "custom_description": "TreeHacks offers an incredible lineup of tracks that you can centralize your project around and we are curious which track you are most interested in! This selection will not influence your acceptance, we just want to see what space you find cool to work in! To learn more about each track, visit https://www.treehacks.com/#challenges"
@@ -9869,9 +9865,6 @@
       "level_of_study": {
         "ui:placeholder": "level of study"
       },
-      "virtual_inperson": {
-        "ui:placeholder": "How will you be joining us?"
-      },
       "top_track": {
         "ui:placeholder": "choose your top track"
       },
@@ -9998,8 +9991,7 @@
         "race",
         "accept_terms",
         "accept_share",
-        "beginner_info",
-        "virtual_inperson"
+        "beginner_info"
       ]
     }
   },
