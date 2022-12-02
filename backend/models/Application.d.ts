@@ -35,6 +35,7 @@ export interface IApplicationInfo {
   q4: String;
   q5: String;
   q6: String;
+  q7: String;
   // Fields only used in 2019:
   q1_goodfit: String;
   q2_experience: String;

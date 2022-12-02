@@ -81,6 +81,7 @@ describe("review next application", () => {
           q4: "test",
           q5: "test",
           q6: "test",
+          q7: "test",
           q_team_matching_1: "test",
           q_team_matching_2: "test",
         },

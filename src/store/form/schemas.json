@@ -40,10 +40,7 @@
             "2023",
             "2024",
             "2025",
-            "2026",
-            "2027",
-            "2028",
-            "2029"
+            "2026"
           ]
         },
         "level_of_study": {
@@ -118,7 +115,7 @@
         },
         "section_track": {
           "type": "string",
-          "custom_description": "TreeHacks offers an incredible lineup of tracks that you can centralize your project around and we are curious which track you are most interested in! This selection will not influence your acceptance, we just want to see what space you find cool to work in! To learn more about each track, visit https://www.treehacks.com/#challenges"
+          "custom_description": "TreeHacks offers an incredible lineup of tracks that you can centralize your project around and we are curious which track you are most interested in! This selection will not influence your acceptance, we just want to see what space you find cool to work in! To learn more about each track, visit https://www.treehacks.com"
         },
         "top_track": {
           "enum": [
@@ -162,6 +159,10 @@
         },
         "q6": {
           "title": "If you plan on participating as a team, your decision for this can change at any time and is non-binding, please enter the emails of your teammates, seperated by a single comma.",
+          "type": "string"
+        },
+        "q7": {
+          "title": "If you have a referral email address from someone who has already applied to TreeHacks 2023, please enter it below. You may only enter one.",
           "type": "string"
         },
         "volunteer": {
@@ -9919,6 +9920,9 @@
       "q6": {
         "ui:widget": "linkarea"
       },
+      "q7": {
+        "ui:widget": "linkarea"
+      },
       "volunteer": {
         "ui:widget": "radio"
       },
@@ -9985,6 +9989,7 @@
         "q_team_matching_2",
         "q5",
         "q6",
+        "q7",
         "volunteer",
         "section4",
         "gender",

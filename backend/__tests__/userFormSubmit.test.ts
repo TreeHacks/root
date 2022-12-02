@@ -38,6 +38,7 @@ const _doc = {
       q4: "test",
       q5: "test",
       q6: "test",
+      q7: "test",
     },
   },
 };
@@ -196,6 +197,7 @@ describe("user form submit by applicant", () => {
           accept_share: true,
           q5: "test",
           q6: "test",
+          q7: "test",
           volunteer: true,
         },
       },

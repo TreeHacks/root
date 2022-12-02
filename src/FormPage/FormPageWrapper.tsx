@@ -116,7 +116,7 @@ class FormPageWrapper extends React.Component<
           I have read and agree to the{" "}
           <a
             className="form-link"
-            href="https://www.treehacks.com/code-of-conduct"
+            href="https://github.com/TreeHacks/policies/blob/master/code-of-conduct.md"
             target="_blank"
           >
             TreeHacks Code of Conduct.
@@ -130,7 +130,7 @@ class FormPageWrapper extends React.Component<
           I have read and agree to the{" "}
           <a
             className="form-link"
-            href="https://www.treehacks.com/privacy-policy"
+            href="https://github.com/TreeHacks/policies/blob/master/privacy-policy.md"
             target="_blank"
             onClick={(e) => e.stopPropagation()}
           >
