@@ -34,6 +34,8 @@ const applicationInfoSchema: Schema = new mongoose.Schema(
     q1: String,
     q2: String,
     q5: String,
+    q6: String,
+    q7: String,
     volunteer: Boolean,
     q_team_matching_1: String,
     q_team_matching_2: String,
