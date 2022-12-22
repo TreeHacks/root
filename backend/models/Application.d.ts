@@ -63,6 +63,7 @@ export interface IMeetInfo {
   devpostLink?: String;
   linkedinLink?: String;
   portfolioLink?: String;
+  isMentor?: Boolean;
 
   // populated from script
   profilePicture?: String;

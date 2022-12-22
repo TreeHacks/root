@@ -16,7 +16,7 @@ import { getApplicationInfo, setApplicationInfo, submitApplicationInfo } from ".
 import { getMeetInfo, setMeetInfo } from "./routes/meet_info";
 import { getSubmitInfo, setSubmitInfo } from "./routes/submit_info";
 import { getUserDetail } from "./routes/user_detail";
-import { getUserList, getUserStats, getMeetList } from "./routes/user_list";
+import { getUserList, getUserStats, getMeetCompleteList, getMeetMentorList } from "./routes/user_list";
 import { getApplicationStatus, getUserProfile, setApplicationStatus, confirmAdmission, declineAdmission } from "./routes/user_status";
 import { setAdminInfo } from "./routes/admin_info";
 import { getLeaderboard, getReviewStats, rateReview, reviewNextApplication } from "./routes/user_review";
@@ -112,7 +112,8 @@ authenticatedRoute.post('/users/:userId/status/confirm', confirmAdmission);
 authenticatedRoute.post('/users/:userId/status/decline', declineAdmission);
 // This one is not admin-protected.
 authenticatedRoute.get('/users', [sponsorRoute], getUserList);
-authenticatedRoute.get('/users_meet', [applicantRoute], getMeetList);
+authenticatedRoute.get('/users_meet', [applicantRoute], getMeetCompleteList);
+authenticatedRoute.get('/mentors_meet', [applicantRoute], getMeetMentorList);
 authenticatedRoute.get('/user_profile', [applicantRoute], getUserProfile);
 // Admin protected
 authenticatedRoute.post('/users_resumes', [sponsorRoute], getUserResumes);
