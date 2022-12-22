@@ -158,11 +158,11 @@
           "type": "string"
         },
         "q6": {
-          "title": "If you plan on participating as a team, your decision for this can change at any time and is non-binding, please enter the emails of your teammates, seperated by a single comma.",
+          "title": "If you plan on participating as a team, your decision for this can change at any time and is non-binding, please enter the emails of your teammates, seperated by a single comma. ALL TEAM MEMBERS MUST SUBMIT APPLICATIONS.",
           "type": "string"
         },
         "q7": {
-          "title": "If you have a referral email address from someone who has already applied to TreeHacks 2023, please enter it below. You may only enter one.",
+          "title": "If you have a referral email address from someone who has already applied to TreeHacks 2023, please enter it below. You may only enter one. This is part of a raffle that will occur during the hackathon, where the winner gets an APPLE WATCH!",
           "type": "string"
         },
         "volunteer": {
