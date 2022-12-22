@@ -7,7 +7,7 @@
         "node": "10.16.0"
     },
     "scripts": {
-        "mongo": "docker-compose up",
+        "mongo": "mongod",
         "test": "dotenv jest -- --runInBand",
         "test:frontend": "dotenv jest src",
         "test:backend": "dotenv jest backend -- --runInBand",
@@ -68,6 +68,7 @@
         "ts-loader": "^4.4.2",
         "ts-node": "^7.0.0",
         "typescript": "^3.6.3",
+        "weak": "^1.0.1",
         "webpack": "^4.41.2",
         "webpack-cli": "^3.1.2",
         "webpack-dev-middleware": "^3.7.2",
