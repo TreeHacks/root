@@ -10,7 +10,7 @@ dotenv_path = '.env'
 load_dotenv(dotenv_path)
 
 def get_organizers():
-    with open ('organizers.json', 'r') as myfile:
+    with open ('./backend/scripts/organizers/organizers.json', 'r') as myfile:
         data=myfile.read()
         return json.loads(data)
 
@@ -25,6 +25,25 @@ if __name__ == "__main__":
     # NOTE: This will overwrite organizers collection
     # Refactor to a single query if JSON is large (N+1)
     for organizer in o["organizers"]:
-        db.organizers.update_one(
-            {"email": organizer["email"]}, {"$set": organizer}, upsert=True
+        payload = {
+            "status": "admission_confirmed",
+            "forms": {
+                "meet_info": {
+                    "showProfile": True,
+                    "isOrganizer": True,
+                    "profileDesc": organizer["team"] if organizer["team"] else "Treehacks Organizer"
+                },
+                "application_info": {
+                    "first_name": organizer["firstName"],
+                    "last_name": organizer["lastName"],
+                }
+            },
+            "user": {
+                "email": organizer["email"],
+                "id": organizer["email"],
+            },
+            "year": "2023"
+        }
+        db.applications.update_one(
+            {"user.email": organizer["email"]}, {"$set": payload}, upsert=False
         )

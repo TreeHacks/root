@@ -25,6 +25,7 @@ export async function getMeetList(req: Request, res: Response) {
       "forms.application_info.last_name": 1,
     }
   );
+
   let finalResults = results.map((result) => {
     let obj = result.toObject();
     prepopulateMeetInfo(obj);
@@ -69,27 +70,20 @@ const facetStatsRequest = async () => {
         location: [{ $sortByCount: "$location" }],
         type: [{ $sortByCount: "$type" }],
         status: [{ $sortByCount: "$status" }],
-        graduation_year: [
-          { $sortByCount: "$forms.application_info.graduation_year" },
-        ],
+        graduation_year: [{ $sortByCount: "$forms.application_info.graduation_year" }],
       },
     },
   ]);
   return result[0];
 };
 const timelineStatsRequest = async () => {
-  const applications = (await Application.find(
-    {},
-    { type: 1, status: 1, _id: 1 }
-  ).lean())
+  const applications = (await Application.find({}, { type: 1, status: 1, _id: 1 }).lean())
     .map((application) => ({
       ...application,
       date_created: application._id.getTimestamp(),
     }))
     .sort((a, b) => a.date_created - b.date_created);
-  let groupedByDay = groupBy(applications, (e) =>
-    e.date_created.toDateString()
-  );
+  let groupedByDay = groupBy(applications, (e) => e.date_created.toDateString());
   let counter: { [x: string]: any } = {
     type: { is: 0, oos: 0, stanford: 0 },
     status: { submitted: 0, incomplete: 0 },
@@ -99,8 +93,7 @@ const timelineStatsRequest = async () => {
   for (let day in groupedByDay) {
     for (let application of groupedByDay[day]) {
       counter.type[application.type] = counter.type[application.type] + 1;
-      counter.status[application.status] =
-        counter.status[application.status] + 1;
+      counter.status[application.status] = counter.status[application.status] + 1;
       i++;
     }
     results.push({
