@@ -149,7 +149,7 @@ website
 export async function createApplication(user: CognitoUser) {
   let applicationInfo = {};
   let applicationLocation = user["custom:location"];
-  let applicationType = user["custom:location"] === "In-Person" ? "is" : "oos";
+  let applicationType = user["custom:location"] === "California" ? "is" : "oos";
   let applicationStatus = STATUS.INCOMPLETE;
   let transportationStatus: string | null = null;
   if (user.email.match(/@stanford.edu$/)) {
