@@ -3,6 +3,7 @@
 
 import os
 import json
+import pandas as pd
 from pymongo import MongoClient, uri_parser
 from dotenv import load_dotenv
 
@@ -10,9 +11,8 @@ dotenv_path = '.env'
 load_dotenv(dotenv_path)
 
 def get_organizers():
-    with open ('./backend/scripts/organizers/organizers.json', 'r') as myfile:
-        data=myfile.read()
-        return json.loads(data)
+    data = pd.read_csv('./backend/scripts/organizers/organizers.csv')
+    return data
 
 if __name__ == "__main__":
     mongo_uri = os.environ.get("MONGODB_URI")
@@ -24,26 +24,27 @@ if __name__ == "__main__":
 
     # NOTE: This will overwrite organizers collection
     # Refactor to a single query if JSON is large (N+1)
-    for organizer in o["organizers"]:
+    for organizer in o.to_dict(orient="records"):
         payload = {
             "status": "admission_confirmed",
             "forms": {
                 "meet_info": {
                     "showProfile": True,
                     "isOrganizer": True,
-                    "profileDesc": organizer["team"] if organizer["team"] else "Treehacks Organizer"
+                    "profileDesc": f"{organizer['Team']} Team" if organizer["Team"] else "Treehacks Organizer"
                 },
                 "application_info": {
-                    "first_name": organizer["firstName"],
-                    "last_name": organizer["lastName"],
+                    "first_name": organizer["First Name"],
+                    "last_name": organizer["Last name"],
                 }
             },
             "user": {
-                "email": organizer["email"],
-                "id": organizer["email"],
+                "email": organizer["Email"],
+                "id": organizer["Email"],
             },
             "year": "2023"
         }
+        print("uploading", organizer["Email"])
         db.applications.update_one(
-            {"user.email": organizer["email"]}, {"$set": payload}, upsert=False
+            {"user.email": organizer["Email"]}, {"$set": payload}, upsert=True
         )
