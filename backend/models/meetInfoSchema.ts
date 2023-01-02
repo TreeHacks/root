@@ -17,7 +17,8 @@ const meetInfoSchema: Schema = new mongoose.Schema({
     // will be prepopulated -- need to add them to the schema so that they can be set
     profilePicture: String,
     first_name: String,
-    last_initial: String
+    last_initial: String,
+    isMentor: Boolean,
 }, { _id: false });
 
 export default meetInfoSchema;
