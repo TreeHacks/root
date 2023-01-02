@@ -172,8 +172,6 @@ function base64MimeType(encoded) {
   return result;
 }
 function validate(formData, errors, schema) {
-  console.log("hello");
-  console.log(formData);
   if (schema.properties.race && (!formData.race || !formData.race.length)) {
     errors.race.addError(
       'Please specify a race, or select "Prefer not to say"'
@@ -194,9 +192,9 @@ function validate(formData, errors, schema) {
     errors.university.addError("University is required");
   }
 
-  if (schema.properties.top_track && !formData.top_track) {
+  /* if (schema.properties.top_track && !formData.top_track) {
     errors.top_track.addError("Please choose your top track");
-  }
+  } */
 
   return errors;
 }
