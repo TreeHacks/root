@@ -176,7 +176,7 @@ function validate(formData, errors, schema) {
   console.log(formData);
   if (schema.properties.race && (!formData.race || !formData.race.length)) {
     errors.race.addError(
-      'Please specify a race, or select "Prefer norfrft to say"'
+      'Please specify a race, or select "Prefer not to say"'
     );
   }
 
