@@ -39,46 +39,48 @@ authenticatedRoute.param('userId', (req, res, next, userId) => {
 });
 
 
-const validateGroup = (group, allowAnonymous = false, allowNoGroupMatching = false) => (req, res, next) => {
+const validateGroup = (group, allowAnonymous = false, allowNoGroupMatching = false) => {
   // Allow either a single group or multiple valid groups passed as an array
   if (!Array.isArray(group)) { group = [group]; }
 
   group = group.filter(e => ALLOWED_GROUPS.indexOf(e) > -1);
-  
+
   group.push("admin"); // admins have access to all routes.
 
-  let accessTokenFromClient = req.headers.authorization;
+  return (req, res, next) => {
+    let accessTokenFromClient = req.headers.authorization;
 
-  cognitoExpress.validate(accessTokenFromClient, function (err, response) {
-    if (err) {
-      if (allowAnonymous) {
-        res.locals.user = {};
+    cognitoExpress.validate(accessTokenFromClient, function (err, response) {
+      if (err) {
+        if (allowAnonymous) {
+          res.locals.user = {};
+          next();
+          return;
+        }
+        else {
+          return res.status(401).send(err);
+        }
+      }
+      res.locals.user = response;
+      if (res.locals.user['cognito:groups'] && group.some(g => res.locals.user['cognito:groups'].indexOf(g) !== -1)) {
         next();
-        return;
       }
       else {
-        return res.status(401).send(err);
+        if (allowNoGroupMatching) {
+          next();
+          return;
+        }
+        if (allowAnonymous) {
+          res.locals.user = {};
+          next();
+          return;
+        }
+        else {
+          return res.status(403).send("Unauthorized; user is not in group " + group  + ".");
+        }
       }
-    }
-    res.locals.user = response;
-    if (res.locals.user['cognito:groups'] && group.some(g => res.locals.user['cognito:groups'].indexOf(g) !== -1)) {
-      next();
-    }
-    else {
-      if (allowNoGroupMatching) {
-        next();
-        return;
-      }
-      if (allowAnonymous) {
-        res.locals.user = {};
-        next();
-        return;
-      }
-      else {
-        return res.status(403).send("Unauthorized; user is not in group " + group  + ".");
-      }
-    }
-  });
+    });
+  }
 }
 
 export const adminRoute = express.Router();
