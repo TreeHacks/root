@@ -80,7 +80,8 @@ import {
   updateSponsor,
   createSponsor,
   getSponsors,
-  getSponsorDetail
+  getSponsorDetail,
+  createAdmin
 } from "./routes/sponsors"
 
 // Set up the Express app
@@ -209,6 +210,7 @@ authenticatedRoute.put("/users/:userId/admin_info", [adminRoute], setAdminInfo);
 authenticatedRoute.get("/sponsors", getSponsors);
 authenticatedRoute.get("/sponsors/:sponsorId", getSponsorDetail);
 authenticatedRoute.post("/sponsors/", [sponsorRoute], createSponsor);
+authenticatedRoute.post("/sponsor/admin", createAdmin);
 authenticatedRoute.patch("/sponsors/:sponsorId", [sponsorRoute], updateSponsor);
 
 

@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 
 import { Sponsor } from "../../models/Sponsor";
 import { ISponsor } from "../../models/Sponsor.d";
-
 type SponsorType = Omit<ISponsor, "users.hacker_ids">;
 
 export async function createSponsor(req: Request, res: Response) {

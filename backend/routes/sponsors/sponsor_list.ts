@@ -3,7 +3,10 @@ import { Request, Response } from "express";
 import { Sponsor } from "../../models/Sponsor";
 
 export async function getSponsors(_: Request, res: Response) {
-  const sponsors = await Sponsor.find({}, { name: 1 });
+  const sponsors = await Sponsor.find(
+    {},
+    { name: 1, description: 1, logo_url: 1, website_url: 1 }
+  );
 
   res.status(200).json({ data: sponsors, count: sponsors.length });
 }

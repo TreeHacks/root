@@ -1,6 +1,7 @@
 import { Document } from "mongoose";
 
 export interface ISponsor extends Document {
+    _id: number;
     name: string;
     description: string;
     logo_url: string;
