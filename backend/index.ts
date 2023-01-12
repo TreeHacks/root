@@ -76,6 +76,12 @@ import {
   leaveTeam,
   getUserTeamData,
 } from "./routes/teams";
+import {
+  updateSponsor,
+  createSponsor,
+  getSponsors,
+  getSponsorDetail
+} from "./routes/sponsors"
 
 // Set up the Express app
 const app = express();
@@ -198,6 +204,13 @@ authenticatedRoute.patch("/hacks/:hackId", [adminRoute], editHack);
 
 // Need custom auth:
 authenticatedRoute.put("/users/:userId/admin_info", [adminRoute], setAdminInfo);
+
+// Sponsor routes:
+authenticatedRoute.get("/sponsors", getSponsors);
+authenticatedRoute.get("/sponsors/:sponsorId", getSponsorDetail);
+authenticatedRoute.post("/sponsors/", [sponsorRoute], createSponsor);
+authenticatedRoute.patch("/sponsors/:sponsorId", [sponsorRoute], updateSponsor);
+
 
 // Review routes:
 authenticatedRoute.get("/review/leaderboard", [reviewerRoute], getLeaderboard);
