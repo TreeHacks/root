@@ -6,6 +6,8 @@ import json
 import pandas as pd
 from pymongo import MongoClient, uri_parser
 from dotenv import load_dotenv
+import certifi
+import math
 
 dotenv_path = '.env'
 load_dotenv(dotenv_path)
@@ -16,7 +18,8 @@ def get_organizers():
 
 if __name__ == "__main__":
     mongo_uri = os.environ.get("MONGODB_URI")
-    client = MongoClient(mongo_uri, retryWrites=False)
+    client = MongoClient(mongo_uri)
+    # client = MongoClient(mongo_uri, tlsCAFile=certifi.where())
     uri_dict = uri_parser.parse_uri(mongo_uri)
 
     db = client[uri_dict["database"]]
@@ -31,6 +34,7 @@ if __name__ == "__main__":
                 "meet_info": {
                     "showProfile": True,
                     "isOrganizer": True,
+                    "profilePicture": organizer["Profile Picture"] if isinstance(organizer["Profile Picture"], str) else None,
                     "profileDesc": f"{organizer['Team']} Team" if organizer["Team"] else "Treehacks Organizer"
                 },
                 "application_info": {
