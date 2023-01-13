@@ -11,7 +11,6 @@ export async function updateSponsor(req: Request, res: Response) {
   const sponsorAttributes: SponsorType = attributes;
 
   const admin = await SponsorAdmin.findOne({ email: updated_by });
-  console.log("email", updated_by, admin, req.body);
   if (!admin) {
     res.status(401).send("Unauthorized");
     return;

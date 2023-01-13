@@ -3,12 +3,6 @@ import { Model, Schema } from "mongoose";
 import { ISponsor } from "./Sponsor.d";
 import { HACKATHON_YEAR_STRING } from "../constants";
 
-function setCurrentYear(this: ISponsor) {
-  if (!this.year) {
-    this.year = HACKATHON_YEAR_STRING;
-  }
-}
-
 function sponsorCurrentYear(this: mongoose.Query<ISponsor>) {
   const query = this.getQuery();
   this.setQuery({ ...query, year: HACKATHON_YEAR_STRING });
@@ -22,7 +16,7 @@ const sponsorSchema: Schema = new mongoose.Schema({
   website_url: String,
   prizes: [String],
   users: {
-    hacker_ids: [Number],
+    hacker_ids: [String],
   },
   year: String,
   created_at: Number,
@@ -31,7 +25,7 @@ const sponsorSchema: Schema = new mongoose.Schema({
 
 sponsorSchema.pre("find", sponsorCurrentYear);
 sponsorSchema.pre("findOne", sponsorCurrentYear);
-sponsorSchema.pre("save", setCurrentYear);
+sponsorSchema.pre("updateOne", sponsorCurrentYear);
 
 const model: Model<ISponsor> = mongoose.model("Sponsor", sponsorSchema);
 

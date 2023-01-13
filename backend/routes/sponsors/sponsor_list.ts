@@ -2,12 +2,10 @@ import { Request, Response } from "express";
 
 import { Sponsor } from "../../models/Sponsor";
 import { SponsorAdmin } from "../../models/SponsorAdmin";
+import Application from "../../models/Application";
 
 export async function getSponsors(_: Request, res: Response) {
-  const sponsors = await Sponsor.find(
-    {},
-    { name: 1, description: 1, logo_url: 1, website_url: 1 }
-  );
+  const sponsors = await Sponsor.find({}, { name: 1, description: 1 });
 
   res.status(200).json({ data: sponsors, count: sponsors.length });
 }
@@ -20,7 +18,7 @@ export async function getSponsorDetail(req: Request, res: Response) {
 }
 
 export async function getSponsorByAdminEmail(req: Request, res: Response) {
-  const { email } = req.params;
+  const { email } = req.query;
 
   const admin = await SponsorAdmin.findOne({ email });
   if (!admin) {
@@ -29,7 +27,29 @@ export async function getSponsorByAdminEmail(req: Request, res: Response) {
   }
 
   const { company_id } = admin;
-  const sponsor = await Sponsor.findOne({ company_id });
+  const sponsor = await Sponsor.findOne({ company_id }, { "users.hacker_ids": 0 });
 
   res.status(200).json({ data: sponsor });
+}
+
+export async function getHackersByAdminEmail(req: Request, res: Response) {
+  const { email } = req.query;
+
+  const admin = await SponsorAdmin.findOne({ email });
+  if (!admin) {
+    res.status(400).json({ error: "Invalid email" });
+    return;
+  }
+
+  const { company_id } = admin;
+  const sponsor = await Sponsor.findOne({ company_id }, { "users.hacker_ids": 0 });
+  if (!sponsor) {
+    res.status(400).json({ error: "Invalid email" });
+    return;
+  }
+
+  const { hacker_ids } = sponsor.users;
+  const hackers = await Application.find({ _id: { $in: hacker_ids } });
+
+  res.status(200).json({ data: hackers });
 }
