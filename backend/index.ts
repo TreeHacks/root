@@ -6,6 +6,8 @@ const swaggerUi = require("swagger-ui-express");
 const forceSsl = require("force-ssl-heroku");
 const compression = require("compression");
 const cors = require("cors");
+const multer = require('multer');
+
 import swaggerDocument from "./swagger";
 import filePlugin from "./utils/file_plugin";
 const port = process.env.PORT || 9000;
@@ -77,6 +79,7 @@ import {
   getUserTeamData,
 } from "./routes/teams";
 import {
+  uploadSponsorLogo,
   updateSponsor,
   createSponsor,
   getSponsors,
@@ -114,6 +117,12 @@ if (!module.parent) {
     console.log(`App listening on port ${port}!`);
   });
 }
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  // file size limitation in bytes
+  limits: { fileSize: 52428800 },
+});
 
 const apiRouter = express.Router();
 
@@ -220,9 +229,9 @@ authenticatedRoute.get("/sponsor", getSponsorByAdminEmail);
 
 authenticatedRoute.get("/sponsor/hackers", [sponsorRoute], getHackersByAdminEmail);
 authenticatedRoute.post("/sponsors/", [sponsorRoute], createSponsor);
+// @ts-ignore
+authenticatedRoute.post("/sponsor/logo", upload.single('file'), uploadSponsorLogo);
 authenticatedRoute.put("/sponsor", [sponsorRoute], updateSponsor);
-
-
 
 // Review routes:
 authenticatedRoute.get("/review/leaderboard", [reviewerRoute], getLeaderboard);

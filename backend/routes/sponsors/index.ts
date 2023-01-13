@@ -4,7 +4,7 @@ import {
   getSponsorByAdminEmail,
   getHackersByAdminEmail,
 } from "./sponsor_list";
-import { createSponsor } from "./sponsor_create";
+import { createSponsor, uploadSponsorLogo, getSponsorIdByAdminEmail } from "./sponsor_create";
 import { updateSponsor } from "./sponsor_update";
 import { createAdmin } from "./admin_create";
 import { addHackerToSponsor, removeHackerFromSponsor } from "./hacker";
@@ -18,5 +18,7 @@ export {
   getHackersByAdminEmail,
   createSponsor,
   updateSponsor,
+  uploadSponsorLogo,
+  getSponsorIdByAdminEmail,
   createAdmin,
 };
