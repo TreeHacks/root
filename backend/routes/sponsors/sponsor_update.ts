@@ -2,22 +2,28 @@ import { Request, Response } from "express";
 
 import { Sponsor } from "../../models/Sponsor";
 import { ISponsor } from "../../models/Sponsor.d";
+import { SponsorAdmin } from "../../models/SponsorAdmin";
 
-type SponsorType = Partial<Omit<ISponsor, "users.hacker_ids">>;
+type SponsorType = Partial<Omit<ISponsor, "users">>;
 
 export async function updateSponsor(req: Request, res: Response) {
-  const { sponsorId: _id } = req.query.params;
+  const { updated_by, ...attributes } = req.body;
+  const sponsorAttributes: SponsorType = attributes;
 
-  const sponsor = await Sponsor.findOne({ _id });
-  if (!sponsor) {
-    res.status(404).send("Resource not found");
+  const admin = await SponsorAdmin.findOne({ email: updated_by });
+  console.log("email", updated_by, admin, req.body);
+  if (!admin) {
+    res.status(401).send("Unauthorized");
     return;
   }
 
-  const sponsorAttributes: SponsorType = req.body;
+  const { company_id } = admin;
 
-  Object.assign(sponsor, sponsorAttributes);
-  await sponsor.save();
+  const sponsor = await Sponsor.updateOne(
+    { company_id },
+    { $set: sponsorAttributes },
+    { upsert: true }
+  );
 
   res.status(200).json({ data: sponsor });
 }

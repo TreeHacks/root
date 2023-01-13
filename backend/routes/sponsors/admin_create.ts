@@ -22,7 +22,7 @@ export async function createAdmin(req: Request, res: Response) {
     res.status(400).json({ error: "Unable to create user" });
     return;
   }
-  const sponsorAdmin: ISponsorAdmin = new SponsorAdmin({
+  const sponsorAdmin: ISponsorAdmin = await SponsorAdmin.create({
     email,
     company_id,
   });

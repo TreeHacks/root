@@ -80,6 +80,7 @@ import {
   updateSponsor,
   createSponsor,
   getSponsors,
+  getSponsorByAdminEmail,
   getSponsorDetail,
   createAdmin
 } from "./routes/sponsors"
@@ -209,9 +210,10 @@ authenticatedRoute.put("/users/:userId/admin_info", [adminRoute], setAdminInfo);
 
 // Sponsor routes:
 authenticatedRoute.get("/sponsors", getSponsors);
+authenticatedRoute.get("/sponsor/:email", getSponsorByAdminEmail);
 authenticatedRoute.get("/sponsors/:sponsorId", getSponsorDetail);
 authenticatedRoute.post("/sponsors/", [sponsorRoute], createSponsor);
-authenticatedRoute.patch("/sponsors/:sponsorId", [sponsorRoute], updateSponsor);
+authenticatedRoute.put("/sponsor", [sponsorRoute], updateSponsor);
 
 
 // Review routes:

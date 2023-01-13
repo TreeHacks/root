@@ -3,13 +3,12 @@ import { Model, Schema } from "mongoose";
 
 interface ISponsorAdmin extends mongoose.Document {
   email: string;
-  company_id?: number;
+  company_id: string;
 }
 
 const sponsorAdmin: Schema = new mongoose.Schema({
-  _id: String,
   email: String,
-  company_id: Number,
+  company_id: String,
 });
 
 const model: Model<ISponsorAdmin> = mongoose.model("SponsorAdmin", sponsorAdmin);

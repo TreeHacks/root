@@ -15,14 +15,13 @@ function sponsorCurrentYear(this: mongoose.Query<ISponsor>) {
 }
 
 const sponsorSchema: Schema = new mongoose.Schema({
-  _id: String,
+  company_id: String,
   name: String,
   description: String,
   logo_url: String,
   website_url: String,
   prizes: [String],
   users: {
-    admin_ids: [Number],
     hacker_ids: [Number],
   },
   year: String,
