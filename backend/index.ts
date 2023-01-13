@@ -130,6 +130,7 @@ apiRouter.get("/rooms/status", [anonymousRoute], getPublicRoomStatus);
 apiRouter.get("/users/:userId/contact", [anonymousRoute], userContact);
 apiRouter.get("/leaderboard", [anonymousRoute], leaderboard);
 apiRouter.post("/mentor_create", [anonymousRoute], mentorCreate);
+apiRouter.post("/sponsor/admin", createAdmin);
 
 apiRouter.use("/", authenticatedRoute);
 
@@ -210,7 +211,6 @@ authenticatedRoute.put("/users/:userId/admin_info", [adminRoute], setAdminInfo);
 authenticatedRoute.get("/sponsors", getSponsors);
 authenticatedRoute.get("/sponsors/:sponsorId", getSponsorDetail);
 authenticatedRoute.post("/sponsors/", [sponsorRoute], createSponsor);
-authenticatedRoute.post("/sponsor/admin", createAdmin);
 authenticatedRoute.patch("/sponsors/:sponsorId", [sponsorRoute], updateSponsor);
 
 
