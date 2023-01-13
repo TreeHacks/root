@@ -16,7 +16,7 @@ const sponsorSchema: Schema = new mongoose.Schema({
   website_url: String,
   prizes: [String],
   users: {
-    hacker_ids: [String],
+    hacker_emails: [String],
   },
   year: String,
   created_at: Number,

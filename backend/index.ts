@@ -82,6 +82,7 @@ import {
   getSponsors,
   getSponsorByAdminEmail,
   addHackerToSponsor,
+  removeHackerFromSponsor,
   getHackersByAdminEmail,
   getSponsorDetail,
   createAdmin
@@ -214,6 +215,7 @@ authenticatedRoute.put("/users/:userId/admin_info", [adminRoute], setAdminInfo);
 authenticatedRoute.get("/sponsors", getSponsors);
 authenticatedRoute.get("/sponsors/:sponsorId", getSponsorDetail);
 authenticatedRoute.put("/sponsor/:sponsorId/hacker", addHackerToSponsor);
+authenticatedRoute.delete("/sponsor/:sponsorId/hacker", removeHackerFromSponsor);
 authenticatedRoute.get("/sponsor", getSponsorByAdminEmail);
 
 authenticatedRoute.get("/sponsor/hackers", [sponsorRoute], getHackersByAdminEmail);

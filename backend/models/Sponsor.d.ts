@@ -8,7 +8,7 @@ export interface ISponsor extends Document {
     website_url: string;
     prizes: string[];
     users: {
-        hacker_ids: number[];
+        hacker_emails: string[];
     },
     year: string;
     created_at: number;
