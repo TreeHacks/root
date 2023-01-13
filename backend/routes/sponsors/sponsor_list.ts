@@ -49,7 +49,7 @@ export async function getHackersByAdminEmail(req: Request, res: Response) {
   }
 
   const { hacker_emails } = sponsor.users;
-  const hackers = await Application.find({ _id: { $in: hacker_emails } });
+  const hackers = await Application.find({ "user.email": { $in: hacker_emails } });
 
   res.status(200).json({ data: hackers });
 }

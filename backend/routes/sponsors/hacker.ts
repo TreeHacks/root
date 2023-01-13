@@ -31,8 +31,6 @@ export async function addHackerToSponsor(req: Request, res: Response) {
   res.status(200).json({ data: sponsor });
 }
 
-
-
 export async function removeHackerFromSponsor(req: Request, res: Response) {
   const { email } = req.body;
   const { sponsorId: _id } = req.params;
@@ -51,7 +49,9 @@ export async function removeHackerFromSponsor(req: Request, res: Response) {
 
   const { hacker_emails } = sponsor.users;
 
-  sponsor.users.hacker_emails = hacker_emails.filter((hacker_email) => hacker_email !== hacker.user.email);
+  sponsor.users.hacker_emails = hacker_emails.filter(
+    (hacker_email) => hacker_email !== hacker.user.email
+  );
   await sponsor.save();
 
   res.status(200).json({ data: sponsor });
