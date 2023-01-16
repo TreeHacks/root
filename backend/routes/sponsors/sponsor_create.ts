@@ -50,12 +50,14 @@ export async function uploadSponsorLogo(req: Request & { file: any }, res: Respo
     });
   });
 
-  const sponsor = await Sponsor.updateOne(
-    { company_id: admin.company_id },
-    {
-      logo_url: `https://treehacks-sponsor-content.s3.amazonaws.com/${HACKATHON_YEAR}/${admin.company_id}`,
-    }
-  );
+  const sponsor = await Sponsor.findOne({ company_id: admin.company_id });
+  if (!sponsor) {
+    res.status(400).json({ error: "Invalid sponsor" });
+    return;
+  }
+
+  sponsor.logo_url = `https://treehacks-sponsor-content.s3.amazonaws.com/${HACKATHON_YEAR}/${admin.company_id}`;
+  await sponsor.save();
 
   res.status(200).json({ data: sponsor });
 }
