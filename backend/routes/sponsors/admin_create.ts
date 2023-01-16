@@ -9,7 +9,16 @@ import { sendSponsorAccountCreationEmail } from "../../services/send_email";
 export async function createAdmin(req: Request, res: Response) {
   const { email, token } = req.body;
 
-  const { company_id } = jwt.verify(token, process.env.JWT_SECRET);
+  //@ts-ignore
+  const { company_id } = await new Promise((resolve, reject) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(decoded);
+    });
+  });
 
   const tokenRecord = await Token.findOne({ company_id });
   if (!tokenRecord) {

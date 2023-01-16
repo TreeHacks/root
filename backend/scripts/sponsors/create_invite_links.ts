@@ -40,4 +40,6 @@ const createLink = async () => {
   const links = await Promise.all([...new Array(NUM_INVITES)].map(() => createLink()));
 
   console.log(links.join("\n"));
+
+  mongoose.connection.close();
 })();
