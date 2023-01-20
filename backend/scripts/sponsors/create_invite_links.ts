@@ -26,7 +26,12 @@ function uuid() {
   });
 }
 
-const createToken = (claims) => jwt.sign(claims, process.env.JWT_SECRET, {});
+const createToken = (claims) =>
+  jwt.sign(
+    { ...claims, exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 100 }, // 100 days
+    process.env.JWT_SECRET,
+    {}
+  );
 
 const createLink = async () => {
   const company_id = uuid();
