@@ -21,6 +21,10 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           Keep an eye on your inbox in the coming weeks -- we'll be sending more
           details to you shortly!
         </p>
+        <p>
+          Check out the <Link to="/transportation">travel section</Link> for
+          details.
+        </p>
         {/*<p>Make sure to check out the <a href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-">Ultimate TreeHacks Guide 🌲</a> to learn more!</p>*/}
       </div>
     )}
