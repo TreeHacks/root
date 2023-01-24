@@ -35,12 +35,14 @@ export default () => (
       </li>
     </ul>
     <p style={{ maxWidth: 575, margin: "20px auto" }}>
-      We recommend flying into SJC, SFO, or OAK; these are the closest airports
-      to Stanford (in that order). Please arrange for transportation to bring
-      you to the venue from the airport on Friday afternoon. Plan for your
-      flight to arrive Friday afternoon by 3pm. This will allow for you to get
-      to Stanford on time for dinner and other goodies we have planned. On
-      Sunday, expect to leave the venue around 4pm, after closing ceremony.
+      If you are booking a flight, we recommend flying into SJC, SFO, or OAK;
+      these are the closest airports to Stanford (in that order). Please arrange
+      for transportation to bring you to the venue from the airport on Friday
+      and to the airport from the venue on Sunday. Plan for your flight to
+      arrive Friday afternoon by 3 PM PST. This will allow for you to get to
+      Stanford on time for the opening ceremony, dinner, and the hacker mixer.
+      On Sunday (2/19), expect to leave the venue around 4 PM PST, after the
+      closing ceremony.
     </p>
     <p style={{ maxWidth: 575, margin: "20px auto" }}>
       In the case that your current flight cap prevents you from attending

@@ -6,6 +6,8 @@ const swaggerUi = require("swagger-ui-express");
 const forceSsl = require("force-ssl-heroku");
 const compression = require("compression");
 const cors = require("cors");
+const multer = require('multer');
+
 import swaggerDocument from "./swagger";
 import filePlugin from "./utils/file_plugin";
 const port = process.env.PORT || 9000;
@@ -76,6 +78,18 @@ import {
   leaveTeam,
   getUserTeamData,
 } from "./routes/teams";
+import {
+  uploadSponsorLogo,
+  updateSponsor,
+  createSponsor,
+  getSponsors,
+  getSponsorByAdminEmail,
+  addHackerToSponsor,
+  removeHackerFromSponsor,
+  getHackersByAdminEmail,
+  getSponsorDetail,
+  createAdmin
+} from "./routes/sponsors"
 
 // Set up the Express app
 const app = express();
@@ -104,6 +118,12 @@ if (!module.parent) {
   });
 }
 
+const upload = multer({
+  storage: multer.memoryStorage(),
+  // file size limitation in bytes
+  limits: { fileSize: 52428800 },
+});
+
 const apiRouter = express.Router();
 
 apiRouter.use(
@@ -123,6 +143,7 @@ apiRouter.get("/rooms/status", [anonymousRoute], getPublicRoomStatus);
 apiRouter.get("/users/:userId/contact", [anonymousRoute], userContact);
 apiRouter.get("/leaderboard", [anonymousRoute], leaderboard);
 apiRouter.post("/mentor_create", [anonymousRoute], mentorCreate);
+apiRouter.post("/sponsor/admin", createAdmin);
 
 apiRouter.use("/", authenticatedRoute);
 
@@ -198,6 +219,19 @@ authenticatedRoute.patch("/hacks/:hackId", [adminRoute], editHack);
 
 // Need custom auth:
 authenticatedRoute.put("/users/:userId/admin_info", [adminRoute], setAdminInfo);
+
+// Sponsor routes:
+authenticatedRoute.get("/sponsors", getSponsors);
+authenticatedRoute.get("/sponsors/:sponsorId", getSponsorDetail);
+authenticatedRoute.put("/sponsor/:sponsorId/hacker", addHackerToSponsor);
+authenticatedRoute.delete("/sponsor/:sponsorId/hacker", removeHackerFromSponsor);
+authenticatedRoute.get("/sponsor", getSponsorByAdminEmail);
+
+authenticatedRoute.get("/sponsor/hackers", [sponsorRoute], getHackersByAdminEmail);
+authenticatedRoute.post("/sponsors/", [sponsorRoute], createSponsor);
+// @ts-ignore
+authenticatedRoute.post("/sponsor/logo", upload.single('file'), uploadSponsorLogo);
+authenticatedRoute.put("/sponsor", [sponsorRoute], updateSponsor);
 
 // Review routes:
 authenticatedRoute.get("/review/leaderboard", [reviewerRoute], getLeaderboard);

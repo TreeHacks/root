@@ -16,11 +16,14 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
     {props.confirmedYet && (
       <div>
         <h4>You're coming to TreeHacks {HACKATHON_YEAR}!</h4>
+        <p>Admission confirmed &ndash; see you there!</p>
         <p>
-          Admission confirmed &ndash; see you there!
+          Keep an eye on your inbox in the coming weeks -- we'll be sending more
+          details to you shortly!
         </p>
         <p>
-          Keep an eye on your inbox in the coming weeks -- we'll be sending more details to you shortly!
+          Check out the <Link to="/transportation">travel section</Link> for
+          details.
         </p>
         {/*<p>Make sure to check out the <a href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-">Ultimate TreeHacks Guide 🌲</a> to learn more!</p>*/}
       </div>
@@ -31,11 +34,11 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           Congratulations! You've been accepted to TreeHacks {HACKATHON_YEAR}!
         </h4>
         <p>
-          We're so stoked to see you the weekend of {HACKATHON_DATE_RANGE} at TreeHacks {HACKATHON_YEAR}! 
-          We were blown away by your application and know that you’ll
-          be an inspiring hacker. It'll be a super fun weekend filled with
-          amazing hacks, and fantastic people. We hope you can
-          join us!
+          We're so stoked to see you the weekend of {HACKATHON_DATE_RANGE} at
+          TreeHacks {HACKATHON_YEAR}! We were blown away by your application and
+          know that you’ll be an inspiring hacker. It'll be a super fun weekend
+          filled with amazing hacks, and fantastic people. We hope you can join
+          us!
         </p>
         <p>
           You have until{" "}
@@ -70,20 +73,20 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
     >
       {props.confirmedYet ? "already confirmed" : "confirm spot"}
     </button>
-    {/* {!props.confirmedYet && (
+    {!props.confirmedYet && (
       <p>
         We are committed to helping every admitted hacker get here! Check out
         the <Link to="/transportation">travel section</Link> for details.
       </p>
-    )} */}
+    )}
   </div>
 );
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   confirmAdmission: () => dispatch(confirmAdmission()),
-  declineAdmission: () => dispatch(declineAdmission())
+  declineAdmission: () => dispatch(declineAdmission()),
 });
 
 export default connect(
