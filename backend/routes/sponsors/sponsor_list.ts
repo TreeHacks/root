@@ -44,7 +44,8 @@ export async function getHackersByAdminEmail(req: Request, res: Response) {
   const { company_id } = admin;
   const sponsor = await Sponsor.findOne({ company_id }, { "users.hacker_emails": 1 });
   if (!sponsor) {
-    res.status(400).json({ error: "Invalid email" });
+    // todo 400 status code
+    res.status(200).send({ error: "Please complete your sponsor profile" });
     return;
   }
 
