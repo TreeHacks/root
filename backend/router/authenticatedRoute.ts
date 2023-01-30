@@ -25,7 +25,6 @@ authenticatedRoute.use(function(req, res, next) {
 
     const { origin: headerOrigin } = req.headers;
     const origin = headerOrigin || "";
-    console.log("GOT", origin);
 
     if (origin.includes("treehacks-meet-dev") || origin.includes("meet.treehacks.com")) {
       Application.findOne({ "user.email": response.email }, { status: 1 }).then(
