@@ -1,7 +1,9 @@
 import CognitoExpress from "cognito-express";
 import express from "express";
 import {get} from "lodash";
+
 import {ALLOWED_GROUPS} from "../constants";
+import Application from "../models/Application";
 
 //Initializing CognitoExpress constructor
 const cognitoExpress = new CognitoExpress({
@@ -15,11 +17,23 @@ export const authenticatedRoute = express.Router();
 authenticatedRoute.use(function (req, res, next) {
   let accessTokenFromClient = req.headers.authorization;
   if (!accessTokenFromClient) return res.status(401).send("Access Token missing from header");
-
   cognitoExpress.validate(accessTokenFromClient, function (err, response) {
     if (err) return res.status(401).send(err);
     res.locals.user = response;
-    next();
+
+    if(req.headers.origin.includes("treehacks-meet-dev") || req.headers.origin.includes("meet.treehacks.com")) {
+      Application.findOne({"user.email": response.email}, {status: 1}).then((application) => {
+        if(application && application?.status !== "admission_confirmed") {
+          return res.status(403).send("User has not been admitted yet"); 
+        }
+        else {
+          next();
+        }
+      })
+    } else{
+      next();
+    }
+    
   });
 });
 authenticatedRoute.param('userId', (req, res, next, userId) => {
