@@ -4,6 +4,7 @@ import {get} from "lodash";
 
 import {ALLOWED_GROUPS} from "../constants";
 import Application from "../models/Application";
+import {IApplication} from "../models/Application.d";
 
 //Initializing CognitoExpress constructor
 const cognitoExpress = new CognitoExpress({
@@ -22,8 +23,8 @@ authenticatedRoute.use(function (req, res, next) {
     res.locals.user = response;
 
     if(req.headers.origin.includes("treehacks-meet-dev") || req.headers.origin.includes("meet.treehacks.com")) {
-      Application.findOne({"user.email": response.email}, {status: 1}).then((application) => {
-        if(application && application?.status !== "admission_confirmed") {
+      Application.findOne({"user.email": response.email}, {status: 1}).then((application: Partial<Pick<IApplication, "status" | "_id" | "id">> | undefined | null) => {
+        if(application && application.status !== "admission_confirmed") {
           return res.status(403).send("User has not been admitted yet"); 
         }
         else {
