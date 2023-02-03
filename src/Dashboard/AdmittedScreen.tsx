@@ -23,8 +23,13 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
         </p>
         <p>
           Check out the <Link to="/transportation">travel section</Link> for
-          details.
+          details to RSVP here.
         </p>
+        <button className="btn btn-custom">
+          <Link to="/transportation" style={{ color: "white" }}>
+            Travel RSVP details
+          </Link>
+        </button>
         {/*<p>Make sure to check out the <a href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-">Ultimate TreeHacks Guide 🌲</a> to learn more!</p>*/}
       </div>
     )}
@@ -74,10 +79,12 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
       {props.confirmedYet ? "already confirmed" : "confirm spot"}
     </button>
     {!props.confirmedYet && (
-      <p>
-        We are committed to helping every admitted hacker get here! Check out
-        the <Link to="/transportation">travel section</Link> for details.
-      </p>
+      <>
+        <p>
+          We are committed to helping every admitted hacker get here! Check out
+          the <Link to="/transportation">travel section</Link> for details.
+        </p>
+      </>
     )}
   </div>
 );
