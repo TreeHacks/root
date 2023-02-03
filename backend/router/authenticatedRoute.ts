@@ -5,6 +5,7 @@ import { get } from "lodash";
 import { ALLOWED_GROUPS } from "../constants";
 import Application from "../models/Application";
 import { IApplication } from "../models/Application.d";
+import { SponsorAdmin } from "../models/SponsorAdmin";
 
 //Initializing CognitoExpress constructor
 const cognitoExpress = new CognitoExpress({
@@ -19,7 +20,7 @@ authenticatedRoute.use(function(req, res, next) {
   let accessTokenFromClient = req.headers.authorization;
   if (!accessTokenFromClient)
     return res.status(401).send("Access Token missing from header");
-  cognitoExpress.validate(accessTokenFromClient, function(err, response) {
+  cognitoExpress.validate(accessTokenFromClient, async function(err, response) {
     if (err) return res.status(401).send(err);
     res.locals.user = response;
 
@@ -27,20 +28,25 @@ authenticatedRoute.use(function(req, res, next) {
     const origin = headerOrigin || "";
 
     if (origin.includes("treehacks-meet-dev") || origin.includes("meet.treehacks.com")) {
-      Application.findOne({ "user.email": response.email }, { status: 1 }).then(
-        (
-          application:
-            | Partial<Pick<IApplication, "status" | "_id" | "id">>
-            | undefined
-            | null
-        ) => {
-          if (application && application.status !== "admission_confirmed") {
-            return res.status(403).send("User has not been admitted yet");
-          } else {
-            next();
-          }
-        }
+      const application:
+        | Partial<Pick<IApplication, "status" | "_id" | "id">>
+        | undefined
+        | null = await Application.findOne(
+        { "user.email": response.email },
+        { status: 1 }
       );
+      if (application && application.status === "admission_confirmed") {
+        next();
+      } else if (!application) {
+        const sponsor = await SponsorAdmin.findOne({ email: response.email });
+        if (sponsor) {
+          return next();
+        }
+        const middleware = validateGroup("mentor");
+        middleware(req, res, next);
+      } else {
+        return res.status(403).send({ error: "User has not applied yet" });
+      }
     } else {
       next();
     }
