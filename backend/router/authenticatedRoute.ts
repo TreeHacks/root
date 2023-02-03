@@ -27,7 +27,7 @@ authenticatedRoute.use(function(req, res, next) {
     const { origin: headerOrigin } = req.headers;
     const origin = headerOrigin || "";
 
-    if (origin.includes("treehacks-meet-dev") || origin.includes("meet.treehacks.com")) {
+    if (origin.includes("localhost") || origin.includes("treehacks-meet-dev") || origin.includes("meet.treehacks.com")) {
       const application:
         | Partial<Pick<IApplication, "status" | "_id" | "id">>
         | undefined
