@@ -95,7 +95,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     //   responseType: "blob"
     // })
     const totalCount = applicationIds.length;
-    const batchSize = 1000;
+    const batchSize = 4000;
     let batchCount = Math.ceil(totalCount / batchSize);
     for (var i = 0; i < batchCount; i++) {
       let batch = applicationIds.slice(i * batchSize, (i + 1) * batchSize);
