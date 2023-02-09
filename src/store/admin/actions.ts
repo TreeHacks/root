@@ -95,21 +95,24 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     //   responseType: "blob"
     // })
     let headers = await custom_header();
-    applicationIds = applicationIds.slice(0, 10);
-    for (var id in applicationIds) {
-      const options = {
-        method: "POST",
-        headers: {
-          ...headers,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ids: applicationIds[id] }),
-      };
-      console.log(ENDPOINT_URL);
-      console.log(options);
-      let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
-      saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
-    }
+    applicationIds = applicationIds.slice(10, 20);
+    const options = {
+      method: "POST",
+      headers: {
+        ...headers,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ids: applicationIds }),
+    };
+    console.log(ENDPOINT_URL);
+    //https://root-dev.herokuapp.com/api/users_resumes
+
+    let res = await fetch(
+      "root-dev.herokuapp.com/" + ENDPOINT_URL + "/users_resumes",
+      options
+    );
+    saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
+
     dispatch(loadingEnd());
   } catch (e) {
     console.error(e);
