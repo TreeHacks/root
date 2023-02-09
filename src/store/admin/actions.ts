@@ -94,7 +94,30 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     //   },
     //   responseType: "blob"
     // })
-    let headers = await custom_header();
+    const totalCount = applicationIds.length;
+    const batchSize = 20;
+    let batchCount = Math.ceil(totalCount / batchSize);
+    for (var i = 0; i < batchCount; i++) {
+      let batch = applicationIds.slice(i * batchSize, (i + 1) * batchSize);
+      let headers = await custom_header();
+      const options = {
+        method: "POST",
+        headers: {
+          ...headers,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ids: batch }),
+      };
+      console.log(ENDPOINT_URL);
+      //https://root-dev.herokuapp.com/api/users_resumes
+
+      let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
+      saveAs(
+        await res.blob(),
+        `treehacks-resumes-batch-${i}-${Date.now()}-${i}.zip`
+      );
+    }
+    /* let headers = await custom_header();
     const options = {
       method: "POST",
       headers: {
@@ -107,9 +130,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     //https://root-dev.herokuapp.com/api/users_resumes
 
     let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
-    console.log(options);
-    console.log(options.body);
-    saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
+    saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`); */
 
     dispatch(loadingEnd());
   } catch (e) {
