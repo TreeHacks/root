@@ -95,7 +95,6 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     //   responseType: "blob"
     // })
     let headers = await custom_header();
-    applicationIds = applicationIds.slice(10, 20);
     const options = {
       method: "POST",
       headers: {
