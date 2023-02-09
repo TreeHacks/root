@@ -95,7 +95,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     //   responseType: "blob"
     // })
     const totalCount = applicationIds.length;
-    const batchSize = 20;
+    const batchSize = 2000;
     let batchCount = Math.ceil(totalCount / batchSize);
     for (var i = 0; i < batchCount; i++) {
       let batch = applicationIds.slice(i * batchSize, (i + 1) * batchSize);
@@ -108,7 +108,6 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
         },
         body: JSON.stringify({ ids: batch }),
       };
-      console.log(ENDPOINT_URL);
       //https://root-dev.herokuapp.com/api/users_resumes
 
       let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
