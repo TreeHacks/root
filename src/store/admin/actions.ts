@@ -95,19 +95,21 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     //   responseType: "blob"
     // })
     let headers = await custom_header();
-    const options = {
-      method: "POST",
-      headers: {
-        ...headers,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ids: applicationIds }),
-    };
-    console.log("the endpoint url");
-    console.log(ENDPOINT_URL);
-    console.log(options);
-    let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
-    saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
+    applicationIds = applicationIds.slice(0, 10);
+    for (var id in applicationIds) {
+      const options = {
+        method: "POST",
+        headers: {
+          ...headers,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ids: id }),
+      };
+      console.log(ENDPOINT_URL);
+      console.log(options);
+      let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
+      saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
+    }
     dispatch(loadingEnd());
   } catch (e) {
     console.error(e);
