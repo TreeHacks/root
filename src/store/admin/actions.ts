@@ -107,10 +107,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     console.log(ENDPOINT_URL);
     //https://root-dev.herokuapp.com/api/users_resumes
 
-    let res = await fetch(
-      "root-dev.herokuapp.com/" + ENDPOINT_URL + "/users_resumes",
-      options
-    );
+    let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
     saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
 
     dispatch(loadingEnd());
