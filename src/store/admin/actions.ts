@@ -103,7 +103,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
           ...headers,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ids: id }),
+        body: JSON.stringify({ ids: applicationIds[id] }),
       };
       console.log(ENDPOINT_URL);
       console.log(options);
