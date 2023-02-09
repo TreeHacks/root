@@ -2,7 +2,7 @@ import API from "@aws-amplify/api";
 import { loadingStart, loadingEnd } from "../base/actions";
 import { IReactTableState, IReactTableHeader } from "src/Admin/types";
 import { get } from "lodash";
-import saveAs from 'file-saver';
+import saveAs from "file-saver";
 import { IAdminState } from "./types";
 import Papa from "papaparse";
 import { STATUS, FLOORS } from "../../constants";
@@ -15,61 +15,78 @@ declare const ENDPOINT_URL: string;
 export const setApplicationList = (applicationList, pages) => ({
   type: "SET_APPLICATION_LIST",
   applicationList,
-  pages
+  pages,
 });
 
 export const setApplicationEmails = (applicationEmails) => ({
   type: "SET_APPLICATION_EMAILS",
-  applicationEmails
+  applicationEmails,
 });
 
 export const setExportedApplications = (exportedApplications) => ({
   type: "SET_EXPORTED_APPLICATIONS",
-  exportedApplications
+  exportedApplications,
 });
 
 export const setSelectedForm = (selectedForm) => ({
   type: "SET_SELECTED_FORM",
-  selectedForm
+  selectedForm,
 });
 
 export const setApplicationStats = (applicationStats) => ({
   type: "SET_APPLICATION_STATS",
-  applicationStats
+  applicationStats,
 });
 
-export const getApplicationList = (tableState: IReactTableState) => (dispatch, getState) => {
+export const getApplicationList = (tableState: IReactTableState) => (
+  dispatch,
+  getState
+) => {
   dispatch(loadingStart());
   dispatch(setApplicationEmails(null));
   dispatch(setExportedApplications(null));
-  return dispatch(fetchApplications(tableState)).then((e: { count: number, results: any[] }) => {
-    dispatch(setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize)));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting application list " + e);
-  });
+  return dispatch(fetchApplications(tableState))
+    .then((e: { count: number; results: any[] }) => {
+      dispatch(
+        setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize))
+      );
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting application list " + e);
+    });
 };
 
-export const getApplicationEmails = (tableState: IReactTableState) => (dispatch, getState) => {
+export const getApplicationEmails = (tableState: IReactTableState) => (
+  dispatch,
+  getState
+) => {
   dispatch(loadingStart());
-  return dispatch(fetchApplications(tableState, { "user.email": 1 }, true)).then((e: { count: number, results: any[] }) => {
-    let emails = e.results.map(e => get(e, "user.email"));
-    dispatch(setApplicationEmails(emails));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting application emails " + e);
-  });
+  return dispatch(fetchApplications(tableState, { "user.email": 1 }, true))
+    .then((e: { count: number; results: any[] }) => {
+      let emails = e.results.map((e) => get(e, "user.email"));
+      dispatch(setApplicationEmails(emails));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting application emails " + e);
+    });
 };
 
-export const getApplicationResumes = (tableState: IReactTableState) => async (dispatch, getState) => {
+export const getApplicationResumes = (tableState: IReactTableState) => async (
+  dispatch,
+  getState
+) => {
   dispatch(loadingStart());
   try {
     // const applicationIds = (getState().admin as IAdminState).applicationList.map(e => e._id);
-    let applicationIds = (await dispatch(fetchApplications(tableState, { "_id": 1 }, true))).results.map(e => e._id);
+    let applicationIds = (await dispatch(
+      fetchApplications(tableState, { _id: 1 }, true)
+    )).results.map((e) => e._id);
     // Using fetch workaround; once Amplify library supports responseType, we can use the below code instead.
     // return API.post("treehacks", `/users_resumes`, {
     //   body: {
@@ -82,125 +99,160 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (di
       method: "POST",
       headers: {
         ...headers,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ids: applicationIds })
+      body: JSON.stringify({ ids: applicationIds }),
     };
-    let res = await fetch(ENDPOINT_URL + '/users_resumes', options)
+    console.log("the endpoint url");
+    console.log(ENDPOINT_URL);
+    console.log(options);
+    let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
     saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
     dispatch(loadingEnd());
-  }
-  catch (e) {
+  } catch (e) {
     console.error(e);
     dispatch(loadingEnd());
     alert("Error getting application resumes " + e);
   }
 };
 
-export const getExportedApplications = (tableState: IReactTableState) => (dispatch, getState) => {
+export const getExportedApplications = (tableState: IReactTableState) => (
+  dispatch,
+  getState
+) => {
   dispatch(loadingStart());
-  return dispatch(fetchApplications(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
-    saveAs(new Blob([JSON.stringify(e.results)]), `treehacks-applications-${Date.now()}.json`);
-    dispatch(setExportedApplications(e.results));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting exported applications " + e);
-  });
+  return dispatch(fetchApplications(tableState, {}, true))
+    .then((e: { count: number; results: any[] }) => {
+      saveAs(
+        new Blob([JSON.stringify(e.results)]),
+        `treehacks-applications-${Date.now()}.json`
+      );
+      dispatch(setExportedApplications(e.results));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting exported applications " + e);
+    });
 };
 
 /*
  * Get exported applications as CSV.
  */
-export const getExportedApplicationsCSV = (tableState: IReactTableState, columns: IReactTableHeader[]) => (dispatch, getState) => {
+export const getExportedApplicationsCSV = (
+  tableState: IReactTableState,
+  columns: IReactTableHeader[]
+) => (dispatch, getState) => {
   dispatch(loadingStart());
-  return dispatch(fetchApplications(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
-    let results = e.results.map(item => {
-      let newItem = {};
-      for (let column of columns) {
-        let value = "";
-        if (typeof column.accessor === "function") {
-          value = column.accessor(item);
-        }
-        else {
-          value = get(item, column.accessor);
-        }
-        newItem[column.Header] = value;
-      }
-      return newItem;
-    }
-    );
-    saveAs(new Blob([Papa.unparse(results)]), `treehacks-applications-${Date.now()}.csv`);
-    dispatch(setExportedApplications(results));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting exported applications " + e);
-  });
-};
-
-export const getExportedHacks = (tableState: IReactTableState, columns?: IReactTableHeader[]) => (dispatch, getState) => {
-  dispatch(loadingStart());
-  return dispatch(fetchHacks(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
-    let results = e.results;
-    if (columns) {
-      results = e.results.map(item => {
+  return dispatch(fetchApplications(tableState, {}, true))
+    .then((e: { count: number; results: any[] }) => {
+      let results = e.results.map((item) => {
         let newItem = {};
         for (let column of columns) {
           let value = "";
           if (typeof column.accessor === "function") {
             value = column.accessor(item);
-          }
-          else {
+          } else {
             value = get(item, column.accessor);
           }
-          newItem[column.accessor] = value;
+          newItem[column.Header] = value;
         }
         return newItem;
-      }
+      });
+      saveAs(
+        new Blob([Papa.unparse(results)]),
+        `treehacks-applications-${Date.now()}.csv`
       );
-    }
-    saveAs(new Blob([JSON.stringify(results)]), `treehacks-hacks-${Date.now()}.json`);
-    dispatch(setExportedApplications(results));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting exported hacks " + e);
-  });
+      dispatch(setExportedApplications(results));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting exported applications " + e);
+    });
 };
 
-export const getExportedHacksCSV = (tableState: IReactTableState, columns: IReactTableHeader[], sheets?: boolean) => (dispatch, getState) => {
+export const getExportedHacks = (
+  tableState: IReactTableState,
+  columns?: IReactTableHeader[]
+) => (dispatch, getState) => {
   dispatch(loadingStart());
-  return dispatch(fetchHacks(tableState, {}, true)).then((e: { count: number, results: any[] }) => {
-    let results = (sheets ? unwind(e.results, "categories"): e.results).map(item => {
-      let newItem = {};
-      for (let column of columns) {
-        let value = "";
-        if (typeof column.accessor === "function") {
-          value = column.accessor(item);
-        }
-        else {
-          value = get(item, column.accessor);
-        }
-        newItem[column.Header] = value;
+  return dispatch(fetchHacks(tableState, {}, true))
+    .then((e: { count: number; results: any[] }) => {
+      let results = e.results;
+      if (columns) {
+        results = e.results.map((item) => {
+          let newItem = {};
+          for (let column of columns) {
+            let value = "";
+            if (typeof column.accessor === "function") {
+              value = column.accessor(item);
+            } else {
+              value = get(item, column.accessor);
+            }
+            newItem[column.accessor] = value;
+          }
+          return newItem;
+        });
       }
-      return newItem;
-    }
-    );
-    saveAs(new Blob([Papa.unparse(results)]), `treehacks-hacks-${Date.now()}.csv`);
-    dispatch(setExportedApplications(results));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting exported hacks " + e);
-  });
+      saveAs(
+        new Blob([JSON.stringify(results)]),
+        `treehacks-hacks-${Date.now()}.json`
+      );
+      dispatch(setExportedApplications(results));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting exported hacks " + e);
+    });
 };
 
-const fetchGenericData = endpoint => (tableState: IReactTableState, project = null, retrieveAllPages = false) => (dispatch, getState) => {
+export const getExportedHacksCSV = (
+  tableState: IReactTableState,
+  columns: IReactTableHeader[],
+  sheets?: boolean
+) => (dispatch, getState) => {
+  dispatch(loadingStart());
+  return dispatch(fetchHacks(tableState, {}, true))
+    .then((e: { count: number; results: any[] }) => {
+      let results = (sheets ? unwind(e.results, "categories") : e.results).map(
+        (item) => {
+          let newItem = {};
+          for (let column of columns) {
+            let value = "";
+            if (typeof column.accessor === "function") {
+              value = column.accessor(item);
+            } else {
+              value = get(item, column.accessor);
+            }
+            newItem[column.Header] = value;
+          }
+          return newItem;
+        }
+      );
+      saveAs(
+        new Blob([Papa.unparse(results)]),
+        `treehacks-hacks-${Date.now()}.csv`
+      );
+      dispatch(setExportedApplications(results));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting exported hacks " + e);
+    });
+};
+
+const fetchGenericData = (endpoint) => (
+  tableState: IReactTableState,
+  project = null,
+  retrieveAllPages = false
+) => (dispatch, getState) => {
   if (project === null) {
     project = {};
   }
@@ -215,13 +267,12 @@ const fetchGenericData = endpoint => (tableState: IReactTableState, project = nu
   let params: any = {
     filter: JSON.stringify(filter),
     sort: JSON.stringify(sort),
-    project: JSON.stringify(project)
+    project: JSON.stringify(project),
   };
   if (!retrieveAllPages) {
-    params.page = tableState.page,
-      params.pageSize = tableState.pageSize
+    (params.page = tableState.page), (params.pageSize = tableState.pageSize);
   }
-  return API.get("treehacks", endpoint, { "queryStringParameters": params });
+  return API.get("treehacks", endpoint, { queryStringParameters: params });
 };
 
 const fetchApplications = fetchGenericData(`/users`);
@@ -230,63 +281,84 @@ const fetchHacks = fetchGenericData(`/hacks`);
 
 const fetchJudges = fetchGenericData(`/judges`);
 
-export const getHackList = (tableState: IReactTableState) => (dispatch, getState) => {
+export const getHackList = (tableState: IReactTableState) => (
+  dispatch,
+  getState
+) => {
   dispatch(loadingStart());
-  return dispatch(fetchHacks(tableState)).then((e: { count: number, results: any[] }) => {
-    dispatch(setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize)));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting hack list " + e);
-  });
+  return dispatch(fetchHacks(tableState))
+    .then((e: { count: number; results: any[] }) => {
+      dispatch(
+        setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize))
+      );
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting hack list " + e);
+    });
 };
 
-export const getJudgeList = (tableState: IReactTableState) => (dispatch, getState) => {
+export const getJudgeList = (tableState: IReactTableState) => (
+  dispatch,
+  getState
+) => {
   dispatch(loadingStart());
-  return dispatch(fetchJudges(tableState)).then((e: { count: number, results: any[] }) => {
-    dispatch(setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize)));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting judge list " + e);
-  });
+  return dispatch(fetchJudges(tableState))
+    .then((e: { count: number; results: any[] }) => {
+      dispatch(
+        setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize))
+      );
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting judge list " + e);
+    });
 };
 
 export const getApplicationStats = () => (dispatch, getState) => {
   dispatch(loadingStart());
-  return API.get("treehacks", `/users_stats`, {}).then(e => {
-    dispatch(setApplicationStats(e));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error getting application stats " + e);
-  });
+  return API.get("treehacks", `/users_stats`, {})
+    .then((e) => {
+      dispatch(setApplicationStats(e));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting application stats " + e);
+    });
 };
-
 
 export const setBulkChangeStatus = (status) => ({
   type: "SET_BULK_CHANGE_STATUS",
-  status
+  status,
 });
 
 export const setBulkChangeIds = (ids) => ({
   type: "SET_BULK_CHANGE_IDS",
-  ids
+  ids,
 });
 
 export const performBulkChange = () => (dispatch, getState) => {
-  const headersAdmitted = ["id", "acceptanceDeadline", "transportationType", "transportationDeadline", "transportationAmount", "transportationId"];
+  const headersAdmitted = [
+    "id",
+    "acceptanceDeadline",
+    "transportationType",
+    "transportationDeadline",
+    "transportationAmount",
+    "transportationId",
+  ];
   const headers = ["id"];
   const { ids, status } = (getState().admin as IAdminState).bulkChange;
   let csvData = null;
   const opts = { header: true, skipEmptyLines: true };
   if (status === STATUS.ADMITTED) {
     csvData = Papa.parse(headersAdmitted.join(",") + "\n" + ids, opts).data;
-  }
-  else {
+  } else {
     csvData = Papa.parse(headers.join(",") + "\n" + ids, opts).data;
   }
   for (let item of csvData) {
@@ -299,114 +371,139 @@ export const performBulkChange = () => (dispatch, getState) => {
   return API.post("treehacks", `/users_bulkchange`, {
     body: {
       ids: csvData,
-      status: status
-    }
-  }).then(e => {
-    dispatch(setBulkChangeIds(""));
-    dispatch(setBulkChangeStatus(""));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error performing bulk change: " + e);
-  });
-}
+      status: status,
+    },
+  })
+    .then((e) => {
+      dispatch(setBulkChangeIds(""));
+      dispatch(setBulkChangeStatus(""));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error performing bulk change: " + e);
+    });
+};
 
 export const editRow = (endpoint, rowId, data) => (dispatch, getState) => {
   dispatch(loadingStart());
   return API.patch("treehacks", `/${endpoint}/${rowId}`, {
-    body: data
-  }).then(e => {
-    const adminState = (getState().admin as IAdminState);
-    const applicationList = adminState.applicationList;
-    let application = find(applicationList, { "_id": rowId });
-    for (let key in data) {
-      set(application, key, data[key]);
-    }
-    dispatch(setApplicationList(applicationList, adminState.pages)); // So that the table refreshes
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error performing edit row " + e);
-  });
-}
+    body: data,
+  })
+    .then((e) => {
+      const adminState = getState().admin as IAdminState;
+      const applicationList = adminState.applicationList;
+      let application = find(applicationList, { _id: rowId });
+      for (let key in data) {
+        set(application, key, data[key]);
+      }
+      dispatch(setApplicationList(applicationList, adminState.pages)); // So that the table refreshes
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error performing edit row " + e);
+    });
+};
 
 export const setBulkCreateGroup = (group) => ({
   type: "SET_BULK_CREATE_GROUP",
-  group
+  group,
 });
 
 export const setBulkCreateEmails = (emails) => ({
   type: "SET_BULK_CREATE_EMAILS",
-  emails
+  emails,
 });
 
 export const setBulkCreatePassword = (password) => ({
   type: "SET_BULK_CREATE_PASSWORD",
-  password
+  password,
 });
 
 export const performBulkCreate = () => (dispatch, getState) => {
-  const { group, emails, password } = (getState().admin as IAdminState).bulkCreate;
+  const { group, emails, password } = (getState()
+    .admin as IAdminState).bulkCreate;
   dispatch(loadingStart());
   return API.post("treehacks", `/users_bulkcreate`, {
     body: {
-      emails: emails.split('\n').map(e => e.trim()),
+      emails: emails.split("\n").map((e) => e.trim()),
       group,
-      password
-    }
-  }).then(e => {
-    saveAs(new Blob([Papa.unparse(e.users)]), `bulk-creation-${Date.now()}.csv`);
-    dispatch(setBulkCreateGroup(""));
-    dispatch(setBulkCreateEmails(""));
-    dispatch(setBulkCreateGroup(""));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error performing bulk creation: " + e);
-  });
-}
+      password,
+    },
+  })
+    .then((e) => {
+      saveAs(
+        new Blob([Papa.unparse(e.users)]),
+        `bulk-creation-${Date.now()}.csv`
+      );
+      dispatch(setBulkCreateGroup(""));
+      dispatch(setBulkCreateEmails(""));
+      dispatch(setBulkCreateGroup(""));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error performing bulk creation: " + e);
+    });
+};
 
 export const setBulkImportHacks = (bulkImportHacks) => ({
   type: "SET_BULK_IMPORT_HACKS",
-  bulkImportHacks
+  bulkImportHacks,
 });
 
 export const setBulkImportHacksFloor = (bulkImportHacksFloor) => ({
   type: "SET_BULK_IMPORT_HACKS_FLOOR",
-  bulkImportHacksFloor
+  bulkImportHacksFloor,
 });
 
 export const performBulkImportHacks = () => (dispatch, getState) => {
-
-  const headers = ["title", "devpostUrl", "description", "video", "website", "fileUrl", "categories"];
+  const headers = [
+    "title",
+    "devpostUrl",
+    "description",
+    "video",
+    "website",
+    "fileUrl",
+    "categories",
+  ];
   const bulkImportHacks = (getState().admin as IAdminState).bulkImportHacks;
-  const bulkImportHacksFloor = (getState().admin as IAdminState).bulkImportHacksFloor;
+  const bulkImportHacksFloor = (getState().admin as IAdminState)
+    .bulkImportHacksFloor;
   const opts = { header: true, skipEmptyLines: true };
-  const csvData = Papa.parse(headers.join(",") + "\n" + bulkImportHacks, opts).data.map(e => ({
+  const csvData = Papa.parse(
+    headers.join(",") + "\n" + bulkImportHacks,
+    opts
+  ).data.map((e) => ({
     ...e,
-    categories: (e.categories || "").split(", ")
+    categories: (e.categories || "").split(", "),
   }));
   dispatch(loadingStart());
   return API.post("treehacks", `/hacks_import`, {
     body: {
       items: csvData,
-      floor: bulkImportHacksFloor
-    }
-  }).then(e => {
-    dispatch(setBulkImportHacks(""));
-    dispatch(setBulkImportHacksFloor(FLOORS[0]));
-    dispatch(loadingEnd());
-  }).catch(e => {
-    console.error(e);
-    dispatch(loadingEnd());
-    alert("Error performing bulk creation: " + e);
-  });
-}
+      floor: bulkImportHacksFloor,
+    },
+  })
+    .then((e) => {
+      dispatch(setBulkImportHacks(""));
+      dispatch(setBulkImportHacksFloor(FLOORS[0]));
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error performing bulk creation: " + e);
+    });
+};
 
-
-export const setApplicationStatus = (status, userId) => (dispatch, getState) => {
+export const setApplicationStatus = (status, userId) => (
+  dispatch,
+  getState
+) => {
   // todo
-}
+};

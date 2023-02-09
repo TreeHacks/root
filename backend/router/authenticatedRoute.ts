@@ -27,7 +27,10 @@ authenticatedRoute.use(function(req, res, next) {
     const { origin: headerOrigin } = req.headers;
     const origin = headerOrigin || "";
 
-    if (origin.includes("localhost") || origin.includes("treehacks-meet-dev") || origin.includes("meet.treehacks.com")) {
+    if (
+      origin.includes("treehacks-meet-dev") ||
+      origin.includes("meet.treehacks.com")
+    ) {
       const application:
         | Partial<Pick<IApplication, "status" | "_id" | "id">>
         | undefined
@@ -45,7 +48,9 @@ authenticatedRoute.use(function(req, res, next) {
         const middleware = validateGroup("mentor");
         middleware(req, res, next);
       } else {
-        return res.status(403).send({ error: "user has not been confirmed" });
+        return res.status(403).send({
+          error: "user has not been confirmed",
+        });
       }
     } else {
       next();
@@ -56,7 +61,8 @@ authenticatedRoute.param("userId", (req, res, next, userId) => {
   if (res.locals.user.sub !== userId) {
     let groups = get(res.locals.user, "cognito:groups", []);
     let isViewingUser =
-      req.route.path === "/users/:userId/forms/application_info" && req.method === "GET";
+      req.route.path === "/users/:userId/forms/application_info" &&
+      req.method === "GET";
     if (groups.indexOf("admin") > -1) {
     } else if (groups.indexOf("sponsor") > -1 && isViewingUser) {
       // Sponsors are able to view users (with a filter implemented on the route itself).
@@ -69,11 +75,11 @@ authenticatedRoute.param("userId", (req, res, next, userId) => {
   next();
 });
 
-const validateGroup = (group, allowAnonymous = false, allowNoGroupMatching = false) => (
-  req,
-  res,
-  next
-) => {
+const validateGroup = (
+  group,
+  allowAnonymous = false,
+  allowNoGroupMatching = false
+) => (req, res, next) => {
   // Allow either a single group or multiple valid groups passed as an array
   if (!Array.isArray(group)) {
     group = [group];
@@ -111,7 +117,9 @@ const validateGroup = (group, allowAnonymous = false, allowNoGroupMatching = fal
         next();
         return;
       } else {
-        return res.status(403).send("Unauthorized; user is not in group " + group + ".");
+        return res
+          .status(403)
+          .send("Unauthorized; user is not in group " + group + ".");
       }
     }
   });
