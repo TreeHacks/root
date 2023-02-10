@@ -59,6 +59,27 @@ export const getApplicationList = (tableState: IReactTableState) => (
     });
 };
 
+export const getApplicationConfirmedList = (tableState: IReactTableState) => (
+  dispatch,
+  getState
+) => {
+  dispatch(loadingStart());
+  dispatch(setApplicationEmails(null));
+  dispatch(setExportedApplications(null));
+  return dispatch(fetchAdmissionConfirmedApplications(tableState))
+    .then((e: { count: number; results: any[] }) => {
+      dispatch(
+        setApplicationList(e.results, Math.ceil(e.count / tableState.pageSize))
+      );
+      dispatch(loadingEnd());
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch(loadingEnd());
+      alert("Error getting application confirmed list " + e);
+    });
+};
+
 export const getApplicationEmails = (tableState: IReactTableState) => (
   dispatch,
   getState
@@ -298,7 +319,39 @@ const fetchGenericData = (endpoint) => (
   return API.get("treehacks", endpoint, { queryStringParameters: params });
 };
 
+const fetchAdmissionConfirmedData = (endpoint) => (
+  tableState: IReactTableState,
+  project = null,
+  retrieveAllPages = false
+) => (dispatch, getState) => {
+  if (project === null) {
+    project = {};
+  }
+  let sort = {};
+  for (let item of tableState.sorted) {
+    sort[item.id] = item.desc ? -1 : 1;
+  }
+  let filter = {};
+  for (let item of tableState.filtered) {
+    filter[item.id] = item.value;
+  }
+  console.log(filter);
+  filter["status"] = { $eq: "admission_confirmed" };
+  let params: any = {
+    filter: JSON.stringify(filter),
+    sort: JSON.stringify(sort),
+    project: JSON.stringify(project),
+  };
+  if (!retrieveAllPages) {
+    (params.page = tableState.page), (params.pageSize = tableState.pageSize);
+  }
+  return API.get("treehacks", endpoint, { queryStringParameters: params });
+};
+
 const fetchApplications = fetchGenericData(`/users`);
+const fetchAdmissionConfirmedApplications = fetchAdmissionConfirmedData(
+  "/users"
+);
 
 const fetchHacks = fetchGenericData(`/hacks`);
 
