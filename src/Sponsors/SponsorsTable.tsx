@@ -98,7 +98,7 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
   });
   console.log(filteredApplications); */
 
-  console.log(props);
+  //console.log(props);
   return (
     <div>
       <div className="col-12">
