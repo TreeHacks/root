@@ -106,7 +106,7 @@ const SponsorsTable = (props: ISponsorsTableProps) => {
         <p style={{ fontWeight: "bold" }}>
           Below are the applications of all our confirmed hackers. These hackers
           are the ones who are attending TreeHacks 2023. These hackers were
-          accepted from a pool of over 4000 applications to attend TreeHacks.
+          accepted from a pool of over 5000 applications to attend TreeHacks.
         </p>
         <ReactTable
           filterable

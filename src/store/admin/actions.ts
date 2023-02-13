@@ -116,33 +116,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     //   },
     //   responseType: "blob"
     // })
-    /* const totalCount = applicationIds.length;
-    const batchSize = 1000;
-    let batchCount = Math.ceil(totalCount / batchSize);
-    for (var i = 0; i < batchCount; i++) {
-      let batch = applicationIds.slice(i * batchSize, (i + 1) * batchSize);
-      let headers = await custom_header();
-      const options = {
-        method: "POST",
-        headers: {
-          ...headers,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ids: batch }),
-      };
-      //https://root-dev.herokuapp.com/api/users_resumes
 
-      let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
-      saveAs(
-        await res.blob(),
-        `treehacks-resumes-batch-${i}-${Date.now()}-${i}.zip`
-      );
-    } */
-    /* applicationIds = [
-      "63c1ce401fcc550015a62af2",
-      "638d4153a6b48f00155a62f5",
-      "63af6a6f11f16c00159f8ec9",
-    ]; */
     let headers = await custom_header();
     const options = {
       method: "POST",
@@ -154,12 +128,11 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     };
     //https://root-dev.herokuapp.com/api/users_resumes
 
-    let res = await fetch(
+    /* let res = await fetch(
       "https://root.treehacks.com/api/users_resumes",
       options
-    );
-    console.log(res);
-    //let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
+    ); */
+    let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
     saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
 
     dispatch(loadingEnd());
@@ -346,7 +319,7 @@ const fetchAdmissionConfirmedData = (endpoint) => (
     filter[item.id] = item.value;
   }
   console.log(filter);
-  //filter["status"] = { $eq: "admission_confirmed" };
+  filter["status"] = { $eq: "admission_confirmed" };
   let params: any = {
     filter: JSON.stringify(filter),
     sort: JSON.stringify(sort),
