@@ -108,6 +108,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
     let applicationIds = (await dispatch(
       fetchAdmissionConfirmedApplications(tableState, { _id: 1 }, true)
     )).results.map((e) => e._id);
+    console.log(applicationIds);
     // Using fetch workaround; once Amplify library supports responseType, we can use the below code instead.
     // return API.post("treehacks", `/users_resumes`, {
     //   body: {
@@ -137,6 +138,7 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
         `treehacks-resumes-batch-${i}-${Date.now()}-${i}.zip`
       );
     } */
+    applicationIds = ["63c1ce401fcc550015a62af2"];
     let headers = await custom_header();
     const options = {
       method: "POST",
