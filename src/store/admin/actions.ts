@@ -346,7 +346,7 @@ const fetchAdmissionConfirmedData = (endpoint) => (
     filter[item.id] = item.value;
   }
   console.log(filter);
-  filter["status"] = { $eq: "admission_confirmed" };
+  //filter["status"] = { $eq: "admission_confirmed" };
   let params: any = {
     filter: JSON.stringify(filter),
     sort: JSON.stringify(sort),
