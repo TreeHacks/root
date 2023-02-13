@@ -138,11 +138,11 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
         `treehacks-resumes-batch-${i}-${Date.now()}-${i}.zip`
       );
     } */
-    applicationIds = [
+    /* applicationIds = [
       "63c1ce401fcc550015a62af2",
       "638d4153a6b48f00155a62f5",
       "63af6a6f11f16c00159f8ec9",
-    ];
+    ]; */
     let headers = await custom_header();
     const options = {
       method: "POST",
