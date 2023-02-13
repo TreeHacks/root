@@ -138,7 +138,11 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
         `treehacks-resumes-batch-${i}-${Date.now()}-${i}.zip`
       );
     } */
-    applicationIds = ["63c3198c8f1d180015df4402"];
+    applicationIds = [
+      "63c1ce401fcc550015a62af2",
+      "638d4153a6b48f00155a62f5",
+      "63af6a6f11f16c00159f8ec9",
+    ];
     let headers = await custom_header();
     const options = {
       method: "POST",
@@ -148,10 +152,14 @@ export const getApplicationResumes = (tableState: IReactTableState) => async (
       },
       body: JSON.stringify({ ids: applicationIds }),
     };
-    console.log(ENDPOINT_URL);
     //https://root-dev.herokuapp.com/api/users_resumes
 
-    let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
+    let res = await fetch(
+      "https://root.treehacks.com/api/users_resumes",
+      options
+    );
+    console.log(res);
+    //let res = await fetch(ENDPOINT_URL + "/users_resumes", options);
     saveAs(await res.blob(), `treehacks-resumes-${Date.now()}.zip`);
 
     dispatch(loadingEnd());
