@@ -46,7 +46,7 @@ authenticatedRoute.use(function(req, res, next) {
           return next();
         }
         const middleware = validateGroup("mentor");
-        middleware(req, res, next);
+        return middleware(req, res, next);
       } else {
         return res.status(403).send({
           error: "user has not been confirmed",
