@@ -58,7 +58,8 @@ export var TRANSPORTATION_BUS_ROUTES = {
   SANDIEGO: "sandiego",
   UCI: "uci",
   POMONA: "pomona",
-  BERKELEY: "berkeley",
+  BERKELEY12: "berkeley12",
+  BERKELEY34: "berkeley34",
 };
 
 export var TRANSPORTATION_DEADLINES = {
@@ -286,20 +287,22 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: {
     ],
   },
   [TRANSPORTATION_BUS_ROUTES.UCLA]: {
-    coordinator: { name: "Aryan Arora", email: "aryan.arora@ucla.edu" },
+    coordinator: {
+      name: "Nathan Leung",
+      email: "https://app.slack.com/client/T04LLEE9DED/D04PXJ1EC13",
+    },
     route: [
       {
-        day: "Friday, February 14th",
-        time: "9:31am",
+        day: "Friday, February 17th",
+        time: "8:45am",
         stop: "Check in at 10 Charles E. Young N",
-        location: "Los Angeles",
+        location: "UCLA",
       },
-
       {
-        day: "Friday, February 14th",
-        time: "4:03pm",
-        stop: "Panama St. & Via Ortega",
-        location: "Stanford",
+        day: "Friday, February 17th",
+        time: "9:00am",
+        stop: "Bus departs from 10 Charles E. Young N",
+        location: "UCLA",
       },
 
       {
@@ -307,17 +310,17 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: {
       },
 
       {
-        day: "Sunday, February 16th",
-        time: "3:30pm",
-        stop: "Check in at Panama St. & Via Ortega",
+        day: "Sunday, February 19th",
+        time: "4:00pm",
+        stop: "Check in at Via Ortega",
         location: "Stanford",
       },
 
       {
-        day: "Sunday, February 16th",
-        time: "9:48pm",
-        stop: "10 Charles E. Young N",
-        location: "Los Angeles",
+        day: "Sunday, February 19th",
+        time: "4:15pm",
+        stop: "Bus departs to 10 Charles E. Young N",
+        location: "UCLA",
       },
     ],
   },
@@ -429,21 +432,20 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: {
       },
     ],
   },
-  [TRANSPORTATION_BUS_ROUTES.BERKELEY]: {
-    coordinator: null,
+  [TRANSPORTATION_BUS_ROUTES.BERKELEY12]: {
+    coordinator: { name: "Rohan Patra", email: "925 587 4500" },
     route: [
       {
-        day: "Friday, Februrary 14th",
-        time: "3:00pm",
+        day: "Friday, Februrary 17th",
+        time: "1:30pm",
         stop: "Check in at West Circle / University Drive",
         location: "Berkeley",
       },
-
       {
-        day: "Friday, Feburary 14th",
-        time: "5:00pm",
-        stop: "Panama St. & Via Ortega",
-        location: "Stanford",
+        day: "Friday, Februrary 17th",
+        time: "1:45pm",
+        stop: "Bus departs from West Circle / University Drive to Stanford",
+        location: "Berkeley",
       },
 
       {
@@ -451,17 +453,50 @@ export var TRANSPORTATION_BUS_ROUTE_DETAILS: {
       },
 
       {
-        day: "Sunday, Februrary 16th",
+        day: "Sunday, Februrary 19th",
         time: "4:00pm",
-        stop: "Check in at Panama St. & Via Ortega",
+        stop: "Check in at Via Ortega",
         location: "Stanford",
+      },
+      {
+        day: "Sunday, Februrary 19th",
+        time: "4:15pm",
+        stop: "Bus leaves from Via Ortega to UC Berkeley",
+        location: "Stanford",
+      },
+    ],
+  },
+  [TRANSPORTATION_BUS_ROUTES.BERKELEY34]: {
+    coordinator: { name: "Chris Leung", email: "925 436 2325" },
+    route: [
+      {
+        day: "Friday, Februrary 17th",
+        time: "4:00pm",
+        stop: "Check in at West Circle / University Drive",
+        location: "Berkeley",
+      },
+      {
+        day: "Friday, Februrary 17th",
+        time: "4:15pm",
+        stop: "Bus departs from West Circle / University Drive to Stanford",
+        location: "Berkeley",
       },
 
       {
-        day: "Sunday, Februrary 16th",
-        time: "6:00pm",
-        stop: "West Circle / University Drive",
-        location: "Berkeley",
+        hack: true,
+      },
+
+      {
+        day: "Sunday, Februrary 19th",
+        time: "6:30pm",
+        stop: "Check in at Via Ortega",
+        location: "Stanford",
+      },
+      {
+        day: "Sunday, Februrary 19th",
+        time: "6:45pm",
+        stop: "Bus leaves from Via Ortega to UC Berkeley",
+        location: "Stanford",
       },
     ],
   },
