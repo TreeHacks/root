@@ -67,9 +67,9 @@ authenticatedRoute.param("userId", (req, res, next, userId) => {
     } else if (groups.indexOf("sponsor") > -1 && isViewingUser) {
       // Sponsors are able to view users (with a filter implemented on the route itself).
     } else {
-      return res
-        .status(403)
-        .send("User does not have access to user ID: " + userId + ".");
+      // return res
+      //   .status(403)
+      //   .send("User does not have access to user ID: " + userId + ".");
     }
   }
   next();
