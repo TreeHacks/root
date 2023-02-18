@@ -40,6 +40,14 @@ authenticatedRoute.use(function(req, res, next) {
       );
       if (application && application.status === "admission_confirmed") {
         next();
+      } else if (application) {
+        //sponsor may have accidentally went to root.treehacks, which will create an application
+        //so if someone does have an application, and is not confirmed, but is a sponsor, let them in
+        let middleware = validateGroup(["sponsor"], true);
+        middleware(req, res, next);
+
+        middleware = validateGroup(["mentor"], true);
+        middleware(req, res, next);
       } else if (!application) {
         const sponsor = await SponsorAdmin.findOne({ email: response.email });
         if (sponsor) {

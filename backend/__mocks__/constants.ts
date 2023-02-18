@@ -244,4 +244,10 @@ export const AUTO_ADMIT_STANFORD = true;
 
 export const IGNORED_REVIEWERS = [];
 
-export const ALLOWED_GROUPS = ["admin", "reviewer", "sponsor", "judge"];
+export const ALLOWED_GROUPS = [
+  "admin",
+  "reviewer",
+  "sponsor",
+  "judge",
+  "mentor",
+];

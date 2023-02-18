@@ -228,16 +228,45 @@ export class Transportation extends React.Component<ITransportationProps> {
               more details about the specific times and locations of your bus.
             </p>
 
-            {/* <div className="treehacks-bus-coordinator-text">
+            <div className="treehacks-bus-coordinator-text">
               <p>
                 <small>
                   {busRouteInfo.coordinator ? (
                     <React.Fragment>
                       Your bus coordinator is{" "}
-                      <strong>
-                        {busRouteInfo.coordinator.name} (
-                        {busRouteInfo.coordinator.email}).{" "}
-                      </strong>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <strong>{busRouteInfo.coordinator.name}</strong>
+                        <a
+                          href={
+                            busRouteInfo.coordinator.email.includes("https")
+                              ? busRouteInfo.coordinator.email
+                              : ""
+                          }
+                          target="_blank"
+                        >
+                          <button
+                            style={{
+                              backgroundColor: "#105E54",
+                              border: "1px solid white",
+                              color: "white",
+                              padding: "10px",
+                              borderRadius: "10px",
+                            }}
+                          >
+                            {busRouteInfo.coordinator.email.includes("https")
+                              ? "Contact them on Slack"
+                              : "Phone number: " +
+                                busRouteInfo.coordinator.email}
+                          </button>
+                        </a>
+                      </div>
                     </React.Fragment>
                   ) : (
                     "We will add information for your bus coordinator in the weeks leading up to the event. If you have questions in the meantime, please reach out to hello@treehacks.com."
@@ -245,10 +274,9 @@ export class Transportation extends React.Component<ITransportationProps> {
                 </small>
               </p>
               <RouteMap route={busRouteInfo.route} />
-            </div> */}
+            </div>
 
             <h5>
-              <br />
               {transportationForm.accept ? (
                 "Thanks, we've received your RSVP"
               ) : (

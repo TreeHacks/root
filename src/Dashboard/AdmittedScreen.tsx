@@ -30,7 +30,13 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
             Travel RSVP details
           </Link>
         </button>
-        {/*<p>Make sure to check out the <a href="https://treehacks.quip.com/AAJgA6BS2tvU/The-Ultimate-TreeHacks-Guide-">Ultimate TreeHacks Guide 🌲</a> to learn more!</p>*/}
+        <p>
+          Make sure to check out the{" "}
+          <a href="https://docs.google.com/document/d/1kzm-m6DqB2I4Z_-c56Oye6uZvPzkX1jR/edit">
+            Ultimate TreeHacks Guide 🌲
+          </a>{" "}
+          to learn more!
+        </p>
       </div>
     )}
     {!props.confirmedYet && (
