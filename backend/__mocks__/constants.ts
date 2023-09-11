@@ -238,7 +238,7 @@ export let AVAILABLE_ROOMS: IRoom[] = [
   },
 ];
 
-export const HACKATHON_YEAR = "2023"; //settings.hackathon_year;
+export const HACKATHON_YEAR = "2024"; //settings.hackathon_year;
 export const HACKATHON_YEAR_STRING = String(HACKATHON_YEAR);
 export const AUTO_ADMIT_STANFORD = true;
 
