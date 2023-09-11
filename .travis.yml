@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "10.16.0"
+  - "16.16.0"
 script:
   - npm test
   - npm run build:backend
