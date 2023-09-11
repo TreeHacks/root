@@ -164,7 +164,7 @@
           "type": "string"
         },
         "q7": {
-          "title": "If you have a referral email address from someone who has already applied to TreeHacks 2023, please enter it below. You may only enter one. This is part of a raffle that will occur during the hackathon, where the winner gets an APPLE WATCH!",
+          "title": "If you have a referral email address from someone who has already applied to TreeHacks 2024, please enter it below. You may only enter one. This is part of a raffle that will occur during the hackathon, where the winner gets an APPLE WATCH!",
           "type": "string"
         },
         "volunteer": {
