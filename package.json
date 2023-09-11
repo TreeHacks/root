@@ -4,7 +4,7 @@
     "description": "https://ap-frontend-test.herokuapp.com/",
     "main": "webpack.common.js",
     "engines": {
-        "node": "16.16.0"
+        "node": "10.16.0"
     },
     "scripts": {
         "mongo": "mongod",
