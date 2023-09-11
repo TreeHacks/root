@@ -1,7 +1,7 @@
 export default {
   // TODO: Make these dates the actual dates of the hackathon
-  hackathon_year: 2023,
-  hackathon_date_range: "February 17-19",
+  hackathon_year: 2024,
+  hackathon_date_range: "February 16-18",
   locations: [
     "Outside USA",
     "Alabama",
@@ -63,19 +63,19 @@ export default {
     {
       key: "oos",
       label: "out-of-state",
-      date: "2023-01-03T08:45:00.000Z",
+      date: "2024-01-03T08:45:00.000Z",
       display_date: "January 2, 2023",
     },
     {
       key: "is",
       label: "in-state",
-      date: "2023-01-03T08:45:00.000Z",
+      date: "2024-01-03T08:45:00.000Z",
       display_date: "January 2, 2023",
     },
     {
       key: "stanford",
       label: "Stanford student",
-      date: "2023-01-14T07:59:00.000Z",
+      date: "2024-01-14T07:59:00.000Z",
       display_date: "January 13, 2023",
     },
   ],
