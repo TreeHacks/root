@@ -5,7 +5,7 @@
       "properties": {
         "section1": {
           "title": "your application",
-          "custom_description": "We’re so excited that you want to come to TreeHacks 2023! If you have any questions, feel free to reach out at hello@treehacks.com. Let’s start with the basics.",
+          "custom_description": "We’re so excited that you want to come to TreeHacks 2024! If you have any questions, feel free to reach out at hello@treehacks.com. Let’s start with the basics.",
           "type": "string"
         },
         "first_name": {
@@ -40,7 +40,8 @@
             "2023",
             "2024",
             "2025",
-            "2026"
+            "2026",
+            "2027"
           ]
         },
         "level_of_study": {
@@ -121,9 +122,9 @@
         "top_track": {
           "enum": [
             "Healthcare",
-            "Sustainability",
-            "Emerging Tech",
-            "Web 3.0 & Fintech",
+            "Sustainability and Development",
+            "Entertainment and Interaction",
+            "Financial Technology",
             "Education",
             "Privacy & Safety"
           ],
@@ -135,7 +136,7 @@
           "type": "string"
         },
         "q1": {
-          "title": "Why do you want to come to TreeHacks 2023?",
+          "title": "Why do you want to come to TreeHacks 2024?",
           "word_count": 150,
           "type": "string"
         },
