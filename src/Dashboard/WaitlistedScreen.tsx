@@ -9,7 +9,7 @@ export default () => (
       offer you a spot at this time.
     </p>
     <p>
-      We will contact you by February 1st, 2023 with more information if we're
+      We will contact you by February 1st, 2024 with more information if we're
       able to offer you a spot at TreeHacks. Stay tuned and be on the lookout
       for updates from us in the future.
     </p>
