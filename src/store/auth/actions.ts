@@ -29,7 +29,7 @@ export const loggedIn = (userId, attributes, admin, reviewer, sponsor, judge, ap
 export function logout() {
   return dispatch => {
     localStorage.removeItem("jwt");
-    window.location.href = `${LOGIN_URL}/logout?redirect=${window.location.href}`;
+    window.location.href = `${LOGIN_URL}/logout`;
   }
 }
 
