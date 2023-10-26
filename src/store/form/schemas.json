@@ -142,11 +142,11 @@
         },
         "q2": {
           "word_count": 150,
-          "title": "Tell us about the most impactful project you’ve worked on, technical or non-technical.",
+          "title": "Tell us about a project you’ve enjoyed working on, technical or non-technical.",
           "type": "string"
         },
         "q3": {
-          "title": "Tell us about something that is meaningful to you, and why?",
+          "title": "What’s something you’re excited to work on in the next 10 years? Dream big!",
           "word_count": 150,
           "type": "string"
         },
@@ -156,7 +156,7 @@
           "type": "string"
         },
         "q5": {
-          "title": "Optionally, add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Dribbble, etc.",
+          "title": "Optionally, add any links (separated by commas) that you'd like us to check out! GitHub, LinkedIn, Devpost, Portfolio, Awards, Dribbble, etc.",
           "type": "string"
         },
         "q6": {
