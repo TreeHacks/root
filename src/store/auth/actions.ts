@@ -15,11 +15,6 @@ function getJwt() {
   return localStorage.getItem("jwt");
 }
 
-function removeJwt() {
-  Cookies.remove("jwt", { domain: LOGIN_COOKIE_DOMAIN });
-  localStorage.removeItem("jwt");
-}
-
 export const loggedIn = (userId, attributes, admin, reviewer, sponsor, judge, applicant) => ({
   type: 'LOGIN_SUCCESS',
   userId,
@@ -33,7 +28,7 @@ export const loggedIn = (userId, attributes, admin, reviewer, sponsor, judge, ap
 
 export function logout() {
   return dispatch => {
-    removeJwt();
+    localStorage.removeItem("jwt");
     window.location.href = `${LOGIN_URL}/logout?redirect=${window.location.href}`;
   }
 }
