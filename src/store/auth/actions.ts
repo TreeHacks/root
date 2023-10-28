@@ -30,7 +30,7 @@ export function logout() {
   return dispatch => {
     localStorage.removeItem("jwt");
     localStorage.clear();
-    window.location.href = `${LOGIN_URL}/logout?redirect=${window.location.href}`;
+    window.location.href = `${LOGIN_URL}/logout?`; //redirect=${window.location.href}`;
   }
 }
 
