@@ -105,6 +105,11 @@ class FormPageWrapper extends React.Component<
             .
           </b>{" "}
           Let’s start with the basics.
+          <br />
+          <b>DISCLAIMER:</b> Be sure to complete all required questions, marked
+          with an *. Common causes for a 403 error when submitting is missing a
+          required question, most commonly the "Choose your top track" question.
+          Be sure to select an appropriate option for that question.
         </span>
       );
     }
