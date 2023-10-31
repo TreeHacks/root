@@ -63,14 +63,14 @@ export default {
     {
       key: "oos",
       label: "out-of-state",
-      date: "2024-01-03T08:45:00.000Z",
-      display_date: "January 2, 2024",
+      date: "2023-12-12T08:45:00.000Z",
+        display_date: "December 11th, 2023",
     },
     {
       key: "is",
       label: "in-state",
-      date: "2024-01-03T08:45:00.000Z",
-      display_date: "January 2, 2024",
+      date: "2023-12-12T08:45:00.000Z",
+      display_date: "December 11th, 2023",
     },
     {
       key: "stanford",
