@@ -15,7 +15,7 @@ mongo_uri = os.environ['MONGODB_URI']
 client = MongoClient(mongo_uri, retryWrites=False);
 uri_dict = uri_parser.parse_uri(mongo_uri)
 db = client[uri_dict['database']]
-applications = db.applications.find({'year': '2022', 'status': 'admission_confirmed'})
+applications = db.applications.find({'year': '2024', 'status': 'admission_confirmed'})
 slack_client = slack.WebClient(token=os.environ['SLACK_OAUTH_ACCESS_TOKEN'])
 count = 0
 

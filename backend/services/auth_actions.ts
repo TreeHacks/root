@@ -50,6 +50,7 @@ export async function bulkAutoCreateUser({ email, group, password = null }) {
     if (group === "judge") {
       await new Judge({_id: User.Username, email: email}).save();
     }
+
     return {
       id: User.Username,
       email,

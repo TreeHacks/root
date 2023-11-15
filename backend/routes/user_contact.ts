@@ -30,7 +30,7 @@ export async function userContact(req: Request, res: Response) {
         response = (await web.users.lookupByEmail({ email }) as any); // TODO: fix slack typings
         const { ok, user } = response;
         if (ok) {
-            res.redirect(`https://treehacks2021.slack.com/team/${user.id}`); // TODO: don't hardcode workspace URL
+            res.redirect(`https://treehacks2023.slack.com/team/${user.id}`); // TODO: don't hardcode workspace URL
         } else {
             throw "Slack user not found";
         }

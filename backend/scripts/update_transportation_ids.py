@@ -13,7 +13,7 @@ mongo_uri = os.environ['MONGODB_URI']
 client = MongoClient(mongo_uri, retryWrites=False);
 uri_dict = uri_parser.parse_uri(mongo_uri)
 db = client[uri_dict['database']]
-applications = db.applications.find({'year': '2022'})
+applications = db.applications.find({'year': '2024'})
 
 ids_to_transportation = {}
 count = 0

@@ -1,52 +1,76 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base target="_parent" />
+    <title>TreeHacks 2024 Root</title>
+    <style>
+      body {
+        /* TODO: Make this configurable to $background-color in theme */
+        background-color: white;
+      }
+    </style>
+    <link rel="icon" href="./images/favicon/favicon.ico" sizes="32x32" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <base target="_parent" />
-  <title>TreeHacks 2022 Root</title>
-  <style>
-    body {
-      /* TODO: Make this configurable to $background-color in theme */
-      background-color: white;
-    }
-  </style>
-  <link rel="icon" href="./images/favicon/favicon.ico" sizes="32x32">
-  <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+      gtag("config", "");
+    </script>
 
-    gtag('config', '');
-  </script>
+    <!--Linkedin Pixel-->
+    <img
+      height="1"
+      width="1"
+      style="display:none;"
+      alt=""
+      src="https://px.ads.linkedin.com/collect/?pid=1643873&conversionId=1608193&fmt=gif"
+    />
 
-  <!--Linkedin Pixel-->
-  <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=1643873&conversionId=1608193&fmt=gif" />
+    <!--Facebook Pixel-->
+    <script>
+      !(function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "551945405382177");
+      fbq("track", "PageView");
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        src="https://www.facebook.com/tr?id=551945405382177&ev=PageView&noscript=1"
+      />
+    </noscript>
+  </head>
 
-  <!--Facebook Pixel-->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window,document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '551945405382177');
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-  <img height="1" width="1"
-    src="https://www.facebook.com/tr?id=551945405382177&ev=PageView&noscript=1"/>
-  </noscript>
-</head>
-
-<body>
-  <div id="main"></div>
-</body>
-
+  <body>
+    <div id="main"></div>
+  </body>
 </html>

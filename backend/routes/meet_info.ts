@@ -20,7 +20,7 @@ export function getMeetInfo(req: Request, res: Response) {
     return getApplicationAttribute(req, res, (e: IApplication) => {
         prepopulateMeetInfo(e);
         return e.forms.meet_info || {};
-    });
+    }, true);
 }
 
 export function setMeetInfo(req: Request, res: Response) {
