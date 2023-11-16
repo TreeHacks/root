@@ -41,18 +41,18 @@ const schema = {
 	"properties": Object.assign({
 		"experience": {
 			"type": "number",
-			"enum": [1, 2, 3, 4, 5],
-			"enumNames": ["1 = No experience", "2 = Intro (106/107 level and/or experience)", "3 = Intermediate (high-level classes, and/or major personal projects)", "4 = Advanced (CS research, grad courses, substantial projects, etc.)", "999 = OUTTA DIS WRLD CODER VERY RARE"]
+			"enum": [1, 2, 3, 4, 5, 6],
+			"enumNames": ["1 = No experience", "2 = Intro (106/107 level and/or experience)", "3 = Low-Intermediate (some projects, worked @ a tech company)", "4 = High-Intermediate (high-level classes, and/or major personal projects)", "5 = Advanced (CS research, grad courses, substantial projects, etc.)", "999 = OUTTA DIS WRLD CODER VERY RARE"]
 		},
 		"passion": {
 			"type": "number",
-			"enum": [1, 2, 3, 4, 5],
-			"enumNames": ["1 = No passion demonstrated", "2 = Discussed something they’re passionate about", "3 = Passionate about something and did something about it", "4 = Passionate about something and did something major about it", "999 = OUTTA DIS WRLD PASSION VERY RARE"]
+			"enum": [1, 2, 3, 4, 5, 6],
+			"enumNames": ["1 = No passion demonstrated", "2 = Low passion (discussed something they’re passionate about)", "3 = Somewhat Passionate (demonstrated passion, took small steps to it)", "4 = Took initiative + action steps to pursue passion", "5 = Very passionate + did something very major about it", "999 = OUTTA DIS WRLD PASSION VERY RARE"]
 		},
 		"cultureFit": {
 			"type": "number",
 			"enum": [1, 2, 3, 4, 5],
-			"enumNames": ["1 = Not a fit", "2 = Maybe", "3 = Yes, a fit", "4 = Awesome fit!!!", "999 = OUTTA DIS WRLD FIT VERY RARE"]
+			"enumNames": ["1 = No", "2 = Leaning No", "3 = Leaning Yes", "4 = Yes", "999 = FOSHOOOOOO (v rare)"]
 		}
 	}, bools),
 	"required": ["experience", "passion", "cultureFit"]
@@ -121,7 +121,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 				"ui:placeholder": "passion",
 			},
 			"cultureFit": {
-				"ui:placeholder": "how strong of a fit for treehacks?",
+				"ui:placeholder": "should admit?",
 			},
 			"ui:order": ["experience", "passion", "cultureFit"].concat(Object.keys(bools))
 		};
