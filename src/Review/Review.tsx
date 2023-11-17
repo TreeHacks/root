@@ -38,7 +38,7 @@ Object.keys(bools).map(k => {
 const schema = {
 	"type": "object",
 	"title": "Rate",
-	"properties": Object.assign({
+	"properties": Object.assign(bools, {
 		"experience": {
 			"type": "number",
 			"enum": [1, 2, 3, 4, 5, 6],
@@ -54,7 +54,7 @@ const schema = {
 			"enum": [1, 2, 3, 4, 5],
 			"enumNames": ["1 = No", "2 = Leaning No", "3 = Leaning Yes", "4 = Yes", "6 = FOSHOOOOOOO (v rare)"]
 		}
-	}, bools),
+	}),
 	"required": ["experience", "passion", "cultureFit"]
 };
 
@@ -123,7 +123,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			"cultureFit": {
 				"ui:placeholder": "should admit?",
 			},
-			"ui:order": ["experience", "passion", "cultureFit"].concat(Object.keys(bools))
+			"ui:order": Object.keys(bools).concat(["experience", "passion", "cultureFit"])
 		};
 
 		return (<div className="row">
