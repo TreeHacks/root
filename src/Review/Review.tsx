@@ -42,17 +42,17 @@ const schema = {
 		"experience": {
 			"type": "number",
 			"enum": [1, 2, 3, 4, 5, 6],
-			"enumNames": ["1 = No experience", "2 = Intro (106/107 level and/or experience)", "3 = Low-Intermediate (some projects, worked @ a tech company)", "4 = High-Intermediate (high-level classes, and/or major personal projects)", "5 = Advanced (CS research, grad courses, substantial projects, etc.)", "999 = OUTTA DIS WRLD CODER VERY RARE"]
+			"enumNames": ["1 = No experience", "2 = Intro (106/107 level and/or experience)", "3 = Low-Intermediate (some projects, worked @ a tech company)", "4 = High-Intermediate (high-level classes, and/or major personal projects)", "5 = Advanced (CS research, grad courses, substantial projects, etc.)", "6 = OUTTA DIS WRLD CODER VERY RARE"]
 		},
 		"passion": {
 			"type": "number",
 			"enum": [1, 2, 3, 4, 5, 6],
-			"enumNames": ["1 = No passion demonstrated", "2 = Low passion (discussed something they’re passionate about)", "3 = Somewhat Passionate (demonstrated passion, took small steps to it)", "4 = Took initiative + action steps to pursue passion", "5 = Very passionate + did something very major about it", "999 = OUTTA DIS WRLD PASSION VERY RARE"]
+			"enumNames": ["1 = No passion demonstrated", "2 = Low passion (discussed something they’re passionate about)", "3 = Somewhat Passionate (demonstrated passion, took small steps to it)", "4 = Took initiative + action steps to pursue passion", "5 = Very passionate + did something very major about it", "6 = OUTTA DIS WRLD PASSION VERY RARE"]
 		},
 		"cultureFit": {
 			"type": "number",
 			"enum": [1, 2, 3, 4, 5],
-			"enumNames": ["1 = No", "2 = Leaning No", "3 = Leaning Yes", "4 = Yes", "999 = FOSHOOOOOOO (v rare)"]
+			"enumNames": ["1 = No", "2 = Leaning No", "3 = Leaning Yes", "4 = Yes", "6 = FOSHOOOOOOO (v rare)"]
 		}
 	}, bools),
 	"required": ["experience", "passion", "cultureFit"]
