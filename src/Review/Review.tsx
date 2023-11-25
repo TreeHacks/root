@@ -113,6 +113,8 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 		applicationSchema.properties.hackathon_experience.title = '# hackathons attended';
 		applicationSchema.properties.resume.description = null;
 
+		const boolsKeys = Object.keys(bools);
+
 		const uiSchema = {
 			"experience": {
 				"ui:placeholder": "technical experience",
@@ -123,7 +125,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 			"cultureFit": {
 				"ui:placeholder": "how strong of a fit for treehacks?",
 			},
-			"ui:order": ["experience", "passion", "cultureFit"].concat(Object.keys(bools))
+			"ui:order": boolsKeys.concat(["experience", "passion", "cultureFit"])
 		};
 
 		return (<div className="row">
