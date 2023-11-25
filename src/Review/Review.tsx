@@ -52,7 +52,7 @@ const schema = {
 		"cultureFit": {
 			"type": "number",
 			"enum": [1, 2, 3, 4, 5],
-			"enumNames": ["1 = No", "2 = Leaning No", "3 = Leaning Yes", "4 = Yes", "6 = FOSHOOOOOOO (v rare)"]
+			"enumNames": ["1 = Not a fit", "2 = Maybe", "3 = Yes, a fit", "4 = Awesome fit!!!", "6 = OUTTA DIS WRLD FIT VERY RARE"]
 		}
 	}, bools),
 	"required": ["experience", "passion", "cultureFit"]
@@ -121,7 +121,7 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 				"ui:placeholder": "passion",
 			},
 			"cultureFit": {
-				"ui:placeholder": "should admit?",
+				"ui:placeholder": "how strong of a fit for treehacks?",
 			},
 			"ui:order": ["experience", "passion", "cultureFit"].concat(Object.keys(bools))
 		};
