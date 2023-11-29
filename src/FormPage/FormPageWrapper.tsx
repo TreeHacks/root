@@ -110,6 +110,10 @@ class FormPageWrapper extends React.Component<
           with an *. Common causes for a 403 error when submitting is missing a
           required question, most commonly the "Choose your top track" question.
           Be sure to select an appropriate option for that question.
+          Also, common causes for a 401 error when submitting is due to leaving 
+          the page for many hours and then coming back to submit since your tokens
+          would expire. In this case, please log out and log back in. Please back up
+          your answers on a doc! 
         </span>
       );
     }
