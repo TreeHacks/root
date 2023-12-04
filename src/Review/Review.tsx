@@ -52,7 +52,7 @@ const schema = {
 		"cultureFit": {
 			"type": "number",
 			"enum": [1, 2, 3, 4, 5],
-			"enumNames": ["1 = Not a fit", "2 = Maybe", "3 = Yes, a fit", "4 = Awesome fit!!!", "6 = OUTTA DIS WRLD FIT VERY RARE"]
+			"enumNames": ["1 = Not a fit", "2 = Maybe", "3 = Yes, a fit", "4 = Awesome fit!!!", "5 = OUTTA DIS WRLD FIT VERY RARE"]
 		}
 	}, bools),
 	"required": ["experience", "passion", "cultureFit"]
