@@ -160,7 +160,7 @@
           "type": "string"
         },
         "q6": {
-          "title": "If you plan on participating as a team, your decision for this can change at any time and is non-binding, please enter the emails of your teammates, seperated by a single comma. ALL TEAM MEMBERS MUST SUBMIT APPLICATIONS.",
+          "title": "If you plan on participating as a team, your decision for this can change at any time and is non-binding, please enter the emails of your teammates, separated by a single comma. ALL TEAM MEMBERS MUST SUBMIT APPLICATIONS.",
           "type": "string"
         },
         "q7": {
