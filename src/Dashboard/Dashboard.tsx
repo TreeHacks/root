@@ -39,7 +39,7 @@ export const Dashboard = (props: IDashboardProps) => {
     dayEndings = ["th", "th", "th", "th", "th", "th", "th", "th", "th", "th"];
   }
   var minuteDiff = (deadlineDate.getTime() - currentDate) / (1000 * 60);
-  var daysLeft = Math.round(1 + minuteDiff / (60 * 24)); // Add 1 since it is inclusive
+  var daysLeft =  1; // Math.round(1 + minuteDiff / (60 * 24)); // Add 1 since it is inclusive
   var timeLeft = daysLeft;
   var unit = "days";
   if (minuteDiff <= 60 * 24 && minuteDiff > 0) {
