@@ -12,12 +12,12 @@ import { prepopulateMeetInfo } from "./meet_info";
 export function getDeadline(type) {
   switch (type) {
     case "is":
-      return new Date("2023-12-12T08:45:00.000Z");
+      return new Date("2023-12-12T09:30:00.000Z");
     case "stanford":
       return new Date("2023-12-31T07:59:00.000Z");
     case "oos":
     default:
-      return new Date("2023-12-12T08:45:00.000Z");
+      return new Date("2023-12-12T09:30:00.000Z");
   }
 }
 
