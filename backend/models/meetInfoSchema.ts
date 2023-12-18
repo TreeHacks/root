@@ -4,6 +4,8 @@ import { Schema } from "mongoose";
 const meetInfoSchema: Schema = new mongoose.Schema({
     verticals: {type: [String], default: undefined},
     numMoreTeammates: String,
+    pendingList: String,
+    approvedList: String,
     profileDesc: String,
     idea: String,
     showProfile: Boolean,
