@@ -52,6 +52,7 @@ export interface ITransportationInfo {
 
 export interface IMeetInfo {
   verticals?: String;
+  numMoreTeammates?: String;
   profileDesc?: String;
   idea?: String;
   pronouns?: String;
