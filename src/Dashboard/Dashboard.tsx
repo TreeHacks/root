@@ -106,7 +106,7 @@ export const Dashboard = (props: IDashboardProps) => {
               confirmedYet={false}
               deadline={acceptanceConfirmDeadline}
             />
-          ) : props.profile.status === STATUS.SUBMITTED ? (
+          ) : (props.profile.status === STATUS.SUBMITTED || props.profile.status === STATUS.DONTREVIEW)? (
             <span>
               Your application has been received &ndash; you are all good for
               now!
