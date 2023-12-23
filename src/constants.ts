@@ -21,6 +21,7 @@ export var STATUS = {
   ADMITTED: "admitted",
   ADMISSION_CONFIRMED: "admission_confirmed",
   ADMISSION_DECLINED: "admission_declined",
+  DONTREVIEW: "no_reviewing",
 };
 
 export var TYPE = {
