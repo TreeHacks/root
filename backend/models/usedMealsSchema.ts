@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const meetInfoSchema: Schema = new mongoose.Schema({
+const usedMealsSchema: Schema = new mongoose.Schema({
     mealList: String,
 }, { _id: false });
 
