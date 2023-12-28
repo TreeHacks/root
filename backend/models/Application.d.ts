@@ -50,6 +50,10 @@ export interface ITransportationInfo {
   [e: string]: any;
 }
 
+export interface IUsedMeals {
+  mealList?: String;
+}
+
 export interface IMeetInfo {
   verticals?: String;
   numMoreTeammates?: String;
