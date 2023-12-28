@@ -4,6 +4,7 @@ import { IApplication } from "./Application.d"
 import applicationInfoSchema from "./applicationInfoSchema";
 import adminInfoSchema from "./adminInfoSchema";
 import meetInfoSchema from "./meetInfoSchema";
+import usedMealsSchema from "./usedMealsSchema";
 import submitInfoSchema from "./submitInfoSchema";
 import reviewSchema from "./reviewSchema";
 import { STATUS, TRANSPORTATION_STATUS } from "../constants";
@@ -38,6 +39,7 @@ export const applicationSchema: Schema = new mongoose.Schema({
         type: String,
         enumValues: ["is", "oos", "stanford"]
     },
+    "used_meals": usedMealsSchema,
     "location": {
         type: String,
         enumValues: ["Outside USA", "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District Of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "US Territories"]
