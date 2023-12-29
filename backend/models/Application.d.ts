@@ -92,6 +92,7 @@ export interface IApplication extends Document {
     transportation: ITransportationInfo;
     meet_info: IMeetInfo;
     submit_info: ISubmitInfo;
+    used_meals: IUsedMeals;
     // we can conceivably add additional forms here.
   };
   admin_info: {
