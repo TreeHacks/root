@@ -21,6 +21,22 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           Keep an eye on your inbox in the coming weeks -- we'll be sending more
           details to you shortly!
         </p>
+        <p>
+          Check out the <Link to="/transportation">travel section</Link> for
+          details to RSVP here.
+        </p>
+        <button className="btn btn-custom">
+          <Link to="/transportation" style={{ color: "white" }}>
+            Travel RSVP details
+          </Link>
+        </button>
+        <p>
+          Make sure to check out the{" "}
+          <a href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit?usp=sharing">
+            Ultimate TreeHacks Guide 🌲
+          </a>{" "}
+          to learn more!
+        </p>
       </div>
     )}
     {!props.confirmedYet && (
