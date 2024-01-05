@@ -309,6 +309,7 @@ export class Transportation extends React.Component<ITransportationProps> {
         >
           <div className="treehacks-alert">
             {transportationType === TRANSPORTATION_TYPES.FLIGHT && (
+          <>
             <h5>
               TreeHacks is reimbursing you up to{" "}
               <span className="treehacks-transportation-amount-text">
@@ -318,7 +319,8 @@ export class Transportation extends React.Component<ITransportationProps> {
                 })}
               </span>
             </h5>
-              <FlightReimbursementHeader />
+            <FlightReimbursementHeader />
+          </>
             )}
             {transportationType === TRANSPORTATION_TYPES.OTHER && (
               <TravelReimbursementHeader />
