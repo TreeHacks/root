@@ -5,11 +5,13 @@ export default () => (
   <div>
     <p style={{ maxWidth: 575, margin: "20px auto" }}>
       We have calculated your flight cap based on the location in your
-      application, and above is the amount up to which we can reimburse the cost of your flight, up to this amount.{" "}
+      application, and above is the amount up to which we can reimburse the cost of your flight.
       <strong>
-        If you do not complete the steps below by the deadline, we will assume you
+        If you do not book your flight through Egencia (detils below) by the deadline, we will assume you
         are declining the reimbursement, and you will not be reimbursed.
       </strong>
+    See the detailed steps below that walk you through booking a flight using Egencia! This should take about 15-20 minutes and must 
+      be completed by the deadline above. 
     </p>
     <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
         <li>
@@ -51,11 +53,16 @@ export default () => (
         </li>
     </ul>
     <p style={{ maxWidth: 575, margin: "20px auto" }}>
-      Your reimbursement will be rejected if you don't meet the following:
+      Your reimbursement will be rejected if you don't:
     </p>
     <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
-      <li>Attend TreeHacks {HACKATHON_YEAR} :)</li>
-      <li>Submit a project by the project deadline the weekend-of.</li>
+      <li>Check-in at the event in person</li>
+      <li>Submit a qualified project to the Devpost before hacking closes. A qualified project is one where: </li>
+      <ul>
+        <li>it is clear that thought and effort went into the project</li>
+        <li>it contains original code and is not a fork/clone of an existing repo</li>
+        <li>it adheres to the rules of the hackathon, which require all coding to be done during the 36 hours</li>
+      </ul>
       <li>
         Follow any and all TreeHacks rules &amp; the{" "}
         <a
