@@ -15,11 +15,9 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
   <div className="admitted-content">
     {props.confirmedYet && (
       <div>
-        <h4>You're coming to TreeHacks {HACKATHON_YEAR}!</h4>
-        <p>Admission confirmed &ndash; see you there!</p>
-        <p>Complete the following by <strong>January 24th:</strong> </p>
+        <h4>Complete the following by <strong>January 24th:</strong></h4>
         <ul>
-          <li>Follow the steps in your <Link to="/transportation">travel section</Link> to confirm your travel plans (we have very specific instructions on travelling to TreeHacks, please read carefully)! You must also input a mailing address that will be valid and accessible by you till May 2024 at the end of that page. </li>
+          <li>Follow the steps in <Link to="/transportation">travel section</Link> as early as possible! You must also input a mailing address that will be valid and accessible by you till May 2024 at the end of that page. </li>
           <li>Register through GrantEd: complete this form to register as a vendor (this is required in order to receive a prize or a travel reimbursement)</li>
           <li>Sign the <a href=""> liability waiver </a> (need to print and then sign, virtual signature not accepted) and <a href=""> upload it here </a> </li>
         </ul>
