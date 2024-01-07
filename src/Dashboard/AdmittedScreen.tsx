@@ -63,7 +63,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
         <p>
           By confirming your spot, you agree to let us share the information you
           gave us in your application with our sponsors. If you'd like to opt
-          out, send us a message at hello@treehacks.com.
+          out, send us a message at hello@treehacks.com with the subject "Sponsor Information Opt Out".
         </p>
       </div>
     )}
