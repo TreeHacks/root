@@ -17,13 +17,15 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
       <div>
         <h4>You're coming to TreeHacks {HACKATHON_YEAR}!</h4>
         <p>Admission confirmed &ndash; see you there!</p>
+        <p>Complete the following by <strong>January 24th:</strong> </p>
+        <ul>
+          <li>Follow the steps in your <Link to="/transportation">travel section</Link> to confirm your travel plans (we have very specific instructions on travelling to TreeHacks, please read carefully)! You must also input a mailing address that will be valid and accessible by you till May 2024 at the end of that page. </li>
+          <li>Register through GrantEd: complete this form to register as a vendor (this is required in order to receive a prize or a travel reimbursement)</li>
+          <li>Sign the <a href=""> liability waiver </a> (need to print and then sign, virtual signature not accepted) and <a href=""> upload it here </a> </li>
+        </ul>
         <p>
           Keep an eye on your inbox in the coming weeks -- we'll be sending more
           details to you shortly!
-        </p>
-        <p>
-          Check out the <Link to="/transportation">travel section</Link> for
-          details to RSVP here.
         </p>
         <button className="btn btn-custom">
           <Link to="/transportation" style={{ color: "white" }}>
@@ -31,7 +33,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           </Link>
         </button>
         <p>
-          Make sure to check out the{" "}
+          Check out {" "}
           <a href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit?usp=sharing">
             Ultimate TreeHacks Guide 🌲
           </a>{" "}
