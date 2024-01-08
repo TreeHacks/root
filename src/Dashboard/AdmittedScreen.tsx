@@ -32,17 +32,10 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           details to you shortly!
         </p>
         <button className="btn btn-custom">
-          <Link to="/transportation" style={{ color: "white" }}>
-            Travel RSVP details
+          <Link to="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit?usp=sharing" style={{ color: "white" }}>
+            Ultimate TreeHacks Guide 🌲
           </Link>
         </button>
-        <p>
-          Check out {" "}
-          <a href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit?usp=sharing">
-            Ultimate TreeHacks Guide 🌲
-          </a>{" "}
-          to learn more!
-        </p>
       </div>
     )}
     {!props.confirmedYet && (
