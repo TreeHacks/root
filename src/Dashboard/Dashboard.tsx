@@ -5,6 +5,7 @@ import WaitlistedScreen from "./WaitlistedScreen";
 import RejectedScreen from "./RejectedScreen";
 import Loading from "../Loading/Loading";
 import AdmittedScreen from "./AdmittedScreen";
+import AdmittedStanford from "./AdmittedStanford";
 import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
 import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
 import { DEADLINES, STATUS, TYPE } from "../constants";
@@ -94,7 +95,9 @@ export const Dashboard = (props: IDashboardProps) => {
             <RejectedScreen />
           ) : props.profile.status === STATUS.WAITLISTED ? (
             <WaitlistedScreen />
-          ) : props.profile.status === STATUS.ADMISSION_CONFIRMED ? (
+          ) : (props.profile.status === STATUS.ADMISSION_CONFIRMED && props.profile.type === TYPE.STANFORD) ? (
+            <AdmittedStanford confirmedYet={true} />
+          ): props.profile.status === STATUS.ADMISSION_CONFIRMED ? (
             <AdmittedScreen confirmedYet={true} />
           ) : props.profile.status === STATUS.ADMISSION_DECLINED ? (
             <AdmissionDeclinedScreen />
