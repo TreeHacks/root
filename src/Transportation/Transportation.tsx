@@ -325,16 +325,6 @@ export class Transportation extends React.Component<ITransportationProps> {
             {transportationType === TRANSPORTATION_TYPES.OTHER && (
               <TravelReimbursementHeader />
             )}
-
-            <h5>
-              TreeHacks is reimbursing you up to{" "}
-              <span className="treehacks-transportation-amount-text">
-                {transportationAmount.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                })}
-              </span>
-            </h5>
             )}
           </div>
         </div>
