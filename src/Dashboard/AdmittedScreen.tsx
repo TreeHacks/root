@@ -16,7 +16,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
     {props.confirmedYet && (
       <div>
         <h4>Complete the following by <strong>January 24th:</strong></h4>
-        <ul>
+        <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
           <li>Follow the steps in <Link to="/transportation">travel section</Link> <strong>as early as possible!</strong> </li>
           <li><a href="https://imgprd.stanford.edu/apeximg/assu/r/assu_vendor_regiser/home">Register through GrantEd</a> (this is required in order to receive a prize or a travel reimbursement)
           <ul>
