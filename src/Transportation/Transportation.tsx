@@ -326,16 +326,6 @@ export class Transportation extends React.Component<ITransportationProps> {
               <TravelReimbursementHeader />
             )}
 
-            <h5 style={{ marginTop: 40 }}>
-              {transportation_status === TRANSPORTATION_STATUS.SUBMITTED ? (
-                "Thanks, we've received your receipt"
-              ) : (
-                <span>
-                  Receipts must be uploaded by{" "}
-                  <strong>{formattedDeadline}</strong>
-                </span>
-              )}
-            </h5>
             <h5>
               TreeHacks is reimbursing you up to{" "}
               <span className="treehacks-transportation-amount-text">
@@ -345,60 +335,6 @@ export class Transportation extends React.Component<ITransportationProps> {
                 })}
               </span>
             </h5>
-
-            {status === STATUS.ADMITTED ? (
-              <p style={{ maxWidth: 575, margin: "20px auto 0" }}>
-                After you confirm your spot using the dashboard, you can use
-                this page to upload your receipts and request reimbursement.
-              </p>
-            ) : transportation_status === TRANSPORTATION_STATUS.SUBMITTED ? (
-              <p style={{ maxWidth: 575, margin: "20px auto 0" }}>
-                Thanks, we've received your reimbursement request.
-              </p>
-            ) : (
-              <div>
-                <p
-                  style={{
-                    maxWidth: 575,
-                    margin: "20px auto -20px",
-                    fontStyle: "italic",
-                  }}
-                >
-                  If you have multiple receipts, please combine them into a
-                  single PDF prior to uploading. You can only submit this form
-                  once.
-                </p>
-                <FormPage
-                  submitted={false}
-                  onChange={(e) => {
-                    const userEdited =
-                      JSON.stringify(e.formData) !==
-                      JSON.stringify(transportationForm);
-                    this.props.setData(e.formData, userEdited);
-                  }}
-                  onError={() => window.scrollTo(0, 0)}
-                  onSubmit={(e) => {
-                    this.props.saveData().then(() => {
-                      this.props
-                        .submitForm()
-                        .then(() => this.props.getUserProfile());
-                    });
-                  }}
-                  schema={this.props.schemas.transportation.schema}
-                  uiSchema={this.props.schemas.transportation.uiSchema}
-                  formData={transportationForm}
-                >
-                  <div className="btn-container" style={{ marginBottom: 0 }}>
-                    <div>
-                      <input
-                        className="btn btn-custom"
-                        type="submit"
-                        value="submit receipt"
-                      />
-                    </div>
-                  </div>
-                </FormPage>
-              </div>
             )}
           </div>
         </div>
