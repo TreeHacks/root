@@ -25,7 +25,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
             <li>Fill out the tax id form sent to you 1-2 days after completing this initial registration</li>
           </ul>
           </li>
-          <li>Sign the <a href=""> liability waiver </a> (need to print and then sign, virtual signature not accepted) and <a href=""> upload it here </a> </li>
+          <li>Complete the <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5JHPbFsLVz4pKt6YtJuZdISozgmnTrRdRFKvI_AhPQE_mow/viewform">liability form </a> </></li>
         </ul>
         <p>
           Keep an eye on your inbox in the coming weeks -- we'll be sending more
