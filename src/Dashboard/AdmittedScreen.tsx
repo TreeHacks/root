@@ -18,6 +18,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
         <h4>Complete the following by <strong>January 24th:</strong></h4>
         <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
           <li>Follow the steps in <Link to="/transportation">travel section</Link> <strong>as early as possible!</strong> </li>
+          <li>Fill out the quick <a href="https://docs.google.com/forms/d/e/1FAIpQLSelNrLpBVxHPhKCSbHiTelqDO7XTknQLmn1M5yxLmcC72NbQQ/viewform">Travel Acknowledgement Form</a></li>
           <li><a href="https://imgprd.stanford.edu/apeximg/assu/r/assu_vendor_regiser/home">Register through GrantEd</a> (this is required in order to receive a prize or a travel reimbursement)
           <ul>
             <li>Use the same email address you applied to TreeHacks with</li>
@@ -33,7 +34,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
         </p>
         <button className="btn btn-custom">
           <Link to="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit?usp=sharing" style={{ color: "white" }}>
-            Ultimate TreeHacks Guide 🌲
+            Ultimate 🌲reeHacks Guide
           </Link>
         </button>
       </div>
