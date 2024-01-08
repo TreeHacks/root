@@ -7,17 +7,20 @@ export default () => (
       We have calculated your flight cap based on the location in your
       application, and above is the amount up to which we can reimburse the cost of your flight.
       <strong>
-        If you do not book your flight through Egencia (detils below) by the deadline, we will assume you
-        are declining the reimbursement, and you will not be reimbursed.
+         If you do not book your flight through Egencia (details below) by the deadline, we will assume you
+        are declining the reimbursement, and you will not be reimbursed. 
       </strong>
     See the detailed steps below that walk you through booking a flight using Egencia! This should take about 15-20 minutes and must 
       be completed by the deadline above. 
     </p>
     <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
         <li>
-            Create an Egencia account
+            <button className="btn btn-custom">
+              <Link to="https://www.egencia.com/pub/agent.dll?qscr=mtgd&mgid=84861&miid=87A6AC6D9057&gpid=9AE927F23FE9" style={{ color: "white" }}>
+                Egencia
+              </Link>
+            </button>
             <ul>
-                <li>Use this link to create an account.</li>
                 <li>Select “Create an account for TreeHacks 2024”.</li>
                 <li>Your name must match your government ID exactly.</li>
                 <li>For Egencia user name, use the email address you applied to TreeHacks with.</li>
@@ -52,7 +55,7 @@ export default () => (
             </ul>
         </li>
     </ul>
-    <p style={{ maxWidth: 575, margin: "20px auto" }}>
+    <p style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
       Your reimbursement will be rejected if you don't:
     </p>
     <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
@@ -73,12 +76,5 @@ export default () => (
         </a>
       </li>
     </ul>
-    <p style={{ maxWidth: 575, margin: "20px auto" }}>
-      In the case that your current flight cap prevents you from attending
-      TreeHacks or is significantly off the mark of flight prices that you're
-      able to find, please reach out to us at hello@treehacks.com, and we will
-      work something out. Our hope is to remove any and all barriers that could
-      prevent you from coming out to TreeHacks!
-    </p>
   </div>
 );
