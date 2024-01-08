@@ -1,5 +1,6 @@
 import React from "react";
 import { HACKATHON_YEAR } from "../constants";
+import { Link } from "react-router-dom";
 
 export default () => (
   <div>
