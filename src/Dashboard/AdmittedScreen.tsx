@@ -18,7 +18,13 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
         <h4>Complete the following by <strong>January 24th:</strong></h4>
         <ul>
           <li>Follow the steps in <Link to="/transportation">travel section</Link> <strong>as early as possible!</strong> </li>
-          <li><a href="https://imgprd.stanford.edu/apeximg/assu/r/assu_vendor_regiser/home">Register through GrantEd</a> using the same email you applied to TreeHacks with (this is required in order to receive a prize or a travel reimbursement)</li>
+          <li><a href="https://imgprd.stanford.edu/apeximg/assu/r/assu_vendor_regiser/home">Register through GrantEd</a> (this is required in order to receive a prize or a travel reimbursement)
+          <ul>
+            <li>Use the same email address you applied to TreeHacks with</li>
+            <li>Enter a mailing address that will be valid till May 2024</li>
+            <li>Fill out the tax id form sent to you 1-2 days after completing this initial registration</li>
+          </ul>
+          </li>
           <li>Sign the <a href=""> liability waiver </a> (need to print and then sign, virtual signature not accepted) and <a href=""> upload it here </a> </li>
         </ul>
         <p>
