@@ -8,9 +8,9 @@ export default () => (
       We have calculated your flight cap based on the location in your application, and above is the amount up to which we can reimburse the cost of your flight.<strong> If you do not book your flight through Egencia (details below) by the deadline, we will assume you are declining the reimbursement, and you will not be reimbursed. </strong>See the detailed steps below that walk you through booking a flight using Egencia! This should take about 15-20 minutes and must be completed by the deadline above. 
     </p>
     <button className="btn btn-custom">
-      <Link to="https://www.egencia.com/pub/agent.dll?qscr=mtgd&mgid=84861&miid=87A6AC6D9057&gpid=9AE927F23FE9" style={{ color: "white" }}>
+      <a href="https://www.egencia.com/pub/agent.dll?qscr=mtgd&mgid=84861&miid=87A6AC6D9057&gpid=9AE927F23FE9" style={{ color: "white" }}>
         Egencia
-      </Link>
+      </a>
     </button>
     <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
         <li> Create an account on Egencia
