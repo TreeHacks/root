@@ -19,13 +19,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
         <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
           <li>Follow the steps in <Link to="/transportation">travel section</Link> <strong>as early as possible!</strong> </li>
           <li>Fill out the quick <a href="https://docs.google.com/forms/d/e/1FAIpQLSelNrLpBVxHPhKCSbHiTelqDO7XTknQLmn1M5yxLmcC72NbQQ/viewform">Travel Acknowledgement Form</a></li>
-          <li><a href="https://imgprd.stanford.edu/apeximg/assu/r/assu_vendor_regiser/home">Register through GrantEd</a> (this is required in order to receive a prize or a travel reimbursement)
-          <ul>
-            <li>Use the same email address you applied to TreeHacks with</li>
-            <li>Enter a mailing address that will be valid till May 2024</li>
-            <li>Fill out the tax id form sent to you 1-2 days after completing this initial registration</li>
-          </ul>
-          </li>
+          <li><a href="https://forms.gle/YwPqv684XYq3f4RZ7">Register for GrantEd</a> (this is required in order to receive a prize or a travel reimbursement)</li>
           <li>Complete the <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5JHPbFsLVz4pKt6YtJuZdISozgmnTrRdRFKvI_AhPQE_mow/viewform">liability form </a></li>
         </ul>
         <p>
