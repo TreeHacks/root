@@ -44,7 +44,6 @@ export default () => (
                     <li>Select “Business” when responding to the ‘Business or Personal Travel’ question.</li>
                     <li>Include “Test Event” in the ‘Expense Notes’ field.</li>
                     <li>Read the flight reimbursement criteria below.</li>
-                    <li>Complete this form confirming your travel plans.</li>
                 </ul>
             </ul>
         </li>
