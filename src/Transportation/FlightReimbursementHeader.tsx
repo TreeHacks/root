@@ -34,7 +34,7 @@ export default () => (
                 <li>On your profile, select “Add a flight”.</li>
                 <li>The name of your traveler must match your government ID exactly.</li>
                 <li>Fly into SFO or SJC.</li>
-                <li>Be sure to book a flight that will let you arrive at Stanford campus BEFORE 6:30pm on Friday, Feb 16.</li>
+                <li>Be sure to book a flight that will let you arrive at Stanford campus BEFORE 5:30pm on Friday, Feb 16.</li>
                 <li>Be sure to book a flight that will let you leave campus no earlier than 2:30pm on Sunday, Feb 18.</li>
                 <li>Leaving earlier than 2:30pm may mean you will not be able to receive your prize.</li>
                 <li>Upon checkout:</li>
