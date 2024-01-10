@@ -27,9 +27,9 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           details to you shortly!
         </p>
         <button className="btn btn-custom">
-          <Link to="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit?usp=sharing" style={{ color: "white" }}>
+          <a href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit?usp=sharing" style={{ color: "white" }}>
             Ultimate TreeHacks Guide
-          </Link>
+          </a>
         </button>
       </div>
     )}
