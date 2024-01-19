@@ -15,7 +15,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
   <div className="admitted-content">
     {props.confirmedYet && (
       <div>
-        <h4>Complete the following by <strong>January 16th:</strong></h4>
+        <h4>Complete the following by <strong>January 21st:</strong></h4>
         <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
           <li>Follow the steps in <Link to="/transportation">travel section</Link> <strong>as early as possible!</strong> </li>
           <li>Fill out the quick <a href="https://docs.google.com/forms/d/e/1FAIpQLSelNrLpBVxHPhKCSbHiTelqDO7XTknQLmn1M5yxLmcC72NbQQ/viewform">Travel Acknowledgement Form</a></li>
