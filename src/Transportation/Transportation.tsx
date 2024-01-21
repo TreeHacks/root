@@ -322,9 +322,6 @@ export class Transportation extends React.Component<ITransportationProps> {
             <FlightReimbursementHeader />
           </>
             )}
-            {transportationType === TRANSPORTATION_TYPES.OTHER && (
-              <TravelReimbursementHeader />
-            )}
             )}
           </div>
         </div>
