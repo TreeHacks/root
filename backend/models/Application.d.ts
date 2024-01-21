@@ -58,6 +58,10 @@ export interface ITeamInfo {
   teamList?: String;
 }
 
+export interface ICheckIn {
+  checkInStatus?: Boolean;
+}
+
 export interface IMeetInfo {
   verticals?: String;
   numMoreTeammates?: String;
@@ -95,6 +99,7 @@ export interface IApplication extends Document {
     meet_info: IMeetInfo;
     submit_info: ISubmitInfo;
     used_meals: IUsedMeals;
+    check_in: ICheckIn;
     // we can conceivably add additional forms here.
   };
   admin_info: {

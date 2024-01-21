@@ -5,6 +5,7 @@ import applicationInfoSchema from "./applicationInfoSchema";
 import adminInfoSchema from "./adminInfoSchema";
 import meetInfoSchema from "./meetInfoSchema";
 import usedMealsSchema from "./usedMealsSchema";
+import checkInSchema from "./checkInSchema";
 import teamInfoSchema from "./teamInfoSchema";
 import submitInfoSchema from "./submitInfoSchema";
 import reviewSchema from "./reviewSchema";
@@ -19,6 +20,7 @@ export const applicationSchema: Schema = new mongoose.Schema({
         "transportation": transportationInfoSchema,
         "meet_info": meetInfoSchema,
         "used_meals": usedMealsSchema,
+        "check_in": checkInSchema,
         "team_info": teamInfoSchema,
         "submit_info": submitInfoSchema
     },
