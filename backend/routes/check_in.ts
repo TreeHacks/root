@@ -4,7 +4,7 @@ import { IApplication } from '../models/Application.d';
 
 export function getCheckIn(req: Request, res: Response) {
     return getApplicationAttribute(req, res, (e: IApplication) => {
-        return e.check_in || {};
+        return e.forms.check_in || {};
     }, true);
 }
 

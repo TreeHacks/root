@@ -4,7 +4,7 @@ import { IApplication } from '../models/Application.d';
 
 export function getTeamInfo(req: Request, res: Response) {
     return getApplicationAttribute(req, res, (e: IApplication) => {
-        return e.team_info || {};
+        return e.forms.team_info || {};
     }, true);
 }
 
