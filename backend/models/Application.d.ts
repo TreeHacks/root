@@ -100,6 +100,7 @@ export interface IApplication extends Document {
     submit_info: ISubmitInfo;
     used_meals: IUsedMeals;
     check_in: ICheckIn;
+    team_info: ITeamInfo;
     // we can conceivably add additional forms here.
   };
   admin_info: {
