@@ -63,7 +63,7 @@ export default {
     {
       key: "oos",
       label: "out-of-state",
-      date: "2023-12-12T07:59:00.000Z",
+      date: "2024-12-12T07:59:00.000Z",
         display_date: "December 11th, 2023",
     },
     {
