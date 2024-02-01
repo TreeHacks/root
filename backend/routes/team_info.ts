@@ -92,7 +92,7 @@ export async function addTeammate(req: Request, res: Response) {
     const teammateConfirmed = filterPending(teammateList);
 
     // requested teammate hasn't added user
-    if (!Object.hasOwn(teammateList, user.user.email)) {
+    if (!teammateList.hasOwnProperty(user.user.email)) {
         userList[teammate.user.email] = 0;
         user.forms.team_info.teamList = JSON.stringify(userList);
 
