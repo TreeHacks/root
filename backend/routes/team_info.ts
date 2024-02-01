@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { getApplicationAttribute, setApplicationAttribute } from "./common";
 import { IApplication } from '../models/Application.d';
-import Application from 'backend/models/Application';
-import { HACKATHON_YEAR } from 'backend/constants';
+import Application from '../models/Application';
+import { HACKATHON_YEAR } from '../constants';
 import { mergeWith, pickBy } from "lodash";
 
 export function getTeamInfo(req: Request, res: Response) {
