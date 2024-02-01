@@ -3,7 +3,7 @@ import { getApplicationAttribute, setApplicationAttribute } from "./common";
 import { IApplication } from '../models/Application.d';
 import Application from '../models/Application';
 import { HACKATHON_YEAR } from '../constants';
-import { mergeWith, pickBy } from "lodash";
+import { mergeWith, pickBy, without } from "lodash";
 
 export function getTeamInfo(req: Request, res: Response) {
     return getApplicationAttribute(req, res, (e: IApplication) => {
@@ -52,7 +52,7 @@ async function combineTeams(one: Record<string, number>, two: Record<string, num
         const teammate = await applicationByEmail(email);
     
         if (!teammate) {
-            throw new Error("Teammate not found");
+            throw new Error("Teammate not found.");
         }
 
         const teammateList = parseList(teammate.forms.team_info.teamList.toString(), email);
@@ -104,7 +104,7 @@ export async function addTeammate(req: Request, res: Response) {
     // check combined teams at most four people
     const combinedConfirmed = combineLists(userConfirmed, teammateConfirmed);
     if (Object.keys(combinedConfirmed).length > 4) {
-        res.status(400).send("Too many combined teammates");
+        res.status(400).send("Too many combined teammates.");
     }
 
     // for each of user's current teammate, combine with requested teammate
@@ -118,6 +118,84 @@ export async function addTeammate(req: Request, res: Response) {
     // for each of requeste teammates's current teammate, combine with user
     try {
         await combineTeams(teammateConfirmed, userConfirmed);
+    } catch (e) {
+        res.status(404).send(e);
+        return;
+    }
+
+    res.status(200).send(user.forms.team_info);
+}
+
+// remove an email `removed` from each confirmed teammate in `team`
+async function removeTeammateFromAll(team: Record<string, number>, removed: string) {
+    for (const email of without(Object.keys(team), removed)) {
+        const teammate = await applicationByEmail(email);
+    
+        if (!teammate) {
+            throw new Error("Teammate not found.");
+        }
+
+        const teammateList = parseList(teammate.forms.team_info.teamList.toString(), email);
+        delete teammateList[removed];
+
+        teammate.forms.team_info.teamList = JSON.stringify(teammateList);
+        await teammate.save();
+    }
+}
+
+export async function removeTeammate(req: Request, res: Response) {
+    // find request user's application
+    const user: IApplication | null = await Application.findOne(
+        { "user.id": req.params.userId },
+        { __v: 0, reviews: 0 }
+    );
+
+    if (!user) {
+        res.status(404).send("User application not found.");
+        return;
+    }
+
+    // find removed teammate user's application
+    const teammate = await applicationByEmail(req.body.email);
+
+    if (!teammate) {
+        res.status(404).send("Teammate application not found.");
+        return;
+    }
+
+    // filter out user's pending teammates
+    const userList = parseList(user.forms.team_info.teamList.toString(), user.user.email);
+    const userConfirmed = filterPending(userList);
+
+    // ensure email exists in team
+    if (!userList.hasOwnProperty(teammate.user.email)) {
+        res.status(400).send("Removed teammate is not in user's team list.");
+        return;
+    }
+
+    // if pending, only remove from user's team list
+    if (!userConfirmed.hasOwnProperty(teammate.user.email)) {
+        delete userList[teammate.user.email];
+        user.forms.team_info.teamList = JSON.stringify(userList);
+        await user.save()
+
+        res.status(200).send(user.forms.team_info);
+        return;
+    }
+
+    // delete all emails except self in deleted user's team list
+    const teammateList = parseList(teammate.forms.team_info.teamList.toString(), teammate.user.email);
+    for (const email of without(Object.keys(teammateList), teammate.user.email)) {
+        delete teammateList[email];
+    }
+
+    teammate.forms.team_info.teamList = JSON.stringify(teammateList);
+    await teammate.save();
+
+    // for each user in the team except the deleted user,
+    // remove the deleted user's email
+    try {
+        await removeTeammateFromAll(userConfirmed, teammate.user.email);
     } catch (e) {
         res.status(404).send(e);
         return;

@@ -29,7 +29,7 @@ import {
 import { getMeetInfo, setMeetInfo } from "./routes/meet_info";
 import { getUsedMeals, setUsedMeals } from "./routes/used_meals";
 import { getCheckIn, setCheckIn } from "./routes/check_in";
-import { addTeammate, getTeamInfo, setTeamInfo } from "./routes/team_info";
+import { addTeammate, getTeamInfo, removeTeammate, setTeamInfo } from "./routes/team_info";
 import { getSubmitInfo, setSubmitInfo } from "./routes/submit_info";
 import { getUserDetail } from "./routes/user_detail";
 import { getUserList, getUserStats, getMeetList } from "./routes/user_list";
@@ -186,6 +186,7 @@ authenticatedRoute.put("/users/:userId/forms/submit_info", setSubmitInfo);
 authenticatedRoute.get("/users/:userId/forms/team_info", getTeamInfo);
 authenticatedRoute.put("/users/:userId/forms/team_info", setTeamInfo);
 authenticatedRoute.put("/users/:userId/forms/add_teammate", addTeammate);
+authenticatedRoute.put("/users/:userId/forms/remove_teammate", removeTeammate);
 
 // What permission should this one be?
 authenticatedRoute.get("/users/:userId/status", getApplicationStatus);
