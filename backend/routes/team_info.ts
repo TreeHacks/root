@@ -97,6 +97,7 @@ export async function addTeammate(req: Request, res: Response) {
         user.forms.team_info.teamList = JSON.stringify(userList);
 
         await user.save();
+        res.status(200).send();
         return;
     }
 
