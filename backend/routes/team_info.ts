@@ -110,17 +110,21 @@ export async function addTeammate(req: Request, res: Response) {
     // for each of user's current teammate, combine with requested teammate
     try {
         await combineTeams(userConfirmed, teammateConfirmed);
-    } catch (e: any) {
-        res.status(404).json({message: e.message});
-        return;
+    } catch (e) {
+        if (e instanceof Error) {
+            res.status(404).json({message: e.message});
+            return;
+        }
     }
 
     // for each of requeste teammates's current teammate, combine with user
     try {
         await combineTeams(teammateConfirmed, userConfirmed);
-    } catch (e: any) {
-        res.status(404).json({message: e.message});
-        return;
+    } catch (e) {
+        if (e instanceof Error) {
+            res.status(404).json({message: e.message});
+            return;
+        }
     }
 
     res.status(200).json(user.forms.team_info);
@@ -198,9 +202,11 @@ export async function removeTeammate(req: Request, res: Response) {
     // remove the deleted user's email
     try {
         await removeTeammateFromAll(userConfirmed, teammate.user.email);
-    } catch (e: any) {
-        res.status(404).json({message: e.message});
-        return;
+    } catch (e) {
+        if (e instanceof Error) {
+            res.status(404).json({message: e.message});
+            return;
+        }
     }
 
     res.status(200).json(user.forms.team_info);
