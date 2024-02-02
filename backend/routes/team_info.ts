@@ -183,10 +183,12 @@ export async function removeTeammate(req: Request, res: Response) {
         return;
     }
 
-    // delete all emails except self in deleted user's team list
+    // delete all emails except self and pending teammates in deleted user's team list
     const teammateList = parseList(teammate.forms.team_info.teamList.toString(), teammate.user.email);
     for (const email of without(Object.keys(teammateList), teammate.user.email)) {
-        delete teammateList[email];
+        if (teammateList[email] === 1) {
+            delete teammateList[email];
+        }
     }
 
     teammate.forms.team_info.teamList = JSON.stringify(teammateList);
