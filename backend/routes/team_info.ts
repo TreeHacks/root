@@ -71,7 +71,7 @@ export async function addTeammate(req: Request, res: Response) {
     );
 
     if (!user) {
-        res.status(404).send("User application not found.");
+        res.status(404).json({message: "User application not found."});
         return;
     }
 
@@ -79,7 +79,7 @@ export async function addTeammate(req: Request, res: Response) {
     const teammate = await applicationByEmail(req.body.email);
 
     if (!teammate) {
-        res.status(404).send("Teammate application not found.");
+        res.status(404).json({message: "Teammate application not found."});
         return;
     }
 
@@ -97,33 +97,33 @@ export async function addTeammate(req: Request, res: Response) {
         user.forms.team_info.teamList = JSON.stringify(userList);
 
         await user.save();
-        res.status(200).send(user.forms.team_info);
+        res.status(200).json(user.forms.team_info);
         return;
     }
 
     // check combined teams at most four people
     const combinedConfirmed = combineLists(userConfirmed, teammateConfirmed);
     if (Object.keys(combinedConfirmed).length > 4) {
-        res.status(400).send("Too many combined teammates.");
+        res.status(400).json({message: "Too many combined teammates."});
     }
 
     // for each of user's current teammate, combine with requested teammate
     try {
         await combineTeams(userConfirmed, teammateConfirmed);
-    } catch (e) {
-        res.status(404).send(e);
+    } catch (e: any) {
+        res.status(404).json({message: e.message});
         return;
     }
 
     // for each of requeste teammates's current teammate, combine with user
     try {
         await combineTeams(teammateConfirmed, userConfirmed);
-    } catch (e) {
-        res.status(404).send(e);
+    } catch (e: any) {
+        res.status(404).json({message: e.message});
         return;
     }
 
-    res.status(200).send(user.forms.team_info);
+    res.status(200).json(user.forms.team_info);
 }
 
 // remove an email `removed` from each confirmed teammate in `team`
@@ -151,7 +151,7 @@ export async function removeTeammate(req: Request, res: Response) {
     );
 
     if (!user) {
-        res.status(404).send("User application not found.");
+        res.status(404).json({message: "User application not found."});
         return;
     }
 
@@ -159,7 +159,7 @@ export async function removeTeammate(req: Request, res: Response) {
     const teammate = await applicationByEmail(req.body.email);
 
     if (!teammate) {
-        res.status(404).send("Teammate application not found.");
+        res.status(404).json({message: "Teammate application not found."});
         return;
     }
 
@@ -169,7 +169,7 @@ export async function removeTeammate(req: Request, res: Response) {
 
     // ensure email exists in team
     if (!userList.hasOwnProperty(teammate.user.email)) {
-        res.status(400).send("Removed teammate is not in user's team list.");
+        res.status(400).json({message: "Removed teammate is not in user's team list."});
         return;
     }
 
@@ -179,7 +179,7 @@ export async function removeTeammate(req: Request, res: Response) {
         user.forms.team_info.teamList = JSON.stringify(userList);
         await user.save()
 
-        res.status(200).send(user.forms.team_info);
+        res.status(200).json(user.forms.team_info);
         return;
     }
 
@@ -198,10 +198,10 @@ export async function removeTeammate(req: Request, res: Response) {
     // remove the deleted user's email
     try {
         await removeTeammateFromAll(userConfirmed, teammate.user.email);
-    } catch (e) {
-        res.status(404).send(e);
+    } catch (e: any) {
+        res.status(404).json({message: e.message});
         return;
     }
 
-    res.status(200).send(user.forms.team_info);
+    res.status(200).json(user.forms.team_info);
 }
