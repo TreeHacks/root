@@ -23,6 +23,7 @@ export async function getMeetList(req: Request, res: Response) {
       "forms.meet_info": 1,
       "forms.application_info.first_name": 1,
       "forms.application_info.last_name": 1,
+      "forms.team_info.teamList": 1,
     }
   );
 
