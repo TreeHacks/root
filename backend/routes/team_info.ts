@@ -105,6 +105,7 @@ export async function addTeammate(req: Request, res: Response) {
     const combinedConfirmed = combineLists(userConfirmed, teammateConfirmed);
     if (Object.keys(combinedConfirmed).length > 4) {
         res.status(400).json({message: "Too many combined teammates."});
+        return;
     }
 
     // for each of user's current teammate, combine with requested teammate
