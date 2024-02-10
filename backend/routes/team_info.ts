@@ -34,6 +34,11 @@ function filterPending(list: Record<string, number>) {
     return pickBy(list, value => value !== 0);
 }
 
+// filter out approved teammates from team list
+function filterApproved(list: Record<string, number>) {
+    return pickBy(list, value => value !== 1);
+}
+
 // combine team lists, preferring a confirmed teammate (a number 1) over a pending teammate (a number 0)
 function combineLists(one: Record<string, number>, two: Record<string, number>): Record<string, number> {
     return mergeWith(one, two, (oneValue, twoValue) => oneValue || twoValue);
@@ -93,6 +98,12 @@ export async function addTeammate(req: Request, res: Response) {
 
     // requested teammate hasn't added user
     if (!teammateList.hasOwnProperty(user.user.email)) {
+        // don't allow user to have more than 8 pending teammates
+        if (Object.keys(filterApproved(userList)).length > 8) {
+            res.status(400).json({message: "Too many pending teammates."});
+            return;
+        }
+
         userList[teammate.user.email] = 0;
         user.forms.team_info.teamList = JSON.stringify(userList);
 
