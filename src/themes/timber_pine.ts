@@ -75,8 +75,8 @@ export default {
     {
       key: "stanford",
       label: "Stanford student",
-      date: "2024-02-15T07:59:00.000Z",
-      display_date: "February 15th, 2024",
+      date: "2024-02-18T07:59:00.000Z",
+      display_date: "February 18th, 2024",
     },
   ],
   logo: require("./assets/logo.svg"),

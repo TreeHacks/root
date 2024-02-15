@@ -14,7 +14,7 @@ export function getDeadline(type) {
     case "is":
       return new Date("2023-12-13:45:00.000Z");
     case "stanford":
-      return new Date("2024-02-15T07:59:00.000Z");
+      return new Date("2024-02-18T07:59:00.000Z");
     case "oos":
     default:
       return new Date("2023-12-13:45:00.000Z");
