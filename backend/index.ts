@@ -186,8 +186,8 @@ authenticatedRoute.get("/users/:userId/forms/submit_info", getSubmitInfo);
 authenticatedRoute.put("/users/:userId/forms/submit_info", setSubmitInfo);
 authenticatedRoute.get("/users/:userId/forms/team_info", getTeamInfo);
 authenticatedRoute.put("/users/:userId/forms/team_info", setTeamInfo);
-authenticatedRoute.get("/users/:userId/forms/team_info", getWorkshopList);
-authenticatedRoute.put("/users/:userId/forms/team_info", setWorkshopList);
+authenticatedRoute.get("/users/:userId/forms/workshop_info", getWorkshopList);
+authenticatedRoute.put("/users/:userId/forms/workshop_info", setWorkshopList);
 authenticatedRoute.put("/users/:userId/forms/add_teammate", addTeammate);
 authenticatedRoute.put("/users/:userId/forms/remove_teammate", removeTeammate);
 
