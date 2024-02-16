@@ -58,6 +58,10 @@ export interface ITeamInfo {
   teamList?: String;
 }
 
+export interface IWorkshopInfo {
+  workshopList?: String;
+}
+
 export interface ICheckIn {
   checkInStatus?: Boolean;
 }
@@ -101,6 +105,7 @@ export interface IApplication extends Document {
     used_meals: IUsedMeals;
     check_in: ICheckIn;
     team_info: ITeamInfo;
+    workshop_info: IWorkshopInfo;
     // we can conceivably add additional forms here.
   };
   admin_info: {

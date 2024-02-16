@@ -7,6 +7,7 @@ import meetInfoSchema from "./meetInfoSchema";
 import usedMealsSchema from "./usedMealsSchema";
 import checkInSchema from "./checkInSchema";
 import teamInfoSchema from "./teamInfoSchema";
+import workshopInfoSchema from "./workshopInfoSchema";
 import submitInfoSchema from "./submitInfoSchema";
 import reviewSchema from "./reviewSchema";
 import { STATUS, TRANSPORTATION_STATUS } from "../constants";
@@ -22,6 +23,7 @@ export const applicationSchema: Schema = new mongoose.Schema({
         "used_meals": usedMealsSchema,
         "check_in": checkInSchema,
         "team_info": teamInfoSchema,
+        "workshop_info": workshopInfoSchema,
         "submit_info": submitInfoSchema
     },
     "admin_info": adminInfoSchema, // Only editable by admin.
