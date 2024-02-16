@@ -28,6 +28,7 @@ import {
 } from "./routes/application_info";
 import { getMeetInfo, setMeetInfo } from "./routes/meet_info";
 import { getUsedMeals, setUsedMeals } from "./routes/used_meals";
+import { getUsedMeals, setUsedMeals } from "./routes/workshop_info";
 import { getCheckIn, setCheckIn } from "./routes/check_in";
 import { addTeammate, getTeamInfo, removeTeammate, setTeamInfo } from "./routes/team_info";
 import { getSubmitInfo, setSubmitInfo } from "./routes/submit_info";
