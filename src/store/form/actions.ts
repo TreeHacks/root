@@ -34,11 +34,11 @@ export const getUserProfile = () => (dispatch, getState) => {
   dispatch(loadingStart());
   return API.get("treehacks", `/users/${userId}`, {}).then(e => {
     dispatch(setUserProfile(e));
-    dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
-    dispatch(loadingEnd());
     alert("Error getting user data " + e);
+  }).finally(() => {
+    dispatch(loadingEnd());
   });
 };
 
@@ -49,12 +49,12 @@ export const saveData = () => (dispatch, getState) => {
   dispatch(loadingStart());
   return API.put("treehacks", `/users/${userId}/forms/${formName}`, { "body": formData }).then(e => {
     dispatch(setData(e, false));
-    dispatch(loadingEnd());
     dispatch(setUserEdited(false));
   }).catch(e => { // catches 401 and other errors
     console.error(e);
-    dispatch(loadingEnd());
     alert("Error saving data " + e);
+  }).finally(() => {
+    dispatch(loadingEnd());
   });
 }
 
@@ -63,11 +63,11 @@ export const submitForm = () => (dispatch, getState) => {
   const formName = (getState().form as IFormState).formName;
   dispatch(loadingStart());
   return API.post("treehacks", `/users/${userId}/forms/${formName}/submit`, {}).then(e => {
-    dispatch(loadingEnd());
   }).catch(e => {
     console.error(e);
-    dispatch(loadingEnd());
     alert("Error submitting form " + e);
+  }).finally(() => {
+    dispatch(loadingEnd());
   });
 }
 
@@ -76,12 +76,12 @@ export const loadData = (userId = null) => (dispatch, getState) => {
   const formName = (getState().form as IFormState).formName;
   dispatch(loadingStart());
   return API.get("treehacks", `/users/${userId}/forms/${formName}`, {}).then(e => {
-    dispatch(loadingEnd());
     dispatch(setData(e));
   }).catch(e => {
     console.error(e);
-    dispatch(loadingEnd());
     alert("Error getting data " + e);
+  }).finally(() => {
+    dispatch(loadingEnd());
   });
 }
 
@@ -92,8 +92,9 @@ export const confirmAdmission = () => (dispatch, getState) => {
     dispatch(getUserProfile());
   }).catch(e => {
     console.error(e);
-    dispatch(loadingEnd());
     alert("Error " + e);
+  }).finally(() => {
+    dispatch(loadingEnd());
   });
 }
 
@@ -104,7 +105,8 @@ export const declineAdmission = () => (dispatch, getState) => {
     dispatch(getUserProfile());
   }).catch(e => {
     console.error(e);
-    dispatch(loadingEnd());
     alert("Error " + e);
+  }).finally(() => {
+    dispatch(loadingEnd());
   });
 }
