@@ -512,6 +512,7 @@ export const applicationDisplayFields = [
   "section1",
   "first_name",
   "last_name",
+  "full_name",
   "phone",
   "dob",
   "university",
@@ -547,12 +548,14 @@ export const applicationDisplayFields = [
   "race",
   "accept_terms",
   "accept_share",
+  "accept_conditions",
   "beginner_info",
 ];
 export const applicationDisplayFieldsStanford = [
   "section1",
   "first_name",
   "last_name",
+  "full_name",
   "phone",
   "dob",
   "university",
@@ -585,6 +588,7 @@ export const applicationDisplayFieldsStanford = [
   "race",
   "accept_terms",
   "accept_share",
+  "accept_conditions",
   "beginner_info",
 ];
 

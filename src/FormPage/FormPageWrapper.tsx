@@ -149,6 +149,20 @@ class FormPageWrapper extends React.Component<
         </span>
       );
     }
+    if (get(schema, "properties.accept_conditions")) {
+      schema.properties.accept_conditions.title = (
+        <span>
+          I have read and agree to the{" "}
+          <a
+            className="form-link"
+            href="https://github.com/TreeHacks/policies/blob/master/terms-and-conditions.md"
+            target="_blank"
+          >
+            TreeHacks Terms and Conditions.
+          </a>
+        </span>
+      );
+    }
 
     let shownFields =
       get(props, "profile.type") === TYPE.STANFORD

@@ -15,7 +15,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
   <div className="admitted-content">
     {props.confirmedYet && (
       <div>
-        <h4>You're coming to TreeHacks 2024!</h4>
+        <h4>You're coming to TreeHacks 2025!</h4>
         <p>
           Keep an eye on your inbox in the coming weeks -- we'll be sending more
           details to you shortly!

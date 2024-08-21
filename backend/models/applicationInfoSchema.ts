@@ -5,6 +5,7 @@ const applicationInfoSchema: Schema = new mongoose.Schema(
   {
     first_name: String,
     last_name: String,
+    full_name: String,
     phone: String,
     dob: String,
     gender: String,
@@ -22,6 +23,7 @@ const applicationInfoSchema: Schema = new mongoose.Schema(
     zip: String,
     resume: String,
     accept_terms: Boolean,
+    accept_conditions: Boolean,
     accept_share: Boolean,
     beginner_info: Boolean,
     top_track: String,

@@ -59,7 +59,8 @@ export const sponsorApplicationDisplayFields = [
   // "gender",
   // "race",
   // "accept_terms",
-  // "accept_share"
+  // "accept_share",
+  // "accept_conditions",
 ];
 export const applicationReviewDisplayFields = [
   "first_name",
@@ -88,7 +89,8 @@ export const applicationReviewDisplayFields = [
   // "gender",
   // "race",
   // "accept_terms",
-  // "accept_share"
+  // "accept_share",
+  // "accept_conditions",
 ];
 export const applicationRequiredFields = [
   "first_name",
@@ -112,6 +114,7 @@ export const applicationRequiredFields = [
   "q4",
   "accept_terms",
   "accept_share",
+  "accept_conditions",
 ];
 export const applicationRequiredFieldsStanford = [
   "first_name",
@@ -126,6 +129,7 @@ export const applicationRequiredFieldsStanford = [
   "hackathon_experience",
   "accept_terms",
   "accept_share",
+  "accept_conditions",
 ];
 export const applicationReviewDisplayFieldsNoSection = applicationReviewDisplayFields.filter(
   (e) => !e.startsWith("section")
@@ -238,7 +242,7 @@ export let AVAILABLE_ROOMS: IRoom[] = [
   },
 ];
 
-export const HACKATHON_YEAR = "2024"; //settings.hackathon_year;
+export const HACKATHON_YEAR = "2025"; //settings.hackathon_year;
 export const HACKATHON_YEAR_STRING = String(HACKATHON_YEAR);
 export const AUTO_ADMIT_STANFORD = true;
 

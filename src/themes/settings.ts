@@ -1,4 +1,4 @@
-import customConfig from "./timber_pine";
+import customConfig from "./tbd_theme";
 import defaultConfig from "./default";
 import { set } from "lodash";
 

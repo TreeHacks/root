@@ -11,6 +11,7 @@ export interface IReview {
 export interface IApplicationInfo {
   first_name: String;
   last_name: String;
+  full_name: String;
   phone: String;
   dob: String;
   gender: String;
@@ -29,6 +30,7 @@ export interface IApplicationInfo {
   resume: String;
   accept_terms: boolean;
   accept_share: boolean;
+  accept_conditions: boolean;
   beginner_info: boolean;
   top_track: String;
   q3: String;
