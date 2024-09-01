@@ -1,7 +1,7 @@
 export default {
     // TODO: Make these dates the actual dates of the hackathon
     hackathon_year: 2025,
-    hackathon_date_range: "February 16-18",
+    hackathon_date_range: "February 14-16",
     locations: [
       "Outside USA",
       "Alabama",
@@ -75,8 +75,8 @@ export default {
       {
         key: "stanford",
         label: "Stanford student",
-        date: "2025-02-18T07:59:00.000Z",
-        display_date: "February 18th, 2025",
+        date: "2025-01-01T07:59:00.000Z",
+        display_date: "December 31st, 2024",
       },
     ],
     logo: require("./assets/logo.svg"),

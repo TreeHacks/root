@@ -33,7 +33,7 @@ export async function sendApplicationSubmittedEmail(toAddress) {
       },
       Subject: {
         Charset: "UTF-8",
-        Data: "🌲 Thanks for Applying to TreeHacks 2024 🌲",
+        Data: "🌲 Thanks for Applying to TreeHacks 2025 🌲",
       },
     },
     Source: "hello@treehacks.com" /* required */,

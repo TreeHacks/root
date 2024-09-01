@@ -8,6 +8,7 @@ import AdmittedScreen from "./AdmittedScreen";
 import AdmittedStanford from "./AdmittedStanford";
 import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
 import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
+import { AUTO_ADMIT_STANFORD } from "../../backend/constants";
 import { DEADLINES, STATUS, TYPE } from "../constants";
 import { get } from "lodash";
 import { Link } from "react-router-dom";
@@ -122,7 +123,7 @@ export const Dashboard = (props: IDashboardProps) => {
             <span>Sorry, the application window has closed.</span>
           ) : (
             <div>
-              {props.profile.type === TYPE.STANFORD && <div>All Stanford students who register by the deadline will be accepted to the event.<br /><br />
+              {AUTO_ADMIT_STANFORD && props.profile.type === TYPE.STANFORD && <div>All Stanford students who register by the deadline will be accepted to the event.<br /><br />
               </div>}
               <div>
                 You haven't submitted your{" "}

@@ -96,7 +96,7 @@ class FormPageWrapper extends React.Component<
     if (get(schema, "properties.section1")) {
       schema.properties.section1.custom_description = (
         <span>
-          We’re so excited that you want to come to TreeHacks 2024!{" "}
+          We’re so excited that you want to come to TreeHacks 2025!{" "}
           <b>
             If you have any questions, feel free to reach out at{" "}
             <a className="email-link" href="mailto:hello@treehacks.com">

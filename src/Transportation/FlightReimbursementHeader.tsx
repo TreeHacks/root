@@ -15,7 +15,7 @@ export default () => (
     <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
         <li> Create an account on Egencia
             <ul>
-                <li>Select “Create an account for TreeHacks 2024”.</li>
+                <li>Select “Create an account for TreeHacks 2025”.</li>
                 <li>Your name must match your government ID exactly.</li>
                 <li>For Egencia user name, use the email address you applied to TreeHacks with.</li>
                 <li>Select “Use password sign-in”.</li>
