@@ -27,8 +27,7 @@ export class Home extends React.Component<IHomeProps, {}> {
       <div className="header-logo">
         <NavLink to="/">
           <img src={logo} height="40px" />
-          <span className="logo-text-tree">tree</span>
-          <span className="logo-text-hacks">hacks</span>
+          <span className="logo-text">TREEHACKS</span>
         </NavLink>
       </div>
       <div className="treehacks-navbar-links">

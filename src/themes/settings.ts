@@ -1,4 +1,4 @@
-import customConfig from "./tbd_theme";
+import customConfig from "./pistachio";
 import defaultConfig from "./default";
 import { set } from "lodash";
 

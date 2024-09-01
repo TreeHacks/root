@@ -45,18 +45,18 @@
     text-align: left;
 
     img {
-      padding-right: $navbar-padding;
+      padding-right: $navbar-padding / 2;
     }
 
     a {
       font-size: 36px;
     }
 
-    .logo-text-tree {
-    }
-
-    .logo-text-hacks {
-      font-weight: bold;
+    .logo-text {
+      font-family: Fredoka;
+      font-style: normal;
+      font-weight: 700;
+      text-transform: uppercase;
     }
   }
 }
