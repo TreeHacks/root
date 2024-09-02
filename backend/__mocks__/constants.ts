@@ -107,6 +107,7 @@ export const applicationRequiredFields = [
   "city",
   "state",
   "zip",
+  "country",
   "q1",
   "q2",
   "q3",

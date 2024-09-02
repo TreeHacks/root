@@ -27,6 +27,7 @@ export interface IApplicationInfo {
   city: String;
   state: String;
   zip: String;
+  country: String;
   resume: String;
   accept_terms: boolean;
   accept_share: boolean;

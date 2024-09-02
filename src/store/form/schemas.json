@@ -93,6 +93,11 @@
           "type": "string",
           "title": "Zip code"
         },
+        "country": {
+          "type": "string",
+          "title": "Country",
+          "default": "United States"
+        },
         "resume": {
           "title": "Resume",
           "description": "Upload your resume (optional) - Must be a PDF file, 10 MB max",
@@ -254,6 +259,7 @@
         "city",
         "state",
         "zip",
+        "country",
         "q1",
         "q2",
         "q3",
@@ -280,7 +286,7 @@
       "dob": {
         "ui:placeholder": "date of birth",
         "ui:options": {
-          "yearsRange": [1900, 2018]
+          "yearsRange": [1900, 2007]
         }
       },
       "gender": {
@@ -9884,7 +9890,7 @@
         "ui:placeholder": "major"
       },
       "address1": {
-        "ui:placeholder": "your mailing address"
+        "ui:placeholder": "address line 1"
       },
       "address2": {
         "ui:placeholder": "address line 2"
@@ -9897,6 +9903,9 @@
       },
       "zip": {
         "ui:placeholder": "zip code"
+      },
+      "country": {
+        "ui:placeholder": "country"
       },
       "skill_level": {
         "ui:placeholder": "skill level"
@@ -9988,6 +9997,7 @@
         "city",
         "state",
         "zip",
+        "country",
         "resume",
         "section2",
         "q1",
@@ -10056,7 +10066,7 @@
         "ui:placeholder": "vendor (company purchased from)"
       },
       "address1": {
-        "ui:placeholder": "your mailing address"
+        "ui:placeholder": "address line 1"
       },
       "address2": {
         "ui:placeholder": "address line 2"

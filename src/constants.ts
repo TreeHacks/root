@@ -528,6 +528,7 @@ export const applicationDisplayFields = [
   "city",
   "state",
   "zip",
+  "country",
   "resume",
   "section2",
   "q1",

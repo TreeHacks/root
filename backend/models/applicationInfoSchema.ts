@@ -21,6 +21,7 @@ const applicationInfoSchema: Schema = new mongoose.Schema(
     city: String,
     state: String,
     zip: String,
+    country: String,
     resume: String,
     accept_terms: Boolean,
     accept_conditions: Boolean,
