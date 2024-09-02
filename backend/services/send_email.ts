@@ -66,7 +66,7 @@ export async function sendSponsorAccountCreationEmail(email: string, password: s
           <html>
             <body>
               <p>Hi there,</p>
-              <p>Thanks for signing up to sponsor TreeHacks 2023! We're excited to have you on board.</p>
+              <p>Thanks for signing up to sponsor TreeHacks 2025! We're excited to have you on board.</p>
               <p>As a sponsor, you'll have access to our platform to manage your sponsorship. You can find your login credentials below.</p>
               <p>Username: ${email}</p>
               <p>Temporary Password: ${password}</p>
