@@ -159,7 +159,8 @@ class Review extends React.Component<IReviewProps, IReviewComponentState> {
 					{this.state.stats_data &&
 						<div className="treehacks-body-text apps-remaining-countdown">
 							<strong>{this.state.stats_data.results.num_remaining_oos}</strong> oos apps remaining<br />
-							<strong>{this.state.stats_data.results.num_remaining_is}</strong> is apps remaining
+							<strong>{this.state.stats_data.results.num_remaining_is}</strong> is apps remaining<br />
+							<strong>{this.state.stats_data.results.num_remaining_stanford}</strong> stanford apps remaining
 						</div>}
 				</div>
 				<div className="container left-sidebar-content">

@@ -48,13 +48,20 @@ export const getReviewStats = (req, res) => {
             { type: 'oos' },
             { [key]: { $exists: false } } // Look for when length of "reviews" is less than REVIEWS_PER_APP.
         ]
+    }).count().exec(), Application.find({
+        $and: [
+            { status: STATUS.SUBMITTED },
+            { type: 'stanford' },
+            { [key]: { $exists: false } } // Look for when length of "reviews" is less than REVIEWS_PER_APP.
+        ]
     }).count().exec()])
-        .then(([num_is, num_oos]) => {
+        .then(([num_is, num_oos, num_stanford]) => {
             res.json({
                 "results": {
-                    "num_remaining": num_is + num_oos,
+                    "num_remaining": num_is + num_oos + num_stanford,
                     "num_remaining_is": num_is,
-                    "num_remaining_oos": num_oos
+                    "num_remaining_oos": num_oos,
+                    "num_remaining_stanford": num_stanford
                 }
             });
         })
