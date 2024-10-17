@@ -113,6 +113,9 @@ export const reviewNextApplication = async (req, res) => {
     if (!data || (data.length === 0)) {
         data = await Application.aggregate(createAggregationPipeline("is"));
     }
+    if (!data || (data.length === 0)) {
+        data = await Application.aggregate(createAggregationPipeline("stanford"));
+    }
     const application = await injectDynamicApplicationContent(data[0]);
     res.json(application);
 };
