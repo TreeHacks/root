@@ -17,7 +17,10 @@ export interface IFormState {
         "deadline": String
       }
   },
-    forms: any
+    forms: any,
+    user: {
+      id: string
+    }
   },
   schemas: {
     application_info: IAuthStateSchemaItem,

@@ -82,6 +82,7 @@ import {
   leaveTeam,
   getUserTeamData,
 } from "./routes/teams";
+import {getDigitalId} from "./routes/digital_id";
 import {
   uploadSponsorLogo,
   updateSponsor,
@@ -148,6 +149,10 @@ apiRouter.get("/users/:userId/contact", [anonymousRoute], userContact);
 apiRouter.get("/leaderboard", [anonymousRoute], leaderboard);
 apiRouter.post("/mentor_create", [anonymousRoute], mentorCreate);
 apiRouter.post("/sponsor/admin", createAdmin);
+apiRouter.get(
+  "/users/:userId/:fullName/getDigitalID",
+  getDigitalId
+);
 
 apiRouter.use("/", authenticatedRoute);
 

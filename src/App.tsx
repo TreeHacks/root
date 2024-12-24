@@ -19,6 +19,7 @@ import Helmet from "react-helmet";
 import FormPageWrapper from "./FormPage/FormPageWrapper";
 import Sponsors from "./Sponsors/Sponsors";
 import Judge from "./Judge/Judge";
+import ID from "./Id/Id";
 import { favicon } from "./constants";
 
 const mapStateToProps = state => ({
@@ -74,6 +75,7 @@ const MainRoutes = (props: IAppProps) => (
             <Route path="/review" exact component={Review} />
             <Route path="/sponsors" component={Sponsors} />
             <Route path="/judge" exact component={Judge} />
+            <Route path="/id" exact component={ID} />
           </Switch>
         </div>
       </div>
