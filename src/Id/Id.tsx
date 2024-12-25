@@ -2,6 +2,7 @@ import React from "react";
 import "./Id.scss";
 import { connect } from "react-redux";
 import Loading from "../Loading/Loading";
+import QRCode from "react-qr-code";
 import { IIDProps } from "./types";
 import { loadData, getUserProfile } from "../store/form/actions";
 import API from "@aws-amplify/api";
@@ -70,7 +71,7 @@ export class ID extends React.Component<IIDProps> {
             Your Treehacks ID will be used for check-in and meals! Make sure you
             have this QR code available before arriving!
           </div>
-          <div className="id-blurb">QR CODE PLACEHOLDER</div>
+          <div className="id-blurb"><QRCode value={this.props.profile.user.id}/></div>
           <div>
             <img
               id="apple-wallet"
