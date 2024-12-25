@@ -1,9 +1,12 @@
 import React from "react";
+import "./Id.scss";
 import { connect } from "react-redux";
 import Loading from "../Loading/Loading";
 import { IIDProps } from "./types";
 import { loadData, getUserProfile } from "../store/form/actions";
 import API from "@aws-amplify/api";
+
+const appleWalletButton = require("../art/add_to_apple_wallet.svg") as string;
 
 const mapStateToProps = (state) => ({
   ...state.form,
@@ -55,8 +58,27 @@ export class ID extends React.Component<IIDProps> {
 
   render(): React.ReactNode {
     return (
-      <div>
-        <a onClick={this.getID}>Click to add ID to Apple Wallet</a>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div className="treehacks-alert">
+          <div className="id-blurb">
+            Your Treehacks ID will be used for check-in and meals! Make sure you
+            have this QR code available before arriving!
+          </div>
+          <div className="id-blurb">QR CODE PLACEHOLDER</div>
+          <div>
+            <img
+              id="apple-wallet"
+              onClick={this.getID}
+              src={appleWalletButton}
+            />
+          </div>
+        </div>
       </div>
     );
   }
