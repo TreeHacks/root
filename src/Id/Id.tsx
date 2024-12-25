@@ -66,12 +66,14 @@ export class ID extends React.Component<IIDProps> {
           alignItems: "center",
         }}
       >
-        <div className="treehacks-alert">
-          <div className="id-blurb">
+        <div id="id-box" className="treehacks-alert">
+          <div>
             Your Treehacks ID will be used for check-in and meals! Make sure you
             have this QR code available before arriving!
           </div>
-          <div className="id-blurb"><QRCode value={this.props.profile.user.id}/></div>
+          <div className="qr-container">
+            <QRCode value={this.props.profile.user.id} />
+          </div>
           <div>
             <img
               id="apple-wallet"
