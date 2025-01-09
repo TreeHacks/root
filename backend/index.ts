@@ -82,7 +82,7 @@ import {
   leaveTeam,
   getUserTeamData,
 } from "./routes/teams";
-import {getDigitalId} from "./routes/digital_id";
+import {getDigitalId, getDigitalGoogleId} from "./routes/digital_id";
 import {
   uploadSponsorLogo,
   updateSponsor,
@@ -149,10 +149,6 @@ apiRouter.get("/users/:userId/contact", [anonymousRoute], userContact);
 apiRouter.get("/leaderboard", [anonymousRoute], leaderboard);
 apiRouter.post("/mentor_create", [anonymousRoute], mentorCreate);
 apiRouter.post("/sponsor/admin", createAdmin);
-apiRouter.get(
-  "/users/:userId/:fullName/getDigitalID",
-  getDigitalId
-);
 
 apiRouter.use("/", authenticatedRoute);
 
@@ -195,6 +191,14 @@ authenticatedRoute.get("/users/:userId/forms/workshop_info", getWorkshopList);
 authenticatedRoute.put("/users/:userId/forms/workshop_info", setWorkshopList);
 authenticatedRoute.put("/users/:userId/forms/add_teammate", addTeammate);
 authenticatedRoute.put("/users/:userId/forms/remove_teammate", removeTeammate);
+authenticatedRoute.get(
+  "/users/:userId/:fullName/getDigitalID",
+  getDigitalId
+);
+authenticatedRoute.get(
+  "/users/:userId/:fullName/getGoogleID",
+  getDigitalGoogleId
+);
 
 // What permission should this one be?
 authenticatedRoute.get("/users/:userId/status", getApplicationStatus);

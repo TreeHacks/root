@@ -34,3 +34,23 @@ export async function getDigitalId(req: Request, res: Response) {
     content: base64Data,
   });
 }
+
+export async function getDigitalGoogleId(req: Request, res: Response) {
+  const baseDomain: string = process.env.ID_URL; // TODO: adjust based on env value
+  const token = generateToken(req.params.userId, req.params.fullName);
+  const response = await fetch(baseDomain + "/googlePass/" + token, {
+    method: "GET",
+  });
+
+  if (!response.ok) {
+    return res.status(response.status).json({
+      error: "Failed to generate digital ID",
+      details: await response.text(),
+    });
+  }
+
+  const data = await response.json();
+  return res.status(200).json({
+    content: data.url,
+  });
+}

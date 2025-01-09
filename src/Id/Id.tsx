@@ -8,6 +8,7 @@ import { loadData, getUserProfile } from "../store/form/actions";
 import API from "@aws-amplify/api";
 
 const appleWalletButton = require("../art/add_to_apple_wallet.svg") as string;
+const googleWalletButton = require("../art/add_to_google_wallet.svg") as string;
 
 const mapStateToProps = (state) => ({
   ...state.form,
@@ -24,7 +25,7 @@ export class ID extends React.Component<IIDProps> {
   constructor(props) {
     super(props);
     this.getID = this.getID.bind(this);
-    console.log(this.props);
+    this.getGoogleID = this.getGoogleID.bind(this);
   }
 
   async getID() {
@@ -57,6 +58,28 @@ export class ID extends React.Component<IIDProps> {
     URL.revokeObjectURL(url); // Clean up the Object URL
   }
 
+  async getGoogleID() {
+    const res = await API.get(
+      "treehacks",
+      "/users/" +
+        this.props.profile.user.id +
+        "/" +
+        this.props.profile.forms.application_info.full_name +
+        "/getGoogleID",
+      {}
+    );
+
+    // trigger file download
+    const url = res.content;
+    const link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    document.body.appendChild(link); // Required for Firefox
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url); // Clean up the Object URL
+  }
+
   render(): React.ReactNode {
     return (
       <div
@@ -74,12 +97,21 @@ export class ID extends React.Component<IIDProps> {
           <div className="qr-container">
             <QRCode value={this.props.profile.user.id} />
           </div>
-          <div>
-            <img
-              id="apple-wallet"
-              onClick={this.getID}
-              src={appleWalletButton}
-            />
+          <div className="wallet-holder">
+            <div>
+              <img
+                className="wallet-btn"
+                onClick={this.getID}
+                src={appleWalletButton}
+              />
+            </div>
+            <div>
+              <img
+                className="wallet-btn"
+                onClick={this.getGoogleID}
+                src={googleWalletButton}
+              />
+            </div>
           </div>
         </div>
       </div>

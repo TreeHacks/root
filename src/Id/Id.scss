@@ -1,7 +1,16 @@
 @import "../Global.scss";
 
-#apple-wallet {
+.wallet-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wallet-btn {
   cursor: pointer;
+  height: 50px;
 }
 
 #id-box {
@@ -9,5 +18,5 @@
 }
 
 .qr-container {
-  padding: 20px;
+  padding: 50px 20px;
 }
