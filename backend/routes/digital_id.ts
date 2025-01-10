@@ -10,16 +10,16 @@ function generateToken(userId, userName) {
   return jwt.sign(payload, secretKey, { expiresIn: "1h" });
 }
 
-export async function getDigitalId(req: Request, res: Response) {
+export async function getAppleId(req: Request, res: Response) {
   const baseDomain: string = process.env.ID_URL; // TODO: adjust based on env value
   const token = generateToken(req.params.userId, req.params.fullName);
-  const response = await fetch(baseDomain + "/pass/" + token, {
+  const response = await fetch(baseDomain + "/applePass/" + token, {
     method: "GET",
   });
 
   if (!response.ok) {
     return res.status(response.status).json({
-      error: "Failed to generate digital ID",
+      error: "Failed to generate Apple Pass",
       details: await response.text(),
     });
   }
@@ -35,7 +35,7 @@ export async function getDigitalId(req: Request, res: Response) {
   });
 }
 
-export async function getDigitalGoogleId(req: Request, res: Response) {
+export async function getGoogleId(req: Request, res: Response) {
   const baseDomain: string = process.env.ID_URL; // TODO: adjust based on env value
   const token = generateToken(req.params.userId, req.params.fullName);
   const response = await fetch(baseDomain + "/googlePass/" + token, {
@@ -44,7 +44,7 @@ export async function getDigitalGoogleId(req: Request, res: Response) {
 
   if (!response.ok) {
     return res.status(response.status).json({
-      error: "Failed to generate digital ID",
+      error: "Failed to generate Google Pass",
       details: await response.text(),
     });
   }

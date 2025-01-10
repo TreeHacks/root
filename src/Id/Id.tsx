@@ -24,18 +24,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export class ID extends React.Component<IIDProps> {
   constructor(props) {
     super(props);
-    this.getID = this.getID.bind(this);
+    this.getAppleID = this.getAppleID.bind(this);
     this.getGoogleID = this.getGoogleID.bind(this);
   }
 
-  async getID() {
+  async getAppleID() {
     const res = await API.get(
       "treehacks",
       "/users/" +
         this.props.profile.user.id +
         "/" +
         this.props.profile.forms.application_info.full_name +
-        "/getDigitalID",
+        "/getAppleID",
       {}
     );
 
@@ -95,7 +95,7 @@ export class ID extends React.Component<IIDProps> {
           <div>
             <img
               className="wallet-btn"
-              onClick={this.getID}
+              onClick={this.getAppleID}
               src={appleWalletButton}
             />
           </div>
