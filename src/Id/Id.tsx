@@ -82,37 +82,34 @@ export class ID extends React.Component<IIDProps> {
 
   render(): React.ReactNode {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <div id="id-box" className="treehacks-alert">
-          <div>
-            Your Treehacks ID will be used for check-in and meals! Make sure you
-            have this QR code available before arriving!
-          </div>
+      <div id="outer-box">
+        <div id="id-box">
+          <div className="id-header-text">Treehacks ID</div>
+          <div>{this.props.profile.forms.application_info.full_name}</div>
+
           <div className="qr-container">
             <QRCode value={this.props.profile.user.id} />
           </div>
-          <div className="wallet-holder">
-            <div>
-              <img
-                className="wallet-btn"
-                onClick={this.getID}
-                src={appleWalletButton}
-              />
-            </div>
-            <div>
-              <img
-                className="wallet-btn"
-                onClick={this.getGoogleID}
-                src={googleWalletButton}
-              />
-            </div>
+        </div>
+        <div className="wallet-holder">
+          <div>
+            <img
+              className="wallet-btn"
+              onClick={this.getID}
+              src={appleWalletButton}
+            />
           </div>
+          <div>
+            <img
+              className="wallet-btn"
+              onClick={this.getGoogleID}
+              src={googleWalletButton}
+            />
+          </div>
+        </div>
+        <div>
+          Your Treehacks ID will be used for check-in and meals! Make sure you
+          have this QR code available before arriving!
         </div>
       </div>
     );

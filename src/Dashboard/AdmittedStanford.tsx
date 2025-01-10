@@ -4,6 +4,7 @@ import { HACKATHON_YEAR, HACKATHON_DATE_RANGE } from "../constants";
 import { confirmAdmission, declineAdmission } from "../store/form/actions";
 import { Link } from "react-router-dom";
 import moment from "moment-timezone";
+import Id from "../Id/Id";
 
 interface IAdmittedScreenProps {
   confirmAdmission: () => void;
@@ -20,6 +21,7 @@ export const AdmittedScreen = (props: IAdmittedScreenProps) => (
           Keep an eye on your inbox in the coming weeks -- we'll be sending more
           details to you shortly!
         </p>
+        <Id></Id>
         <button className="btn btn-custom">
           <Link to="/transportation" style={{ color: "white" }}>
             Travel RSVP details
