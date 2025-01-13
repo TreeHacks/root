@@ -85,7 +85,9 @@ export class ID extends React.Component<IIDProps> {
       <div id="outer-box">
         <div id="id-box">
           <div className="id-header-text">Treehacks ID</div>
-          <div>{this.props.profile.forms.application_info.full_name}</div>
+          <div className="id-full-name">
+            {this.props.profile.forms.application_info.full_name}
+          </div>
 
           <div className="qr-container">
             <QRCode value={this.props.profile.user.id} />
