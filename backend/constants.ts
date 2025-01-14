@@ -30,6 +30,7 @@ export var TYPE = {
 export var TRANSPORTATION_TYPE = {
   BUS: "bus",
   FLIGHT: "flight",
+  TRAIN: "train",
   OTHER: "other",
 };
 

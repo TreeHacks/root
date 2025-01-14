@@ -11,28 +11,28 @@ interface IAdmittedScreenProps {
   declineAdmission: () => void;
   confirmedYet: boolean;
   deadline: string;
+  stanford?: boolean;
 }
 export const AdmittedScreen = (props: IAdmittedScreenProps) => (
   <div className="admitted-content">
     {props.confirmedYet && (
       <div>
-        <h4>Complete the following by <strong>January 21st:</strong></h4>
+        <h4>Complete the following by <strong>January 8th:</strong></h4>
         <ul style={{ textAlign: "left", margin: "20px auto", maxWidth: 575 }}>
-          <li>Follow the steps in <Link to="/transportation">travel section</Link> <strong>as early as possible!</strong> </li>
-          <li>Fill out the quick <a href="https://forms.gle/v44CrmU426cfhxwh6">Travel Acknowledgement Form</a></li>
-          <li><a href="https://forms.gle/YwPqv684XYq3f4RZ7">Register for GrantEd</a> (this is required in order to receive a prize or a travel reimbursement)</li>
-          <li>Complete the <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5JHPbFsLVz4pKt6YtJuZdISozgmnTrRdRFKvI_AhPQE_mow/viewform">liability form </a></li>
+          {!props.stanford && <li>Follow the steps in <Link to="/transportation">travel section</Link> <strong>as early as possible!</strong> </li>}
+          <li>Fill out the quick <a href="https://forms.gle/NdxcXZWqmW5erSA27">Acceptance and Travel Acknowledgement Form</a></li>
         </ul>
         <p>
           Keep an eye on your inbox in the coming weeks -- we'll be sending more
           details to you shortly!
         </p>
         <Id></Id>
-        <button className="btn btn-custom">
+        {/* Commenting out until updated */}
+        {/* <button className="btn btn-custom">
           <a href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit?usp=sharing" style={{ color: "white" }}>
             Ultimate TreeHacks Guide
           </a>
-        </button>
+        </button> */}
       </div>
     )}
     {!props.confirmedYet && (

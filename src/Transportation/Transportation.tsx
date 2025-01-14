@@ -109,6 +109,7 @@ export class Transportation extends React.Component<ITransportationProps> {
     const dateNow = moment();
     const deadlinePassed = dateNow > transportationDeadline;
     let transportationForm = this.props.formData || {};
+
     if (status !== STATUS.ADMITTED && status !== STATUS.ADMISSION_CONFIRMED) {
       // No travel info to show
       return (
@@ -140,7 +141,7 @@ export class Transportation extends React.Component<ITransportationProps> {
         </div>
       );
     }
-    if (transportation_status === TRANSPORTATION_STATUS.UNAVAILABLE) {
+    if (transportation_status === TRANSPORTATION_STATUS.UNAVAILABLE || transportationType === TRANSPORTATION_TYPES.OTHER) {
       return (
         <div
           style={{
@@ -289,7 +290,7 @@ export class Transportation extends React.Component<ITransportationProps> {
 
     if (
       transportationType === TRANSPORTATION_TYPES.FLIGHT ||
-      transportationType === TRANSPORTATION_TYPES.OTHER
+      transportationType === TRANSPORTATION_TYPES.TRAIN
     ) {
       if (
         dateNow > transportationDeadline &&
@@ -308,8 +309,6 @@ export class Transportation extends React.Component<ITransportationProps> {
           }}
         >
           <div className="treehacks-alert">
-            {transportationType === TRANSPORTATION_TYPES.FLIGHT && (
-          <>
             <h5>
               TreeHacks is reimbursing you up to{" "}
               <span className="treehacks-transportation-amount-text">
@@ -318,11 +317,10 @@ export class Transportation extends React.Component<ITransportationProps> {
                   currency: "USD",
                 })}
               </span>
+              {" "}for your{" "}
+              {transportationType === TRANSPORTATION_TYPES.TRAIN ? "train" : "flight"}
             </h5>
             <FlightReimbursementHeader />
-          </>
-            )}
-            )}
           </div>
         </div>
       );

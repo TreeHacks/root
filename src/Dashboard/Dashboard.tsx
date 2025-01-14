@@ -97,7 +97,7 @@ export const Dashboard = (props: IDashboardProps) => {
           ) : props.profile.status === STATUS.WAITLISTED ? (
             <WaitlistedScreen />
           ) : (props.profile.status === STATUS.ADMISSION_CONFIRMED && props.profile.type === TYPE.STANFORD) ? (
-            <AdmittedStanford confirmedYet={true} />
+            <AdmittedScreen confirmedYet={true} stanford={true} />
           ): props.profile.status === STATUS.ADMISSION_CONFIRMED ? (
             <AdmittedScreen confirmedYet={true} />
           ) : props.profile.status === STATUS.ADMISSION_DECLINED ? (

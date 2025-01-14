@@ -25,6 +25,7 @@ export function bulkChangeUsers(req: Request, res: Response) {
             switch (element.transportationType) {
                 case TRANSPORTATION_TYPE.BUS:
                 case TRANSPORTATION_TYPE.FLIGHT:
+                case TRANSPORTATION_TYPE.TRAIN:
                 case TRANSPORTATION_TYPE.OTHER:
                     break;
                 case "":

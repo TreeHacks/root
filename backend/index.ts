@@ -26,6 +26,7 @@ import {
   setApplicationInfo,
   submitApplicationInfo,
 } from "./routes/application_info";
+import { createEventPushSubscription, deleteEventPushSubscription, getEventSubscriptions } from "./routes/event_subscriptions"
 import { getMeetInfo, setMeetInfo } from "./routes/meet_info";
 import { getUsedMeals, setUsedMeals } from "./routes/used_meals";
 import { getWorkshopList, setWorkshopList } from "./routes/workshop_info";
@@ -95,6 +96,11 @@ import {
   getSponsorDetail,
   createAdmin
 } from "./routes/sponsors"
+import LiveNotificationsService from "./services/live_notifications";
+
+// Start the notification service
+const notificationService = new LiveNotificationsService();
+notificationService.start();
 
 // Set up the Express app
 const app = express();
@@ -149,6 +155,11 @@ apiRouter.get("/users/:userId/contact", [anonymousRoute], userContact);
 apiRouter.get("/leaderboard", [anonymousRoute], leaderboard);
 apiRouter.post("/mentor_create", [anonymousRoute], mentorCreate);
 apiRouter.post("/sponsor/admin", createAdmin);
+
+// Live push notifications, no auth required
+apiRouter.post('/live/event_subscriptions', createEventPushSubscription);
+apiRouter.delete('/live/event_subscriptions', deleteEventPushSubscription);
+apiRouter.get('/live/event_subscriptions', getEventSubscriptions);
 
 apiRouter.use("/", authenticatedRoute);
 
