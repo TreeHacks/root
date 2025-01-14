@@ -44,14 +44,29 @@ export class ID extends React.Component<IIDProps> {
     const binaryData = atob(base64Data); // Decode base64 to binary data
 
     // Create a blob
-    const blob = new Blob([
-      new Uint8Array(binaryData.split("").map((char) => char.charCodeAt(0))),
-    ]);
+    const blob = new Blob(
+      [new Uint8Array(binaryData.split("").map((char) => char.charCodeAt(0)))],
+      { type: "application/vnd.apple.pkpass" }
+    );
     // trigger file download
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
+
     link.href = url;
-    link.download = "treehacksID.pkpass";
+
+    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    let isIOS = [
+      "iPad Simulator",
+      "iPhone Simulator",
+      "iPod Simulator",
+      "iPad",
+      "iPhone",
+      "iPod",
+    ].includes(navigator.platform);
+
+    if (!isSafari && !isIOS) {
+      link.download = "treehacksID.pkpass";
+    }
     document.body.appendChild(link); // Required for Firefox
     link.click();
     document.body.removeChild(link);
