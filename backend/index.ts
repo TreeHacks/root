@@ -85,6 +85,7 @@ import {
   leaveTeam,
   getUserTeamData,
 } from "./routes/teams";
+import {getAppleId, getGoogleId} from "./routes/digital_id";
 import {
   uploadSponsorLogo,
   updateSponsor,
@@ -207,6 +208,14 @@ authenticatedRoute.get("/users/:userId/forms/workshop_info", getWorkshopList);
 authenticatedRoute.put("/users/:userId/forms/workshop_info", setWorkshopList);
 authenticatedRoute.put("/users/:userId/forms/add_teammate", addTeammate);
 authenticatedRoute.put("/users/:userId/forms/remove_teammate", removeTeammate);
+authenticatedRoute.get(
+  "/users/:userId/:fullName/getAppleID",
+  getAppleId
+);
+authenticatedRoute.get(
+  "/users/:userId/:fullName/getGoogleID",
+  getGoogleId
+);
 
 // What permission should this one be?
 authenticatedRoute.get("/users/:userId/status", getApplicationStatus);
