@@ -99,6 +99,20 @@ import {
   createAdmin
 } from "./routes/sponsors"
 import LiveNotificationsService from "./services/live_notifications";
+import {
+  getJudgeForms,
+  getJudgeMealInfo,
+  setJudgeMealInfo,
+  getJudgeCheckInInfo,
+  setJudgeCheckInInfo 
+} from "./routes/judge_forms";
+import { 
+  getMentorForms,
+  getMentorMealInfo,
+  setMentorMealInfo,
+  getMentorCheckInInfo,
+  setMentorCheckInInfo 
+} from "./routes/mentor_forms";
 
 // Start the notification service
 const notificationService = new LiveNotificationsService();
@@ -293,6 +307,20 @@ authenticatedRoute.get(
 authenticatedRoute.get("/judging/stats", [judgeRoute], getJudgeStats);
 authenticatedRoute.post("/judging/rate", [judgeRoute], rateHack);
 authenticatedRoute.get("/judging/next_hack", [judgeRoute], reviewNextHack);
+
+// Judge form routes
+authenticatedRoute.get("/judges/:userId/forms", getJudgeForms);
+authenticatedRoute.get("/judges/:userId/forms/meal_info", getJudgeMealInfo);
+authenticatedRoute.put("/judges/:userId/forms/meal_info", setJudgeMealInfo);
+authenticatedRoute.get("/judges/:userId/forms/check_in_info", getJudgeCheckInInfo);
+authenticatedRoute.put("/judges/:userId/forms/check_in_info", setJudgeCheckInInfo);
+
+// Mentor form routes  
+authenticatedRoute.get("/mentors/:userId/forms", getMentorForms);
+authenticatedRoute.get("/mentors/:userId/forms/meal_info", getMentorMealInfo);
+authenticatedRoute.put("/mentors/:userId/forms/meal_info", setMentorMealInfo);
+authenticatedRoute.get("/mentors/:userId/forms/check_in_info", getMentorCheckInInfo);
+authenticatedRoute.put("/mentors/:userId/forms/check_in_info", setMentorCheckInInfo);
 
 app.use("/api", apiRouter);
 

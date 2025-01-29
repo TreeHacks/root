@@ -55,6 +55,7 @@ export interface ITransportationInfo {
 
 export interface IMealInfo {
   usedMeals?: [String];
+  dietaryRestrictions?: String;
 }
 
 export interface ITeamInfo {

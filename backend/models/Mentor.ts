@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import { Model, Schema } from "mongoose";
-import checkInSchema from "./checkInSchema";
-import mealInfoSchema from "./mealInfoSchema";
 import { ICheckInInfo } from "./Application.d";
 import { IMealInfo } from "./Application.d";
+import checkInSchema from "./checkInSchema";
+import mealInfoSchema from "./mealInfoSchema";
 
-interface IJudge extends mongoose.Document {
+interface IMentor extends mongoose.Document {
     _id: string,
     year: string,
     forms: {
@@ -22,7 +22,7 @@ interface IJudge extends mongoose.Document {
     }
 }
 
-const judgeSchema: Schema = new mongoose.Schema({
+const mentorSchema: Schema = new mongoose.Schema({
     "_id": String,
     "year": String,
     "forms": {
@@ -39,5 +39,5 @@ const judgeSchema: Schema = new mongoose.Schema({
     }
 });
 
-const model: Model<IJudge> = mongoose.model("Judge", judgeSchema);
+const model: Model<IMentor> = mongoose.model("Mentor", mentorSchema);
 export default model;
