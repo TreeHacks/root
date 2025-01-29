@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 import { Model, Schema } from "mongoose";
+import { ICheckInInfo } from "./Application.d";
+import { IMealInfo } from "./Application.d";
+import checkInSchema from "./checkInSchema";
+import mealInfoSchema from "./mealInfoSchema";
 
 interface IMentor extends mongoose.Document {
     _id: string,
@@ -9,13 +13,8 @@ interface IMentor extends mongoose.Document {
             first_name: string,
             last_name: string
         },
-        check_in_info: {
-            tshirtSize: string
-        },
-        meal_info: {
-            usedMeals: string[],
-            dietaryRestrictions: string
-        }
+        check_in_info: ICheckInInfo,
+        meal_info: IMealInfo
     },
     user: {
         id: string,
@@ -31,13 +30,8 @@ const mentorSchema: Schema = new mongoose.Schema({
             "first_name": String,
             "last_name": String
         },
-        "check_in_info": {
-            "tshirtSize": String
-        },
-        "meal_info": {
-            "usedMeals": [String],
-            "dietaryRestrictions": String
-        }
+        "check_in_info": checkInSchema,
+        "meal_info": mealInfoSchema
     },
     "user": {
         "id": String,
