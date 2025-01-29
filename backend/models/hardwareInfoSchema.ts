@@ -7,7 +7,7 @@ const hardwareInfoSchema: Schema = new mongoose.Schema({
     pendingReturn: Boolean,
     returnedAt: Date,
     returnedBy: String,
-    hardwareList: String
+    hardwareList: [String]
 }, { _id: false });
 
 export default hardwareInfoSchema; 
