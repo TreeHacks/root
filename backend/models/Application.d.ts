@@ -106,7 +106,7 @@ export interface IHardwareInfo {
   pendingReturn?: Boolean;
   returnedAt?: Date;
   returnedBy?: String;
-  hardwareList?: String;
+  hardwareList?: String[];
 }
 
 export interface IApplication extends Document {
