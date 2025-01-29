@@ -2,12 +2,12 @@ import Application from "../models/Application";
 import { IApplication } from "../models/Application.d";
 import { Request, Response } from "express";
 import { CognitoUser } from "../models/cognitoUser";
-import { STATUS, TYPE, TRANSPORTATION_STATUS } from "../constants";
-import { isEqual } from "lodash";
+import { STATUS } from "../constants";
 import { injectDynamicApplicationContent } from "../utils/file_plugin";
 import { ServerResponse } from "http";
 import { Model } from "mongoose";
-import { prepopulateMeetInfo } from "./meet_info";
+import Judge from "../models/Judge";
+import Mentor from "../models/Mentor";
 
 export function getDeadline(type) {
   switch (type) {
@@ -235,4 +235,120 @@ export function getGenericList(req: Request, res: Response, Model: Model<any>) {
     .catch((err) => {
       return res.status(400).json(err);
     });
+}
+
+export async function getJudgeAttribute(
+  req: Request,
+  res: Response,
+  getter: (e: any) => any
+) {
+  // prevent non-admins from viewing judges
+  const groups = res.locals.user["cognito:groups"] || [];
+  const canView = groups.includes("admin") || groups.includes("organizers_current");
+  if (!canView && res.locals.user.sub !== req.params.userId) {
+    return res.status(403).send("You do not have access to view this judge");
+  }
+
+  let judge = await Judge.findOne(
+    { "user.id": req.params.userId },
+    { __v: 0 },
+    { "treehacks:groups": res.locals.user["cognito:groups"] }
+  );
+
+  if (!judge) {
+    res.status(404).send("Judge not found.");
+  } else {
+    res.status(200).send(getter(judge));
+  }
+}
+
+export async function setJudgeAttribute(
+  req: Request,
+  res: Response,
+  setter: (e: any) => any,
+  getter: (e: any) => any = (e) => e
+) {
+  // prevent non-admins from editing other judges
+  const groups = res.locals.user["cognito:groups"] || [];
+  const canEdit = groups.includes("admin") || groups.includes("organizers_current");
+  if (!canEdit && res.locals.user.sub !== req.params.userId) {
+    return res.status(403).send("You do not have access to edit this judge");
+  }
+
+  const judge = await Judge.findOne(
+    { "user.id": req.params.userId },
+    { __v: 0 }
+  );
+
+  if (!judge) {
+    res.status(404).send("Judge not found.");
+    return;
+  }
+
+  let setResponse = setter(judge);
+  if (setResponse instanceof ServerResponse) {
+    return;
+  }
+
+  await judge.save();
+
+  await getJudgeAttribute(req, res, getter);
+}
+
+export async function getMentorAttribute(
+  req: Request,
+  res: Response,
+  getter: (e: any) => any
+) {
+  // prevent non-admins from viewing mentors
+  const groups = res.locals.user["cognito:groups"] || [];
+  const canView = groups.includes("admin") || groups.includes("organizers_current");
+  if (!canView && res.locals.user.sub !== req.params.userId) {
+    return res.status(403).send("You do not have access to view this mentor");
+  }
+
+  let mentor = await Mentor.findOne(
+    { "user.id": req.params.userId },
+    { __v: 0 },
+    { "treehacks:groups": res.locals.user["cognito:groups"] }
+  );
+
+  if (!mentor) {
+    res.status(404).send("Mentor not found.");
+  } else {
+    res.status(200).send(getter(mentor));
+  }
+}
+
+export async function setMentorAttribute(
+  req: Request,
+  res: Response,
+  setter: (e: any) => any,
+  getter: (e: any) => any = (e) => e
+) {
+  // prevent non-admins from editing other mentors
+  const groups = res.locals.user["cognito:groups"] || [];
+  const canEdit = groups.includes("admin") || groups.includes("organizers_current");
+  if (!canEdit && res.locals.user.sub !== req.params.userId) {
+    return res.status(403).send("You do not have access to edit this mentor");
+  }
+
+  const mentor = await Mentor.findOne(
+    { "user.id": req.params.userId },
+    { __v: 0 }
+  );
+
+  if (!mentor) {
+    res.status(404).send("Mentor not found.");
+    return;
+  }
+
+  let setResponse = setter(mentor);
+  if (setResponse instanceof ServerResponse) {
+    return;
+  }
+
+  await mentor.save();
+
+  await getMentorAttribute(req, res, getter);
 }
