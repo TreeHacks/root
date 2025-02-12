@@ -70,6 +70,7 @@ export interface ICheckInInfo {
   checkedIn?: Boolean;
   checkedInBy?: String;
   checkedInAt?: Date;
+  tshirtSize?: String;
 }
 
 export interface IMeetInfo {
