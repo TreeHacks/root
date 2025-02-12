@@ -60,12 +60,6 @@ import {
 } from "./routes/transportation_info";
 import { getUserResumes } from "./routes/user_resumes";
 import { importHacks } from "./routes/hacks/hacks_import";
-import {
-  reviewNextHack,
-  getJudgeLeaderboard,
-  getJudgeStats,
-  rateHack,
-} from "./routes/hacks/judging";
 import { getHackList, editHack } from "./routes/hacks/hacks_list";
 import { getJudgeList, editJudge } from "./routes/hacks/judges";
 import { getAnnouncements } from "./routes/announcements";
@@ -297,16 +291,6 @@ authenticatedRoute.get(
   [reviewerRoute],
   reviewNextApplication
 );
-
-// Judging routes:
-authenticatedRoute.get(
-  "/judging/leaderboard",
-  [judgeRoute],
-  getJudgeLeaderboard
-);
-authenticatedRoute.get("/judging/stats", [judgeRoute], getJudgeStats);
-authenticatedRoute.post("/judging/rate", [judgeRoute], rateHack);
-authenticatedRoute.get("/judging/next_hack", [judgeRoute], reviewNextHack);
 
 // Judge form routes
 authenticatedRoute.get("/judges/:userId/forms", getJudgeForms);
