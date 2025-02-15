@@ -9,7 +9,7 @@ import AdmittedStanford from "./AdmittedStanford";
 import AdmissionExpiredScreen from "./AdmissionExpiredScreen";
 import AdmissionDeclinedScreen from "./AdmissionDeclinedScreen";
 import { AUTO_ADMIT_STANFORD } from "../../backend/constants";
-import { DEADLINES, STATUS, TYPE } from "../constants";
+import { DEADLINES, STATUS, TRANSPORTATION_STATUS, TYPE } from "../constants";
 import { get } from "lodash";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -74,6 +74,11 @@ export const Dashboard = (props: IDashboardProps) => {
   const acceptanceConfirmDeadlineObject = new Date(acceptanceConfirmDeadline);
   const laptop = require("../art/laptop.svg") as string;
   const hoover = require("../art/hoover.svg") as string;
+
+  // acceptance expired if the deadline has passed or the user has not submitted their transportation info
+  const acceptanceExpired = currentDate > acceptanceConfirmDeadlineObject.getTime()
+    || props.profile.transportation_status !== TRANSPORTATION_STATUS.SUBMITTED;
+
   return (
     <div className="dashboard">
       <div className="stripe accent-blue" />
@@ -102,8 +107,7 @@ export const Dashboard = (props: IDashboardProps) => {
             <AdmittedScreen confirmedYet={true} />
           ) : props.profile.status === STATUS.ADMISSION_DECLINED ? (
             <AdmissionDeclinedScreen />
-          ) : props.profile.status === STATUS.ADMITTED &&
-            currentDate > acceptanceConfirmDeadlineObject.getTime() ? (
+          ) : props.profile.status === STATUS.ADMITTED && acceptanceExpired ? (
             <AdmissionExpiredScreen />
           ) : props.profile.status === STATUS.ADMITTED ? (
             <AdmittedScreen
