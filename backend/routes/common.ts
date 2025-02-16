@@ -277,7 +277,7 @@ export async function setJudgeAttribute(
 
   const judge = await Judge.findOne(
     { "user.id": req.params.userId },
-    // { __v: 0 }
+    { __v: 0 }
   );
 
   if (!judge) {
@@ -292,7 +292,7 @@ export async function setJudgeAttribute(
 
   await judge.save();
 
-  // await getJudgeAttribute(req, res, getter);
+  await getJudgeAttribute(req, res, getter);
 }
 
 export async function getMentorAttribute(
