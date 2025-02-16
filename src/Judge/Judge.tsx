@@ -2,19 +2,19 @@ import React from 'react';
 import '../Review/Review.scss';
 
 interface checkInSchema {
-	checkedIn: Boolean;
-  	checkedInBy: string;
-  	checkedInAt: Date;
-  	tshirtSize: string;
+    checkedIn: Boolean;
+    checkedInBy: string;
+    checkedInAt: Date;
+    tshirtSize: string;
 }
 
 interface mealInfoSchema {
-    usedMeals: [string],
-    dietaryRestrictions: string
+    usedMeals: [string];
+    dietaryRestrictions: string;
 }
 
 interface IJudgeProps {
-    applicationSchema: { schema: any, uiSchema: any }
+    applicationSchema: { schema: any; uiSchema: any };
 }
 
 interface IJudgeComponentState {
@@ -33,6 +33,7 @@ interface IJudgeComponentState {
         email: string;
     };
 }
+
 class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
     constructor(props: IJudgeProps) {
         super(props);
@@ -44,16 +45,23 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
                     first_name: '',
                     last_name: ''
                 },
-                check_in_info: {},
-                meal_info: {}
+                check_in_info: {
+                    checkedIn: false,
+                    checkedInBy: '',
+                    checkedInAt: new Date(),
+                    tshirtSize: ''
+                },
+                meal_info: {
+                    usedMeals: [''],
+                    dietaryRestrictions: ''
+                }
             },
             user: {
                 id: '',
                 email: ''
             }
-        }
+        };
     }
-
 }
 
 export default Judge;
