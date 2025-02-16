@@ -3,15 +3,26 @@ import '../Review/Review.scss';
 import API from "@aws-amplify/api";
 import Form from "react-jsonschema-form";
 import { connect } from "react-redux";
+import { ICheckInInfo, IMealInfo } from "../../backend/models/Application.d";
 
 interface IJudgeProps {
 	applicationSchema: { schema: any, uiSchema: any }
 }
 interface IJudgeComponentState {
-	leaderboard_data: any[],
-	hack_data: any, // todo: IHack
-	stats_data: any,
-	reviewFormData: any
+	_id: string,
+    year: string,
+    forms: {
+        application_info: {
+            first_name: string,
+            last_name: string
+        },
+        check_in_info: ICheckInInfo,
+        meal_info: IMealInfo
+    },
+    user: {
+        id: string,
+        email: string
+    }
 }
 
 const schema = {
@@ -115,9 +126,9 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 					</div>}
 				</div>
 			</div>
-			<div className="col-12 col-sm-4 treehacks-review-form text-center">
+			<div className="col-12 col-sm-4 text-center treehacks-review-form">
 				<div >
-					<Form className="treehacks-form rate-form mt-0" schema={schema} uiSchema={uiSchema}
+					<Form className="mt-0 rate-form treehacks-form" schema={schema} uiSchema={uiSchema}
 						onSubmit={e => this.handleSubmit()}
 						formData={this.state.reviewFormData}
 						onChange={e => this.setState({ reviewFormData: e.formData })}
@@ -130,7 +141,7 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 							"ui:placeholder": "Enter custom table number",
 							"ui:widget": props => <div className="row">
 								<input type="number"
-									className="form-control float-left col-8"
+									className="col-8 float-left form-control"
 									value={props.value}
 									required={props.required}
 									placeholder="Custom table number..."
@@ -146,7 +157,7 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 				</div>
 				<div className="container left-sidebar-content">
 					{this.state.stats_data &&
-						<div className="treehacks-body-text apps-remaining-countdown">
+						<div className="apps-remaining-countdown treehacks-body-text">
 							<strong>{this.state.stats_data.results.num_remaining}</strong> hacks remaining
 						</div>}
 				</div>
