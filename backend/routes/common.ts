@@ -277,7 +277,7 @@ export async function setJudgeAttribute(
 
   const judge = await Judge.findOne(
     { "user.id": req.params.userId },
-    { __v: 0 }
+    // { __v: 0 }
   );
 
   if (!judge) {
