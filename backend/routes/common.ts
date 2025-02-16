@@ -292,7 +292,7 @@ export async function setJudgeAttribute(
 
   await judge.save();
 
-  await getJudgeAttribute(req, res, getter);
+  // await getJudgeAttribute(req, res, getter);
 }
 
 export async function getMentorAttribute(
