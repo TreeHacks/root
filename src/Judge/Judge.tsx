@@ -68,10 +68,28 @@ class Judge extends React.Component<IJudgeProps, IJudgeComponentState> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			leaderboard_data: null,
-			hack_data: null,
-			stats_data: null,
-			reviewFormData: null
+			_id: null,
+			year: null,
+			forms: {
+				application_info: {
+					first_name: null,
+					last_name: null
+				},
+				check_in_info: {
+					checkedIn: false,
+					checkedInBy: null,
+					checkedInAt: null,
+					tshirtSize: null,
+				},
+				meal_info: {
+					usedMeals: [],
+    				dietaryRestrictions: null
+				}
+			},
+			user: {
+				id: null,
+				email: null
+			}
 		}
 	}
 
